@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mt-3">
+      <div class="card-header">Update Profile Info</div>
+      <div class="card-body">
+        <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              formControlName="description"
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="text"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+            />
+            <div
+              *ngIf="submitted && f.password.errors"
+              class="invalid-feedback"
+            ></div>
+          </div>
+
+          <div class="form-group">
+            <label for="post">Update Profile Picture</label>
+            <input type="file" (change)="onFileSelected($event)" />
+            <!-- <button type="button" (click)="onUpload()">Upload</button> -->
+          </div>
+          <div class="form-group">
+            <label for="post_description">Picture Description</label>
+            <input
+              type="text"
+              formControlName="post_description"
+              class="form-control"
+            />
+          </div>
+          <button>Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

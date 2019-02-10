@@ -1,0 +1,5 @@
+<div class="row card-group">
+  <div class="col-4" *ngFor="let post of (posts | async)">
+    <app-profile [post]="post"></app-profile>
+  </div>
+</div>

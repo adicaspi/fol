@@ -1,0 +1,7 @@
+.btn-group {
+  margin: 5px;
+  overflow: hidden;
+  background-color: #ffffff;
+  float: right;
+  display: block;
+}

@@ -1,0 +1,19 @@
+<li class="list-group-item">
+  <div class="row">
+    <div class="col-2">
+      <app-image-component
+        [addr]="item.profileImageAddr"
+        width="80%"
+        [profile]="true"
+      ></app-image-component>
+    </div>
+    <p class="text-right">
+      <small>{{ item.username }}</small>
+    </p>
+    <div class="col-4 ml-auto">
+      <button type="button" class="btn btn-primary btn-xs" (click)="follow()">
+        {{ follows ? 'unfollow' : 'follow' }}
+      </button>
+    </div>
+  </div>
+</li>

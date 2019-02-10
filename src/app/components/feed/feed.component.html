@@ -1,0 +1,16 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="card" style="width: 18rem;">
+  <app-image-component
+    [addr]="timelinePost.userProfileImageAddr"
+    width="20%"
+    [profile]="true"
+  ></app-image-component>
+  <app-image-component
+    [addr]="timelinePost.postImageAddr"
+    width="80%"
+    [profile]="false"
+  ></app-image-component>
+  <div class="card-body">
+    <p class="card-text">{{ timelinePost.description }}</p>
+  </div>
+</div>

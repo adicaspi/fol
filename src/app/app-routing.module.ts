@@ -1,10 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-const routes: Routes = [];
+import { HttpClientModule } from '@angular/common/http';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { ViewFeedComponent } from './components/view-feed/view-feed.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+const routes: Routes = [
+  { path: 'feed/:id', component: ViewFeedComponent },
+  {
+    path: 'profile/:id',
+    component: ViewProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+    // canActivate: [AuthGuard]
+  }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), HttpClientModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

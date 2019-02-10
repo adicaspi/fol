@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="btn-group">
+    <button type="button" class="btn btn-mb1" (click)="follow()">
+      {{ follows ? 'unfollow' : 'follow' }}
+    </button>
+    <button type="button" class="btn btn-link">
+      {{ numberOfPosts | async }} posts
+    </button>
+
+    <button type="button" class="btn btn-link" (click)="openDialog()">
+      {{ following | async }} following
+    </button>
+
+    <button type="button" class="btn btn-link" (click)="openDialog()">
+      {{ followers | async }} followears
+    </button>
+  </div>
+</div>
+
+<div *ngIf="(user | async) as currentUser">
+  <div class="card" style="width: 14rem;">
+    <app-image-component
+      [addr]="currentUser.profileImageAddr"
+      width="20%"
+      [profile]="true"
+    ></app-image-component>
+
+    <div class="card-body">
+      <p class="card-text">{{ currentUser.username }}</p>
+      <p class="card-text">{{ currentUser.description }}</p>
+    </div>
+  </div>
+</div>

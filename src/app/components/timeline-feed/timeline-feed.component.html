@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let post of (posts | async)">
+    <app-feed [post]="post"></app-feed>
+  </li>
+</ul>
