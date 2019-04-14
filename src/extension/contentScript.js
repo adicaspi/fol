@@ -19,13 +19,13 @@ function generateOutfit(
   return outfit;
 }
 
-function generateFollowearDiv(selector, outfit) {
+function generateFollowearDiv(selector, outfit, website) {
   var followear_div = document.createElement('div');
   followear_div.className = 'followear';
   followear_div.id = 'flwr';
   var button = document.createElement('button');
   button.id = 'flbtn';
-  var text = document.createTextNode('followear');
+
   var img = document.createElement('img');
 
   var url = chrome.runtime.getURL('images/fw.PNG');
@@ -34,17 +34,65 @@ function generateFollowearDiv(selector, outfit) {
   img.setAttribute('height', '25');
 
   //button.appendChild(img);
-  followear_div.appendChild(img);
-  $(selector).append(followear_div);
-  var fl = $(selector).find('#flwr');
 
-  // var cs = getComputedStyle($('#flwr')[0]);
-  // for (var i = 0; i < cs.length; i++) {
-  //   fl.css(cs[i], 'inherit');
-  // }
-  fl.css({
-    float: 'right'
-  });
+  switch (website) {
+    case 'netaporter':
+      followear_div.appendChild(img);
+      $(selector).append(followear_div);
+      var fl = $(selector).find('#flwr');
+      fl.css({
+        // float: 'right',
+        // bottom: '10px'
+      });
+      break;
+    case 'asos':
+      var followear_span = document.createElement('span');
+      followear_span.className = 'followear';
+      followear_span.id = 'flwr';
+      followear_span.appendChild(img);
+      $(selector).append(followear_span);
+      // var p_class = $(selector).find('p._6RF5CVD');
+      // p_class.append(span);
+      var fl = $(selector).find('#flwr');
+
+      // p_class.css({
+      //   display: 'inline'
+      // });
+      fl.css({
+        float: 'right',
+        position: 'absolute',
+        bottom: '15px',
+        right: '10px'
+      });
+      break;
+    case 'matchesfashion':
+      // followear_div.appendChild(img);
+      var followear_span = document.createElement('span');
+      followear_span.className = 'followear';
+      followear_span.id = 'flwr';
+      followear_span.appendChild(img);
+      var innder_div = $(selector).find('.lister__item__inner');
+      // innder_div.append(followear_div);
+      innder_div.append(followear_span);
+      var fl = $(selector).find('#flwr');
+      fl.css({ bottom: '5px' });
+      break;
+    case 'zara':
+      var url = chrome.runtime.getURL('images/fw.PNG');
+      img.setAttribute('src', url);
+      img.setAttribute('width', '20px');
+
+      followear_div.appendChild(img);
+      $(selector).append(followear_div);
+      var fl = $(selector).find('#flwr');
+      fl.css({
+        float: 'right',
+        position: 'absolute',
+        bottom: '35px',
+        display: 'inline'
+      });
+      break;
+  }
 
   $(img).click(function() {
     chrome.runtime.sendMessage({ outfit: outfit }, function(response) {
@@ -88,7 +136,7 @@ function netaporter(selector) {
       website,
       href
     );
-    generateFollowearDiv($(this), outfit);
+    generateFollowearDiv($(this), outfit, 'netaporter');
   });
 }
 
@@ -122,7 +170,7 @@ function matchesfashion(selector) {
       website,
       href
     );
-    generateFollowearDiv($(this), outfit);
+    generateFollowearDiv($(this), outfit, 'matchesfashion');
   });
 }
 
@@ -151,14 +199,45 @@ function asos(selector) {
       website,
       href
     );
-    generateFollowearDiv($(this), outfit);
+    generateFollowearDiv($(this), outfit, 'asos');
+  });
+}
+
+function zara(selector) {
+  selector.each(function() {
+    var user_id = 0;
+    var href = $(this)
+      .find('a.item _item')
+      .attr('href');
+    var description = $(this)
+      .find('name _item')
+      .attr('tabindex');
+    var price = $(this)
+      .find('.price _product-price')
+      .text();
+    var designer = 'zara';
+    var website = window.location.hostname.toString();
+    var src = $(this)
+      .find('img')
+      .attr('src');
+
+    var outfit = generateOutfit(
+      user_id,
+      src,
+      description,
+      price,
+      designer,
+      website,
+      href
+    );
+    generateFollowearDiv($(this), outfit, 'zara');
   });
 }
 
 (function() {
   switch (window.location.hostname) {
     case 'www.net-a-porter.com':
-      selector = $('ul.products').find('.description');
+      selector = $('ul.products').find('li');
       netaporter(selector);
 
       break;
@@ -170,6 +249,25 @@ function asos(selector) {
       selector = $('ul.lister__wrapper').find('li.lister__item');
       matchesfashion(selector);
 
+      break;
+    case 'www.zara.com':
+      console.log('im in zaraaaa');
+      //first_selector = $('li.product _product');
+      //console.log('im first selector', first_selector);
+      //zara(first_selector);
+      // console.log('im in first selector');
+      second_selector = $('.nth-child3n');
+      zara(second_selector);
+      console.log('im in second selector', second_selector);
+      // third_selector = $('.product _product double _doubleChanged');
+      // zara(third_selector);
+      // console.log('im in third selector');
+      // fourth_selector = $('.product _product nth-child2n nth-child3n');
+      // zara(fourth_selector);
+      // console.log('im in fourth selector');
+      // fifth_selector = $('.product _product nth-child3n');
+      // zara(fifth_selector);
+      // console.log('im in fifth selector');
       break;
   }
 })();
