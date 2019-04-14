@@ -38,4 +38,16 @@ export class GenerateFollowListComponent implements OnInit {
       this.flag
     );
   }
+
+  follow() {
+    //if user is already following then unfollow
+    console.log('in func');
+    // if (this.follows) {
+    //   this.userService.unFollow(this.item.id);
+    //   this.follows = false;
+    // } else {
+    //   this.userService.follow(this.item.id);
+    //   this.follows = true;
+    // }
+  }
 }

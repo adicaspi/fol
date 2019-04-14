@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
-import { PostService } from '../../services/post.service';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GenerateFollowListComponent } from '../generate-follow-list/generate-follow-list.component';
-import { FollowItem } from '../../models/FollowItem';
 import { FeedService } from '../../services/feed.service';
 
 @Component({
@@ -30,9 +28,7 @@ export class UserProfileInfoComponent implements OnInit {
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private postService: PostService,
-    public dialog: MatDialog,
-    private feedService: FeedService
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -54,7 +50,6 @@ export class UserProfileInfoComponent implements OnInit {
 
   updateUser() {
     this.user = this.userService.getUserDetails(this.masterId);
-    console.log(this.user);
   }
 
   follow() {

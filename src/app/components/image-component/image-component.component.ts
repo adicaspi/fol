@@ -14,7 +14,7 @@ export class ImageComponentComponent implements OnInit {
   @Input() height: string;
 
   constructor(private postService: PostService) {}
-
+  showSpinner: boolean = true;
   ngOnInit() {
     this.updatePostImageFd();
   }
@@ -25,6 +25,7 @@ export class ImageComponentComponent implements OnInit {
       'load',
       () => {
         this.postImage = reader.result;
+        this.showSpinner = false;
       },
       false
     );

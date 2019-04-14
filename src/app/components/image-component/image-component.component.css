@@ -1,0 +1,37 @@
+/* Equal-height card images, cf. https://stackoverflow.com/a/47698201/1375163*/
+.card-img-top {
+  /* height: 11vw; */
+  object-fit: cover;
+  display: block;
+
+  /* width: 200px;
+  height: 200px; */
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .card-img-top {
+    height: 15vw;
+    /* width: 10vw; */
+  }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 577px) and (max-width: 750px) {
+  .card-img-top {
+    height: 60vw;
+  }
+}
+/* Large devices (desktops, 992px and up) */
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 992px) {
+  .card-img-top {
+    height: 18vw;
+  }
+}
+.card {
+  /* border: none; */
+  margin-top: 30px;
+}
+.card-body {
+  padding-left: 45px;
+}

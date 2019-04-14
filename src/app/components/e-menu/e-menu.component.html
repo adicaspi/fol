@@ -1,127 +1,156 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mx-auto">
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
+<div (window:resize)="sizeChange($event)">
+  <nav
+    class="navbar navbar-expand-sm text-white bg-dark justify-content-between"
   >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle "
-          data-toggle="dropdown"
-          role="button
-    "
-          aria-haspopup="true "
-          aria-expanded="false "
-          >{{ categoriesTitle.title }}</a
-        >
-        <div class="dropdown-menu ">
-          <button
-            *ngFor="let prod of categoriesTab"
-            (click)="filterMenu('categoris', prod)"
-            class="dropdown-item "
-          >
-            {{ prod }}
-          </button>
-          <div class="dropdown-divider "></div>
-        </div>
-      </li>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon">
+        <i class="fa fa-navicon"></i>
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <div *ngIf="display">
+          <li class="nav-item">
+            <button
+              type="button"
+              class="simple-button"
+              (click)="settingsPage()"
+            >
+              Explore
+            </button>
+          </li>
+          <li class="nav-item ">
+            <button type="button" class="simple-button" (click)="profilePage()">
+              {{ loggedin ? 'Profile' : 'Register' }}
+            </button>
+          </li>
 
-      <li class="nav-item dropdown ">
-        <a
-          class="nav-link dropdown-toggle "
-          data-toggle="dropdown"
-          role="button
-    "
-          aria-haspopup="true "
-          aria-expanded="false "
-          >{{ productTitle.title }}</a
-        >
-        <div class="dropdown-menu ">
-          <button
-            *ngFor="let prod of productType[index]"
-            (click)="filterMenu('productType', prod)"
-            class="dropdown-item "
-          >
-            {{ prod }}
-          </button>
-          <div class="dropdown-divider "></div>
+          <li class="nav-item dropdown-divider">
+            <button
+              type="button"
+              class="simple-button"
+              (click)="settingsPage()"
+            >
+              Settings
+            </button>
+          </li>
         </div>
-      </li>
 
-      <li class="nav-item dropdown ">
-        <a
-          class="nav-link dropdown-toggle "
-          data-toggle="dropdown"
-          role="button
-    "
-          aria-haspopup="true "
-          aria-expanded="false "
-          >{{ designerTitle.title }}</a
-        >
-        <div class="dropdown-menu ">
-          <button
-            *ngFor="let prod of designerTab"
-            (click)="filterMenu('designer', prod)"
-            class="dropdown-item "
+        <li class="nav-item dropdown" id="cat">
+          <a
+            class="nav-link dropdown-toggle "
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true "
+            aria-expanded="false "
+            >{{ categoriesTitle.title }}</a
           >
-            {{ prod }}
-          </button>
-          <div class="dropdown-divider "></div>
-        </div>
-      </li>
+          <div class="dropdown-menu ">
+            <button
+              *ngFor="let prod of categoriesTab; let i = index"
+              (click)="filterCtegories(i)"
+              class="dropdown-item "
+            >
+              {{ prod }}
+            </button>
+            <div class="dropdown-divider "></div>
+          </div>
+        </li>
 
-      <li class="nav-item dropdown ">
-        <a
-          class="nav-link dropdown-toggle "
-          data-toggle="dropdown "
-          role="button
-    "
-          aria-haspopup="true "
-          aria-expanded="false "
-          >{{ storesTitle.title }}</a
-        >
-        <div class="dropdown-menu ">
-          <button
-            *ngFor="let prod of storesTab"
-            (click)="filterMenu('stores', prod)"
-            class="dropdown-item "
+        <li class="nav-item dropdown ">
+          <a
+            class="nav-link dropdown-toggle "
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true "
+            aria-expanded="false "
+            >{{ productTitle.title }}</a
           >
-            {{ prod }}
-          </button>
+          <div class="dropdown-menu ">
+            <button
+              *ngFor="let prod of productType[index]; let i = index"
+              (click)="filterProductType(i)"
+              class="dropdown-item "
+            >
+              {{ prod }}
+            </button>
+          </div>
+        </li>
 
-          <div class="dropdown-divider "></div>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown ">
-        <a
-          class="nav-link dropdown-toggle "
-          data-toggle="dropdown "
-          role="button
+        <li class="nav-item dropdown ">
+          <a
+            class="nav-link dropdown-toggle "
+            data-toggle="dropdown"
+            role="button
     "
-          aria-haspopup="true "
-          aria-expanded="false "
-          >{{ priceTitle.title }}</a
-        >
-        <div class="dropdown-menu ">
-          <button
-            *ngFor="let prod of priceTab"
-            (click)="filterMenu('price', prod)"
-            class="dropdown-item "
+            aria-haspopup="true "
+            aria-expanded="false "
+            >{{ designerTitle.title }}</a
           >
-            {{ prod }}
-          </button>
-          <div class="dropdown-divider "></div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+          <div class="dropdown-menu ">
+            <button
+              *ngFor="let prod of designerTab; let i = index"
+              (click)="filterDesigners(i)"
+              class="dropdown-item "
+            >
+              {{ prod }}
+            </button>
+            <div class="dropdown-divider "></div>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown ">
+          <a
+            class="nav-link dropdown-toggle "
+            data-toggle="dropdown"
+            role="button
+      "
+            aria-haspopup="true "
+            aria-expanded="false "
+            >{{ storesTitle.title }}</a
+          >
+          <div class="dropdown-menu ">
+            <button
+              *ngFor="let prod of storesTab; let i = index"
+              (click)="filterStores(i)"
+              class="dropdown-item "
+            >
+              {{ prod }}
+            </button>
+            <div class="dropdown-divider "></div>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown " id="prx">
+          <a
+            class="nav-link dropdown-toggle "
+            data-toggle="dropdown"
+            role="button
+        "
+            aria-haspopup="true "
+            aria-expanded="false "
+            >{{ priceTitle.title }}</a
+          >
+          <div class="dropdown-menu ">
+            <button
+              *ngFor="let prod of priceTab; let i = index"
+              (click)="filterPrice(i)"
+              class="dropdown-item "
+            >
+              {{ prod }}
+            </button>
+            <div class="dropdown-divider "></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
+import { Subscription } from 'rxjs';
 //import { AlertService } from '../../_services/alert.service';
 import { UserService } from '../../services/user.service';
+import { PostService } from '../../services/post.service';
+import { ErrorsService } from '../../services/errors.service';
 //import { AuthenticationService } from '../../_services/authentication.service';
 
 @Component({
@@ -13,6 +15,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  subscription: Subscription;
+  error: any;
   registerForm: FormGroup;
   loginForm: FormGroup;
   loading = false;
@@ -22,12 +26,20 @@ export class RegisterComponent implements OnInit {
   userNameValidatorLength = false;
   emailExists = false;
   minLength = 3;
+  wrongPassUser: boolean = false;
+
   // TODO - FIXED TOUCHED INVALID CLASS
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService //private alertService: AlertService, //private authenticationService: AuthenticationService
-  ) {}
+    private userService: UserService,
+    private errorsService: ErrorsService,
+    private postService: PostService
+  ) {
+    this.subscription = this.errorsService.getMessage().subscribe(msg => {
+      this.error = msg;
+    });
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -38,8 +50,8 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      emailLogin: [''], //[Validators.required, Validators.email]],
+      passwordLogin: [''] //[Validators.required, Validators.minLength(6)]]
     });
 
     this.onChanges();
@@ -111,41 +123,52 @@ export class RegisterComponent implements OnInit {
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           console.log('im user id', data.userId, data.userName);
+          this.ngOnDestroy();
           this.router.navigate(['/feed/' + data.userId]);
         },
         error => {
-          //this.alertService.error(error);
-          console.log('im error', error);
-          this.loading = false;
+          if (this.error.error == 'User Collision') {
+            alert('already exist');
+            this.emailExists = true;
+          }
         }
       );
   }
 
   onSubmitLogin() {
-    let email = this.loginForm.value.email;
-    let password = this.loginForm.value.password;
+    console.log('im in login');
+    let email = this.loginForm.value.emailLogin;
+    console.log('im email', email);
+    let password = this.loginForm.value.passwordLogin;
     let res = {
       email: email,
       password: password
     };
+    console.log('in register im res', res);
 
     this.userService
-      .register(res)
+      .login(res)
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
+          console.log(data, 'im data login form');
           //  this.alertService.success('Registration successful', true);
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           console.log('im user id', data.userId, data.userName);
-          this.router.navigate(['/feed/' + data.userId]);
+          this.router.navigate(['/profile/' + data.userId]);
         },
         error => {
-          //this.alertService.error(error);
-          console.log('im error', error);
-          this.loading = false;
+          if (this.error.error == 'Invalid Authentication Data') {
+            this.wrongPassUser = true;
+            console.log('im wrongpass', this.wrongPassUser);
+          }
         }
       );
+  }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
   }
 }

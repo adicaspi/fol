@@ -1,8 +1,22 @@
-<img
-  [attr.src]="postImage"
-  [attr.width]="width"
-  [attr.height]="height"
-  [ngStyle]="{
-    'border-radius': profile ? '50%' : '0%'
-  }"
-/>
+<!-- <div class="card" style="width: 13rem;"> -->
+
+<div *ngIf="!profile">
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  <img
+    class="card-img-top"
+    [attr.src]="postImage"
+    [attr.width]="width"
+    [attr.height]="height"
+  />
+</div>
+<div *ngIf="profile">
+  <img
+    [attr.src]="postImage"
+    [attr.width]="width"
+    [attr.height]="height"
+    [ngStyle]="{
+      'border-radius': profile ? '50%' : '0%'
+    }"
+  />
+</div>
+<!-- </div> -->

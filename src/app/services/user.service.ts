@@ -9,23 +9,26 @@ import { Observable } from 'rxjs/Observable';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+import { GlobalVariable } from '../../global';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  userId: number = 306;
+  userId: number;
   username: string;
-  globalRegisterURL =
-    'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/registration/';
-  globaSoicalURL =
-    'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/';
-  globalInfoURL =
-    'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/user-info/';
-  globalUploadPostURL: string =
-    'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/305/upload';
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  globalRegisterURL = this.baseApiUrl + '/registration/';
+  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/registration/';
+  globaSoicalURL = this.baseApiUrl + '/social/';
+  //'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/';
+  globalInfoURL = this.baseApiUrl + '/user-info/';
+  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/user-info/';
+  //  globalUploadPostURL: string = this.baseApiUrl+'/social/655/upload'
+  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/655/upload';
+
   constructor(private http: HttpClient) {}
 
-  //change to promise
   register(userForm: any): Observable<any> {
     console.log(userForm);
     return this.http.post<any>(this.globalRegisterURL + 'signup', userForm, {
@@ -36,17 +39,23 @@ export class UserService {
   getCurrentUser(): any {
     return this.userId;
   }
-  //change to promise
+
   uploadPost(fd: FormData, desc: string): Observable<any> {
+    console.log('im in upload post');
     let params = new HttpParams().set('description', desc);
-    return this.http.post<any>(this.globalUploadPostURL, fd, {
-      params: params
-    });
+    return this.http.post<any>(
+      this.globaSoicalURL + this.userId + '/upload',
+      fd,
+      {
+        params: params
+      }
+    );
   }
 
   updateUserDescription(description: string) {
+    console.log('im userid', this.userId);
     let params = new HttpParams().set('description', description);
-    return this.http.put(
+    return this.http.post(
       this.globalInfoURL + this.userId + '/update-description',
       {
         params: params
@@ -122,12 +131,38 @@ export class UserService {
     return this.http.get<any>(this.globalInfoURL + id + '/num-posts');
   }
 
-  //TODO
-
   login(userForm: any): Observable<any> {
-    console.log(userForm);
-    return this.http.post<any>(this.globalRegisterURL + 'signin', userForm, {
-      headers: httpOptions.headers
+    console.log('im in login');
+    return this.http.get<any>(this.globalRegisterURL + 'signin', {
+      params: { username: userForm.email, password: userForm.password }
     });
+  }
+
+  logout(): Observable<any> {
+    return this.http.get<any>(this.globalRegisterURL + 'logout');
+  }
+
+  resetPassword(userForm: any) {
+    //console.log('in reset pass', userForm.email);
+    let params = new HttpParams().set('username', userForm.username);
+    console.log(params);
+    return this.http.get(this.globalRegisterURL + 'reset-password', {
+      params: params
+    });
+  }
+
+  setNewPassword(userForm: any) {
+    let params = {
+      username: userForm.email,
+      newPassword: userForm.password,
+      code: userForm.code
+    };
+
+    return this.http.post(
+      this.globalRegisterURL + 'set-new-password',
+
+      params,
+      { headers: httpOptions.headers }
+    );
   }
 }

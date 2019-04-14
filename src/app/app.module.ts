@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,20 @@ import { FollowListComponent } from './components/follow-list/follow-list.compon
 import { ImageComponentComponent } from './components/image-component/image-component.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpErrorComponent } from './interceptor/http-error/http-error.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandler } from '@angular/core';
+import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
+import { ConfigService } from './services/config.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { LandingNavComponent } from './components/landing-nav/landing-nav.component';
+import { MutualNavComponent } from './components/mutual-nav/mutual-nav.component';
+import { XsrfInterceptorComponent } from './interceptor/xsrf-interceptor/xsrf-interceptor.component';
+import { MaterialDesignModule } from './material-design/material-design.module';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ProductPageComponent } from './components/product-page/product-page.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,20 +52,57 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterComponent,
     GenerateFollowListComponent,
     FollowListComponent,
-    ImageComponentComponent
+    ImageComponentComponent,
+    HttpErrorComponent,
+    ErrorHandlerComponent,
+    LandingNavComponent,
+    MutualNavComponent,
+    XsrfInterceptorComponent,
+    ForgotPasswordComponent,
+    ProductPageComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
     MatDialogModule,
     BrowserAnimationsModule,
+    MaterialDesignModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    AngularFontAwesomeModule
   ],
 
-  entryComponents: [UserProfileInfoComponent, GenerateFollowListComponent],
+  entryComponents: [
+    UserProfileInfoComponent,
+    GenerateFollowListComponent,
+    ImageComponentComponent,
+    ProductPageComponent
+  ],
 
-  providers: [CookieService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XsrfInterceptorComponent,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorComponent,
+      multi: true
+    },
+
+    { provide: ErrorHandler, useClass: ErrorHandlerComponent },
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (configService: ConfigService) => () =>
+        configService.loadConfigurationData(),
+      deps: [ConfigService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,10 +1,18 @@
-<div class="card m-auto" style="width: 14rem;">
-  <app-image-component
-    [addr]="userPost.postImageAddr"
-    width="80%"
-    [profile]="false"
-  ></app-image-component>
+<div class="card m-auto" style="width: 15rem;">
   <div class="card-body">
-    <p class="card-text">{{ userPost.description }}</p>
+    <app-image-component
+      (click)="openDialog()"
+      [addr]="userPost.postImageAddr"
+      width="90%"
+      [profile]="false"
+    ></app-image-component>
+
+    <p class="card-text">
+      Balenciaga <br />
+
+      {{ userPost.description }}
+      <br />
+      $500
+    </p>
   </div>
 </div>

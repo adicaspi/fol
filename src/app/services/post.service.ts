@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams,
-  HttpResponse
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { map } from '../../../node_modules/rxjs/operators';
-
+import { GlobalVariable } from '../../global';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'image/jpeg' })
 };
@@ -17,9 +10,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PostService {
-  postsUrl: string =
-    'http://Sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/image';
-  constructor(private http: HttpClient, private domSanitizer: DomSanitizer) {}
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  postsUrl: string = this.baseApiUrl + '/image';
+  //'http://Sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/image';
+  constructor(private http: HttpClient) {}
 
   getImage(image_adr: string): Observable<Blob> {
     console.log('in service - get profile image', image_adr);
@@ -31,10 +25,10 @@ export class PostService {
     });
   }
 
-  // .toPromise()
-  // .then(data => {
-  //   let res = this.domSanitizer.bypassSecurityTrustUrl(
-  //     URL.createObjectURL(data)
-  //   );
-  //   return res;
+  // mockRequest(): Observable<any> {
+  //   let params = new HttpParams().set('name', 'adi');
+  //   return this.http.post('http://localhost:3000/exp', {
+  //     params
+  //   });
+  // }
 }

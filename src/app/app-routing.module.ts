@@ -5,24 +5,26 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
 import { ViewFeedComponent } from './components/view-feed/view-feed.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
   {
     path: 'profile/:id',
-    component: ViewProfileComponent,
-    canActivate: [AuthGuard]
+    component: ViewProfileComponent
+    //canActivate: [AuthGuard]
   },
   {
-    path: 'settings',
+    path: 'settings/:id',
     component: SettingsComponent
     // canActivate: [AuthGuard]
   },
   {
-    path: 'register',
+    path: '',
     component: RegisterComponent
     // canActivate: [AuthGuard]
-  }
+  },
+  { path: 'forgotpassword', component: ForgotPasswordComponent }
 ];
 
 @NgModule({

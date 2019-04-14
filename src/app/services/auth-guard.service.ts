@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs/Observable';
-import { map } from '../../../node_modules/rxjs/operators';
+import 'rxjs/add/observable/of';
+import { map, catchError } from '../../../node_modules/rxjs/operators';
 import { pipe } from '../../../node_modules/rxjs';
-
+import { HttpErrorResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +19,23 @@ export class AuthGuardService implements CanActivate {
   // }
 
   canActivate(): Observable<boolean> {
-    return this.authService.isAuthenticated();
+    console.log('in can activate');
+    return this.authService.isAuthenticated().pipe(
+      map(
+        response => {
+          if (response) {
+            console.log('in auth gurad im repsonse false', response);
+            return false;
+          } else {
+            console.log('in auth gurad im repsonse true', response);
+            return true;
+          }
+        },
+        error => {
+          //this.alertService.error(error);
+          console.log('im error', error);
+        }
+      )
+    );
   }
 }

@@ -6,10 +6,39 @@
         class="list-group list-group-flush"
         *ngFor="let item of (followsFeed | async)"
       >
-        <app-follow-list [item]="item"></app-follow-list>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-2">
+              <app-image-component
+                [addr]="item.profileImageAddr"
+                width="80%"
+                [profile]="true"
+              ></app-image-component>
+            </div>
+            <p class="text-right">
+              <small>{{ item.username }}</small>
+            </p>
+            <div class="col-4 ml-auto">
+              <button
+                type="button"
+                class="btn btn-primary btn-xs"
+                (click)="follow(item)"
+              >
+                {{ follows ? 'unfollow' : 'follow' }}
+              </button>
+            </div>
+          </div>
+        </li>
+
+        <!-- <app-follow-list [item]="item"></app-follow-list> -->
       </ul>
-    </div></div
-></mat-dialog-content>
+    </div>
+  </div></mat-dialog-content
+>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close>
+    <i class="material-icons">
+      close
+    </i>
+  </button>
 </mat-dialog-actions>

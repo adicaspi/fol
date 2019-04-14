@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from '../../../node_modules/rxjs';
 import {
   HttpClient,
   HttpHeaders,
@@ -11,8 +11,8 @@ import { UserPost } from '../models/UserPost';
 import { FollowItem } from '../models/FollowItem';
 import { map } from '../../../node_modules/rxjs/operators';
 import { catchError } from 'rxjs/operators';
-
 import { throwError } from 'rxjs';
+import { GlobalVariable } from '../../global';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,10 +21,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class FeedService {
-  globalFeedURL =
-    'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/';
-  globaSoicalURL =
-    'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/';
+  private subject = new Subject<any>();
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  globalFeedURL = this.baseApiUrl + '/social/';
+  globaSoicalURL = this.baseApiUrl + '/social/';
+  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/';
 
   constructor(private http: HttpClient) {}
 
@@ -83,5 +84,17 @@ export class FeedService {
         }
       );
     }
+  }
+
+  sendMessage(message: any) {
+    this.subject.next({ post: message });
+  }
+
+  clearMessage() {
+    this.subject.next();
+  }
+
+  getMessage(): Observable<any> {
+    return this.subject.asObservable();
   }
 }

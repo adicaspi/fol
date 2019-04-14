@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Hi</h1>
+
+<div mat-dialog-content>
+  <app-image-component
+    class="test"
+    [addr]="userPost.postImageAddr"
+    [profile]="false"
+  ></app-image-component>
+
+  <!-- <button type="button" class="btn btn-light">View outfit</button> -->
+</div>
+<p class="card-text">
+  Balenciaga <br />
+
+  {{ userPost.description }}
+  <br />
+  $500
+</p>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>
+    <i class="material-icons">
+      close
+    </i>
+  </button>
+  <button mat-raised-button>View outfit</button>
+</mat-dialog-actions>
