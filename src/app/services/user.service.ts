@@ -19,13 +19,8 @@ export class UserService {
   username: string;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   globalRegisterURL = this.baseApiUrl + '/registration/';
-  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/registration/';
   globaSoicalURL = this.baseApiUrl + '/social/';
-  //'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/';
   globalInfoURL = this.baseApiUrl + '/user-info/';
-  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/user-info/';
-  //  globalUploadPostURL: string = this.baseApiUrl+'/social/655/upload'
-  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/655/upload';
 
   constructor(private http: HttpClient) {}
 

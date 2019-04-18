@@ -35,6 +35,7 @@ import { MaterialDesignModule } from './material-design/material-design.module';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -98,8 +99,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     {
       provide: APP_INITIALIZER,
       useFactory: (configService: ConfigService) => () =>
-        configService.loadConfigurationData(),
-      deps: [ConfigService],
+        configService.getSessionStorgae(),
+      deps: [ConfigService, UserService],
       multi: true
     }
   ],

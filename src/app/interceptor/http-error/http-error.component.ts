@@ -28,7 +28,6 @@ export class HttpErrorComponent implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(1),
       catchError((error: HttpErrorResponse) => {
-        console.log('im http-error-interceptor');
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
           // client-side error
@@ -37,7 +36,7 @@ export class HttpErrorComponent implements HttpInterceptor {
           if (error.status == 401) {
             // TODO - add msg something went wrong
             console.log('status 401 unauth');
-            this.router.navigate(['/register']);
+            this.router.navigate(['/']);
           }
           if (error.error.error == 'User Collision') {
             this.errorsService.sendMessage('User Collision');

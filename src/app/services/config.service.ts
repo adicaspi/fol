@@ -1,36 +1,34 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { map } from '../../../node_modules/rxjs/operators';
-import { GlobalVariable } from '../../global';
 import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
-  //'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/registration/auto-login'
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
-  private autoLogin = this.baseApiUrl + '/registration/auto-login';
-  constructor(
-    private http: HttpClient,
-    private userService: UserService,
-    private router: Router
-  ) {}
+  constructor(private userService: UserService, private injector: Injector) {}
 
-  loadConfigurationData() {
-    console.log('im in config service');
-
-    this.http
-      .get<any>(this.autoLogin, { observe: 'response' })
-      .pipe(
-        map(data => {
-          console.log('IM IN DATA CONFIG SERVICE', data);
-          this.userService.userId = data.body.userId;
-          this.userService.username = data.body.username;
-          this.router.navigate(['/feed/' + data.body.userId]);
-        })
-      )
-      .toPromise();
+  router(): Router {
+    //this creates router property on your service.
+    return this.injector.get(Router);
   }
-  //catch error
+
+  setSessionStorage(userId) {
+    if (typeof Storage !== 'undefined') {
+      console.log('setting session storgae', userId);
+      sessionStorage.setItem('user_id', userId);
+    } else {
+      alert('no session storgae');
+    }
+  }
+
+  getSessionStorgae() {
+    const user_id = sessionStorage.getItem('user_id');
+    if (user_id) {
+      var userId = parseInt(user_id);
+      this.userService.userId = userId;
+    } else {
+      console.log('session storage not initiliazed yet');
+    }
+  }
 }

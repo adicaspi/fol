@@ -7,6 +7,10 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { ErrorsService } from '../../services/errors.service';
+import { HttpClient } from '@angular/common/http';
+import { map } from '../../../../node_modules/rxjs/operators';
+import { GlobalVariable } from '../../../global';
+import { ConfigService } from '../../services/config.service';
 //import { AuthenticationService } from '../../_services/authentication.service';
 
 @Component({
@@ -27,6 +31,8 @@ export class RegisterComponent implements OnInit {
   emailExists = false;
   minLength = 3;
   wrongPassUser: boolean = false;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
   // TODO - FIXED TOUCHED INVALID CLASS
   constructor(
@@ -34,7 +40,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private errorsService: ErrorsService,
-    private postService: PostService
+    private http: HttpClient,
+    private configSerivce: ConfigService
   ) {
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
@@ -55,6 +62,8 @@ export class RegisterComponent implements OnInit {
     });
 
     this.onChanges();
+    //Check if user can auto-login
+    this.loadConfigurationData();
   }
 
   // convenience getter for easy access to form fields
@@ -119,12 +128,11 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          //  this.alertService.success('Registration successful', true);
           this.userService.userId = data.userId;
           this.userService.username = data.username;
-          console.log('im user id', data.userId, data.userName);
-          this.ngOnDestroy();
+          this.configSerivce.setSessionStorage(data.userId.toString());
           this.router.navigate(['/feed/' + data.userId]);
+          this.ngOnDestroy();
         },
         error => {
           if (this.error.error == 'User Collision') {
@@ -136,15 +144,12 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitLogin() {
-    console.log('im in login');
     let email = this.loginForm.value.emailLogin;
-    console.log('im email', email);
     let password = this.loginForm.value.passwordLogin;
     let res = {
       email: email,
       password: password
     };
-    console.log('in register im res', res);
 
     this.userService
       .login(res)
@@ -152,11 +157,12 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data, 'im data login form');
-          //  this.alertService.success('Registration successful', true);
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           console.log('im user id', data.userId, data.userName);
-          this.router.navigate(['/profile/' + data.userId]);
+          this.configSerivce.setSessionStorage(data.userId.toString());
+          this.router.navigate(['/feed/' + data.userId]);
+          this.ngOnDestroy();
         },
         error => {
           if (this.error.error == 'Invalid Authentication Data') {
@@ -165,6 +171,25 @@ export class RegisterComponent implements OnInit {
           }
         }
       );
+  }
+
+  loadConfigurationData() {
+    this.http
+      .get<any>(this.autoLogin, { observe: 'response' })
+      .pipe(
+        map(data => {
+          console.log(
+            'IM IN DATA CONFIG SERVICE, USER CRED ARE',
+            data.body.userId,
+            data.body.userName
+          );
+          this.userService.userId = data.body.userId;
+          this.userService.username = data.body.userName;
+          this.router.navigate(['/feed/' + data.body.userId]);
+          this.configSerivce.setSessionStorage(data.body.userId.toString());
+        })
+      )
+      .toPromise();
   }
 
   ngOnDestroy() {

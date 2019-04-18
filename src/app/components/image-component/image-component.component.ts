@@ -39,7 +39,6 @@ export class ImageComponentComponent implements OnInit {
     this.postService.getImage(this.postImageAddr).subscribe(
       data => {
         this.createImageFromBlob(data);
-        console.log('hello');
       },
       error => {
         console.log('error in loading image', error);
