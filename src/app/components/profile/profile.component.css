@@ -7,12 +7,14 @@
 @media (min-width: 576px) {
   .card-img-top {
     height: 19vw;
+    padding: 30px;
   }
 }
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .card-img-top {
     height: 16vw;
+    padding: 30px;
   }
 }
 /* Large devices (desktops, 992px and up) */
@@ -20,6 +22,7 @@
   .card-img-top {
     height: 5vw;
     width: 20vw;
+    padding: 30px;
   }
 }
 /* Extra large devices (large desktops, 1200px and up) */
@@ -30,9 +33,16 @@
 }
 
 .card {
-  /* border: none; */
+  border: none;
   margin-top: 30px;
 }
 .card-body {
   padding-left: 18px;
+}
+.footer span.store {
+  float: right;
+}
+
+.card-text {
+  font-weight: 600;
 }

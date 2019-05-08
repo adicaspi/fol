@@ -2,14 +2,18 @@
 
 <div *ngIf="!profile">
   <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-  <img
-    class="card-img-top"
-    [attr.src]="postImage"
-    [attr.width]="width"
-    [attr.height]="height"
-  />
+  <div *ngIf="loaded">
+    <img
+      class="card-img-top"
+      [attr.src]="postImage"
+      [attr.width]="width"
+      [attr.height]="height"
+      [class]="class"
+    />
+  </div>
 </div>
-<div *ngIf="profile">
+<!-- <div *ngIf="profile"> -->
+<div *ngIf="profile" [ngClass]="class">
   <img
     [attr.src]="postImage"
     [attr.width]="width"
@@ -19,4 +23,5 @@
     }"
   />
 </div>
+<!-- </div> -->
 <!-- </div> -->

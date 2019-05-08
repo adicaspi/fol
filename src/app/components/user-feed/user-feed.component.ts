@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserFeedComponent implements OnInit {
   posts: Observable<Array<UserPost>>;
+  //posts: Array<UserPost>;
   offset: number;
   id = 0;
   constructor(
@@ -23,6 +24,13 @@ export class UserFeedComponent implements OnInit {
       this.id = +params['id'];
       this.generateUserFeed(0, this.id);
     });
+    // this.posts = [
+    //   {
+    //     postImageAddr: '../../../assets/bag.jpg',
+    //     description: 'Balenciaga Bag'
+    //   }
+    // ];
+    // console.log('im in user feed this is post image adr', this.posts);
   }
 
   generateUserFeed(offset: number, userId: number) {

@@ -1,3 +1,7 @@
+body {
+  background-color: #f9f9f9;
+}
+
 .card {
   border: none;
 }
@@ -8,18 +12,26 @@
 }
 
 .description {
-  display: inline-block;
-  margin-left: 10px;
+  /* display: inline; */
+  /* float: right;
+  margin-top: 20px; */
+  margin-left: 40%;
+}
+
+.description button {
+  margin-left: 100px;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px), only screen and (min-width: 768px) {
   .btn-group {
     overflow: hidden;
-    background-color: #ffffff;
-    float: right;
-    display: block;
+    /* background-color: #ffffff; */
+    /* float: right; */
+    /* display: inline;
     margin-top: 20px;
+     */
+    margin-left: 40%;
   }
 
   .simple-button {
@@ -30,11 +42,15 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    margin-right: 10px;
+  }
+  .btn {
+    margin-right: 10px;
   }
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px), only screen and (min-width: 600px) {
+@media only screen and (max-width: 600px) {
   .simple-button {
     background: none;
     color: inherit;
@@ -43,5 +59,16 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    margin-right: 10px;
+  }
+  .btn-group {
+    overflow: hidden;
+    /* background-color: #ffffff; */
+
+    display: block;
+    margin-top: 20px;
+  }
+  .btn {
+    margin-right: 10px;
   }
 }

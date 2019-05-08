@@ -10,13 +10,22 @@ export class ImageComponentComponent implements OnInit {
   postImage: any;
   @Input('addr') postImageAddr: string;
   @Input('profile') profile: boolean;
-  @Input() width: string;
+  @Input('width') width: string;
   @Input() height: string;
+  @Input('class') class: string;
+  // @Input('profileClass') profileClass: string;
 
   constructor(private postService: PostService) {}
   showSpinner: boolean = true;
+  loaded: boolean = false;
   ngOnInit() {
+    console.log('profileClass is', this.class);
     this.updatePostImageFd();
+    this.postImage = this.postImageAddr;
+
+    if (!this.class) {
+      this.class = 'card-img-top';
+    }
   }
 
   createImageFromBlob(image: Blob) {
@@ -25,6 +34,7 @@ export class ImageComponentComponent implements OnInit {
       'load',
       () => {
         this.postImage = reader.result;
+        this.loaded = true;
         this.showSpinner = false;
       },
       false
@@ -44,8 +54,5 @@ export class ImageComponentComponent implements OnInit {
         console.log('error in loading image', error);
       }
     );
-    // return this.postService.getImage(post.postImageAddr).then(url => {
-    //   this.post_sanitizeURL = url;
-    // });
   }
 }

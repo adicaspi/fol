@@ -1,10 +1,18 @@
-<h1 mat-dialog-title>Hi</h1>
+<div *ngIf="(user | async) as currentUser">
+  <h1 mat-dialog-title>{{ currentUser.username }}</h1>
+  <app-image-component
+    [addr]="currentUser.profileImageAddr"
+    width="10%"
+    [profile]="true"
+  ></app-image-component>
+</div>
 
 <div mat-dialog-content>
   <app-image-component
-    class="test"
+    class="modalbox"
     [addr]="userPost.postImageAddr"
     [profile]="false"
+    width="50%"
   ></app-image-component>
 
   <!-- <button type="button" class="btn btn-light">View outfit</button> -->

@@ -1,18 +1,23 @@
-<div class="card m-auto" style="width: 15rem;">
-  <div class="card-body">
-    <app-image-component
-      (click)="openDialog()"
-      [addr]="userPost.postImageAddr"
-      width="90%"
-      [profile]="false"
-    ></app-image-component>
+<div class="card m-auto" style="width: 250px">
+  <app-image-component
+    (click)="openDialog()"
+    [addr]="userPost.postImageAddr"
+    [profile]="false"
+  ></app-image-component>
 
+  <div class="card-body" style="width: 200px">
     <p class="card-text">
       Balenciaga <br />
-
+      Vela studded leather-trimmed shell shoulder bag
       {{ userPost.description }}
-      <br />
-      $500
     </p>
+    <div class="footer">
+      <span class="text-left">
+        $500
+      </span>
+      <span class="store text-right">
+        Net-A-Porter
+      </span>
+    </div>
   </div>
 </div>

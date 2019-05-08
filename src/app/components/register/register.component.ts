@@ -130,6 +130,7 @@ export class RegisterComponent implements OnInit {
           console.log(data);
           this.userService.userId = data.userId;
           this.userService.username = data.username;
+          this.userService.updateUser(data.userId);
           this.configSerivce.setSessionStorage(data.userId.toString());
           this.router.navigate(['/feed/' + data.userId]);
           this.ngOnDestroy();
@@ -159,6 +160,7 @@ export class RegisterComponent implements OnInit {
           console.log(data, 'im data login form');
           this.userService.userId = data.userId;
           this.userService.username = data.username;
+          this.userService.updateUser(data.userId);
           console.log('im user id', data.userId, data.userName);
           this.configSerivce.setSessionStorage(data.userId.toString());
           this.router.navigate(['/feed/' + data.userId]);
@@ -185,6 +187,7 @@ export class RegisterComponent implements OnInit {
           );
           this.userService.userId = data.body.userId;
           this.userService.username = data.body.userName;
+          this.userService.updateUser(data.body.userId);
           this.router.navigate(['/feed/' + data.body.userId]);
           this.configSerivce.setSessionStorage(data.body.userId.toString());
         })

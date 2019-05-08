@@ -5,6 +5,7 @@ import {
   HttpParams,
   HttpResponse
 } from '@angular/common/http';
+import { User } from '../models/User';
 import { Observable } from 'rxjs/Observable';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,6 +18,7 @@ import { GlobalVariable } from '../../global';
 export class UserService {
   userId: number;
   username: string;
+  user: Observable<User>;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   globalRegisterURL = this.baseApiUrl + '/registration/';
   globaSoicalURL = this.baseApiUrl + '/social/';
@@ -33,6 +35,10 @@ export class UserService {
 
   getCurrentUser(): any {
     return this.userId;
+  }
+
+  updateUser(id: number) {
+    this.user = this.getUserDetails(id);
   }
 
   uploadPost(fd: FormData, desc: string): Observable<any> {

@@ -7,31 +7,90 @@
   /* width: 200px;
   height: 200px; */
 }
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
+
+/* Small devices (landscape phones, 360px and up) */
+@media (min-width: 360px) {
   .card-img-top {
-    height: 15vw;
-    /* width: 10vw; */
+    /* height: 60vw; */
+    width: 198px;
+    height: 270px;
+  }
+  .profile img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+
+/* Small devices (landscape phones, 577px and up) */
+@media (min-width: 480px) {
+  .card-img-top {
+    /* height: 60vw; */
+    width: 198px;
+    height: 270px;
+  }
+  .profile img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
 }
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 577px) and (max-width: 750px) {
+@media (min-width: 600px) {
   .card-img-top {
-    height: 60vw;
+    width: 198px;
+    height: 290px;
+  }
+  .profile img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
 }
-/* Large devices (desktops, 992px and up) */
 
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 992px) {
+/* Medium devices (tablets, 751px and up) */
+
+@media (min-width: 768px) {
   .card-img-top {
-    height: 18vw;
+    width: 198px;
+    height: 270px;
   }
 }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 900px) {
+  .card-img-top {
+    width: 198px;
+    height: 270px;
+    padding: 30px;
+  }
+
+  .profile img {
+    margin-left: 20%;
+    display: block;
+  }
+}
+
 .card {
   /* border: none; */
   margin-top: 30px;
 }
 .card-body {
   padding-left: 45px;
+}
+.modalbox {
+  width: 19vw;
+  margin-left: 30%;
+}
+
+.card-img-top {
+  /* height: 25vw; */
+  /* height: 250px; */
+  /* width: 250px; */
+  width: 250px;
+  height: 290px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
