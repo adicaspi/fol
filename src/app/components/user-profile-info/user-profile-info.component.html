@@ -1,16 +1,6 @@
 <body>
-  <div class="test">
+  <div class="row">
     <div *ngIf="(user | async) as currentUser">
-      <div class="description">
-        <h2>
-          {{ currentUser.username }}
-          {{ currentUser.description }}
-
-          <button type="button" class="btn btn-outline-dark" (click)="follow()">
-            {{ follows ? 'unfollow' : 'follow' }}
-          </button>
-        </h2>
-      </div>
       <app-image-component
         [addr]="currentUser.profileImageAddr"
         [profile]="true"
@@ -18,18 +8,37 @@
       ></app-image-component>
     </div>
 
-    <div class="btn-group">
-      <button type="button" class="simple-button">
-        {{ numberOfPosts | async }} posts
-      </button>
+    <div *ngIf="(user | async) as currentUser" class="description">
+      <h2>
+        {{ currentUser.username }}
+        {{ currentUser.description }}
 
-      <button type="button" class="simple-button" (click)="openDialog()">
-        {{ following | async }} following
-      </button>
+        <button type="button" class="btn btn-outline-dark" (click)="follow()">
+          {{ follows ? 'unfollow' : 'follow' }}
+        </button>
+      </h2>
 
-      <button type="button" class="simple-button" (click)="openDialog()">
-        {{ followers | async }} followears
-      </button>
+      <div class="btn-group">
+        <button type="button" class="simple-button">
+          <span class="metrics">{{ numberOfPosts | async }}</span> posts
+        </button>
+
+        <button
+          type="button"
+          class="simple-button second"
+          (click)="openDialog()"
+        >
+          <span class="metrics">{{ following | async }}</span> following
+        </button>
+
+        <button
+          type="button"
+          class="simple-button third"
+          (click)="openDialog()"
+        >
+          <span class="metrics">{{ followers | async }}</span> followears
+        </button>
+      </div>
     </div>
   </div>
 </body>

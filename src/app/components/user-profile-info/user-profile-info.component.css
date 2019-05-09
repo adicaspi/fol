@@ -1,5 +1,8 @@
 body {
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
+  background-color: white;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .card {
@@ -12,26 +15,34 @@ body {
 }
 
 .description {
-  /* display: inline; */
-  /* float: right;
-  margin-top: 20px; */
-  margin-left: 40%;
+  margin-left: 10%;
+  margin-top: 20px;
 }
 
-.description button {
-  margin-left: 100px;
+.description .btn {
+  float: right;
+}
+
+.row {
+  margin-left: 15%;
+}
+
+.simple-button .metrics {
+  font-weight: 500;
+}
+
+button.btn {
+  background-color: #ff1493;
+  color: white;
+  border: none;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px), only screen and (min-width: 768px) {
+@media only screen and (min-width: 990px), only screen and (min-width: 768px) {
   .btn-group {
     overflow: hidden;
-    /* background-color: #ffffff; */
-    /* float: right; */
-    /* display: inline;
-    margin-top: 20px;
-     */
-    margin-left: 40%;
+    position: relative;
+    top: 20px;
   }
 
   .simple-button {
@@ -42,11 +53,25 @@ body {
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    margin-right: 10px;
+    /* margin-right: 10px; */
   }
-  .btn {
-    margin-right: 10px;
+
+  .simple-button.second,
+  .simple-button.third {
+    margin-left: 30px;
   }
+
+  /* button.simple-button.third {
+    float: right;
+  }
+
+  button.simple-button.secdon {
+    margin-left: 15px;
+  } */
+
+  /* .btn {
+    margin-right: 10px;
+  } */
 }
 
 /* Extra small devices (phones, 600px and down) */
