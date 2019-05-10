@@ -14,18 +14,13 @@ body {
   margin-left: 15px;
 }
 
-.description {
-  margin-left: 10%;
-  margin-top: 20px;
-}
-
 .description .btn {
   float: right;
 }
 
-.row {
+/* .row {
   margin-left: 15%;
-}
+} */
 
 .simple-button .metrics {
   font-weight: 500;
@@ -35,6 +30,16 @@ button.btn {
   background-color: #ff1493;
   color: white;
   border: none;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row .img-comp {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -61,17 +66,10 @@ button.btn {
     margin-left: 30px;
   }
 
-  /* button.simple-button.third {
-    float: right;
+  .description {
+    margin-left: 10%;
+    margin-top: 20px;
   }
-
-  button.simple-button.secdon {
-    margin-left: 15px;
-  } */
-
-  /* .btn {
-    margin-right: 10px;
-  } */
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -95,5 +93,21 @@ button.btn {
   }
   .btn {
     margin-right: 10px;
+  }
+
+  .description {
+    margin-top: 20px;
+  }
+
+  .row .description {
+    margin: 0 auto;
+  }
+
+  .row .img-comp {
+    margin: 0 auto;
+  }
+  .row {
+    margin-right: 0;
+    margin-left: 0;
   }
 }

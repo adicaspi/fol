@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProductPageComponent implements OnInit {
   subscription: Subscription;
   userPost: UserPost;
+  loaded: boolean = false;
 
   showSpinner: boolean = true;
   user: Observable<User>;
@@ -27,8 +28,11 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('im user post', this.userPost);
     this.updateUser();
+    if (this.user) {
+      this.loaded = true;
+      console.log('im user post', this.user);
+    }
   }
   updateUser() {
     this.user = this.userService.user;

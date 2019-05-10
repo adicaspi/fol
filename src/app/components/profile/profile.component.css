@@ -1,48 +1,59 @@
 /* Equal-height card images, cf. https://stackoverflow.com/a/47698201/1375163*/
 .card-img-top {
-  /*height: 11vw;*/
   object-fit: cover;
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  .card-img-top {
-    height: 19vw;
-    padding: 30px;
-  }
 }
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  .card-img-top {
-    height: 16vw;
-    padding: 30px;
-  }
 }
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+@media (min-width: 990px) {
   .card-img-top {
     height: 5vw;
     width: 20vw;
     padding: 30px;
   }
+  p.card-text {
+    font-weight: 600;
+    font-size: 12px;
+    margin: 0 auto;
+  }
+  .card-body {
+    margin-top: 10px;
+  }
+  .footer {
+    margin-top: 5px;
+  }
+  .card {
+    width: 272px;
+    height: 408px;
+    margin-top: 30px;
+    border: none;
+  }
 }
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 992px) {
-  .card-img-top {
-    height: 11vw;
+/* Extra small devices (iphones) */
+@media (min-width: 360px) and (max-width: 376px) {
+  .card-text {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .card-body {
+    width: 270px;
+    padding: 0 0 0 0;
+  }
+  p.card-text {
+    margin: 0 auto;
+  }
+  .card {
+    height: 450px;
+    width: 272px;
+    margin-top: 30px;
+    border: none;
   }
 }
 
-.card {
-  border: none;
-  margin-top: 30px;
-}
-.card-body {
-  padding-left: 18px;
-}
 .footer span.store {
   float: right;
-}
-
-.card-text {
-  font-weight: 600;
 }

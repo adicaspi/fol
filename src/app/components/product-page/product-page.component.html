@@ -9,21 +9,28 @@
 
 <div mat-dialog-content>
   <app-image-component
-    class="modalbox"
     [addr]="userPost.postImageAddr"
     [profile]="false"
+    [class]="modal"
     width="50%"
   ></app-image-component>
 
   <!-- <button type="button" class="btn btn-light">View outfit</button> -->
 </div>
 <p class="card-text">
-  Balenciaga <br />
-
+  Vela studded leather-trimmed shell shoulder bag
   {{ userPost.description }}
   <br />
   $500
 </p>
+<div class="footer">
+  <span class="text-left">
+    $500
+  </span>
+  <span class="store text-right">
+    Net-A-Porter
+  </span>
+</div>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>
     <i class="material-icons">

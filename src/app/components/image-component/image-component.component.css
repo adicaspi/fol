@@ -12,13 +12,26 @@
 @media (min-width: 360px) {
   .card-img-top {
     /* height: 60vw; */
-    width: 198px;
-    height: 270px;
+    width: 270px;
+    height: 350px;
+    /* padding-left: 30px;
+    padding-right: 30px; */
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 0 auto;
   }
+
   .profile img {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    float: center;
+  }
+
+  .modal img {
+    width: 270px;
+    height: 270px;
+    margin: 0 auto;
   }
 }
 
@@ -33,6 +46,7 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+    float: center;
   }
 }
 /* Medium devices (tablets, 768px and up) */
@@ -55,6 +69,11 @@
     width: 198px;
     height: 270px;
   }
+  .modal img {
+    width: 270px;
+    height: 270px;
+    margin: 0 auto;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -68,6 +87,23 @@
   .profile img {
     margin-left: 10%;
     width: 80%;
+    background-color: gray;
+  }
+
+  .modal img {
+    width: 270px;
+    height: 270px;
+    margin: 0 auto;
+  }
+
+  .card-img-top {
+    width: 250px;
+    height: 290px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    float: left;
   }
 }
 
@@ -83,14 +119,7 @@
   margin-left: 30%;
 }
 
-.card-img-top {
-  /* height: 25vw; */
-  /* height: 250px; */
-  /* width: 250px; */
-  width: 250px;
-  height: 290px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+.modal img {
+  width: 270px;
+  height: 270px;
 }
