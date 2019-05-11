@@ -9,13 +9,11 @@
 }
 
 /* Small devices (landscape phones, 360px and up) */
-@media (min-width: 360px) {
+@media (min-width: 360px) and (max-width: 376px) {
   .card-img-top {
-    /* height: 60vw; */
     width: 270px;
     height: 350px;
-    /* padding-left: 30px;
-    padding-right: 30px; */
+
     padding-top: 0px;
     padding-bottom: 0px;
     margin: 0 auto;
@@ -32,6 +30,14 @@
     width: 270px;
     height: 270px;
     margin: 0 auto;
+  }
+
+  .profilePic img {
+    width: 50px;
+    margin-left: 25px;
+  }
+  .profilePic {
+    margin-bottom: 20px;
   }
 }
 
@@ -104,6 +110,10 @@
     padding-top: 0px;
     padding-bottom: 0px;
     float: left;
+  }
+
+  .profilePic img {
+    width: 40px;
   }
 }
 

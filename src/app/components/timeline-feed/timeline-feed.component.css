@@ -29,12 +29,6 @@
 }
 
 @media (min-width: 576px) {
-  body {
-    background-color: #f9f9f9;
-    padding-top: 80px;
-    /* padding-left: 170px;
-    padding-right: 170px; */
-  }
 }
 
 @media (min-width: 360px) {

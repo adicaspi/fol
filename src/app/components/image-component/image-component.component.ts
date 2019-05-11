@@ -23,7 +23,7 @@ export class ImageComponentComponent implements OnInit {
     this.updatePostImageFd();
     this.postImage = this.postImageAddr;
 
-    if (!this.class) {
+    if (!this.class && !this.profile) {
       this.class = 'card-img-top';
     }
   }
