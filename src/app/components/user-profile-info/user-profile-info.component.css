@@ -70,6 +70,9 @@ button.btn {
     margin-left: 10%;
     margin-top: 20px;
   }
+  .row {
+    padding-left: 210px;
+  }
 }
 
 /* Extra small devices (phones, 600px and down) */
