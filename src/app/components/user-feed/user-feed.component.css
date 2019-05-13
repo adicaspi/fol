@@ -3,6 +3,11 @@
   margin-left: 0;
 }
 
+.col-sm-12.col-md-4.col-lg-4.col-xl-4 {
+  height: 480px;
+  padding-top: 10px;
+}
+
 @media only screen and (min-width: 990px), only screen and (min-width: 768px) {
   body {
     background-color: #f9f9f9;

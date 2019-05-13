@@ -31,8 +31,8 @@ export class FeedService {
 
   //returns time line feed for the user in stupid json format
   getTimeLineFeed(
-    userId: number,
-    offset: number
+    offset: number,
+    userId: number
   ): Observable<Array<TimelinePost>> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.get<TimelinePost[]>(

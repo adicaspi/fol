@@ -10,9 +10,19 @@
       <div
         class="col-sm-12 col-md-4 col-lg-4 col-xl-4"
         *ngFor="let post of (posts | async)"
+        (deferLoad)="post.show = true"
       >
-        <app-feed [post]="post"></app-feed>
+        <ng-container *ngIf="post.show">
+          <app-feed [post]="post"></app-feed>
+        </ng-container>
       </div>
+      <div
+        class="search-results"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000"
+        (scrolled)="fetchImages()"
+      ></div>
     </div>
   </div>
 </body>

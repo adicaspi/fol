@@ -36,6 +36,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { UserService } from './services/user.service';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { UserService } from './services/user.service';
     BrowserModule,
     MatDialogModule,
     BrowserAnimationsModule,
+    InfiniteScrollModule,
+    DeferLoadModule,
     MaterialDesignModule,
     AppRoutingModule,
     FormsModule,
