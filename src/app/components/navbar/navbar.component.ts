@@ -44,4 +44,12 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['']);
     }
   }
+
+  feedPage() {
+    if (this.loggedin) {
+      this.router.navigate(['feed', this.userService.userId]);
+    } else {
+      this.router.navigate(['']);
+    }
+  }
 }
