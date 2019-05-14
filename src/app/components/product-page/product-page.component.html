@@ -1,41 +1,66 @@
-<div *ngIf="(user | async) as currentUser">
-  <h1 mat-dialog-title>{{ currentUser.username }}</h1>
-  <app-image-component
-    [addr]="currentUser.profileImageAddr"
-    width="10%"
-    [profile]="true"
-  ></app-image-component>
-</div>
+<body>
+  <div class="row">
+    <div *ngIf="(user | async) as currentUser">
+      <div class="img-comp">
+        <app-image-component
+          [addr]="currentUser.profileImageAddr"
+          [profile]="true"
+          class="productPageProfile"
+        ></app-image-component>
+      </div>
+      <div class="user-name-title">
+        {{ currentUser.username }}
+      </div>
+    </div>
+  </div>
 
-<div mat-dialog-content>
-  <app-image-component
-    [addr]="userPost.postImageAddr"
-    [profile]="false"
-    [class]="modal"
-    width="50%"
-  ></app-image-component>
+  <div mat-dialog-content>
+    <div class="product-img">
+      <app-image-component
+        [addr]="userPost.postImageAddr"
+        [profile]="false"
+        class="modalImg"
+      ></app-image-component>
+    </div>
 
-  <!-- <button type="button" class="btn btn-light">View outfit</button> -->
-</div>
-<p class="card-text">
-  Vela studded leather-trimmed shell shoulder bag
-  {{ userPost.description }}
-  <br />
-  $500
-</p>
-<div class="footer">
-  <span class="text-left">
-    $500
-  </span>
-  <span class="store text-right">
-    Net-A-Porter
-  </span>
-</div>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>
-    <i class="material-icons">
-      close
-    </i>
-  </button>
-  <button mat-raised-button>View outfit</button>
-</mat-dialog-actions>
+    <!-- <button type="button" class="btn btn-light">View outfit</button> -->
+    <div class="product-description">
+      <p class="card-text title">
+        Pimkie Cardigan
+      </p>
+      <p class="card-text description">
+        Vela studded leather-trimmed shell shoulder bag
+        {{ userPost.description }}
+      </p>
+
+      <div class="footer">
+        <div class="upper-footer">
+          <span class="text-left">
+            <button type="button" class="btn btn-primary btn-xs">
+              Shop
+            </button>
+            <button mat-button>
+              <i class="material-icons"> more_horiz</i>
+            </button>
+          </span>
+          <span class="text-right">
+            $500
+          </span>
+        </div>
+
+        <div class="text-right">
+          Net-A-Porter
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <mat-dialog-actions>
+    <button mat-button mat-dialog-close>
+      <i class="material-icons">
+        close
+      </i>
+    </button>
+    <button mat-raised-button>View outfit</button>
+  </mat-dialog-actions> -->
+</body>

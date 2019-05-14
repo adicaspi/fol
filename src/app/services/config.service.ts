@@ -26,7 +26,9 @@ export class ConfigService {
     const user_id = sessionStorage.getItem('user_id');
     if (user_id) {
       var userId = parseInt(user_id);
+      console.log('at session storage user ID is', userId);
       this.userService.userId = userId;
+      this.userService.updateUser(userId);
     } else {
       console.log('session storage not initiliazed yet');
     }

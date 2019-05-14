@@ -13,13 +13,12 @@ export class ImageComponentComponent implements OnInit {
   @Input('width') width: string;
   @Input() height: string;
   @Input('class') class: string;
-  // @Input('profileClass') profileClass: string;
 
   constructor(private postService: PostService) {}
   showSpinner: boolean = true;
   loaded: boolean = false;
   ngOnInit() {
-    console.log('profileClass is', this.class);
+    console.log('Class is', this.class);
     this.updatePostImageFd();
     this.postImage = this.postImageAddr;
 
@@ -35,6 +34,7 @@ export class ImageComponentComponent implements OnInit {
       () => {
         this.postImage = reader.result;
         this.loaded = true;
+
         this.showSpinner = false;
       },
       false

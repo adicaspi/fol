@@ -31,7 +31,6 @@ export class UserFeedComponent implements OnInit {
   }
 
   generateUserFeed(offset: number, userId: number) {
-    //this.posts = this.feedService.getUserFeed(this.id, offset);
     this.feedService
       .getUserFeed(this.id, offset)
       .pipe(
@@ -42,13 +41,13 @@ export class UserFeedComponent implements OnInit {
 
           /// Concatenate new movies to current movies
           this.posts.next(_.concat(current_posts, new_posts));
+          this.offset = new_posts.length;
         })
       )
       .subscribe();
   }
 
   fetchImages() {
-    console.log('in fetch');
     this.generateUserFeed(this.offset, this.id);
   }
 }

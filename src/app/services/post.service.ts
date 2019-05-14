@@ -12,12 +12,9 @@ const httpOptions = {
 export class PostService {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   postsUrl: string = this.baseApiUrl + '/image';
-  //'http://Sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/image';
   constructor(private http: HttpClient) {}
 
   getImage(image_adr: string): Observable<Blob> {
-    console.log('in service - get profile image', image_adr);
-
     let params = new HttpParams().set('s3key', image_adr);
     return this.http.get(this.postsUrl, {
       params: params,

@@ -15,11 +15,11 @@ export class ProductPageComponent implements OnInit {
   subscription: Subscription;
   userPost: UserPost;
   loaded: boolean = false;
+  addr: string;
 
-  showSpinner: boolean = true;
+  class: string;
   user: Observable<User>;
   constructor(
-    private feedService: FeedService,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ProductPageComponent>
@@ -28,11 +28,8 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dialogRef.updateSize('550px', '430px');
     this.updateUser();
-    if (this.user) {
-      this.loaded = true;
-      console.log('im user post', this.user);
-    }
   }
   updateUser() {
     this.user = this.userService.user;
