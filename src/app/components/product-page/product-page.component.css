@@ -52,4 +52,14 @@
     bottom: 45px;
     margin-left: 80px;
   }
+
+  .row.more-from {
+    float: right;
+    position: relative;
+    bottom: 220px;
+  }
+
+  .row .column {
+    margin-right: 20px;
+  }
 }

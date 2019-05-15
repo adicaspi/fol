@@ -4,4 +4,5 @@ export class TimelinePost {
   postImageAddr: string;
   description: string;
   show: boolean = false;
+  userId: number;
 }

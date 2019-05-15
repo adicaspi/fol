@@ -115,6 +115,10 @@
   .productPageProfile img {
     width: 40px;
   }
+
+  img.productPageMoreFromUser {
+    width: 75px;
+  }
 }
 
 .card {

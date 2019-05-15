@@ -23,7 +23,6 @@
       ></app-image-component>
     </div>
 
-    <!-- <button type="button" class="btn btn-light">View outfit</button> -->
     <div class="product-description">
       <p class="card-text title">
         Pimkie Cardigan
@@ -51,6 +50,15 @@
         <div class="text-right">
           Net-A-Porter
         </div>
+      </div>
+    </div>
+    <div class="row more-from">
+      <div *ngFor="let post of posts" class="column">
+        <app-image-component
+          [addr]="post.postImageAddr"
+          [profile]="false"
+          class="productPageMoreFromUser"
+        ></app-image-component>
       </div>
     </div>
   </div>

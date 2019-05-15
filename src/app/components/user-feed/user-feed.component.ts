@@ -36,10 +36,10 @@ export class UserFeedComponent implements OnInit {
       .pipe(
         tap(resulst => {
           const new_posts = resulst;
-          /// Get current movies in BehaviorSubject
+          /// Get current posts in BehaviorSubject
           const current_posts = this.posts.getValue();
 
-          /// Concatenate new movies to current movies
+          /// Concatenate new posts to current movies
           this.posts.next(_.concat(current_posts, new_posts));
           this.offset = new_posts.length;
         })

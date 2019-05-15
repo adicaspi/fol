@@ -16,9 +16,7 @@ export class ProfileComponent implements OnInit {
     private dialogService: DialogService
   ) {}
 
-  ngOnInit() {
-    //console.log('im postImageAddr', this.userPost);
-  }
+  ngOnInit() {}
 
   postClicked() {
     this.feedService.sendMessage(this.userPost);
