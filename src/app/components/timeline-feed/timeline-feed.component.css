@@ -11,10 +11,13 @@
 
 @media only screen and (min-width: 990px), only screen and (min-width: 768px) {
   body {
-    background-color: #f9f9f9;
+    background-color: rgb(246, 246, 246);
     padding-top: 80px;
     padding-left: 170px;
     padding-right: 170px;
+  }
+  .card-group {
+    border-radius: 10px;
   }
 
   ul {

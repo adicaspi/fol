@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <button type="button" class="simple-button" (click)="settingsPage()">
+  <button type="button" class="simple-button" (click)="feedPage()">
     Followear
   </button>
   <button
@@ -48,16 +48,16 @@
         </button>
       </li>
 
-      <li *ngIf="!loggedin" class="nav-item ">
+      <!-- <li *ngIf="!loggedin" class="nav-item ">
         <button type="button" class="simple-button" (click)="profilePage()">
           Register
         </button>
-      </li>
-      <li *ngIf="loggedin" class=" nav-item ">
+      </li> -->
+      <!-- <li *ngIf="loggedin" class=" nav-item ">
         <button type="button" class="simple-button icon" (click)="feedPage()">
           <mat-icon>rss_feed</mat-icon>
         </button>
-      </li>
+      </li> -->
       <li *ngIf="loggedin" class=" nav-item ">
         <button
           type="button"

@@ -25,11 +25,9 @@ export class NavbarComponent implements OnInit {
     if (this.userService.userId) {
       this.loggedin = true;
     }
-    console.log('im log in status', this.loggedin);
   }
 
   profilePage() {
-    console.log('in prof button');
     if (this.loggedin) {
       this.router.navigate(['profile', this.userService.userId]);
     } else {

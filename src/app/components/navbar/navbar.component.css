@@ -22,9 +22,6 @@ mat-icon {
   #navBarSearchForm {
     width: 130px !important;
   }
-  .navbar {
-    display: none;
-  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -43,13 +40,6 @@ mat-icon {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  #navBarSearchForm {
-    width: 530px !important;
-  }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
   #navBarSearchForm {
     width: 530px !important;
   }

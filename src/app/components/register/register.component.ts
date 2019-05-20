@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-//import { AlertService } from '../../_services/alert.service';
+
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { ErrorsService } from '../../services/errors.service';
@@ -11,7 +11,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from '../../../../node_modules/rxjs/operators';
 import { GlobalVariable } from '../../../global';
 import { ConfigService } from '../../services/config.service';
-//import { AuthenticationService } from '../../_services/authentication.service';
 
 @Component({
   selector: 'app-register',

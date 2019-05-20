@@ -13,7 +13,6 @@ import * as _ from 'lodash';
   styleUrls: ['./user-feed.component.css']
 })
 export class UserFeedComponent implements OnInit {
-  //posts: Observable<Array<UserPost>>;
   posts = new BehaviorSubject([]);
 
   offset: number = 0;

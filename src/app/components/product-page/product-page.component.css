@@ -1,3 +1,7 @@
+/* .body {
+  background: black;
+}
+
 @media (min-width: 360px) {
   .mat-dialog-content {
     padding: 0 0 0 0;
@@ -61,5 +65,35 @@
 
   .row .column {
     margin-right: 20px;
+  }
+} */
+
+@media (min-width: 900px) {
+  [ng\:cloak],
+  [ng-cloak],
+  [data-ng-cloak],
+  [x-ng-cloak],
+  .ng-cloak,
+  .x-ng-cloak {
+    display: none !important;
+  }
+  .carousel-thumbnails .carousel-indicators img {
+    max-width: 100px;
+    height: 50px;
+    overflow: hidden;
+    /* display: block; */
+  }
+
+  .carousel-thumbnails .carousel-indicators li {
+    height: auto;
+    max-width: 100px;
+    width: 100px;
+    border: none;
+    box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  }
+  ol.carousel-indicators {
+    position: absolute;
+    /* display: flex; */
+    margin-left: 0;
   }
 }

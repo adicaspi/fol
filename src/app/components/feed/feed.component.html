@@ -1,32 +1,42 @@
 <div class="card">
-  <div class="row profile-img-comp">
+  <div class="profile-img-comp">
     <app-image-component
       [addr]="timelinePost.userProfileImageAddr"
       width="15%"
       [profile]="true"
       class="profilePic"
     ></app-image-component>
-    <p class="card-text">
-      Adi Zep
-    </p>
-  </div>
-  <app-image-component
-    [addr]="timelinePost.postImageAddr"
-    width="80%"
-    [profile]="false"
-  ></app-image-component>
-  <div class="card-body">
-    <p class="card-text">
-      Vela studded leather-trimmed shell shoulder bag
-      {{ timelinePost.description }}
-    </p>
-    <div class="footer">
-      <span class="text-left">
-        $500
-      </span>
-      <span class="store text-right">
-        Net-A-Porter
-      </span>
+
+    <div class="card-text profile">
+      AdiZep
     </div>
   </div>
+
+  <app-image-component
+    [addr]="timelinePost.postImageAddr"
+    [profile]="false"
+  ></app-image-component>
+
+  <!-- <div class="card-body"> -->
+  <div class="card-text">
+    <div class="description">
+      Vela studded leather-trimmed shell shoulder bag
+      {{ timelinePost.description }}
+    </div>
+    <span class="text-left">
+      $500
+    </span>
+    <span class="store text-right">
+      net-a-porter.com
+    </span>
+  </div>
+  <!-- <div class="footer"> -->
+  <!-- <span class="text-left">
+      $500
+    </span>
+    <span class="store text-right">
+      Net-A-Porter
+    </span> -->
+  <!-- </div> -->
+  <!-- </div> -->
 </div>

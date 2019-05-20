@@ -143,6 +143,10 @@ export class UserService {
     return this.http.get<any>(this.globalRegisterURL + 'logout');
   }
 
+  //redirect user to home page
+  //delete user_id from local storage
+  //delete user credentials from user service
+
   resetPassword(userForm: any) {
     //console.log('in reset pass', userForm.email);
     let params = new HttpParams().set('username', userForm.username);

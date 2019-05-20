@@ -3,12 +3,7 @@
 <div *ngIf="!profile">
   <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
   <div *ngIf="loaded">
-    <img
-      [attr.src]="postImage"
-      [attr.width]="width"
-      [attr.height]="height"
-      [class]="class"
-    />
+    <img [attr.src]="postImage" [attr.height]="height" [class]="class" />
   </div>
 </div>
 
