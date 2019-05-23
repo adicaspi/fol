@@ -49,7 +49,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('550px', '490px');
+    this.dialogRef.updateSize('580px', '480px');
     // (550,430)
     this.updateUser();
     this.updatePostImageFd(this.postImageAddr).subscribe(res => {
