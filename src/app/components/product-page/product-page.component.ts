@@ -10,6 +10,7 @@ import { TimelinePost } from '../../models/TimelinePost';
 import { DialogService } from '../../services/dialog.service';
 import { PostService } from '../../services/post.service';
 import * as Rx from 'rxjs';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-product-page',
@@ -48,7 +49,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('550px', '480px');
+    this.dialogRef.updateSize('550px', '490px');
     // (550,430)
     this.updateUser();
     this.updatePostImageFd(this.postImageAddr).subscribe(res => {
@@ -74,20 +75,7 @@ export class ProductPageComponent implements OnInit {
       .then(result => {
         this.posts = result.slice(0, 2);
         console.log('in get more after posts');
-        // this.posts.forEach(function(post, i) {
-        //   console.log('in get for eaxh', post.postImageAddr);
-        //   this.updatePostImageFd(post.postImageAddr).subscribe(res => {
-        //     console.log('after update post');
-        //     this.createImageFromBlob(res).subscribe(img => {
-        //       console.log('im i', i);
-        //       if (i === 0) {
-        //         this.ImageSrcFirstThumbnail = img;
-        //       } else {
-        //         this.ImageSrcSecondThumbnail = img;
-        //       }
-        //     });
-        //   });
-        // });
+
         this.updatePostImageFd(this.posts[0].postImageAddr).subscribe(res => {
           this.createImageFromBlob(res).subscribe(img => {
             this.ImageSrcFirstThumbnail = img;
@@ -146,5 +134,10 @@ export class ProductPageComponent implements OnInit {
     //       console.log('error in loading image', error);
     //     };
     // });
+  }
+
+  setImage(src) {
+    var mainImageElement = $('#mainImage');
+    mainImageElement.attr('src', src);
   }
 }

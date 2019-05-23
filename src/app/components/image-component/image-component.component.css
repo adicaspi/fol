@@ -109,6 +109,7 @@
     width: 42px;
     height: 42px;
     float: left;
+    clear: left;
     margin: 11px;
   }
 
@@ -117,7 +118,8 @@
   }
 
   img.productPageMoreFromUser {
-    width: 75px;
+    width: 70px;
+    height: 80px;
   }
 }
 

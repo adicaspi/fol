@@ -69,31 +69,51 @@
 } */
 
 @media (min-width: 900px) {
-  [ng\:cloak],
-  [ng-cloak],
-  [data-ng-cloak],
-  [x-ng-cloak],
-  .ng-cloak,
-  .x-ng-cloak {
-    display: none !important;
-  }
-  .carousel-thumbnails .carousel-indicators img {
-    max-width: 100px;
-    height: 50px;
+  .wrapper {
+    height: 440px;
     overflow: hidden;
-    /* display: block; */
   }
 
-  .carousel-thumbnails .carousel-indicators li {
-    height: auto;
-    max-width: 100px;
-    width: 100px;
-    border: none;
-    box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  #mainImage {
+    width: 200px;
+    height: 250px;
   }
-  ol.carousel-indicators {
-    position: absolute;
-    /* display: flex; */
-    margin-left: 0;
+
+  .product-description {
+    width: 280px;
+    float: right;
+    clear: right;
+  }
+
+  .imgStyle {
+    width: 50px;
+    height: 60px;
+    margin-right: 10px;
+  }
+
+  .thumbnails {
+    margin-top: 40px;
+    display: inline-block;
+  }
+  .card-text.profile {
+    line-height: 64px;
+    font-size: 15px;
+    height: 64px;
+    margin-bottom: 15px;
+  }
+
+  span.text-right {
+    float: right;
+  }
+
+  .more-from {
+    float: right;
+    /* clear: right; */
+  }
+
+  .user {
+    float: right;
+    /* clear: right; */
+    /* margin-top: 15px; */
   }
 }

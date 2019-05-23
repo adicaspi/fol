@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <button type="button" class="simple-button" (click)="feedPage()">
-    Followear
-  </button>
+  <!-- <button type="button" class="simple-button" (click)="feedPage()">
+    <img src="../../../assets/logo.png" />
+  </button> -->
   <button
     class="navbar-toggler"
     type="button"
@@ -12,8 +12,17 @@
   </button>
   <div class="collapse navbar-collapse " id="navbarMain">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <button type="button" class="simple-button" (click)="settingsPage()">
+      <li class="item">
+        <button type="button" class="simple-button" (click)="feedPage()">
+          <img src="../../../assets/logo.png" />
+        </button>
+      </li>
+      <li class="item">
+        <button
+          type="button"
+          class="simple-button explore"
+          (click)="settingsPage()"
+        >
           Explore
         </button>
       </li>
@@ -48,16 +57,6 @@
         </button>
       </li>
 
-      <!-- <li *ngIf="!loggedin" class="nav-item ">
-        <button type="button" class="simple-button" (click)="profilePage()">
-          Register
-        </button>
-      </li> -->
-      <!-- <li *ngIf="loggedin" class=" nav-item ">
-        <button type="button" class="simple-button icon" (click)="feedPage()">
-          <mat-icon>rss_feed</mat-icon>
-        </button>
-      </li> -->
       <li *ngIf="loggedin" class=" nav-item ">
         <button
           type="button"

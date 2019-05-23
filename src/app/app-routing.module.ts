@@ -7,22 +7,25 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { LandingNavComponent } from './components/landing-nav/landing-nav.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
   {
     path: 'profile/:id',
     component: ViewProfileComponent
-    //canActivate: [AuthGuard]
   },
   {
     path: 'settings/:id',
     component: SettingsComponent
-    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: '',
-    component: RegisterComponent
-    // canActivate: [AuthGuard]
+    component: LandingPageComponent
   },
   { path: 'forgotpassword', component: ForgotPasswordComponent }
 ];

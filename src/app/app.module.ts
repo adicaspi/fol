@@ -38,6 +38,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { UserService } from './services/user.service';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     XsrfInterceptorComponent,
     ForgotPasswordComponent,
     ProductPageComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
