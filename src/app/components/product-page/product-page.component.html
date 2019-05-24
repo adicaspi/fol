@@ -1,80 +1,4 @@
-<!-- <body>
-  <div class="row">
-    <div *ngIf="(user | async) as currentUser">
-      <div class="img-comp">
-        <app-image-component
-          [addr]="currentUser.profileImageAddr"
-          [profile]="true"
-          class="productPageProfile"
-        ></app-image-component>
-      </div>
-      <div class="user-name-title">
-        {{ currentUser.username }}
-      </div>
-    </div>
-  </div>
-
-  <div mat-dialog-content>
-    <div class="product-img">
-      <app-image-component
-        [addr]="userPost.postImageAddr"
-        [profile]="false"
-        class="modalImg"
-      ></app-image-component>
-    </div>
-
-    <div class="product-description">
-      <p class="card-text title">
-        Pimkie Cardigan
-      </p>
-      <p class="card-text description">
-        Vela studded leather-trimmed shell shoulder bag
-        {{ userPost.description }}
-      </p>
-
-      <div class="footer">
-        <div class="upper-footer">
-          <span class="text-left">
-            <button type="button" class="btn btn-primary btn-xs">
-              Shop
-            </button>
-            <button mat-button>
-              <i class="material-icons"> more_horiz</i>
-            </button>
-          </span>
-          <span class="text-right">
-            $500
-          </span>
-        </div>
-
-        <div class="text-right">
-          Net-A-Porter
-        </div>
-      </div>
-    </div>
-    <div class="row more-from">
-      <div *ngFor="let post of posts" class="column">
-        <app-image-component
-          (click)="changeDialog(post)"
-          [addr]="post.postImageAddr"
-          [profile]="false"
-          class="productPageMoreFromUser"
-        ></app-image-component>
-      </div>
-    </div>
-  </div>
-</body> -->
-
-<!-- <mat-dialog-actions>
-    <button mat-button mat-dialog-close>
-      <i class="material-icons">
-        close
-      </i>
-    </button>
-    <button mat-raised-button>View outfit</button>
-  </mat-dialog-actions> -->
 <div *ngIf="user | async as currentUser" class="wrapper">
-  <!-- <div class="wrapper"> -->
   <div class="profile-img-comp">
     <app-image-component
       [addr]="currentUser.profileImageAddr"
@@ -86,17 +10,16 @@
       {{ currentUser.username }}
     </div>
   </div>
-  <!-- </div> -->
 
   <div class="slider">
     <div class="mainImage">
-      <img id="mainImage" [attr.src]="postImageSrc" />
+      <img id="mainImage" [attr.src]="mainImageSrc" />
       <div class="product-description">
         <p class="card-text title">
           <img src="../../../assets/zara.PNG" class="store-logo" />
         </p>
-        <p class="card-text description">
-          {{ userPost.description }}
+        <p id="description" class="card-text description">
+          text {{ post.description }}
         </p>
 
         <div class="footer">
@@ -113,41 +36,26 @@
               <div class="price">
                 $500
               </div>
-              <div class="store">
+              <!-- <div class="store">
                 net-a-porter.com
-              </div>
+              </div> -->
             </span>
           </div>
         </div>
       </div>
     </div>
     <div class="lower-part">
-      <div class="thumbnails">
-        <img
-          class="imgStyle"
-          [attr.src]="postImageSrc"
-          (click)="setImage(postImageSrc)"
-        />
-        <img
-          class="imgStyle"
-          [attr.src]="ImageSrcFirstThumbnail"
-          (click)="setImage(ImageSrcFirstThumbnail)"
-        />
-        <img
-          class="imgStyle"
-          [attr.src]="ImageSrcSecondThumbnail"
-          (click)="setImage(ImageSrcSecondThumbnail)"
-        />
+      <div class="thumbnails" *ngFor="let image of imagesToShow">
+        <img class="imgStyle" [attr.src]="image" (click)="setImage(image)" />
       </div>
       <div class="more-from-user">
-        <div class="more-text">more from Adi</div>
-        <div *ngFor="let post of posts" class="posts-more-from">
-          <app-image-component
-            (click)="changeDialog(post)"
-            [addr]="post.postImageAddr"
-            [profile]="false"
-            class="productPageMoreFromUser"
-          ></app-image-component>
+        <div class="more-text">more from {{ user.username }}</div>
+        <div class="posts-more-from" *ngFor="let image of imagesToShow">
+          <img
+            class="users-additional"
+            [attr.src]="image"
+            (click)="setImageAndText(image)"
+          />
         </div>
       </div>
     </div>

@@ -18,24 +18,15 @@ import * as $ from 'jquery';
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit {
-  subscription: Subscription;
   userPost: UserPost;
   timelinePost: TimelinePost;
-  loaded: Rx.Subject<any>;
-  postloaded: boolean = false;
-  addr: string;
   posts = [];
-  ImageSrcFirstThumbnail: any;
-  ImageSrcSecondThumbnail: any;
-  class: string;
+  imagesToShow = [];
   user: Observable<User>;
-  postImageSrc: any;
+  mainImageSrc: any;
   postImageAddr: any;
-  first: boolean = false;
-  second: boolean = false;
-  third: boolean = false;
   showSpinner: boolean = true;
-  display_val = 'none';
+
   constructor(
     private userService: UserService,
     private feedService: FeedService,
@@ -50,16 +41,9 @@ export class ProductPageComponent implements OnInit {
 
   ngOnInit() {
     this.dialogRef.updateSize('580px', '480px');
-    // (550,430)
     this.updateUser();
     this.updatePostImageFd(this.postImageAddr).subscribe(res => {
-      this.createImageFromBlob(res).subscribe(img => {
-        this.postImageSrc = img;
-        this.first = true;
-        if (this.first && this.second && this.third) {
-          this.showSpinner = false;
-        }
-      });
+      this.createImageFromBlob(res, true);
     });
     this.getMoreFromUser();
   }
@@ -68,30 +52,14 @@ export class ProductPageComponent implements OnInit {
   }
 
   getMoreFromUser() {
-    console.log('in get more');
     this.feedService
       .getUserFeed(655, 0)
       .toPromise()
       .then(result => {
         this.posts = result.slice(0, 2);
-        console.log('in get more after posts');
-
-        this.updatePostImageFd(this.posts[0].postImageAddr).subscribe(res => {
-          this.createImageFromBlob(res).subscribe(img => {
-            this.ImageSrcFirstThumbnail = img;
-            this.second = true;
-            if (this.first && this.second && this.third) {
-              this.showSpinner = false;
-            }
-          });
-        });
-        this.updatePostImageFd(this.posts[1].postImageAddr).subscribe(res => {
-          this.createImageFromBlob(res).subscribe(img => {
-            this.ImageSrcSecondThumbnail = img;
-            this.third = true;
-            if (this.first && this.second && this.third) {
-              this.showSpinner = false;
-            }
+        this.posts.forEach(post => {
+          this.postService.getImage(post.postImageAddr).subscribe(res => {
+            this.createImageFromBlob(res, false);
           });
         });
       });
@@ -104,40 +72,40 @@ export class ProductPageComponent implements OnInit {
     this.dialogService.openDialog(ProductPageComponent, this.userPost);
   }
 
-  createImageFromBlob(image: Blob): Observable<any> {
-    return new Observable<any>(observer => {
-      // This is a tiny blank image
-      observer.next(image);
+  createImageFromBlob(image: Blob, main: boolean) {
+    let reader = new FileReader();
+    reader.addEventListener(
+      'load',
+      () => {
+        if (main) {
+          this.mainImageSrc = reader.result;
+          this.imagesToShow.push(this.mainImageSrc);
+        } else {
+          this.imagesToShow.push(reader.result);
+        }
+      },
+      false
+    );
 
-      // The next and error callbacks from the observer
-      const { next, error } = observer;
-
-      const reader = new FileReader();
+    if (image) {
       reader.readAsDataURL(image);
-      reader.onloadend = function() {
-        observer.next(reader.result);
-      };
-
-      return { unsubscribe() {} };
-    });
+    }
   }
 
   updatePostImageFd(postImageAddr: string): Observable<Blob> {
     console.log('in post service');
     return this.postService.getImage(postImageAddr);
-    // .subscribe(data => {
-    //   console.log('im data from post servcie', data);
-    //   this.createImageFromBlob(data).subscribe(res => {
-    //     imgSrc = res;
-    //   }),
-    //     error => {
-    //       console.log('error in loading image', error);
-    //     };
-    // });
   }
 
   setImage(src) {
     var mainImageElement = $('#mainImage');
     mainImageElement.attr('src', src);
+  }
+
+  setImageAndText(src) {
+    var mainImageElement = $('#mainImage');
+    mainImageElement.attr('src', src);
+    var description = $('#description');
+    description.text('im nex text');
   }
 }
