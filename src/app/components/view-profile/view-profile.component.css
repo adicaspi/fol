@@ -1,5 +1,5 @@
-@media (min-width: 360px) and (max-width: 376px) {
-  .ecommerce {
+@media (min-width: 376px) {
+  .bottom-navbar {
     display: none;
   }
 }
