@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber, Subscription } from 'rxjs';
 import { UserPost } from '../../models/UserPost';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { tap } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 @Component({
@@ -14,9 +14,9 @@ import * as _ from 'lodash';
 })
 export class UserFeedComponent implements OnInit {
   posts = new BehaviorSubject([]);
-
   offset: number = 0;
   id = 0;
+  subscrition: Subscription;
   constructor(
     private feedService: FeedService,
     private activatedRoute: ActivatedRoute
@@ -43,10 +43,14 @@ export class UserFeedComponent implements OnInit {
           this.offset = new_posts.length;
         })
       )
-      .subscribe();
+      .toPromise();
   }
 
   fetchImages() {
     this.generateUserFeed(this.offset, this.id);
   }
+
+  // public ngOnDestroy(): void {
+  //   this.subscrition.unsubscribe();
+  // }
 }

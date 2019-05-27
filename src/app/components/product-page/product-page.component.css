@@ -72,6 +72,13 @@
     overflow: hidden;
   }
 
+  #profileImage {
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    margin: 11px;
+  }
+
   #mainImage {
     width: 200px;
     height: 250px;
@@ -100,9 +107,10 @@
     font-size: 15px;
     height: 50px;
     margin-bottom: 15px;
+    display: inline-block;
   }
 
-  .price {
+  span.text-right {
     float: right;
     clear: right;
     line-height: 50px;
@@ -117,15 +125,21 @@
 
   .more-from-user {
     float: right;
+    margin-top: 10px;
+  }
+
+  .more-text {
+    font-weight: 500;
   }
 
   .shop_btn {
-    background-color: #3cb371;
+    background-color: rgb(255, 140, 0);
+    color: white;
     border-radius: 50px;
-    width: 90px;
+    width: 80px;
     height: 50px;
     border: none;
-    font-size: 20px;
+    font-size: 18px;
     outline: none;
   }
 

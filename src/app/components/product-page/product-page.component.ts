@@ -9,8 +9,10 @@ import { Observable } from 'rxjs/Observable';
 import { TimelinePost } from '../../models/TimelinePost';
 import { DialogService } from '../../services/dialog.service';
 import { PostService } from '../../services/post.service';
-import * as Rx from 'rxjs';
+import { imageEnum } from '../../models/imageEnum';
 import * as $ from 'jquery';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-page',
@@ -21,11 +23,14 @@ export class ProductPageComponent implements OnInit {
   userPost: UserPost;
   timelinePost: TimelinePost;
   posts = [];
-  imagesToShow = [];
-  user: Observable<User>;
+  postsToShow = [];
+  user: User;
   mainImageSrc: any;
   postImageAddr: any;
+  userProfileSrc: any;
   showSpinner: boolean = true;
+
+  onDestroy: Subject<void> = new Subject<void>();
 
   constructor(
     private userService: UserService,
@@ -40,15 +45,24 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('580px', '480px');
-    this.updateUser();
-    this.updatePostImageFd(this.postImageAddr).subscribe(res => {
-      this.createImageFromBlob(res, true);
+    this.dialogRef.updateSize('560px', '480px');
+    // this.updateUser();
+    this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
+      this.user = user;
+      this.updatePostImageFd(user.profileImageAddr)
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(res => {
+          let image_enum = imageEnum.PROFILE;
+          this.createImageFromBlob(res, this.userPost, image_enum);
+        });
     });
+    this.updatePostImageFd(this.postImageAddr)
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(res => {
+        let image_enum = imageEnum.MAIN;
+        this.createImageFromBlob(res, this.userPost, image_enum);
+      });
     this.getMoreFromUser();
-  }
-  updateUser() {
-    this.user = this.userService.user;
   }
 
   getMoreFromUser() {
@@ -58,30 +72,44 @@ export class ProductPageComponent implements OnInit {
       .then(result => {
         this.posts = result.slice(0, 2);
         this.posts.forEach(post => {
-          this.postService.getImage(post.postImageAddr).subscribe(res => {
-            this.createImageFromBlob(res, false);
-          });
+          this.postService
+            .getImage(post.postImageAddr)
+            .pipe(takeUntil(this.onDestroy))
+            .subscribe(res => {
+              let image_enum = imageEnum.THUMBNAILS;
+              this.createImageFromBlob(res, post, image_enum);
+            });
         });
       });
   }
 
-  changeDialog(userPost: UserPost) {
-    this.userPost = userPost;
-    console.log('in change dialog');
-    this.dialogRef.close();
-    this.dialogService.openDialog(ProductPageComponent, this.userPost);
-  }
+  // changeDialog(userPost: UserPost) {
+  //   this.userPost = userPost;
+  //   this.dialogRef.close();
+  //   this.dialogService.openDialog(ProductPageComponent, this.userPost);
+  // }
 
-  createImageFromBlob(image: Blob, main: boolean) {
+  createImageFromBlob(image: Blob, post: UserPost, image_enum: imageEnum) {
     let reader = new FileReader();
     reader.addEventListener(
       'load',
       () => {
-        if (main) {
-          this.mainImageSrc = reader.result;
-          this.imagesToShow.push(this.mainImageSrc);
-        } else {
-          this.imagesToShow.push(reader.result);
+        let postObject = {
+          post: post,
+          imgSrc: reader.result
+        };
+        switch (image_enum) {
+          case 0:
+            this.userProfileSrc = reader.result;
+            break;
+          case 1:
+            this.mainImageSrc = reader.result;
+            this.postsToShow.push(postObject);
+            break;
+
+          case 2:
+            this.postsToShow.push(postObject);
+            break;
         }
       },
       false
@@ -93,7 +121,6 @@ export class ProductPageComponent implements OnInit {
   }
 
   updatePostImageFd(postImageAddr: string): Observable<Blob> {
-    console.log('in post service');
     return this.postService.getImage(postImageAddr);
   }
 
@@ -102,10 +129,15 @@ export class ProductPageComponent implements OnInit {
     mainImageElement.attr('src', src);
   }
 
-  setImageAndText(src) {
+  setImageAndText(post) {
     var mainImageElement = $('#mainImage');
-    mainImageElement.attr('src', src);
+    mainImageElement.attr('src', post['imgSrc']);
     var description = $('#description');
+    //description.text(post['post']['description']);
     description.text('im nex text');
+  }
+
+  public ngOnDestroy(): void {
+    this.onDestroy.next();
   }
 }

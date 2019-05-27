@@ -14,10 +14,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {}
 
-  // postClicked() {
-  //   this.feedService.sendMessage(this.userPost);
-  // }
-
   openDialog(): void {
     this.dialogService.openDialog(ProductPageComponent, this.userPost);
   }

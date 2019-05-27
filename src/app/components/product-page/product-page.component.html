@@ -1,16 +1,10 @@
-<div *ngIf="user | async as currentUser" class="wrapper">
+<div *ngIf="user as currentUser" class="wrapper">
   <div class="profile-img-comp">
-    <app-image-component
-      [addr]="currentUser.profileImageAddr"
-      [profile]="true"
-      class="profilePic"
-    ></app-image-component>
-
+    <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">
       {{ currentUser.username }}
     </div>
   </div>
-
   <div class="slider">
     <div class="mainImage">
       <img id="mainImage" [attr.src]="mainImageSrc" />
@@ -19,9 +13,8 @@
           <img src="../../../assets/zara.PNG" class="store-logo" />
         </p>
         <p id="description" class="card-text description">
-          text {{ post.description }}
+          text {{ userPost.description }}
         </p>
-
         <div class="footer">
           <div class="upper-footer">
             <span class="text-left">
@@ -33,28 +26,29 @@
               </button>
             </span>
             <span class="text-right">
-              <div class="price">
-                $500
-              </div>
-              <!-- <div class="store">
-                net-a-porter.com
-              </div> -->
+              $500
             </span>
           </div>
         </div>
       </div>
     </div>
     <div class="lower-part">
-      <div class="thumbnails" *ngFor="let image of imagesToShow">
-        <img class="imgStyle" [attr.src]="image" (click)="setImage(image)" />
+      <div class="thumbnails" *ngFor="let image of postsToShow">
+        <img
+          class="imgStyle"
+          [attr.src]="image['imgSrc']"
+          (click)="setImage(image)"
+        />
       </div>
       <div class="more-from-user">
-        <div class="more-text">more from {{ user.username }}</div>
-        <div class="posts-more-from" *ngFor="let image of imagesToShow">
+        <div class="more-text">
+          See more products from {{ currentUser.username }}
+        </div>
+        <div class="posts-more-from" *ngFor="let post of postsToShow">
           <img
             class="users-additional"
-            [attr.src]="image"
-            (click)="setImageAndText(image)"
+            [attr.src]="post['imgSrc']"
+            (click)="setImageAndText(post)"
           />
         </div>
       </div>

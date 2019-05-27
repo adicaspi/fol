@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from '../../services/post.service';
+import { Subscription } from '../../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-image-component',
@@ -8,6 +9,7 @@ import { PostService } from '../../services/post.service';
 })
 export class ImageComponentComponent implements OnInit {
   postImage: any;
+  reader = new FileReader();
   @Input('addr') postImageAddr: string;
   @Input('profile') profile: boolean;
   @Input('width') width: string;
@@ -17,6 +19,7 @@ export class ImageComponentComponent implements OnInit {
   constructor(private postService: PostService) {}
   showSpinner: boolean = true;
   loaded: boolean = false;
+  subscription: Subscription;
   ngOnInit() {
     console.log('Class is', this.class);
     this.updatePostImageFd();
@@ -28,11 +31,10 @@ export class ImageComponentComponent implements OnInit {
   }
 
   createImageFromBlob(image: Blob) {
-    let reader = new FileReader();
-    reader.addEventListener(
+    this.reader.addEventListener(
       'load',
       () => {
-        this.postImage = reader.result;
+        this.postImage = this.reader.result;
         this.loaded = true;
 
         this.showSpinner = false;
@@ -41,12 +43,12 @@ export class ImageComponentComponent implements OnInit {
     );
 
     if (image) {
-      reader.readAsDataURL(image);
+      this.reader.readAsDataURL(image);
     }
   }
 
   updatePostImageFd() {
-    this.postService.getImage(this.postImageAddr).subscribe(
+    this.subscription = this.postService.getImage(this.postImageAddr).subscribe(
       data => {
         this.createImageFromBlob(data);
       },
@@ -54,5 +56,9 @@ export class ImageComponentComponent implements OnInit {
         console.log('error in loading image', error);
       }
     );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
