@@ -12,6 +12,7 @@
   </div>
 
   <app-image-component
+    (click)="openDialog()"
     [addr]="timelinePost.postImageAddr"
     [profile]="false"
   ></app-image-component>
@@ -29,13 +30,4 @@
       net-a-porter.com
     </span>
   </div>
-  <!-- <div class="footer"> -->
-  <!-- <span class="text-left">
-      $500
-    </span>
-    <span class="store text-right">
-      Net-A-Porter
-    </span> -->
-  <!-- </div> -->
-  <!-- </div> -->
 </div>

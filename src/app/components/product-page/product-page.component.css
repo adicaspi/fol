@@ -1,70 +1,89 @@
-/* .body {
-  background: black;
-}
-
-@media (min-width: 360px) {
-  .mat-dialog-content {
-    padding: 0 0 0 0;
-    height: 400px;
+@media (min-width: 360px) and (max-width: 376px) {
+  .wrapper {
+    height: 430px;
   }
-}
 
-@media (min-width: 900px) {
-  .mat-dialog-content {
-    height: 300px;
-    overflow: hidden;
+  #profileImage {
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    margin: 11px;
   }
+
+  #mainImage {
+    width: 200px;
+    height: 250px;
+    border: solid 0.8px;
+    border-color: lightgray;
+  }
+
   .product-description {
-    position: relative;
-    bottom: 270px;
-    margin-left: 220px;
-  }
-
-  p.card-text.title {
-    font-weight: 700;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  p.card-text.description {
-    font-weight: 500;
-    font-size: 14px;
-  }
-  .footer {
-    margin-right: 30px;
-  }
-  span.text-right {
+    width: 280px;
     float: right;
     clear: right;
   }
-  
 
-  span.user-name {
-    margin-left: 10px;
-    margin-top: 8px;
-  }
-
-  .img-comp {
+  .imgStyle {
     width: 50px;
+    height: 60px;
+    margin-right: 10px;
+  }
+
+  .thumbnails {
+    margin-top: 40px;
+    display: inline-block;
+  }
+  .card-text.profile {
+    line-height: 64px;
+    font-size: 15px;
     height: 50px;
-    margin-left: 30px;
+    margin-bottom: 15px;
+    display: inline-block;
   }
 
-  .user-name-title {
-    position: relative;
-    bottom: 45px;
-    margin-left: 80px;
-  }
-
-  .row.more-from {
+  span.text-right {
     float: right;
-    position: relative;
-    bottom: 220px;
+    clear: right;
+    line-height: 50px;
+    font-weight: 400;
+    color: gray;
+    font-size: 16px;
   }
 
-  .row .column {
-    margin-right: 20px;
+  .posts-more-from {
+    float: right;
   }
-} */
+
+  .more-from-user {
+    float: right;
+    margin-top: 10px;
+  }
+
+  .more-text {
+    font-weight: 500;
+  }
+
+  .shop_btn {
+    background-color: rgb(255, 140, 0);
+    color: white;
+    border-radius: 50px;
+    width: 80px;
+    height: 50px;
+    border: none;
+    font-size: 18px;
+    outline: none;
+  }
+
+  .store-logo {
+    width: 80px;
+    height: 30px;
+  }
+
+  .users-additional {
+    height: 90px;
+    width: 80px;
+  }
+}
 
 @media (min-width: 900px) {
   .wrapper {

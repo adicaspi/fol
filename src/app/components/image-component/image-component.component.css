@@ -10,13 +10,13 @@
 
 /* Small devices (landscape phones, 360px and up) */
 @media (min-width: 360px) and (max-width: 376px) {
-  .card-img-top {
-    width: 270px;
-    height: 350px;
-
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin: 0 auto;
+  .img-top {
+    width: 175px;
+    height: 262px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
   }
 
   .profile img {
@@ -33,11 +33,11 @@
   }
 
   .profilePic img {
-    width: 50px;
-    margin-left: 25px;
-  }
-  .profilePic {
-    margin-bottom: 20px;
+    width: 42px;
+    height: 42px;
+    float: left;
+    clear: left;
+    margin: 11px;
   }
 }
 

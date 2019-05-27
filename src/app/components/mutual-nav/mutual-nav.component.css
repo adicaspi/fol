@@ -1,52 +1,32 @@
-.simple-button {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  margin-right: 10px;
+.navbar {
+  overflow: hidden;
+  background-color: rgb(243, 239, 239);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-.right {
-  float: right;
+.navbar a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 575px) {
-  #navBarSearchForm {
-    width: 130px !important;
-  }
-  .navbar {
-    display: none;
-  }
+.navbar a:hover {
+  background: #f1f1f1;
+  color: black;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 575px) {
-  #navBarSearchForm {
-    width: 200px !important;
-  }
+.navbar a.active {
+  background-color: #4caf50;
+  color: white;
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  #navBarSearchForm {
-    width: 400px !important;
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  #navBarSearchForm {
-    width: 500px !important;
-  }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  #navBarSearchForm {
-    width: 500px !important;
-  }
+.main {
+  padding: 16px;
+  margin-bottom: 30px;
 }

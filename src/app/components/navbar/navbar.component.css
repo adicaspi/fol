@@ -1,3 +1,8 @@
+img.logo {
+  width: 110px;
+  height: 20px;
+}
+
 .simple-button {
   background: none;
   color: inherit;
@@ -17,33 +22,25 @@
 mat-icon {
   font-size: 20px;
 }
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 575px) {
-  #navBarSearchForm {
-    width: 130px !important;
-  }
-}
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 575px) {
-  #navBarSearchForm {
-    width: 200px !important;
+/* Small devices (landscape phones, 360px and up) */
+@media (min-width: 360px) and (max-width: 376px) {
+  img.logo {
+    width: 110px;
+    height: 20px;
   }
-}
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  #navBarSearchForm {
-    width: 430px !important;
+  #navbarMain {
+    display: none;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 990px) {
+@media only screen and (min-width: 900px) {
   #navBarSearchForm {
     width: 530px !important;
   }
-  img {
+  img.logo {
     width: 110px;
     height: 20px;
   }

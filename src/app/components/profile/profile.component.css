@@ -1,7 +1,7 @@
 /* Equal-height card images, cf. https://stackoverflow.com/a/47698201/1375163*/
-.card-img-top {
+/* .card-img-top {
   object-fit: cover;
-}
+} */
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 }
@@ -35,7 +35,7 @@
   }
 }
 /* Extra small devices (iphones) */
-@media (min-width: 360px) and (max-width: 376px) {
+/* @media (min-width: 360px) and (max-width: 376px) {
   .card-text {
     font-weight: 600;
     font-size: 16px;
@@ -54,6 +54,44 @@
     border: none;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+.footer span.store {
+  float: right;
+} */
+
+@media (min-width: 360px) and (max-width: 376px) {
+  .card {
+    width: 267px;
+    height: 450px;
+    margin-top: 35px;
+    border: none;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card-text {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .card-body {
+    width: 270px;
+    padding: 0 0 0 0;
+  }
+  .card-text {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .card-text.profile {
+    line-height: 42px;
+    font-size: 15px;
+  }
+
+  .profile-img-comp {
+    margin-top: 10px;
   }
 }
 

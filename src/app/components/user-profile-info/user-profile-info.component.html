@@ -1,6 +1,6 @@
 <body>
   <div class="row">
-    <div *ngIf="(user | async) as currentUser" class="img-comp">
+    <div *ngIf="user | async as currentUser" class="img-comp">
       <app-image-component
         [addr]="currentUser.profileImageAddr"
         [profile]="true"
@@ -8,7 +8,7 @@
       ></app-image-component>
     </div>
 
-    <div *ngIf="(user | async) as currentUser" class="description">
+    <div *ngIf="user | async as currentUser" class="description">
       <h2>
         {{ currentUser.username }}
         {{ currentUser.description }}

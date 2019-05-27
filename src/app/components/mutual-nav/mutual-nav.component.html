@@ -1,41 +1,7 @@
-<div class="collapse navbar-collapse " id="navbarMain">
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <button type="button" class="simple-button" (click)="settingsPage()">
-        Explore
-      </button>
-    </li>
-  </ul>
-
-  <ul class="navbar-nav" *ngIf="enabled">
-    <li class="nav-item">
-      <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          id="navBarSearchForm"
-        />
-
-        <button class="simple-button" type="button">
-          <i class="fa fa-search"></i>
-        </button>
-      </form>
-    </li>
-  </ul>
-
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <button type="button" class="simple-button" (click)="profilePage()">
-        {{ loggedin ? 'Profile' : 'Register' }}
-      </button>
-    </li>
-
-    <li class="nav-item">
-      <button type="button" class="simple-button" (click)="settingsPage()">
-        Settings
-      </button>
-    </li>
-  </ul>
-</div>
+<body>
+  <div class="navbar">
+    <a href="#home" class="active">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </div>
+</body>
