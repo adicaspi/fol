@@ -8,12 +8,13 @@
   object-fit: cover;
 }
 
-.background-img {
-  width: 175px;
-  height: 262px;
-  background-repeat: no-repeat;
+.img-placeholder {
+  /* background-repeat: no-repeat; */
   background-image: url('https://via.placeholder.com/150');
   background-size: cover;
+}
+
+.first-level {
 }
 
 /* Small devices (landscape phones, 360px and up) */
@@ -25,14 +26,15 @@
     margin-right: auto;
     display: block;
     border-radius: 5px;
+    object-fit: cover;
   }
 
-  .profile img {
+  /* .profile img {
     margin-left: auto;
     margin-right: auto;
     display: block;
     float: center;
-  }
+  } */
 
   .modal {
     width: 270px;
@@ -46,6 +48,7 @@
     float: left;
     clear: left;
     margin: 11px;
+    max-width: 100%;
   }
 }
 

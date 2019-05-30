@@ -24,7 +24,7 @@ export class ImageComponentComponent implements OnInit {
   ngOnInit() {
     this.updatePostImageFd();
     this.postImage = this.postImageAddr;
-
+    this.postImage = '../../../assets/placeholder.png';
     if (!this.class && !this.profile) {
       this.class = 'img-top';
     }
@@ -37,7 +37,7 @@ export class ImageComponentComponent implements OnInit {
       (handler = () => {
         this.postImage = this.reader.result;
         this.loaded = true;
-        //this.bg = false;
+
         this.reader.removeEventListener('load', handler, false);
         this.showSpinner = false;
       }),
