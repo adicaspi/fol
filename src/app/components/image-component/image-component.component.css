@@ -8,15 +8,6 @@
   object-fit: cover;
 }
 
-.img-placeholder {
-  /* background-repeat: no-repeat; */
-  background-image: url('https://via.placeholder.com/150');
-  background-size: cover;
-}
-
-.first-level {
-}
-
 /* Small devices (landscape phones, 360px and up) */
 @media (min-width: 360px) and (max-width: 376px) {
   .img-top {
