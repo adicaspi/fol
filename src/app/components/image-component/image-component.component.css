@@ -1,11 +1,19 @@
-/* Equal-height card images, cf. https://stackoverflow.com/a/47698201/1375163*/
-.card-img-top {
-  /* height: 11vw; */
-  object-fit: cover;
+.img-top {
+  width: 175px;
+  height: 262px;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
+  border-radius: 5px;
+  object-fit: cover;
+}
 
-  /* width: 200px;
-  height: 200px; */
+.background-img {
+  width: 175px;
+  height: 262px;
+  background-repeat: no-repeat;
+  background-image: url('https://via.placeholder.com/150');
+  background-size: cover;
 }
 
 /* Small devices (landscape phones, 360px and up) */

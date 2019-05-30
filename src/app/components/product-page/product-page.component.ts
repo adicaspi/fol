@@ -62,6 +62,7 @@ export class ProductPageComponent implements OnInit {
         let image_enum = imageEnum.MAIN;
         this.createImageFromBlob(res, this.userPost, image_enum);
       });
+
     this.getMoreFromUser();
   }
 
@@ -91,9 +92,10 @@ export class ProductPageComponent implements OnInit {
 
   createImageFromBlob(image: Blob, post: UserPost, image_enum: imageEnum) {
     let reader = new FileReader();
+    let handler;
     reader.addEventListener(
       'load',
-      () => {
+      (handler = () => {
         let postObject = {
           post: post,
           imgSrc: reader.result
@@ -101,17 +103,20 @@ export class ProductPageComponent implements OnInit {
         switch (image_enum) {
           case 0:
             this.userProfileSrc = reader.result;
+            reader.removeEventListener('load', handler, false);
             break;
           case 1:
             this.mainImageSrc = reader.result;
             this.postsToShow.push(postObject);
+            reader.removeEventListener('load', handler, false);
             break;
 
           case 2:
             this.postsToShow.push(postObject);
+            reader.removeEventListener('load', handler, false);
             break;
         }
-      },
+      }),
       false
     );
 

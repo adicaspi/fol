@@ -66,7 +66,6 @@ export class UserProfileInfoComponent implements OnInit {
   modalFlag(flag: number) {
     this.flag = flag;
     this.clicked = true;
-    console.log('i was clicked', flag);
   }
 
   openDialog(): void {
@@ -79,8 +78,8 @@ export class UserProfileInfoComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 }

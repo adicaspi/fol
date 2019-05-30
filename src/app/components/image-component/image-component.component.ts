@@ -19,9 +19,9 @@ export class ImageComponentComponent implements OnInit {
   constructor(private postService: PostService) {}
   showSpinner: boolean = true;
   loaded: boolean = false;
+  bg: boolean = true;
   subscription: Subscription;
   ngOnInit() {
-    console.log('Class is', this.class);
     this.updatePostImageFd();
     this.postImage = this.postImageAddr;
 
@@ -31,14 +31,16 @@ export class ImageComponentComponent implements OnInit {
   }
 
   createImageFromBlob(image: Blob) {
+    let handler;
     this.reader.addEventListener(
       'load',
-      () => {
+      (handler = () => {
         this.postImage = this.reader.result;
         this.loaded = true;
-
+        //this.bg = false;
+        this.reader.removeEventListener('load', handler, false);
         this.showSpinner = false;
-      },
+      }),
       false
     );
 

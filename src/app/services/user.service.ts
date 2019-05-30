@@ -27,7 +27,6 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   register(userForm: any): Observable<any> {
-    console.log(userForm);
     return this.http.post<any>(this.globalRegisterURL + 'signup', userForm, {
       headers: httpOptions.headers
     });

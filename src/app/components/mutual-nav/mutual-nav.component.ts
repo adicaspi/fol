@@ -11,37 +11,35 @@ import { SettingsComponent } from '../settings/settings.component';
   styleUrls: ['./mutual-nav.component.css']
 })
 export class MutualNavComponent implements OnInit {
-  loggedin = false;
-  margin = '0%';
+  feed: boolean = false;
+  profile: boolean = false;
 
   @Input('enabled') enabled: boolean = true;
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
-    { path: 'regsiter', component: RegisterComponent },
+    { path: 'feed/:id', component: RegisterComponent },
     { path: 'settings/:id', component: SettingsComponent }
   ];
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
-    if (this.userService.userId) {
-      this.loggedin = true;
+    if (this.router.url.match('/profile')) {
+      this.profile = true;
     }
-    console.log('im log in status', this.loggedin);
+    if (this.router.url.match('/feed')) {
+      this.feed = true;
+    }
   }
 
   profilePage() {
-    if (this.loggedin) {
-      this.router.navigate(['profile', this.userService.userId]);
-    } else {
-      this.router.navigate(['register']);
-    }
+    this.router.navigate(['profile', this.userService.userId]);
+    this.profile = true;
+    this.feed = false;
   }
 
-  settingsPage() {
-    if (this.loggedin) {
-      this.router.navigate(['settings', this.userService.userId]);
-    } else {
-      this.router.navigate(['register']);
-    }
+  feedPage() {
+    this.router.navigate(['feed', this.userService.userId]);
+    this.feed = true;
+    this.profile = false;
   }
 }

@@ -23,7 +23,7 @@ export class UserFeedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.subscrition = this.activatedRoute.params.subscribe(params => {
       this.id = +params['id'];
       this.generateUserFeed(0, this.id);
     });
@@ -50,7 +50,7 @@ export class UserFeedComponent implements OnInit {
     this.generateUserFeed(this.offset, this.id);
   }
 
-  // public ngOnDestroy(): void {
-  //   this.subscrition.unsubscribe();
-  // }
+  public ngOnDestroy(): void {
+    this.subscrition.unsubscribe();
+  }
 }
