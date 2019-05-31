@@ -43,18 +43,20 @@ export class FeedService {
     );
   }
 
-  getUserFeed(userId: number, offset: number): Observable<Array<UserPost>> {
+  getUserFeed(userId: number, offset: number) {
     let params = new HttpParams().set('offset', offset.toString());
-    return this.http
-      .get<Array<UserPost>>(this.globalFeedURL + userId + '/user-feed', {
+    return this.http.get<Array<any>>(
+      this.globalFeedURL + userId + '/user-feed',
+      {
         params: params
-      })
-      .pipe(
-        catchError(err => {
-          console.log('im error', err);
-          return throwError('Something bad happened; please try again later.');
-        })
-      );
+      }
+    );
+    // .pipe(
+    //   catchError(err => {
+    //     console.log('im error', err);
+    //     return throwError('Something bad happened; please try again later.');
+    //   })
+    // );
   }
 
   getSlavesMasters(

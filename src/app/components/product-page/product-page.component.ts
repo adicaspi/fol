@@ -29,7 +29,6 @@ export class ProductPageComponent implements OnInit {
   postImageAddr: any;
   userProfileSrc: any;
   showSpinner: boolean = true;
-
   onDestroy: Subject<void> = new Subject<void>();
 
   constructor(
@@ -47,9 +46,10 @@ export class ProductPageComponent implements OnInit {
   ngOnInit() {
     this.dialogRef.updateSize('560px', '480px');
     this.userProfileSrc = '../../../assets/placeholder.png';
-    // this.updateUser();
+    this.userService.updateUser(655);
     this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
       this.user = user;
+
       this.updatePostImageFd(user.profileImageAddr)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(res => {

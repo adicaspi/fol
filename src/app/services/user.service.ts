@@ -82,7 +82,6 @@ export class UserService {
   }
 
   checkIsFollowing(masterId: number): Promise<boolean> {
-    console.log('im masterid', masterId);
     let params = new HttpParams().set('masterId', masterId.toString());
     return this.http
       .get<boolean>(this.globaSoicalURL + this.userId + '/is-following', {

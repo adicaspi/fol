@@ -8,6 +8,15 @@
   object-fit: cover;
 }
 
+.profilePic img {
+  width: 42px;
+  height: 42px;
+  float: left;
+  clear: left;
+  margin: 11px;
+  max-width: 100%;
+}
+
 /* Small devices (landscape phones, 360px and up) */
 @media (min-width: 360px) and (max-width: 376px) {
   .img-top {

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import * as _ from 'lodash';
 
 @Component({
@@ -14,8 +16,9 @@ import * as _ from 'lodash';
 })
 export class TimelineFeedComponent implements OnInit {
   id: number;
-  posts = new BehaviorSubject([]);
+  posts: Array<any> = [];
   offset: number = 0;
+  onDestroy: Subject<void> = new Subject<void>();
   constructor(
     private userService: UserService,
     private feedService: FeedService
@@ -27,25 +30,22 @@ export class TimelineFeedComponent implements OnInit {
     this.generateTimelineFeed(0, this.id);
   }
 
+  private processData = posts => {
+    this.posts = this.posts.concat(posts);
+  };
+
   generateTimelineFeed(offset: number, id: number) {
     this.feedService
       .getTimeLineFeed(offset, id)
-      .pipe(
-        tap(resulst => {
-          const new_posts = resulst;
-          /// Get current movies in BehaviorSubject
-          const current_posts = this.posts.getValue();
-
-          /// Concatenate new movies to current movies
-          this.posts.next(_.concat(current_posts, new_posts));
-
-          this.offset += new_posts.length;
-        })
-      )
-      .subscribe();
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(this.processData);
   }
   fetchImages() {
     this.generateTimelineFeed(this.offset, this.id);
     console.log('im offest', this.offset);
+  }
+
+  public ngOnDestroy(): void {
+    this.onDestroy.next();
   }
 }
