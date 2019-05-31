@@ -1,6 +1,6 @@
 .img-top {
-  width: 175px;
-  height: 262px;
+  /* width: 175px;
+  height: 262px; */
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -20,8 +20,7 @@
 /* Small devices (landscape phones, 360px and up) */
 @media (min-width: 360px) and (max-width: 376px) {
   .img-top {
-    width: 175px;
-    height: 262px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     display: block;

@@ -15,11 +15,10 @@ import * as _ from 'lodash';
   styleUrls: ['./user-feed.component.css']
 })
 export class UserFeedComponent implements OnInit {
-  //posts = new BehaviorSubject([]);
   posts: Array<any> = [];
   offset: number = 0;
   id = 0;
-  //subscrition: Subscription;
+
   onDestroy: Subject<void> = new Subject<void>();
 
   constructor(
