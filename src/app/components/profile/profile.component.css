@@ -10,28 +10,32 @@
 }
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 900px) {
-  p.card-text {
-    font-weight: 600;
-    font-size: 12px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .card-body {
-    margin-top: 10px;
-  }
-  .footer {
-    margin-top: 5px;
-  }
   .card {
     width: 272px;
     height: 408px;
     margin-top: 30px;
     border: none;
   }
-  span.store {
+
+  .card-text {
+    font-weight: 600;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
+  .description {
+    text-align: center;
+  }
+
+  span.store.text-right {
     float: right;
     clear: right;
     text-decoration: underline;
+  }
+  span.text-left {
+    float: left;
+    clear: left;
   }
 }
 
