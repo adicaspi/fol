@@ -6,13 +6,13 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from '../../../node_modules/rxjs/operators';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { ReplaySubject, Subject } from 'rxjs';
 import { throwError } from 'rxjs';
-import { nextContext } from '../../../node_modules/@angular/core/src/render3';
+
 import { GlobalVariable } from '../../global';
 
 const httpOptions = {

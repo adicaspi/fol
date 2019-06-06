@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { element } from '../../../../node_modules/@angular/core/src/render3';
+
 @Component({
   selector: 'app-generate-follow-list',
   templateUrl: './generate-follow-list.component.html',
