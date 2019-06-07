@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { TimelinePost } from '../../models/TimelinePost';
-import { Observable } from 'rxjs';
+
 import { FeedService } from '../../services/feed.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { tap } from 'rxjs/operators';
+
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -42,7 +39,6 @@ export class TimelineFeedComponent implements OnInit {
   }
   fetchImages() {
     this.generateTimelineFeed(this.offset, this.id);
-    console.log('im offest', this.offset);
   }
 
   public ngOnDestroy(): void {

@@ -5,7 +5,7 @@ import { FeedService } from '../../services/feed.service';
 import { UserService } from '../../services/user.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../models/User';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { TimelinePost } from '../../models/TimelinePost';
 import { DialogService } from '../../services/dialog.service';
 import { PostService } from '../../services/post.service';

@@ -1,6 +1,27 @@
+li.item-logo {
+  height: 3px;
+  list-style: none;
+  float: left;
+  cursor: pointer;
+}
+
+li.item-explore {
+  line-height: 30px;
+  list-style: none;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
 img.logo {
   width: 110px;
   height: 20px;
+}
+
+button.button-left-nav {
+  background: none;
+  border: none;
 }
 
 .simple-button {
@@ -8,7 +29,6 @@ img.logo {
   color: inherit;
   border: none;
   padding: 0;
-  font: inherit;
   cursor: pointer;
   outline: inherit;
   margin-right: 10px;
@@ -39,6 +59,7 @@ mat-icon {
 @media only screen and (min-width: 900px) {
   #navBarSearchForm {
     width: 530px !important;
+    margin-left: 50px;
   }
   img.logo {
     width: 110px;

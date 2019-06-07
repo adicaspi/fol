@@ -6,7 +6,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { User } from '../models/User';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -16,7 +16,7 @@ import { GlobalVariable } from '../../global';
   providedIn: 'root'
 })
 export class UserService {
-  userId: number;
+  userId: number = 655;
   username: string;
   user: Observable<User>;
   private baseApiUrl = GlobalVariable.BASE_API_URL;

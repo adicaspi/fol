@@ -28,11 +28,8 @@ export class NavbarComponent implements OnInit {
   }
 
   profilePage() {
-    if (this.loggedin) {
-      this.router.navigate(['profile', this.userService.userId]);
-    } else {
-      this.router.navigate(['']);
-    }
+    console.log('in prof');
+    this.router.navigate(['profile', this.userService.userId]);
   }
 
   settingsPage() {
@@ -49,5 +46,9 @@ export class NavbarComponent implements OnInit {
     } else {
       this.router.navigate(['']);
     }
+  }
+
+  explorePage() {
+    this.router.navigate(['/explore']);
   }
 }

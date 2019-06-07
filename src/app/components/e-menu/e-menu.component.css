@@ -1,10 +1,11 @@
 .navbar-nav,
 .mr-auto {
   flex: 1;
-  margin: 0 !important;
+  /* margin: 0 !important; */
+  margin: 40px;
   display: flex;
   justify-content: space-between;
-  color: white;
+  /* color: white; */
 }
 .fa.fa-navicon {
   color: white;

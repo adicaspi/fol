@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { GlobalVariable } from '../../global';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'image/jpeg' })

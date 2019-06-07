@@ -39,6 +39,9 @@ import { UserService } from './services/user.service';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ExploreFeedComponent } from './components/explore-feed/explore-feed.component';
+import { ExplorePostComponent } from './components/explore-post/explore-post.component';
+import { ViewExploreComponent } from './components/view-explore/view-explore.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     ForgotPasswordComponent,
     ProductPageComponent,
     LoadingSpinnerComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ExploreFeedComponent,
+    ExplorePostComponent,
+    ViewExploreComponent
   ],
   imports: [
     BrowserModule,

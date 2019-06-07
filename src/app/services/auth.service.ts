@@ -7,7 +7,7 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from '../../../node_modules/rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { ReplaySubject, Subject } from 'rxjs';

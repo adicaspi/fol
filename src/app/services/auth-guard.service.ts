@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import 'rxjs/add/observable/of';
-import { map, catchError } from '../../../node_modules/rxjs/operators';
-import { pipe } from '../../../node_modules/rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'

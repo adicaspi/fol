@@ -9,6 +9,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { LandingNavComponent } from './components/landing-nav/landing-nav.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ExploreFeedComponent } from './components/explore-feed/explore-feed.component';
+import { ViewExploreComponent } from './components/view-explore/view-explore.component';
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
   {
@@ -27,7 +29,8 @@ const routes: Routes = [
     path: '',
     component: LandingPageComponent
   },
-  { path: 'forgotpassword', component: ForgotPasswordComponent }
+  { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'explore', component: ViewExploreComponent }
 ];
 
 @NgModule({

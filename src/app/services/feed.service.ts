@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from '../../../node_modules/rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
   HttpClient,
   HttpHeaders,
@@ -9,7 +9,7 @@ import {
 import { TimelinePost } from '../models/TimelinePost';
 import { UserPost } from '../models/UserPost';
 import { FollowItem } from '../models/FollowItem';
-import { map } from '../../../node_modules/rxjs/operators';
+import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { GlobalVariable } from '../../global';

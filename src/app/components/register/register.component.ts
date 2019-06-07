@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { ErrorsService } from '../../services/errors.service';
 import { HttpClient } from '@angular/common/http';
-import { map } from '../../../../node_modules/rxjs/operators';
+import { map } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
 import { ConfigService } from '../../services/config.service';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from '../../services/post.service';
-import { Subscription } from '../../../../node_modules/rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-image-component',
@@ -15,6 +15,7 @@ export class ImageComponentComponent implements OnInit {
   @Input('width') width: string;
   @Input() height: string;
   @Input('class') class: string;
+  @Input() showDescription: boolean = false;
 
   constructor(private postService: PostService) {}
   showSpinner: boolean = true;

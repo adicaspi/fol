@@ -2,6 +2,9 @@
   <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
   <div *ngIf="loaded">
     <img [attr.src]="postImage" [attr.height]="height" [class]="class" />
+    <span *ngIf="showDescription" class="test"
+      >Tech Pack cropped cutout Pro
+    </span>
   </div>
 </div>
 
