@@ -50,6 +50,13 @@ p.forgot-password {
   font-size: 12px;
   font-weight: 700;
   text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+}
+
+.login-method span {
+  background: #fff;
+  padding: 0 10px;
 }
 
 button.btn.facebook {
@@ -64,8 +71,11 @@ button.button-register {
   display: block;
   margin-top: 15px;
 }
-@media (min-width: 360px) {
-  button.btn {
-    background-color: #32cd32;
+@media (min-width: 360px) and (max-width: 376px) {
+  button {
+    width: 100;
+  }
+  button.btn.btn-default.login.facebook {
+    width: 100%;
   }
 }
