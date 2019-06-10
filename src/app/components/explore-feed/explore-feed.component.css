@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
+/* force scrollbar */
+html {
+  overflow-y: scroll;
+  background-color: #f9f9f9;
+}
+
+body {
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+}
+
+.center {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.masonry-item {
+  width: 25%;
+  border-radius: 10px;
+}
+
+.masonry-item img {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  margin: 20px;
+  border: none;
+  border-radius: 10px;
+  opacity: 1;
+  transition: 0.5s ease;
+}
+
+.card:hover {
+  opacity: 0.1;
+}
+
+.description {
+  margin-top: 15px;
+  background-color: #f9f9f9;
+  font-weight: 700px;
+  font-size: 13px;
+}
+
+@media (min-width: 360px) and (max-width: 376px) {
+  body {
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  .masonry-item {
+    width: 50%;
+    border-radius: 10px;
+  }
+
+  .description {
+    font-size: 10px;
+  }
+}

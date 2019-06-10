@@ -1,21 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgxMasonryOptions } from 'ngx-masonry';
+import { Subject } from 'rxjs';
+import * as $ from 'jquery';
+
 import { PostService } from '../../services/post.service';
 
+import { NgxMasonryOptions } from 'ngx-masonry';
+
 @Component({
-  selector: 'app-user-feed',
-  templateUrl: './user-feed.component.html',
-  styleUrls: ['./user-feed.component.css']
+  selector: 'app-explore-feed',
+  templateUrl: './explore-feed.component.html',
+  styleUrls: ['./explore-feed.component.css']
 })
-export class UserFeedComponent implements OnInit {
+export class ExploreFeedComponent implements OnInit {
+  id: number;
   posts: Array<any> = [];
   postsToShow = [];
   offset: number = 0;
-  id = 0;
+  onDestroy: Subject<void> = new Subject<void>();
+
+  count = 0;
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0.2s',
     gutter: 20,
@@ -23,28 +29,18 @@ export class UserFeedComponent implements OnInit {
     initLayout: true,
     fitWidth: true
   };
-
-  onDestroy: Subject<void> = new Subject<void>();
-
   constructor(
+    private userService: UserService,
     private feedService: FeedService,
-    private activatedRoute: ActivatedRoute,
     private postService: PostService
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.params
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(params => {
-        this.id = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
-        //this.generateUserFeed(0, this.id);
-      });
-    this.generateUserFeed(0, this.id);
+    this.id = 655;
+    console.log('posts', this.posts);
+    this.generateTimelineFeed(0, this.id);
+    console.log('posts', this.posts);
   }
-
-  // private processData = posts => {
-  //   this.posts = this.posts.concat(posts);
-  // };
 
   private processData = posts => {
     this.posts = this.posts.concat(posts);
@@ -57,11 +53,15 @@ export class UserFeedComponent implements OnInit {
         });
     });
   };
-  generateUserFeed(offset: number, userId: number) {
+
+  generateTimelineFeed(offset: number, id: number) {
     this.feedService
-      .getUserFeed(userId, offset)
+      .getTimeLineFeed(offset, id)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(this.processData);
+  }
+  fetchImages() {
+    this.generateTimelineFeed(this.offset, this.id);
   }
 
   createImageFromBlob(image: Blob, post: any) {
@@ -83,10 +83,6 @@ export class UserFeedComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
-  }
-
-  fetchImages() {
-    this.generateUserFeed(this.offset, this.id);
   }
 
   public ngOnDestroy(): void {

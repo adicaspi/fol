@@ -1,0 +1,9 @@
+@media (min-width: 900px) {
+  .grid-item {
+    width: 20%;
+  }
+
+  .grid-item {
+    float: left;
+  }
+}

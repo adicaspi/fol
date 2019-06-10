@@ -1,12 +1,58 @@
+.mat-dialog-content {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
 a {
   color: black;
 }
 
+h2 {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-control {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.form-group {
+  margin: 0;
+}
+
+button.btn.btn-default.login {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+}
+
+p.forgot-password {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 25px;
+  margin-top: 0;
+  font-size: 12px;
+}
+
+.login-method {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 25px;
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+button.btn.facebook {
+  background-color: #3b5998;
+}
 @media (min-width: 360px) {
   button.btn {
     background-color: #32cd32;
-  }
-  p.forgot-password {
-    margin-top: 10px;
   }
 }

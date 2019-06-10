@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserService } from '../../services/user.service';
-import { PostService } from '../../services/post.service';
 import { ErrorsService } from '../../services/errors.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -31,6 +30,7 @@ export class RegisterComponent implements OnInit {
   minLength = 3;
   wrongPassUser: boolean = false;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
+
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
   // TODO - FIXED TOUCHED INVALID CLASS
@@ -40,7 +40,8 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     private errorsService: ErrorsService,
     private http: HttpClient,
-    private configSerivce: ConfigService
+    private configSerivce: ConfigService,
+    private dialogRef: MatDialogRef<RegisterComponent>
   ) {
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
@@ -48,6 +49,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dialogRef.updateSize('550px', '580px');
+    console.log('im dialog ref', this.dialogRef);
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', Validators.required],

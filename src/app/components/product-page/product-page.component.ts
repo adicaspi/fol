@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Subscription, BehaviorSubject, Observer } from 'rxjs';
+
 import { UserPost } from '../../models/UserPost';
 import { FeedService } from '../../services/feed.service';
 import { UserService } from '../../services/user.service';
@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../models/User';
 import { Observable } from 'rxjs';
 import { TimelinePost } from '../../models/TimelinePost';
-import { DialogService } from '../../services/dialog.service';
+
 import { PostService } from '../../services/post.service';
 import { imageEnum } from '../../models/imageEnum';
 import * as $ from 'jquery';
@@ -36,7 +36,6 @@ export class ProductPageComponent implements OnInit {
     private feedService: FeedService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ProductPageComponent>,
-    private dialogService: DialogService,
     private postService: PostService
   ) {
     this.userPost = this.data;

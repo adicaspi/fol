@@ -42,6 +42,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ExploreFeedComponent } from './components/explore-feed/explore-feed.component';
 import { ExplorePostComponent } from './components/explore-post/explore-post.component';
 import { ViewExploreComponent } from './components/view-explore/view-explore.component';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 @NgModule({
   declarations: [
@@ -84,14 +85,16 @@ import { ViewExploreComponent } from './components/view-explore/view-explore.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgxMasonryModule
   ],
 
   entryComponents: [
     UserProfileInfoComponent,
     GenerateFollowListComponent,
     ImageComponentComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    RegisterComponent
   ],
 
   providers: [

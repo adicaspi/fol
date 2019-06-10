@@ -11,6 +11,7 @@ import { LandingNavComponent } from './components/landing-nav/landing-nav.compon
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ExploreFeedComponent } from './components/explore-feed/explore-feed.component';
 import { ViewExploreComponent } from './components/view-explore/view-explore.component';
+import { MutualNavComponent } from './components/mutual-nav/mutual-nav.component';
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent
+    // component: RegisterComponent
+    component: MutualNavComponent
   },
   {
     path: '',

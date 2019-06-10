@@ -1,0 +1,82 @@
+html,
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+.landing {
+  background: url('../../../assets/landing.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+
+  z-index: -1;
+  /* Add the blur effect */
+  filter: blur(3px);
+
+  /* Full height */
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* .landing {
+  height: 100%;
+  margin: 0;
+} */
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.header button {
+  background: none;
+  border: none;
+  display: inline-block;
+}
+
+button img {
+  width: 90px;
+  height: 20px;
+
+  z-index: 2;
+  display: inline-block;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  color: white;
+  font-family: 'open sans-serif';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 80%;
+
+  text-align: center;
+}
+.title {
+  font-size: 120px;
+}
+.moto {
+  font-family: 'arial';
+  font-size: 25px;
+  position: relative;
+  top: -55px;
+}
+
+.sing-in-button {
+  position: relative;
+  top: -55px;
+  width: 150px;
+  height: 40px;
+  color: white;
+  background: none;
+  border: 2px solid white;
+  outline: none;
+  border-radius: 25px;
+  font-size: 12px;
+}

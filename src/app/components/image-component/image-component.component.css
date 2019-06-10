@@ -116,8 +116,8 @@
   }
 
   .profilePic img {
-    width: 42px;
-    height: 42px;
+    width: 35px;
+    height: 35px;
     float: left;
     clear: left;
     margin: 11px;
@@ -134,63 +134,21 @@
 
   /* ---- grid-item ---- */
 
-  .grid-item0 {
-    height: 360px;
-  }
-
-  img.grid.grid-item0 {
-    display: inline-block;
-    width: 100%;
-    height: 300px;
+  /* img.grid.grid-item0 {
+ 
     background-color: white;
     border-radius: 5px;
     opacity: 1;
+    transition: 0.5s ease;
   }
 
   img.grid.grid-item0:hover {
-    opacity: 0.6;
-  }
+    opacity: 0.5;
+  } */
 
-  img.grid.grid-item1 {
-    width: 100%;
-    height: 350px;
-    display: inline-block;
-    background-color: white;
-    border-radius: 5px;
-  }
-  img.grid.grid-item2 {
-    width: 100%;
-    height: 320px;
-    display: inline-block;
-    background-color: white;
-    border-radius: 5px;
-  }
-  img.grid.grid-item3 {
-    width: 100%;
-    height: 360px;
-    display: inline-block;
-    background-color: white;
-    border-radius: 5px;
-  }
-
-  img.grid.grid-item4 {
-    width: 100%;
-    height: 360px;
-    display: inline-block;
-    background-color: white;
-    border-radius: 5px;
-    /* position: relative;
-    bottom: 30px; */
-  }
-
-  img.grid.grid-item5 {
-    width: 100%;
-    height: 320px;
-    display: inline-block;
-    background-color: white;
-    border-radius: 5px;
-    /* position: relative;
-    top: 30px; */
+  .grid-item img {
+    display: block;
+    max-width: 100%;
   }
 }
 
@@ -200,8 +158,4 @@
 }
 .card-body {
   padding-left: 45px;
-}
-.modalbox {
-  width: 19vw;
-  margin-left: 30%;
 }
