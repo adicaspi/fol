@@ -22,10 +22,26 @@ export class PostService {
     });
   }
 
-  // mockRequest(): Observable<any> {
-  //   let params = new HttpParams().set('name', 'adi');
-  //   return this.http.post('http://localhost:3000/exp', {
-  //     params
-  //   });
-  // }
+  createImageFromBlob(image: Blob, post: any, posts: Array<any>): Array<any> {
+    let reader = new FileReader();
+    let handler;
+    reader.addEventListener(
+      'load',
+      (handler = () => {
+        let postObject = {
+          post: post,
+          imgSrc: reader.result
+        };
+
+        //this.postsToShow.push(postObject);
+        posts.push(postObject);
+      }),
+      false
+    );
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+    return posts;
+  }
 }

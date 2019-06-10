@@ -42,10 +42,6 @@ export class UserFeedComponent implements OnInit {
     this.generateUserFeed(0, this.id);
   }
 
-  // private processData = posts => {
-  //   this.posts = this.posts.concat(posts);
-  // };
-
   private processData = posts => {
     this.posts = this.posts.concat(posts);
     posts.forEach(post => {
@@ -53,7 +49,11 @@ export class UserFeedComponent implements OnInit {
         .getImage(post.postImageAddr)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(res => {
-          this.createImageFromBlob(res, post);
+          this.postsToShow = this.postService.createImageFromBlob(
+            res,
+            post,
+            this.postsToShow
+          );
         });
     });
   };
@@ -62,27 +62,6 @@ export class UserFeedComponent implements OnInit {
       .getUserFeed(userId, offset)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(this.processData);
-  }
-
-  createImageFromBlob(image: Blob, post: any) {
-    let reader = new FileReader();
-    let handler;
-    reader.addEventListener(
-      'load',
-      (handler = () => {
-        let postObject = {
-          post: post,
-          imgSrc: reader.result
-        };
-
-        this.postsToShow.push(postObject);
-      }),
-      false
-    );
-
-    if (image) {
-      reader.readAsDataURL(image);
-    }
   }
 
   fetchImages() {

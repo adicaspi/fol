@@ -49,14 +49,16 @@ export class ProductPageComponent implements OnInit {
     this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
       this.user = user;
 
-      this.updatePostImageFd(user.profileImageAddr)
+      this.postService
+        .getImage(user.profileImageAddr)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(res => {
           let image_enum = imageEnum.PROFILE;
           this.createImageFromBlob(res, this.userPost, image_enum);
         });
     });
-    this.updatePostImageFd(this.postImageAddr)
+    this.postService
+      .getImage(this.postImageAddr)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(res => {
         let image_enum = imageEnum.MAIN;
@@ -83,12 +85,6 @@ export class ProductPageComponent implements OnInit {
         });
       });
   }
-
-  // changeDialog(userPost: UserPost) {
-  //   this.userPost = userPost;
-  //   this.dialogRef.close();
-  //   this.dialogService.openDialog(ProductPageComponent, this.userPost);
-  // }
 
   createImageFromBlob(image: Blob, post: UserPost, image_enum: imageEnum) {
     let reader = new FileReader();
@@ -123,10 +119,6 @@ export class ProductPageComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
-  }
-
-  updatePostImageFd(postImageAddr: string): Observable<Blob> {
-    return this.postService.getImage(postImageAddr);
   }
 
   setImage(src) {
