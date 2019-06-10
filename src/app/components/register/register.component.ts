@@ -50,7 +50,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.dialogRef.updateSize('550px', '580px');
-    console.log('im dialog ref', this.dialogRef);
+    this.dialogRef._containerInstance._config.height = '580px';
+    console.log(
+      'im dialog ref',
+      this.dialogRef._containerInstance._config.height
+    );
+
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', Validators.required],
@@ -65,7 +70,7 @@ export class RegisterComponent implements OnInit {
 
     this.onChanges();
     //Check if user can auto-login
-    this.loadConfigurationData();
+    //this.loadConfigurationData();
   }
 
   // convenience getter for easy access to form fields

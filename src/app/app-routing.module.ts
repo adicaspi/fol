@@ -23,8 +23,8 @@ const routes: Routes = [
     component: SettingsComponent
   },
   {
-    path: 'register',
-    // component: RegisterComponent
+    path: 'login',
+
     component: MutualNavComponent
   },
   {

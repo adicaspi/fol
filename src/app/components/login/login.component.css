@@ -1,11 +1,8 @@
-.wrapper {
-  height: 500px;
+.mat-dialog-content {
   width: 100%;
-
   overflow: hidden;
   margin: 0 auto;
 }
-
 a {
   color: black;
 }
@@ -25,10 +22,14 @@ h2 {
   margin: 0;
 }
 
-button.btn.btn-default.register {
+button {
+  font-size: 14px;
+}
+
+button.btn.btn-default.login {
   display: block;
   margin: 0 auto;
-  margin-top: 15px;
+  width: 50%;
 }
 
 p.forgot-password {
@@ -53,6 +54,15 @@ p.forgot-password {
 
 button.btn.facebook {
   background-color: #6d84b4;
+}
+
+button.button-register {
+  background: none;
+  border: none;
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+  margin-top: 15px;
 }
 @media (min-width: 360px) {
   button.btn {

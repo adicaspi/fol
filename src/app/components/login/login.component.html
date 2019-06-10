@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+    <div class="form-group">
+      <label for="email"></label>
+      <input
+        type="text"
+        formControlName="emailLogin"
+        class="form-control"
+        placeholder="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password"></label>
+      <input
+        type="password"
+        formControlName="passwordLogin"
+        class="form-control"
+        placeholder="password"
+      />
+      <p class="forgot-password">
+        <a routerLink="/forgotpassword">
+          Forgot your password?
+        </a>
+      </p>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-default login">Login</button>
+    </div>
+
+    <div class="login-method">
+      OR
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-default login facebook">
+        Login with Facebook
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="wrongPassUser" class="alert alert-danger">
+    Incorrect username or password
+  </div>
+
+  <div class="form-group">
+    <button type="button" class="button-register" (click)="regsiterPage()">
+      Create An Account
+    </button>
+  </div>
+</div>

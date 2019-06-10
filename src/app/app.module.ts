@@ -43,6 +43,7 @@ import { ExploreFeedComponent } from './components/explore-feed/explore-feed.com
 import { ExplorePostComponent } from './components/explore-post/explore-post.component';
 import { ViewExploreComponent } from './components/view-explore/view-explore.component';
 import { NgxMasonryModule } from 'ngx-masonry';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { NgxMasonryModule } from 'ngx-masonry';
     LandingPageComponent,
     ExploreFeedComponent,
     ExplorePostComponent,
-    ViewExploreComponent
+    ViewExploreComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +96,8 @@ import { NgxMasonryModule } from 'ngx-masonry';
     GenerateFollowListComponent,
     ImageComponentComponent,
     ProductPageComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
 
   providers: [

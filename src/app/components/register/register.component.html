@@ -1,154 +1,111 @@
 <!-- <app-landing-nav></app-landing-nav> -->
-
-<div class="container">
-  <div class="row">
-    <div mat-dialog-content>
-      <h2>Login</h2>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
-        <div class="form-group">
-          <label for="email"></label>
-          <input
-            type="text"
-            formControlName="emailLogin"
-            class="form-control"
-            placeholder="email"
-          />
+<div class="wrapper">
+  <!-- <div mat-dialog-content> -->
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+    <div class="form-group">
+      <label for="fullName"></label>
+      <input
+        type="text"
+        formControlName=""
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
+        placeholder="Full Name"
+      />
+      <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+        <div *ngIf="f.fullName.errors.required">
+          Full Name is required
         </div>
-        <div class="form-group">
-          <label for="password"></label>
-          <input
-            type="password"
-            formControlName="passwordLogin"
-            class="form-control"
-            placeholder="password"
-          />
-          <p class="forgot-password">
-            <a routerLink="/forgotpassword">
-              Forgot your password?
-            </a>
-          </p>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-default login">Login</button>
-        </div>
-
-        <div class="login-method">
-          OR
-        </div>
-
-        <div class="form-group">
-          <button class="btn btn-default login facebook">
-            Login with Facebook
-          </button>
-        </div>
-      </form>
-
-      <div *ngIf="wrongPassUser" class="alert alert-danger">
-        Incorrect username or password
       </div>
     </div>
 
-    <!--     
-      <h2>Register</h2>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input
-            type="text"
-            formControlName="fullName"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
-          />
-          <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
-            <div *ngIf="f.fullName.errors.required">
-              Full Name is required
-            </div>
-          </div>
-        </div>
+    <div class="form-group">
+      <label for="email"></label>
+      <input
+        type="text"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': (submitted && f.email.errors) || emailExists
+        }"
+        placeholder="Email"
+      />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">E-mail is required</div>
+      </div>
 
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input
-            type="text"
-            formControlName="email"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': (submitted && f.email.errors) || emailExists
-            }"
-          />
-          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">E-mail is required</div>
-          </div>
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.email">E-mail is not valid</div>
+      </div>
 
-          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.email">E-mail is not valid</div>
-          </div>
+      <div *ngIf="emailExists" class="invalid-feedback">
+        E-mail already exists
+      </div>
+    </div>
 
-          <div *ngIf="emailExists" class="invalid-feedback">
-            E-mail already exists
-          </div>
+    <div class="form-group">
+      <label for="birthDate"></label>
+      <input
+        type="text"
+        formControlName="birthDate"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
+        placeholder="Birthdate"
+      />
+      <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+        <div *ngIf="f.birthDate.errors.required">
+          Birthdate is required
         </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="username"></label>
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': userNameExists || userNameValidatorLength
+        }"
+        placeholder="Username"
+      />
 
-        <div class="form-group">
-          <label for="birthDate">Birth Date</label>
-          <input
-            type="text"
-            formControlName="birthDate"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
-          />
-          <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
-            <div *ngIf="f.birthDate.errors.required">
-              Birthdate is required
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            formControlName="username"
-            class="form-control"
-            [ngClass]="{
-              'is-invalid': userNameExists || userNameValidatorLength
-            }"
-          />
+      <div *ngIf="userNameValidatorLength" class="invalid-feedback">
+        Username must be at least 3 characters
+      </div>
+      <div *ngIf="userNameExists" class="invalid-feedback">
+        Username already exists
+      </div>
 
-          <div *ngIf="userNameValidatorLength" class="invalid-feedback">
-            Username must be at least 3 characters
-          </div>
-          <div *ngIf="userNameExists" class="invalid-feedback">
-            Username already exists
-          </div>
-
-          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-          </div>
+      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div *ngIf="f.username.errors.required">Username is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password"></label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        placeholder="Password"
+      />
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">
+          Password must be at least 6 characters
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            formControlName="password"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-          />
-          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors.minlength">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <button [disabled]="loading" class="btn btn-default">
-            Register
-          </button>
-          <img
-            *ngIf="loading"
-            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-          />
-        </div>
-      </form> -->
-  </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-default register">
+        Register
+      </button>
+      <!-- <img
+        *ngIf="loading"
+        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      /> -->
+    </div>
+  </form>
+  <!-- </div> -->
 </div>
