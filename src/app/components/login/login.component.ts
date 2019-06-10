@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     });
 
     //Check if user can auto-login
-    //this.loadConfigurationData();
+    this.loadConfigurationData();
   }
 
   // convenience getter for easy access to form fields
@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin() {
+    this.dialogRef.close();
     let email = this.loginForm.value.emailLogin;
     let password = this.loginForm.value.passwordLogin;
     let res = {
@@ -73,7 +74,6 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data, 'im data login form');
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           this.userService.updateUser(data.userId);
@@ -91,6 +91,7 @@ export class LoginComponent implements OnInit {
   }
 
   regsiterPage() {
+    this.dialogRef.close();
     this.dialogService.openDialog(RegisterComponent);
   }
 
