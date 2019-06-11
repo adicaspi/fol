@@ -1,44 +1,40 @@
 <body>
-  <div class="row">
-    <div *ngIf="user | async as currentUser" class="img-comp">
-      <app-image-component
-        [addr]="currentUser.profileImageAddr"
-        [profile]="true"
-        class="profile"
-      ></app-image-component>
+  <div class="container">
+    <div *ngIf="userProfileImageSrc" class="img-comp">
+      <img [attr.src]="userProfileImageSrc[0]['imgSrc']" />
     </div>
 
-    <div *ngIf="user | async as currentUser" class="description">
-      <h2>
-        {{ currentUser.username }}
-        {{ currentUser.description }}
+    <div *ngIf="user" class="description">
+      <div class="upper-description-div">
+        <div class="user-name">{{ user.username }}</div>
 
-        <button type="button" class="btn btn-outline-dark" (click)="follow()">
+        <button type="button" class="button-follow" (click)="follow()">
           {{ follows ? 'unfollow' : 'follow' }}
         </button>
-      </h2>
+      </div>
 
       <div class="btn-group">
-        <button type="button" class="simple-button">
-          <span class="metrics">{{ numberOfPosts | async }}</span> posts
+        <button type="button" class="simple-button-metrics first">
+          <span class="metrics">{{ numberOfPosts | async }} posts </span>
         </button>
 
         <button
           type="button"
-          class="simple-button second"
+          class="simple-button-metrics second"
           (click)="openDialog()"
         >
-          <span class="metrics">{{ following | async }}</span> following
+          <span class="metrics">{{ following | async }} following</span>
         </button>
 
         <button
           type="button"
-          class="simple-button third"
+          class="simple-button-metrics third"
           (click)="openDialog()"
         >
-          <span class="metrics">{{ followers | async }}</span> followers
+          <span class="metrics">{{ followers | async }} followers</span>
         </button>
       </div>
+      <div class="user-description">{{ user.description }} shopping addict</div>
     </div>
   </div>
 </body>

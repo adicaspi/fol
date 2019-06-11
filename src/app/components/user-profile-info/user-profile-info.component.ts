@@ -5,7 +5,9 @@ import { User } from '../../models/User';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GenerateFollowListComponent } from '../generate-follow-list/generate-follow-list.component';
-import { FeedService } from '../../services/feed.service';
+import { PostService } from '../../services/post.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile-info',
@@ -16,24 +18,28 @@ export class UserProfileInfoComponent implements OnInit {
   masterId: number;
   slaveId: number;
   follows: boolean;
-  user: Observable<User>;
-  userProfileImage: any;
+  user: User;
+  userProfileImageSrc = [];
+  src: any;
   following: Observable<number>;
   followers: Observable<number>;
   numberOfPosts: Observable<number>;
   userLoaded: Promise<boolean>;
   flag: number = 1;
   clicked: boolean = false;
+  onDestroy: Subject<void> = new Subject<void>();
 
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    public dialog: MatDialog
+    private dialog: MatDialog,
+    private postService: PostService
   ) {}
 
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = routeParams.id;
+
     this.userService.checkIsFollowing(this.masterId).then(
       res => {
         this.follows = res.valueOf();
@@ -48,8 +54,24 @@ export class UserProfileInfoComponent implements OnInit {
     this.numberOfPosts = this.userService.getNumberOfPosts(this.masterId);
   }
 
+  updateProfileImage(user) {
+    this.postService
+      .getImage(user.profileImageAddr)
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(res => {
+        this.userProfileImageSrc = this.postService.createImageFromBlob(
+          res,
+          user.profileImageAddr,
+          this.userProfileImageSrc
+        );
+      });
+  }
+
   updateUser() {
-    this.user = this.userService.getUserDetails(this.masterId);
+    this.userService.getUserDetails(this.masterId).subscribe(user => {
+      this.updateProfileImage(user);
+      this.user = user;
+    });
   }
 
   follow() {

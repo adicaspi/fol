@@ -32,8 +32,6 @@ export class PostService {
           post: post,
           imgSrc: reader.result
         };
-
-        //this.postsToShow.push(postObject);
         posts.push(postObject);
       }),
       false
