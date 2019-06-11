@@ -17,11 +17,7 @@ export class UserFeedComponent implements OnInit {
   offset: number = 0;
   id = 0;
   public masonryOptions: NgxMasonryOptions = {
-    transitionDuration: '0',
-    gutter: 20,
-    resize: true,
-    initLayout: true,
-    fitWidth: true
+    transitionDuration: '0'
   };
 
   onDestroy: Subject<void> = new Subject<void>();

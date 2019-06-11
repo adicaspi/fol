@@ -1,9 +1,4 @@
-/* ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-} */
-
+/* 
 .row {
   margin-right: 0;
   margin-left: 0;
@@ -41,5 +36,117 @@
   }
   body {
     background-color: #f9f9f9;
+  }
+} */
+
+@media only screen and (min-width: 900px) {
+  body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .center {
+    background-color: #f9f9f9;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .masonry-item {
+    width: 20%;
+    margin: 30px;
+  }
+  .masonry-item img {
+    width: 175px;
+    height: 262px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    display: block;
+  }
+
+  .card {
+    height: 380px;
+    margin-top: 35px;
+    border: none;
+    border-radius: 10px;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  span.store.text-right {
+    float: right;
+    clear: right;
+    text-decoration: underline;
+  }
+  span.text-left {
+    float: left;
+    clear: left;
+  }
+
+  .card-text {
+    font-weight: 400px;
+    font-size: 15px;
+    height: 48px;
+    margin-top: 30px;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'helvetica', sans-serif;
+  }
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 360px) and (max-width: 376px) {
+  body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .center {
+    background-color: #f9f9f9;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .masonry-item {
+    width: 50%;
+  }
+  .masonry-item img {
+    /* width: 100px; */
+    width: 85%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    display: block;
+  }
+
+  .card {
+    height: 300px;
+    margin: 20px;
+    /* margin-top: 35px; */
+    border: none;
+    border-radius: 10px;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  span.store.text-right {
+    float: right;
+    clear: right;
+    text-decoration: underline;
+  }
+  span.text-left {
+    float: left;
+    clear: left;
+  }
+
+  .card-text {
+    font-weight: 400px;
+    font-size: 12px;
+    height: 48px;
+    margin-top: 30px;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'helvetica', sans-serif;
   }
 }

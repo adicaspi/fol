@@ -1,10 +1,37 @@
 <body>
-  <div class="row">
-    <div class="col" *ngFor="let post of posts" (deferLoad)="post.show = true">
-      <ng-container *ngIf="post.show">
-        <app-feed [post]="post"></app-feed>
-      </ng-container>
-    </div>
+  <div class="center">
+    <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
+      <ngxMasonryItem class="masonry-item" *ngFor="let post of postsToShow">
+        <div class="card">
+          <div class="profile-image">
+            <app-image-component
+              [addr]="post['post']['userProfileImageAddr']"
+              [profile]="true"
+              class="profilePic"
+            ></app-image-component>
+
+            <div class="card-text profile">
+              AdiZep
+            </div>
+          </div>
+          <div class="masonry-img">
+            <img [attr.src]="post['imgSrc']" />
+          </div>
+          <div class="card-text">
+            <div class="description">
+              {{ post['post']['description'] }}
+              little black dress
+            </div>
+            <span class="text-left">
+              $500
+            </span>
+            <span class="store text-right">
+              net-a-porter.com
+            </span>
+          </div>
+        </div>
+      </ngxMasonryItem>
+    </ngx-masonry>
     <div
       class="search-results"
       infiniteScroll
@@ -12,5 +39,13 @@
       [infiniteScrollThrottle]="1000"
       (scrolled)="fetchImages()"
     ></div>
+    <!-- <div class="row">
+    <div class="col" *ngFor="let post of posts" (deferLoad)="post.show = true">
+      <ng-container *ngIf="post.show">
+        <app-feed [post]="post"></app-feed>
+      </ng-container>
+    </div>
+   
+  </div> -->
   </div>
 </body>

@@ -15,7 +15,7 @@
           class="profilePic"
         ></app-image-component> -->
 
-    <ngx-masonry [useImagesLoaded]="true">
+    <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
       <ngxMasonryItem class="masonry-item" *ngFor="let post of postsToShow">
         <div class="card">
           <!-- <div class="profile-image"> -->

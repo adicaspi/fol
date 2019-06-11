@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-
 import { FeedService } from '../../services/feed.service';
-
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { PostService } from '../../services/post.service';
+import { NgxMasonryOptions } from 'ngx-masonry';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -14,11 +14,16 @@ import { Subject } from 'rxjs';
 export class TimelineFeedComponent implements OnInit {
   id: number;
   posts: Array<any> = [];
+  postsToShow = [];
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
+  public masonryOptions: NgxMasonryOptions = {
+    transitionDuration: '0'
+  };
   constructor(
     private userService: UserService,
-    private feedService: FeedService
+    private feedService: FeedService,
+    private postService: PostService
   ) {}
 
   ngOnInit() {
@@ -27,8 +32,24 @@ export class TimelineFeedComponent implements OnInit {
     this.generateTimelineFeed(0, this.id);
   }
 
+  // private processData = posts => {
+  //   this.posts = this.posts.concat(posts);
+  // };
+
   private processData = posts => {
     this.posts = this.posts.concat(posts);
+    posts.forEach(post => {
+      this.postService
+        .getImage(post.postImageAddr)
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(res => {
+          this.postsToShow = this.postService.createImageFromBlob(
+            res,
+            post,
+            this.postsToShow
+          );
+        });
+    });
   };
 
   generateTimelineFeed(offset: number, id: number) {
