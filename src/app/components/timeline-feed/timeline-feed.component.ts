@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
 
@@ -17,6 +17,8 @@ export class TimelineFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
+  eventsSubscription: any;
+  @Input() events: Observable<void>;
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0'
   };
@@ -31,10 +33,6 @@ export class TimelineFeedComponent implements OnInit {
     this.id = 655;
     this.generateTimelineFeed(0, this.id);
   }
-
-  // private processData = posts => {
-  //   this.posts = this.posts.concat(posts);
-  // };
 
   private processData = posts => {
     this.posts = this.posts.concat(posts);

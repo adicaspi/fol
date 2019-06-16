@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UserPost } from '../../models/UserPost';
-import { PostService } from '../../services/post.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-profile',
@@ -9,7 +9,11 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./view-profile.component.css']
 })
 export class ViewProfileComponent implements OnInit {
-  constructor() {}
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches));
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit() {}
 }

@@ -20,7 +20,15 @@ import { CookieService } from 'ngx-cookie-service';
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { FollowListComponent } from './components/follow-list/follow-list.component';
 import { ImageComponentComponent } from './components/image-component/image-component.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpErrorComponent } from './interceptor/http-error/http-error.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -44,6 +52,8 @@ import { ExplorePostComponent } from './components/explore-post/explore-post.com
 import { ViewExploreComponent } from './components/view-explore/view-explore.component';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { LoginComponent } from './components/login/login.component';
+import { ShoppingNavComponent } from './components/shopping-nav/shopping-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -74,7 +84,8 @@ import { LoginComponent } from './components/login/login.component';
     ExploreFeedComponent,
     ExplorePostComponent,
     ViewExploreComponent,
-    LoginComponent
+    LoginComponent,
+    ShoppingNavComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +99,13 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
 
   entryComponents: [

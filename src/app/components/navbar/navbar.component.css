@@ -42,16 +42,42 @@ button.button-left-nav {
 mat-icon {
   font-size: 20px;
 }
-
+.bottom-navbar {
+  display: none;
+}
 /* Small devices (landscape phones, 360px and up) */
-@media (min-width: 360px) and (max-width: 376px) {
-  img.logo {
-    width: 110px;
-    height: 20px;
+@media (min-width: 360px) and (max-width: 600px) {
+  .navbar {
+    display: none;
   }
 
-  #navbarMain {
-    display: none;
+  .bottom-navbar {
+    display: initial;
+    overflow: hidden;
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    padding: 15px;
+    width: 100%;
+    overflow: auto;
+  }
+
+  .bottom-navbar mat-icon {
+    float: left;
+    width: 33.33%;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+  }
+
+  .bottom-navbar mat-icon:hover {
+    background: white;
+  }
+
+  .bottom-navbar mat-icon:active {
+    background-color: #4caf50;
+    color: white;
   }
 }
 

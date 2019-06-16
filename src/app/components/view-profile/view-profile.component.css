@@ -1,5 +1,12 @@
-@media (min-width: 376px) {
-  .bottom-navbar {
+.hidden {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .hidden {
+    display: initial;
+  }
+  .display {
     display: none;
   }
 }

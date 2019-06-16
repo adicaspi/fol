@@ -1,4 +1,11 @@
-<app-navbar></app-navbar>
-<app-e-menu></app-e-menu>
-<app-timeline-feed></app-timeline-feed>
-<app-mutual-nav class="bottom-navbar"></app-mutual-nav>
+<div class="display">
+  <app-navbar></app-navbar>
+  <app-mutual-nav></app-mutual-nav>
+  <app-timeline-feed></app-timeline-feed>
+</div>
+<div class="hidden">
+  <app-shopping-nav>
+    <app-timeline-feed></app-timeline-feed>
+    <app-navbar></app-navbar>
+  </app-shopping-nav>
+</div>
