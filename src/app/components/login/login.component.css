@@ -72,6 +72,11 @@ button.button-register {
   margin-top: 15px;
 }
 @media (min-width: 360px) and (max-width: 376px) {
+  .mat-dialog-content {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
   button {
     width: 100;
   }

@@ -1,0 +1,92 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 24);
+  background-color: white;
+}
+
+.test {
+  color: white;
+  background-color: black;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-drawer-inner-container {
+  background-color: blue;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+.display {
+  display: none;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: none;
+  list-style: none;
+  width: 20%;
+}
+
+.toolbar-test {
+  color: white;
+}
+h2 {
+  color: white;
+}
+
+mat-toolbar a {
+  display: inline-block;
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+  width: 20%;
+}
+
+.mat-sidenav-content {
+}
+
+button.nav-item {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  outline: 0;
+  font-size: 13px;
+}
+
+button.back-button {
+  color: white;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: 0;
+  font-size: 13px;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+
+img.logo {
+  width: 110px;
+  height: 20px;
+}

@@ -1,1 +1,12 @@
-<body></body>
+<div>
+  <mat-toolbar>
+    <div *ngFor="let key of getKeys()" class="dropdown">
+      <button class="dropbtn">
+        {{ key }}
+      </button>
+      <div class="dropdown-content">
+        <a *ngFor="let item of mainList[key]">{{ item }}</a>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>

@@ -43,6 +43,7 @@
   body {
     padding-right: 0px;
     padding-left: 0px;
+    overflow: visible;
   }
   .center {
     background-color: #f9f9f9;

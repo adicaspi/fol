@@ -22,6 +22,7 @@ const httpOptions = {
 })
 export class FeedService {
   private subject = new Subject<any>();
+  private scrollingSubjebt = new Subject<any>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
@@ -98,5 +99,13 @@ export class FeedService {
 
   getMessage(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  scrollingEventSendMsg(message: any) {
+    this.scrollingSubjebt.next(message);
+  }
+
+  scrollingEventGetMsg(): Observable<any> {
+    return this.scrollingSubjebt.asObservable();
   }
 }

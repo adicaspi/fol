@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observer, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { PostService } from '../../services/post.service';
@@ -16,6 +16,7 @@ export class UserFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   id = 0;
+
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0'
   };

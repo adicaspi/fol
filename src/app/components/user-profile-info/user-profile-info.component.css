@@ -3,17 +3,6 @@
   margin-left: 15px;
 }
 
-.simple-button span.metrics {
-  font-weight: 500;
-  width: 60px;
-}
-
-button.btn {
-  background-color: #ff1493;
-  color: white;
-  border: none;
-}
-
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 990px), only screen and (min-width: 768px) {
   .simple-button {
