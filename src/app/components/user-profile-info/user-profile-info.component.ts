@@ -18,7 +18,7 @@ export class UserProfileInfoComponent implements OnInit {
   masterId: number;
   slaveId: number;
   follows: boolean;
-  user: User;
+  user: Observable<User>;
   userProfileImageSrc = [];
   src: any;
   following: Observable<number>;
@@ -39,15 +39,14 @@ export class UserProfileInfoComponent implements OnInit {
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = routeParams.id;
-
-    this.userService.checkIsFollowing(this.masterId).then(
-      res => {
-        this.follows = res.valueOf();
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    // this.userService.checkIsFollowing(this.masterId).then(
+    //   res => {
+    //     this.follows = res.valueOf();
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
     this.updateUser();
     this.following = this.userService.getNumberOfFollowing(this.masterId);
     this.followers = this.userService.getNumberOfFollowers(this.masterId);
@@ -59,6 +58,7 @@ export class UserProfileInfoComponent implements OnInit {
       .getImage(user.profileImageAddr)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(res => {
+        console.log('im res', res);
         this.userProfileImageSrc = this.postService.createImageFromBlob(
           res,
           user.profileImageAddr,
@@ -68,9 +68,17 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   updateUser() {
-    this.userService.getUserDetails(this.masterId).subscribe(user => {
-      this.updateProfileImage(user);
-      this.user = user;
+    // this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
+    //   this.updateProfileImage(user);
+    //   this.user = user;
+    // });
+
+    this.user = this.userService
+      .getUserDetails(this.masterId)
+      .pipe(takeUntil(this.onDestroy));
+    console.log('im in update user');
+    this.user.subscribe(res => {
+      this.updateProfileImage(res);
     });
   }
 
