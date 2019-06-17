@@ -17,8 +17,7 @@ export class TimelineFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
-  eventsSubscription: any;
-  @Input() events: Observable<void>;
+
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0'
   };

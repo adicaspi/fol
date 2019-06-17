@@ -41,7 +41,6 @@ export class UserService {
   }
 
   uploadPost(fd: FormData, desc: string): Observable<any> {
-    console.log('im in upload post');
     let params = new HttpParams().set('description', desc);
     return this.http.post<any>(
       this.globaSoicalURL + this.userId + '/upload',
@@ -53,7 +52,6 @@ export class UserService {
   }
 
   updateUserDescription(description: string) {
-    console.log('im userid', this.userId);
     let params = new HttpParams().set('description', description);
     return this.http.post(
       this.globalInfoURL + this.userId + '/update-description',
@@ -131,7 +129,6 @@ export class UserService {
   }
 
   login(userForm: any): Observable<any> {
-    console.log('im in login');
     return this.http.get<any>(this.globalRegisterURL + 'signin', {
       params: { username: userForm.email, password: userForm.password }
     });
@@ -146,9 +143,8 @@ export class UserService {
   //delete user credentials from user service
 
   resetPassword(userForm: any) {
-    //console.log('in reset pass', userForm.email);
     let params = new HttpParams().set('username', userForm.username);
-    console.log(params);
+
     return this.http.get(this.globalRegisterURL + 'reset-password', {
       params: params
     });

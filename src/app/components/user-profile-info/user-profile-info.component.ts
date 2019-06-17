@@ -90,12 +90,12 @@ export class UserProfileInfoComponent implements OnInit {
     this.clicked = true;
   }
 
-  openDialog(): void {
+  openDialog(flag): void {
     const dialogRef = this.dialog.open(GenerateFollowListComponent, {
       width: '350px',
       height: '250px',
       data: {
-        flag: 1,
+        flag: flag,
         id: this.masterId
       }
     });

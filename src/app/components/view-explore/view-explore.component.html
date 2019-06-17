@@ -1,5 +1,11 @@
-<app-navbar></app-navbar>
-<!-- <app-e-menu></app-e-menu> -->
-<app-shopping-nav>
+<div class="display">
+  <app-navbar></app-navbar>
+  <app-mutual-nav></app-mutual-nav>
   <app-explore-feed></app-explore-feed>
-</app-shopping-nav>
+</div>
+<div class="hidden">
+  <app-shopping-nav>
+    <app-explore-feed></app-explore-feed>
+    <app-navbar></app-navbar>
+  </app-shopping-nav>
+</div>

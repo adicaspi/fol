@@ -66,7 +66,7 @@ export class FeedService {
     flag: number
   ): Observable<Array<FollowItem>> {
     //get slaves
-    console.log('im in feed service flag is:', flag);
+
     if (flag) {
       let params = new HttpParams().set('offset', offset.toString());
       return this.http.get<Array<FollowItem>>(
