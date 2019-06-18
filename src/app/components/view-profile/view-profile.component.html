@@ -1,13 +1,19 @@
-<div class="display">
-  <app-navbar></app-navbar>
-  <app-user-profile-info></app-user-profile-info>
-  <app-mutual-nav></app-mutual-nav>
-  <app-user-feed></app-user-feed>
-</div>
-<div class="hidden">
-  <app-shopping-nav>
-    <app-user-profile-info></app-user-profile-info>
-    <app-user-feed></app-user-feed>
-    <app-navbar></app-navbar>
-  </app-shopping-nav>
-</div>
+<html>
+    <body>
+      <div class="display">
+        <app-navbar></app-navbar>
+        <div class="center">
+            <app-user-profile-info></app-user-profile-info>
+            <app-user-feed></app-user-feed>
+        </div>
+      </div>
+
+      <div class="hidden">
+          <app-shopping-nav>
+            <app-user-profile-info></app-user-profile-info>
+            <app-user-feed></app-user-feed>
+            <app-navbar></app-navbar>
+          </app-shopping-nav>
+        </div>
+    </body>
+</html>

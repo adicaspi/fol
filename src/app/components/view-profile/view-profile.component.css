@@ -1,12 +1,33 @@
+.display{
+  background-color: #f9f9f9;
+}
+
+html, body{
+  height:100%;
+}
+
 .hidden {
   display: none;
 }
 
+body {
+  background-color: #f9f9f9;
+}
+
+.center {
+  margin: auto;
+  width: 900px;
+}
+
 @media (max-width: 600px) {
+
   .hidden {
     display: initial;
+    background-color: #f9f9f9;
   }
+  
   .display {
     display: none;
   }
 }
+
