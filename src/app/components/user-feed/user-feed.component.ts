@@ -20,7 +20,7 @@ export class UserFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter : 60
+    gutter : 39
   };
 
   onDestroy: Subject<void> = new Subject<void>();

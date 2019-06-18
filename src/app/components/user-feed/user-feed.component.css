@@ -5,7 +5,7 @@
   }
   .center {
     margin: auto;
-    width: 925px;
+    width: 900px;
   }
 
   ngxMasonryItem:nth-of-type(3n) {
@@ -13,8 +13,8 @@
   }
 
   .masonry-item img {
-    width: 185px;
-    height: 277px;
+    width: 197px;
+    height: 295px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
@@ -25,8 +25,8 @@
 
   .card {
     height: 337px;
-    width: 267px;
-    margin-top: 35px;
+    width: 274px;
+    margin-top: 39px;
     border: none;
     border-radius: 20px;
     display: inline-block;
