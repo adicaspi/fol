@@ -1,17 +1,17 @@
 @media only screen and (min-width: 900px) {
-  body {
+  #main-body {
     padding-right: 0px;
     padding-left: 0px;
   }
   .center {
-    background-color: #f9f9f9;
-    margin-left: 0;
-    margin-right: 0;
+    margin: auto;
+    width: 950px;
   }
-  .masonry-item {
-    width: 20%;
-    margin: 30px;
+
+  ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
   }
+
   .masonry-item img {
     width: 175px;
     height: 262px;
@@ -19,13 +19,17 @@
     margin-right: auto;
     margin-top: 15px;
     display: block;
+    border-radius: 5px;
+    object-fit: cover;
   }
 
   .card {
-    height: 380px;
+    height: 360px;
+    width: 280px;
     margin-top: 35px;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
+    display: inline-block;
   }
 
   .description {

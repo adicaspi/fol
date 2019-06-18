@@ -1,4 +1,4 @@
-<body>
+<div id="main-body">
   <div class="center">
     <!-- <div class="row">
     <div class="col" *ngFor="let post of posts" (deferLoad)="post.show = true">
@@ -15,9 +15,8 @@
           class="profilePic"
         ></app-image-component> -->
 
-    <ngx-masonry [useImagesLoaded]="true">
-      <ngxMasonryItem class="masonry-item" *ngFor="let post of postsToShow">
-        <div class="card">
+    <ngx-masonry [options]= "masonryOptions" [useImagesLoaded]="true">
+      <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
           <!-- <div class="profile-image"> -->
           <!-- <app-image-component
               [addr]="post['post']['userProfileImageAddr']"
@@ -43,7 +42,6 @@
               net-a-porter.com
             </span>
           </div>
-        </div>
       </ngxMasonryItem>
     </ngx-masonry>
 
@@ -55,4 +53,4 @@
       (scrolled)="fetchImages()"
     ></div>
   </div>
-</body>
+</div>
