@@ -5,7 +5,7 @@
   }
   .center {
     margin: auto;
-    width: 950px;
+    width: 925px;
   }
 
   ngxMasonryItem:nth-of-type(3n) {
@@ -13,8 +13,8 @@
   }
 
   .masonry-item img {
-    width: 175px;
-    height: 262px;
+    width: 185px;
+    height: 277px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
@@ -24,8 +24,8 @@
   }
 
   .card {
-    height: 360px;
-    width: 280px;
+    height: 337px;
+    width: 267px;
     margin-top: 35px;
     border: none;
     border-radius: 20px;
@@ -50,7 +50,7 @@
     font-weight: 400px;
     font-size: 15px;
     height: 48px;
-    margin-top: 30px;
+    margin-top: 15px;
     /* font-family: 'Roboto', sans-serif; */
     font-family: 'helvetica', sans-serif;
   }
