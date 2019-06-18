@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
+<<<<<<< Updated upstream
 import { FollowItem } from '../../models/FollowItem';
 import { Observable } from 'rxjs';
+=======
+
+import { Subject } from 'rxjs';
+>>>>>>> Stashed changes
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -24,6 +29,7 @@ export class GenerateFollowListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.dialogRef.updateSize('350px', '350px');
     this.flag = this.data.flag;
     console.log('im flag', this.flag);
     this.id = this.data.id;

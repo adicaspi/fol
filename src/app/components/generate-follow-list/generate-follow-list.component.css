@@ -1,0 +1,60 @@
+<<<<<<< Updated upstream
+=======
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.img-comp {
+  line-height: 50px;
+}
+
+.username {
+  display: inline-block;
+  line-height: 50px;
+  margin-left: 15px;
+}
+
+.card {
+  width: 20px;
+  height: 80px;
+  /* overflow: hidden; */
+}
+
+.follower-button {
+  line-height: 50px;
+}
+
+.follower-button button {
+  width: 80px;
+  background-color: black;
+  border: none;
+  outline: 0;
+}
+
+.card {
+  list-style: none;
+  width: 300px;
+  height: 60px;
+  border: none;
+}
+
+.row {
+  margin: 0;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn:active:focus,
+.btn:focus {
+  outline: 0 !important;
+  outline-offset: 0 !important;
+  background-image: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+>>>>>>> Stashed changes
