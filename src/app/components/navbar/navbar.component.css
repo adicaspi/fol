@@ -1,3 +1,7 @@
+.navbar {
+  background-color: white;
+}
+
 li.item-logo {
   height: 3px;
   list-style: none;
