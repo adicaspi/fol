@@ -24,7 +24,7 @@
   }
 
   .card {
-    height: 337px;
+    /* height: 337px; */
     width: 274px;
     margin-top: 39px;
     border: none;
@@ -32,27 +32,38 @@
     display: inline-block;
   }
 
-  .description {
-    text-align: center;
-  }
-
-  span.store.text-right {
-    float: right;
-    clear: right;
-    text-decoration: underline;
-  }
-  span.text-left {
-    float: left;
-    clear: left;
-  }
-
   .card-text {
-    font-weight: 400px;
     font-size: 15px;
     height: 48px;
-    margin-top: 15px;
-    /* font-family: 'Roboto', sans-serif; */
-    font-family: 'helvetica', sans-serif;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
+
+  .description {
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .store.text-right {
+    position: absolute;
+    right: 12px;
+    margin-top: 8px;
+    text-decoration: underline;
+    line-height: 1;
+    color: grey;
+  }
+
+  span.price{
+    position: absolute;
+    left: 12px;
+    margin-top: 8px;
+    color: #2F2E2E;
+    font-weight: 200;
+    font-size: 14px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
   }
 }
 
