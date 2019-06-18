@@ -3,7 +3,7 @@
     <img [attr.src]="userProfileImageSrc[0]['imgSrc']" />
   </div>
 
-  <div *ngIf="user" class="description">
+  <div *ngIf="user | async" class="description">
     <div class="upper-description-div">
       <div class="user-name">{{ user.username }}</div>
 

@@ -3,7 +3,14 @@
   margin-left: 15px;
 }
 
+.img-comp {
+  display: inline-block;
+  margin-left: 20%;
+  height: 200px;
+}
+
 .img-comp img {
+  border-radius: 50%;
   width: 200px;
   height: 200px;
 }
