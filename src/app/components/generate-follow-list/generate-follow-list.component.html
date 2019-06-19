@@ -1,33 +1,40 @@
-<!-- <mat-dialog-actions>
-  <button mat-button mat-dialog-close>
-    <i class="material-icons">
-      close
-    </i>
-  </button>
-</mat-dialog-actions> -->
 <mat-dialog-content>
-  <app-loading-spinner
-    class="spinner"
-    *ngIf="showSpinner"
-  ></app-loading-spinner>
+  <div class="close-button">
+    <button mat-dialog-close>
+      <i class="material-icons">
+        close
+      </i>
+    </button>
+  </div>
 
-  <div class="card" *ngFor="let item of postsToShow">
-    <div class="row">
-      <div class="img-comp">
-        <img [attr.src]="item['imgSrc']" />
-      </div>
+  <div class="title">
+    {{ flag ? 'followers' : 'following' }}
+  </div>
 
-      <div class="username">
-        <span>{{ item['post']['username'] }}</span>
-      </div>
-      <div class="follower-button col-4 ml-auto">
-        <button
-          type="button"
-          class="btn btn-primary btn-xs"
-          (click)="follow(item)"
-        >
-          {{ item['post']['follows'] ? 'unfollow' : 'follow' }}
-        </button>
+  <div class="content">
+    <app-loading-spinner
+      class="spinner"
+      *ngIf="showSpinner"
+    ></app-loading-spinner>
+
+    <div class="card" *ngFor="let item of postsToShow">
+      <div class="row">
+        <div class="img-comp">
+          <img [attr.src]="item['postImgSrc']" />
+        </div>
+
+        <div class="username">
+          <span>{{ item['post']['username'] }}</span>
+        </div>
+        <div class="follower-button">
+          <button
+            type="button"
+            class="btn btn-primary btn-xs"
+            (click)="follow(item)"
+          >
+            {{ item['post']['follows'] ? 'unfollow' : 'follow' }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
