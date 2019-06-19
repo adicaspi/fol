@@ -4,18 +4,15 @@
       <ngxMasonryItem class="masonry-item" *ngFor="let post of postsToShow">
         <div class="card">
           <div class="profile-image">
-            <app-image-component
-              [addr]="post['post']['userProfileImageAddr']"
-              [profile]="true"
-              class="profilePic"
-            ></app-image-component>
-
+            <div class="img-comp">
+              <img [attr.src]="post['profileImgSrc']" />
+            </div>
             <div class="card-text profile">
               AdiZep
             </div>
           </div>
           <div class="masonry-img">
-            <img [attr.src]="post['imgSrc']" />
+            <img [attr.src]="post['postImgSrc']" />
           </div>
           <div class="card-text">
             <div class="description">

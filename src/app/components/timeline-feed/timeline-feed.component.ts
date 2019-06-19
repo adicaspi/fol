@@ -39,15 +39,36 @@ export class TimelineFeedComponent implements OnInit {
       this.postService
         .getImage(post.postImageAddr)
         .pipe(takeUntil(this.onDestroy))
-        .subscribe(res => {
-          this.postsToShow = this.postService.createImageFromBlob(
-            res,
-            post,
-            this.postsToShow
-          );
+        .subscribe(postImage => {
+          this.postService
+            .getImage(post.userProfileImageAddr)
+            .pipe(takeUntil(this.onDestroy))
+            .subscribe(profileImage => {
+              this.postsToShow = this.postService.createImageFromBlob(
+                postImage,
+                post,
+                this.postsToShow,
+                profileImage
+              );
+            });
         });
     });
   };
+  // private processData = posts => {
+  //   this.posts = this.posts.concat(posts);
+  //   posts.forEach(post => {
+  //     this.postService
+  //       .getImage(post.postImageAddr)
+  //       .pipe(takeUntil(this.onDestroy))
+  //       .subscribe(res => {
+  //         this.postsToShow = this.postService.createImageFromBlob(
+  //           res,
+  //           post,
+  //           this.postsToShow
+  //         );
+  //       });
+  //   });
+  // };
 
   generateTimelineFeed(offset: number, id: number) {
     this.feedService

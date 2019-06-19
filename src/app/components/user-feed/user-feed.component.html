@@ -1,12 +1,12 @@
 <div id="main-body">
-    <!-- <div class="row">
+  <!-- <div class="row">
     <div class="col" *ngFor="let post of posts" (deferLoad)="post.show = true">
       <ng-container *ngIf="post.show">
         <app-profile [post]="post"></app-profile>
       </ng-container>
     </div> -->
 
-    <!-- <div class="card">
+  <!-- <div class="card">
       <div class="profile-img-comp">
         <app-image-component
           [addr]="post.userProfileImageAddr"
@@ -14,40 +14,44 @@
           class="profilePic"
         ></app-image-component> -->
 
-    <ngx-masonry [options]= "masonryOptions" [useImagesLoaded]="true">
-      <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
-          <!-- <div class="profile-image"> -->
-          <!-- <app-image-component
+  <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
+    <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
+      <!-- <div class="profile-image"> -->
+      <!-- <app-image-component
               [addr]="post['post']['userProfileImageAddr']"
               [profile]="true"
               class="profilePic"
             ></app-image-component> -->
-          <!-- <div class="card-text profile">
+      <!-- <div class="card-text profile">
               AdiZep
             </div> -->
-          <!-- </div> -->
-          <div class="masonry-img">
-            <img [attr.src]="post['imgSrc']" />
-          </div>
-          <div class="card-text">
-            <div class="description">
-              little black dress
-            </div>
-            <span class="price">
-              $450
-            </span>
-              <a class= "store text-right" href="https://www.net-a-porter.com" target="_blank">
-                net-a-porter.com
-              </a>
-          </div>
-      </ngxMasonryItem>
-    </ngx-masonry>
+      <!-- </div> -->
+      <div class="masonry-img">
+        <img [attr.src]="post['postImgSrc']" />
+      </div>
+      <div class="card-text">
+        <div class="description">
+          little black dress
+        </div>
+        <span class="price">
+          $450
+        </span>
+        <a
+          class="store text-right"
+          href="https://www.net-a-porter.com"
+          target="_blank"
+        >
+          net-a-porter.com
+        </a>
+      </div>
+    </ngxMasonryItem>
+  </ngx-masonry>
 
-    <div
-      class="search-results"
-      infiniteScroll
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="1000"
-      (scrolled)="fetchImages()"
-    ></div>
+  <div
+    class="search-results"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="1000"
+    (scrolled)="fetchImages()"
+  ></div>
 </div>

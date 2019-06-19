@@ -1,9 +1,8 @@
 <div id="main">
   <div class="container">
     <div *ngIf="userProfileImageSrc" class="img-comp">
-      <img [attr.src]="userProfileImageSrc[0]['imgSrc']" />
+      <img [attr.src]="userProfileImageSrc[0]['postImgSrc']" />
     </div>
-
 
     <div *ngIf="user | async" class="description">
       <div class="upper-description-div">
@@ -19,14 +18,23 @@
           <span class="metrics">{{ numberOfPosts | async }} posts </span>
         </button>
 
-        <button type="button" class="simple-button-metrics second" (click)="openDialog(0)">
+        <button
+          type="button"
+          class="simple-button-metrics second"
+          (click)="openDialog(0)"
+        >
           <span class="metrics">{{ following | async }} following</span>
         </button>
 
-        <button type="button" class="simple-button-metrics third" (click)="openDialog(1)">
+        <button
+          type="button"
+          class="simple-button-metrics third"
+          (click)="openDialog(1)"
+        >
           <span class="metrics">{{ followers | async }} followers</span>
         </button>
       </div>
       <div class="user-description">{{ user.description }} shopping addict</div>
     </div>
   </div>
+</div>

@@ -22,24 +22,49 @@ export class PostService {
     });
   }
 
-  createImageFromBlob(image: Blob, post: any, posts: Array<any>): Array<any> {
-    let reader = new FileReader();
-    let handler;
-    reader.addEventListener(
+  createImageFromBlob(
+    postImage: Blob,
+    post: any,
+    posts: Array<any>,
+    profileImage?: Blob
+  ): Array<any> {
+    let postObject = {
+      post: post,
+      postImgSrc: null,
+      profileImgSrc: null
+    };
+    if (profileImage) {
+      let profileReader = new FileReader();
+      let profileHandler;
+      profileReader.addEventListener(
+        'load',
+        (profileHandler = () => {
+          postObject['profileImgSrc'] = profileReader.result;
+          console.log('im profile image src', postObject['profileImgSrc']);
+        }),
+        false
+      );
+
+      if (profileImage) {
+        profileReader.readAsDataURL(profileImage);
+      }
+    }
+
+    let postReader = new FileReader();
+    let postHandler;
+    postReader.addEventListener(
       'load',
-      (handler = () => {
-        let postObject = {
-          post: post,
-          imgSrc: reader.result
-        };
-        posts.push(postObject);
+      (postHandler = () => {
+        postObject['postImgSrc'] = postReader.result;
       }),
       false
     );
 
-    if (image) {
-      reader.readAsDataURL(image);
+    if (postImage) {
+      postReader.readAsDataURL(postImage);
     }
+    posts.push(postObject);
+    console.log('im posts', posts);
     return posts;
   }
 }
