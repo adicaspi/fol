@@ -1,7 +1,8 @@
 .mat-toolbar {
   color: black;
   background-color: white;
-  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .mat-toolbar span {
   width: 20%;

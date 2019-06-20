@@ -23,11 +23,9 @@ export class ExploreFeedComponent implements OnInit {
 
   count = 0;
   public masonryOptions: NgxMasonryOptions = {
-    transitionDuration: '0.2s',
-    gutter: 20,
-    resize: true,
-    initLayout: true,
-    fitWidth: true
+    transitionDuration: '0',
+    horizontalOrder: true,
+    gutter: 10
   };
   constructor(
     private userService: UserService,
@@ -37,9 +35,8 @@ export class ExploreFeedComponent implements OnInit {
 
   ngOnInit() {
     this.id = 655;
-    console.log('posts', this.posts);
+
     this.generateTimelineFeed(0, this.id);
-    console.log('posts', this.posts);
   }
 
   private processData = posts => {
