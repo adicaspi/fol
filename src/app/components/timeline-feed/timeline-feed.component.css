@@ -1,58 +1,26 @@
-/* 
-.row {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-@media only screen and (min-width: 990px), only screen and (min-width: 768px) {
-  body {
-    background-color: rgb(246, 246, 246);
-    padding-top: 80px;
-    padding-left: 170px;
-    padding-right: 170px;
-  }
-  .card-group {
-    border-radius: 10px;
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .col-sm-12.col-md-4.col-lg-4.col-xl-4 {
-    margin-bottom: 20px;
-  }
-}
-
-@media (min-width: 576px) {
-}
-
-@media (min-width: 360px) {
-  .col-sm-12.col-md-4.col-lg-4.col-xl-4 {
-    padding: 0 0 0 0;
-    margin-top: 25px;
-  }
-  body {
-    background-color: #f9f9f9;
-  }
-} */
-
 @media only screen and (min-width: 900px) {
-  body {
+  #main-body {
     padding-right: 0px;
     padding-left: 0px;
     overflow: visible;
   }
+  
   .center {
-    background-color: #f9f9f9;
-    margin-left: 0;
-    margin-right: 0;
+    margin: auto;
+    width: 900px;
   }
-  .masonry-item {
-    width: 20%;
-    margin: 30px;
+  
+  ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
+  }
+
+  .card {
+    /* height: 337px; */
+    width: 274px;
+    margin-top: 39px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
   }
 
   .img-comp img {
