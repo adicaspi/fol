@@ -3,20 +3,18 @@
     <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
       <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
 
-          <!-- <div class="profile-image">
-            <div class="img-comp">
-              <img [attr.src]="post['profileImgSrc']" />
-            </div>
-            <div class="card-text profile">
-              AdiZep
-            </div>
+          <div class="profile-image">
+            <img [attr.src]="post['profileImgSrc']" />
+            <span class="card-text profile">
+              galincha
+            </span>
           </div>
 
           <div class="masonry-img">
             <img [attr.src]="post['postImgSrc']" />
           </div>
 
-          <div class="card-text">
+          <!-- <div class="card-text">
             <div class="description">
               {{ post['post']['description'] }}
               little black dress
