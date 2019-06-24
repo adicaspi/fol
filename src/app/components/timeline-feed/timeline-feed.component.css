@@ -24,13 +24,14 @@
 
   .profile-image {
     margin-top: 10px;
+    margin-bottom: 20px;
   }
 
   .profile-image img {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    margin-left: 10px;
+    margin-left: 14px;
   }
 
   .profile-image span {
@@ -38,7 +39,9 @@
     'Helvetica Neue' Helvetica, Arial, sans-serif; */
 
     font-size: 18px;
-    margin-left: 10px;
+    margin-left: 7px;
+    color: #2F2E2E;
+    font-family: 'helvetica', arial, sans-serif;
   }
 
   .masonry-img img {
@@ -46,7 +49,6 @@
     height: 295px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
     display: block;
     border-radius: 5px;
     object-fit: cover;
