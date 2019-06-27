@@ -39,9 +39,10 @@
     'Helvetica Neue' Helvetica, Arial, sans-serif; */
 
     font-size: 18px;
-    margin-left: 7px;
-    color: #2F2E2E;
-    font-family: 'helvetica', arial, sans-serif;
+    margin-left: 10px;
+    color: rgb(33,37,41);
+    font-family: arial, 'helvetica', sans-serif;
+    text-align: left;
   }
 
   .masonry-img img {
