@@ -1,30 +1,31 @@
 <div id="main-body">
   <div class="center">
     <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
-      <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
+      <ngxMasonryItem
+        class="card masonry-item"
+        *ngFor="let post of postsToShow"
+      >
+        <div class="profile-image">
+          <img [attr.src]="post['profileImgSrc']" />
+          <span class="card-text profile">galincha</span>
+        </div>
 
-          <div class="profile-image">
-            <img [attr.src]="post['profileImgSrc']" />
-            <span class="card-text profile">galincha</span>
+        <div class="masonry-img">
+          <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
+        </div>
+
+        <div class="card-text">
+          <div class="description">
+            {{ post['post']['description'] }}
+            little black dress
           </div>
-
-          <div class="masonry-img">
-            <img [attr.src]="post['postImgSrc']" />
-          </div>
-
-          <div class="card-text">
-            <div class="description">
-              {{ post['post']['description'] }}
-              little black dress
-            </div>
-            <span class="price">
-              $500
-            </span>
-            <span class="store text-right">
-              net-a-porter.com
-            </span>
-          </div>
-
+          <span class="price">
+            $500
+          </span>
+          <span class="store text-right">
+            net-a-porter.com
+          </span>
+        </div>
       </ngxMasonryItem>
     </ngx-masonry>
     <div

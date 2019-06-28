@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
+import { DialogService } from '../../services/dialog.service';
+import { ProductPageComponent } from '../product-page/product-page.component';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -27,7 +29,8 @@ export class TimelineFeedComponent implements OnInit {
   constructor(
     private userService: UserService,
     private feedService: FeedService,
-    private postService: PostService
+    private postService: PostService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -57,21 +60,6 @@ export class TimelineFeedComponent implements OnInit {
         });
     });
   };
-  // private processData = posts => {
-  //   this.posts = this.posts.concat(posts);
-  //   posts.forEach(post => {
-  //     this.postService
-  //       .getImage(post.postImageAddr)
-  //       .pipe(takeUntil(this.onDestroy))
-  //       .subscribe(res => {
-  //         this.postsToShow = this.postService.createImageFromBlob(
-  //           res,
-  //           post,
-  //           this.postsToShow
-  //         );
-  //       });
-  //   });
-  // };
 
   generateTimelineFeed(offset: number, id: number) {
     this.feedService
@@ -81,6 +69,10 @@ export class TimelineFeedComponent implements OnInit {
   }
   fetchImages() {
     this.generateTimelineFeed(this.offset, this.id);
+  }
+
+  openDialog(post): void {
+    this.dialogService.openDialog(ProductPageComponent, post);
   }
 
   public ngOnDestroy(): void {
