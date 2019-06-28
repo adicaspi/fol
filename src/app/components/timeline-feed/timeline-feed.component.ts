@@ -19,8 +19,11 @@ export class TimelineFeedComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
 
   public masonryOptions: NgxMasonryOptions = {
-    transitionDuration: '0'
+    transitionDuration: '0',
+    horizontalOrder: true,
+    gutter: 39
   };
+
   constructor(
     private userService: UserService,
     private feedService: FeedService,

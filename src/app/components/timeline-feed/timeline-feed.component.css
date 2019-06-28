@@ -1,103 +1,93 @@
-/* 
-.row {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-@media only screen and (min-width: 990px), only screen and (min-width: 768px) {
-  body {
-    background-color: rgb(246, 246, 246);
-    padding-top: 80px;
-    padding-left: 170px;
-    padding-right: 170px;
-  }
-  .card-group {
-    border-radius: 10px;
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .col-sm-12.col-md-4.col-lg-4.col-xl-4 {
-    margin-bottom: 20px;
-  }
-}
-
-@media (min-width: 576px) {
-}
-
-@media (min-width: 360px) {
-  .col-sm-12.col-md-4.col-lg-4.col-xl-4 {
-    padding: 0 0 0 0;
-    margin-top: 25px;
-  }
-  body {
-    background-color: #f9f9f9;
-  }
-} */
-
 @media only screen and (min-width: 900px) {
-  body {
+  #main-body {
     padding-right: 0px;
     padding-left: 0px;
     overflow: visible;
   }
+  
   .center {
-    background-color: #f9f9f9;
-    margin-left: 0;
-    margin-right: 0;
+    margin: auto;
+    width: 900px;
   }
-  .masonry-item {
-    width: 20%;
-    margin: 30px;
-  }
-
-  .img-comp img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-
-  .masonry-img img {
-    width: 175px;
-    height: 262px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    display: block;
+  
+  ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
   }
 
   .card {
-    height: 380px;
-    margin-top: 35px;
+    width: 274px;
+    margin-top: 39px;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  .profile-image {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .profile-image img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-left: 14px;
+  }
+
+  .profile-image span {
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue' Helvetica, Arial, sans-serif; */
+
+    font-size: 18px;
+    margin-left: 10px;
+    color: rgb(33,37,41);
+    font-family: arial, 'helvetica', sans-serif;
+    text-align: left;
+  }
+
+  .masonry-img img {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
   }
 
   .description {
     text-align: center;
+    font-weight: 400;
+    color: black;
   }
 
-  span.store.text-right {
-    float: right;
-    clear: right;
+  .store.text-right {
+    position: absolute;
+    right: 12px;
+    margin-top: 8px;
     text-decoration: underline;
+    line-height: 1;
+    color: grey;
   }
-  span.text-left {
-    float: left;
-    clear: left;
+
+  span.price{
+    position: absolute;
+    left: 12px;
+    margin-top: 8px;
+    color: #2F2E2E;
+    font-weight: 200;
+    font-size: 14px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
   }
 
   .card-text {
-    font-weight: 400px;
     font-size: 15px;
     height: 48px;
-    margin-top: 30px;
-    /* font-family: 'Roboto', sans-serif; */
-    font-family: 'helvetica', sans-serif;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: 'helvetica', arial, sans-serif;
   }
 }
 
