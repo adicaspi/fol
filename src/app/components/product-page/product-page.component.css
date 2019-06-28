@@ -147,6 +147,10 @@
     margin-top: 10px;
   }
 
+  .posts-more-from {
+    display: inline-block;
+  }
+
   .more-text {
     font-weight: 500;
   }

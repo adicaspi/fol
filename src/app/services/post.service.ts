@@ -40,7 +40,6 @@ export class PostService {
         'load',
         (profileHandler = () => {
           postObject['profileImgSrc'] = profileReader.result;
-          console.log('im profile image src', postObject['profileImgSrc']);
         }),
         false
       );
@@ -64,7 +63,7 @@ export class PostService {
       postReader.readAsDataURL(postImage);
     }
     posts.push(postObject);
-    console.log('im posts', posts);
+
     return posts;
   }
 }

@@ -48,23 +48,7 @@ export class ProductPageComponent implements OnInit {
     this.userService.updateUser(655);
     this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
       this.user = user;
-
-      this.postService
-        .getImage(user.profileImageAddr)
-        .pipe(takeUntil(this.onDestroy))
-        .subscribe(res => {
-          let image_enum = imageEnum.PROFILE;
-          this.createImageFromBlob(res, this.userPost, image_enum);
-        });
     });
-    this.postService
-      .getImage(this.postImageAddr)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(res => {
-        let image_enum = imageEnum.MAIN;
-        this.createImageFromBlob(res, this.userPost, image_enum);
-      });
-
     this.getMoreFromUser();
   }
 
@@ -73,6 +57,8 @@ export class ProductPageComponent implements OnInit {
       .getUserFeed(655, 0)
       .toPromise()
       .then(result => {
+        let len = result.length;
+        let varNum = Math.floor(Math.random() * (len + 1));
         this.posts = result.slice(0, 2);
         this.posts.forEach(post => {
           this.postService
@@ -121,16 +107,18 @@ export class ProductPageComponent implements OnInit {
     }
   }
 
-  setImage(src) {
+  setImage(post) {
+    console.log('im post', post);
     var mainImageElement = $('#mainImage');
-    mainImageElement.attr('src', src);
+    mainImageElement.attr('src', post['imgSrc']);
   }
 
   setImageAndText(post) {
+    console.log('im post', post);
     var mainImageElement = $('#mainImage');
     mainImageElement.attr('src', post['imgSrc']);
     var description = $('#description');
-    //description.text(post['post']['description']);
+
     description.text('im nex text');
   }
 

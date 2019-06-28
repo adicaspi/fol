@@ -1,13 +1,13 @@
 <div *ngIf="user as currentUser" class="wrapper">
   <div class="profile-img-comp">
-    <img id="profileImage" [attr.src]="userProfileSrc" />
+    <img id="profileImage" [attr.src]="userPost.profileImgSrc" />
     <div class="card-text profile">
       {{ currentUser.username }}
     </div>
   </div>
   <div class="slider">
     <div class="mainImage">
-      <img id="mainImage" [attr.src]="mainImageSrc" />
+      <img id="mainImage" [attr.src]="userPost.postImgSrc" />
       <div class="product-description">
         <p class="card-text title">
           <img src="../../../assets/zara.PNG" class="store-logo" />
@@ -33,13 +33,13 @@
       </div>
     </div>
     <div class="lower-part">
-      <div class="thumbnails" *ngFor="let image of postsToShow">
+      <!-- <div class="thumbnails" *ngFor="let image of postsToShow">
         <img
           class="imgStyle"
           [attr.src]="image['imgSrc']"
           (click)="setImage(image)"
         />
-      </div>
+      </div> -->
       <div class="more-from-user">
         <div class="more-text">
           See more products from {{ currentUser.username }}
