@@ -12,6 +12,7 @@ const httpOptions = {
 export class PostService {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   postsUrl: string = this.baseApiUrl + '/image';
+  socialUrl: string = this.baseApiUrl + '/social';
   constructor(private http: HttpClient) {}
 
   getImage(image_adr: string): Observable<Blob> {
@@ -19,6 +20,15 @@ export class PostService {
     return this.http.get(this.postsUrl, {
       params: params,
       responseType: 'blob'
+    });
+  }
+
+  getPostInfo(userId: number, postId: number) {
+    let postIdString = postId.toString();
+    let postInfoURL = this.socialUrl + '/' + userId + '/';
+    let params = new HttpParams().set('post-info', postIdString);
+    return this.http.get(postInfoURL, {
+      params: params
     });
   }
 
