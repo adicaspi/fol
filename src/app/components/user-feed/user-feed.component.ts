@@ -5,6 +5,9 @@ import { Subject, Observer, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { PostService } from '../../services/post.service';
+import { DialogService } from '../../services/dialog.service';
+import { ProductPageComponent } from '../product-page/product-page.component';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-user-feed',
@@ -16,11 +19,12 @@ export class UserFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   id = 0;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter : 39
+    gutter: 39
   };
 
   onDestroy: Subject<void> = new Subject<void>();
@@ -28,7 +32,8 @@ export class UserFeedComponent implements OnInit {
   constructor(
     private feedService: FeedService,
     private activatedRoute: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -41,19 +46,32 @@ export class UserFeedComponent implements OnInit {
     this.generateUserFeed(0, this.id);
   }
 
+  // private processData = posts => {
+  //   this.posts = this.posts.concat(posts);
+  //   posts.forEach(post => {
+  //     this.postService
+  //       .getImage(post.postImageAddr)
+  //       .pipe(takeUntil(this.onDestroy))
+  //       .subscribe(res => {
+  //         this.postsToShow = this.postService.createImageFromBlob(
+  //           res,
+  //           post,
+  //           this.postsToShow
+  //         );
+  //       });
+  //   });
+  // };
+
   private processData = posts => {
     this.posts = this.posts.concat(posts);
     posts.forEach(post => {
-      this.postService
-        .getImage(post.postImageAddr)
-        .pipe(takeUntil(this.onDestroy))
-        .subscribe(res => {
-          this.postsToShow = this.postService.createImageFromBlob(
-            res,
-            post,
-            this.postsToShow
-          );
-        });
+      let baseAPI = this.baseApiUrl + '/image?s3key=';
+      let postObject = {
+        post: post,
+        postImgSrc: baseAPI + post.postImageAddr
+      };
+
+      this.postsToShow.push(postObject);
     });
   };
   generateUserFeed(offset: number, userId: number) {
@@ -65,6 +83,10 @@ export class UserFeedComponent implements OnInit {
 
   fetchImages() {
     this.generateUserFeed(this.offset, this.id);
+  }
+
+  openDialog(post): void {
+    this.dialogService.openDialog(ProductPageComponent, post);
   }
 
   public ngOnDestroy(): void {
