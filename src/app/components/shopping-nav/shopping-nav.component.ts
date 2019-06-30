@@ -30,7 +30,6 @@ export class ShoppingNavComponent {
     this.originalList['Designers'] = this.Designers;
     this.originalList['Stores'] = this.Stores;
     this.originalList['Price'] = this.Price;
-    console.log(this.originalList['Categoris']);
   }
 
   changeMenu(item) {
