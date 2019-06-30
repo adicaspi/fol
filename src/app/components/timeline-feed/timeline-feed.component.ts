@@ -7,6 +7,7 @@ import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { DialogService } from '../../services/dialog.service';
 import { ProductPageComponent } from '../product-page/product-page.component';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -19,6 +20,7 @@ export class TimelineFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
@@ -39,25 +41,40 @@ export class TimelineFeedComponent implements OnInit {
     this.generateTimelineFeed(0, this.id);
   }
 
+  // private processData = posts => {
+  //   this.posts = this.posts.concat(posts);
+  //   posts.forEach(post => {
+  //     this.postService
+  //       .getImage(post.postImageAddr)
+  //       .pipe(takeUntil(this.onDestroy))
+  //       .subscribe(postImage => {
+  //         this.postService
+  //           .getImage(post.userProfileImageAddr)
+  //           .pipe(takeUntil(this.onDestroy))
+  //           .subscribe(profileImage => {
+  //             this.postsToShow = this.postService.createImageFromBlob(
+  //               postImage,
+  //               post,
+  //               this.postsToShow,
+  //               profileImage
+  //             );
+  //           });
+  //       });
+  //   });
+  // };
+
   private processData = posts => {
     this.posts = this.posts.concat(posts);
     posts.forEach(post => {
-      this.postService
-        .getImage(post.postImageAddr)
-        .pipe(takeUntil(this.onDestroy))
-        .subscribe(postImage => {
-          this.postService
-            .getImage(post.userProfileImageAddr)
-            .pipe(takeUntil(this.onDestroy))
-            .subscribe(profileImage => {
-              this.postsToShow = this.postService.createImageFromBlob(
-                postImage,
-                post,
-                this.postsToShow,
-                profileImage
-              );
-            });
-        });
+      this.postService;
+      let baseAPI = this.baseApiUrl + '/image?s3key=';
+      let postObject = {
+        post: post,
+        postImgSrc: baseAPI + post.postImageAddr,
+        profileImgSrc: baseAPI + post.userProfileImageAddr
+      };
+
+      this.postsToShow.push(postObject);
     });
   };
 
