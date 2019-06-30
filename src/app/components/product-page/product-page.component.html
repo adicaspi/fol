@@ -1,6 +1,6 @@
 <div *ngIf="user as currentUser" class="wrapper">
   <div class="profile-img-comp">
-    <img id="profileImage" [attr.src]="userPost.profileImgSrc" />
+    <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">
       {{ currentUser.username }}
     </div>
@@ -13,7 +13,7 @@
           <img src="../../../assets/zara.PNG" class="store-logo" />
         </p>
         <p id="description" class="card-text description">
-          text {{ userPost.description }}
+          {{ userPost.description }}
         </p>
         <div class="footer">
           <div class="upper-footer">

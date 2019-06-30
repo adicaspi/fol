@@ -7,12 +7,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../models/User';
 import { Observable } from 'rxjs';
 import { TimelinePost } from '../../models/TimelinePost';
-
 import { PostService } from '../../services/post.service';
 import { imageEnum } from '../../models/imageEnum';
 import * as $ from 'jquery';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-product-page',
@@ -30,44 +30,75 @@ export class ProductPageComponent implements OnInit {
   userProfileSrc: any;
   showSpinner: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   constructor(
     private userService: UserService,
     private feedService: FeedService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<ProductPageComponent>,
-    private postService: PostService
+    private dialogRef: MatDialogRef<ProductPageComponent>
   ) {
     this.userPost = this.data;
+    console.log('im data', this.data);
     this.postImageAddr = this.userPost.postImageAddr;
   }
 
   ngOnInit() {
     this.dialogRef.updateSize('560px', '480px');
     this.userProfileSrc = '../../../assets/placeholder.png';
-    this.userService.updateUser(655);
-    this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
-      this.user = user;
-    });
-    this.getMoreFromUser();
+
+    this.userService
+      .getUserDetails(this.userPost['post']['userId'])
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(user => {
+        this.user = user;
+        this.userProfileSrc =
+          this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
+      });
+    this.getMoreFromUser(this.userPost['post']['userId']);
   }
 
-  getMoreFromUser() {
+  // getMoreFromUser() {
+  //   this.feedService
+  //     .getUserFeed(655, 0)
+  //     .toPromise()
+  //     .then(result => {
+  //       let len = result.length;
+  //       var i;
+  //       for (i = 0; i < 2; i++) {
+  //         let varNum = Math.floor(Math.random() * (len + 1));
+  //         this.posts.push(result[varNum]);
+  //       }
+  //       this.posts.forEach(post => {
+  //         this.postService
+  //           .getImage(post.postImageAddr)
+  //           .pipe(takeUntil(this.onDestroy))
+  //           .subscribe(res => {
+  //             let image_enum = imageEnum.THUMBNAILS;
+  //             this.createImageFromBlob(res, post, image_enum);
+  //           });
+  //       });
+  //     });
+  // }
+
+  getMoreFromUser(userId: number) {
     this.feedService
-      .getUserFeed(655, 0)
+      .getUserFeed(userId, 0)
       .toPromise()
       .then(result => {
         let len = result.length;
-        let varNum = Math.floor(Math.random() * (len + 1));
-        this.posts = result.slice(0, 2);
+        var i;
+        for (i = 0; i < 2; i++) {
+          let varNum = Math.floor(Math.random() * (len + 1));
+          this.posts.push(result[varNum]);
+        }
         this.posts.forEach(post => {
-          this.postService
-            .getImage(post.postImageAddr)
-            .pipe(takeUntil(this.onDestroy))
-            .subscribe(res => {
-              let image_enum = imageEnum.THUMBNAILS;
-              this.createImageFromBlob(res, post, image_enum);
-            });
+          let baseAPI = this.baseApiUrl + '/image?s3key=';
+          let postObject = {
+            post: post,
+            imgSrc: baseAPI + post.postImageAddr
+          };
+          this.postsToShow.push(postObject);
         });
       });
   }
