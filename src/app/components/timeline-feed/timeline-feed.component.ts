@@ -31,7 +31,6 @@ export class TimelineFeedComponent implements OnInit {
   constructor(
     private userService: UserService,
     private feedService: FeedService,
-    private postService: PostService,
     private dialogService: DialogService
   ) {}
 
@@ -66,7 +65,6 @@ export class TimelineFeedComponent implements OnInit {
   private processData = posts => {
     this.posts = this.posts.concat(posts);
     posts.forEach(post => {
-      this.postService;
       let baseAPI = this.baseApiUrl + '/image?s3key=';
       let postObject = {
         post: post,
