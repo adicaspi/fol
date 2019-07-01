@@ -1,18 +1,32 @@
-<html>
-  <body>
-    <div class="landing"></div>
-    <div class="header">
-      <button type="button" class="simple-button">
-        <img src="../../../assets/logo.png" />
-      </button>
+<div class="content">
+  <div class="landing"></div>
+  <div class="header">
+    <div class="navbar">
+      <li>
+        <button type="button" class="left-button">
+          <img src="../../../assets/fw_followear_white.png" />
+        </button>
+      </li>
+      <div class="right-navbar">
+        <li>
+          <button type="button" class="right-button">
+            EXPLORE
+          </button>
+        </li>
+        <li>
+          <button type="button" class="right-button sign-in">
+            SIGN-IN/UP
+          </button>
+        </li>
+      </div>
     </div>
+  </div>
 
-    <div class="bg-text">
-      <p class="title">followear</p>
-      <p class="moto">OUTSMART SHOPPING TOGETHER</p>
-      <button type="button" class="sing-in-button" (click)="registerPage()">
-        SING IN / UP
-      </button>
-    </div>
-  </body>
-</html>
+  <div class="bg-text">
+    <div class="title">followear</div>
+    <div class="moto"><span>OUTSMART SHOPPING TOGETHER</span></div>
+    <button type="button" class="sing-in-button" (click)="registerPage()">
+      SING IN / UP
+    </button>
+  </div>
+</div>
