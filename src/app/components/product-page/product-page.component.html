@@ -13,13 +13,13 @@
           <img src="../../../assets/zara.PNG" class="store-logo" />
         </p>
         <p id="description" class="card-text description">
-          {{ userPost.description }}
+          {{ postInfo.description }}
         </p>
         <div class="footer">
           <div class="upper-footer">
             <span class="text-left">
               <button type="button" class="shop_btn">
-                Shop
+                <a href="{{ postInfo.link }}">Shop</a>
               </button>
               <button mat-button>
                 <i class="material-icons"> more_horiz</i>

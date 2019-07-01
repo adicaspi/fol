@@ -1,14 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-
 import { UserPost } from '../../models/UserPost';
+import { PostInfo } from '../../models/PostInfo';
 import { FeedService } from '../../services/feed.service';
 import { UserService } from '../../services/user.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../models/User';
-import { Observable } from 'rxjs';
 import { TimelinePost } from '../../models/TimelinePost';
 import { PostService } from '../../services/post.service';
-import { imageEnum } from '../../models/imageEnum';
 import * as $ from 'jquery';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -21,6 +19,7 @@ import { GlobalVariable } from '../../../global';
 })
 export class ProductPageComponent implements OnInit {
   userPost: UserPost;
+  postInfo: PostInfo;
   timelinePost: TimelinePost;
   posts = [];
   postsToShow = [];
@@ -35,11 +34,12 @@ export class ProductPageComponent implements OnInit {
   constructor(
     private userService: UserService,
     private feedService: FeedService,
+    private postService: PostService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ProductPageComponent>
   ) {
     this.userPost = this.data;
-    console.log('im data', this.data);
+
     this.postImageAddr = this.userPost.postImageAddr;
   }
 
@@ -56,30 +56,18 @@ export class ProductPageComponent implements OnInit {
           this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
       });
     this.getMoreFromUser(this.userPost['post']['userId']);
+    this.getPostInfo();
   }
 
-  // getMoreFromUser() {
-  //   this.feedService
-  //     .getUserFeed(655, 0)
-  //     .toPromise()
-  //     .then(result => {
-  //       let len = result.length;
-  //       var i;
-  //       for (i = 0; i < 2; i++) {
-  //         let varNum = Math.floor(Math.random() * (len + 1));
-  //         this.posts.push(result[varNum]);
-  //       }
-  //       this.posts.forEach(post => {
-  //         this.postService
-  //           .getImage(post.postImageAddr)
-  //           .pipe(takeUntil(this.onDestroy))
-  //           .subscribe(res => {
-  //             let image_enum = imageEnum.THUMBNAILS;
-  //             this.createImageFromBlob(res, post, image_enum);
-  //           });
-  //       });
-  //     });
-  // }
+  getPostInfo() {
+    this.postService
+      .getPostInfo(this.data['post']['userId'], this.data['post']['postId'])
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(postInfo => {
+        this.postInfo = postInfo;
+        console.log('im data', this.postInfo);
+      });
+  }
 
   getMoreFromUser(userId: number) {
     this.feedService
@@ -101,47 +89,6 @@ export class ProductPageComponent implements OnInit {
           this.postsToShow.push(postObject);
         });
       });
-  }
-
-  createImageFromBlob(image: Blob, post: UserPost, image_enum: imageEnum) {
-    let reader = new FileReader();
-    let handler;
-    reader.addEventListener(
-      'load',
-      (handler = () => {
-        let postObject = {
-          post: post,
-          imgSrc: reader.result
-        };
-        switch (image_enum) {
-          case 0:
-            this.userProfileSrc = reader.result;
-            reader.removeEventListener('load', handler, false);
-            break;
-          case 1:
-            this.mainImageSrc = reader.result;
-            this.postsToShow.push(postObject);
-            reader.removeEventListener('load', handler, false);
-            break;
-
-          case 2:
-            this.postsToShow.push(postObject);
-            reader.removeEventListener('load', handler, false);
-            break;
-        }
-      }),
-      false
-    );
-
-    if (image) {
-      reader.readAsDataURL(image);
-    }
-  }
-
-  setImage(post) {
-    console.log('im post', post);
-    var mainImageElement = $('#mainImage');
-    mainImageElement.attr('src', post['imgSrc']);
   }
 
   setImageAndText(post) {
