@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GlobalVariable } from '../../global';
+import { PostInfo } from '../models/PostInfo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'image/jpeg' })
 };
@@ -23,11 +24,11 @@ export class PostService {
     });
   }
 
-  getPostInfo(userId: number, postId: number) {
+  getPostInfo(userId: number, postId: number): Observable<PostInfo> {
     let postIdString = postId.toString();
-    let postInfoURL = this.socialUrl + '/' + userId + '/';
-    let params = new HttpParams().set('post-info', postIdString);
-    return this.http.get(postInfoURL, {
+    let postInfoURL = this.socialUrl + '/' + userId + '/post-info';
+    let params = new HttpParams().set('postId', postIdString);
+    return this.http.get<PostInfo>(postInfoURL, {
       params: params
     });
   }
