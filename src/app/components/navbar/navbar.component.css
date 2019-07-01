@@ -34,9 +34,10 @@ li.item-explore {
   cursor: pointer;
 }
 
-button.button-left-nav {
+button {
   background: none;
   border: none;
+  outline: none;
 }
 
 .simple-button {
@@ -68,6 +69,11 @@ li.nav-item.right {
 img.logo {
   width: 60px;
   height: 40px;
+}
+
+img.icon {
+  width: 35px;
+  height: 35px;
 }
 /* Small devices (landscape phones, 360px and up) */
 @media (min-width: 360px) and (max-width: 600px) {
