@@ -30,7 +30,11 @@
 </nav>
 
 <div class="bottom-navbar">
-  <mat-icon (click)="feedPage()">home</mat-icon>
-  <mat-icon (click)="profilePage()">account_circle</mat-icon>
-  <mat-icon (click)="explorePage()">explore</mat-icon>
+  <mat-icon [ngClass]="{ active: feed }" (click)="feedPage()">home</mat-icon>
+  <mat-icon [ngClass]="{ active: profile }" (click)="profilePage()"
+    >account_circle</mat-icon
+  >
+  <mat-icon [ngClass]="{ active: explore }" (click)="explorePage()"
+    >explore</mat-icon
+  >
 </div>

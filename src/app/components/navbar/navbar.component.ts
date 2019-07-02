@@ -14,6 +14,9 @@ import { SettingsComponent } from '../settings/settings.component';
 export class NavbarComponent implements OnInit {
   enabled: boolean = false;
   loggedin = false;
+  feed: boolean = true;
+  explore: boolean = false;
+  profile: boolean = false;
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
     { path: '', component: RegisterComponent },
@@ -28,7 +31,9 @@ export class NavbarComponent implements OnInit {
   }
 
   profilePage() {
-    console.log('in prof');
+    this.profile = true;
+    this.feed = false;
+    this.explore = false;
     this.router.navigate(['profile', this.userService.userId]);
   }
 
@@ -42,6 +47,9 @@ export class NavbarComponent implements OnInit {
 
   feedPage() {
     if (this.loggedin) {
+      this.profile = false;
+      this.feed = true;
+      this.explore = false;
       this.router.navigate(['feed', this.userService.userId]);
     } else {
       this.router.navigate(['']);
@@ -49,6 +57,9 @@ export class NavbarComponent implements OnInit {
   }
 
   explorePage() {
+    this.profile = false;
+    this.feed = false;
+    this.explore = true;
     this.router.navigate(['/explore']);
   }
 }

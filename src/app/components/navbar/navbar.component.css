@@ -101,13 +101,8 @@ img.icon {
     text-decoration: none;
   }
 
-  .bottom-navbar mat-icon:hover {
-    background: white;
-  }
-
-  .bottom-navbar mat-icon:active {
-    background-color: #4caf50;
-    color: white;
+  .bottom-navbar .active {
+    color: grey;
   }
 }
 
