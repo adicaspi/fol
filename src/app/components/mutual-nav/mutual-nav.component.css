@@ -1,9 +1,13 @@
 .mat-toolbar {
   color: black;
   background-color: white;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-top: 35px;
+  padding-bottom: 30px;
+  background-color: white;
 }
+
 .mat-toolbar span {
   width: 20%;
   text-align: center;
@@ -13,14 +17,15 @@
   position: relative;
   display: inline-block;
   flex: 1 1 auto;
-  width: 25%;
   text-align: center;
 }
 
 .dropbtn {
   background-color: white;
-  color: black;
-  padding: 16px;
+  font-family: 'Maven Pro', sans-serif;
+  color: grey;
+  padding: 10px;
+  outline: none;
   font-size: 14px;
   border: none;
   cursor: pointer;

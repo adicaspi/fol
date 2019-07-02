@@ -1,21 +1,20 @@
 <html>
-    <body>
+  <body>
+    <div class="display">
+      <app-navbar></app-navbar>
+      <app-mutual-nav></app-mutual-nav>
+      <div class="center">
+        <app-user-profile-info></app-user-profile-info>
+        <app-user-feed></app-user-feed>
+      </div>
+    </div>
 
-      <div class="display">
+    <div class="hidden">
+      <app-shopping-nav>
+        <app-user-profile-info></app-user-profile-info>
+        <app-user-feed></app-user-feed>
         <app-navbar></app-navbar>
-        <div class="center">
-            <app-user-profile-info></app-user-profile-info>
-            <app-user-feed></app-user-feed>
-        </div>
-      </div>
-
-      <div class="hidden">
-          <app-shopping-nav>
-            <app-user-profile-info></app-user-profile-info>
-            <app-user-feed></app-user-feed>
-            <app-navbar></app-navbar>
-          </app-shopping-nav>
-      </div>
-      
-    </body>
+      </app-shopping-nav>
+    </div>
+  </body>
 </html>
