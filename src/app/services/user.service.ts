@@ -16,7 +16,8 @@ import { GlobalVariable } from '../../global';
   providedIn: 'root'
 })
 export class UserService {
-  userId: number = 655; //DELETE SHOULD BE UPDATED FORM CONFIG
+  // userId: number = 655; //DELETE SHOULD BE UPDATED FORM CONFIG
+  userId: number;
   username: string;
   user: Observable<User>;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
