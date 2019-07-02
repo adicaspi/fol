@@ -34,7 +34,8 @@ export class ExploreFeedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = 655;
+    this.id = this.userService.userId;
+    //this.id = 655; //DELETE ID
 
     this.generateTimelineFeed(0, this.id);
   }

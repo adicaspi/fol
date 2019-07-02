@@ -17,7 +17,10 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {}
 
   registerPage() {
-    // this.router.navigate(['login']);
     this.dialogService.openDialog(LoginComponent);
+  }
+
+  explorePage() {
+    this.router.navigate(['/explore']);
   }
 }
