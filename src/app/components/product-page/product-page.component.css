@@ -89,6 +89,7 @@
 
   .wrapper {
     height: 100%;
+    padding: 6px;
     overflow: hidden;
   }
 
@@ -96,11 +97,25 @@
     position: relative;
   }
 
+  .profile-img-comp {
+    margin-top: -5px;
+    margin-bottom: 20px;
+  }
+
   #profileImage {
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    margin: 11px;
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+  }
+
+  .card-text.profile {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: rgb(47,46,46);
+    padding-left: 16px;
+    vertical-align: middle;
   }
 
   #mainImage {
@@ -140,14 +155,6 @@
 
   .thumbnails {
     margin-top: 40px;
-    display: inline-block;
-  }
-
-  .card-text.profile {
-    line-height: 64px;
-    font-size: 15px;
-    height: 50px;
-    margin-bottom: 15px;
     display: inline-block;
   }
 
