@@ -8,6 +8,7 @@ import { NgxMasonryOptions } from 'ngx-masonry';
 import { DialogService } from '../../services/dialog.service';
 import { ProductPageComponent } from '../product-page/product-page.component';
 import { GlobalVariable } from '../../../global';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -31,7 +32,8 @@ export class TimelineFeedComponent implements OnInit {
   constructor(
     private userService: UserService,
     private feedService: FeedService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -92,5 +94,10 @@ export class TimelineFeedComponent implements OnInit {
 
   public ngOnDestroy(): void {
     this.onDestroy.next();
+  }
+
+  profilePgae(post) {
+    console.log('im post', post['post']['userId']);
+    this.router.navigate(['profile', post['post']['userId']]);
   }
 }
