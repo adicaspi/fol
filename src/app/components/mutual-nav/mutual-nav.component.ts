@@ -13,10 +13,10 @@ export class MutualNavComponent implements OnInit {
   Stores = ['All Stores', 'ASOS', 'ZARA', 'Adika'];
   Price = ['All Prices', '<1000', '1000-5000', '<5000'];
   constructor() {
-    this.mainList['Categoris'] = this.Categories;
-    this.mainList['Designers'] = this.Designers;
-    this.mainList['Stores'] = this.Stores;
-    this.mainList['Price'] = this.Price;
+    this.mainList['CATEGORIES'] = this.Categories;
+    this.mainList['DESIGNERS'] = this.Designers;
+    this.mainList['STORES'] = this.Stores;
+    this.mainList['PRICE'] = this.Price;
   }
 
   ngOnInit() {}

@@ -1,5 +1,6 @@
 .navbar {
   background-color: white;
+  margin-top: 20px;
 }
 
 input#navBarSearchForm {
