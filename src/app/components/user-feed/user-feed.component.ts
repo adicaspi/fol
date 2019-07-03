@@ -41,9 +41,9 @@ export class UserFeedComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         this.id = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
-        //this.generateUserFeed(0, this.id);
+        this.generateUserFeed(0, this.id);
       });
-    this.generateUserFeed(0, this.id);
+    //this.generateUserFeed(0, this.id);
   }
 
   // private processData = posts => {

@@ -6,7 +6,7 @@
         *ngFor="let post of postsToShow"
       >
         <div class="profile-image">
-          <img [attr.src]="post['profileImgSrc']" />
+          <img (click)="profilePgae(post)" [attr.src]="post['profileImgSrc']" />
           <span class="card-text profile">galincha</span>
         </div>
 
