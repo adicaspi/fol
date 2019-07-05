@@ -1,38 +1,43 @@
 <div *ngIf="user as currentUser" class="wrapper">
+
   <div class="profile-img-comp">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">
       {{ currentUser.username }}
     </div>
   </div>
+
   <div class="slider">
-    <div class="mainImage">
+
       <img id="mainImage" [attr.src]="userPost.postImgSrc" />
+
       <div class="product-description">
-        <p class="card-text title">
-          <img src="../../../assets/zara.PNG" class="store-logo" />
-        </p>
+       
         <p id="description" class="card-text description">
-          {{ postInfo.description }}
+          Night Out open-back ruched satin blouse
         </p>
+
         <div class="footer">
           <div class="upper-footer">
-            <span class="text-left">
-              <button type="button" class="shop_btn">
-                <a href="{{ postInfo.link }}">Shop</a>
-              </button>
-              <button mat-button>
-                <i class="material-icons"> more_horiz</i>
-              </button>
-            </span>
-            <span class="text-right">
-              $500
-            </span>
+            <button type="button" class="shop_btn">
+              <a href="{{postInfo.link}}">Shop</a>
+            </button>
+
+            
+            <button mat-button>
+              <i class="material-icons">more_horiz</i>
+            </button>
+            <span class="price">$500</span>
+            <div class="card-text title">
+              <img src="../../../assets/zara.PNG" class="store-logo" />
+            </div>
           </div>
         </div>
-      </div>
+
     </div>
+
     <div class="lower-part">
+
       <!-- <div class="thumbnails" *ngFor="let image of postsToShow">
         <img
           class="imgStyle"
@@ -40,9 +45,10 @@
           (click)="setImage(image)"
         />
       </div> -->
+
       <div class="more-from-user">
         <div class="more-text">
-          See more products from {{ currentUser.username }}
+          more products from {{ currentUser.username }}
         </div>
         <div class="posts-more-from" *ngFor="let post of postsToShow">
           <img
@@ -52,6 +58,8 @@
           />
         </div>
       </div>
+
     </div>
+    
   </div>
 </div>

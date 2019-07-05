@@ -44,7 +44,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('560px', '480px');
+    this.dialogRef.updateSize('800px', '660px');
     this.userProfileSrc = '../../../assets/placeholder.png';
 
     this.userService
