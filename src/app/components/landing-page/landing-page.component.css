@@ -47,8 +47,9 @@ li {
   letter-spacing: 3px;
 }
 button.right-button {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 2px;
+  
 }
 button.right-button.sign-in {
   color: grey;
@@ -57,8 +58,8 @@ button.right-button.sign-in {
   outline: none;
   border-radius: 25px;
 
-  width: 90px;
-  height: 20px;
+  width: 120px;
+  height: 30px;
 }
 
 button img {
@@ -94,12 +95,12 @@ button.right-button {
 
 .title img {
   /* width: 50%; */
-  width: 50vw;
+  width: 35vw;
 }
 
 .moto {
   font-family: 'Oswald', sans-serif;
-  font-size: 4vw;
+  font-size: 2.7vw;
 }
 
 .sing-in-button {
