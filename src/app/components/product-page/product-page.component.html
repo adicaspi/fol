@@ -2,9 +2,7 @@
 
   <div class="profile-img-comp">
     <img id="profileImage" [attr.src]="userProfileSrc" />
-    <div class="card-text profile">
-      {{ currentUser.username }}
-    </div>
+    <div class="card-text profile">{{ currentUser.username }}</div>
   </div>
 
   <div class="slider">
@@ -28,9 +26,9 @@
               <i class="material-icons">more_horiz</i>
             </button>
             <span class="price">$500</span>
-            <div class="card-text title">
+            <!-- <div class="card-text title">
               <img src="../../../assets/zara.PNG" class="store-logo" />
-            </div>
+            </div> -->
           </div>
         </div>
 
@@ -44,7 +42,7 @@
           [attr.src]="image['imgSrc']"
           (click)="setImage(image)"
         />
-      </div> -->
+      </div>
 
       <div class="more-from-user">
         <div class="more-text">
@@ -57,7 +55,7 @@
             (click)="setImageAndText(post)"
           />
         </div>
-      </div>
+      </div> -->
 
     </div>
     
