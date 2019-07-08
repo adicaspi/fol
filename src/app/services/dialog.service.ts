@@ -16,6 +16,7 @@ export class DialogService {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = data;
+    dialogConfig.panelClass = "fw-dialog-class";
 
     const dialogRef = this.dialog.open(component, dialogConfig);
 
