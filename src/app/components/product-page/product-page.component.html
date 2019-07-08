@@ -32,19 +32,20 @@
           </div>
         </div>
 
+      </div>
     </div>
 
     <div class="lower-part">
 
-      <!-- <div class="thumbnails" *ngFor="let image of postsToShow">
-        <img
-          class="imgStyle"
+      <div class="thumbnails" >
+        <img *ngFor="let image of postsToShow"
+          class="thumbnail"
           [attr.src]="image['imgSrc']"
           (click)="setImage(image)"
         />
       </div>
 
-      <div class="more-from-user">
+      <!-- <div class="more-from-user">
         <div class="more-text">
           more products from {{ currentUser.username }}
         </div>
@@ -56,8 +57,6 @@
           />
         </div>
       </div> -->
-
-    </div>
     
   </div>
 </div>
