@@ -8,4 +8,6 @@ export class PostInfo {
   website: string;
   designer: string;
   productId: string;
+  thumbnail1: string;
+  thumbnail2: string;
 }

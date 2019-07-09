@@ -28,6 +28,8 @@ export class ProductPageComponent implements OnInit {
   postImageAddr: any;
   userProfileSrc: any;
   showSpinner: boolean = true;
+  thumbnails = [];
+
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
 
@@ -65,7 +67,19 @@ export class ProductPageComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
-        console.log('im data', this.postInfo);
+        this.thumbnails.push(
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.imageAddr
+        );
+        if (postInfo.thumbnail1) {
+          this.thumbnails.push(
+            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail1
+          );
+        }
+        if (postInfo.thumbnail2) {
+          this.thumbnails.push(
+            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail2
+          );
+        }
       });
   }
 
@@ -92,7 +106,6 @@ export class ProductPageComponent implements OnInit {
   }
 
   setImageAndText(post) {
-    console.log('im post', post);
     var mainImageElement = $('#mainImage');
     mainImageElement.attr('src', post['imgSrc']);
     var description = $('#description');
