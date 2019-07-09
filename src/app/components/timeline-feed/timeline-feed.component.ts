@@ -42,28 +42,6 @@ export class TimelineFeedComponent implements OnInit {
     this.generateTimelineFeed(0, this.id);
   }
 
-  // private processData = posts => {
-  //   this.posts = this.posts.concat(posts);
-  //   posts.forEach(post => {
-  //     this.postService
-  //       .getImage(post.postImageAddr)
-  //       .pipe(takeUntil(this.onDestroy))
-  //       .subscribe(postImage => {
-  //         this.postService
-  //           .getImage(post.userProfileImageAddr)
-  //           .pipe(takeUntil(this.onDestroy))
-  //           .subscribe(profileImage => {
-  //             this.postsToShow = this.postService.createImageFromBlob(
-  //               postImage,
-  //               post,
-  //               this.postsToShow,
-  //               profileImage
-  //             );
-  //           });
-  //       });
-  //   });
-  // };
-
   private processData = posts => {
     this.posts = this.posts.concat(posts);
     posts.forEach(post => {
@@ -97,7 +75,6 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   profilePgae(post) {
-    console.log('im post', post['post']['userId']);
     this.router.navigate(['profile', post['post']['userId']]);
   }
 }

@@ -26,7 +26,6 @@ export class FeedService {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
-  // 'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/social/';
 
   constructor(private http: HttpClient) {}
 

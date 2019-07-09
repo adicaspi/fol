@@ -7,7 +7,7 @@
       >
         <div class="profile-image">
           <img (click)="profilePgae(post)" [attr.src]="post['profileImgSrc']" />
-          <span class="card-text profile">galincha</span>
+          <span class="card-text profile">{{ post['post']['userName'] }}</span>
         </div>
 
         <div class="masonry-img">
