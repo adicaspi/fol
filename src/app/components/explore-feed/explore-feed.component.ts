@@ -8,6 +8,7 @@ import * as $ from 'jquery';
 import { PostService } from '../../services/post.service';
 
 import { NgxMasonryOptions } from 'ngx-masonry';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-explore-feed',
@@ -20,6 +21,7 @@ export class ExploreFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   count = 0;
   public masonryOptions: NgxMasonryOptions = {
@@ -36,19 +38,19 @@ export class ExploreFeedComponent implements OnInit {
   ngOnInit() {
     this.id = this.userService.userId;
     //this.id = 655; //DELETE ID
-
     this.generateTimelineFeed(0, this.id);
   }
 
   private processData = posts => {
     this.posts = this.posts.concat(posts);
     posts.forEach(post => {
-      this.postService
-        .getImage(post.postImageAddr)
-        .pipe(takeUntil(this.onDestroy))
-        .subscribe(res => {
-          this.createImageFromBlob(res, post);
-        });
+      let baseAPI = this.baseApiUrl + '/image?s3key=';
+      let postObject = {
+        post: post,
+        postImgSrc: baseAPI + post.postImageAddr,
+        profileImgSrc: baseAPI + post.userProfileImageAddr
+      };
+      this.postsToShow.push(postObject);
     });
   };
 
@@ -60,27 +62,6 @@ export class ExploreFeedComponent implements OnInit {
   }
   fetchImages() {
     this.generateTimelineFeed(this.offset, this.id);
-  }
-
-  createImageFromBlob(image: Blob, post: any) {
-    let reader = new FileReader();
-    let handler;
-    reader.addEventListener(
-      'load',
-      (handler = () => {
-        let postObject = {
-          post: post,
-          imgSrc: reader.result
-        };
-
-        this.postsToShow.push(postObject);
-      }),
-      false
-    );
-
-    if (image) {
-      reader.readAsDataURL(image);
-    }
   }
 
   public ngOnDestroy(): void {

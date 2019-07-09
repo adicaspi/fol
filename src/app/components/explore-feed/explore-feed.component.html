@@ -1,7 +1,7 @@
 <div class="center">
   <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
-    <ngxMasonryItem class="masonry-item" *ngFor="let image of postsToShow">
-      <img [attr.src]="image['imgSrc']" class="image" />
+    <ngxMasonryItem class="masonry-item" *ngFor="let post of postsToShow">
+      <img [attr.src]="post['postImgSrc']" class="image" />
 
       <div class="description">
         Belted two-tone stretch-silk satin wrap dress
