@@ -76,7 +76,7 @@ export class ProductPageComponent implements OnInit {
       .then(result => {
         let len = result.length;
         var i;
-        for (i = 0; i < 2; i++) {
+        for (i = 0; i < 3; i++) {
           let varNum = Math.floor(Math.random() * (len + 1));
           this.posts.push(result[varNum]);
         }
