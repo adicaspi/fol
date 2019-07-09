@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { FollowItem } from '../../models/FollowItem';
-import { Observable, Subject } from 'rxjs';
+
+import { Subject } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-generate-follow-list',
@@ -22,9 +23,9 @@ export class GenerateFollowListComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   postsToShow = [];
   showSpinner: boolean = true;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   constructor(
     private feedService: FeedService,
-    private postService: PostService,
     private userService: UserService,
     private dialogRef: MatDialogRef<GenerateFollowListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -41,26 +42,17 @@ export class GenerateFollowListComponent implements OnInit {
     followsFeed.forEach(follower => {
       this.userService.checkIsFollowing(follower.id).then(res => {
         follower.follows = res.valueOf();
-
-        this.postService
-          .getImage(follower.profileImageAddr)
-          .pipe(takeUntil(this.onDestroy))
-          .subscribe(
-            res => {
-              this.postsToShow = this.postService.createImageFromBlob(
-                res,
-                follower,
-                this.postsToShow
-              );
-              this.showSpinner = false;
-            },
-            error => {
-              console.log(error);
-            }
-          );
+        let baseAPI = this.baseApiUrl + '/image?s3key=';
+        let postObject = {
+          post: follower,
+          imgSrc: baseAPI + follower.profileImageAddr
+        };
+        this.postsToShow.push(postObject);
+        this.showSpinner = false;
       });
     });
   };
+
   generateFollowsFeed(offset: number) {
     this.feedService
       .getSlavesMasters(this.id, offset, this.flag)
