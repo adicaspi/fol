@@ -8,6 +8,7 @@ import { GenerateFollowListComponent } from '../generate-follow-list/generate-fo
 import { PostService } from '../../services/post.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-user-profile-info',
@@ -18,8 +19,8 @@ export class UserProfileInfoComponent implements OnInit {
   masterId: number;
   slaveId: number;
   follows: boolean;
-  user: Observable<User>;
-  userProfileImageSrc = [];
+  user: User;
+  userProfileImageSrc: string;
   src: any;
   following: Observable<number>;
   followers: Observable<number>;
@@ -28,6 +29,9 @@ export class UserProfileInfoComponent implements OnInit {
   flag: number = 1;
   clicked: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
+
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  AWSImgAddr = this.baseApiUrl + '/image?s3key=';
 
   constructor(
     private userService: UserService,
@@ -39,47 +43,29 @@ export class UserProfileInfoComponent implements OnInit {
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = routeParams.id;
-    // this.userService.checkIsFollowing(this.masterId).then(
-    //   res => {
-    //     this.follows = res.valueOf();
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
     this.updateUser();
+    this.userService.checkIsFollowing(this.masterId).then(
+      res => {
+        this.follows = res.valueOf();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
     this.following = this.userService.getNumberOfFollowing(this.masterId);
     this.followers = this.userService.getNumberOfFollowers(this.masterId);
     this.numberOfPosts = this.userService.getNumberOfPosts(this.masterId);
   }
 
-  updateProfileImage(user) {
-    this.postService
-      .getImage(user.profileImageAddr)
+  updateUser() {
+    this.userService
+      .getUserDetails(this.masterId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(res => {
-        console.log('im res', res);
-        this.userProfileImageSrc = this.postService.createImageFromBlob(
-          res,
-          user.profileImageAddr,
-          this.userProfileImageSrc
-        );
+        this.user = res;
+        this.userProfileImageSrc = this.AWSImgAddr + this.user.profileImageAddr;
       });
-  }
-
-  updateUser() {
-    // this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
-    //   this.updateProfileImage(user);
-    //   this.user = user;
-    // });
-
-    this.user = this.userService
-      .getUserDetails(this.masterId)
-      .pipe(takeUntil(this.onDestroy));
-    console.log('im in update user');
-    this.user.subscribe(res => {
-      this.updateProfileImage(res);
-    });
   }
 
   follow() {

@@ -46,22 +46,6 @@ export class UserFeedComponent implements OnInit {
     //this.generateUserFeed(0, this.id);
   }
 
-  // private processData = posts => {
-  //   this.posts = this.posts.concat(posts);
-  //   posts.forEach(post => {
-  //     this.postService
-  //       .getImage(post.postImageAddr)
-  //       .pipe(takeUntil(this.onDestroy))
-  //       .subscribe(res => {
-  //         this.postsToShow = this.postService.createImageFromBlob(
-  //           res,
-  //           post,
-  //           this.postsToShow
-  //         );
-  //       });
-  //   });
-  // };
-
   private processData = posts => {
     this.posts = this.posts.concat(posts);
     posts.forEach(post => {

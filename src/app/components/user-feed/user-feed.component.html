@@ -6,17 +6,17 @@
       </div>
       <div class="card-text">
         <div class="description">
-          little black dress
+          {{ post['post']['description'] }}
         </div>
         <span class="price">
-          $450
+          {{ post['post']['price'] }}
         </span>
         <a
           class="store text-right"
           href="https://www.net-a-porter.com"
           target="_blank"
         >
-          net-a-porter.com
+          {{ post['post']['website'] }}
         </a>
       </div>
     </ngxMasonryItem>
