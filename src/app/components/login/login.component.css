@@ -10,12 +10,15 @@ a {
 h2 {
   width: 50%;
   margin: 0 auto;
+  margin-top: 5px;
   text-align: center;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 30px;
 }
 
 .form-control {
   margin: 0 auto;
-  width: 50%;
+  width: 75%;
 }
 
 .form-group {
@@ -30,10 +33,11 @@ button.btn.btn-default.login {
   display: block;
   margin: 0 auto;
   width: 50%;
+  background-color: grey;
 }
 
 p.forgot-password {
-  width: 50%;
+  width: 75%;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 25px;
@@ -59,7 +63,7 @@ p.forgot-password {
   padding: 0 10px;
 }
 
-button.btn.facebook {
+button.btn.btn-default.login.facebook {
   background-color: #6d84b4;
 }
 
