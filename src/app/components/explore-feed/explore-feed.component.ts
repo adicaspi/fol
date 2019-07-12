@@ -31,8 +31,7 @@ export class ExploreFeedComponent implements OnInit {
   };
   constructor(
     private userService: UserService,
-    private feedService: FeedService,
-    private postService: PostService
+    private feedService: FeedService
   ) {}
 
   ngOnInit() {
