@@ -1,20 +1,30 @@
 <div *ngIf="user as currentUser" class="wrapper">
+  <i (click)="closeModal()" class="fa fa-close"></i>
   <div class="profile-img-comp">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">{{ currentUser.username }}</div>
   </div>
 
   <div class="slider">
-    <img id="mainImage" [attr.src]="userPost.postImgSrc" />
-
-    <div class="product-description">
+    <div class="product-upper-description">
       <div class="card-text title">
         <img src="../../../assets/zara.PNG" class="store-logo" />
       </div>
-
       <p id="description" class="card-text description">
         Night Out open-back ruched satin blouse
       </p>
+    </div>
+
+    <img id="mainImage" [attr.src]="userPost.postImgSrc" />
+
+    <div class="product-description">
+      <!-- <div class="card-text title">
+        <img src="../../../assets/zara.PNG" class="store-logo" />
+      </div> -->
+
+      <!-- <p id="description" class="card-text description">
+        Night Out open-back ruched satin blouse
+      </p> -->
 
       <div class="footer">
         <div class="upper-footer">

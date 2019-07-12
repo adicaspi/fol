@@ -113,6 +113,9 @@ export class ProductPageComponent implements OnInit {
     description.text('im nex text');
   }
 
+  closeModal() {
+    this.dialogRef.close();
+  }
   public ngOnDestroy(): void {
     this.onDestroy.next();
   }
