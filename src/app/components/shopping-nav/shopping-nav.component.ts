@@ -10,12 +10,28 @@ import { FeedService } from '../../services/feed.service';
   styleUrls: ['./shopping-nav.component.css']
 })
 export class ShoppingNavComponent {
-  mainList = ['Categories', 'Designers', 'Stores', 'Price'];
+  mainList = ['CATEGORIES', 'PRODUCT TYPE', 'DESIGNERS', 'STORES', 'PRICE'];
   originalList = {};
-  Categories = ['Clothings', 'Shoes', 'Bags'];
-  Designers = ['All Designers', 'Gucci', 'Prada', 'D&G'];
-  Stores = ['All Stores', 'ASOS', 'ZARA', 'Adika'];
-  Price = ['All Prices', '<1000', '1000-5000', '<5000'];
+  Categories = ['CLOTHING', 'SHOES', 'BAGS', 'ACCESSORIES'];
+  ProductType = [
+    'ALL CLOTHING',
+    'TOPS',
+    'JACKETS & COATS',
+    'DRESSES & SKIRTS',
+    'PANTS',
+    'SWIMWEAR'
+  ];
+  Designers = ['ALL DESIGNERS', 'GUCCI', 'PRADA', 'D&G'];
+  Stores = [
+    'ALL STORES',
+    'ZARA',
+    'FAR FETCH',
+    'SHOPBOP',
+    'ASOS',
+    'TerminalX',
+    'ADIKA'
+  ];
+  Price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
   icon = 'menu';
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -26,10 +42,11 @@ export class ShoppingNavComponent {
     private breakpointObserver: BreakpointObserver,
     private feedService: FeedService
   ) {
-    this.originalList['Categories'] = this.Categories;
-    this.originalList['Designers'] = this.Designers;
-    this.originalList['Stores'] = this.Stores;
-    this.originalList['Price'] = this.Price;
+    this.originalList['CATEGORIES'] = this.Categories;
+    this.originalList['PRODUCT TYPE'] = this.ProductType;
+    this.originalList['DESIGNERS'] = this.Designers;
+    this.originalList['STORES'] = this.Stores;
+    this.originalList['PRICE'] = this.Price;
   }
 
   changeMenu(item) {
