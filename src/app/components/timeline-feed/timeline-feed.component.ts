@@ -51,7 +51,7 @@ export class TimelineFeedComponent implements OnInit {
         postImgSrc: baseAPI + post.postImageAddr,
         profileImgSrc: baseAPI + post.userProfileImageAddr
       };
-
+      console.log('post', postObject);
       this.postsToShow.push(postObject);
     });
   };

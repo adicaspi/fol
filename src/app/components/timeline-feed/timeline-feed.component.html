@@ -16,15 +16,14 @@
 
         <div class="card-text">
           <div class="description">
-            <!-- {{ post['post']['description'] }} -->
-            little black dress
+            {{ post['post']['description'] }}
           </div>
           <span class="price">
-            $500
+            {{ post['post']['price'] }}
           </span>
-          <span class="store text-right">
-            net-a-porter.com
-          </span>
+          <a class="store text-right">
+            {{ post['post']['website'] }}
+          </a>
         </div>
       </ngxMasonryItem>
     </ngx-masonry>
