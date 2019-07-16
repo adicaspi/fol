@@ -11,7 +11,7 @@ nav {
   height: 80px;
   margin: auto;
   padding: 0;
-  width: 1030px;
+  width: 1025px;
 }
 
 li {
@@ -109,6 +109,12 @@ li.explore {
   color: #5c5c5c;
   font-family: 'Maven Pro';
   cursor: pointer;
+  border-radius: 25px;
+  padding: 2px 12px;
+}
+
+li.explore:hover {
+  background-color: rgba(0,0,0,0.1);
 }
 
 .profile {
@@ -120,6 +126,11 @@ li.explore {
   border-radius: 50%;
   border: 2px solid rgba(128,128,128,0.25);
   cursor: pointer;
+  transition: border-color 200ms;
+}
+
+.profile:hover {
+  border-color: rgba(128,128,128,0.5);
 }
 
 mat-icon {
