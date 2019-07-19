@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Observer, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxMasonryOptions } from 'ngx-masonry';
@@ -8,6 +8,7 @@ import { PostService } from '../../services/post.service';
 import { DialogService } from '../../services/dialog.service';
 import { ProductPageComponent } from '../product-page/product-page.component';
 import { GlobalVariable } from '../../../global';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-user-feed',
@@ -19,6 +20,7 @@ export class UserFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   id = 0;
+  deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   public masonryOptions: NgxMasonryOptions = {
@@ -33,7 +35,9 @@ export class UserFeedComponent implements OnInit {
     private feedService: FeedService,
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private deviceService: DeviceDetectorService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -43,7 +47,6 @@ export class UserFeedComponent implements OnInit {
         this.id = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
         this.generateUserFeed(0, this.id);
       });
-    //this.generateUserFeed(0, this.id);
   }
 
   private processData = posts => {
@@ -70,8 +73,26 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.dialogService.openDialog(ProductPageComponent, post);
+    if (this.deviceService.isDesktop()) {
+      this.dialogService.openDialog(ProductPageComponent, post);
+    } else {
+      this.dialogService.userPost = post;
+      this.dialogService.directingPage = 'profile';
+      this.router.navigate(['product-page']);
+    }
   }
+
+  // epicFunction() {
+  //   console.log('hello `Home` component');
+  //   this.deviceInfo = this.deviceService.getDeviceInfo();
+  //   const isMobile = this.deviceService.isMobile();
+  //   const isTablet = this.deviceService.isTablet();
+  //   const isDesktopDevice = this.deviceService.isDesktop();
+  //   console.log(this.deviceInfo);
+  //   console.log(isMobile);
+  //   console.log(isTablet);
+  //   console.log(isDesktopDevice);
+  // }
 
   public ngOnDestroy(): void {
     this.onDestroy.next();
