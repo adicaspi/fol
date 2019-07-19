@@ -3,12 +3,13 @@ import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import * as $ from 'jquery';
-
-import { PostService } from '../../services/post.service';
+import { ProductPageComponent } from '../product-page/product-page.component';
 
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { GlobalVariable } from '../../../global';
+import { DeviceDetectorService } from '../../../../node_modules/ngx-device-detector';
+import { DialogService } from '../../services/dialog.service';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-explore-feed',
@@ -31,13 +32,22 @@ export class ExploreFeedComponent implements OnInit {
   };
   constructor(
     private userService: UserService,
-    private feedService: FeedService
+    private feedService: FeedService,
+    private deviceService: DeviceDetectorService,
+    private dialogService: DialogService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.id = this.userService.userId;
-    //this.id = 655; //DELETE ID
-    this.generateTimelineFeed(0, this.id);
+    // explore of unsigned user (user id = 0)
+
+    if (!this.id) {
+      this.generateTimelineFeed(0, 0);
+    } else {
+      //this.id = 655; //DELETE ID
+      this.generateTimelineFeed(0, this.id);
+    }
   }
 
   private processData = posts => {
@@ -61,6 +71,16 @@ export class ExploreFeedComponent implements OnInit {
   }
   fetchImages() {
     this.generateTimelineFeed(this.offset, this.id);
+  }
+
+  openDialog(post): void {
+    if (this.deviceService.isDesktop()) {
+      this.dialogService.openDialog(ProductPageComponent, post);
+    } else {
+      this.dialogService.userPost = post;
+      this.dialogService.directingPage = 'explore';
+      this.router.navigate(['product-page']);
+    }
   }
 
   public ngOnDestroy(): void {
