@@ -10,4 +10,6 @@ export class PostInfo {
   productId: string;
   thumbnail1: string;
   thumbnail2: string;
+  website_logo: string;
+  currency: string;
 }

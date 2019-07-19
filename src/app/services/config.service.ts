@@ -1,12 +1,20 @@
 import { Injectable, Injector } from '@angular/core';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { GlobalVariable } from '../../global';
+import { HttpClient } from '../../../node_modules/@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
-  constructor(private userService: UserService, private injector: Injector) {}
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private autoLogin = this.baseApiUrl + '/registration/auto-login';
+  constructor(
+    private userService: UserService,
+    private http: HttpClient,
+    private injector: Injector
+  ) {}
 
   router(): Router {
     //this creates router property on your service.

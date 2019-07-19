@@ -12,6 +12,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ExploreFeedComponent } from './components/explore-feed/explore-feed.component';
 import { ViewExploreComponent } from './components/view-explore/view-explore.component';
 import { MutualNavComponent } from './components/mutual-nav/mutual-nav.component';
+import { ProductPageMobileComponent } from './components/product-page-mobile/product-page-mobile.component';
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
   {
@@ -31,7 +32,8 @@ const routes: Routes = [
     component: LandingPageComponent
   },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
-  { path: 'explore', component: ViewExploreComponent }
+  { path: 'explore/:id', component: ViewExploreComponent },
+  { path: 'product-page', component: ProductPageMobileComponent }
 ];
 
 @NgModule({

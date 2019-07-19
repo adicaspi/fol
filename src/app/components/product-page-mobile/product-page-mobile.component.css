@@ -1,0 +1,129 @@
+.slider {
+  position: relative;
+  margin-left: 20px;
+}
+
+#profileImage {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-top: 0;
+  margin-right: 10px;
+}
+
+.profile-img-comp {
+  margin-top: 20px;
+  display: inline-block;
+}
+
+#mainImage {
+  width: 100%;
+  border: solid 0.8px;
+  border-color: lightgray;
+  height: 400px;
+  object-fit: cover;
+}
+
+.product-upper-description {
+  margin-top: 20px;
+}
+
+.product-description {
+  float: right;
+  margin-top: 20px;
+}
+
+button.mat-button {
+  display: none;
+}
+
+.imgStyle {
+  width: 50px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+#description {
+  font-family: 'Maven Pro';
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-text.profile {
+  line-height: 64px;
+  font-size: 25px;
+  height: 50px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+span.text-right {
+  float: right;
+  clear: right;
+  line-height: 30px;
+  font-weight: 400;
+  color: gray;
+  font-size: 16px;
+}
+
+button.shop_btn {
+  background-color: rgb(255, 20, 147);
+  color: white;
+  border-radius: 50px;
+  width: 90px;
+  height: 50px;
+  border: none;
+  font-size: 18px;
+  outline: none;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 25px;
+}
+
+img.store-logo {
+  width: 120px;
+}
+
+.thumbnails {
+  margin-top: 18px;
+  margin-bottom: 80px;
+  display: inline-block;
+}
+
+img.thumbnail {
+  width: 54px;
+  height: 120px;
+  margin-right: 16px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.more-from-user {
+  display: none;
+}
+
+.material-icons {
+  color: rgb(166, 166, 166);
+  font-size: 40px;
+}
+
+span.price {
+  float: right;
+  margin-right: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: black;
+  font-family: FontAwesome;
+}
+
+i {
+  margin-right: 10px;
+}
+
+.icon-img {
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 30px;
+  vertical-align: middle;
+}

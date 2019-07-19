@@ -54,6 +54,8 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { LoginComponent } from './components/login/login.component';
 import { ShoppingNavComponent } from './components/shopping-nav/shopping-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { ProductPageMobileComponent } from './components/product-page-mobile/product-page-mobile.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     ExplorePostComponent,
     ViewExploreComponent,
     LoginComponent,
-    ShoppingNavComponent
+    ShoppingNavComponent,
+    ProductPageMobileComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +108,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    DeviceDetectorModule.forRoot()
   ],
 
   entryComponents: [

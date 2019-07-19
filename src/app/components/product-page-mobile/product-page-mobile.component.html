@@ -1,0 +1,66 @@
+<div *ngIf="user as currentUser" class="wrapper">
+  <div class="icon-img">
+    <i (click)="goBackPage()" class="fa fa-chevron-left"></i>
+  </div>
+  <div class="profile-img-comp">
+    <img id="profileImage" [attr.src]="userProfileSrc" />
+    <div class="card-text profile">{{ currentUser.username }}</div>
+  </div>
+
+  <div class="product-upper-description">
+    <div class="card-text title">
+      <img [attr.src]="postInfo.website_logo" class="store-logo" />
+    </div>
+    <p id="description" class="card-text description">
+      {{ postInfo.description }}
+    </p>
+  </div>
+  <img id="mainImage" [attr.src]="userPost.postImgSrc" />
+  <div class="product-description">
+    <div class="footer">
+      <span *ngIf="postInfo.currency == 'ils'" class="price">
+        <!-- <i class="fal fa-shekel-sign"></i> -->
+        {{ postInfo.price }}
+      </span>
+      <span *ngIf="postInfo.currency == 'usd'" class="price">
+        <!-- <i class="fal fa-dollar-sign"></i> -->
+        {{ postInfo.price }}
+      </span>
+    </div>
+    <div class="upper-footer">
+      <a href="{{ postInfo.link }}" target="_blank">
+        <button type="button" class="shop_btn">
+          Shop
+        </button>
+      </a>
+
+      <!-- <button mat-button>
+          <i class="material-icons">more_horiz</i>
+        </button> -->
+    </div>
+  </div>
+  <!-- <div class="slider"> -->
+  <div class="lower-part">
+    <div class="thumbnails">
+      <img
+        *ngFor="let image of thumbnails"
+        class="thumbnail"
+        [attr.src]="image"
+        (click)="setImage(image)"
+      />
+    </div>
+
+    <!-- <div class="more-from-user">
+          <div class="more-text">more from {{ currentUser.username }}</div>
+          <div class="more-from-container">
+            <img
+              *ngFor="let post of postsToShow"
+              class="more-from"
+              [attr.src]="post['imgSrc']"
+              (click)="setImageAndText(post)"
+            />
+          </div>
+        </div> -->
+  </div>
+</div>
+<app-navbar></app-navbar>
