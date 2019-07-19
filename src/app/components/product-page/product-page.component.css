@@ -127,6 +127,13 @@
     overflow: scroll;
   }
 
+  i.fal.fa-times {
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
   .slider {
     position: relative;
   }

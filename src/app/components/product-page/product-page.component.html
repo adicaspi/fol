@@ -1,5 +1,5 @@
 <div *ngIf="user as currentUser" class="wrapper">
-  <i (click)="closeModal()" class="fa fa-close"></i>
+  <i (click)="closeModal()" class="fal fa-times"></i>
   <div class="profile-img-comp">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">{{ currentUser.username }}</div>
