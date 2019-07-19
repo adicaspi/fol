@@ -6,7 +6,6 @@
 input#navBarSearchForm {
   text-align: center;
   font-size: 20px;
-
   font-family: FontAwesome, 'Maven Pro', sans-serif;
 }
 
@@ -77,7 +76,7 @@ img.icon {
   height: 35px;
 }
 /* Small devices (landscape phones, 360px and up) */
-@media (min-width: 360px) and (max-width: 600px) {
+@media (max-width: 600px) {
   .navbar {
     display: none;
   }
@@ -93,9 +92,9 @@ img.icon {
     overflow: auto;
   }
 
-  .bottom-navbar mat-icon {
+  .bottom-navbar {
     float: left;
-    width: 33.33%;
+
     color: white;
     text-align: center;
     font-size: 30px;
@@ -104,6 +103,24 @@ img.icon {
 
   .bottom-navbar .active {
     color: grey;
+  }
+
+  .icon-img {
+    display: inline-block;
+    width: 33%;
+    font-family: FontAwesome;
+  }
+
+  .bottom-icon.home {
+    width: 40px;
+  }
+
+  .bottom-icon.user {
+    width: 40px;
+  }
+
+  .bottom-icon.explore {
+    width: 40px;
   }
 }
 
