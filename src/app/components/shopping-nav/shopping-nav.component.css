@@ -16,6 +16,24 @@
 .logo-drawer img {
   width: 50px;
   padding-bottom: 10px;
+  display: inline-block;
+}
+
+li.nav-item.search {
+  display: inline-block;
+}
+
+input#navBarSearchForm {
+  text-align: center;
+  font-size: 22px;
+  font-family: FontAwesome, 'Maven Pro', sans-serif;
+  background-color: black;
+  border: none;
+}
+
+.form-inline {
+  display: inline-block;
+  width: 80%;
 }
 
 .sidenav .mat-toolbar {
@@ -31,6 +49,7 @@
   top: 0;
   z-index: 1;
   background-color: black;
+  width: 100%;
 }
 
 .hidden {

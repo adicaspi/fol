@@ -12,7 +12,11 @@
   >
     <div class="test">
       <mat-toolbar
-        ><button class="back-button" (click)="getValues('back')">
+        ><button
+          *ngIf="showBack"
+          class="back-button"
+          (click)="getValues('back')"
+        >
           BACK
         </button></mat-toolbar
       >
@@ -38,6 +42,16 @@
       </button>
       <div class="logo-drawer">
         <img src="../../../assets/fw_logo_white.png" />
+
+        <form class="form-inline">
+          <input
+            class="form-control "
+            type="search"
+            placeholder="search &#xF002;"
+            aria-label="Search"
+            id="navBarSearchForm"
+          />
+        </form>
       </div>
     </mat-toolbar>
     <ng-content></ng-content>

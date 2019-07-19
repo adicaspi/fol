@@ -10,6 +10,7 @@ import { FeedService } from '../../services/feed.service';
   styleUrls: ['./shopping-nav.component.css']
 })
 export class ShoppingNavComponent {
+  showBack: boolean = false;
   mainList = ['CATEGORIES', 'PRODUCT TYPE', 'DESIGNERS', 'STORES', 'PRICE'];
   originalList = {};
   Categories = ['CLOTHING', 'SHOES', 'BAGS', 'ACCESSORIES'];
@@ -58,11 +59,13 @@ export class ShoppingNavComponent {
   }
 
   getValues(key) {
-    console.log('im key', key);
     if (key === 'back') {
       this.mainList = this.getKeys();
+      this.showBack = false;
+    } else {
+      this.mainList = Object.values(this.originalList[key]);
+      this.showBack = true;
     }
-    this.mainList = Object.values(this.originalList[key]);
   }
 
   onOpen() {
