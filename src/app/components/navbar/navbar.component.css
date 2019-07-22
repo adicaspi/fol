@@ -37,7 +37,7 @@ img.logo {
 
 li.search {
   height: 48px;
-  width: 400px;
+  width: 320px;
   background-color: white;
   border: 1px solid #EBEBEB;
   border-radius: 4px;
@@ -126,7 +126,6 @@ li.explore:hover {
   border-radius: 50%;
   border: 2px solid rgba(128,128,128,0.25);
   cursor: pointer;
-  transition: border-color 200ms;
 }
 
 .profile:hover {
