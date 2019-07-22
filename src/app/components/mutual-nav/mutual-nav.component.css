@@ -18,20 +18,24 @@ div.center {
 .dropdown {
   position: relative;
   display: inline-block;
-  padding-bottom: 12px;
 }
 
 .dropbtn {
-  color: rgb(132,132,132);
+  display: inline-block;
+  color: rgb(72, 72, 72);
   cursor: pointer;
-  margin-right: 24px;
-  font-family: Roboto, sans-serif !important;
+  margin-right: 16px;
+  margin-bottom: 12px;
   font-size: 14px;
-  transition: 200ms;
+  transition: color 200ms, border-color 200ms, background-color 200ms;
+  padding: 5px 16px;
+  border: 1px solid rgb(220, 224, 224);
+  border-radius: 30px;
 }
 
 .dropbtn:hover {
-  color: black;
+  color: #333;
+  border-color: #333;
 }
 
 .dropdown-content {
