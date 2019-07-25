@@ -43,7 +43,16 @@ button.mat-button {
   margin-right: 10px;
 }
 
-#description {
+.card-text-description-rtl {
+  font-family: 'Maven Pro';
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 30px;
+  float: right;
+  clear: both;
+}
+
+.card-text-description-ltr {
   font-family: 'Maven Pro';
   margin-top: 10px;
   margin-bottom: 10px;
@@ -79,7 +88,12 @@ button.shop_btn {
   font-size: 25px;
 }
 
-img.store-logo {
+img.store-logo-rtl {
+  width: 150px;
+  float: right;
+}
+
+img.store-logo-ltr {
   width: 120px;
 }
 

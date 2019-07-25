@@ -23,6 +23,7 @@ export class ProductPageMobileComponent implements OnInit {
   postInfo: PostInfo;
   thumbnails = [];
   onDestroy: Subject<void> = new Subject<void>();
+  rtl: boolean = false;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   constructor(
     private dialogService: DialogService,
@@ -59,14 +60,17 @@ export class ProductPageMobileComponent implements OnInit {
           case 'www.terminalx.com':
             this.postInfo.website_logo = '../../../assets/terminalx.PNG';
             this.postInfo.currency = 'ils';
+            this.rtl = true;
             break;
           case 'www.zara.com':
             this.postInfo.website_logo = '../../../assets/zara.PNG';
             this.postInfo.currency = 'ils';
+            this.rtl = true;
             break;
           case 'www.adikastyle.com':
             this.postInfo.website_logo = '../../../assets/adika.PNG';
             this.postInfo.currency = 'ils';
+            this.rtl = true;
             break;
           case 'www.asos.com':
             this.postInfo.website_logo = '../../../assets/asos.PNG';

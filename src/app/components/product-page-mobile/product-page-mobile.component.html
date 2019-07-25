@@ -9,14 +9,22 @@
 
   <div class="product-upper-description">
     <div class="card-text title">
-      <img [attr.src]="postInfo.website_logo" class="store-logo" />
+      <img
+        [attr.src]="postInfo.website_logo"
+        [ngClass]="rtl ? 'store-logo-rtl' : 'store-logo-ltr'"
+      />
     </div>
-    <p id="description" class="card-text description">
-      {{ postInfo.description }}
-    </p>
   </div>
   <img id="mainImage" [attr.src]="userPost.postImgSrc" />
   <div class="product-description">
+    <p
+      id="description"
+      [ngClass]="
+        rtl ? 'card-text-description-rtl' : 'card-text-description-ltr'
+      "
+    >
+      {{ postInfo.description }}
+    </p>
     <div class="footer">
       <span *ngIf="postInfo.currency == 'ils'" class="price">
         <!-- <i class="fal fa-shekel-sign"></i> -->
