@@ -11,7 +11,7 @@ nav {
   height: 80px;
   margin: auto;
   padding: 0;
-  width: 1025px;
+  width: 1015px;
 }
 
 li {
@@ -37,18 +37,17 @@ img.logo {
 
 li.search {
   height: 48px;
-  width: 340px;
-  background-color: white;
+  width: 360px;
+  background-color: rgb(234,234,234);
   border: 1px solid #EBEBEB;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 30px;
   display: inline-block;
 
   transition: box-shadow 200ms ease-in !important
 }
 
 li.search:hover {
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.16);
+  box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
 }
 
 form {
@@ -99,6 +98,7 @@ div.input-container {
   font-size: 17px;
   font-weight: 600;
   color: #333;
+  background-color: rgb(234,234,234);
 }
 
 li.explore {
