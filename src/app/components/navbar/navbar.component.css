@@ -38,16 +38,17 @@ img.logo {
 li.search {
   height: 48px;
   width: 360px;
-  background-color: rgb(234,234,234);
-  border: 1px solid #EBEBEB;
+  background-color: rgb(241,241,241);
+  border: 1px solid #e6e6e6;
   border-radius: 30px;
   display: inline-block;
 
-  transition: box-shadow 200ms ease-in !important
+  transition: box-shadow 200ms, background-color 200ms ease-in !important
 }
 
-li.search:hover {
+li.search:focus {
   box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
+  background-color: white;
 }
 
 form {
@@ -98,7 +99,7 @@ div.input-container {
   font-size: 17px;
   font-weight: 600;
   color: #333;
-  background-color: rgb(234,234,234);
+  background-color: transparent;
 }
 
 li.explore {
