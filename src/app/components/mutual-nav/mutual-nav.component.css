@@ -22,15 +22,15 @@ div.center {
 
 .dropbtn {
   display: inline-block;
-  color: rgb(112, 112, 112);
+  color: rgb(140, 140, 140);
   cursor: pointer;
   margin-right: 16px;
   margin-bottom: 12px;
   font-size: 14px;
-  transition: color 200ms, border-color 200ms, background-color 200ms;
+  transition: color 200ms;
   padding: 5px 16px;
-  /* border: 1px solid rgb(220, 224, 224); */
   border-radius: 30px;
+  font-weight: 500;
 }
 
 .dropbtn:hover {
