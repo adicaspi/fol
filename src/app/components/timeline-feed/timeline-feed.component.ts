@@ -40,7 +40,7 @@ export class TimelineFeedComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.userService.getCurrentUser();
-    this.id = 655;
+    //this.id = 655;
     this.generateTimelineFeed(0, this.id);
   }
 

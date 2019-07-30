@@ -34,7 +34,6 @@ export class UserFeedComponent implements OnInit {
   constructor(
     private feedService: FeedService,
     private activatedRoute: ActivatedRoute,
-    private postService: PostService,
     private dialogService: DialogService,
     private deviceService: DeviceDetectorService,
     private router: Router

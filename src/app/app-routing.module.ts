@@ -29,6 +29,10 @@ const routes: Routes = [
   },
   {
     path: '',
+    component: ViewFeedComponent
+  },
+  {
+    path: 'landing',
     component: LandingPageComponent
   },
   { path: 'forgotpassword', component: ForgotPasswordComponent },

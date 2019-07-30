@@ -30,7 +30,6 @@
 
 .product-description {
   float: right;
-  margin-top: 20px;
 }
 
 button.mat-button {
@@ -91,10 +90,12 @@ button.shop_btn {
 img.store-logo-rtl {
   width: 150px;
   float: right;
+  margin-bottom: 10px;
 }
 
 img.store-logo-ltr {
   width: 120px;
+  margin-bottom: 10px;
 }
 
 .thumbnails {

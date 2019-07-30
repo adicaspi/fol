@@ -28,9 +28,7 @@ export class LandingPageComponent implements OnInit {
   ) {}
   // 'use strict';
 
-  ngOnInit() {
-    this.loadConfigurationData();
-  }
+  ngOnInit() {}
 
   registerPage() {
     this.dialogService.openDialog(LoginComponent);
