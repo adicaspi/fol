@@ -7,11 +7,43 @@ body {
   height: 100%;
 }
 
-.fw-dialog-class .mat-dialog-container {
-  padding: 0px;
-  border-radius: 4px;
+.mat-dialog-container {
+  border-radius: 0px !important;
+  padding: 10px !important;
+}
+
+.cdk-global-overlay-wrapper::before {
+  content: '';
+  display: block;
+  border-radius: 0px;
+  white-space: nowrap;
+  height: 8%;
+}
+
+.cdk-global-overlay-wrapper {
+  pointer-events: auto;
+  display: block;
+  position: relative;
+  overflow: auto;
+  text-align: center;
+}
+
+.cdk-global-overlay-wrapper::after {
+  content: '';
+  display: block;
+  border-radius: 0px;
+  white-space: nowrap;
+  height: 8%;
+}
+
+.cdk-overlay-pane {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  white-space: normal;
 }
 
 .cdk-overlay-backdrop {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
 }

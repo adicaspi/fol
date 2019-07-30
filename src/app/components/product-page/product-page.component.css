@@ -1,3 +1,11 @@
+* {
+  overflow: hidden;
+}
+
+.mat-dialog-container {
+  border-radius: 0px;
+}
+
 @media (max-width: 600px) {
   .wrapper {
     height: 430px;
@@ -25,7 +33,8 @@
   }
 
   #mainImage {
-    width: 200px;
+    /* width: 200px; */
+    width: 40%;
     height: 250px;
     border: solid 0.8px;
     border-color: lightgray;
@@ -37,12 +46,13 @@
     margin-bottom: 20px;
   }
 
-  .product-description {
-    width: 100%;
+  /* .product-description {
+    width: 400px;
+     width: 55%;
     float: center;
     clear: right;
     margin-top: 10px;
-  }
+  } */
 
   .footer {
     margin-top: 20px;
@@ -124,14 +134,17 @@
   .wrapper {
     padding: 30px;
     height: 100%;
-    overflow: scroll;
+    /* overflow-x: hidden;
+    overflow-y: scroll; */
   }
 
   i.fal.fa-times {
     font-size: 24px;
     position: absolute;
-    right: 0;
-    top: 0;
+    color: white;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
   }
 
   .slider {
@@ -161,8 +174,9 @@
   }
 
   #mainImage {
-    width: 280px;
-    height: 410px;
+    /* width: 280px; */
+    width: 40%;
+    height: 350px;
     object-fit: cover;
     display: inline-block;
     border-radius: 20px;
@@ -175,23 +189,24 @@
   }
 
   .product-upper-description {
-    width: 400px;
+    /* width: 400px; */
+    width: 55%;
     float: right;
     clear: right;
     display: inline-block;
   }
-
+  /* 
   .product-description {
-    width: 400px;
+    width: 55%;
     display: inline-block;
     position: absolute;
     top: 70px;
-    margin-left: 50px;
+    margin-left: 10px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       'Helvetica Neue' Helvetica, Arial, sans-serif;
     font-size: 24px;
     color: #333;
-  }
+  } */
 
   /* .product-description {
     width: 400px;
@@ -211,7 +226,6 @@
 
   .footer {
     margin-top: 20px;
-    margin-left: -7px;
   }
 
   span.price {

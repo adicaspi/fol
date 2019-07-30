@@ -21,7 +21,7 @@ export class ProductPageComponent implements OnInit {
   userPost: UserPost;
   postInfo: PostInfo;
   timelinePost: TimelinePost;
-  posts = [];
+  website_logo: string;
   postsToShow = [];
   user: User;
   mainImageSrc: any;
@@ -46,7 +46,8 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('800px', '625px');
+    this.dialogRef.updateSize('750px');
+    console.log('im diabsle close', this.dialogRef.disableClose);
     this.userProfileSrc = '../../../assets/placeholder.png';
 
     this.userService
@@ -80,6 +81,7 @@ export class ProductPageComponent implements OnInit {
             this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail2
           );
         }
+        this.setWebsiteLogo(postInfo.website);
       });
   }
 
@@ -89,28 +91,79 @@ export class ProductPageComponent implements OnInit {
       .toPromise()
       .then(result => {
         let len = result.length;
-        var i;
-        for (i = 0; i < 3; i++) {
-          let varNum = Math.floor(Math.random() * (len + 1));
-          this.posts.push(result[varNum]);
+        var i = Math.min(3, len);
+        var arr = [];
+        while (arr.length < i) {
+          var r = Math.floor(Math.random() * len);
+          if (arr.indexOf(r) === -1) arr.push(r);
         }
-        this.posts.forEach(post => {
+        arr.forEach(index => {
+          console.log('inside foreach res', result[index]);
           let baseAPI = this.baseApiUrl + '/image?s3key=';
           let postObject = {
-            post: post,
-            imgSrc: baseAPI + post.postImageAddr
+            post: result[index],
+            imgSrc: baseAPI + result[index].postImageAddr
           };
           this.postsToShow.push(postObject);
         });
       });
   }
 
+  setImage(image) {
+    var mainImageElement = $('#mainImage');
+    mainImageElement.attr('src', image);
+    var description = $('#description');
+    description.text(this.userPost['post']['description']);
+    var link = $('#link');
+    link.attr('href', this.userPost['post']['link']);
+    this.setWebsiteLogo(this.userPost['post']['website']);
+    var price = $('span.price');
+    price.text(this.userPost['post']['price']);
+  }
+
   setImageAndText(post) {
     var mainImageElement = $('#mainImage');
     mainImageElement.attr('src', post['imgSrc']);
     var description = $('#description');
+    description.text(post['post']['description']);
+    var link = $('#link');
+    link.attr('href', post['post']['link']);
+    this.setWebsiteLogo(post['post']['website']);
+    var price = $('span.price');
+    price.text(post['post']['price']);
+  }
 
-    description.text('im nex text');
+  setWebsiteLogo(website) {
+    console.log('inside set website logo', website);
+    switch (website) {
+      case 'www.terminalx.com':
+        this.website_logo = '../../../assets/terminalx.PNG';
+        this.postInfo.currency = 'ils';
+        //this.rtl = true;
+        break;
+      case 'www.zara.com':
+        this.website_logo = '../../../assets/zara.PNG';
+        this.postInfo.currency = 'ils';
+        //this.rtl = true;
+        break;
+      case 'www.adikastyle.com':
+        this.website_logo = '../../../assets/adika.PNG';
+        this.postInfo.currency = 'ils';
+        //this.rtl = true;
+        break;
+      case 'www.asos.com':
+        this.website_logo = '../../../assets/asos.PNG';
+        this.postInfo.currency = 'usd';
+        break;
+      case 'www.farfetch.com':
+        this.website_logo = '../../../assets/farfetch.PNG';
+        this.postInfo.currency = 'usd';
+        break;
+      case 'www.shein.com':
+        this.website_logo = '../../../assets/shein.PNG';
+        this.postInfo.currency = 'usd';
+        break;
+    }
   }
 
   closeModal() {
