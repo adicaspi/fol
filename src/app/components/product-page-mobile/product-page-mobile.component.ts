@@ -55,7 +55,7 @@ export class ProductPageMobileComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
-        console.log('post info', this.postInfo);
+
         switch (this.postInfo.website) {
           case 'www.terminalx.com':
             this.postInfo.website_logo = '../../../assets/terminalx.PNG';
