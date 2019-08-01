@@ -11,7 +11,7 @@ nav {
   height: 80px;
   margin: auto;
   padding: 0;
-  width: 1015px;
+  width: 1040px;
 }
 
 li {
@@ -30,7 +30,7 @@ div.center-container {
 }
 
 img.logo {
-  height: 24px;
+  height: 30px;
   padding-right: 24px;
   cursor: pointer;
 }
