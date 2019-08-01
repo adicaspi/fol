@@ -8,24 +8,31 @@ body {
 }
 
 .mat-dialog-container {
-  border-radius: 0px !important;
-  padding: 10px !important;
+  border-radius: 4px !important;
+  padding: 0px !important;
 }
+
+/* .cdk-global-overlay-wrapper {
+  pointer-events: auto;
+  display: block;
+  position: relative;
+  overflow: auto;
+  text-align: center;
+} */
+
+.cdk-overlay-pane {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  white-space: normal;
+} 
 
 .cdk-global-overlay-wrapper::before {
   content: '';
   display: block;
   border-radius: 0px;
   white-space: nowrap;
-  height: 8%;
-}
-
-.cdk-global-overlay-wrapper {
-  pointer-events: auto;
-  display: block;
-  position: relative;
-  overflow: auto;
-  text-align: center;
+  min-height: 8%;
 }
 
 .cdk-global-overlay-wrapper::after {
@@ -33,17 +40,10 @@ body {
   display: block;
   border-radius: 0px;
   white-space: nowrap;
-  height: 8%;
-}
-
-.cdk-overlay-pane {
-  display: inline-block;
-  position: relative;
-  text-align: left;
-  white-space: normal;
+  min-height: 8%;
 }
 
 .cdk-overlay-backdrop {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   overflow: hidden;
 }

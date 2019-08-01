@@ -1,12 +1,13 @@
 <div id="main">
   <div class="container">
-    <div class="img-comp" *ngIf="user">
-      <img [attr.src]="userProfileImageSrc" />
+    <div *ngIf="userProfileImageSrc" class="img-comp">
+      <img [attr.src]="userProfileImageSrc[0]['postImgSrc']" />
     </div>
 
-    <div class="description">
+    <div *ngIf="user | async" class="description">
       <div class="upper-description-div">
         <div class="user-name">{{ user.username }}</div>
+
         <button type="button" class="button-follow" (click)="follow()">
           {{ follows ? 'unfollow' : 'follow' }}
         </button>

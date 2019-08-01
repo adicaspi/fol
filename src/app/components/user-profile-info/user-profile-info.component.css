@@ -20,52 +20,6 @@
   height: 200px;
 }
 
-@media (max-width: 600px) {
-  .simple-button {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    /* margin-right: 10px; */
-  }
-  .simple-button-metrics {
-    padding: 0;
-
-    color: black;
-    border: none;
-    background: none;
-  }
-
-  .simple-button-metrics.first,
-  .simple-button-metrics.second {
-    padding-right: 10px;
-  }
-
-  .button-follow {
-    float: right;
-    background-color: #ff1493;
-    color: white;
-    border: none;
-  }
-
-  .upper-description-div {
-    width: 250px;
-  }
-
-  .description {
-    margin-top: 10%;
-    margin-left: 10%;
-  }
-
-  .user-name {
-    width: 100px;
-    display: inline-block;
-  }
-}
-
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 990px), only screen and (min-width: 768px) {
   .simple-button {

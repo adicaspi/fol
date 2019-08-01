@@ -2,6 +2,19 @@
   box-sizing: border-box;
 }
 
+/* force scrollbar */
+/* html {
+  overflow-y: scroll;
+  background-color: #f9f9f9;
+}
+
+body {
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+} */
+
 .center {
   margin-left: 0;
   margin-right: 0;
@@ -26,6 +39,18 @@ ngxMasonryItem:nth-of-type(5n) {
   border-radius: 10px;
 }
 
+/* .card {
+  margin: 20px;
+  border: none;
+  border-radius: 10px;
+  opacity: 1;
+  transition: 0.5s ease;
+} */
+
+/* .card:hover {
+  opacity: 0.1;
+} */
+
 .description {
   width: 200px;
   margin-top: 5px;
@@ -34,22 +59,18 @@ ngxMasonryItem:nth-of-type(5n) {
   font-size: 13px;
 }
 
-@media (max-width: 600px) {
-  .center {
-    margin-left: 5%;
+@media (min-width: 360px) and (max-width: 376px) {
+  body {
+    font-family: sans-serif;
     background-color: #f9f9f9;
   }
-  .description {
-    font-size: 10px;
-    width: initial;
-    width: 150px;
+
+  .masonry-item {
+    width: 50%;
+    border-radius: 10px;
   }
 
-  .masonry-item img {
-    width: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    object-fit: cover;
+  .description {
+    font-size: 10px;
   }
 }

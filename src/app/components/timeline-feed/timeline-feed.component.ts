@@ -9,7 +9,6 @@ import { DialogService } from '../../services/dialog.service';
 import { ProductPageComponent } from '../product-page/product-page.component';
 import { GlobalVariable } from '../../../global';
 import { Router } from '../../../../node_modules/@angular/router';
-import { DeviceDetectorService } from '../../../../node_modules/ngx-device-detector';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -34,13 +33,12 @@ export class TimelineFeedComponent implements OnInit {
     private userService: UserService,
     private feedService: FeedService,
     private dialogService: DialogService,
-    private deviceService: DeviceDetectorService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.id = this.userService.getCurrentUser();
-    //this.id = 655;
+    this.id = 655;
     this.generateTimelineFeed(0, this.id);
   }
 
@@ -69,13 +67,7 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    if (this.deviceService.isDesktop()) {
-      this.dialogService.openDialog(ProductPageComponent, post);
-    } else {
-      this.dialogService.userPost = post;
-      this.dialogService.directingPage = 'feed';
-      this.router.navigate(['product-page']);
-    }
+    this.dialogService.openDialog(ProductPageComponent, post);
   }
 
   public ngOnDestroy(): void {
