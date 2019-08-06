@@ -37,7 +37,7 @@ body {
 .cdk-global-overlay-wrapper::before {
   content: '';
   display: block;
-  height: 5%;
+  height: 40px;
 }
 
 .cdk-global-overlay-wrapper {
@@ -45,14 +45,20 @@ body {
   position: relative;
   text-align: center;
 }
-*/ .cdk-overlay-pane {
+
+.cdk-global-overlay-wrapper::before {
+  content: '';
+  display: block;
+  height: 40px;
+}
+.cdk-overlay-pane {
   display: inline-block;
   position: relative;
   text-align: left;
   white-space: normal;
 }
 
-.cdk-global-overlay-wrapper::before {
+.cdk-global-overlay-wrapper::after {
   content: '';
   display: block;
   height: 5%;
