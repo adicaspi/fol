@@ -24,12 +24,14 @@ body {
 } */
 
 .overlay-product .mat-dialog-container {
-  border-radius: 0px !important;
-  padding: 10px !important;
+  border-radius: 4px !important;
+  padding: 0px !important;
+  width: 800px !important;
+  height: 625px !important;
 }
 
 .cdk-overlay-container > .cdk-overlay-backdrop {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
 }
 .cdk-global-overlay-wrapper::before {
@@ -61,5 +63,5 @@ body {
   position: relative;
   text-align: left;
   white-space: normal;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
 }

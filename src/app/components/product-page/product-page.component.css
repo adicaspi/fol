@@ -101,6 +101,10 @@
     cursor: pointer;
   }
 
+  .fal {
+    display: none;
+  }
+
   .slider {
     position: relative;
   }
