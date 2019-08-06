@@ -1,46 +1,44 @@
 img {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: inline-block;
 }
 
 .img-comp {
-  line-height: 50px;
+  line-height: 30px;
+  display: inline-block;
 }
 
 .username {
   display: inline-block;
-  line-height: 50px;
-  margin-left: 15px;
-}
-
-.card {
-  width: 20px;
-  height: 80px;
-  overflow: hidden;
+  line-height: 30px;
+  margin-left: 5px;
+  width: 80%;
 }
 
 .follower-button {
-  line-height: 50px;
+  float: right;
 }
 
-.follower-button button {
+.btn-follower {
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: center;
+  vertical-align: middle;
   width: 80px;
   background-color: black;
   border: none;
   outline: 0;
+  border-radius: 4px;
 }
 
-.card {
+.fol-card {
   list-style: none;
   width: 300px;
-  height: 60px;
+  height: 40px;
   border: none;
-}
-
-.row {
-  margin: 0;
 }
 
 .btn.active.focus,
@@ -54,4 +52,12 @@ img {
   background-image: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+}
+
+.close {
+  float: left;
+}
+
+.mat-dialog-title {
+  text-align: center;
 }

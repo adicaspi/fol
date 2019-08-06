@@ -20,6 +20,7 @@ export class GenerateFollowListComponent implements OnInit {
   id: number;
   offset: number;
   flag: number;
+  dialogTitle: String;
   onDestroy: Subject<void> = new Subject<void>();
   postsToShow = [];
   showSpinner: boolean = true;
@@ -35,6 +36,7 @@ export class GenerateFollowListComponent implements OnInit {
     this.flag = this.data.flag;
     this.id = this.data.id;
     this.generateFollowsFeed(0);
+    this.dialogTitle = this.data.title;
   }
 
   private processData = followsFeed => {
@@ -69,6 +71,10 @@ export class GenerateFollowListComponent implements OnInit {
       //this.userService.follow(item['post']['id']);
       item['post']['follows'] = true;
     }
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 
   public ngOnDestroy(): void {
