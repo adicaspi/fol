@@ -20,7 +20,7 @@ export class XsrfInterceptorComponent implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const headerName = 'X-XSRF-TOKEN';
     let token = this.tokenExtractor.getToken() as string;
-    console.log('in xsrf', token);
+
     if (token !== null && req.method == 'POST') {
       req = req.clone({ headers: req.headers.set(headerName, token) });
     }

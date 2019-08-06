@@ -7,33 +7,47 @@ body {
   height: 100%;
 }
 
-.mat-dialog-container {
+.cdk-overlay-container {
+  overflow-y: scroll !important;
+  pointer-events: auto !important;
+}
+
+.overlay-fol-list .mat-dialog-container {
+  border-radius: 2px !important;
+  padding: 10px !important;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+/* .following-list > .mat-dialog-container {
+  overflow: hidden !important;
+} */
+
+.overlay-product .mat-dialog-container {
   border-radius: 0px !important;
   padding: 10px !important;
 }
 
+.cdk-overlay-container > .cdk-overlay-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+}
 .cdk-global-overlay-wrapper::before {
   content: '';
   display: block;
-  border-radius: 0px;
-  white-space: nowrap;
-  height: 8%;
+  height: 5%;
 }
 
 .cdk-global-overlay-wrapper {
-  pointer-events: auto;
   display: block;
   position: relative;
-  overflow: auto;
   text-align: center;
 }
 
 .cdk-global-overlay-wrapper::after {
   content: '';
   display: block;
-  border-radius: 0px;
-  white-space: nowrap;
-  height: 8%;
+  height: 5%;
 }
 
 .cdk-overlay-pane {
@@ -41,9 +55,5 @@ body {
   position: relative;
   text-align: left;
   white-space: normal;
-}
-
-.cdk-overlay-backdrop {
   background-color: rgba(0, 0, 0, 0.7);
-  overflow: hidden;
 }

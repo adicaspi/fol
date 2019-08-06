@@ -1,5 +1,5 @@
 <div id="main-body">
-  <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
+  <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
     <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
       <div class="masonry-img">
         <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />

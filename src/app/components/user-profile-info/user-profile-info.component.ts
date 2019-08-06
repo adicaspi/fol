@@ -85,13 +85,22 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   openDialog(flag): void {
+    var title;
+    if (flag) {
+      title = 'Followears';
+    } else {
+      title = 'Following';
+    }
+
     const dialogRef = this.dialog.open(GenerateFollowListComponent, {
-      width: '350px',
-      height: '250px',
+      width: '320px',
+      height: '50%',
       data: {
         flag: flag,
-        id: this.masterId
-      }
+        id: this.masterId,
+        title: title
+      },
+      panelClass: 'overlay-fol-list'
     });
 
     // dialogRef.afterClosed().subscribe(result => {
