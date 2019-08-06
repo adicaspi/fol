@@ -1,186 +1,10 @@
-.wrapper {
-  padding: 30px;
-  height: 100%;
-  overflow: hidden;
-}
-
-i.fal.fa-times {
-  font-size: 24px;
-  position: absolute;
-  color: white;
-  right: 15px;
-  top: 10px;
-  cursor: pointer;
-}
-
-.slider {
-  position: relative;
-}
-
-.profile-img-comp {
-  margin-top: -10px;
-  margin-bottom: 28px;
-  margin-left: 3px;
-}
-
-#profileImage {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-}
-
-.card-text.profile {
-  display: inline-block;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 26px;
-  color: rgb(47, 46, 46);
-  padding-left: 16px;
-  vertical-align: middle;
-}
-
-#mainImage {
-  width: 280px;
-  /* width: 40%; */
-  height: 350px;
-  object-fit: cover;
-  display: inline-block;
-  border-radius: 20px;
-}
-
-.store-logo {
-  width: 80px;
-  height: 30px;
-  margin-bottom: 10px;
-}
-
-.product-upper-description {
-  /* width: 400px; */
-  width: 55%;
-  float: right;
-  clear: right;
-  display: inline-block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue' Helvetica, Arial, sans-serif;
-}
-/* 
-  .product-description {
-    width: 55%;
-    display: inline-block;
-    position: absolute;
-    top: 70px;
-    margin-left: 10px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      'Helvetica Neue' Helvetica, Arial, sans-serif;
-    font-size: 24px;
-    color: #333;
-  } */
-
-/* .product-description {
-    width: 400px;
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    margin-left: 50px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      'Helvetica Neue' Helvetica, Arial, sans-serif;
-    font-size: 24px;
-    color: #333;
-  } */
-
-#description {
-  vertical-align: top;
-}
-
-.footer {
-  margin-top: 20px;
-}
-
-span.price {
-  position: absolute;
-  right: 10px;
-  line-height: 68px;
-  color: rgb(114, 114, 114);
-  font-size: 22px;
-  font-family: sans-serif;
-}
-
-button.shop_btn {
-  background-color: rgb(40, 192, 94);
-  color: white;
-  border-radius: 50px;
-  width: 105px;
-  height: 60px;
-  border: none;
-  font-size: 22px;
-  outline: none;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-}
-
-.lower-part {
-  position: relative;
-}
-
-.thumbnails {
-  margin-top: 18px;
-  display: inline-block;
-}
-
-img.thumbnail {
-  width: 54px;
-  height: 72px;
-  margin-right: 16px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.more-from-user {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-}
-
-.more-text {
-  margin-bottom: 6px;
-  font-size: 18px;
-  font-weight: 400;
-  color: black;
-}
-
-img.more-from:last-of-type {
-  margin-right: 0px;
-}
-
-img.more-from {
-  height: 120px;
-  width: 90px;
-  object-fit: cover;
-  margin-right: 10px;
-  border-radius: 6px;
-}
-
-.material-icons {
-  color: rgb(166, 166, 166);
-  font-size: 40px;
-}
-
-@media (max-width: 600px) {
+@media (min-width: 360px) and (max-width: 376px) {
   .wrapper {
     height: 430px;
   }
 
-  i.fa.fa-close {
-    float: right;
-    font-size: 24px;
-  }
-
-  .slider {
-    position: relative;
-    margin-left: 20px;
+  .lower-part {
+    display: none;
   }
 
   #profileImage {
@@ -190,34 +14,18 @@ img.more-from {
     margin-top: 0;
   }
 
-  .profile-img-comp {
-    margin-left: 20px;
-  }
-
   #mainImage {
-    /* width: 200px; */
-    width: 40%;
+    width: 200px;
     height: 250px;
     border: solid 0.8px;
     border-color: lightgray;
   }
 
-  .product-upper-description {
-    width: 100%;
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-
-  /* .product-description {
-    width: 400px;
-     width: 55%;
+  .product-description {
+    width: 250px;
     float: center;
     clear: right;
     margin-top: 10px;
-  } */
-
-  .footer {
-    margin-top: 20px;
   }
 
   button.mat-button {
@@ -247,6 +55,14 @@ img.more-from {
     font-size: 16px;
   }
 
+  .more-from-user {
+    display: none;
+  }
+
+  .more-text {
+    font-weight: 500;
+  }
+
   button.shop_btn {
     background-color: rgb(255, 140, 0);
     color: white;
@@ -263,6 +79,118 @@ img.more-from {
     height: 20px;
   }
 
+  .users-additional {
+    height: 90px;
+    width: 80px;
+  }
+}
+
+/* @media (min-width: 900px) { */
+@media (min-width: 900px) {
+  .wrapper {
+    padding: 30px;
+    height: 100%;
+  }
+
+  i.fal.fa-times {
+    font-size: 24px;
+    position: absolute;
+    color: white;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+  }
+
+  .slider {
+    position: relative;
+  }
+
+  .profile-img-comp {
+    margin-top: -10px;
+    margin-bottom: 28px;
+    margin-left: 3px;
+  }
+
+  #profileImage {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+
+  .card-text.profile {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    color: rgb(47, 46, 46);
+    padding-left: 16px;
+    vertical-align: middle;
+  }
+
+  #mainImage {
+    width: 280px;
+    height: 410px;
+    object-fit: cover;
+    display: inline-block;
+    border-radius: 20px;
+  }
+
+  .store-logo {
+    width: 80px;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  .product-description {
+    width: 400px;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    margin-left: 50px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue' Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    color: #333;
+  }
+
+  #description {
+    vertical-align: top;
+  }
+
+  .footer {
+    margin-top: 20px;
+    margin-left: -7px;
+  }
+
+  span.price {
+    position: absolute;
+    right: 10px;
+    line-height: 68px;
+    color: rgb(114, 114, 114);
+    font-size: 22px;
+    font-family: sans-serif;
+  }
+
+  button.shop_btn {
+    background-color: rgb(40, 192, 94);
+    color: white;
+    border-radius: 50px;
+    width: 105px;
+    height: 60px;
+    border: none;
+    font-size: 22px;
+    outline: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .lower-part {
+    position: relative;
+  }
+
   .thumbnails {
     margin-top: 18px;
     display: inline-block;
@@ -277,19 +205,33 @@ img.more-from {
   }
 
   .more-from-user {
-    display: none;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+  }
+
+  .more-text {
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+  }
+
+  img.more-from:last-of-type {
+    margin-right: 0px;
+  }
+
+  img.more-from {
+    height: 120px;
+    width: 90px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 6px;
   }
 
   .material-icons {
     color: rgb(166, 166, 166);
     font-size: 40px;
   }
-
-  span.price {
-    float: right;
-    margin-right: 20px;
-  }
 }
-
-/* @media (min-width: 900px) { */
 /* } */

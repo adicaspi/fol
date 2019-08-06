@@ -3,6 +3,7 @@
   padding-right: 0px;
   padding-left: 0px;
   overflow: visible;
+  margin-top: -14px;
 }
 
 .center {
@@ -84,7 +85,7 @@ span.price {
 }
 
 .card-text {
-  font-size: 12px;
+  font-size: 15px;
   height: 48px;
   width: 100%;
   margin-top: 14px;
@@ -96,56 +97,17 @@ span.price {
 @media (min-width: 576px) {
 }
 
-@media (max-width: 600px) {
+@media (min-width: 360px) and (max-width: 376px) {
   .center {
     margin: auto;
     width: initial;
   }
 
-  .card-text {
-    font-size: 20px;
-  }
-
-  .masonry-img img {
-    width: 100%;
-    height: initial;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    border-radius: 5px;
-    object-fit: cover;
-  }
-
-  /* .card {
+  .card {
     width: 400px;
     margin-top: 39px;
     border: none;
     border-radius: 20px;
     display: inline-block;
-  } */
-
-  .card {
-    width: 100%;
-    margin-top: 39px;
-    border: none;
-    border-radius: 20px;
-    display: inline-block;
-  }
-
-  .description {
-    font-size: 20px;
-  }
-
-  a.store.text-right {
-    float: right;
-    clear: right;
-    text-decoration: underline;
-    margin-right: 5%;
-    font-size: 20px;
-  }
-
-  span.price {
-    margin-left: 5%;
-    font-size: 20px;
   }
 }
