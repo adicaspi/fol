@@ -11,6 +11,7 @@ import * as $ from 'jquery';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-product-page',
@@ -37,17 +38,16 @@ export class ProductPageComponent implements OnInit {
     private userService: UserService,
     private feedService: FeedService,
     private postService: PostService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<ProductPageComponent>
+    private dialogRef: MatDialogRef<ProductPageComponent>,
+    private dialogService: DialogService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.userPost = this.data;
-
     this.postImageAddr = this.userPost.postImageAddr;
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('750px');
-    console.log('im diabsle close', this.dialogRef.disableClose);
+    this.dialogRef.updateSize('750px', '625px');
     this.userProfileSrc = '../../../assets/placeholder.png';
 
     this.userService
@@ -58,8 +58,8 @@ export class ProductPageComponent implements OnInit {
         this.userProfileSrc =
           this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
       });
-    this.getMoreFromUser(this.userPost['post']['userId']);
     this.getPostInfo();
+    this.getMoreFromUser(this.userPost['post']['userId']);
   }
 
   getPostInfo() {
@@ -98,13 +98,13 @@ export class ProductPageComponent implements OnInit {
           if (arr.indexOf(r) === -1) arr.push(r);
         }
         arr.forEach(index => {
-          console.log('inside foreach res', result[index]);
           let baseAPI = this.baseApiUrl + '/image?s3key=';
           let postObject = {
             post: result[index],
-            imgSrc: baseAPI + result[index].postImageAddr
+            postImgSrc: baseAPI + result[index].postImageAddr
           };
           this.postsToShow.push(postObject);
+          this.showSpinner = false;
         });
       });
   }
@@ -122,19 +122,15 @@ export class ProductPageComponent implements OnInit {
   }
 
   setImageAndText(post) {
-    var mainImageElement = $('#mainImage');
-    mainImageElement.attr('src', post['imgSrc']);
-    var description = $('#description');
-    description.text(post['post']['description']);
-    var link = $('#link');
-    link.attr('href', post['post']['link']);
-    this.setWebsiteLogo(post['post']['website']);
-    var price = $('span.price');
-    price.text(post['post']['price']);
+    this.dialogRef.close();
+    this.openDialog(post);
+  }
+
+  openDialog(post): void {
+    this.dialogService.openDialog(ProductPageComponent, post);
   }
 
   setWebsiteLogo(website) {
-    console.log('inside set website logo', website);
     switch (website) {
       case 'www.terminalx.com':
         this.website_logo = '../../../assets/terminalx.PNG';
@@ -169,6 +165,7 @@ export class ProductPageComponent implements OnInit {
   closeModal() {
     this.dialogRef.close();
   }
+
   public ngOnDestroy(): void {
     this.onDestroy.next();
   }

@@ -1,3 +1,4 @@
+<!-- <app-loading-spinner class="spinner" *ngIf="showSpinner"></app-loading-spinner> -->
 <div *ngIf="user as currentUser" class="wrapper">
   <i (click)="closeModal()" class="fal fa-times"></i>
   <div class="profile-img-comp">
@@ -45,7 +46,7 @@
           <img
             *ngFor="let post of postsToShow"
             class="more-from"
-            [attr.src]="post['imgSrc']"
+            [attr.src]="post['postImgSrc']"
             (click)="setImageAndText(post)"
           />
         </div>
