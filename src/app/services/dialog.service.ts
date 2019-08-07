@@ -19,12 +19,11 @@ export class DialogService {
   constructor(public dialog: MatDialog, private overlay: Overlay) {}
 
   openDialog(component, data?): void {
-    
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
 
     //this.dialogConfig.scrollStrategy = scrollStrategy;
 
-    this.dialogConfig.autoFocus = true;
+    this.dialogConfig.autoFocus = false;
     this.dialogConfig.data = data;
     this.dialogConfig.closeOnNavigation = true;
     this.dialogConfig.panelClass = 'overlay-product';

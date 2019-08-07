@@ -1,6 +1,6 @@
 <!-- <app-loading-spinner class="spinner" *ngIf="showSpinner"></app-loading-spinner> -->
 <div *ngIf="user as currentUser" class="wrapper">
-  <i class="fal fa-time"></i>
+  <i (click)="closeModal()" class="fal fa-times"></i>
   <div class="profile-img-comp">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">{{ currentUser.username }}</div>

@@ -8,7 +8,7 @@ body {
 }
 
 .cdk-overlay-container {
-  overflow-y: scroll !important;
+  overflow-y: auto !important;
   pointer-events: auto !important;
 }
 
@@ -46,28 +46,16 @@ body {
   text-align: center;
 }
 
-.cdk-global-overlay-wrapper::before {
+.cdk-global-overlay-wrapper::after {
   content: '';
   display: block;
   height: 40px;
 }
-.cdk-overlay-pane {
-  display: inline-block;
-  position: relative;
-  text-align: left;
-  white-space: normal;
-}
-
-.cdk-global-overlay-wrapper::after {
-  content: '';
-  display: block;
-  height: 5%;
-}
 
 .cdk-overlay-pane {
   display: inline-block;
   position: relative;
   text-align: left;
   white-space: normal;
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
 }

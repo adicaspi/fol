@@ -47,6 +47,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('.cdk-overlay-container').scrollTop(0);
     this.dialogRef.updateSize('800px');
     this.userProfileSrc = '../../../assets/placeholder.png';
 
