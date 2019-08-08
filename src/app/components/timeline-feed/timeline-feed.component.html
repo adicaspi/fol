@@ -11,7 +11,16 @@
         </div>
 
         <div class="masonry-img">
-          <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
+          <img
+            (click)="openDialog(post)"
+            [attr.src]="post['postImgSrc']"
+            class="img-main"
+          />
+          <!-- <img
+            src="../../../assets/zara.PNG"
+            class="img-hover"
+            (click)="openDialog(post)"
+          /> -->
         </div>
 
         <div class="card-text">

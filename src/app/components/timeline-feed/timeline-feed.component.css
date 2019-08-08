@@ -46,7 +46,7 @@ ngxMasonryItem:nth-of-type(3n) {
   text-align: left;
 }
 
-.masonry-img img {
+.masonry-img .img-main {
   width: 197px;
   height: 295px;
   margin-left: auto;
@@ -55,6 +55,24 @@ ngxMasonryItem:nth-of-type(3n) {
   border-radius: 5px;
   object-fit: cover;
 }
+
+/* .masonry-img .img-hover {
+  display: none;
+} */
+
+/* .masonry-img:hover .img-hover {
+  width: 197px;
+  height: 295px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 5px;
+  object-fit: cover;
+} */
+
+/* .masonry-img:hover .img-main {
+  display: none;
+} */
 
 .description {
   text-align: center;
