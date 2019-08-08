@@ -8,6 +8,7 @@ import {
 import { UserPost } from '../models/UserPost';
 import { Overlay } from '@angular/cdk/overlay';
 import { ProductPageComponent } from '../components/product-page/product-page.component';
+import { LoginComponent } from '../components/login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,9 @@ export class DialogService {
   constructor(public dialog: MatDialog, private overlay: Overlay) {}
 
   openDialog(component, data?): void {
+    // if (component == 'LoginComponent') {
+    //   console.log('im comp');
+    // }
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
 
     //this.dialogConfig.scrollStrategy = scrollStrategy;
@@ -26,8 +30,11 @@ export class DialogService {
     this.dialogConfig.autoFocus = false;
     this.dialogConfig.data = data;
     this.dialogConfig.closeOnNavigation = true;
-    this.dialogConfig.panelClass = 'overlay-product';
-    this.dialogConfig.backdropClass = 'cdk-global-overlay-wrapper';
+    // if (component == "ProductPageComponen")
+    if (data) {
+      this.dialogConfig.panelClass = 'overlay-product';
+      this.dialogConfig.backdropClass = 'cdk-global-overlay-wrapper';
+    }
 
     const dialogRef = this.dialog.open(component, this.dialogConfig);
 
