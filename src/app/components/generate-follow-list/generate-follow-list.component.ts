@@ -51,8 +51,8 @@ export class GenerateFollowListComponent implements OnInit {
           imgSrc: baseAPI + follower.profileImageAddr
         };
         this.postsToShow.push(postObject);
-        this.showSpinner = false;
       });
+      this.showSpinner = false;
     });
   };
 

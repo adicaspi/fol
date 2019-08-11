@@ -1,30 +1,35 @@
-<!-- <app-loading-spinner class="spinner" *ngIf="showSpinner"></app-loading-spinner> -->
-<div class="title">
-  <h2 mat-dialog-title>{{ dialogTitle }}</h2>
-  <i (click)="closeModal()" class="fal fa-times"></i>
-</div>
-<div class="wrapper">
-  <mat-dialog-content>
-    <div class="fol-card" *ngFor="let item of postsToShow">
-      <div class="row-class">
-        <div class="img-comp">
-          <img [attr.src]="item['imgSrc']" />
-        </div>
-
-        <div class="username">
-          <span>{{ item['post']['username'] }}</span>
-          <div class="follower-button">
-            <button type="button" class="btn-follower" (click)="follow(item)">
-              {{ item['post']['follows'] ? 'unfollow' : 'follow' }}
-            </button>
+<app-loading-spinner
+  class="spinner"
+  *ngIf="showSpinner; else mainPage"
+></app-loading-spinner>
+<ng-template #mainPage>
+  <div class="title">
+    <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+    <i (click)="closeModal()" class="fal fa-times"></i>
+  </div>
+  <div class="wrapper">
+    <mat-dialog-content>
+      <div class="fol-card" *ngFor="let item of postsToShow">
+        <div class="row-class">
+          <div class="img-comp">
+            <img [attr.src]="item['imgSrc']" />
           </div>
-        </div>
-        <!-- <div class="follower-button">
+
+          <div class="username">
+            <span>{{ item['post']['username'] }}</span>
+            <div class="follower-button">
+              <button type="button" class="btn-follower" (click)="follow(item)">
+                {{ item['post']['follows'] ? 'unfollow' : 'follow' }}
+              </button>
+            </div>
+          </div>
+          <!-- <div class="follower-button">
           <button type="button" class="btn-follower" (click)="follow(item)">
             {{ item['post']['follows'] ? 'unfollow' : 'follow' }}
           </button>
         </div> -->
+        </div>
       </div>
-    </div>
-  </mat-dialog-content>
-</div>
+    </mat-dialog-content>
+  </div>
+</ng-template>
