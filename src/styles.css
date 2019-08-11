@@ -34,23 +34,23 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
 }
-/* .cdk-global-overlay-wrapper::before {
+.cdk-global-overlay-wrapper-fol::before {
   content: '';
   display: block;
   height: 40px;
-} */
+}
 
-.cdk-global-overlay-wrapper {
+.cdk-global-overlay-wrapper-fol {
   display: block;
   position: relative;
   text-align: center;
 }
 
-/* .cdk-global-overlay-wrapper::after {
+.cdk-global-overlay-wrapper-fol::after {
   content: '';
   display: block;
   height: 40px;
-} */
+}
 
 .cdk-overlay-pane {
   display: inline-block;

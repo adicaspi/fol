@@ -1,12 +1,9 @@
-<app-loading-spinner class="spinner" *ngIf="showSpinner"></app-loading-spinner>
-
+<!-- <app-loading-spinner class="spinner" *ngIf="showSpinner"></app-loading-spinner> -->
+<div class="title">
+  <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+  <i (click)="closeModal()" class="fal fa-times"></i>
+</div>
 <div class="wrapper">
-  <div class="close">
-    <i (click)="closeModal()" class="fal fa-times"></i>
-  </div>
-  <div class="title">
-    <h2 mat-dialog-title>{{ dialogTitle }}</h2>
-  </div>
   <mat-dialog-content>
     <div class="fol-card" *ngFor="let item of postsToShow">
       <div class="row-class">

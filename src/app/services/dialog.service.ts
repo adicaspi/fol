@@ -111,7 +111,7 @@ export class DialogService {
     return overlayConfig;
   }
 
-  openModalWindow(component, data?) {
+  openModalWindow(component, data?, componentName?) {
     console.log('in openModalWinodw', component, data);
     const modalWindowConfig = new MatDialogConfig<ProductPageComponent>();
 
@@ -120,10 +120,16 @@ export class DialogService {
     modalWindowConfig.data = data;
     modalWindowConfig.closeOnNavigation = true;
 
-    if (data) {
-      modalWindowConfig.panelClass = 'overlay-product';
-      modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper';
+    if (componentName == 'followersList') {
+      modalWindowConfig.data = data;
+      modalWindowConfig.width = '400px';
+      modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper-fol';
+      modalWindowConfig.panelClass = 'overlay-fol-list';
     }
+    // if (data) {
+    //   modalWindowConfig.panelClass = 'overlay-product';
+    //   modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper';
+    // }
 
     const dialogRef = this.dialog.open(component, modalWindowConfig);
 

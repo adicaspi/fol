@@ -8,6 +8,7 @@ import { GenerateFollowListComponent } from '../generate-follow-list/generate-fo
 import { PostService } from '../../services/post.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-user-profile-info',
@@ -33,7 +34,8 @@ export class UserProfileInfoComponent implements OnInit {
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private postService: PostService
+    private postService: PostService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -99,17 +101,23 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   openDialog(flag): void {
-    const dialogRef = this.dialog.open(GenerateFollowListComponent, {
-      width: '350px',
-      height: '250px',
-      data: {
-        flag: flag,
-        id: this.masterId
-      }
-    });
+    var title;
+    if (flag) {
+      title = 'Followers';
+    } else {
+      title = 'Following';
+    }
+    const data = {
+      flag: flag,
+      id: this.masterId,
+      title: title
+    };
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
+    var componentName = 'followersList';
+    this.dialogService.openModalWindow(
+      GenerateFollowListComponent,
+      data,
+      componentName
+    );
   }
 }

@@ -1,3 +1,16 @@
+.title {
+  text-align: center;
+}
+.mat-dialog-title {
+  display: inline-block;
+}
+
+i.fal.fa-times {
+  float: right;
+  line-height: 30px;
+  font-size: 20px;
+}
+
 img {
   width: 30px;
   height: 30px;
@@ -8,13 +21,14 @@ img {
 .img-comp {
   line-height: 30px;
   display: inline-block;
+  margin-left: 5px;
 }
 
 .username {
   display: inline-block;
   line-height: 30px;
-  margin-left: 5px;
-  width: 80%;
+  margin-left: 10px;
+  width: 85%;
 }
 
 .follower-button {
@@ -36,7 +50,7 @@ img {
 
 .fol-card {
   list-style: none;
-  width: 300px;
+  /* width: 300px; */
   height: 40px;
   border: none;
 }
@@ -52,12 +66,4 @@ img {
   background-image: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-}
-
-.close {
-  float: left;
-}
-
-.mat-dialog-title {
-  text-align: center;
 }
