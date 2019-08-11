@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GlobalVariable } from '../../global';
 import { PostInfo } from '../models/PostInfo';
+import { UserPost } from '../models/UserPost';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'image/jpeg' })
 };
@@ -14,6 +15,7 @@ export class PostService {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   postsUrl: string = this.baseApiUrl + '/image';
   socialUrl: string = this.baseApiUrl + '/social';
+  userPost: UserPost;
   constructor(private http: HttpClient) {}
 
   getImage(image_adr: string): Observable<Blob> {

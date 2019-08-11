@@ -16,6 +16,6 @@ export class FeedComponent implements OnInit {
   ngOnInit() {}
 
   openDialog(): void {
-    this.dialogService.openDialog(ProductPageComponent, this.timelinePost);
+    this.dialogService.openModalWindow(ProductPageComponent, this.timelinePost);
   }
 }

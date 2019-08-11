@@ -32,6 +32,7 @@ export class TimelineFeedComponent implements OnInit {
   constructor(
     private userService: UserService,
     private feedService: FeedService,
+    private postService: PostService,
     private dialogService: DialogService,
     private router: Router
   ) {}
@@ -68,7 +69,10 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.dialogService.openDialog(ProductPageComponent, post);
+    //this.dialogService.userPost = post;
+    this.postService.userPost = post;
+    //this.dialogService.openModalWindow(ProductPageComponent, post);
+    this.dialogService.openDialog();
   }
 
   public ngOnDestroy(): void {

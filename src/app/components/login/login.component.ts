@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
 
   regsiterPage() {
     this.dialogRef.close();
-    this.dialogService.openDialog(RegisterComponent);
+    this.dialogService.openModalWindow(RegisterComponent);
   }
 
   loadConfigurationData() {

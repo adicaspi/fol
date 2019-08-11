@@ -15,6 +15,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {}
 
   openDialog(): void {
-    this.dialogService.openDialog(ProductPageComponent, this.userPost);
+    this.dialogService.openModalWindow(ProductPageComponent, this.userPost);
   }
 }
