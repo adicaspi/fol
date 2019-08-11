@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FeedService } from '../../services/feed.service';
+import { DialogService } from '../../services/dialog.service';
 import { UserPost } from '../../models/UserPost';
 import { PostInfo } from '../../models/PostInfo';
-import { FeedService } from '../../services/feed.service';
 import { UserService } from '../../services/user.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../models/User';
@@ -11,14 +12,17 @@ import * as $ from 'jquery';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
-import { DialogService } from '../../services/dialog.service';
+import { ProductPageComponent } from '../product-page/product-page.component';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { FilePreviewOverlayRef } from '../file-preview-overlay/file-preview-overlay-ref';
 
 @Component({
-  selector: 'app-product-page',
-  templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.css']
+  selector: 'app-file-preview-overlay',
+  templateUrl: './file-preview-overlay.component.html',
+  styleUrls: ['./file-preview-overlay.component.css']
 })
-export class ProductPageComponent implements OnInit {
+export class FilePreviewOverlayComponent implements OnInit {
+  showSpinner: boolean = true;
   userPost: UserPost;
   postInfo: PostInfo;
   timelinePost: TimelinePost;
@@ -28,30 +32,21 @@ export class ProductPageComponent implements OnInit {
   mainImageSrc: any;
   postImageAddr: any;
   userProfileSrc: any;
-  showSpinner: boolean = true;
   thumbnails = [];
-  getMorePromise: Promise<any>;
 
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
-
   constructor(
-    private userService: UserService,
     private feedService: FeedService,
+    private userService: UserService,
     private postService: PostService,
-    private dialogRef: MatDialogRef<ProductPageComponent>,
-    private dialogService: DialogService
-  ) //@Inject(MAT_DIALOG_DATA) public data: any
-  {
-    //this.userPost = this.data;
-    this.userPost = this.dialogService.userPost;
-    this.postImageAddr = this.userPost.postImageAddr;
-  }
+    private dialogRef: FilePreviewOverlayRef
+  ) {}
 
   ngOnInit() {
-    console.log('in product');
-    $('.cdk-overlay-container').scrollTop(0);
-    this.dialogRef.updateSize('800px');
+    this.userPost = this.postService.userPost;
+    this.postImageAddr = this.userPost.postImageAddr;
+
     this.userProfileSrc = '../../../assets/placeholder.png';
 
     this.userService
@@ -91,7 +86,6 @@ export class ProductPageComponent implements OnInit {
         this.setWebsiteLogo(postInfo.website);
         this.showSpinner = false;
         this.feedService.sendMessage('done-loading');
-        console.log('im spiiner', this.showSpinner);
       });
   }
 
@@ -136,8 +130,11 @@ export class ProductPageComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.dialogRef.close();
-    this.dialogService.openModalWindow(ProductPageComponent, post);
+    this.postService.userPost = post;
+    this.postsToShow = [];
+    this.thumbnails = [];
+    this.showSpinner = true;
+    this.ngOnInit();
   }
 
   setWebsiteLogo(website) {
