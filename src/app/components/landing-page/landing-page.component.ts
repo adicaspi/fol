@@ -31,7 +31,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {}
 
   registerPage() {
-    this.dialogService.openDialog(LoginComponent);
+    this.dialogService.openModalWindow(LoginComponent);
   }
 
   explorePage() {
