@@ -56,6 +56,9 @@ import { ShoppingNavComponent } from './components/shopping-nav/shopping-nav.com
 import { LayoutModule } from '@angular/cdk/layout';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ProductPageMobileComponent } from './components/product-page-mobile/product-page-mobile.component';
+import { FilePreviewOverlayComponent } from './components/file-preview-overlay/file-preview-overlay.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { DialogService } from './services/dialog.service';
 
 @NgModule({
   declarations: [
@@ -88,7 +91,8 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
     ViewExploreComponent,
     LoginComponent,
     ShoppingNavComponent,
-    ProductPageMobileComponent
+    ProductPageMobileComponent,
+    FilePreviewOverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +122,8 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
     ImageComponentComponent,
     ProductPageComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    FilePreviewOverlayComponent
   ],
 
   providers: [

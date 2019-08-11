@@ -51,12 +51,6 @@ export class FeedService {
         params: params
       }
     );
-    // .pipe(
-    //   catchError(err => {
-    //     console.log('im error', err);
-    //     return throwError('Something bad happened; please try again later.');
-    //   })
-    // );
   }
 
   getSlavesMasters(

@@ -8,7 +8,7 @@ import { GlobalVariable } from '../../../global';
 import { User } from '../../models/User';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
-import { Router } from '../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-page-mobile',
