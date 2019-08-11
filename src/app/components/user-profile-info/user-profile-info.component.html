@@ -20,6 +20,7 @@
 
         <button
           type="button"
+          *ngIf="following | async; else unclickableFollowing"
           class="simple-button-metrics second"
           (click)="openDialog(0)"
         >
@@ -27,12 +28,23 @@
         </button>
 
         <button
+          *ngIf="followers | async; else unclickableFollowers"
           type="button"
           class="simple-button-metrics third"
           (click)="openDialog(1)"
         >
           <span class="metrics">{{ followers | async }} followers</span>
         </button>
+        <ng-template #unclickableFollowers>
+          <button type="button" class="simple-button-metrics third">
+            <span class="metrics">{{ followers | async }} followers</span>
+          </button>
+        </ng-template>
+        <ng-template #unclickableFollowing>
+          <button type="button" class="simple-button-metrics second">
+            <span class="metrics">{{ following | async }} following</span>
+          </button>
+        </ng-template>
       </div>
       <div class="user-description">{{ user.description }} shopping addict</div>
     </div>
