@@ -60,7 +60,7 @@ ngxMasonryItem:nth-of-type(3n) {
   display: none;
 }
 
-.masonry-img:hover .img-hover {
+/* .masonry-img:hover .img-hover {
   width: 197px;
   height: 295px;
   margin-left: auto;
@@ -72,7 +72,7 @@ ngxMasonryItem:nth-of-type(3n) {
 
 .masonry-img:hover .img-main {
   display: none;
-}
+} */
 
 .description {
   text-align: center;
