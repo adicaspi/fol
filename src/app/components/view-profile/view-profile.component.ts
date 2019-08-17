@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { DeviceDetectorService } from '../../../../node_modules/ngx-device-detector';
 
 @Component({
   selector: 'app-view-profile',
@@ -9,11 +10,19 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./view-profile.component.css']
 })
 export class ViewProfileComponent implements OnInit {
+  desktop: Boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private deviceService: DeviceDetectorService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.deviceService.isDesktop()) {
+      this.desktop = true;
+    }
+  }
 }

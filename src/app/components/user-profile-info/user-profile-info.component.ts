@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { Observable } from 'rxjs';
@@ -29,13 +29,15 @@ export class UserProfileInfoComponent implements OnInit {
   flag: number = 1;
   clicked: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
+  desktop: Boolean;
 
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private postService: PostService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -70,11 +72,6 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   updateUser() {
-    // this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
-    //   this.updateProfileImage(user);
-    //   this.user = user;
-    // });
-
     this.user = this.userService
       .getUserDetails(this.masterId)
       .pipe(takeUntil(this.onDestroy));
@@ -119,5 +116,9 @@ export class UserProfileInfoComponent implements OnInit {
       data,
       componentName
     );
+  }
+
+  settingsPage() {
+    this.router.navigate(['settings', this.userService.userId]);
   }
 }

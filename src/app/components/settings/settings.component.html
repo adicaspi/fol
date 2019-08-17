@@ -1,50 +1,88 @@
 <app-navbar></app-navbar>
 
 <div class="row">
-  <div class="col-md-6">
-    <div class="card mt-3">
-      <div class="card-header">Update Profile Info</div>
-      <div class="card-body">
-        <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input
-              type="text"
-              formControlName="description"
-              class="form-control"
+  <div class="column controlers">
+    <ul class="form-sections">
+      <li [class]="profileClass" (click)="editProfile()">
+        Edit Profile
+      </li>
+      <li [class]="passClass" (click)="changePassword()">
+        password
+      </li>
+    </ul>
+  </div>
+  <div class="column">
+    <div id="form">
+      <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <div class="form-group user">
+            <img
+              src="../../../assets/kloss_profile.jpg"
+              class="profile"
+              (click)="profilePage()"
             />
+
+            <div class="user">
+              Adi Caspi
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="password">Password</label>
+          <div *ngFor="let item of fields" class="form-group">
+            <label for="{{ item[label] }}">{{ item['display'] }}</label>
             <input
               type="text"
-              formControlName="description"
+              [formControlName]="item['input']"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
             />
-            <div
-              *ngIf="submitted && f.password.errors"
-              class="invalid-feedback"
-            ></div>
+          </div>
+          <div class="form-sbumit-button">
+            <button>Submit</button>
           </div>
 
-          <div class="form-group">
-            <label for="post">Update Profile Picture</label>
-            <input type="file" (change)="onFileSelected($event)" />
-            <!-- <button type="button" (click)="onUpload()">Upload</button> -->
-          </div>
-          <div class="form-group">
-            <label for="post_description">Picture Description</label>
-            <input
-              type="text"
-              formControlName="post_description"
-              class="form-control"
-            />
-          </div>
-          <button>Submit</button>
-        </form>
-      </div>
+          <!-- <div class="form-group">
+          <label for="post">Update Profile Picture</label>
+
+          <input
+            type="file"
+            class="profile-image"
+            (change)="onFileSelected($event)"
+            placeholder="Upload file..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            formControlName="description"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="text"
+            formControlName="description"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          />
+          <div
+            *ngIf="submitted && f.password.errors"
+            class="invalid-feedback"
+          ></div>
+        </div>
+
+        <div class="form-group">
+          <label for="post_description">Bio</label>
+          <input
+            type="text"
+            formControlName="post_description"
+            class="form-control"
+          />
+        </div> -->
+        </fieldset>
+      </form>
     </div>
   </div>
 </div>

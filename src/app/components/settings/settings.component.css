@@ -1,0 +1,124 @@
+.wrapper {
+  /* background: #fafafa;
+  margin-top: 50px;
+  padding: 50px; */
+}
+
+.row {
+  text-align: center;
+  background: #fafafa;
+  margin-top: 50px;
+  padding: 50px;
+  justify-content: center;
+}
+
+.column.controlers {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px 0px 0px 3px;
+  border-right: none;
+  height: 380px;
+  padding: 0px;
+}
+
+ul.form-sections {
+  padding-left: 0px;
+}
+
+.controlers {
+  list-style: none;
+  border-left: 2px solid transparent;
+  display: block;
+  font-size: 16px;
+  height: 100%;
+  line-height: 20px;
+  padding: 16px 80px 16px 30px;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 14px;
+  color: #262626;
+}
+
+.password-clicked {
+  color: black;
+  border-left-color: black;
+  font-weight: 600;
+}
+
+.profile-clicked {
+  color: black;
+  border-left-color: black;
+  font-weight: 600;
+}
+
+li.controlers:hover {
+  background-color: #fafafa;
+  cursor: pointer;
+}
+
+#form {
+  background-color: #fff;
+  height: 380px;
+  width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid #dbdbdb;
+  border-radius: 0px 3px 3px 0px;
+  text-align: center;
+  padding: 15px;
+}
+
+.form-group {
+  float: left;
+}
+
+.form-group.user {
+  margin-bottom: 10px;
+  display: block;
+}
+
+label {
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 14px;
+  color: #333;
+  height: 20px;
+  width: 200px;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: right;
+  margin-right: 15px;
+  float: left;
+  line-height: 32px;
+}
+input {
+  height: 32px;
+  width: 300px;
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #262626;
+  font-size: 14px;
+  margin-top: 10px;
+  float: left;
+}
+
+img.profile {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  display: inline;
+}
+
+.user {
+  display: inline;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+.form-group.user {
+  float: none;
+}
+
+button {
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}

@@ -1,6 +1,6 @@
 <html>
   <body>
-    <div class="display">
+    <div *ngIf="desktop; else mobileView" class="display">
       <app-navbar></app-navbar>
       <app-mutual-nav></app-mutual-nav>
       <div class="center">
@@ -8,13 +8,14 @@
         <app-user-feed></app-user-feed>
       </div>
     </div>
-
-    <div class="hidden">
-      <app-shopping-nav>
-        <app-user-profile-info></app-user-profile-info>
-        <app-user-feed></app-user-feed>
-        <app-navbar></app-navbar>
-      </app-shopping-nav>
-    </div>
+    <ng-template #mobileView>
+      <div class="hidden">
+        <app-shopping-nav>
+          <app-user-profile-info></app-user-profile-info>
+          <app-user-feed></app-user-feed>
+          <app-navbar></app-navbar>
+        </app-shopping-nav>
+      </div>
+    </ng-template>
   </body>
 </html>

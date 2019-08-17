@@ -3,6 +3,11 @@
   padding-bottom: 40px;
 }
 
+.settings {
+  float: left;
+  font-size: 23px;
+}
+
 .container {
   margin-top: 15px;
   margin-left: 15px;

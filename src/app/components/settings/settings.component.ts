@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import * as $ from 'jquery';
+
+class fieldItem {
+  label: string;
+  display: string;
+  input: string;
+}
 
 @Component({
   selector: 'app-settings',
@@ -13,6 +20,11 @@ export class SettingsComponent implements OnInit {
   selectedFile: File = null;
   submitted: boolean = false;
   updateImageProfile: boolean = false;
+  fields = [];
+  profileClass = 'controlers profile';
+  passClass = 'controlers password';
+  //profileClass = $('li.controlers.profile');
+  //passwordClass = $('li.controlers.password');
 
   constructor(
     private userService: UserService,
@@ -22,10 +34,14 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
       description: [''],
-      password: ['', Validators.minLength(8)],
+      bio: [''],
+      oldPass: ['', Validators.minLength(8)],
+      newPass: ['', Validators.minLength(8)],
+      confirmPass: [''],
       post: [''],
       post_description: ['']
     });
+    this.editProfile();
   }
 
   get f() {
@@ -40,16 +56,38 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  // onUpload() {
-  //   let desc = '';
-  //   const fd = new FormData();
-  //   fd.append('image', this.selectedFile, this.selectedFile.name);
-  //   console.log(fd);
+  editProfile() {
+    this.profileClass = 'controlers profile-clicked';
+    this.passClass = 'controlers password';
+    var desc = new fieldItem();
+    desc.display = 'Description';
+    desc.input = 'description';
+    desc.label = 'description';
+    var bio = new fieldItem();
+    bio.display = 'Bio';
+    bio.input = 'bio';
+    bio.label = 'bio';
+    this.fields = [desc, bio];
+    //this.fields = ['description', 'bio'];
+  }
 
-  //   this.userService.uploadPost(fd, desc).subscribe(res => {
-  //     console.log(res);
-  //   });
-  // }
+  changePassword() {
+    this.passClass = 'controlers password-clicked';
+    this.profileClass = 'controlers profile';
+    var oldPass = new fieldItem();
+    oldPass.display = 'New Password';
+    oldPass.input = 'oldPass';
+    oldPass.label = 'oldPass';
+    var newPass = new fieldItem();
+    newPass.display = 'Old Password';
+    newPass.input = 'newPass';
+    newPass.label = 'newPass';
+    var confirmPass = new fieldItem();
+    confirmPass.display = 'Confirm New Password';
+    confirmPass.input = 'confirmPass';
+    confirmPass.label = 'confirmPass';
+    this.fields = [oldPass, newPass, confirmPass];
+  }
 
   onSubmit() {
     this.submitted = true;
