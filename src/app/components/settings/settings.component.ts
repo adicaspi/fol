@@ -23,8 +23,7 @@ export class SettingsComponent implements OnInit {
   fields = [];
   profileClass = 'controlers profile';
   passClass = 'controlers password';
-  //profileClass = $('li.controlers.profile');
-  //passwordClass = $('li.controlers.password');
+  section: string;
 
   constructor(
     private userService: UserService,
@@ -57,6 +56,7 @@ export class SettingsComponent implements OnInit {
   }
 
   editProfile() {
+    this.section = 'profile';
     this.profileClass = 'controlers profile-clicked';
     this.passClass = 'controlers password';
     var desc = new fieldItem();
@@ -72,6 +72,7 @@ export class SettingsComponent implements OnInit {
   }
 
   changePassword() {
+    this.section = 'password';
     this.passClass = 'controlers password-clicked';
     this.profileClass = 'controlers profile';
     var oldPass = new fieldItem();
