@@ -15,15 +15,28 @@
     <div id="form">
       <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
         <fieldset>
-          <div class="form-group user">
+          <!-- <div class="form-group user"> -->
+          <label>
             <img
               src="../../../assets/kloss_profile.jpg"
               class="profile"
               (click)="profilePage()"
             />
-
-            <div class="user">
-              Adi Caspi
+          </label>
+          <!-- </div> -->
+          <div class="user">
+            <span>Adi Caspi</span>
+            <input
+              style="display:none"
+              type="file"
+              class="profile-image"
+              (change)="onFileSelected($event)"
+              #fileInput
+            />
+            <div class="change-profile-image">
+              <button type="button" (click)="fileInput.click()">
+                Change Profile Image
+              </button>
             </div>
           </div>
 

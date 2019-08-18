@@ -69,6 +69,7 @@ li.controlers:hover {
 
 .form-group {
   float: left;
+  margin-top: 20px;
 }
 
 .form-group.user {
@@ -81,9 +82,7 @@ label {
   font-size: 14px;
   color: #333;
   height: 20px;
-  width: 200px;
-  margin-top: 10px;
-  margin-left: 10px;
+  width: 140px;
   text-align: right;
   margin-right: 15px;
   float: left;
@@ -97,7 +96,6 @@ input {
   box-sizing: border-box;
   color: #262626;
   font-size: 14px;
-  margin-top: 10px;
   float: left;
 }
 
@@ -109,8 +107,20 @@ img.profile {
 }
 
 .user {
-  display: inline;
+  float: left;
   font-family: 'Maven Pro', sans-serif;
+}
+
+.user span {
+  float: left;
+}
+
+.change-profile-image button {
+  border: none;
+  background-color: white;
+  color: #ff1493;
+  outline: none;
+  padding: 0;
 }
 
 .form-group.user {
