@@ -127,6 +127,10 @@ img.profile {
   float: none;
 }
 
+.submit-button {
+  display: block;
+}
+
 button {
   font-family: 'Maven Pro', sans-serif;
   font-size: 13px;

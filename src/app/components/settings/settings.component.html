@@ -48,9 +48,6 @@
               class="form-control"
             />
           </div>
-          <div class="form-sbumit-button">
-            <button>Submit</button>
-          </div>
 
           <!-- <div class="form-group">
           <label for="post">Update Profile Picture</label>
@@ -96,6 +93,18 @@
         </div> -->
         </fieldset>
       </form>
+      <div class="submit-button">
+        <input
+          style="display:none"
+          type="button"
+          class="submit-button"
+          #submitButtn
+        />
+        <button type="button" (click)="submitButtn.click()">
+          Submit
+        </button>
+        <!-- <button>Submit</button> -->
+      </div>
     </div>
   </div>
 </div>
