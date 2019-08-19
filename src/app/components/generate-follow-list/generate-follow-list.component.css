@@ -1,14 +1,19 @@
 .title {
   text-align: center;
+  height: 43px;
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 10px;
 }
 .mat-dialog-title {
   display: inline-block;
+  text-align: center;
 }
 
 i.fal.fa-times {
   float: right;
   line-height: 30px;
   font-size: 20px;
+  margin-right: 5px;
 }
 
 img {
@@ -21,7 +26,7 @@ img {
 .img-comp {
   line-height: 30px;
   display: inline-block;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .username {

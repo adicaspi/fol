@@ -33,7 +33,6 @@ export class GenerateFollowListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('im data', this.data);
     this.flag = this.data.flag;
     this.id = this.data.id;
     this.generateFollowsFeed(0);
