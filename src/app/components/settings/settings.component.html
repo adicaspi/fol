@@ -40,6 +40,24 @@
             </div>
             <div *ngIf="section == 'profile'">
               <div class="form-group">
+                <label>User Name</label>
+                <input
+                  type="text"
+                  formControlName="username"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  formControlName="fullname"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
                 <label>Description</label>
                 <input
                   type="text"
@@ -49,8 +67,12 @@
               </div>
 
               <div class="form-group">
-                <label>Bio</label>
-                <input type="text" formControlName="bio" class="form-control" />
+                <label>E-mail</label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                />
               </div>
 
               <div class="form-group submit-button">

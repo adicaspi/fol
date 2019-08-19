@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import * as $ from 'jquery';
+import { User } from '../../models/User';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 class fieldItem {
   label: string;
@@ -16,6 +19,7 @@ class fieldItem {
 })
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
+  user: User;
   description: string;
   selectedFile: File = null;
   submitted: boolean = false;
@@ -27,6 +31,7 @@ export class SettingsComponent implements OnInit {
   section: string;
   button_text: string;
   submittedPass: boolean = false;
+  onDestroy: Subject<void> = new Subject<void>();
 
   constructor(
     private userService: UserService,
@@ -36,8 +41,10 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.settingsForm = this.formBuilder.group(
       {
+        username: [''],
+        fullname: [''],
         description: [''],
-        bio: [''],
+        email: [''],
         oldPass: ['', Validators.minLength(6)],
         newPass: ['', Validators.minLength(6)],
         confirmPass: ['', Validators.required]
@@ -46,7 +53,7 @@ export class SettingsComponent implements OnInit {
         validator: this.MustMatch('newPass', 'confirmPass')
       }
     );
-
+    this.updateUser();
     this.editProfile();
   }
 
@@ -54,6 +61,21 @@ export class SettingsComponent implements OnInit {
     return this.settingsForm.controls;
   }
 
+  updateUser() {
+    this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
+      this.user = user;
+      this.patchValue(this.user);
+    });
+  }
+
+  patchValue(user: User) {
+    this.settingsForm.patchValue({
+      username: user.username,
+      fullname: user.fullName,
+      description: user.description,
+      email: user.email
+    });
+  }
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
     // checking the file isn't null
@@ -68,15 +90,6 @@ export class SettingsComponent implements OnInit {
     this.profileClass = 'controlers profile-clicked';
     this.passClass = 'controlers password';
     this.spanClass = 'user';
-    var desc = new fieldItem();
-    desc.display = 'Description';
-    desc.input = 'description';
-    desc.label = 'description';
-    var bio = new fieldItem();
-    bio.display = 'Bio';
-    bio.input = 'bio';
-    bio.label = 'bio';
-    this.fields = [desc, bio];
   }
 
   changePassword() {
@@ -85,19 +98,6 @@ export class SettingsComponent implements OnInit {
     this.passClass = 'controlers password-clicked';
     this.profileClass = 'controlers profile';
     this.spanClass = 'user pass';
-    var oldPass = new fieldItem();
-    oldPass.display = 'New Password';
-    oldPass.input = 'oldPass';
-    oldPass.label = 'oldPass';
-    var newPass = new fieldItem();
-    newPass.display = 'Old Password';
-    newPass.input = 'newPass';
-    newPass.label = 'newPass';
-    var confirmPass = new fieldItem();
-    confirmPass.display = 'Confirm New Password';
-    confirmPass.input = 'confirmPass';
-    confirmPass.label = 'confirmPass';
-    this.fields = [oldPass, newPass, confirmPass];
   }
 
   MustMatch(controlName: string, matchingControlName: string) {
