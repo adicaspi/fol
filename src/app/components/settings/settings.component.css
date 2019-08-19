@@ -70,11 +70,13 @@ li.controlers:hover {
 .form-group {
   float: left;
   margin-top: 20px;
+  clear: both;
 }
 
 .form-group.user {
   margin-bottom: 10px;
   display: block;
+  float: none;
 }
 
 label {
@@ -82,7 +84,7 @@ label {
   font-size: 14px;
   color: #333;
   height: 20px;
-  width: 140px;
+  width: 150px;
   text-align: right;
   margin-right: 15px;
   float: left;
@@ -106,13 +108,21 @@ img.profile {
   display: inline;
 }
 
-.user {
+span.user {
+  font-family: 'Maven Pro', sans-serif;
   float: left;
+  clear: both;
+  line-height: initial;
+}
+
+span.user.pass {
+  line-height: 38px;
   font-family: 'Maven Pro', sans-serif;
 }
 
-.user span {
-  float: left;
+.user-info {
+  float: right;
+  clear: right;
 }
 
 .change-profile-image button {
@@ -123,8 +133,9 @@ img.profile {
   padding: 0;
 }
 
-.form-group.user {
+.form-group.submit-button {
   float: none;
+  margin-top: 50px;
 }
 
 .submit-button {

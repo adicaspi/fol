@@ -15,98 +15,141 @@
     <div id="form">
       <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
         <fieldset>
-          <!-- <div class="form-group user"> -->
-          <label>
-            <img
-              src="../../../assets/kloss_profile.jpg"
-              class="profile"
-              (click)="profilePage()"
-            />
-          </label>
-          <!-- </div> -->
           <div class="user">
-            <span>Adi Caspi</span>
-            <div *ngIf="section == 'profile'" class="upload-image">
-              <input
-                style="display:none"
-                type="file"
-                class="profile-image"
-                (change)="onFileSelected($event)"
-                #fileInput
-              />
-              <div class="change-profile-image">
-                <button type="button" (click)="fileInput.click()">
-                  Change Profile Image
-                </button>
+            <div class="form-group">
+              <label>
+                <img
+                  src="../../../assets/kloss_profile.jpg"
+                  class="profile"
+                  (click)="profilePage()"
+                />
+              </label>
+              <div class="user-info">
+                <span [class]="spanClass">Adi Caspi</span>
+                <div *ngIf="section == 'profile'" class="upload-image">
+                  <input
+                    style="display:none"
+                    type="file"
+                    class="profile-image"
+                    (change)="onFileSelected($event)"
+                    #fileInput
+                  />
+                  <div class="change-profile-image">
+                    <button type="button" (click)="fileInput.click()">
+                      Change Profile Image
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="section == 'profile'">
+              <div class="form-group">
+                <label>Description</label>
+                <input
+                  type="text"
+                  formControlName="description"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Bio</label>
+                <input type="text" formControlName="bio" class="form-control" />
+              </div>
+
+              <div class="form-group submit-button">
+                <div class="submit-button">
+                  <input
+                    style="display:none"
+                    type="button"
+                    class="submit-button"
+                    #submitButtn
+                  />
+                  <button type="button" (click)="onSubmit()">
+                    Submit
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
-          <div *ngFor="let item of fields" class="form-group">
-            <label for="{{ item[label] }}">{{ item['display'] }}</label>
-            <input
-              type="text"
-              [formControlName]="item['input']"
-              class="form-control"
-            />
+          <div *ngIf="section == 'password'" class="upload-image">
+            <div class="form-group">
+              <label>Old Password</label>
+              <input
+                type="password"
+                formControlName="oldPass"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submittedPass && f.oldPass.errors }"
+              />
+              <div
+                *ngIf="submittedPass && f.oldPass.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.oldPass.errors.required">
+                  Password is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input
+                type="password"
+                formControlName="newPass"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submittedPass && f.newPass.errors }"
+              />
+              <div
+                *ngIf="submittedPass && f.newPass.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.newPass.errors.required">
+                  Password is required
+                </div>
+                <div *ngIf="f.newPass.errors.minlength">
+                  Password must be at least 6 characters
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input
+                type="password"
+                formControlName="confirmPass"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submittedPass && f.confirmPass.errors
+                }"
+              />
+              <div
+                *ngIf="submittedPass && f.confirmPass.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.confirmPass.errors.required">
+                  Confirm Password is required
+                </div>
+                <div *ngIf="f.confirmPass.errors.mustMatch">
+                  Passwords must match
+                </div>
+              </div>
+              <div class="form-group submit-button">
+                <div class="submit-button">
+                  <input
+                    style="display:none"
+                    type="button"
+                    class="submit-button"
+                    #submitButtn
+                  />
+                  <button type="button" (click)="onSubmitChangePassword()">
+                    Change Password
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <!-- <div class="form-group">
-          <label for="post">Update Profile Picture</label>
-
-          <input
-            type="file"
-            class="profile-image"
-            (change)="onFileSelected($event)"
-            placeholder="Upload file..."
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            formControlName="description"
-            class="form-control"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="text"
-            formControlName="description"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-          />
-          <div
-            *ngIf="submitted && f.password.errors"
-            class="invalid-feedback"
-          ></div>
-        </div>
-
-        <div class="form-group">
-          <label for="post_description">Bio</label>
-          <input
-            type="text"
-            formControlName="post_description"
-            class="form-control"
-          />
-        </div> -->
         </fieldset>
       </form>
-      <div class="submit-button">
-        <input
-          style="display:none"
-          type="button"
-          class="submit-button"
-          #submitButtn
-        />
-        <button type="button" (click)="submitButtn.click()">
-          Submit
-        </button>
-        <!-- <button>Submit</button> -->
-      </div>
     </div>
   </div>
 </div>

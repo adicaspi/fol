@@ -168,7 +168,6 @@ export class RegisterComponent implements OnInit {
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           this.userService.updateUser(data.userId);
-          console.log('im user id', data.userId, data.userName);
           this.configSerivce.setSessionStorage(data.userId.toString());
           this.router.navigate(['/feed/' + data.userId]);
           this.ngOnDestroy();

@@ -23,7 +23,10 @@ export class SettingsComponent implements OnInit {
   fields = [];
   profileClass = 'controlers profile';
   passClass = 'controlers password';
+  spanClass = 'user';
   section: string;
+  button_text: string;
+  submittedPass: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -31,15 +34,17 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.settingsForm = this.formBuilder.group({
+    (this.settingsForm = this.formBuilder.group({
       description: [''],
       bio: [''],
       oldPass: ['', Validators.minLength(8)],
       newPass: ['', Validators.minLength(8)],
-      confirmPass: [''],
-      post: [''],
-      post_description: ['']
-    });
+      confirmPass: ['', Validators.required]
+    })),
+      {
+        validator: this.MustMatch('password', 'confirmPassword')
+      };
+
     this.editProfile();
   }
 
@@ -56,9 +61,11 @@ export class SettingsComponent implements OnInit {
   }
 
   editProfile() {
+    this.button_text = 'Submit';
     this.section = 'profile';
     this.profileClass = 'controlers profile-clicked';
     this.passClass = 'controlers password';
+    this.spanClass = 'user';
     var desc = new fieldItem();
     desc.display = 'Description';
     desc.input = 'description';
@@ -68,13 +75,14 @@ export class SettingsComponent implements OnInit {
     bio.input = 'bio';
     bio.label = 'bio';
     this.fields = [desc, bio];
-    //this.fields = ['description', 'bio'];
   }
 
   changePassword() {
     this.section = 'password';
+    this.button_text = 'Change Password';
     this.passClass = 'controlers password-clicked';
     this.profileClass = 'controlers profile';
+    this.spanClass = 'user pass';
     var oldPass = new fieldItem();
     oldPass.display = 'New Password';
     oldPass.input = 'oldPass';
@@ -90,10 +98,47 @@ export class SettingsComponent implements OnInit {
     this.fields = [oldPass, newPass, confirmPass];
   }
 
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        // return if another validator has already found an error on the matchingControl
+        return;
+      }
+
+      // set error on matchingControl if validation fails
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
+  }
+
+  onSubmitChangePassword() {
+    this.submittedPass = true;
+    if (this.settingsForm.invalid) {
+      return;
+    }
+    let oldPassForm = this.f.oldPass;
+    let newPassForm = this.f.newPass;
+    let confirmPassForm = this.settingsForm.value.oldPass;
+    if (confirmPassForm != newPassForm) {
+    }
+    let res = {
+      oldPass: oldPassForm,
+      newPass: newPassForm,
+      confirmPass: confirmPassForm
+    };
+  }
+
   onSubmit() {
     this.submitted = true;
     let description = this.settingsForm.get('description').value;
     let post_description = this.settingsForm.get('post_description').value;
+
     this.userService.updateUserDescription(description);
     if (this.updateImageProfile) {
       const fd = new FormData();
