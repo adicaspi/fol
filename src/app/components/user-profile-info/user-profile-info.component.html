@@ -4,11 +4,11 @@
       <img [attr.src]="userProfileImageSrc[0]['postImgSrc']" />
     </div>
 
-    <div *ngIf="user | async" class="description">
+    <div *ngIf="user" class="description">
       <div class="upper-description-div">
         <div class="user-name">{{ user.username }}</div>
         <div class="settings">
-          <i (click)="settingsPage()" class="fad fa-cog"></i>
+          <i (click)="settingsPage()" class="fal fa-cog"></i>
         </div>
 
         <button type="button" class="button-follow" (click)="follow()">
@@ -18,7 +18,8 @@
 
       <div class="btn-group">
         <button type="button" class="simple-button-metrics first">
-          <span class="metrics">{{ numberOfPosts | async }} posts </span>
+          <span class="metrics">{{ numberOfPosts | async }} </span>
+          <span class="text"> posts</span>
         </button>
 
         <button
@@ -27,7 +28,8 @@
           class="simple-button-metrics second"
           (click)="openDialog(0)"
         >
-          <span class="metrics">{{ following | async }} following</span>
+          <span class="metrics">{{ following | async }}</span>
+          <span class="text"> following</span>
         </button>
 
         <button
@@ -36,11 +38,13 @@
           class="simple-button-metrics third"
           (click)="openDialog(1)"
         >
-          <span class="metrics">{{ followers | async }} followers</span>
+          <span class="metrics">{{ followers | async }}</span>
+          <span class="text"> followers </span>
         </button>
         <ng-template #unclickableFollowers>
           <button type="button" class="simple-button-metrics third">
-            <span class="metrics">{{ followers | async }} followers</span>
+            <span class="metrics">{{ followers | async }} </span>
+            <span class="text"> followers </span>
           </button>
         </ng-template>
         <ng-template #unclickableFollowing>
