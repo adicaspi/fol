@@ -17,9 +17,9 @@
 }
 
 .img-comp {
-  display: inline-block;
+  /* display: inline-block; */
   /* margin-left: 20%; */
-  height: 200px;
+  /* height: 200px; */
 }
 
 .img-comp img {
@@ -78,6 +78,7 @@
     display: inline-block;
     position: absolute; */
     margin-top: 5%;
+    max-width: 500px;
   }
 
   .upper-description-div::after {
@@ -97,6 +98,7 @@
   .user-description {
     font-family: 'Maven Pro', sans-serif;
     margin-top: 10px;
+    overflow-wrap: break-word;
   }
 
   .upper-description-div {
@@ -107,9 +109,9 @@
   }
 
   .img-comp {
-    display: inline-block;
+    /* display: inline-block; */
     /* margin-left: 20%; */
-    height: 200px;
+    /* height: 200px; */
   }
 
   .img-comp img {
