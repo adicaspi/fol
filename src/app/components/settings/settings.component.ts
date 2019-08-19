@@ -34,16 +34,18 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    (this.settingsForm = this.formBuilder.group({
-      description: [''],
-      bio: [''],
-      oldPass: ['', Validators.minLength(8)],
-      newPass: ['', Validators.minLength(8)],
-      confirmPass: ['', Validators.required]
-    })),
+    this.settingsForm = this.formBuilder.group(
       {
-        validator: this.MustMatch('password', 'confirmPassword')
-      };
+        description: [''],
+        bio: [''],
+        oldPass: ['', Validators.minLength(6)],
+        newPass: ['', Validators.minLength(6)],
+        confirmPass: ['', Validators.required]
+      },
+      {
+        validator: this.MustMatch('newPass', 'confirmPass')
+      }
+    );
 
     this.editProfile();
   }
@@ -99,6 +101,7 @@ export class SettingsComponent implements OnInit {
   }
 
   MustMatch(controlName: string, matchingControlName: string) {
+    console.log('in must match');
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];

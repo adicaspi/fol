@@ -147,3 +147,10 @@ button {
   font-size: 13px;
   cursor: pointer;
 }
+
+.invalid-feedback {
+  float: right;
+  clear: both;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 12px;
+}
