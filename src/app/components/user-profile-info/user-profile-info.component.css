@@ -6,6 +6,7 @@
 .settings {
   /* float: left; */
   font-size: 23px;
+  cursor: pointer;
 }
 
 .container {
