@@ -31,6 +31,7 @@ export class UserProfileInfoComponent implements OnInit {
   clicked: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
   desktop: Boolean;
+  userProfile: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -43,7 +44,7 @@ export class UserProfileInfoComponent implements OnInit {
 
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
-    this.masterId = routeParams.id;
+    this.masterId = parseInt(routeParams.id);
     this.updateUser();
     this.following = this.userService.getNumberOfFollowing(this.masterId);
     this.followers = this.userService.getNumberOfFollowers(this.masterId);
@@ -70,6 +71,9 @@ export class UserProfileInfoComponent implements OnInit {
       .subscribe(user => {
         this.user = user;
         this.updateProfileImage(user);
+        if (this.user.id == this.masterId) {
+          this.userProfile = true;
+        }
       });
   }
 
