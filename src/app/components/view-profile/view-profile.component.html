@@ -2,8 +2,12 @@
   <body>
     <div *ngIf="desktop; else mobileView" class="display">
       <app-navbar></app-navbar>
-      <app-mutual-nav></app-mutual-nav>
-      <div class="center">
+      <app-mutual-nav (change)="countChange($event)"></app-mutual-nav>
+      <!-- <div class="center">
+        <app-user-profile-info></app-user-profile-info>
+        <app-user-feed></app-user-feed>
+      </div> -->
+      <div [class]="classToApply">
         <app-user-profile-info></app-user-profile-info>
         <app-user-feed></app-user-feed>
       </div>

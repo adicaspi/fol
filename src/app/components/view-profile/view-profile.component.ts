@@ -11,6 +11,7 @@ import { DeviceDetectorService } from '../../../../node_modules/ngx-device-detec
 })
 export class ViewProfileComponent implements OnInit {
   desktop: Boolean;
+  classToApply: string = 'center';
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
@@ -24,5 +25,9 @@ export class ViewProfileComponent implements OnInit {
     if (this.deviceService.isDesktop()) {
       this.desktop = true;
     }
+  }
+
+  countChange(event) {
+    this.classToApply = event;
   }
 }

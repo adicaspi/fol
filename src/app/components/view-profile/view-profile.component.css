@@ -1,9 +1,10 @@
-.display{
+.display {
   background-color: #f9f9f9;
 }
 
-html, body{
-  height:100%;
+html,
+body {
+  height: 100%;
 }
 
 .hidden {
@@ -19,15 +20,50 @@ body {
   width: 900px;
 }
 
-@media (max-width: 600px) {
+.filtered {
+  margin: auto;
+  width: 900px;
+  position: relative;
+}
 
+.filtered:after {
+  margin: auto;
+  width: 100%;
+  content: '\A';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 1;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+/* .filtered:after {
+  content: '\A';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+} */
+.filtered:hover {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
   .hidden {
     display: initial;
     background-color: #f9f9f9;
   }
-  
+
   .display {
     display: none;
   }
 }
-

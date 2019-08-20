@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-mutual-nav',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MutualNavComponent implements OnInit {
   //mainList = ['Categories', 'Designers', 'Stores', 'Price'];
+  @Output()
+  change: EventEmitter<string> = new EventEmitter<string>();
+  class = 'filtered';
   mainList = {};
   Categories = ['Clothings', 'Shoes', 'Bags', 'Accesories'];
   ProductType = [
@@ -31,8 +34,8 @@ export class MutualNavComponent implements OnInit {
 
   ngOnInit() {}
 
-  changeMenu(item) {
-    // this.mainList = ['heels', 'boots'];
+  changeMenu() {
+    this.change.emit(this.class);
   }
 
   getKeys() {

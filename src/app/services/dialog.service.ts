@@ -10,7 +10,11 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ProductPageComponent } from '../components/product-page/product-page.component';
 import { LoginComponent } from '../components/login/login.component';
 import { FilePreviewOverlayComponent } from '../components/file-preview-overlay/file-preview-overlay.component';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import {
+  ComponentPortal,
+  PortalInjector,
+  ComponentType
+} from '@angular/cdk/portal';
 
 import { FilePreviewOverlayRef } from '../components/file-preview-overlay/file-preview-overlay-ref';
 
@@ -75,6 +79,7 @@ export class DialogService {
       null,
       injector
     );
+
     const containerRef: ComponentRef<
       FilePreviewOverlayComponent
     > = overlayRef.attach(containerPortal);

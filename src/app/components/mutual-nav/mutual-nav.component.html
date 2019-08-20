@@ -1,13 +1,9 @@
 <div class="container">
   <div class="center">
     <div *ngFor="let key of getKeys()" class="dropdown">
-      <div class="dropbtn">
-        {{key}}
+      <div class="dropbtn" (click)="changeMenu()">
+        {{ key }}
       </div>
-      <!-- <div class="dropdown-content">
-        <a *ngFor="let item of mainList[key]">
-        </a>
-      </div>
-    </div> -->
+    </div>
   </div>
 </div>
