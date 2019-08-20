@@ -55,7 +55,10 @@
           </button>
         </ng-template>
       </div>
-      <div class="user-description">{{ user.description }} shopping addict</div>
+      <div class="user-description">
+        <p>{{ user.fullName }}</p>
+        <p>{{ user.description }} shopping addict</p>
+      </div>
     </div>
   </div>
 </div>
