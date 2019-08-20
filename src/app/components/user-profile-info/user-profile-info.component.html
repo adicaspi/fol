@@ -51,13 +51,16 @@
         </ng-template>
         <ng-template #unclickableFollowing>
           <button type="button" class="simple-button-metrics second">
-            <span class="metrics">{{ following | async }} following</span>
+            <span class="metrics">{{ following | async }}</span>
+            <span class="text"> following </span>
           </button>
         </ng-template>
       </div>
       <div class="user-description">
-        <p>{{ user.fullName }}</p>
-        <p>{{ user.description }} shopping addict</p>
+        <p class="full-name">{{ user.fullName }}</p>
+        <p>{{ user.description }} I just love fashion you know, and everything that comes with it.
+          Shopping is LYFE
+        </p>
       </div>
     </div>
   </div>
