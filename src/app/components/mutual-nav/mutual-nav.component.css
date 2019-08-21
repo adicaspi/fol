@@ -55,10 +55,14 @@ div.center {
   font-size: 14px;
 }
 
+.category {
+  background-color: red;
+}
 .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:vi .dropdown-content {
   display: block;
+  margin-top: 10px;
 }

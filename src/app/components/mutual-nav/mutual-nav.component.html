@@ -1,9 +1,35 @@
 <div class="container">
   <div class="center">
-    <div *ngFor="let key of getKeys()" class="dropdown">
-      <div class="dropbtn" (click)="changeMenu()">
-        {{ key }}
+    <div *ngFor="let key of getKeys(); let i = index" class="dropdown">
+      <div class="dropbtn" (click)="changeMenu(key, i)">{{ key }}</div>
+      <div class="dropdown-content" id="{{ '_' + i }}">
+        <div class="{{ key.toLowerCase() }}">
+          <a *ngFor="let item of getValues(key)"> {{ item }}</a>
+        </div>
+        <button>Submit</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- <div class="container">
+  <div class="center">
+ 
+    <div *ngFor="let key of getKeys(); let i = index" class="dropbtn">
+      <button
+        type="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        (click)="changeMenu(key, i)"
+        class="{{ 'dropbtn' + '_' + i }}"
+      >
+        {{ key }}
+      </button>
+      <div id="{{ '_' + i }}">
+        <div class="dropdown-content" id="{{ '_' + i }}">
+          <a *ngFor="let item of getValues(key)"> {{ item }} </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

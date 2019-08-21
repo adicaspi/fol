@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-mutual-nav',
@@ -10,7 +11,12 @@ export class MutualNavComponent implements OnInit {
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
   class = 'filtered';
+  menu_class = 'popup';
+  aria_expanded = 'false';
   mainList = {};
+  keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
+  openDropDownKey: any;
+  prevOpenKey: any;
   Categories = ['Clothings', 'Shoes', 'Bags', 'Accesories'];
   ProductType = [
     'All clothings',
@@ -24,7 +30,9 @@ export class MutualNavComponent implements OnInit {
   Stores = ['All Stores', 'ASOS', 'ZARA', 'Adika'];
   Price = ['All Prices', '<1000', '1000-5000', '<5000'];
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit() {
     this.mainList['Category'] = this.Categories;
     this.mainList['Product type'] = this.ProductType;
     this.mainList['Designer'] = this.Designers;
@@ -32,14 +40,28 @@ export class MutualNavComponent implements OnInit {
     this.mainList['Price'] = this.Price;
   }
 
-  ngOnInit() {}
-
-  changeMenu() {
+  changeMenu(key, i) {
     this.change.emit(this.class);
+    let dropDownID = $('#_' + i);
+
+    if (this.openDropDownKey) {
+      this.prevOpenKey.css({
+        display: 'none'
+      });
+      if (this.openDropDownKey == key) {
+        this.openDropDownKey = null;
+        return;
+      }
+    }
+    this.prevOpenKey = dropDownID;
+    this.openDropDownKey = key;
+    dropDownID.css({
+      display: 'block'
+    });
   }
 
   getKeys() {
-    return Object.keys(this.mainList);
+    return this.keys;
   }
 
   getValues(key) {
