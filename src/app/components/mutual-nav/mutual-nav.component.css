@@ -37,32 +37,216 @@ div.center {
   color: #333;
 }
 
-.dropdown-content {
-  display: none;
-  width: 100%;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+.dropbtn.category {
+  color: rgb(140, 140, 140);
 }
 
+.dropbtn.product {
+  color: rgb(140, 140, 140);
+}
+
+.dropbtn.designer {
+  color: rgb(140, 140, 140);
+}
+
+.dropbtn.price {
+  color: rgb(140, 140, 140);
+}
+
+.dropbtn.store {
+  color: rgb(140, 140, 140);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  align-items: center;
+  background: white;
+}
+
+.dropdown-content {
+  display: none;
+  z-index: 1;
+  background-color: #f9f9f9;
+  margin-left: 15px;
+  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  border-style: solid;
+  border-radius: 4px;
+  z-index: 1;   */
+}
+
+/* 
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  text-align: center;
+  text-align: left;
   font-size: 14px;
+} */
+
+#_category {
+  background: white;
+  margin-bottom: 30px;
+  border-radius: 3px;
 }
 
-.category {
-  background-color: red;
+#_product {
+  background: white;
+  margin-bottom: 30px;
+  border-radius: 3px;
 }
-.dropdown-content a:hover {
+
+#_designer {
+  background: white;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+
+#_price {
+  background: white;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+
+#_store {
+  background: white;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+
+/* .dropdown-content a:hover {
   background-color: #f1f1f1;
-}
+} */
 
 .dropdown:vi .dropdown-content {
   display: block;
   margin-top: 10px;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 13px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+label.container {
+  font-size: 12px;
+  font-family: 'Maven Pro', sans-serif;
+  width: 120px;
+}
+
+label.container.all.clothings,
+label.container.all.designers,
+label.container.jackets,
+label.container.dresses {
+  width: 140px;
+}
+
+label.container.high,
+label.container.low {
+  width: 110px;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+  border-radius: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+/* .container:hover input ~ .checkmark {
+  background-color: #ccc;
+} */
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: rgb(255, 20, 147);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.submit-btn {
+  display: none;
+  position: absolute;
+  bottom: 12px;
+  right: 0px;
+}
+
+button {
+  background: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: rgb(255, 20, 147);
+}
+
+button:hover {
+  text-decoration: underline;
+}
+
+.form-group.category {
+  width: 100%;
+}
+
+.form-group.product {
+  left: -112px;
+}
+
+.form-group.designer {
+  left: -255px;
+}
+
+.form-group.store {
+  left: -370px;
+}
+
+.form-group.price {
+  left: -465px;
 }

@@ -1,35 +1,111 @@
-<div class="container">
+<!-- <div class="container">
   <div class="center">
     <div *ngFor="let key of getKeys(); let i = index" class="dropdown">
       <div class="dropbtn" (click)="changeMenu(key, i)">{{ key }}</div>
       <div class="dropdown-content" id="{{ '_' + i }}">
         <div class="{{ key.toLowerCase() }}">
           <a *ngFor="let item of getValues(key)"> {{ item }}</a>
-        </div>
-        <button>Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <div class="container">
-  <div class="center">
- 
-    <div *ngFor="let key of getKeys(); let i = index" class="dropbtn">
-      <button
-        type="button"
-        aria-haspopup="true"
-        aria-expanded="false"
-        (click)="changeMenu(key, i)"
-        class="{{ 'dropbtn' + '_' + i }}"
-      >
-        {{ key }}
-      </button>
-      <div id="{{ '_' + i }}">
-        <div class="dropdown-content" id="{{ '_' + i }}">
-          <a *ngFor="let item of getValues(key)"> {{ item }} </a>
+          <button>Submit</button>
         </div>
       </div>
     </div>
   </div>
 </div> -->
+
+<div class="container">
+  <div class="center">
+    <div class="dropdown">
+      <div class="dropbtn category" (click)="changeMenu('category', 0)">
+        Categories <i class="fa fa-caret-down"></i>
+      </div>
+
+      <div class="dropdown-content" id="{{ '_' + 'category' }}">
+        <form [formGroup]="categoryForm">
+          <div class="form-group category" (ngSubmit)="onSubmitCategory()">
+            <label
+              *ngFor="let item of getValues('Category')"
+              class="{{ 'container ' + item.toLowerCase() }}"
+            >
+              {{ item }} <input type="checkbox"/><span class="checkmark"></span
+            ></label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="dropdown">
+      <div class="dropbtn product" (click)="changeMenu('product', 0)">
+        Product Type <i class="fa fa-caret-down"></i>
+      </div>
+      <div class="dropdown-content" id="{{ '_' + 'product' }}">
+        <form [formGroup]="productForm">
+          <div class="form-group product" (ngSubmit)="onSubmitProduct()">
+            <label
+              *ngFor="let item of getValues('Product type')"
+              class="{{ 'container ' + item.toLowerCase() }}"
+            >
+              {{ item }} <input type="checkbox"/><span class="checkmark"></span
+            ></label>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <div class="dropbtn designer" (click)="changeMenu('designer', 0)">
+        Designer <i class="fa fa-caret-down"></i>
+      </div>
+      <div class="dropdown-content" id="{{ '_' + 'designer' }}">
+        <form [formGroup]="designerForm">
+          <div class="form-group designer" (ngSubmit)="onSubmitDesigner()">
+            <label
+              *ngFor="let item of getValues('Designer')"
+              class="{{ 'container ' + item.toLowerCase() }}"
+            >
+              {{ item }} <input type="checkbox"/><span class="checkmark"></span
+            ></label>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <div class="dropbtn store" (click)="changeMenu('store', 0)">
+        Store <i class="fa fa-caret-down"></i>
+      </div>
+      <div class="dropdown-content" id="{{ '_' + 'store' }}">
+        <form [formGroup]="storeForm">
+          <div class="form-group store" (ngSubmit)="onSubmitStore()">
+            <label
+              *ngFor="let item of getValues('Store')"
+              class="{{ 'container ' + item.toLowerCase() }}"
+            >
+              {{ item }} <input type="checkbox"/><span class="checkmark"></span
+            ></label>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <div class="dropbtn price" (click)="changeMenu('price', 0)">
+        Price <i class="fa fa-caret-down"></i>
+      </div>
+      <div class="dropdown-content" id="{{ '_' + 'price' }}">
+        <form [formGroup]="PriceForm">
+          <div class="form-group price" (ngSubmit)="onSubmitPrice()">
+            <label
+              *ngFor="let item of getValues('Price')"
+              class="{{ 'container ' + item.toLowerCase() }}"
+            >
+              {{ item }} <input type="checkbox"/><span class="checkmark"></span
+            ></label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="submit-btn">
+      <button>Save</button>
+      <button>Clear</button>
+    </div>
+  </div>
+</div>
