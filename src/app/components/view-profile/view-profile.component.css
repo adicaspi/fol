@@ -1,5 +1,5 @@
 .display{
-  background-color: #f9f9f9;
+  background-color: white;
 }
 
 html, body{
@@ -11,7 +11,7 @@ html, body{
 }
 
 body {
-  background-color: #f9f9f9;
+  background-color: white;
 }
 
 .center {
@@ -23,7 +23,7 @@ body {
 
   .hidden {
     display: initial;
-    background-color: #f9f9f9;
+    background-color: white;
   }
   
   .display {

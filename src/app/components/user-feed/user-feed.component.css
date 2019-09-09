@@ -33,6 +33,7 @@
     border: none;
     border-radius: 20px;
     display: inline-block;
+    border: 1px solid rgb(235,235,235);
   }
 
   .card-text {
