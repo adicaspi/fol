@@ -1,25 +1,27 @@
 <html>
-  <body>
-    <div *ngIf="desktop; else mobileView" class="display">
-      <app-navbar></app-navbar>
-      <app-mutual-nav (change)="countChange($event)"></app-mutual-nav>
-      <!-- <div class="center">
+
+<body>
+  <div *ngIf="desktop; else mobileView" class="display">
+    <app-navbar></app-navbar>
+    <!-- <app-mutual-nav (change)="countChange($event)"></app-mutual-nav> -->
+    <!-- <div class="center">
         <app-user-profile-info></app-user-profile-info>
         <app-user-feed></app-user-feed>
       </div> -->
-      <div [class]="classToApply">
+    <div [class]="classToApply">
+      <app-user-profile-info></app-user-profile-info>
+      <app-user-feed></app-user-feed>
+    </div>
+  </div>
+  <ng-template #mobileView>
+    <div class="hidden">
+      <app-shopping-nav>
         <app-user-profile-info></app-user-profile-info>
         <app-user-feed></app-user-feed>
-      </div>
+        <app-navbar></app-navbar>
+      </app-shopping-nav>
     </div>
-    <ng-template #mobileView>
-      <div class="hidden">
-        <app-shopping-nav>
-          <app-user-profile-info></app-user-profile-info>
-          <app-user-feed></app-user-feed>
-          <app-navbar></app-navbar>
-        </app-shopping-nav>
-      </div>
-    </ng-template>
-  </body>
+  </ng-template>
+</body>
+
 </html>

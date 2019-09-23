@@ -1,11 +1,16 @@
 <nav>
   <ul class="fw-navbar">
-
     <li>
-      <img src="../../../assets/FW-Icon-1.png" class="logo nav-item" (click)="feedPage()"/>
+      <img src="../../../assets/FW-Icon-1.png" class="logo nav-item" (click)="feedPage()" />
     </li>
 
+
     <div class="center-container">
+
+      <li>
+        <app-mutual-nav></app-mutual-nav>
+      </li>
+
 
       <li class="nav-item search">
         <form>
@@ -14,11 +19,11 @@
               <svg class="search-icon" view-box="0 0 16 16" role="presentatino" aria-hidden="true">
                 <path d="m2.5 7c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5-4.5-2-4.5-4.5m13.1
                 6.9-2.8-2.9c.7-1.1 1.2-2.5 1.2-4 0-3.9-3.1-7-7-7s-7 3.1-7 7 3.1 7 7 7c1.5 0 
-                2.9-.5 4-1.2l2.9 2.8c.2.3.5.4.9.4.3 0 .6-.1.8-.4.5-.5.5-1.2 0-1.7" ></path>
+                2.9-.5 4-1.2l2.9 2.8c.2.3.5.4.9.4.3 0 .6-.1.8-.4.5-.5.5-1.2 0-1.7"></path>
               </svg>
             </div>
             <div class="input-container">
-              <input type="serach" placeholder="Search" spellcheck="false" id="navBarSearchForm"/>
+              <input type="serach" placeholder="Search" spellcheck="false" id="navBarSearchForm" />
             </div>
           </div>
         </form>
@@ -30,7 +35,7 @@
     </div>
 
     <li>
-      <img src="../../../assets/kloss_profile.jpg" class="profile" (click)="profilePage()"/>
+      <img src="../../../assets/kloss_profile.jpg" class="profile" (click)="profilePage()" />
     </li>
 
   </ul>

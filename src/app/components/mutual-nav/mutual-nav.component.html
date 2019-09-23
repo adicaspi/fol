@@ -1,104 +1,168 @@
+<mat-toolbar>
+
+  <button mat-button [matMenuTriggerFor]="category">Category</button>
+  <mat-menu #category="matMenu">
+    <form [formGroup]="categoryForm" (ngSubmit)="categoryValue()">
+      <mat-radio-group class="category-radio-group" (change)="onChange($event)" aria-label="Select an option">
+
+
+        <mat-radio-button *ngFor="let category of categories" [value]="category.id" [checked]="category.checked" formControlName="category">
+          <label class="category-label"> {{category.name}}</label>
+        </mat-radio-button>
+        <!-- <input type="radio" class="cat-input" formControlName="category" [value]="category" [checked]="category_checked">
+          <label> {{category}}</label> -->
+        <!-- </span> -->
+        <!-- <mat-radio-button (click)="$event.stopPropagation();" *ngFor="let category of categories" [value]="category" formControlName="category">
+          {{category}}
+        </mat-radio-button> -->
+      </mat-radio-group>
+      <!-- <button type="ngSubmit" mat-button>save</button> -->
+    </form>
+  </mat-menu>
+
+  <button mat-button *ngIf="showProduct" [matMenuTriggerFor]="product">Product Type</button>
+  <mat-menu #product="matMenu" class=checkbox-menu>
+    <mat-checkbox *ngFor="let product of productsToShow" class="example-margin" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
+      [value]="product.id" [disabled]="disabled" (click)="$event.stopPropagation();">
+      {{product.name}}
+    </mat-checkbox>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="designer">Designer</button>
+  <mat-menu #designer="matMenu" class=checkbox-menu>
+    <mat-checkbox *ngFor="let designer of designers" class="example-margin" [value]="designer.id" (click)="$event.stopPropagation();"
+      (change)="OnChangeDesignerCheckBox($event)">
+      {{designer.name}}
+    </mat-checkbox>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="store">Store</button>
+  <mat-menu #store="matMenu" class=checkbox-menu>
+    <mat-checkbox *ngFor="let store of stores" class="example-margin" [value]="store.id" [disabled]="disabled" (click)="$event.stopPropagation();"
+      (change)="OnChangeStoreCheckBox($event)"> {{store.name}}
+    </mat-checkbox>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="price">Price</button>
+  <mat-menu #price="matMenu">
+    <!-- <label class="price-container"> -->
+    <mat-slider thumbLabel [displayWith]="formatLabel" min="1" max="100000" (click)="$event.stopPropagation();" (change)="OnChangePriceSlider($event)"></mat-slider>
+    <!-- </label> -->
+  </mat-menu>
+  <span class="filler"></span>
+
+</mat-toolbar>
+
+
 <!-- <div class="container">
   <div class="center">
-    <div *ngFor="let key of getKeys(); let i = index" class="dropdown">
-      <div class="dropbtn" (click)="changeMenu(key, i)">{{ key }}</div>
-      <div class="dropdown-content" id="{{ '_' + i }}">
-        <div class="{{ key.toLowerCase() }}">
-          <a *ngFor="let item of getValues(key)"> {{ item }}</a>
-          <button>Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
-<div class="container">
-  <div class="center">
+
     <div class="dropdown">
       <div class="dropbtn category" (click)="changeMenu('category', 0)">
-        Categories <i class="fa fa-caret-down"></i>
+        Category
+        <i class="fa fa-caret-down"></i>
       </div>
 
       <div class="dropdown-content" id="{{ '_' + 'category' }}">
         <form [formGroup]="categoryForm">
           <div class="form-group category" (ngSubmit)="onSubmitCategory()">
-            <label
-              *ngFor="let item of getValues('Category')"
-              class="{{ 'container ' + item.toLowerCase() }}"
-            >
-              {{ item }} <input type="checkbox"/><span class="checkmark"></span
-            ></label>
+            <label *ngFor="let item of getValues('Category')" class="{{ 'container ' + item.toLowerCase() }}">
+              {{ item }}
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+            </label>
+            <label class="submit cat">
+              <button>Save</button>
+            </label>
           </div>
         </form>
       </div>
     </div>
+
+
     <div class="dropdown">
       <div class="dropbtn product" (click)="changeMenu('product', 0)">
-        Product Type <i class="fa fa-caret-down"></i>
+        Product Type
+        <i class="fa fa-caret-down"></i>
       </div>
       <div class="dropdown-content" id="{{ '_' + 'product' }}">
         <form [formGroup]="productForm">
           <div class="form-group product" (ngSubmit)="onSubmitProduct()">
-            <label
-              *ngFor="let item of getValues('Product type')"
-              class="{{ 'container ' + item.toLowerCase() }}"
-            >
-              {{ item }} <input type="checkbox"/><span class="checkmark"></span
-            ></label>
+            <label *ngFor="let item of getValues('Product type')" class="{{ 'container ' + item.toLowerCase() }}">
+              {{ item }}
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+            </label>
+            <label class="submit product">
+              <button>Save</button>
+            </label>
           </div>
         </form>
       </div>
     </div>
 
+
     <div class="dropdown">
-      <div class="dropbtn designer" (click)="changeMenu('designer', 0)">
-        Designer <i class="fa fa-caret-down"></i>
+      <div class="dropbtn category" (click)="changeMenu('designer', 0)">
+        Designer
+        <i class="fa fa-caret-down"></i>
       </div>
+
       <div class="dropdown-content" id="{{ '_' + 'designer' }}">
-        <form [formGroup]="designerForm">
-          <div class="form-group designer" (ngSubmit)="onSubmitDesigner()">
-            <label
-              *ngFor="let item of getValues('Designer')"
-              class="{{ 'container ' + item.toLowerCase() }}"
-            >
-              {{ item }} <input type="checkbox"/><span class="checkmark"></span
-            ></label>
+        <form [formGroup]="categoryForm">
+          <div class="form-group category" (ngSubmit)="onSubmitCategory()">
+            <label *ngFor="let item of getValues('Category')" class="{{ 'container ' + item.toLowerCase() }}">
+              {{ item }}
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+            </label>
+            <label class="submit cat">
+              <button>Save</button>
+            </label>
           </div>
         </form>
       </div>
     </div>
 
+
+
     <div class="dropdown">
-      <div class="dropbtn store" (click)="changeMenu('store', 0)">
-        Store <i class="fa fa-caret-down"></i>
+      <div class="dropbtn category" (click)="changeMenu('store', 0)">
+        Store
+        <i class="fa fa-caret-down"></i>
       </div>
+
       <div class="dropdown-content" id="{{ '_' + 'store' }}">
-        <form [formGroup]="storeForm">
-          <div class="form-group store" (ngSubmit)="onSubmitStore()">
-            <label
-              *ngFor="let item of getValues('Store')"
-              class="{{ 'container ' + item.toLowerCase() }}"
-            >
-              {{ item }} <input type="checkbox"/><span class="checkmark"></span
-            ></label>
+        <form [formGroup]="categoryForm">
+          <div class="form-group category" (ngSubmit)="onSubmitCategory()">
+            <label *ngFor="let item of getValues('Category')" class="{{ 'container ' + item.toLowerCase() }}">
+              {{ item }}
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+            </label>
+            <label class="submit cat">
+              <button>Save</button>
+            </label>
           </div>
         </form>
       </div>
     </div>
+
+
 
     <div class="dropdown">
       <div class="dropbtn price" (click)="changeMenu('price', 0)">
-        Price <i class="fa fa-caret-down"></i>
+        Price
+        <i class="fa fa-caret-down"></i>
       </div>
       <div class="dropdown-content" id="{{ '_' + 'price' }}">
         <form [formGroup]="PriceForm">
-          <div class="form-group price" (ngSubmit)="onSubmitPrice()">
-            <label
-              *ngFor="let item of getValues('Price')"
-              class="{{ 'container ' + item.toLowerCase() }}"
-            >
-              {{ item }} <input type="checkbox"/><span class="checkmark"></span
-            ></label>
+          <div class="form-group category" (ngSubmit)="onSubmitPrice()">
+            <label class="price-container">
+              <mat-slider thumbLabel [displayWith]="formatLabel" min="1" max="100000"></mat-slider>
+            </label>
+            <label class="submit price">
+              <button>Save</button>
+            </label>
           </div>
         </form>
       </div>
@@ -108,4 +172,4 @@
       <button>Clear</button>
     </div>
   </div>
-</div>
+</div> -->

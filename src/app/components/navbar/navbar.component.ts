@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { RegisterComponent } from '../register/register.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatMenuTrigger } from '../../../../node_modules/@angular/material';
+import { MutualNavComponent } from '../mutual-nav/mutual-nav.component';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +14,10 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  //  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
+
   enabled: boolean = false;
+  menuIsClosed: boolean = true;
   loggedin = false;
   feed: boolean = false;
   explore: boolean = false;
@@ -28,7 +33,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private deviceService: DeviceDetectorService
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.router.url.includes('profile')) {
@@ -72,5 +77,22 @@ export class NavbarComponent implements OnInit {
     this.feed = false;
     this.explore = true;
     this.router.navigate(['/explore', this.userService.userId]);
+  }
+
+
+  openCloseMenu() {
+    console.log("im in func", this.menuIsClosed);
+    if (this.menuIsClosed) {
+      console.log("im in func openig");
+      //this.menu.openMenu();
+      this.menuIsClosed = false;
+    }
+    else {
+      console.log("im in func closeing");
+
+      //this.menu.closeMenu();
+      this.menuIsClosed = true;
+    }
+
   }
 }

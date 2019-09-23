@@ -11,11 +11,11 @@ import { DialogService } from '../../services/dialog.service';
 export class FeedComponent implements OnInit {
   @Input('post') timelinePost: TimelinePost;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(private dialogService: DialogService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   openDialog(): void {
-    this.dialogService.openModalWindow(ProductPageComponent, this.timelinePost);
+    this.dialogService.openModalWindow(ProductPageComponent, this.timelinePost, "feed");
   }
 }

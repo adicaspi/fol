@@ -243,3 +243,7 @@
   }
 }
 /* } */
+.basic-container {
+  overflow-y: auto !important;
+  pointer-events: auto !important;
+}

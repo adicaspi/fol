@@ -41,9 +41,11 @@ export class DialogService {
     public dialog: MatDialog,
     private overlay: Overlay,
     private injector: Injector
-  ) {}
+  ) { }
 
   openDialog(config: FilePreviewDialogConfig = {}) {
+    config.backdropClass = "backdrop-product";
+    config.panelClass = "panel-product";
     const dialogConfig = { ...DEFAULT_CONFIG, ...config };
     const overlayRef = this.createOverlay(dialogConfig);
     //const filePreviewPortal = new ComponentPortal(FilePreviewOverlayComponent);
@@ -82,7 +84,7 @@ export class DialogService {
 
     const containerRef: ComponentRef<
       FilePreviewOverlayComponent
-    > = overlayRef.attach(containerPortal);
+      > = overlayRef.attach(containerPortal);
 
     return containerRef.instance;
   }
@@ -117,7 +119,7 @@ export class DialogService {
   }
 
   openModalWindow(component, data?, componentName?) {
-    console.log('in openModalWinodw', component, data);
+    console.log('in openModalWinodw', component, data, componentName);
     const modalWindowConfig = new MatDialogConfig<ProductPageComponent>();
 
     //dialogConfig.scrollStrategy = scrollStrategy;

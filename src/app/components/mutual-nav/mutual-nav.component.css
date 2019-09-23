@@ -1,14 +1,14 @@
 div.container {
-  width: 100%;
-  max-width: 100%;
+  /* width: 100%; */
+  /* max-width: 100%; */
   background-color: white;
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid rgb(235, 235, 235);
+  /* border-bottom: 1px solid rgb(235, 235, 235); */
 }
 
 div.center {
-  width: 900px;
+  /* width: 900px; */
   position: relative;
   left: 0px;
   margin: auto;
@@ -22,10 +22,10 @@ div.center {
 
 .dropbtn {
   display: inline-block;
-  color: rgb(140, 140, 140);
+  color: black; 
   cursor: pointer;
-  margin-right: 16px;
-  margin-bottom: 12px;
+  /* margin-right: 16px;
+  margin-bottom: 12px; */
   font-size: 14px;
   transition: color 200ms;
   padding: 5px 16px;
@@ -34,27 +34,12 @@ div.center {
 }
 
 .dropbtn:hover {
-  color: #333;
+  /* color: #333; */
+  /* color: rgb(140, 140, 140); */
 }
 
-.dropbtn.category {
-  color: rgb(140, 140, 140);
-}
-
-.dropbtn.product {
-  color: rgb(140, 140, 140);
-}
-
-.dropbtn.designer {
-  color: rgb(140, 140, 140);
-}
-
-.dropbtn.price {
-  color: rgb(140, 140, 140);
-}
-
-.dropbtn.store {
-  color: rgb(140, 140, 140);
+.dropbtn.product{
+  display: none;
 }
 
 .form-group {
@@ -62,7 +47,7 @@ div.center {
   flex-direction: row;
   position: absolute;
   align-items: center;
-  background: white;
+  width: 100%;
 }
 
 .dropdown-content {
@@ -70,56 +55,10 @@ div.center {
   z-index: 1;
   background-color: #f9f9f9;
   margin-left: 15px;
-  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  border-style: solid;
-  border-radius: 4px;
-  z-index: 1;   */
-}
-
-/* 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  font-size: 14px;
-} */
-
-#_category {
   background: white;
   margin-bottom: 30px;
   border-radius: 3px;
 }
-
-#_product {
-  background: white;
-  margin-bottom: 30px;
-  border-radius: 3px;
-}
-
-#_designer {
-  background: white;
-  margin-bottom: 30px;
-  border-radius: 3px;
-}
-
-#_price {
-  background: white;
-  margin-bottom: 30px;
-  border-radius: 3px;
-}
-
-#_store {
-  background: white;
-  margin-bottom: 30px;
-  border-radius: 3px;
-}
-
-/* .dropdown-content a:hover {
-  background-color: #f1f1f1;
-} */
 
 .dropdown:vi .dropdown-content {
   display: block;
@@ -146,6 +85,12 @@ label.container {
   width: 120px;
 }
 
+label.price-container{
+  width:120px;
+  margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 label.container.all.clothings,
 label.container.all.designers,
 label.container.jackets,
@@ -153,10 +98,7 @@ label.container.dresses {
   width: 140px;
 }
 
-label.container.high,
-label.container.low {
-  width: 110px;
-}
+
 
 /* Hide the browser's default checkbox */
 .container input {
@@ -231,22 +173,82 @@ button:hover {
   text-decoration: underline;
 }
 
-.form-group.category {
-  width: 100%;
+
+label.submit {
+  margin-bottom: 12px;
+  border: solid;
+  border-color: rgb(255, 20, 147);
+  border-radius: 12px;
 }
 
-.form-group.product {
-  left: -112px;
+
+mat-slider {
+  width: 300px;
+}
+div.mat-slider-thumb{
+  background-color: #ff4081 !important;
+
 }
 
-.form-group.designer {
-  left: -255px;
+mat-toolbar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
 }
 
-.form-group.store {
-  left: -370px;
+button.mat-button{
+  color:black;
+  font-size: 15px;
+  font-family: 'Maven Pro', sans-serif;
+  outline:none;
 }
 
-.form-group.price {
-  left: -465px;
+/* span.mat-radio-button{
+  font-size:12px;
+  font-family: 'Maven Pro', sans-serif;
+  padding-right: 10px;
+} */
+
+.category-radio-group {
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+  justify-content: center;
+}
+
+label.category-label{
+  margin:0;
+  font-size: 12px;
+  margin-right: 0px;
+}
+
+button.mat-button:hover{
+  text-decoration: none;
+}
+
+.checkbox-menu{
+  display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+div.mat-menu-content{
+  display: flex;
+  flex-direction: row;
+   justify-content: space-evenly;
+}
+
+/* input[type="radio"] {
+  margin-top: -1px;
+  margin-right: 2px;
+  vertical-align: middle;
+  background-color: #ff4081;
+} */
+
+
+
+
+.filler {
+  flex: 1 1 auto;
 }
