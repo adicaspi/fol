@@ -37,12 +37,13 @@ img.logo {
 
 li.search {
   height: 48px;
-  width: 360px;
+  width: 300px;
   background-color: rgb(241,241,241);
   border: 1px solid #e6e6e6;
   border-radius: 30px;
   display: inline-block;
-
+  position: relative;
+  margin-left: auto;
   transition: box-shadow 200ms, background-color 200ms ease-in !important
 }
 
@@ -103,9 +104,9 @@ div.input-container {
 }
 
 li.explore {
-  position: relative;
+  /* position: relative; */
   top: 4px;
-  margin-left: auto;
+  /* margin-left: auto; */
   font-size: 18px;
   color: #5c5c5c;
   font-family: 'Maven Pro';
@@ -204,3 +205,5 @@ img.icon {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 900px) {
 }
+
+

@@ -27,7 +27,8 @@ import {
   MatButtonModule,
   MatSidenavModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatMenuModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpErrorComponent } from './interceptor/http-error/http-error.component';
@@ -59,6 +60,8 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
 import { FilePreviewOverlayComponent } from './components/file-preview-overlay/file-preview-overlay.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService } from './services/dialog.service';
+
+
 
 @NgModule({
   declarations: [
@@ -110,6 +113,7 @@ import { DialogService } from './services/dialog.service';
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatMenuModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -123,7 +127,8 @@ import { DialogService } from './services/dialog.service';
     ProductPageComponent,
     RegisterComponent,
     LoginComponent,
-    FilePreviewOverlayComponent
+    FilePreviewOverlayComponent,
+
   ],
 
   providers: [
@@ -150,4 +155,4 @@ import { DialogService } from './services/dialog.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

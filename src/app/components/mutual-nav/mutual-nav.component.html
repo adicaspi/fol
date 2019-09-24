@@ -1,13 +1,44 @@
-<div class="container">
-  <div class="center">
-    <div *ngFor="let key of getKeys()" class="dropdown">
-      <div class="dropbtn">
-        {{key}}
-      </div>
-      <!-- <div class="dropdown-content">
-        <a *ngFor="let item of mainList[key]">
-        </a>
-      </div>
-    </div> -->
-  </div>
-</div>
+<mat-toolbar>
+
+  <button mat-button [matMenuTriggerFor]="category">Category</button>
+  <mat-menu #category="matMenu">
+    <mat-radio-group class="category-radio-group" (change)="onChange($event)" aria-label="Select an option">
+      <mat-radio-button *ngFor="let category of categories" [value]="category.id" [checked]="category.checked">
+        <label class="category-label"> {{category.name}}</label>
+      </mat-radio-button>
+    </mat-radio-group>
+    <!-- <button type="ngSubmit" mat-button>save</button> -->
+  </mat-menu>
+
+  <button mat-button *ngIf="showProduct" [matMenuTriggerFor]="product">Product Type</button>
+  <mat-menu #product="matMenu" class=checkbox-menu>
+    <mat-checkbox *ngFor="let product of productsToShow" class="example-margin" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
+      [value]="product.id" [disabled]="disabled" (click)="$event.stopPropagation();">
+      {{product.name}}
+    </mat-checkbox>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="designer">Designer</button>
+  <mat-menu #designer="matMenu" class=checkbox-menu>
+    <mat-checkbox *ngFor="let designer of designers" class="example-margin" [value]="designer.id" (click)="$event.stopPropagation();"
+      (change)="OnChangeDesignerCheckBox($event)">
+      {{designer.name}}
+    </mat-checkbox>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="store">Store</button>
+  <mat-menu #store="matMenu" class=checkbox-menu>
+    <mat-checkbox *ngFor="let store of stores" class="example-margin" [value]="store.id" [disabled]="disabled" (click)="$event.stopPropagation();"
+      (change)="OnChangeStoreCheckBox($event)"> {{store.name}}
+    </mat-checkbox>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="price">Price</button>
+  <mat-menu #price="matMenu">
+    <!-- <label class="price-container"> -->
+    <mat-slider thumbLabel [displayWith]="formatLabel" min="1" max="100000" (click)="$event.stopPropagation();" (change)="OnChangePriceSlider($event)"></mat-slider>
+    <!-- </label> -->
+  </mat-menu>
+  <span class="filler"></span>
+
+</mat-toolbar>

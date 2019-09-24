@@ -1,16 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 html,
 body {
   height: 100%;
 }
 
-.cdk-overlay-container {
-  overflow-y: auto !important;
-  pointer-events: auto !important;
-}
+ .cdk-overlay-container {
+  /* pointer-events: auto !important; */
+  /* overflow-y: auto !important; */
+} 
 
 .overlay-fol-list .mat-dialog-container {
   border-radius: 2px !important;
@@ -30,10 +31,18 @@ body {
   height: 625px !important;
 }
 
-.cdk-overlay-container > .cdk-overlay-backdrop {
+/* .cdk-overlay-container > .cdk-overlay-backdrop {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
+} */
+
+.cdk-overlay-container > .backdrop-product {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  overflow-y: auto !important;
+  pointer-events: auto !important;
 }
+
 .cdk-global-overlay-wrapper-fol::before {
   content: '';
   display: block;
@@ -58,4 +67,102 @@ body {
   text-align: left;
   white-space: normal;
   /* background-color: rgba(0, 0, 0, 0.4); */
+}
+
+.cdk-global-overlay-wrapper{
+  overflow-y: auto !important;
+ pointer-events: auto !important;
+}
+
+.backdrop-product{
+  overflow-y: auto !important;
+  /* pointer-events: auto !important; */
+}
+
+
+mat-slider{
+  position: 0;
+} 
+
+div.mat-slider-thumb-label{
+  background-color: #ff4081 !important;
+}
+
+div.mat-slider-thumb{
+  background-color: #ff4081 !important;
+}
+
+/* mat-accent mat-slider-thumb{
+  background-color: #ff4081;
+} */
+
+
+/* div.mat-radio-outer-circle{
+  width:15px;
+  height: 15px;
+
+} */
+
+ div.mat-menu-panel{
+  max-width: 380px !important;
+}
+
+div.mat-menu-content{
+  display: flex;
+  flex-direction: row;
+   justify-content: space-evenly;
+}
+
+ div.mat-radio-container{
+  height: 15px;
+  width: 15px;
+}
+ div.mat-radio-outer-circle{
+  height: 15px;
+  width: 15px;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #ff4081;
+}
+
+div.mat-radio-inner-circle{
+  height: 15px;
+  width: 15px;
+  background-color: #ff4081 !important;
+}
+div.mat-radio-button div.mat-radio-ripple{
+  height: 30px; 
+  width: 30px; 
+  left: calc(50% - 10px); 
+  top: calc(50% - 10px); 
+}
+
+div.mat-radio-label-content{
+  padding-left: 2px;
+  padding-right: 10px;
+}
+
+label.category-label{
+  font-family: 'Maven Pro', sans-serif;
+}
+
+label.mat-checkbox-layout{
+  margin-right: 5px;
+}
+
+div.mat-checkbox-inner-container{
+  margin-right: 3px;
+}
+
+.mat-checkbox{
+  font-family: 'Maven Pro', sans-serif;
+}
+
+span.mat-checkbox-label{
+  font-size: 12px;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background{
+  background-color: #ff4081;
 }

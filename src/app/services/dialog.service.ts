@@ -10,7 +10,11 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ProductPageComponent } from '../components/product-page/product-page.component';
 import { LoginComponent } from '../components/login/login.component';
 import { FilePreviewOverlayComponent } from '../components/file-preview-overlay/file-preview-overlay.component';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import {
+  ComponentPortal,
+  PortalInjector,
+  ComponentType
+} from '@angular/cdk/portal';
 
 import { FilePreviewOverlayRef } from '../components/file-preview-overlay/file-preview-overlay-ref';
 
@@ -37,9 +41,11 @@ export class DialogService {
     public dialog: MatDialog,
     private overlay: Overlay,
     private injector: Injector
-  ) {}
+  ) { }
 
   openDialog(config: FilePreviewDialogConfig = {}) {
+    config.backdropClass = "backdrop-product";
+    config.panelClass = "panel-product";
     const dialogConfig = { ...DEFAULT_CONFIG, ...config };
     const overlayRef = this.createOverlay(dialogConfig);
     //const filePreviewPortal = new ComponentPortal(FilePreviewOverlayComponent);
@@ -75,9 +81,10 @@ export class DialogService {
       null,
       injector
     );
+
     const containerRef: ComponentRef<
       FilePreviewOverlayComponent
-    > = overlayRef.attach(containerPortal);
+      > = overlayRef.attach(containerPortal);
 
     return containerRef.instance;
   }
@@ -112,7 +119,7 @@ export class DialogService {
   }
 
   openModalWindow(component, data?, componentName?) {
-    console.log('in openModalWinodw', component, data);
+    console.log('in openModalWinodw', component, data, componentName);
     const modalWindowConfig = new MatDialogConfig<ProductPageComponent>();
 
     //dialogConfig.scrollStrategy = scrollStrategy;

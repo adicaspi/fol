@@ -1,65 +1,56 @@
-<!-- <i class="fal fa-times"></i> -->
 <div *ngIf="showSpinner; else product">
   <app-loading-spinner class="spinner"></app-loading-spinner>
 </div>
-<ng-template #product>
-  <div *ngIf="user as currentUser" class="wrapper">
-    <i (click)="closeModal()" class="fal fa-times"></i>
-    <div class="profile-img-comp">
-      <img id="profileImage" [attr.src]="userProfileSrc" />
-      <div class="card-text profile">{{ currentUser.username }}</div>
-    </div>
+<div class="basic-container">
+  <ng-template #product>
+    <div *ngIf="user as currentUser" class="wrapper">
+      <i (click)="closeModal()" class="fal fa-times"></i>
+      <div class="profile-img-comp">
+        <img id="profileImage" [attr.src]="userProfileSrc" />
+        <div class="card-text profile">{{ currentUser.username }}</div>
+      </div>
 
-    <div class="slider">
-      <img id="mainImage" [attr.src]="userPost.postImgSrc" />
+      <div class="slider">
+        <img id="mainImage" [attr.src]="userPost.postImgSrc" />
 
-      <div class="product-description">
-        <div class="card-text title">
-          <img src="../../../assets/zara.PNG" class="store-logo" />
-        </div>
+        <div class="product-description">
+          <div class="card-text title">
+            <img src="../../../assets/zara.PNG" class="store-logo" />
+          </div>
 
-        <p id="description" class="card-text description">
-          Night Out open-back ruched satin blouse
-        </p>
+          <p id="description" class="card-text description">
+            Night Out open-back ruched satin blouse
+          </p>
 
-        <div class="footer">
-          <div class="upper-footer">
-            <a href="{{ postInfo.link }}" target="_blank">
-              <button type="button" class="shop_btn">
-                Shop
+          <div class="footer">
+            <div class="upper-footer">
+              <a href="{{ postInfo.link }}" target="_blank">
+                <button type="button" class="shop_btn">
+                  Shop
+                </button>
+              </a>
+
+              <button mat-button>
+                <i class="material-icons">more_horiz</i>
               </button>
-            </a>
-
-            <button mat-button>
-              <i class="material-icons">more_horiz</i>
-            </button>
-            <span class="price">$500</span>
+              <span class="price">$500</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="lower-part">
-        <div class="thumbnails">
-          <img
-            *ngFor="let image of thumbnails"
-            class="thumbnail"
-            [attr.src]="image"
-            (click)="setImage(image)"
-          />
-        </div>
+        <div class="lower-part">
+          <div class="thumbnails">
+            <img *ngFor="let image of thumbnails" class="thumbnail" [attr.src]="image" (click)="setImage(image)" />
+          </div>
 
-        <div class="more-from-user">
-          <div class="more-text">more from {{ currentUser.username }}</div>
-          <div class="more-from-container">
-            <img
-              *ngFor="let post of postsToShow"
-              class="more-from"
-              [attr.src]="post['postImgSrc']"
-              (click)="openDialog(post)"
-            />
+          <div class="more-from-user">
+            <div class="more-text">more from {{ currentUser.username }}</div>
+            <div class="more-from-container">
+              <img *ngFor="let post of postsToShow" class="more-from" [attr.src]="post['postImgSrc']" (click)="openDialog(post)" />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+</div>
