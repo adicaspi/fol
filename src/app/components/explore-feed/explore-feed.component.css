@@ -21,6 +21,12 @@ body {
   background-color: #f9f9f9;
 }
 
+ngx-masonry{
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+}
+
 .masonry-item {
   margin-bottom: 20px;
 }

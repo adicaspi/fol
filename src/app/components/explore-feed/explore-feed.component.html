@@ -9,11 +9,5 @@
     </ngxMasonryItem>
   </ngx-masonry>
 
-  <div
-    class="search-results"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="1000"
-    (scrolled)="fetchImages()"
-  ></div>
+  <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()"></div>
 </div>

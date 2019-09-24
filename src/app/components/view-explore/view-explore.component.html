@@ -1,15 +1,16 @@
 <html>
-  <body>
-    <div class="display">
-      <app-navbar></app-navbar>
-      <app-mutual-nav></app-mutual-nav>
+
+<body>
+  <div class="display">
+    <app-navbar></app-navbar>
+    <app-explore-feed></app-explore-feed>
+  </div>
+  <div class="hidden">
+    <app-shopping-nav>
       <app-explore-feed></app-explore-feed>
-    </div>
-    <div class="hidden">
-      <app-shopping-nav>
-        <app-explore-feed></app-explore-feed>
-        <app-navbar></app-navbar>
-      </app-shopping-nav>
-    </div>
-  </body>
+      <app-navbar></app-navbar>
+    </app-shopping-nav>
+  </div>
+</body>
+
 </html>
