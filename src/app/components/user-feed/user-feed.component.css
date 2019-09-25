@@ -1,19 +1,24 @@
-@media only screen and (min-width: 900px) {
+/* @media only screen and (min-width: 900px) { */
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
   }
 
-  /* #main-body {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  } */
+  ngx-masonry{
+    margin: 0 auto;
+  }
+
+  ngxMasonryItem:nth-of-type(1n) {
+    margin-left: 15px;
+  }
 
   ngxMasonryItem:nth-of-type(3n) {
-    margin-right: 0px;
+    margin-right: 15px;
   }
+  
+  /* ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
+  } */
 
   .masonry-item img {
     width: 197px;
@@ -27,7 +32,6 @@
   }
 
   .card {
-    /* height: 337px; */
     width: 274px;
     margin-top: 39px;
     border: none;
@@ -70,8 +74,8 @@
     font-family: open sans, sans-serif;
     line-height: 1;
   }
-}
-
+/* } */
+/* 
 @media (min-width: 576px) {
 }
 
@@ -96,7 +100,7 @@
     width: 50%;
   }
   .masonry-item img {
-    /* width: 100px; */
+   
     width: 85%;
     height: 200px;
     margin-left: auto;
@@ -108,7 +112,6 @@
   .card {
     height: 300px;
     margin: 20px;
-    /* margin-top: 35px; */
     border: none;
     border-radius: 10px;
   }
@@ -132,7 +135,6 @@
     font-size: 12px;
     height: 48px;
     margin-top: 30px;
-    /* font-family: 'Roboto', sans-serif; */
     font-family: 'helvetica', sans-serif;
   }
-}
+}  */

@@ -26,7 +26,8 @@ export class UserFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter: 39
+    gutter: 39,
+    fitWidth: true
   };
 
   onDestroy: Subject<void> = new Subject<void>();
@@ -38,7 +39,7 @@ export class UserFeedComponent implements OnInit {
     private deviceService: DeviceDetectorService,
     private router: Router,
     private postService: PostService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params
