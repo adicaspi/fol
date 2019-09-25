@@ -2,19 +2,6 @@
   box-sizing: border-box;
 }
 
-/* force scrollbar */
-/* html {
-  overflow-y: scroll;
-  background-color: #f9f9f9;
-}
-
-body {
-  padding-right: 10px;
-  padding-left: 10px;
-  font-family: sans-serif;
-  background-color: #f9f9f9;
-} */
-
 .center {
   margin-left: 0;
   margin-right: 0;
@@ -44,18 +31,6 @@ ngxMasonryItem:nth-of-type(5n) {
   border-radius: 10px;
 }
 
-/* .card {
-  margin: 20px;
-  border: none;
-  border-radius: 10px;
-  opacity: 1;
-  transition: 0.5s ease;
-} */
-
-/* .card:hover {
-  opacity: 0.1;
-} */
-
 .description {
   width: 200px;
   margin-top: 5px;
@@ -63,7 +38,7 @@ ngxMasonryItem:nth-of-type(5n) {
   font-weight: 700px;
   font-size: 13px;
 }
-
+/* 
 @media (min-width: 360px) and (max-width: 376px) {
   body {
     font-family: sans-serif;
@@ -78,4 +53,4 @@ ngxMasonryItem:nth-of-type(5n) {
   .description {
     font-size: 10px;
   }
-}
+} */
