@@ -6,14 +6,33 @@
   margin-top: -14px;
 }
 
-.center {
-  margin: auto;
-  width: 900px;
+ngx-masonry{
+  margin: 0 auto;
 }
 
-ngxMasonryItem:nth-of-type(3n) {
-  margin-right: 0px;
+/* .center {
+  margin: auto;
+  width: 900px;
+} */
+
+ngxMasonryItem:nth-of-type(1n) {
+  margin-left: 22px;
+  margin-right: 22px;
 }
+
+/* ngxMasonryItem:nth-of-type(3n) {
+  margin-right: 30px;
+  margin-left: 0px;
+} */
+
+ngxMasonryItem:nth-of-type(2n) {
+  margin-right: 22px;
+  margin-left: 22px;
+}
+
+/* ngxMasonryItem:nth-of-type(3n) {
+  margin-right: 0px;
+} */
 
 .card {
   width: 274px;

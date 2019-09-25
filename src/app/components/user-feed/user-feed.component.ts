@@ -26,7 +26,7 @@ export class UserFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter: 39,
+    // gutter: 39,
     fitWidth: true
   };
 
