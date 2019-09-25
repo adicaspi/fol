@@ -11,51 +11,11 @@
         <span class="price">
           $450
         </span>
-        <a
-          class="store text-right"
-          href="https://www.net-a-porter.com"
-          target="_blank"
-        >
+        <a class="store text-right" href="https://www.net-a-porter.com" target="_blank">
           net-a-porter.com
         </a>
       </div>
     </ngxMasonryItem>
   </ngx-masonry>
-  <div
-    class="search-results"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="1000"
-    (scrolled)="fetchImages()"
-  ></div>
+  <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()"></div>
 </div>
-<!-- 
-<div id="main-body">
-  <div class="card masonry-item" *ngFor="let post of postsToShow">
-    <div class="masonry-img">
-      <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
-    </div>
-    <div class="card-text">
-      <div class="description">
-        little black dress
-      </div>
-      <span class="price">
-        $450
-      </span>
-      <a
-        class="store text-right"
-        href="https://www.net-a-porter.com"
-        target="_blank"
-      >
-        net-a-porter.com
-      </a>
-    </div>
-  </div>
-  <div
-    class="search-results"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="1000"
-    (scrolled)="fetchImages()"
-  ></div>
-</div> -->
