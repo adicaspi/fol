@@ -22,9 +22,7 @@ body {
 }
 
 ngx-masonry{
-  flex-direction: row;
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
 }
 
 .masonry-item {

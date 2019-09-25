@@ -27,13 +27,14 @@ export class ExploreFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter: 10
+    gutter: 10,
+    fitWidth: true
   };
   constructor(
     private userService: UserService,
     private feedService: FeedService,
     private postService: PostService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.id = this.userService.userId;
