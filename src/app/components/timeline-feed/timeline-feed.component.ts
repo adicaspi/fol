@@ -26,8 +26,7 @@ export class TimelineFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    // gutter: 39,
-    fitWidth: true
+    gutter: 39
   };
 
   constructor(
