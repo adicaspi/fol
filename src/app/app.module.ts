@@ -60,6 +60,8 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
 import { FilePreviewOverlayComponent } from './components/file-preview-overlay/file-preview-overlay.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService } from './services/dialog.service';
+import { Ng5SliderModule } from 'ng5-slider';
+
 
 
 
@@ -117,8 +119,10 @@ import { DialogService } from './services/dialog.service';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    Ng5SliderModule,
     DeviceDetectorModule.forRoot()
   ],
+
 
   entryComponents: [
     UserProfileInfoComponent,
@@ -128,6 +132,7 @@ import { DialogService } from './services/dialog.service';
     RegisterComponent,
     LoginComponent,
     FilePreviewOverlayComponent,
+    MutualNavComponent
 
   ],
 

@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import * as $ from 'jquery';
 import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '../../../../node_modules/@angular/material';
+import { Options, LabelType } from 'ng5-slider';
+import { Ng5SliderModule } from 'ng5-slider';
+
 
 @Component({
   selector: 'app-mutual-nav',
@@ -14,21 +17,37 @@ export class MutualNavComponent implements OnInit {
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    step: 100,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '$' + value;
+        case LabelType.High:
+          return '$' + value;
+        default:
+          return '$' + value;
+      }
+    }
+  }
+  minValue: number = 0;
+  maxValue: number = 5000;
   categoryForm: FormGroup;
   productForm: FormGroup;
   categroyRadioButton: MatRadioButton = null;
   allCategroiesRadioButton: MatRadioButton = null;
   showProduct: boolean = false;
 
+
+
   class = 'filtered';
   menu_class = 'popup';
   aria_expanded = 'false';
   mainList = {};
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
-  prevOpenID: any;
-  currentOpenKey: any = null;
-  prevOpenKey: any = null;
-  categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothings', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accesories', checked: false }];
+  categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothings', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
     { id: 1, name: 'All Clothings' },
     { id: 2, name: 'Tops' },
@@ -48,6 +67,7 @@ export class MutualNavComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
     this.mainList['Category'] = this.categories;
     this.mainList['Product type'] = this.clothings;
     this.mainList['Designer'] = this.designers;
@@ -67,11 +87,9 @@ export class MutualNavComponent implements OnInit {
 
   categoryValue() {
     let val = this.categoryForm.get('category');
-    console.log("im val", val);
   }
 
   clearCategoryForm() {
-    console.log("im in clear");
     if (this.categroyRadioButton) {
       this.categroyRadioButton.checked = false;
     }
@@ -100,77 +118,46 @@ export class MutualNavComponent implements OnInit {
 
   }
 
-  OnChangeDesignerCheckBox($event) {
-    console.log("in designer");
-    console.log($event.source);
-    //$event.source.toggle();
-    //MatCheckboxChange {checked,MatCheckbox}
+  selectedProduct() {
+    var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
+    for (let i = 0; i < elements.length; i++) {
+
+      if (elements[i].checked) {
+        console.log(elements[i].value);
+      }
+
+    }
   }
 
-  OnChangeStoreCheckBox($event) {
-    console.log("in store");
-    console.log($event.source);
+  selectedStore() {
+    var elements = (<HTMLInputElement[]><any>document.getElementsByName("store"));
+    for (let i = 0; i < elements.length; i++) {
+
+      if (elements[i].checked) {
+        console.log(elements[i].value);
+      }
+
+    }
+  }
+
+  selectedDesigner() {
+    var elements = (<HTMLInputElement[]><any>document.getElementsByName("designer"));
+    for (let i = 0; i < elements.length; i++) {
+
+      if (elements[i].checked) {
+        console.log(elements[i].value);
+      }
+
+    }
+  }
+
+  selectedPrice() {
+    (this.maxValue, this.minValue);
   }
 
   OnChangePriceSlider($event) {
     console.log("in price");
     console.log($event.value);
-
-  }
-
-
-
-  changeMenu(key, i) {
-    //this.change.emit(this.class);
-    if (key == 'category') {
-      this.getProductTypeElement();
-    }
-    this.currentOpenKey = key;
-    let currentDropDownID = $('#_' + key);
-    let btn = $('.submit-btn');
-    let currentDropBtn = $('.dropbtn.' + key);
-
-    //checking if this isn't the first time user opens dropbtn, if it's not then display prev key as none;
-    if (this.prevOpenKey) {
-      let prevDropBtn = $('.dropbtn.' + this.prevOpenKey);
-      // prevDropBtn.css({
-      //   color: 'rgb(140, 140, 140)'
-      // });
-      this.prevOpenID.css({
-        display: 'none'
-      });
-
-      //if user opened and closes same dropdown then just clear all fields and return
-
-      if (this.prevOpenKey == key) {
-        this.currentOpenKey = null;
-        this.prevOpenKey = null;
-        btn.css({
-          display: 'none'
-        });
-        return;
-
-        //else user openes a new dropdown which is not the same dropdown currently opens
-      } else {
-        this.prevOpenKey = this.currentOpenKey;
-        this.prevOpenID = currentDropDownID;
-      }
-    }
-    // if this is the very first time the user filters the menu
-    else {
-      this.prevOpenKey = key;
-      this.prevOpenID = currentDropDownID;
-    }
-    //anyway do this when user clicks the menu
-    currentDropDownID.css({
-      display: 'block'
-    });
-    btn.css({
-      display: 'initial'
-    });
-    currentDropBtn.css({
-      color: 'black'
-    });
   }
   getKeys() {
     return this.keys;

@@ -217,6 +217,14 @@ button.mat-button{
   justify-content: center;
 }
 
+/* .checkbox-menu{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  justify-content: center;
+} */
+
 label.category-label{
   margin:0;
   font-size: 12px;
@@ -237,6 +245,11 @@ div.mat-menu-content{
   display: flex;
   flex-direction: row;
    justify-content: space-evenly;
+   flex-wrap: wrap;
+}
+
+div.submit{
+  margin-left: auto;
 }
 
 /* input[type="radio"] {
