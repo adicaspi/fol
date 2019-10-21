@@ -1,4 +1,4 @@
-/* @media only screen and (min-width: 900px) { */
+@media only screen and (min-width: 900px) {
 #main-body {
   padding-right: 0px;
   padding-left: 0px;
@@ -115,7 +115,7 @@ span.price {
   margin-bottom: 8px;
   font-family: 'helvetica', arial, sans-serif;
 }
-/* } */
+ } 
 
 @media (min-width: 576px) {
 }

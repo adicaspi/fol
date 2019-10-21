@@ -11,7 +11,8 @@ nav {
   height: 80px;
   margin: auto;
   padding: 0;
-  width: 1040px;
+  justify-content: center;
+  /* width: 1040px; */
 }
 
 li {
