@@ -49,20 +49,20 @@ export class MutualNavComponent implements OnInit {
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
   categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothings', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
-    { id: 1, name: 'All Clothings' },
-    { id: 2, name: 'Tops' },
-    { id: 3, name: 'Jackets & Coats' },
-    { id: 4, name: 'Dresses & Skirts' },
-    { id: 5, name: 'Pants' },
-    { id: 6, name: 'Swimwear' }
+    { id: 1, name: 'All Clothings', checked: true, disabled: false },
+    { id: 2, name: 'Tops', checked: true },
+    { id: 3, name: 'Jackets & Coats', checked: true },
+    { id: 4, name: 'Dresses & Skirts', checked: true },
+    { id: 5, name: 'Pants', checked: true },
+    { id: 6, name: 'Swimwear', checked: true }
   ];
   shoes = [{ id: 1, name: 'All Shoes' },
   { id: 2, name: 'Heels' },
   { id: 3, name: 'Boots' },
   { id: 4, name: 'Sneakers' }]
   productsToShow = [];
-  designers = [{ id: 1, name: 'All Designers' }, { id: 2, name: 'Gucci' }, { id: 3, name: 'Prada' }, { id: 4, name: 'D&G' }];
-  stores = [{ id: 1, name: 'All Stores' }, { id: 2, name: 'ASOS' }, { id: 3, name: 'ZARA' }, { id: 4, name: 'Adika' }];
+  designers = [{ id: 1, name: 'All Designers', checked: true }, { id: 2, name: 'Gucci', checked: true }, { id: 3, name: 'Prada', checked: true }, { id: 4, name: 'D&G', checked: true }, { id: 5, name: 'Isabel Marant', checked: true }, { id: 6, name: 'Loewe', checked: true }, { id: 7, name: 'Saint Laurent', checked: true }, { id: 8, name: 'Celine', checked: true }, { id: 9, name: 'Givenchy', checked: true }, { id: 10, name: 'Fendi', checked: true }];
+  stores = [{ id: 1, name: 'All Stores', checked: true }, { id: 2, name: 'ASOS', checked: true }, { id: 3, name: 'ZARA', checked: true }, { id: 4, name: 'Farfetch', checked: true }, { id: 4, name: 'Shopbop', checked: true }, { id: 5, name: 'Shein', checked: true }, { id: 6, name: 'TerminalX', checked: true }, { id: 7, name: 'Net-A-Porter', checked: true }];
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -153,6 +153,43 @@ export class MutualNavComponent implements OnInit {
 
   selectedPrice() {
     (this.maxValue, this.minValue);
+  }
+
+  onChangeAllCheckBox($event, elem, arrayToIterrate) {
+
+    if (elem.id == 1) {
+      if ($event.checked == true) {
+        elem.checked = true;
+        arrayToIterrate.forEach(function (elem) {
+          elem.checked = true;
+        })
+      } else {
+        elem.checked = false
+        arrayToIterrate.forEach(function (elem) {
+          elem.checked = false;
+        })
+      }
+    } else {
+      if ($event.checked == false) {
+        elem.checked = false;
+        arrayToIterrate[0].checked = false;
+      }
+      else {
+        var allChecked = true;
+        elem.checked = true;
+        arrayToIterrate.forEach(function (elem) {
+          if (elem.id != 1) {
+            if (elem.checked == false) {
+              arrayToIterrate[0].checked = false;
+              allChecked = false;
+            }
+          }
+        })
+        if (allChecked) {
+          arrayToIterrate[0].checked = true;
+        }
+      }
+    }
   }
 
   OnChangePriceSlider($event) {

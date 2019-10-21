@@ -172,6 +172,10 @@ span.mat-checkbox-label{
   background-color: #ff4081;
 }
 
+div.mat-checkbox-frame{
+  border-color: #ff4081;
+}
+
 span.ng5-slider-span.ng5-slider-pointer{
   background-color: #ff4081;
 }

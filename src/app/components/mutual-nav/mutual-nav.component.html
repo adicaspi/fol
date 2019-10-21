@@ -11,10 +11,12 @@
 
   <button mat-button *ngIf="showProduct" [matMenuTriggerFor]="product">Product Type</button>
   <mat-menu class=checkbox-menu #product="matMenu">
-    <mat-checkbox *ngFor="let product of productsToShow" name="product" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
-      [value]="product.id" [disabled]="disabled" (click)="$event.stopPropagation();">
+    <mat-checkbox *ngFor="let product of productsToShow" name="product" [(indeterminate)]="indeterminate" [checked]="product.checked"
+      [labelPosition]="labelPosition" [value]="product.id" [disabled]="product.disabled" (click)="$event.stopPropagation();"
+      (change)="onChangeAllCheckBox($event,product,productsToShow)">
       {{product.name}}
     </mat-checkbox>
+
     <div class="submit">
       <button mat-button (click)="selectedProduct()">apply</button>
     </div>
@@ -22,8 +24,8 @@
 
   <button mat-button [matMenuTriggerFor]="designer">Designer</button>
   <mat-menu #designer="matMenu" class=checkbox-menu>
-    <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" (click)="$event.stopPropagation();"
-      (change)="OnChangeDesignerCheckBox($event)">
+    <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (click)="$event.stopPropagation();"
+      (change)="onChangeAllCheckBox($event,designer,designers)">
       {{designer.name}}
     </mat-checkbox>
     <div class="submit">
@@ -33,8 +35,8 @@
 
   <button mat-button [matMenuTriggerFor]="store">Store</button>
   <mat-menu #store="matMenu" class=checkbox-menu>
-    <mat-checkbox *ngFor="let store of stores" class="example-margin" name="store" [value]="store.id" [disabled]="disabled" (click)="$event.stopPropagation();"
-      (change)="OnChangeStoreCheckBox($event)"> {{store.name}}
+    <mat-checkbox *ngFor="let store of stores" class="example-margin" name="store" [value]="store.id" [checked]="store.checked"
+      [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeAllCheckBox($event,store,stores)"> {{store.name}}
     </mat-checkbox>
     <div class="submit">
       <button mat-button (click)="selectedStore()">apply</button>
