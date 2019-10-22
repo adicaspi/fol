@@ -6,7 +6,7 @@ import { Subject, Observable } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { DialogService } from '../../services/dialog.service';
-import { ProductPageComponent } from '../product-page/product-page.component';
+import { ConfigService } from '../../services/config.service';
 import { GlobalVariable } from '../../../global';
 import { Router } from '../../../../node_modules/@angular/router';
 
@@ -22,6 +22,9 @@ export class TimelineFeedComponent implements OnInit {
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
 
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
@@ -34,6 +37,7 @@ export class TimelineFeedComponent implements OnInit {
     private feedService: FeedService,
     private postService: PostService,
     private dialogService: DialogService,
+    private configService: ConfigService,
     private router: Router
   ) { }
 
@@ -41,6 +45,15 @@ export class TimelineFeedComponent implements OnInit {
     this.id = this.userService.getCurrentUser();
     this.id = 655;
     this.generateTimelineFeed(0, this.id);
+    this.subscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 900) {
+          this.masonryOptions.gutter = 26;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+
   }
 
   private processData = posts => {

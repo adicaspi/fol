@@ -156,7 +156,9 @@ import { Ng5SliderModule } from 'ng5-slider';
         configService.getSessionStorgae(),
       deps: [ConfigService, UserService],
       multi: true
-    }
+    },
+    { provide: 'windowObject', useValue: window },
+    ConfigService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,13 +1,14 @@
-/* @media only screen and (min-width: 900px) { */
+@media only screen and (min-width: 900px) {
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
   }
 
-  /* ngx-masonry{
-    margin: 0 auto;
-  } */
-  
+  .center {
+    margin: auto;
+    width: 900px;
+  }
+
   ngxMasonryItem:nth-of-type(3n) {
     margin-right: 0px;
   }
@@ -66,9 +67,76 @@
     font-family: open sans, sans-serif;
     line-height: 1;
   }
-/* } */
-/* 
-@media (min-width: 576px) {
+ }  
+@media (min-width: 600px) and (max-width: 900px) {
+  #main-body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .center {
+    margin: auto;
+    width: 600px;
+  }
+
+  ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
+  }
+
+  .masonry-item img {
+    width: 131px;
+    height: 196px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+  .card {
+    width: 182px;
+    margin-top: 26px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
+
+  .card-text {
+    font-size: 10px;
+    height: 32px;
+    width: 100%;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
+
+  .description {
+    text-align: center;
+    font-weight: 400;
+    color: black;
+  }
+
+  .store.text-right {
+    position: absolute;
+    right: 8px;
+    margin-top: 5px;
+    text-decoration: underline;
+    line-height: 1;
+    color: grey;
+  }
+
+  span.price {
+    position: absolute;
+    left: 8px;
+    margin-top: 5px;
+    color: #2f2e2e;
+    font-weight: 200;
+    font-size: 9px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
+  }
 }
 
 @media (min-width: 360px) and (max-width: 376px) {
@@ -129,4 +197,4 @@
     margin-top: 30px;
     font-family: 'helvetica', sans-serif;
   }
-}  */
+}  

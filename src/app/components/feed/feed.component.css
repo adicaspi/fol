@@ -9,7 +9,7 @@
 @media (min-width: 768px) {
 }
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 990px) {
+@media (min-width: 900px) {
   .card {
     width: 267px;
     height: 370px;

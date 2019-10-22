@@ -9,6 +9,7 @@ import { DialogService } from '../../services/dialog.service';
 import { ProductPageComponent } from '../product-page/product-page.component';
 import { GlobalVariable } from '../../../global';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -22,6 +23,10 @@ export class UserFeedComponent implements OnInit {
   id = 0;
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
+
 
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
@@ -37,6 +42,7 @@ export class UserFeedComponent implements OnInit {
     private dialogService: DialogService,
     private deviceService: DeviceDetectorService,
     private router: Router,
+    private configService: ConfigService,
     private postService: PostService
   ) { }
 
@@ -47,6 +53,16 @@ export class UserFeedComponent implements OnInit {
         this.id = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
         this.generateUserFeed(0, this.id);
       });
+    this.subscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 900) {
+          console.log(this.masonryOptions.gutter)
+          this.masonryOptions.gutter = 20;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+
   }
 
   private processData = posts => {

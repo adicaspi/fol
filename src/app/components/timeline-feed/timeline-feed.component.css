@@ -6,10 +6,6 @@
   margin-top: -14px;
 }
 
-/* ngx-masonry{
-  margin: 0 auto;
-} */
-
 .center {
   margin: auto;
   width: 900px;
@@ -65,20 +61,6 @@ ngxMasonryItem:nth-of-type(3n) {
   display: none;
 }
 
-/* .masonry-img:hover .img-hover {
-  width: 197px;
-  height: 295px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-.masonry-img:hover .img-main {
-  display: none;
-} */
-
 .description {
   text-align: center;
   font-weight: 400;
@@ -117,7 +99,105 @@ span.price {
 }
  } 
 
-@media (min-width: 576px) {
+@media (min-width: 600px) and (max-width: 900px)  {
+  #main-body {
+    padding-right: 0px;
+    padding-left: 0px;
+    overflow: visible;
+    margin-top: -14px;
+  }
+  
+  .center {
+    margin: auto;
+    width: 600px;
+  } 
+  
+  ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
+  }
+  
+  .card {
+    width: 182px;
+    margin-top: 17px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
+  
+  .profile-image {
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .profile-image img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-left: 9px;
+  }
+  
+  .profile-image span {
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue' Helvetica, Arial, sans-serif; */
+  
+    font-size: 12px;
+    margin-left: 6px;
+    color: rgb(33, 37, 41);
+    font-family: arial, 'helvetica', sans-serif;
+    text-align: left;
+  }
+  
+  .masonry-img .img-main {
+    width: 131px;
+    height: 196px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+  
+  .masonry-img .img-hover {
+    display: none;
+  }
+  
+  .description {
+    text-align: center;
+    font-weight: 400;
+    color: black;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .store.text-right {
+    position: absolute;
+    right: 8px;
+    margin-top: 5px;
+    text-decoration: underline;
+    line-height: 1;
+    color: grey;
+  }
+  
+  span.price {
+    position: absolute;
+    left: 8px;
+    margin-top: 5px;
+    color: #2f2e2e;
+    font-weight: 200;
+    font-size: 9px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
+  }
+  
+  .card-text {
+    font-size: 10px;
+    height: 32px;
+    width: 100%;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
 }
 
 @media (min-width: 360px) and (max-width: 376px) {
