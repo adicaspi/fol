@@ -211,10 +211,6 @@ span.price {
     width:375px;
     margin:auto;
   }
-
-  ngx-masonry{
-    margin: 0 auto;
-  }
   
   ngxMasonryItem:nth-of-type(3n) {
     margin-right: 0px;
