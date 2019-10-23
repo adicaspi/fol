@@ -23,13 +23,13 @@ const routes: Routes = [
     path: 'settings/:id',
     component: SettingsComponent
   },
-  {
-    path: 'login',
-    component: MutualNavComponent
-  },
+  // {
+  //   path: 'login',
+  //   component: MutualNavComponent
+  // },
   {
     path: '',
-    component: ViewFeedComponent
+    component: LandingPageComponent
   },
   {
     path: 'landing',
@@ -44,4 +44,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), HttpClientModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
