@@ -199,3 +199,11 @@ span.ng5-slider-span.ng5-slider-pointer{
 span.ng5-slider-span.ng5-slider-bubble{
   font-size: 13px;
 }
+
+@media (min-width: 600px) and (max-width: 900px)  {
+
+mat-toolbar.mat-toolbar.mat-toolbar-single-row{
+  height: 40px;
+}
+
+}

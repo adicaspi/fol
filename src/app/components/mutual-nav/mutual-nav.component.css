@@ -199,7 +199,7 @@ mat-toolbar{
 
 button.mat-button{
   color:black;
-  font-size: 15px;
+  font-size: 17px;
   font-family: 'Maven Pro', sans-serif;
   outline:none;
 }
@@ -259,9 +259,16 @@ div.submit{
   background-color: #ff4081;
 } */
 
-
-
-
 .filler {
   flex: 1 1 auto;
+}
+
+@media (min-width: 600px) and (max-width: 900px)  {
+  button.mat-button{
+    color:black;
+    font-size: 12px;
+    font-family: 'Maven Pro', sans-serif;
+    outline:none;
+  }
+  
 }

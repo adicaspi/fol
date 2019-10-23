@@ -7,6 +7,7 @@ import { SettingsComponent } from '../settings/settings.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MatMenuTrigger } from '../../../../node_modules/@angular/material';
 import { MutualNavComponent } from '../mutual-nav/mutual-nav.component';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-navbar',
@@ -28,11 +29,15 @@ export class NavbarComponent implements OnInit {
     { path: '', component: RegisterComponent },
     { path: 'settings/:id', component: SettingsComponent }
   ];
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
   constructor(
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private configService: ConfigService
   ) { }
 
   ngOnInit() {
@@ -48,10 +53,19 @@ export class NavbarComponent implements OnInit {
     if (this.userService.userId) {
       this.loggedin = true;
     }
+    this.subscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 600) {
+          this.mobile = true;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
 
-    if (this.deviceService.isMobile() || this.deviceService.isTablet()) {
-      this.mobile = true;
-    }
+
+    // if (this.deviceService.isMobile() || this.deviceService.isTablet()) {
+    //   this.mobile = true;
+    // }
   }
 
   profilePage() {

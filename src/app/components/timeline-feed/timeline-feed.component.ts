@@ -50,6 +50,10 @@ export class TimelineFeedComponent implements OnInit {
         if (value.width <= 900) {
           this.masonryOptions.gutter = 26;
         }
+        if (value.width <= 600) {
+          this.masonryOptions.gutter = 15;
+          console.log(this.masonryOptions.gutter);
+        }
       }),
       error => this.anyErrors = true,
       () => this.finished = true

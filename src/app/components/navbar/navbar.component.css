@@ -3,7 +3,12 @@
 nav {
   background-color: white;
   width: 100%;
+  border-bottom: 2px solid;
 }
+
+.bottom-navbar {
+  display: none;
+  }
 
 .fw-navbar {
   list-style-type: none;
@@ -16,14 +21,14 @@ nav {
   justify-content: center;
 }
 
-li {
+/* li {
   display: inline-block;
-}
+} */
 
 div.center-container {
   display: flex;
   align-items: center;
-  width: 900px;
+  /* width: 900px; */
   position: relative;
 }
 
@@ -32,14 +37,20 @@ div.center-container {
 }
 
 img.logo {
-  height: 30px;
-  padding-right: 24px;
-  cursor: pointer;
+  /* height: 30px; */
+  /* padding-right: 24px; */
+  /* cursor: pointer; */
+    height: 35px;
+    margin-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+    bottom: 4px;
 }
 
 li.search {
   height: 48px;
-  width: 300px;
+  /* width: 300px; */
   background-color: rgb(241,241,241);
   border: 1px solid #e6e6e6;
   border-radius: 30px;
@@ -111,7 +122,7 @@ li.explore {
   top: 4px;
   /* margin-left: auto; */
   font-size: 18px;
-  color: #5c5c5c;
+  /* color: #5c5c5c; */
   font-family: 'Maven Pro';
   cursor: pointer;
   border-radius: 25px;
@@ -131,6 +142,7 @@ li.explore:hover {
   border-radius: 50%;
   border: 2px solid rgba(128,128,128,0.25);
   cursor: pointer;
+  margin-right: 20px;
 }
 
 .profile:hover {
@@ -141,9 +153,9 @@ mat-icon {
   font-size: 30px;
 }
 
-.bottom-navbar {
+/* .bottom-navbar {
   display: none;
-}
+} */
 
 .nav-item.right {
   display: inline-block;
@@ -158,9 +170,14 @@ img.icon {
 
 
 @media only screen and (min-width: 600px) and  (max-width: 900px) {
+  .bottom-navbar {
+  display: none;
+  }
+
   nav {
     background-color: white;
     width: 100%;
+    border-bottom: 2px solid;
   }
   
   .fw-navbar {
@@ -191,9 +208,15 @@ img.icon {
   }
   
   img.logo {
-    height: 20px;
+    /* height: 20px;
     padding-right: 16px;
+    cursor: pointer; */
+    height: 23px;
+    margin-left: 13px;
+    margin-right: 13px;
     cursor: pointer;
+    position: relative;
+    bottom: 4px;
   }
   
   li.search {
@@ -269,7 +292,7 @@ img.icon {
     top: 2px;
     /* margin-left: auto; */
     font-size: 12px;
-    color: #5c5c5c;
+    /* color: #5c5c5c; */
     font-family: 'Maven Pro';
     cursor: pointer;
     border-radius: 25px;
@@ -299,9 +322,9 @@ img.icon {
     font-size: 20px;
   }
   
-  .bottom-navbar {
+  /* .bottom-navbar {
     display: none;
-  }
+  } */
   
   .nav-item.right {
     display: inline-block;
@@ -311,5 +334,43 @@ img.icon {
     width: 23px;
     height: 23px;
   }
-  
   }
+
+  @media (max-width: 600px)  {
+  .fw-navbar {
+      display: none;
+  }
+
+  .bottom-navbar {
+    background-color: black;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  
+.bottom-navbar .icon-img {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+div.icon-img .fa{
+  font-size: 35px;
+}
+
+.bottom-navbar .icon-img.active{
+  color: grey;
+}
+
+} 
+  
+  

@@ -4,13 +4,21 @@
   margin: auto;
   width: 900px;
 }
+
+.mobile{
+  display: none;
+}
 }
 @media only screen and (min-width: 600px) and (max-width: 900px) {
   .center {
     margin: auto;
     width: 600px;
   }
-  }
+ 
+.mobile{
+  display: none;
+}
+}
 .display{
   background-color: white;
 }
@@ -67,7 +75,7 @@ body {
   opacity: 1;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .hidden {
     display: initial;
     background-color: white;
@@ -76,4 +84,4 @@ body {
   .display {
     display: none;
   }
-}
+} */
