@@ -16,6 +16,10 @@ export class ViewFeedComponent implements OnInit {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   userId: boolean = false;
+  desktop: Boolean = true;
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
@@ -24,7 +28,7 @@ export class ViewFeedComponent implements OnInit {
     private userService: UserService,
     private http: HttpClient,
     private configService: ConfigService
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.userService.userId) {
@@ -32,6 +36,18 @@ export class ViewFeedComponent implements OnInit {
     } else {
       this.loadConfigurationData();
     }
+    this.subscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+        else {
+          this.desktop = true;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+
   }
 
   loadConfigurationData() {

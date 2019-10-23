@@ -42,6 +42,9 @@ export class ViewProfileComponent implements OnInit {
         if (value.width <= 600) {
           this.desktop = false;
         }
+        else {
+          this.desktop = true;
+        }
       }),
       error => this.anyErrors = true,
       () => this.finished = true

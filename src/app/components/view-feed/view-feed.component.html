@@ -1,14 +1,14 @@
 <body>
   <div *ngIf="userId">
-    <div class="display">
+    <div *ngIf="desktop; else mobileView" class="display">
       <app-navbar></app-navbar>
       <app-timeline-feed></app-timeline-feed>
     </div>
-    <div class="hidden">
+    <ng-template #mobileView class="mobile">
       <app-shopping-nav>
         <app-timeline-feed></app-timeline-feed>
         <app-navbar></app-navbar>
       </app-shopping-nav>
-    </div>
+    </ng-template>
   </div>
 </body>
