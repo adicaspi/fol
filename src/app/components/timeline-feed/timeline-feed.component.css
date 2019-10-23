@@ -212,12 +212,16 @@ span.price {
     margin:auto;
   }
   
+  ngx-masonry{
+    margin: 0 auto;
+  }
+  
   ngxMasonryItem:nth-of-type(3n) {
     margin-right: 0px;
   }
   
   .card {
-    width: 150px;
+    width: 160px;
     margin-top: 17px;
     border: none;
     border-radius: 20px;
@@ -249,7 +253,7 @@ span.price {
   }
   
   .masonry-img .img-main {
-    width: 120px;
+    width: 130px;
     height: 196px;
     margin-left: auto;
     margin-right: auto;

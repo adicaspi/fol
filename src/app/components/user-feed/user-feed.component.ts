@@ -31,6 +31,7 @@ export class UserFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
+    fitWidth: true,
     gutter: 39
   };
 
@@ -56,12 +57,10 @@ export class UserFeedComponent implements OnInit {
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 900) {
-          console.log(this.masonryOptions.gutter)
           this.masonryOptions.gutter = 20;
         }
         if (value.width <= 600) {
-          this.masonryOptions.gutter = 40;
-          console.log(this.masonryOptions.gutter);
+          this.masonryOptions.gutter = 20;
         }
       }),
       error => this.anyErrors = true,
