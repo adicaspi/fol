@@ -2,6 +2,7 @@
   width: 100%;
   overflow: hidden;
   margin: 0 auto;
+  max-height: 100vh;
 }
 a {
   color: black;
@@ -67,13 +68,21 @@ button.btn.btn-default.login.facebook {
   background-color: #6d84b4;
 }
 
-button.button-register {
+/* .button-register {
   background: none;
-  border: none;
+  border: 1px solid;
   width: 50%;
   margin: 0 auto;
   display: block;
   margin-top: 15px;
+} */
+
+button.btn.btn-default.register {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  background-color: white;
+  font-weight: 700;
 }
 
 div.invalid-feedback{
