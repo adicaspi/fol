@@ -61,6 +61,7 @@ import { FilePreviewOverlayComponent } from './components/file-preview-overlay/f
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService } from './services/dialog.service';
 import { Ng5SliderModule } from 'ng5-slider';
+import { ErrorsService } from './services/errors.service';
 
 
 

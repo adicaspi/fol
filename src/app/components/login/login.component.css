@@ -75,6 +75,10 @@ button.button-register {
   display: block;
   margin-top: 15px;
 }
+
+div.invalid-feedback{
+  text-align: center;
+}
 @media (min-width: 360px) and (max-width: 376px) {
   .mat-dialog-content {
     width: 100%;

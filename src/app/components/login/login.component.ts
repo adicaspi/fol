@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserService } from '../../services/user.service';
 import { ErrorsService } from '../../services/errors.service';
@@ -20,11 +21,14 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class LoginComponent implements OnInit {
   subscription: Subscription;
-  error: any;
+  error: any = {};
   loginForm: FormGroup;
   submitted = false;
   userId: number;
-  wrongPassUser: boolean = false;
+  wrongPass: boolean = false;
+  wrongUser: boolean = false;
+  msgToShow: string;
+  onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
@@ -36,9 +40,9 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private configSerivce: ConfigService,
     private dialogRef: MatDialogRef<LoginComponent>,
-    private dialogService: DialogService
+    private dialogService: DialogService,
   ) {
-    this.subscription = this.errorsService.getMessage().subscribe(msg => {
+    this.subscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
     });
   }
@@ -61,7 +65,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin() {
-    this.dialogRef.close();
+    this.wrongPass = false;
+    this.wrongUser = false;
     let email = this.loginForm.value.emailLogin;
     let password = this.loginForm.value.passwordLogin;
     let res = {
@@ -80,11 +85,19 @@ export class LoginComponent implements OnInit {
 
           this.configSerivce.setSessionStorage(data.userId.toString());
           this.router.navigate(['/feed/' + data.userId]);
+          this.dialogRef.close();
           this.ngOnDestroy();
         },
         error => {
+
           if (this.error.error == 'Invalid Authentication Data') {
-            this.wrongPassUser = true;
+            this.wrongPass = true;
+            this.msgToShow = 'The password you entered is incorrect.'
+          }
+          if (this.error.error == 'Invalid User') {
+            this.wrongUser = true;
+            this.msgToShow = "Username doesn't exist."
+
           }
         }
       );
@@ -116,7 +129,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    // this.onDestroy.next();
     // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
   }
 }
