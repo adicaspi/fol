@@ -356,7 +356,7 @@ img.icon {
 .bottom-navbar .icon-img {
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: grey;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -368,7 +368,7 @@ div.icon-img .fa{
 }
 
 .bottom-navbar .icon-img.active{
-  color: grey;
+  color: #f2f2f2;
 }
 
 } 
