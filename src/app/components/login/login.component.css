@@ -66,6 +66,7 @@ p.forgot-password {
 
 button.btn.btn-default.login.facebook {
   background-color: #6d84b4;
+  width: 50%;
 }
 
 /* .button-register {
@@ -79,10 +80,24 @@ button.btn.btn-default.login.facebook {
 
 button.btn.btn-default.register {
   display: block;
+  cursor: pointer;
   margin: 0 auto;
   width: 50%;
   background-color: white;
   font-weight: 700;
+}
+
+
+button.btn.btn-default.register:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button.btn.btn-default.login {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  background-color: grey;
 }
 
 div.invalid-feedback{
@@ -94,10 +109,14 @@ div.invalid-feedback{
     overflow: hidden;
     margin: 0 auto;
   }
-  button {
-    width: 100;
-  }
+
   button.btn.btn-default.login.facebook {
     width: 100%;
+  }
+
+  button.btn.btn-default.register{
+    width:100%;
+    border:none;
+    outline: none;
   }
 }

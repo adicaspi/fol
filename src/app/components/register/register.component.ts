@@ -109,10 +109,11 @@ export class RegisterComponent implements OnInit {
   onSubmitRegister() {
     this.submitted = true;
 
-    // stop here if form is invalid
-    // if (this.registerForm.invalid || this.emailExists || this.userNameExists) {
-    //   return;
-    // }
+    //   stop here if form is invalid
+    if (!this.registerForm.valid) {
+      console.log("form not valid");
+      return;
+    }
 
     this.loading = true;
 
@@ -152,7 +153,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitLogin() {
-    console.log("in submit login");
     let email = this.loginForm.value.emailLogin;
     let password = this.loginForm.value.passwordLogin;
     let res = {
@@ -173,7 +173,6 @@ export class RegisterComponent implements OnInit {
           this.ngOnDestroy();
         },
         error => {
-          console.log("hi again adi", error);
           if (this.error.error == 'Invalid Authentication Data') {
             this.wrongPassUser = true;
           }
