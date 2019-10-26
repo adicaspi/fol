@@ -44,7 +44,7 @@ export class TimelineFeedComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.userService.getCurrentUser();
-    this.id = 655;
+    //this.id = 655;
     this.generateTimelineFeed(0, this.id);
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
@@ -62,9 +62,10 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   private processData = posts => {
-    this.posts = this.posts.concat(posts);
-
-    posts.forEach(post => {
+    console.log("im posts", posts);
+    this.offset = posts['newOffset'];
+    posts['feedPosts'].forEach(post => {
+      console.log("im post", post);
       let baseAPI = this.baseApiUrl + '/image?s3key=';
       let postObject = {
         post: post,
@@ -73,10 +74,12 @@ export class TimelineFeedComponent implements OnInit {
       };
 
       this.postsToShow.push(postObject);
+      console.log("mi post to show", this.postsToShow);
     });
   };
 
   generateTimelineFeed(offset: number, id: number) {
+    console.log("in timeline", id);
     this.feedService
       .getTimeLineFeed(offset, id)
       .pipe(takeUntil(this.onDestroy))

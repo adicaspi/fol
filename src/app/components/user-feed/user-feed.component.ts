@@ -70,7 +70,8 @@ export class UserFeedComponent implements OnInit {
 
   private processData = posts => {
     this.posts = this.posts.concat(posts);
-    posts.forEach(post => {
+    this.offset = posts['newOffset'];
+    posts['feedPosts'].forEach(post => {
       let baseAPI = this.baseApiUrl + '/image?s3key=';
       let postObject = {
         post: post,
@@ -88,6 +89,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   fetchImages() {
+    console.log("in fetch");
     this.generateUserFeed(this.offset, this.id);
   }
 
