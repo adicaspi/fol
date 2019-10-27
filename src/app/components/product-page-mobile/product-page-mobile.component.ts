@@ -9,6 +9,8 @@ import { User } from '../../models/User';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-product-page-mobile',
@@ -21,16 +23,21 @@ export class ProductPageMobileComponent implements OnInit {
   directingPage: string;
   userProfileSrc: any;
   postInfo: PostInfo;
-  thumbnails = [];
+  imageUrls: string[] = [];
+  // imageUrls: (string)[] = [
+  //   'https://cdn.vox-cdn.com/uploads/chorus_image/image/56748793/dbohn_170625_1801_0018.0.0.jpg', , 'https://cdn.vox-cdn.com/uploads/chorus_asset/file/9278671/jbareham_170917_2000_0124.jpg', 'https://cdn.vox-cdn.com/uploads/chorus_image/image/56789263/akrales_170919_1976_0104.0.jpg', 'https://cdn.vox-cdn.com/uploads/chorus_image/image/56674755/mr_pb_is_the_best.0.jpg',
+
+  // ];
   onDestroy: Subject<void> = new Subject<void>();
   rtl: boolean = false;
+
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   constructor(
     private dialogService: DialogService,
     private userService: UserService,
     private postService: PostService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userPost = this.dialogService.userPost;
@@ -42,8 +49,9 @@ export class ProductPageMobileComponent implements OnInit {
         this.user = user;
         this.userProfileSrc =
           this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
+        this.getPostInfo();
       });
-    this.getPostInfo();
+
   }
 
   getPostInfo() {
@@ -55,52 +63,31 @@ export class ProductPageMobileComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
-
-        switch (this.postInfo.website) {
-          case 'www.terminalx.com':
-            this.postInfo.website_logo = '../../../assets/terminalx.PNG';
-            this.postInfo.currency = 'ils';
-            this.rtl = true;
-            break;
-          case 'www.zara.com':
-            this.postInfo.website_logo = '../../../assets/zara.PNG';
-            this.postInfo.currency = 'ils';
-            this.rtl = true;
-            break;
-          case 'www.adikastyle.com':
-            this.postInfo.website_logo = '../../../assets/adika.PNG';
-            this.postInfo.currency = 'ils';
-            this.rtl = true;
-            break;
-          case 'www.asos.com':
-            this.postInfo.website_logo = '../../../assets/asos.PNG';
-            this.postInfo.currency = 'usd';
-            break;
-          case 'www.farfetch.com':
-            this.postInfo.website_logo = '../../../assets/farfetch.PNG';
-            this.postInfo.currency = 'usd';
-            break;
-          case 'www.shein.com':
-            this.postInfo.website_logo = '../../../assets/shein.PNG';
-            this.postInfo.currency = 'usd';
-            break;
-        }
-
-        this.thumbnails.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.imageAddr
+        this.imageUrls.push(
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
         );
-        if (postInfo.thumbnail1) {
-          this.thumbnails.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail1
-          );
-        }
-        if (postInfo.thumbnail2) {
-          this.thumbnails.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail2
-          );
-        }
-      });
+        this.imageUrls.push(
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+        );
+      })
   }
+
+
+  setThumbnailImage(image) {
+    var mainImageElement = $('#mainImage');
+    mainImageElement.attr('src', image);
+  }
+
+  // setImage(image) {
+  //   var mainImageElement = $('#mainImage');
+  //   mainImageElement.attr('src', image);
+  //   var description = $('#description');
+  //   description.text(this.userPost['post']['description']);
+  //   var link = $('#link');
+  //   link.attr('href', this.userPost['post']['link']);
+  //   var price = $('span.price');
+  //   price.text(this.userPost['post']['price']);
+  // }
 
   goBackPage() {
     if (this.directingPage == 'profile') {

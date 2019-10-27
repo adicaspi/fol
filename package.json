@@ -34,6 +34,7 @@
     "imagesloaded": "^4.1.4",
     "jquery": "^3.4.1",
     "masonry-layout": "^4.2.2",
+    "ng-simple-slideshow": "^1.2.9",
     "ng2-nouislider": "^1.8.2",
     "ng5-slider": "^1.2.4",
     "ngx-cookie-service": "^2.1.0",

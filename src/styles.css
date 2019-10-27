@@ -72,12 +72,12 @@ body {
 
 .cdk-global-overlay-wrapper{
   overflow-y: auto !important;
- /* pointer-events: auto !important; */
+ pointer-events: auto !important;
 }
 
-.backdrop-product{
+.cdk-overlay-backdrop.backdrop-product.cdk-overlay-backdrop-showing{
   overflow-y: auto !important;
-  /* pointer-events: auto !important; */
+  pointer-events: auto !important;
 }
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { Subject, Observer, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxMasonryOptions } from 'ngx-masonry';
@@ -10,6 +10,7 @@ import { ProductPageComponent } from '../product-page/product-page.component';
 import { GlobalVariable } from '../../../global';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
+import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
 
 @Component({
   selector: 'app-user-feed',
@@ -20,13 +21,16 @@ export class UserFeedComponent implements OnInit {
   posts: Array<any> = [];
   postsToShow = [];
   offset: number = 0;
+  desktop: boolean = true;
   id = 0;
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
-
+  routes: Routes = [
+    { path: 'product-page', component: ProductPageMobileComponent }
+  ];
 
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
@@ -54,12 +58,13 @@ export class UserFeedComponent implements OnInit {
         this.id = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
         this.generateUserFeed(0, this.id);
       });
-    this.subscription = this.configService.windowSizeChanged.subscribe(
+    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
         if (value.width <= 900) {
           this.masonryOptions.gutter = 20;
         }
         if (value.width <= 600) {
+          this.desktop = false;
           this.masonryOptions.gutter = 20;
         }
       }),
@@ -94,8 +99,9 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    if (this.deviceService.isDesktop()) {
-      //this.dialogService.openModalWindow(ProductPageComponent, post);
+    // if (this.deviceService.isDesktop()) {
+    //this.dialogService.openModalWindow(ProductPageComponent, post);
+    if (this.desktop) {
       this.postService.userPost = post;
       this.dialogService.openDialog();
     } else {

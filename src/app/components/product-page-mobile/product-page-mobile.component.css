@@ -46,7 +46,7 @@ button.mat-button {
   font-family: 'Maven Pro';
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 25px;
   float: right;
   clear: both;
 }
@@ -55,6 +55,7 @@ button.mat-button {
   font-family: 'Maven Pro';
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 25px;
 }
 
 .card-text.profile {
@@ -85,6 +86,7 @@ button.shop_btn {
   outline: none;
   font-family: 'Maven Pro', sans-serif;
   font-size: 25px;
+  float: right;
 }
 
 img.store-logo-rtl {

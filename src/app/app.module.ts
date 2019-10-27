@@ -62,6 +62,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService } from './services/dialog.service';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ErrorsService } from './services/errors.service';
+import { SlideshowModule } from 'ng-simple-slideshow';
 
 
 
@@ -121,6 +122,7 @@ import { ErrorsService } from './services/errors.service';
     MatIconModule,
     MatListModule,
     Ng5SliderModule,
+    SlideshowModule,
     DeviceDetectorModule.forRoot()
   ],
 
