@@ -37,7 +37,6 @@ export class ProductPageMobileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.userPost = this.dialogService.userPost;
     this.userPost = this.postService.userPost;
     this.directingPage = this.dialogService.directingPage;
     this.userService
