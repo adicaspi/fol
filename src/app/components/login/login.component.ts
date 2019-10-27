@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     });
 
     //Check if user can auto-login
-    this.loadConfigurationData();
+    //this.loadConfigurationData();
   }
 
   // convenience getter for easy access to form fields

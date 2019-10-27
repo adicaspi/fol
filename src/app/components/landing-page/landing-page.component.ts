@@ -25,10 +25,10 @@ export class LandingPageComponent implements OnInit {
     private http: HttpClient,
     private userService: UserService,
     private configService: ConfigService
-  ) {}
+  ) { }
   // 'use strict';
 
-  ngOnInit() {}
+  ngOnInit() { this.loadConfigurationData() }
 
   registerPage() {
     this.dialogService.openModalWindow(LoginComponent);
