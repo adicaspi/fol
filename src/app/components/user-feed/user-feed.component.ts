@@ -101,11 +101,11 @@ export class UserFeedComponent implements OnInit {
   openDialog(post): void {
     // if (this.deviceService.isDesktop()) {
     //this.dialogService.openModalWindow(ProductPageComponent, post);
+    this.postService.userPost = post;
     if (this.desktop) {
-      this.postService.userPost = post;
       this.dialogService.openDialog();
     } else {
-      this.dialogService.userPost = post;
+      //this.dialogService.userPost = post;
       this.dialogService.directingPage = 'profile';
       this.router.navigate(['product-page']);
     }

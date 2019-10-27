@@ -20,6 +20,7 @@ export class TimelineFeedComponent implements OnInit {
   posts: Array<any> = [];
   postsToShow = [];
   offset: number = 0;
+  desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
@@ -53,7 +54,7 @@ export class TimelineFeedComponent implements OnInit {
         }
         if (value.width <= 600) {
           this.masonryOptions.gutter = 20;
-          console.log(this.masonryOptions.gutter);
+          this.desktop = false;
         }
       }),
       error => this.anyErrors = true,
@@ -62,7 +63,6 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   private processData = posts => {
-    console.log("im posts", posts);
     this.offset = posts['newOffset'];
     posts['feedPosts'].forEach(post => {
       console.log("im post", post);
@@ -72,14 +72,11 @@ export class TimelineFeedComponent implements OnInit {
         postImgSrc: baseAPI + post.postImageAddr,
         profileImgSrc: baseAPI + post.userProfileImageAddr
       };
-
       this.postsToShow.push(postObject);
-      console.log("mi post to show", this.postsToShow);
     });
   };
 
   generateTimelineFeed(offset: number, id: number) {
-    console.log("in timeline", id);
     this.feedService
       .getTimeLineFeed(offset, id)
       .pipe(takeUntil(this.onDestroy))
@@ -90,10 +87,16 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    //this.dialogService.userPost = post;
-    this.postService.userPost = post;
+    // if (this.deviceService.isDesktop()) {
     //this.dialogService.openModalWindow(ProductPageComponent, post);
-    this.dialogService.openDialog();
+    this.postService.userPost = post;
+    if (this.desktop) {
+      this.dialogService.openDialog();
+    } else {
+      //this.dialogService.userPost = post;
+      this.dialogService.directingPage = 'feed';
+      this.router.navigate(['product-page']);
+    }
   }
 
   public ngOnDestroy(): void {
