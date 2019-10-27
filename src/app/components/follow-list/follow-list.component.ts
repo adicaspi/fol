@@ -18,7 +18,7 @@ export class FollowListComponent implements OnInit {
   constructor(
     private postService: PostService,
     private userService: UserService //@Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+  ) { }
 
   ngOnInit() {
     console.log('in app-follow-list');
@@ -38,10 +38,9 @@ export class FollowListComponent implements OnInit {
   }
 
   checkIsFollowing() {
-    this.userService.checkIsFollowing(this.item.id).then(
+    this.userService.checkIsFollowing(this.item.id).subscribe(
       res => {
-        this.follows = res.valueOf();
-        console.log('im res', res);
+        this.follows = res;
       },
       error => {
         console.log('im error', error);
