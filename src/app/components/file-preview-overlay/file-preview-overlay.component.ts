@@ -26,7 +26,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   userPost: UserPost;
   postInfo: PostInfo;
   timelinePost: TimelinePost;
-  website_logo: string;
+  storeLogoSrc: string;
   postsToShow = [];
   user: User;
   mainImageSrc: any;
@@ -73,7 +73,10 @@ export class FilePreviewOverlayComponent implements OnInit {
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
         );
-        //this.setWebsiteLogo(postInfo.website);
+        this.thumbnails.push(
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+        );
+        this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr
         this.showSpinner = false;
         this.feedService.sendMessage('done-loading');
       });

@@ -10,13 +10,13 @@
         <div class="card-text profile">{{ currentUser.username }}</div>
       </div>
 
-      <div class="slider">
+      <div *ngIf="postInfo" class="slider">
         <img id="mainImage" [attr.src]="userPost.postImgSrc" />
 
         <div class="product-description">
           <div class="card-text title">
             <!-- <img  src="../../../assets/zara.PNG" class="store-logo" /> -->
-            <img class="store-logo" [attr.src]="postInfo.storeLogoAddr">
+            <img class="store-logo" [attr.src]="storeLogoSrc">
           </div>
 
           <p id="description" class="card-text description">
