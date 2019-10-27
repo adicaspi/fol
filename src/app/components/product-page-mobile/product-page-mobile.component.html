@@ -7,55 +7,32 @@
     <div class="card-text profile">{{ currentUser.username }}</div>
   </div>
 
-  <div class="product-upper-description">
+  <div *ngIf="postInfo" class="product-upper-description">
     <div class="card-text title">
-      <img [attr.src]="postInfo.storeLogoAddr" class="store-logo-ltr" />
+      <img [attr.src]="storeLogoSrc" class="store-logo" />
     </div>
     <div class="product-description">
-      <p id="description" [ngClass]="
-            rtl ? 'card-text-description-rtl' : 'card-text-description-ltr'
-          ">
+      <p id="description" class="card-text-description-ltr">
         {{ postInfo.description }}
       </p>
-      <div class="footer">
-        <!-- <span *ngIf="postInfo.currency == 'ils'" class="price"> -->
-        <!-- <i class="fal fa-shekel-sign"></i> -->
-
-        <!-- </span> -->
-        <!-- <span *ngIf="postInfo.currency == 'usd'" class="price"> -->
-        <!-- <i class="fal fa-dollar-sign"></i> -->
-
-        <!-- </span> -->
-      </div>
     </div>
-    <!-- <img id="mainImage" [attr.src]="userPost.postImgSrc" /> -->
-    <div class="slider">
-      <!-- <slideshow [imageUrls]="imageUrls"></slideshow> -->
-      <slideshow [height]="height" [autoPlay]="false" [showArrows]="true" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1"
-        [autoPlayWaitForLazyLoad]="false">
-      </slideshow>
-    </div>
+  </div>
+  <!-- <img id="mainImage" [attr.src]="userPost.postImgSrc" /> -->
+  <div class="slider">
+    <!-- <slideshow [imageUrls]="imageUrls"></slideshow> -->
+    <slideshow [height]="height" [autoPlay]="false" [showArrows]="true" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1"
+      [autoPlayWaitForLazyLoad]="false">
+    </slideshow>
+  </div>
 
-    <div class="upper-footer">
-      <span class="price">
-        {{ postInfo.price }}
-      </span>
-      <a href="{{ userPost.post.link }}" target="_blank">
-        <button type="button" class="shop_btn">
-          Shop
-        </button>
-      </a>
-
-      <!-- <button mat-button>
-          <i class="material-icons">more_horiz</i>
-        </button> -->
-    </div>
-
-    <!-- <div class="slider"> -->
-    <!-- <div class="lower-part">
-      <div class="thumbnails">
-        <img *ngFor="let image of thumbnails" class="thumbnail" [attr.src]="image" (click)="setThumbnailImage(image)" />
-      </div>
-    </div> -->
+  <div class="upper-footer">
+    <span class="price">
+      {{ postInfo.price }}
+    </span>
+    <a href="{{ userPost.post.link }}" target="_blank">
+      <button type="button" class="shop_btn">
+        Shop
+      </button>
+    </a>
   </div>
   <app-navbar></app-navbar>

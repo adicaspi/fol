@@ -10,8 +10,8 @@
 
 #profileImage {
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   margin-top: 0;
   margin-right: 10px;
 }
@@ -31,6 +31,9 @@
 
 .product-upper-description {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .upper-footer{
@@ -76,11 +79,10 @@ button.mat-button {
 }
 
 .card-text.profile {
-  line-height: 64px;
+  line-height: 50px;
   font-size: 25px;
-  height: 50px;
-  margin-bottom: 15px;
   display: inline-block;
+  vertical-align: bottom;
 }
 
 span.text-right {
@@ -106,15 +108,14 @@ button.shop_btn {
   float: right;
 }
 
-img.store-logo-rtl {
+/* img.store-logo-rtl {
   width: 150px;
   float: right;
   margin-bottom: 10px;
-}
+} */
 
-img.store-logo-ltr {
-  width: 120px;
-  margin-bottom: 10px;
+img.store-logo {
+  width: 110px;
 }
 
 .thumbnails {

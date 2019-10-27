@@ -22,6 +22,7 @@ export class ProductPageMobileComponent implements OnInit {
   user: User;
   directingPage: string;
   userProfileSrc: any;
+  storeLogoSrc: string;
   postInfo: PostInfo;
   imageUrls: string[] = [];
   onDestroy: Subject<void> = new Subject<void>();
@@ -67,6 +68,7 @@ export class ProductPageMobileComponent implements OnInit {
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
+        this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
         if (postInfo.storeId == 5 || postInfo.storeId == 7) {
           this.rtl = true;
         }
