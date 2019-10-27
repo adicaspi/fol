@@ -9,7 +9,7 @@
 
   <div class="product-upper-description">
     <div class="card-text title">
-      <img [attr.src]="postInfo.storeLogoAddr" [ngClass]="rtl ? 'store-logo-rtl' : 'store-logo-ltr'" />
+      <img [attr.src]="postInfo.storeLogoAddr" class="store-logo-ltr" />
     </div>
     <div class="product-description">
       <p id="description" [ngClass]="
@@ -18,25 +18,28 @@
         {{ postInfo.description }}
       </p>
       <div class="footer">
-        <span *ngIf="postInfo.currency == 'ils'" class="price">
-          <!-- <i class="fal fa-shekel-sign"></i> -->
-          {{ postInfo.price }}
-        </span>
-        <span *ngIf="postInfo.currency == 'usd'" class="price">
-          <!-- <i class="fal fa-dollar-sign"></i> -->
-          {{ postInfo.price }}
-        </span>
+        <!-- <span *ngIf="postInfo.currency == 'ils'" class="price"> -->
+        <!-- <i class="fal fa-shekel-sign"></i> -->
+
+        <!-- </span> -->
+        <!-- <span *ngIf="postInfo.currency == 'usd'" class="price"> -->
+        <!-- <i class="fal fa-dollar-sign"></i> -->
+
+        <!-- </span> -->
       </div>
     </div>
     <!-- <img id="mainImage" [attr.src]="userPost.postImgSrc" /> -->
     <div class="slider">
       <!-- <slideshow [imageUrls]="imageUrls"></slideshow> -->
-      <slideshow [height]="height" [minHeight]="'525px'" [autoPlay]="false" [showArrows]="true" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1"
+      <slideshow [height]="height" [autoPlay]="false" [showArrows]="true" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1"
         [autoPlayWaitForLazyLoad]="false">
       </slideshow>
     </div>
 
     <div class="upper-footer">
+      <span class="price">
+        {{ postInfo.price }}
+      </span>
       <a href="{{ userPost.link }}" target="_blank">
         <button type="button" class="shop_btn">
           Shop

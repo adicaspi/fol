@@ -26,6 +26,7 @@ export class ProductPageMobileComponent implements OnInit {
   imageUrls: string[] = [];
   onDestroy: Subject<void> = new Subject<void>();
   rtl: boolean = false;
+  height: string = '400px';
 
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   constructor(
@@ -59,6 +60,7 @@ export class ProductPageMobileComponent implements OnInit {
       )
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
+        console.log("post info", postInfo);
         this.postInfo = postInfo;
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
@@ -66,6 +68,9 @@ export class ProductPageMobileComponent implements OnInit {
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
+        if (postInfo.storeId == 5 || postInfo.storeId == 7) {
+          this.rtl = true;
+        }
       })
   }
 
