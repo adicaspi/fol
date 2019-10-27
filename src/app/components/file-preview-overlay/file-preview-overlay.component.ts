@@ -45,7 +45,6 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   ngOnInit() {
     this.userPost = this.postService.userPost;
-    console.log("post", this.userPost);
     this.postImageAddr = this.userPost.postImageAddr;
 
     this.userProfileSrc = '../../../assets/placeholder.png';
