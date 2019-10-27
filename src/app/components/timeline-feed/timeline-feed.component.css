@@ -34,6 +34,7 @@ ngxMasonryItem:nth-of-type(3n) {
   height: 42px;
   border-radius: 50%;
   margin-left: 14px;
+  cursor: pointer;
 }
 
 .profile-image span {
@@ -45,6 +46,7 @@ ngxMasonryItem:nth-of-type(3n) {
   color: rgb(33, 37, 41);
   font-family: arial, 'helvetica', sans-serif;
   text-align: left;
+  cursor: pointer;
 }
 
 .masonry-img .img-main {
@@ -135,6 +137,7 @@ span.price {
     height: 28px;
     border-radius: 50%;
     margin-left: 9px;
+    cursor: pointer;
   }
   
   .profile-image span {
@@ -146,6 +149,7 @@ span.price {
     color: rgb(33, 37, 41);
     font-family: arial, 'helvetica', sans-serif;
     text-align: left;
+    cursor: pointer;
   }
   
   .masonry-img .img-main {
@@ -239,6 +243,7 @@ span.price {
     height: 28px;
     border-radius: 50%;
     margin-left: 9px;
+    cursor: pointer;
   }
   
   .profile-image span {
@@ -250,6 +255,7 @@ span.price {
     color: rgb(33, 37, 41);
     font-family: arial, 'helvetica', sans-serif;
     text-align: left;
+    cursor: pointer;
   }
   
   .masonry-img .img-main {

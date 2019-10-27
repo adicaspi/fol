@@ -103,7 +103,7 @@ export class TimelineFeedComponent implements OnInit {
     this.onDestroy.next();
   }
 
-  profilePgae(post) {
+  profilePage(post) {
     this.router.navigate(['profile', post['post']['userId']]);
   }
 }
