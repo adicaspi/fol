@@ -278,6 +278,7 @@ span.price {
     color: black;
     width: 90%;
     margin: auto;
+    font-size: 15px;
   }
   
   .store.text-right {
@@ -287,6 +288,7 @@ span.price {
     text-decoration: underline;
     line-height: 1;
     color: grey;
+    font-size: 12px;
   }
   
   span.price {
@@ -295,14 +297,14 @@ span.price {
     margin-top: 5px;
     color: #2f2e2e;
     font-weight: 200;
-    font-size: 9px;
+    font-size: 12px;
     font-family: open sans, sans-serif;
     line-height: 1;
   }
   
   .card-text {
     font-size: 10px;
-    height: 32px;
+    height: 42px;
     width: 100%;
     margin-top: 9px;
     margin-bottom: 5px;
