@@ -58,6 +58,7 @@ span.text {
 div.upper-description-div{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 16px;
   width: 275px;
   position: relative;

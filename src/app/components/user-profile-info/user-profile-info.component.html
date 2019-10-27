@@ -8,14 +8,19 @@
     <div *ngIf="user" class="description">
       <div class="upper-description-div">
         <div class="user-name">{{ user.username }}</div>
-        <div class="settings">
-          <i (click)="settingsPage()" class="fal fa-cog"></i>
+
+        <div *ngIf="!userProfile; else settings">
+          <div class="button-follow">
+            <button type="button" class="button-follow setiings" (click)="follow()">
+              {{ follows ? 'following' : 'follow' }}
+            </button>
+          </div>
         </div>
-        <div *ngIf="!userProfile">
-          <button type="button" class="button-follow" (click)="follow()">
-            {{ follows ? 'unfollow' : 'follow' }}
-          </button>
-        </div>
+        <ng-template #settings>
+          <div class="settings">
+            <i (click)="settingsPage()" class="fal fa-cog"></i>
+          </div>
+        </ng-template>
       </div>
 
       <div class="btn-group">
