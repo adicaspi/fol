@@ -30,7 +30,7 @@ export class GenerateFollowListComponent implements OnInit {
     private userService: UserService,
     private dialogRef: MatDialogRef<GenerateFollowListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.flag = this.data.flag;
@@ -42,8 +42,8 @@ export class GenerateFollowListComponent implements OnInit {
   private processData = followsFeed => {
     this.followsFeed = this.followsFeed.concat(followsFeed);
     followsFeed.forEach(follower => {
-      this.userService.checkIsFollowing(follower.id).then(res => {
-        follower.follows = res.valueOf();
+      this.userService.checkIsFollowing(follower.id).subscribe(res => {
+        follower.follows = res;
         let baseAPI = this.baseApiUrl + '/image?s3key=';
         let postObject = {
           post: follower,
