@@ -226,7 +226,7 @@ span.price {
   
   .card {
     width: 160px;
-    margin-top: 17px;
+    margin-top: 10px;
     border: none;
     border-radius: 20px;
     display: inline-block;
@@ -259,8 +259,8 @@ span.price {
   }
   
   .masonry-img .img-main {
-    width: 130px;
-    height: 196px;
+    width: 150px;
+    height: 200px;
     margin-left: auto;
     margin-right: auto;
     display: block;
