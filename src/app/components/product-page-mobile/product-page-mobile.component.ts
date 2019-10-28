@@ -63,10 +63,10 @@ export class ProductPageMobileComponent implements OnInit {
         console.log("post info", postInfo);
         this.postInfo = postInfo;
         this.imageUrls.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
         this.imageUrls.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
         );
         this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
         if (postInfo.storeId == 5 || postInfo.storeId == 7) {
