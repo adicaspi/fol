@@ -145,7 +145,7 @@
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
-    height: 100vh;
+    padding-bottom: 40px
   }
 
   .center {

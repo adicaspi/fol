@@ -231,6 +231,7 @@ span.price {
   .center {
     width:375px;
     margin:auto;
+    padding-bottom: 40px
   }
   
   ngx-masonry{
@@ -323,8 +324,6 @@ span.price {
     font-size: 10px;
     height: 28px;
     width: 100%;
-    margin-top: 9px;
-    margin-bottom: 5px;
     font-family: 'helvetica', arial, sans-serif;
   }
 }
