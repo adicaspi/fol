@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
   menuIsClosed: boolean = true;
   loggedin = false;
   feed: boolean = false;
+  masterId: number;
+  userId: number;
   explore: boolean = false;
   profile: boolean = false;
   mobile: boolean = false;
@@ -41,8 +43,13 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const routeParams = this.activatedRoute.snapshot.params;
+    this.masterId = parseInt(routeParams.id);
+    this.userId = this.userService.userId;
     if (this.router.url.includes('profile')) {
-      this.profile = true;
+      if (this.userId == this.masterId) {
+        this.profile = true;
+      }
     }
     if (this.router.url.includes('feed')) {
       this.feed = true;
