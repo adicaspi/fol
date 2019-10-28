@@ -316,8 +316,9 @@ div.user-name{
   div.upper-description-div{
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
-    width: 150px;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 200px;
     position: relative;
   }
 
@@ -336,101 +337,3 @@ div.user-name{
     margin-top: 10px;
   }
 }
-
-/* 
-@media only screen and (min-width: 900px), only screen and (min-width: 768px) {
-  .simple-button {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-  }
-
-  .simple-button-metrics {
-    padding: 0;
-    color: black;
-    border: none;
-    background: none;
-    outline: none;
-    cursor: pointer;
-  }
-
-  .simple-button-metrics.first {
-    cursor: none;
-  }
-
-  .simple-button-metrics.first,
-  .simple-button-metrics.second {
-    padding-right: 15px;
-  }
-
-  span.metrics {
-    font-weight: 500;
-  }
-
-  span.text {
-    font-weight: 300
-  }
-
-  .button-follow {
-    background-color: #ff1493;
-    color: white;
-    border: none;
-    outline: none;
-    font-family: 'Maven Pro', sans-serif;
-    border-radius: 4px;
-  }
-
-  .description {
-    margin-top: 30px;
-    max-width: 500px;
-  }
-
-  .upper-description-div::after {
-    clear: both;
-  }
-
-  .btn-group {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .user-name {
-    line-height: 34px;
-    font-weight: bold;
-    font-size: 24px;
-    font-family: 'Maven Pro', sans-serif;
-  }
-
-  .user-description {
-    margin-top: 16px;
-    overflow-wrap: break-word;
-    line-height: 26px;
-  }
-
-  .full-name {
-    font-weight: 500;
-    font-size: 16px;
-    margin-bottom: 2px;
-    letter-spacing: 0.5px;
-  }
-
-  .user-description p:not(.full-name) {
-    margin: 0;
-  }
-
-  .upper-description-div {
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: row;
-    width: 275px;
-    position: relative;
-  }
-
-  .img-comp img {
-    border-radius: 50%;
-  }
-} */
