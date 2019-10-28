@@ -1,3 +1,6 @@
+<button mat-button [mat-dialog-close]="true">
+  <i class="fal fa-times"></i>
+</button>
 <div mat-dialog-content>
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">

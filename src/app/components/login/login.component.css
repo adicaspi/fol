@@ -1,3 +1,8 @@
+button.mat-button{
+  float: right;
+  font-size: 20px;
+}
+
 .mat-dialog-content {
   width: 100%;
   overflow: hidden;
@@ -39,7 +44,7 @@ button.btn.btn-default.login {
 
 button.btn.btn-default.login:focus {
   background-color: black;
-  color:white;
+  color:white;  
 }
 
 p.forgot-password {
