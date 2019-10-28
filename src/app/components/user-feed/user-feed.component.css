@@ -77,6 +77,8 @@
   .center {
     margin: auto;
     width: 600px;
+    display: flex;
+    justify-content: center;
   }
 
   ngxMasonryItem:nth-of-type(3n) {
@@ -116,6 +118,7 @@
     text-align: center;
     font-weight: 400;
     color: black;
+    font-size: 12px;
   }
 
   .store.text-right {
@@ -143,6 +146,7 @@
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
+    height: 100vh;
   }
 
   .center {
@@ -191,7 +195,7 @@
     text-align: center;
     font-weight: 400;
     color: black;
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .store.text-right {

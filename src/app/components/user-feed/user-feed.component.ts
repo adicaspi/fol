@@ -61,7 +61,7 @@ export class UserFeedComponent implements OnInit {
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
         if (value.width <= 900) {
-          this.masonryOptions.gutter = 20;
+          // this.masonryOptions.gutter = 20;
         }
         if (value.width <= 600) {
           this.desktop = false;

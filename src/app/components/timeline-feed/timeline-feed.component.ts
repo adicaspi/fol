@@ -50,10 +50,11 @@ export class TimelineFeedComponent implements OnInit {
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 900) {
-          this.masonryOptions.gutter = 26;
+          // this.masonryOptions.gutter = 60;
+          this.masonryOptions.fitWidth = true;
         }
         if (value.width <= 600) {
-          this.masonryOptions.gutter = 100;
+          this.masonryOptions.gutter = 80;
           this.desktop = false;
         }
       }),
