@@ -9,8 +9,9 @@
   }
 
   .fal {
-    font-size: 24px;
+    font-size: 26px;
     position: absolute;
+    font-weight: 500;
     color: white;
     right: 15px;
     top: 10px;
@@ -172,7 +173,8 @@
   }
 
   .fal {
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: 500;
     position: absolute;
     color: white;
     right: 15px;
