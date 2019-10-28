@@ -91,7 +91,7 @@ span.price {
   line-height: 1;
 }
 
-.card-text {
+.fotter-card-text {
   font-size: 15px;
   height: 48px;
   width: 100%;
@@ -194,7 +194,7 @@ span.price {
     line-height: 1;
   }
   
-  .card-text {
+  .fotter-card-text {
     font-size: 10px;
     height: 32px;
     width: 100%;
@@ -302,9 +302,9 @@ span.price {
     line-height: 1;
   }
   
-  .card-text {
+  .fotter-card-text {
     font-size: 10px;
-    height: 42px;
+    height: 28px;
     width: 100%;
     margin-top: 9px;
     margin-bottom: 5px;

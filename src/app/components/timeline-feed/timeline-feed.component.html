@@ -11,10 +11,11 @@
           <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" class="img-main" />
         </div>
 
-        <div class="card-text">
-          <div class="description">
-            {{ post['post']['description'] }}
-          </div>
+
+        <div class="description">
+          {{ post['post']['description'] }}
+        </div>
+        <div class="fotter-card-text">
           <span class="price">
             {{ post['post']['price'] }}
           </span>
