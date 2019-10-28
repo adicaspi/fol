@@ -37,6 +37,11 @@ button.btn.btn-default.login {
   background-color: grey;
 }
 
+button.btn.btn-default.login:focus {
+  background-color: black;
+  color:white;
+}
+
 p.forgot-password {
   width: 75%;
   margin-right: auto;
