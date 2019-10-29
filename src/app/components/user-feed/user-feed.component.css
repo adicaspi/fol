@@ -194,24 +194,27 @@
     margin-right: 0px;
   }
 
+  .card {
+    /* width: 160px; */
+    width:170px;
+    margin-top: 26px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
+
   .masonry-item img {
-    width: 150px;
-    height: 200px;
+    /* width: 150px;
+    height: 200px; */
+    width: 170px;
+    height: 280px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
     display: block;
     border-radius: 5px;
     object-fit: cover;
-  }
-
-  .card {
-    width: 160px;
-    margin-top: 26px;
-    border: none;
-    border-radius: 20px;
-    display: inline-block;
-    border: 1px solid rgb(235,235,235);
   }
 
   .card-text {

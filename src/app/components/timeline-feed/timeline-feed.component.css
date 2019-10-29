@@ -247,7 +247,6 @@ span.price {
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
-    padding-bottom: 55px;
     /* overflow: visible;
     height: 100vh; */
   }
@@ -274,7 +273,8 @@ span.price {
   }
   
   .card {
-    width: 160px;
+    /* width: 160px; */
+    width:220px;
     margin-top: 10px;
     border: none;
     border-radius: 20px;
@@ -308,8 +308,10 @@ span.price {
   }
   
   .masonry-img .img-main {
-    width: 150px;
-    height: 200px;
+    /* width: 150px;
+    height: 200px; */
+    width: 220px;
+    height: 310px;
     margin-left: auto;
     margin-right: auto;
     display: block;
