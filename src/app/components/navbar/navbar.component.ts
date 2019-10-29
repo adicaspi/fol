@@ -5,9 +5,12 @@ import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { RegisterComponent } from '../register/register.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { MatMenuTrigger } from '../../../../node_modules/@angular/material';
 import { MutualNavComponent } from '../mutual-nav/mutual-nav.component';
 import { ConfigService } from '../../services/config.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +19,9 @@ import { ConfigService } from '../../services/config.service';
 })
 export class NavbarComponent implements OnInit {
   //  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
-
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
   enabled: boolean = false;
   menuIsClosed: boolean = true;
   loggedin = false;
@@ -43,6 +48,12 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
     this.userId = this.userService.userId;
@@ -73,6 +84,12 @@ export class NavbarComponent implements OnInit {
     // if (this.deviceService.isMobile() || this.deviceService.isTablet()) {
     //   this.mobile = true;
     // }
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   profilePage() {
