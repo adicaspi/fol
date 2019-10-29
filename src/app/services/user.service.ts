@@ -12,6 +12,7 @@ const httpOptions = {
 };
 import { GlobalVariable } from '../../global';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -160,5 +161,12 @@ export class UserService {
       params,
       { headers: httpOptions.headers }
     );
+  }
+
+  search(char: string): Observable<Array<any>> {
+    let params = new HttpParams().set('query', char);
+    return this.http.get<any[]>(this.baseApiUrl + '/general/search', {
+      params: params
+    });
   }
 }

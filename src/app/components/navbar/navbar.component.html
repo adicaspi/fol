@@ -14,7 +14,7 @@
 
 
     <li class="nav-item search">
-      <form>
+      <form [formGroup]="searchForm">
         <div class="search-container">
           <div class="search-icon">
             <i class="fas fa-search"></i>
@@ -26,7 +26,7 @@
           </div>
           <div class="input-container">
             <input type="serach" matInput [formControl]="myControl" [matAutocomplete]="auto" placeholder="Search" spellcheck="false"
-              id="navBarSearchForm" />
+              formControlName="search" id="navBarSearchForm" />
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}

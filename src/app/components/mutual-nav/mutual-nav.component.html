@@ -24,12 +24,12 @@
 
   <button mat-button [matMenuTriggerFor]="designer">Designer</button>
   <mat-menu #designer="matMenu" class=checkbox-menu>
-    <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (click)="$event.stopPropagation();"
-      (change)="onChangeAllCheckBox($event,designer,designers)">
+    <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (click)="$event.stopPropagation();">
       {{designer.name}}
     </mat-checkbox>
     <div class="submit">
       <button mat-button (click)="selectedDesigner()">apply</button>
+      <button mat-button (click)="clearSelection(designers)">clear</button>
     </div>
   </mat-menu>
 

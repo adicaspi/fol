@@ -51,10 +51,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.dialogRef.updateSize('550px', '580px');
     this.dialogRef._containerInstance._config.height = '580px';
-    console.log(
-      'im dialog ref',
-      this.dialogRef._containerInstance._config.height
-    );
 
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
@@ -88,7 +84,6 @@ export class RegisterComponent implements OnInit {
         this.userService.checkUserNameExists(val).subscribe(res => {
           this.userNameExists = res;
           this.userNameValidatorLength = false;
-          console.log(res);
         });
       } else {
         this.userNameValidatorLength = true;
@@ -101,7 +96,6 @@ export class RegisterComponent implements OnInit {
     this.registerForm.get('email').valueChanges.subscribe(val => {
       this.userService.checkEmailExists(val).subscribe(res => {
         this.emailExists = res;
-        console.log(res);
       });
     });
   }

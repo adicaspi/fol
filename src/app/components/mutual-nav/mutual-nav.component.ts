@@ -49,20 +49,19 @@ export class MutualNavComponent implements OnInit {
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
   categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothings', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
-    { id: 1, name: 'All Clothings', checked: true, disabled: false },
-    { id: 2, name: 'Tops', checked: true },
-    { id: 3, name: 'Jackets & Coats', checked: true },
-    { id: 4, name: 'Dresses & Skirts', checked: true },
-    { id: 5, name: 'Pants', checked: true },
-    { id: 6, name: 'Swimwear', checked: true }
+    { id: 1, name: 'Tops', checked: false },
+    { id: 2, name: 'Jackets & Coats', checked: false },
+    { id: 3, name: 'Dresses & Skirts', checked: false },
+    { id: 4, name: 'Pants', checked: false },
+    { id: 5, name: 'Swimwear', checked: false }
   ];
-  shoes = [{ id: 1, name: 'All Shoes' },
-  { id: 2, name: 'Heels' },
-  { id: 3, name: 'Boots' },
-  { id: 4, name: 'Sneakers' }]
+  shoes = [
+    { id: 1, name: 'Heels' },
+    { id: 2, name: 'Boots' },
+    { id: 3, name: 'Sneakers' }]
   productsToShow = [];
-  designers = [{ id: 1, name: 'All Designers', checked: true }, { id: 2, name: 'Gucci', checked: true }, { id: 3, name: 'Prada', checked: true }, { id: 4, name: 'D&G', checked: true }, { id: 5, name: 'Isabel Marant', checked: true }, { id: 6, name: 'Loewe', checked: true }, { id: 7, name: 'Saint Laurent', checked: true }, { id: 8, name: 'Celine', checked: true }, { id: 9, name: 'Givenchy', checked: true }, { id: 10, name: 'Fendi', checked: true }];
-  stores = [{ id: 1, name: 'All Stores', checked: true }, { id: 2, name: 'ASOS', checked: true }, { id: 3, name: 'ZARA', checked: true }, { id: 4, name: 'Farfetch', checked: true }, { id: 4, name: 'Shopbop', checked: true }, { id: 5, name: 'Shein', checked: true }, { id: 6, name: 'TerminalX', checked: true }, { id: 7, name: 'Net-A-Porter', checked: true }];
+  designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
+  stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 2, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 4, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 6, name: 'TerminalX', checked: false }, { id: 7, name: 'Net-A-Porter', checked: false }];
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -110,49 +109,47 @@ export class MutualNavComponent implements OnInit {
       }
     } else {
       this.showProduct = false;
-
     }
     //this.categroyRadioButton = mrChange.source;
-
     //console.log(this.categroyRadioButton.name);
-
   }
 
   selectedProduct() {
     var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
     for (let i = 0; i < elements.length; i++) {
-
       if (elements[i].checked) {
         console.log(elements[i].value);
       }
-
     }
   }
 
   selectedStore() {
     var elements = (<HTMLInputElement[]><any>document.getElementsByName("store"));
     for (let i = 0; i < elements.length; i++) {
-
       if (elements[i].checked) {
         console.log(elements[i].value);
       }
-
     }
   }
 
   selectedDesigner() {
     var elements = (<HTMLInputElement[]><any>document.getElementsByName("designer"));
     for (let i = 0; i < elements.length; i++) {
-
       if (elements[i].checked) {
         console.log(elements[i].value);
       }
-
     }
   }
 
   selectedPrice() {
     (this.maxValue, this.minValue);
+  }
+
+  clearSelection(arrayToIterrate) {
+    console.log("in clear", arrayToIterrate);
+    arrayToIterrate.forEach(function (elem) {
+      elem.checked = false;
+    })
   }
 
   onChangeAllCheckBox($event, elem, arrayToIterrate) {

@@ -10,7 +10,9 @@ import { map, startWith } from 'rxjs/operators';
 import { MatMenuTrigger } from '../../../../node_modules/@angular/material';
 import { MutualNavComponent } from '../mutual-nav/mutual-nav.component';
 import { ConfigService } from '../../services/config.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -19,8 +21,9 @@ import { FormControl } from '@angular/forms';
 })
 export class NavbarComponent implements OnInit {
   //  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
-  myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
+  searchForm: FormGroup;
+  firstChar: boolean = true;
+  options: string[] = [];
   filteredOptions: Observable<string[]>;
   enabled: boolean = false;
   menuIsClosed: boolean = true;
@@ -39,21 +42,21 @@ export class NavbarComponent implements OnInit {
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
+  onDestroy: Subject<void> = new Subject<void>();
   constructor(
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private deviceService: DeviceDetectorService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-
+    this.searchForm = this.formBuilder.group({
+      search: ['']
+    })
+    this.onChanges();
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
     this.userId = this.userService.userId;
@@ -71,7 +74,7 @@ export class NavbarComponent implements OnInit {
     if (this.userService.userId) {
       this.loggedin = true;
     }
-    this.subscription = this.configService.windowSizeChanged.subscribe(
+    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
         if (value.width <= 600) {
           this.mobile = true;
@@ -86,10 +89,37 @@ export class NavbarComponent implements OnInit {
     // }
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  onChanges(): void {
+    this.searchForm.get('search').valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
+      if (val == "") {
+        this.firstChar = true;
+        this.options = [];
+        this.filteredOptions = this._filter(val);
+      }
+      if (this.firstChar && val != "") {
+        this.getSearchResults(val);
+        this.firstChar = false;
+      }
+      if (!this.firstChar) {
+        this.filteredOptions = this._filter(val);
+      }
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    })
+  }
+
+  getSearchResults(value: string) {
+    this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
+      res.forEach(element => {
+        this.options.push(element.username);
+      })
+      this.filteredOptions = this._filter(value);
+
+    })
+  }
+
+  private _filter(value: string): Observable<string[]> {
+    const filterValue = value.toLowerCase();
+    return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)))
   }
 
   profilePage() {
@@ -119,15 +149,10 @@ export class NavbarComponent implements OnInit {
 
 
   openCloseMenu() {
-    console.log("im in func", this.menuIsClosed);
     if (this.menuIsClosed) {
-      console.log("im in func openig");
-      //this.menu.openMenu();
       this.menuIsClosed = false;
     }
     else {
-      console.log("im in func closeing");
-
       //this.menu.closeMenu();
       this.menuIsClosed = true;
     }
