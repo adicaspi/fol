@@ -1,7 +1,9 @@
 <div id="main-body">
-  <div class="center">
-    <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
-      <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
+  <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
+    <div class="center">
+      <div class="card masonry-item" *ngFor="let post of postsToShow">
+        <!-- <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
+        <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow"> -->
         <div class="profile-image">
           <img (click)="profilePage(post)" [attr.src]="post['profileImgSrc']" />
           <span (click)="profilePage(post)" class="card-text profile">{{ post['post']['userName'] }}</span>
@@ -23,8 +25,9 @@
             {{ post['post']['website'] }}
           </span>
         </div>
-      </ngxMasonryItem>
-    </ngx-masonry>
-    <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()"></div>
+      </div>
+      <!-- </ngxMasonryItem>
+      </ngx-masonry> -->
+    </div>
   </div>
 </div>

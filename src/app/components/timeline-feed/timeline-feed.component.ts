@@ -54,8 +54,9 @@ export class TimelineFeedComponent implements OnInit {
           this.masonryOptions.fitWidth = true;
         }
         if (value.width <= 600) {
-          this.masonryOptions.gutter = 80;
+          this.masonryOptions.horizontalOrder = false;
           this.desktop = false;
+          this.masonryOptions.gutter = 100;
         }
       }),
       error => this.anyErrors = true,

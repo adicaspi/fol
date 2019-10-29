@@ -1,9 +1,10 @@
 .display {
   background-color: white;
 }
-
+html,
 body {
   background-color: white;
+  height: 100%;
 }
 
 @media (min-width: 900px)  {

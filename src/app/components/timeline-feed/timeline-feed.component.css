@@ -1,3 +1,7 @@
+.infinite-scroll{
+  height: 100%;
+}
+
 @media only screen and (min-width: 900px) {
 #main-body {
   padding-right: 0px;
@@ -6,10 +10,18 @@
   margin-top: -14px;
 }
 
-.center {
+.center{
   margin: auto;
   width: 900px;
-} 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* .center {
+  margin: auto;
+  width: 900px;
+}  */
 
 ngxMasonryItem:nth-of-type(3n) {
   margin-right: 0px;
@@ -109,13 +121,24 @@ span.price {
     overflow: visible;
     margin-top: -9px;
   }
-  
-  .center {
+
+  .center{
     margin: auto;
     width: 600px;
     display: flex;
-    justify-content: center;
-  } 
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .center>.card{
+    width:47%;
+  }
+  
+  /* .center {
+    margin: auto;
+    width: 600px;
+  }  */
   
   ngxMasonryItem:nth-of-type(3n) {
     margin-right: 0px;
@@ -224,16 +247,23 @@ span.price {
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
-    overflow: visible;
-    height: 100vh;
+    /* overflow: visible;
+    height: 100vh; */
   }
+
+  /* .center {
+    width:375px;
+    margin:auto;
+  } */
 
   .center {
     width:375px;
     margin:auto;
-    padding-bottom: 40px
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   ngx-masonry{
     margin: 0 auto;
   }
