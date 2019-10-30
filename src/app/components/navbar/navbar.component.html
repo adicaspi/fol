@@ -25,7 +25,7 @@
               </svg> -->
           </div>
           <div class="input-container">
-            <input type="serach" matInput [formControl]="myControl" [matAutocomplete]="auto" placeholder="Search" spellcheck="false"
+            <input type="serach" matInput [formControl]="searchForm" [matAutocomplete]="auto" placeholder="Search" spellcheck="false"
               formControlName="search" id="navBarSearchForm" />
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
