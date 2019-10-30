@@ -63,6 +63,7 @@ import { DialogService } from './services/dialog.service';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ErrorsService } from './services/errors.service';
 import { SlideshowModule } from 'ng-simple-slideshow';
+import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
 
 
 
@@ -99,7 +100,8 @@ import { SlideshowModule } from 'ng-simple-slideshow';
     LoginComponent,
     ShoppingNavComponent,
     ProductPageMobileComponent,
-    FilePreviewOverlayComponent
+    FilePreviewOverlayComponent,
+    BottomNavbarComponent
   ],
   imports: [
     BrowserModule,
