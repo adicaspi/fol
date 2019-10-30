@@ -13,19 +13,20 @@
   <mat-menu class=checkbox-menu #product="matMenu">
     <mat-checkbox *ngFor="let product of productsToShow" name="product" [(indeterminate)]="indeterminate" [checked]="product.checked"
       [labelPosition]="labelPosition" [value]="product.id" [disabled]="product.disabled" (click)="$event.stopPropagation();"
-      (change)="onChangeAllCheckBox($event,product,productsToShow)">
+      (change)="onChangeCheckBox($event,product)">
       {{product.name}}
     </mat-checkbox>
 
     <div class="submit">
       <button mat-button (click)="selectedProduct()">apply</button>
+      <button mat-button (click)="clearSelection(productsToShow)">clear</button>
     </div>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="designer">Designer</button>
   <mat-menu #designer="matMenu" class=checkbox-menu>
-    <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (click)="$event.stopPropagation();">
-      {{designer.name}}
+    <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (change)="onChangeCheckBox($event,designer)"
+      (click)="$event.stopPropagation();"> {{designer.name}}
     </mat-checkbox>
     <div class="submit">
       <button mat-button (click)="selectedDesigner()">apply</button>
@@ -36,10 +37,11 @@
   <button mat-button [matMenuTriggerFor]="store">Store</button>
   <mat-menu #store="matMenu" class=checkbox-menu>
     <mat-checkbox *ngFor="let store of stores" class="example-margin" name="store" [value]="store.id" [checked]="store.checked"
-      [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeAllCheckBox($event,store,stores)"> {{store.name}}
+      [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeCheckBox($event,store)"> {{store.name}}
     </mat-checkbox>
     <div class="submit">
       <button mat-button (click)="selectedStore()">apply</button>
+      <button mat-button (click)="clearSelection(stores)">clear</button>
     </div>
   </mat-menu>
 

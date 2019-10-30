@@ -114,6 +114,15 @@ export class MutualNavComponent implements OnInit {
     //console.log(this.categroyRadioButton.name);
   }
 
+  onChangeCheckBox($event, elem) {
+    if ($event.checked == true) {
+      elem.checked = true;
+    }
+    else {
+      elem.checked = false;
+    }
+  }
+
   selectedProduct() {
     var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
     for (let i = 0; i < elements.length; i++) {
@@ -147,7 +156,7 @@ export class MutualNavComponent implements OnInit {
 
   clearSelection(arrayToIterrate) {
     console.log("in clear", arrayToIterrate);
-    arrayToIterrate.forEach(function (elem) {
+    arrayToIterrate.forEach(elem => {
       elem.checked = false;
     })
   }
