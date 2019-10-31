@@ -17,11 +17,10 @@
       </p>
     </div>
   </div>
-  <!-- <img id="mainImage" [attr.src]="userPost.postImgSrc" /> -->
-  <div class="slider">
-    <!-- <slideshow [imageUrls]="imageUrls"></slideshow> -->
-    <slideshow [height]="height" [autoPlay]="false" [showArrows]="true" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1"
-      [autoPlayWaitForLazyLoad]="false">
+  <div *ngIf="imageUrls" class="slider">
+    <slideshow [imageUrls]="imageUrls"></slideshow>
+    <slideshow [height]="height" [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1"
+      [autoPlayWaitForLazyLoad]="false" showDots="true">
     </slideshow>
   </div>
 

@@ -83,7 +83,7 @@ mat-toolbar a {
 }
 
 .mat-sidenav-content {
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 button.nav-item {
@@ -114,4 +114,11 @@ button.back-button {
 img.logo {
   width: 110px;
   height: 20px;
+}
+
+.example-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

@@ -244,8 +244,8 @@ span.price {
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
-    /* overflow: visible;
-    height: 100vh; */
+     overflow: visible;
+    /* height: 100vh;  */
   }
 
   /* .center {

@@ -1,11 +1,15 @@
 .wrapper{
-  height: 900px;
+  height: 700px;
 }
 
 .slider {
   position: relative;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.fs-container{
+  display:none;
 }
 
 #profileImage {

@@ -122,30 +122,30 @@ export class NavbarComponent implements OnInit {
     return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)))
   }
 
-  profilePage() {
-    this.profile = true;
-    this.feed = false;
-    this.explore = false;
-    this.router.navigate(['profile', this.userService.userId]);
-  }
+  // profilePage() {
+  //   this.profile = true;
+  //   this.feed = false;
+  //   this.explore = false;
+  //   this.router.navigate(['profile', this.userService.userId]);
+  // }
 
-  settingsPage() {
-    this.router.navigate(['settings', this.userService.userId]);
-  }
+  // settingsPage() {
+  //   this.router.navigate(['settings', this.userService.userId]);
+  // }
 
-  feedPage() {
-    this.profile = false;
-    this.feed = true;
-    this.explore = false;
-    this.router.navigate(['feed', this.userService.userId]);
-  }
+  // feedPage() {
+  //   this.profile = false;
+  //   this.feed = true;
+  //   this.explore = false;
+  //   this.router.navigate(['feed', this.userService.userId]);
+  // }
 
-  explorePage() {
-    this.profile = false;
-    this.feed = false;
-    this.explore = true;
-    this.router.navigate(['/explore', this.userService.userId]);
-  }
+  // explorePage() {
+  //   this.profile = false;
+  //   this.feed = false;
+  //   this.explore = true;
+  //   this.router.navigate(['/explore', this.userService.userId]);
+  // }
 
 
   openCloseMenu() {
