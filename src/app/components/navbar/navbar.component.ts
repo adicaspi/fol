@@ -96,9 +96,8 @@ export class NavbarComponent implements OnInit {
 
   onChanges(): void {
     console.log("on changes");
-    this.searchForm.get('search').valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
+    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
       if (val == "") {
-        console.log("in val on ref 1");
         this.firstChar = true;
         this.options = [];
         this.filteredOptions = this.searchForm.valueChanges
@@ -108,19 +107,16 @@ export class NavbarComponent implements OnInit {
           );
       }
       if (this.firstChar && val != "") {
-        console.log("in val on ref 2");
         this.getSearchResults(val);
         this.firstChar = false;
       }
       if (!this.firstChar) {
-        console.log("in val on ref 3");
         this.filteredOptions = this.searchForm.valueChanges
           .pipe(
             startWith(''),
             map(value => this._filter(val))
           );
       }
-
     })
   }
 
@@ -128,6 +124,7 @@ export class NavbarComponent implements OnInit {
     this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       res.forEach(element => {
         this.options.push(element.username);
+
       })
       this.filteredOptions = this.searchForm.valueChanges
         .pipe(
