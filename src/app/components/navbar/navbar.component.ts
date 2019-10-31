@@ -57,6 +57,11 @@ export class NavbarComponent implements OnInit {
       search: ['']
     })
     this.onChanges();
+    // this.filteredOptions = this.searchForm.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this._filter(value))
+    //   );
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
     this.userId = this.userService.userId;
@@ -90,18 +95,30 @@ export class NavbarComponent implements OnInit {
   }
 
   onChanges(): void {
+    console.log("on changes");
     this.searchForm.get('search').valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
       if (val == "") {
+        console.log("in val on ref 1");
         this.firstChar = true;
         this.options = [];
-        this.filteredOptions = this._filter(val);
+        this.filteredOptions = this.searchForm.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(''))
+          );
       }
       if (this.firstChar && val != "") {
+        console.log("in val on ref 2");
         this.getSearchResults(val);
         this.firstChar = false;
       }
       if (!this.firstChar) {
-        this.filteredOptions = this._filter(val);
+        console.log("in val on ref 3");
+        this.filteredOptions = this.searchForm.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(val))
+          );
       }
 
     })
@@ -112,14 +129,18 @@ export class NavbarComponent implements OnInit {
       res.forEach(element => {
         this.options.push(element.username);
       })
-      this.filteredOptions = this._filter(value);
+      this.filteredOptions = this.searchForm.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
 
     })
   }
 
-  private _filter(value: string): Observable<string[]> {
+  private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)))
+    return (this.options.filter(option => option.toLowerCase().includes(filterValue)))
   }
 
   profilePage() {

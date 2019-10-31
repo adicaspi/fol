@@ -67,7 +67,6 @@ export class TimelineFeedComponent implements OnInit {
   private processData = posts => {
     this.offset = posts['newOffset'];
     posts['feedPosts'].forEach(post => {
-      console.log("im post", post);
       let baseAPI = this.baseApiUrl + '/image?s3key=';
       let postObject = {
         post: post,
