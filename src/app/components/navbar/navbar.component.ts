@@ -13,6 +13,7 @@ import { ConfigService } from '../../services/config.service';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ErrorsService } from '../../services/errors.service';
 
 @Component({
   selector: 'app-navbar',
@@ -49,7 +50,8 @@ export class NavbarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private deviceService: DeviceDetectorService,
     private configService: ConfigService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private errorService: ErrorsService
   ) { }
 
   ngOnInit() {
@@ -95,8 +97,10 @@ export class NavbarComponent implements OnInit {
   }
 
   onChanges(): void {
-    console.log("on changes");
+
     this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
+      this.errorService.sendMessage(val);
+
       if (val == "") {
         this.firstChar = true;
         this.options = [];
@@ -124,14 +128,12 @@ export class NavbarComponent implements OnInit {
     this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       res.forEach(element => {
         this.options.push(element.username);
-
       })
       this.filteredOptions = this.searchForm.valueChanges
         .pipe(
           startWith(''),
           map(value => this._filter(value))
         );
-
     })
   }
 

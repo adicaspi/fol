@@ -27,11 +27,11 @@
           <div class="input-container">
             <input type="serach" matInput [matAutocomplete]="auto" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm"
             />
-            <mat-autocomplete #auto="matAutocomplete">
+            <!-- <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}
               </mat-option>
-            </mat-autocomplete>
+            </mat-autocomplete> -->
           </div>
         </div>
       </form>

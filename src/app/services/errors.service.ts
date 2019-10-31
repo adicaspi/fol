@@ -8,7 +8,7 @@ export class ErrorsService {
   private subject = new Subject<any>();
 
   sendMessage(message: string) {
-    console.log("in send msg", message);
+
     this.subject.next({ error: message });
   }
 

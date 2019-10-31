@@ -12,6 +12,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
 import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
 
+
 @Component({
   selector: 'app-user-feed',
   templateUrl: './user-feed.component.html',
@@ -22,6 +23,7 @@ export class UserFeedComponent implements OnInit {
   postsToShow = [];
   offset: number = 0;
   desktop: boolean = true;
+  searchedTouched: boolean = false;
   id = 0;
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
@@ -40,6 +42,7 @@ export class UserFeedComponent implements OnInit {
   };
 
   onDestroy: Subject<void> = new Subject<void>();
+  error: string = "";
 
   constructor(
     private feedService: FeedService,
@@ -48,10 +51,12 @@ export class UserFeedComponent implements OnInit {
     private deviceService: DeviceDetectorService,
     private router: Router,
     private configService: ConfigService,
-    private postService: PostService
+    private postService: PostService,
+
   ) { }
 
   ngOnInit() {
+
     this.activatedRoute.params
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {

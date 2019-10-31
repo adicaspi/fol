@@ -9,6 +9,7 @@ import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
 import { GlobalVariable } from '../../../global';
 import { Router } from '../../../../node_modules/@angular/router';
+import { ErrorsService } from '../../services/errors.service';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -22,6 +23,8 @@ export class TimelineFeedComponent implements OnInit {
   offset: number = 0;
   desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
+  error: string;
+
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
   private anyErrors: boolean;
@@ -40,10 +43,12 @@ export class TimelineFeedComponent implements OnInit {
     private postService: PostService,
     private dialogService: DialogService,
     private configService: ConfigService,
-    private router: Router
+    private router: Router,
+
   ) { }
 
   ngOnInit() {
+
     this.id = this.userService.getCurrentUser();
     //this.id = 655;
     this.generateTimelineFeed(0, this.id);

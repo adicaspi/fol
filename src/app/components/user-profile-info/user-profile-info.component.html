@@ -23,7 +23,7 @@
         </ng-template>
       </div>
 
-      <div class="btn-group">
+      <div *ngIf="numberOfPosts | async" class="btn-group">
         <button type="button" class="simple-button-metrics first">
           <span class="metrics">{{ numberOfPosts | async }} </span>
           <span class="text"> posts</span>
