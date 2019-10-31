@@ -2,7 +2,7 @@
   <div class="icon-img">
     <i (click)="goBackPage()" class="fa fa-chevron-left"></i>
   </div>
-  <div class="profile-img-comp">
+  <div class="profile-img-comp" (click)="profilePage()">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">{{ currentUser.username }}</div>
   </div>

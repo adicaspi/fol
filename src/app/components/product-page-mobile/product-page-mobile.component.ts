@@ -103,4 +103,8 @@ export class ProductPageMobileComponent implements OnInit {
       this.router.navigate(['explore', this.user.id]);
     }
   }
+
+  profilePage() {
+    this.router.navigate(['profile', this.postInfo.userId]);
+  }
 }
