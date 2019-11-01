@@ -7,14 +7,7 @@ body {
   background-color: white;
 }
 
-.hidden {
-  display: none;
-}
-
 @media (max-width: 600px) {
-  .hidden {
-    display: initial;
-  }
   .display {
     display: none;
   }
