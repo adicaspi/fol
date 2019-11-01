@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+@media only screen and (min-width: 900px) {
 
 .center {
   margin-left: 20px;
@@ -38,19 +39,44 @@ ngxMasonryItem:nth-of-type(5n) {
   font-weight: 700px;
   font-size: 13px;
 }
-/* 
-@media (min-width: 360px) and (max-width: 376px) {
-  body {
-    font-family: sans-serif;
+}
+@media  (max-width: 600px)  {
+  .center {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
     background-color: white;
   }
 
+  ngx-masonry{
+    margin: 0 auto;
+  }
+  
   .masonry-item {
-    width: 50%;
+    margin-bottom: 20px;
+  }
+  ngxMasonryItem:nth-of-type(5n) {
+    margin-right: 0px;
+  }
+  
+  .masonry-item:hover {
+    opacity: 0.5;
+  }
+  
+  .masonry-item img {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 10px;
   }
-
+  
   .description {
-    font-size: 10px;
+    width: 130px;
+    margin-top: 5px;
+    background-color: white;
+    font-weight: 700px;
+    font-size: 13px;
   }
-} */
+  
+
+}
