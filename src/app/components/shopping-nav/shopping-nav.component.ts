@@ -6,6 +6,7 @@ import { FeedService } from '../../services/feed.service';
 import { FormGroup, FormBuilder } from '../../../../node_modules/@angular/forms';
 import { UserService } from '../../services/user.service';
 import { takeUntil } from 'rxjs/operators';
+import { ErrorsService } from '../../services/errors.service';
 
 
 @Component({
@@ -54,7 +55,8 @@ export class ShoppingNavComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private feedService: FeedService
+    private feedService: FeedService,
+    private errorService: ErrorsService
   ) {
     this.originalList['CATEGORIES'] = this.categories;
     this.originalList['CLOTHINGS'] = this.clothings;
@@ -71,41 +73,14 @@ export class ShoppingNavComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
-    //this.onChanges();
+    this.onChanges();
   }
+  onChanges(): void {
 
-  // onChanges(): void {
-  //   this.searchForm.get('search').valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
-  //     if (val == "") {
-  //       this.firstChar = true;
-  //       this.options = [];
-  //       this.filteredOptions = this._filter(val);
-  //     }
-  //     if (this.firstChar && val != "") {
-  //       this.getSearchResults(val);
-  //       this.firstChar = false;
-  //     }
-  //     if (!this.firstChar) {
-  //       this.filteredOptions = this._filter(val);
-  //     }
-
-  //   })
-  // }
-
-  // getSearchResults(value: string) {
-  //   this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
-  //     res.forEach(element => {
-  //       this.options.push(element.username);
-  //     })
-  //     this.filteredOptions = this._filter(value);
-
-  //   })
-  // }
-
-  // private _filter(value: string): Observable<string[]> {
-  //   const filterValue = value.toLowerCase();
-  //   return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)))
-  // }
+    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
+      this.errorService.setSearchInput(val);
+    })
+  }
 
 
   getKeys() {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from '../../../../node_modules/rxjs';
+import { ErrorsService } from '../../services/errors.service';
 
 @Component({
   selector: 'app-view-explore',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-explore.component.css']
 })
 export class ViewExploreComponent implements OnInit {
+  filteredOptions: Observable<string[]>;
+  searchedTouched: Observable<boolean>;
 
-  constructor() { }
+  constructor(private errorService: ErrorsService) { }
 
   ngOnInit() {
+    this.filteredOptions = this.errorService.getSearchInput();
+    this.searchedTouched = this.errorService.getSearchCondition();
   }
 
 }
