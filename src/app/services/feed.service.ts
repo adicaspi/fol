@@ -36,7 +36,7 @@ export class FeedService {
   ): Observable<Array<TimelinePost>> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/timeline-feed',
+      this.globalFeedURL + userId + '/timeline-feed', { headers: httpOptions.headers },
       {
         params: params
       }
@@ -53,7 +53,7 @@ export class FeedService {
   getUserFeed(userId: number, offset: number) {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed',
+      this.globalFeedURL + userId + '/user-feed', { headers: httpOptions.headers },
       {
         params: params
       }
@@ -78,7 +78,6 @@ export class FeedService {
     }
     //get masters
     else {
-      console.log('im in masters');
       let params = new HttpParams().set('offset', offset.toString());
       return this.http.get<Array<FollowItem>>(
         this.globaSoicalURL + id + '/follow-masters',
