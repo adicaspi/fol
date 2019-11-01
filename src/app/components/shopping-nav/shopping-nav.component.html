@@ -25,7 +25,8 @@
         <img src="../../../assets/fw_logo_white.png" />
 
         <form [formGroup]="searchForm" class="form-inline">
-          <input class="form-control " type="search" placeholder="search &#xF002;" aria-label="Search" id="navBarSearchForm" />
+          <input class="form-control " type="search" placeholder="search &#xF002;" formControlName="search" aria-label="Search" id="navBarSearchForm"
+          />
         </form>
       </div>
     </mat-toolbar>

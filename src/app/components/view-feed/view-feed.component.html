@@ -13,7 +13,7 @@
     </div>
     <ng-template #mobileView class="mobile">
       <app-shopping-nav>
-        <div *ngIf="mobileSearchedTouched | async;else mobileTimelineFeed">
+        <div *ngIf=" searchedTouched | async;else mobileTimelineFeed">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option}}
           </mat-option>

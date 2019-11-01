@@ -20,7 +20,6 @@ export class ViewFeedComponent implements OnInit {
   desktop: Boolean = true;
   filteredOptions: Observable<string[]>;
   searchedTouched: Observable<boolean>;
-  mobileSearchedTouched: Observable<boolean>;
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
