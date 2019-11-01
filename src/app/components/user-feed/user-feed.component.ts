@@ -99,7 +99,6 @@ export class UserFeedComponent implements OnInit {
   }
 
   fetchImages() {
-    console.log("in fetch");
     this.generateUserFeed(this.offset, this.id);
   }
 

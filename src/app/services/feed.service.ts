@@ -27,7 +27,7 @@ export class FeedService {
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //returns time line feed for the user in stupid json format
   getTimeLineFeed(
@@ -35,7 +35,7 @@ export class FeedService {
     userId: number
   ): Observable<Array<TimelinePost>> {
     let params = new HttpParams().set('offset', offset.toString());
-    return this.http.get<TimelinePost[]>(
+    return this.http.post<TimelinePost[]>(
       this.globalFeedURL + userId + '/timeline-feed',
       {
         params: params
@@ -43,9 +43,16 @@ export class FeedService {
     );
   }
 
+  getExploreFeed(userId: number): Observable<Array<TimelinePost>> {
+    return this.http.post<TimelinePost[]>(
+      this.globalFeedURL + userId + '/explore-feed', { headers: httpOptions.headers }
+    );
+
+  }
+
   getUserFeed(userId: number, offset: number) {
     let params = new HttpParams().set('offset', offset.toString());
-    return this.http.get<Array<any>>(
+    return this.http.post<Array<any>>(
       this.globalFeedURL + userId + '/user-feed',
       {
         params: params

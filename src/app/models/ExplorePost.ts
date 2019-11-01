@@ -1,8 +1,6 @@
 export class ExplorePost {
-  userProfileImageAddr: string;
-  userName: string;
+  postId: number;
+  userId: number;
   postImageAddr: string;
   description: string;
-  show: boolean = false;
-  userId: number;
 }
