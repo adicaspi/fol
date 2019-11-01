@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
       search: ['']
     })
     this.onChanges();
-    // this.filteredOptions = this.searchForm.valueChanges
+    // this.errorService.filteredOptions = this.searchForm.valueChanges
     //   .pipe(
     //     startWith(''),
     //     map(value => this._filter(value))
@@ -99,47 +99,8 @@ export class NavbarComponent implements OnInit {
   onChanges(): void {
 
     this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
-      this.errorService.sendMessage(val);
-
-      if (val == "") {
-        this.firstChar = true;
-        this.options = [];
-        this.filteredOptions = this.searchForm.valueChanges
-          .pipe(
-            startWith(''),
-            map(value => this._filter(''))
-          );
-      }
-      if (this.firstChar && val != "") {
-        this.getSearchResults(val);
-        this.firstChar = false;
-      }
-      if (!this.firstChar) {
-        this.filteredOptions = this.searchForm.valueChanges
-          .pipe(
-            startWith(''),
-            map(value => this._filter(val))
-          );
-      }
+      this.errorService.setSearchInput(val);
     })
-  }
-
-  getSearchResults(value: string) {
-    this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
-      res.forEach(element => {
-        this.options.push(element.username);
-      })
-      this.filteredOptions = this.searchForm.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => this._filter(value))
-        );
-    })
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return (this.options.filter(option => option.toLowerCase().includes(filterValue)))
   }
 
   profilePage() {

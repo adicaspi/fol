@@ -71,41 +71,41 @@ export class ShoppingNavComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
-    this.onChanges();
+    //this.onChanges();
   }
 
-  onChanges(): void {
-    this.searchForm.get('search').valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
-      if (val == "") {
-        this.firstChar = true;
-        this.options = [];
-        this.filteredOptions = this._filter(val);
-      }
-      if (this.firstChar && val != "") {
-        this.getSearchResults(val);
-        this.firstChar = false;
-      }
-      if (!this.firstChar) {
-        this.filteredOptions = this._filter(val);
-      }
+  // onChanges(): void {
+  //   this.searchForm.get('search').valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
+  //     if (val == "") {
+  //       this.firstChar = true;
+  //       this.options = [];
+  //       this.filteredOptions = this._filter(val);
+  //     }
+  //     if (this.firstChar && val != "") {
+  //       this.getSearchResults(val);
+  //       this.firstChar = false;
+  //     }
+  //     if (!this.firstChar) {
+  //       this.filteredOptions = this._filter(val);
+  //     }
 
-    })
-  }
+  //   })
+  // }
 
-  getSearchResults(value: string) {
-    this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
-      res.forEach(element => {
-        this.options.push(element.username);
-      })
-      this.filteredOptions = this._filter(value);
+  // getSearchResults(value: string) {
+  //   this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
+  //     res.forEach(element => {
+  //       this.options.push(element.username);
+  //     })
+  //     this.filteredOptions = this._filter(value);
 
-    })
-  }
+  //   })
+  // }
 
-  private _filter(value: string): Observable<string[]> {
-    const filterValue = value.toLowerCase();
-    return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)))
-  }
+  // private _filter(value: string): Observable<string[]> {
+  //   const filterValue = value.toLowerCase();
+  //   return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)))
+  // }
 
 
   getKeys() {
