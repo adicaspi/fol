@@ -3,7 +3,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DeviceDetectorService } from '../../../../node_modules/ngx-device-detector';
-import { MutualNavComponent } from '../mutual-nav/mutual-nav.component';
+import { ConfigService } from '../../services/config.service';
+import { ErrorsService } from '../../services/errors.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-view-profile',
@@ -14,10 +16,15 @@ import { MutualNavComponent } from '../mutual-nav/mutual-nav.component';
   }
 })
 export class ViewProfileComponent implements OnInit {
-  @ViewChild(MutualNavComponent, { static: false })
-  mutualNav: MutualNavComponent;
-  desktop: Boolean;
+  desktop: Boolean = true;
   classToApply: string = 'center';
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
+  searchedTouched: Observable<boolean>;
+  mobileSearchedTouched: Observable<boolean>;
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
@@ -25,28 +32,27 @@ export class ViewProfileComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private deviceService: DeviceDetectorService,
-    private _eref: ElementRef
-  ) {}
+    private configService: ConfigService,
+    private errorService: ErrorsService
+  ) { }
 
   ngOnInit() {
-    if (this.deviceService.isDesktop()) {
-      this.desktop = true;
-    }
+    this.filteredOptions = this.errorService.getSearchInput();
+    this.searchedTouched = this.errorService.getSearchCondition();
+    // if (this.deviceService.isDesktop()) {
+    //   this.desktop = true;
+    // }
+
+    this.subscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+        else {
+          this.desktop = true;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
   }
-
-  // countChange(event) {
-  //   this.classToApply = event;
-  // }
-
-  // onClick(event) {
-  //   if (this._eref.nativeElement.contains(event.target))
-  //     console.log('in click event');
-  //   if (this.mutualNav.openDropDownKey) {
-  // or some similar check
-
-  // this.mutualNav.prevOpenKey.css({
-  //   display: 'none'
-  // });
-  //}
-  //  }
 }

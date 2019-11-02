@@ -18,7 +18,7 @@ import { ErrorsService } from '../../services/errors.service';
   styleUrls: ['./http-error.component.css']
 })
 export class HttpErrorComponent implements HttpInterceptor {
-  constructor(private router: Router, private errorsService: ErrorsService) {}
+  constructor(private router: Router, private errorsService: ErrorsService) { }
 
   intercept(
     request: HttpRequest<any>,
@@ -42,9 +42,11 @@ export class HttpErrorComponent implements HttpInterceptor {
           }
           if (error.error.error == 'Invalid Authentication Data') {
             this.errorsService.sendMessage('Invalid Authentication Data');
+            console.log("hi adi in error comp invalid authen");
           }
           if (error.error.error == 'Invalid User') {
             this.errorsService.sendMessage('Invalid User');
+            console.log("hi adi in error comp");
           }
           if (error.error.error == 'Cognito Exception') {
             //this.router.navigate(['/forgotpassword']);
@@ -55,7 +57,7 @@ export class HttpErrorComponent implements HttpInterceptor {
           console.log('in handler', error);
           errorMessage = `Error Code: ${error.status}\nMessage: ${
             error.message
-          }`;
+            }`;
         }
         // window.alert(errorMessage);
         console.log('im before throweeror');

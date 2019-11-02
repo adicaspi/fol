@@ -21,6 +21,7 @@ export class UserProfileInfoComponent implements OnInit {
   follows: boolean;
   // user: Observable<User>;
   user: User;
+  userId: number;
   userProfileImageSrc = [];
   src: any;
   following: Observable<number>;
@@ -40,11 +41,15 @@ export class UserProfileInfoComponent implements OnInit {
     private postService: PostService,
     private dialogService: DialogService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
+    this.userId = this.userService.userId;
+    this.userService.checkIsFollowing(this.masterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
+      this.follows = res;
+    })
     this.updateUser();
     this.following = this.userService.getNumberOfFollowing(this.masterId);
     this.followers = this.userService.getNumberOfFollowers(this.masterId);
@@ -71,7 +76,7 @@ export class UserProfileInfoComponent implements OnInit {
       .subscribe(user => {
         this.user = user;
         this.updateProfileImage(user);
-        if (this.user.id == this.masterId) {
+        if (this.userId == this.masterId) {
           this.userProfile = true;
         }
       });

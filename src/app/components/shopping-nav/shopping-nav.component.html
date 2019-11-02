@@ -1,55 +1,31 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    [ngClass]="{ hidden: !(isHandset$ | async) }"
-    fixedInViewport="false"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'push' : 'side'"
-    [opened]="(isHandset$ | async) === false"
-    (opened)="onOpen()"
-    (closed)="onClose()"
-  >
+  <mat-sidenav #drawer class="sidenav" [ngClass]="{ hidden: !(isHandset$ | async) }" fixedInViewport="false" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'push' : 'side'" [opened]="(isHandset$ | async) === false" (opened)="onOpen()" (closed)="onClose()">
     <div class="test">
-      <mat-toolbar
-        ><button
-          *ngIf="showBack"
-          class="back-button"
-          (click)="getValues('back')"
-        >
+      <mat-toolbar>
+        <button *ngIf="showBack" class="back-button" (click)="getValues('back')">
           BACK
-        </button></mat-toolbar
-      >
+        </button>
+      </mat-toolbar>
     </div>
     <mat-nav-list *ngFor="let key of mainList">
       <mat-list-item>
         <button class="nav-item" (click)="getValues(key)">
           {{ key }}
-        </button></mat-list-item
-      >
+        </button>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
       </button>
       <div class="logo-drawer">
         <img src="../../../assets/fw_logo_white.png" />
 
-        <form class="form-inline">
-          <input
-            class="form-control "
-            type="search"
-            placeholder="search &#xF002;"
-            aria-label="Search"
-            id="navBarSearchForm"
+        <form [formGroup]="searchForm" class="form-inline">
+          <input class="form-control " type="search" placeholder="search &#xF002;" formControlName="search" aria-label="Search" id="navBarSearchForm"
           />
         </form>
       </div>

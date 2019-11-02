@@ -1,7 +1,11 @@
+button.mat-button{
+  float: right;
+  font-size: 20px;
+}
+
 .wrapper {
   height: 500px;
   width: 100%;
-
   overflow: hidden;
   margin: 0 auto;
 }
@@ -29,6 +33,7 @@ button.btn.btn-default.register {
   display: block;
   margin: 0 auto;
   margin-top: 15px;
+  background-color: black;
 }
 
 p.forgot-password {
@@ -53,6 +58,11 @@ p.forgot-password {
 
 button.btn.facebook {
   background-color: #6d84b4;
+}
+
+div.invalid-feedback{
+  width: 50%;
+  margin: 0 auto;
 }
 @media (min-width: 360px) {
   button.btn {

@@ -1,48 +1,36 @@
 <div id="main-body">
-  <div class="center">
-    <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
-      <ngxMasonryItem
-        class="card masonry-item"
-        *ngFor="let post of postsToShow"
-      >
+  <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
+    <div class="center">
+      <div class="card masonry-item" *ngFor="let post of postsToShow">
+        <!-- <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
+        <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow"> -->
         <div class="profile-image">
-          <img (click)="profilePgae(post)" [attr.src]="post['profileImgSrc']" />
-          <span class="card-text profile">{{ post['post']['userName'] }}</span>
+          <img (click)="profilePage(post)" [attr.src]="post['profileImgSrc']" />
+          <span (click)="profilePage(post)" class="card-text profile">{{ post['post']['userName'] }}</span>
         </div>
 
         <div class="masonry-img">
-          <img
-            (click)="openDialog(post)"
-            [attr.src]="post['postImgSrc']"
-            class="img-main"
-          />
-          <!-- <img
-            src="../../../assets/asos_thumb.jpg"
-            class="img-hover"
-            (click)="openDialog(post)"
-          /> -->
+          <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" class="img-main" />
         </div>
 
-        <div class="card-text">
-          <div class="description">
-            <!-- {{ post['post']['description'] }} -->
-            little black dress
-          </div>
+
+        <div class="description">
+          {{ post['post']['description'] }}
+        </div>
+        <div class="fotter-card-text">
           <span class="price">
-            $500
+            {{ post['post']['price'] }}
           </span>
           <span class="store text-right">
-            net-a-porter.com
+            {{ post['post']['website'] }}
           </span>
         </div>
-      </ngxMasonryItem>
-    </ngx-masonry>
-    <div
-      class="search-results"
-      infiniteScroll
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="1000"
-      (scrolled)="fetchImages()"
-    ></div>
+      </div>
+      <!-- </ngxMasonryItem>
+      </ngx-masonry> -->
+    </div>
   </div>
+
+
+
 </div>

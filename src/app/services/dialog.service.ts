@@ -140,9 +140,10 @@ export class DialogService {
 
     const dialogRef = this.dialog.open(component, modalWindowConfig);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
   postData(post, directingPage) {

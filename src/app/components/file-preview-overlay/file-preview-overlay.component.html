@@ -10,21 +10,22 @@
         <div class="card-text profile">{{ currentUser.username }}</div>
       </div>
 
-      <div class="slider">
+      <div *ngIf="postInfo" class="slider">
         <img id="mainImage" [attr.src]="userPost.postImgSrc" />
 
         <div class="product-description">
           <div class="card-text title">
-            <img src="../../../assets/zara.PNG" class="store-logo" />
+            <!-- <img  src="../../../assets/zara.PNG" class="store-logo" /> -->
+            <img class="store-logo" [attr.src]="storeLogoSrc">
           </div>
 
           <p id="description" class="card-text description">
-            Night Out open-back ruched satin blouse
+            {{postInfo.description}}
           </p>
 
           <div class="footer">
             <div class="upper-footer">
-              <a href="{{ postInfo.link }}" target="_blank">
+              <a href="{{ userPost?.link }}" target="_blank">
                 <button type="button" class="shop_btn">
                   Shop
                 </button>
@@ -33,7 +34,7 @@
               <button mat-button>
                 <i class="material-icons">more_horiz</i>
               </button>
-              <span class="price">$500</span>
+              <span class="price">{{postInfo.price}}</span>
             </div>
           </div>
         </div>

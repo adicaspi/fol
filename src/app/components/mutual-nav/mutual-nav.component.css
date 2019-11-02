@@ -199,7 +199,7 @@ mat-toolbar{
 
 button.mat-button{
   color:black;
-  font-size: 15px;
+  font-size: 17px;
   font-family: 'Maven Pro', sans-serif;
   outline:none;
 }
@@ -216,6 +216,14 @@ button.mat-button{
   margin: 15px 0;
   justify-content: center;
 }
+
+/* .checkbox-menu{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  justify-content: center;
+} */
 
 label.category-label{
   margin:0;
@@ -237,6 +245,11 @@ div.mat-menu-content{
   display: flex;
   flex-direction: row;
    justify-content: space-evenly;
+   flex-wrap: wrap;
+}
+
+div.submit{
+  margin-left: auto;
 }
 
 /* input[type="radio"] {
@@ -246,9 +259,16 @@ div.mat-menu-content{
   background-color: #ff4081;
 } */
 
-
-
-
 .filler {
   flex: 1 1 auto;
+}
+
+@media (min-width: 600px) and (max-width: 900px)  {
+  button.mat-button{
+    color:black;
+    font-size: 12px;
+    font-family: 'Maven Pro', sans-serif;
+    outline:none;
+  }
+  
 }

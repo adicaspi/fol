@@ -26,7 +26,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   userPost: UserPost;
   postInfo: PostInfo;
   timelinePost: TimelinePost;
-  website_logo: string;
+  storeLogoSrc: string;
   postsToShow = [];
   user: User;
   mainImageSrc: any;
@@ -41,7 +41,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private dialogRef: FilePreviewOverlayRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userPost = this.postService.userPost;
@@ -68,22 +68,15 @@ export class FilePreviewOverlayComponent implements OnInit {
       )
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
+        console.log("im post info", postInfo);
         this.postInfo = postInfo;
         this.thumbnails.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.imageAddr
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
         );
-        if (postInfo.thumbnail1) {
-          this.thumbnails.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail1
-          );
-        }
-        if (postInfo.thumbnail2) {
-          this.thumbnails.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail2
-          );
-        }
-
-        this.setWebsiteLogo(postInfo.website);
+        this.thumbnails.push(
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+        );
+        this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr
         this.showSpinner = false;
         this.feedService.sendMessage('done-loading');
       });
@@ -120,7 +113,6 @@ export class FilePreviewOverlayComponent implements OnInit {
     description.text(this.userPost['post']['description']);
     var link = $('#link');
     link.attr('href', this.userPost['post']['link']);
-    this.setWebsiteLogo(this.userPost['post']['website']);
     var price = $('span.price');
     price.text(this.userPost['post']['price']);
   }
@@ -137,37 +129,37 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.ngOnInit();
   }
 
-  setWebsiteLogo(website) {
-    switch (website) {
-      case 'www.terminalx.com':
-        this.website_logo = '../../../assets/terminalx.PNG';
-        this.postInfo.currency = 'ils';
-        //this.rtl = true;
-        break;
-      case 'www.zara.com':
-        this.website_logo = '../../../assets/zara.PNG';
-        this.postInfo.currency = 'ils';
-        //this.rtl = true;
-        break;
-      case 'www.adikastyle.com':
-        this.website_logo = '../../../assets/adika.PNG';
-        this.postInfo.currency = 'ils';
-        //this.rtl = true;
-        break;
-      case 'www.asos.com':
-        this.website_logo = '../../../assets/asos.PNG';
-        this.postInfo.currency = 'usd';
-        break;
-      case 'www.farfetch.com':
-        this.website_logo = '../../../assets/farfetch.PNG';
-        this.postInfo.currency = 'usd';
-        break;
-      case 'www.shein.com':
-        this.website_logo = '../../../assets/shein.PNG';
-        this.postInfo.currency = 'usd';
-        break;
-    }
-  }
+  // setWebsiteLogo(postInfo:PostInfo) {
+  //   switch (postInfo.website) {
+  //     case 'www.terminalx.com':
+  //       this.website_logo = '../../../assets/terminalx.PNG';
+  //       this.postInfo.currency = 'ils';
+
+  //       break;
+  //     case 'www.zara.com':
+  //       this.website_logo = '../../../assets/zara.PNG';
+  //       this.postInfo.currency = 'ils';
+
+  //       break;
+  //     case 'www.adikastyle.com':
+  //       this.website_logo = '../../../assets/adika.PNG';
+  //       this.postInfo.currency = 'ils';
+
+  //       break;
+  //     case 'www.asos.com':
+  //       this.website_logo = '../../../assets/asos.PNG';
+  //       this.postInfo.currency = 'usd';
+  //       break;
+  //     case 'www.farfetch.com':
+  //       this.website_logo = '../../../assets/farfetch.PNG';
+  //       this.postInfo.currency = 'usd';
+  //       break;
+  //     case 'www.shein.com':
+  //       this.website_logo = '../../../assets/shein.PNG';
+  //       this.postInfo.currency = 'usd';
+  //       break;
+  //   }
+  // }
 
   closeModal() {
     this.dialogRef.close();

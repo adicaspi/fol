@@ -8,38 +8,33 @@
     <div *ngIf="user" class="description">
       <div class="upper-description-div">
         <div class="user-name">{{ user.username }}</div>
-        <div class="settings">
-          <i (click)="settingsPage()" class="fal fa-cog"></i>
+
+        <div *ngIf="!userProfile; else settings">
+          <div class="button-follow">
+            <button type="button" class="button-follow setiings" (click)="follow()">
+              {{ follows ? 'following' : 'follow' }}
+            </button>
+          </div>
         </div>
-        <div *ngIf="!userProfile">
-          <button type="button" class="button-follow" (click)="follow()">
-            {{ follows ? 'unfollow' : 'follow' }}
-          </button>
-        </div>
+        <ng-template #settings>
+          <div class="settings">
+            <i (click)="settingsPage()" class="fal fa-cog"></i>
+          </div>
+        </ng-template>
       </div>
 
-      <div class="btn-group">
+      <div *ngIf="numberOfPosts | async" class="btn-group">
         <button type="button" class="simple-button-metrics first">
           <span class="metrics">{{ numberOfPosts | async }} </span>
           <span class="text"> posts</span>
         </button>
 
-        <button
-          type="button"
-          *ngIf="following | async; else unclickableFollowing"
-          class="simple-button-metrics second"
-          (click)="openDialog(0)"
-        >
+        <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(0)">
           <span class="metrics">{{ following | async }}</span>
           <span class="text"> following</span>
         </button>
 
-        <button
-          *ngIf="followers | async; else unclickableFollowers"
-          type="button"
-          class="simple-button-metrics third"
-          (click)="openDialog(1)"
-        >
+        <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(1)">
           <span class="metrics">{{ followers | async }}</span>
           <span class="text"> followers </span>
         </button>
@@ -58,8 +53,7 @@
       </div>
       <div class="user-description">
         <p class="full-name">{{ user.fullName }}</p>
-        <p>{{ user.description }} I just love fashion you know, and everything that comes with it.
-          Shopping is LYFE
+        <p class="bio">{{ user.description }} I just love fashion you know, and everything that comes with it. Shopping is LYFE
         </p>
       </div>
     </div>

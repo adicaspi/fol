@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { Subject, Observer, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxMasonryOptions } from 'ngx-masonry';
@@ -9,6 +9,9 @@ import { DialogService } from '../../services/dialog.service';
 import { ProductPageComponent } from '../product-page/product-page.component';
 import { GlobalVariable } from '../../../global';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ConfigService } from '../../services/config.service';
+import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
+
 
 @Component({
   selector: 'app-user-feed',
@@ -19,17 +22,27 @@ export class UserFeedComponent implements OnInit {
   posts: Array<any> = [];
   postsToShow = [];
   offset: number = 0;
+  desktop: boolean = true;
+  searchedTouched: boolean = false;
   id = 0;
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
+  routes: Routes = [
+    { path: 'product-page', component: ProductPageMobileComponent }
+  ];
 
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
+    fitWidth: true,
     gutter: 39
   };
 
   onDestroy: Subject<void> = new Subject<void>();
+  error: string = "";
 
   constructor(
     private feedService: FeedService,
@@ -37,21 +50,38 @@ export class UserFeedComponent implements OnInit {
     private dialogService: DialogService,
     private deviceService: DeviceDetectorService,
     private router: Router,
-    private postService: PostService
-  ) {}
+    private configService: ConfigService,
+    private postService: PostService,
+
+  ) { }
 
   ngOnInit() {
+
     this.activatedRoute.params
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         this.id = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
         this.generateUserFeed(0, this.id);
       });
+    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
+      value => {
+        if (value.width <= 900) {
+          // this.masonryOptions.gutter = 20;
+        }
+        if (value.width <= 600) {
+          this.desktop = false;
+          this.masonryOptions.gutter = 20;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+
   }
 
   private processData = posts => {
     this.posts = this.posts.concat(posts);
-    posts.forEach(post => {
+    this.offset = posts['newOffset'];
+    posts['feedPosts'].forEach(post => {
       let baseAPI = this.baseApiUrl + '/image?s3key=';
       let postObject = {
         post: post,
@@ -73,12 +103,13 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    if (this.deviceService.isDesktop()) {
-      //this.dialogService.openModalWindow(ProductPageComponent, post);
-      this.postService.userPost = post;
+    // if (this.deviceService.isDesktop()) {
+    //this.dialogService.openModalWindow(ProductPageComponent, post);
+    this.postService.userPost = post;
+    if (this.desktop) {
       this.dialogService.openDialog();
     } else {
-      this.dialogService.userPost = post;
+      //this.dialogService.userPost = post;
       this.dialogService.directingPage = 'profile';
       this.router.navigate(['product-page']);
     }

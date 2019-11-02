@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import { HttpClient } from '../../../../node_modules/@angular/common/http';
 import { Router } from '../../../../node_modules/@angular/router';
 import { ConfigService } from '../../services/config.service';
+import { ErrorsService } from '../../services/errors.service';
 @Component({
   selector: 'app-view-feed',
   templateUrl: './view-feed.component.html',
@@ -16,6 +17,12 @@ export class ViewFeedComponent implements OnInit {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   userId: boolean = false;
+  desktop: Boolean = true;
+  filteredOptions: Observable<string[]>;
+  searchedTouched: Observable<boolean>;
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
@@ -23,8 +30,9 @@ export class ViewFeedComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private userService: UserService,
     private http: HttpClient,
-    private configService: ConfigService
-  ) {}
+    private configService: ConfigService,
+    private errorService: ErrorsService
+  ) { }
 
   ngOnInit() {
     if (this.userService.userId) {
@@ -32,6 +40,20 @@ export class ViewFeedComponent implements OnInit {
     } else {
       this.loadConfigurationData();
     }
+    this.filteredOptions = this.errorService.getSearchInput();
+    this.searchedTouched = this.errorService.getSearchCondition();
+    this.subscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+        else {
+          this.desktop = true;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+
   }
 
   loadConfigurationData() {

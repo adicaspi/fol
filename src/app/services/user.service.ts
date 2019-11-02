@@ -12,6 +12,7 @@ const httpOptions = {
 };
 import { GlobalVariable } from '../../global';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +26,7 @@ export class UserService {
   globaSoicalURL = this.baseApiUrl + '/social/';
   globalInfoURL = this.baseApiUrl + '/user-info/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(userForm: any): Observable<any> {
     return this.http.post<any>(this.globalRegisterURL + 'signup', userForm, {
@@ -80,15 +81,11 @@ export class UserService {
     });
   }
 
-  checkIsFollowing(masterId: number): Promise<boolean> {
+  checkIsFollowing(masterId: number): Observable<boolean> {
     let params = new HttpParams().set('masterId', masterId.toString());
     return this.http
       .get<boolean>(this.globaSoicalURL + this.userId + '/is-following', {
         params: params
-      })
-      .toPromise()
-      .then(data => {
-        return data;
       });
   }
   follow(master: any) {
@@ -164,5 +161,12 @@ export class UserService {
       params,
       { headers: httpOptions.headers }
     );
+  }
+
+  search(char: string): Observable<Array<any>> {
+    let params = new HttpParams().set('query', char);
+    return this.http.get<any[]>(this.baseApiUrl + '/general/search', {
+      params: params
+    });
   }
 }

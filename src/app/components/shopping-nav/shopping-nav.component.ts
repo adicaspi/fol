@@ -1,20 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeedService } from '../../services/feed.service';
+import { FormGroup, FormBuilder } from '../../../../node_modules/@angular/forms';
+import { UserService } from '../../services/user.service';
+import { takeUntil } from 'rxjs/operators';
+import { ErrorsService } from '../../services/errors.service';
+
 
 @Component({
   selector: 'app-shopping-nav',
   templateUrl: './shopping-nav.component.html',
   styleUrls: ['./shopping-nav.component.css']
 })
-export class ShoppingNavComponent {
+export class ShoppingNavComponent implements OnInit {
   showBack: boolean = false;
-  mainList = ['CATEGORIES', 'PRODUCT TYPE', 'DESIGNERS', 'STORES', 'PRICE'];
+  searchForm: FormGroup;
+  firstChar: boolean = true;
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
+  mainList = ['CATEGORIES', 'DESIGNERS', 'STORES', 'PRICE'];
   originalList = {};
-  Categories = ['CLOTHING', 'SHOES', 'BAGS', 'ACCESSORIES'];
-  ProductType = [
+  displayList = {};
+  categories = ['CLOTHINGS', 'SHOES', 'BAGS', 'ACCESSORIES'];
+  clothings = [
     'ALL CLOTHING',
     'TOPS',
     'JACKETS & COATS',
@@ -22,8 +32,8 @@ export class ShoppingNavComponent {
     'PANTS',
     'SWIMWEAR'
   ];
-  Designers = ['ALL DESIGNERS', 'GUCCI', 'PRADA', 'D&G'];
-  Stores = [
+  designers = ['ALL DESIGNERS', 'GUCCI', 'PRADA', 'D&G'];
+  stores = [
     'ALL STORES',
     'ZARA',
     'FAR FETCH',
@@ -32,36 +42,64 @@ export class ShoppingNavComponent {
     'TerminalX',
     'ADIKA'
   ];
-  Price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
+  price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
   icon = 'menu';
-
+  currKey: string;
+  prevKey: string;
+  onDestroy: Subject<void> = new Subject<void>();
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private feedService: FeedService
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private feedService: FeedService,
+    private errorService: ErrorsService
   ) {
-    this.originalList['CATEGORIES'] = this.Categories;
-    this.originalList['PRODUCT TYPE'] = this.ProductType;
-    this.originalList['DESIGNERS'] = this.Designers;
-    this.originalList['STORES'] = this.Stores;
-    this.originalList['PRICE'] = this.Price;
+    this.originalList['CATEGORIES'] = this.categories;
+    this.originalList['CLOTHINGS'] = this.clothings;
+    this.originalList['DESIGNERS'] = this.designers;
+    this.originalList['STORES'] = this.stores;
+    this.originalList['PRICE'] = this.price;
+    this.displayList['CATEGORIES'] = this.categories;
+    this.displayList['DESIGNERS'] = this.designers;
+    this.displayList['STORES'] = this.stores;
+    this.displayList['PRICE'] = this.price;
   }
 
-  changeMenu(item) {
-    this.mainList = ['heels', 'boots'];
+  ngOnInit() {
+    this.searchForm = this.formBuilder.group({
+      search: ['']
+    })
+    this.onChanges();
   }
+  onChanges(): void {
+
+    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
+      this.errorService.setSearchInput(val);
+    })
+  }
+
 
   getKeys() {
-    return Object.keys(this.originalList);
+    return Object.keys(this.displayList);
   }
 
   getValues(key) {
+    this.prevKey = this.currKey;
+    this.currKey = key;
+
     if (key === 'back') {
-      this.mainList = this.getKeys();
-      this.showBack = false;
+      if (this.prevKey == 'CLOTHINGS') {
+        this.mainList = Object.values(this.originalList['CATEGORIES']);
+      }
+      else {
+        this.mainList = this.getKeys();
+        this.showBack = false;
+      }
+
     } else {
       this.mainList = Object.values(this.originalList[key]);
       this.showBack = true;

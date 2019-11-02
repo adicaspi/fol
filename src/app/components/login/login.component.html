@@ -1,23 +1,26 @@
+<button mat-button [mat-dialog-close]="true">
+  <i class="fal fa-times"></i>
+</button>
 <div mat-dialog-content>
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
     <div class="form-group">
       <label for="email"></label>
-      <input
-        type="text"
-        formControlName="emailLogin"
-        class="form-control"
-        placeholder="email"
-      />
+      <input type="text" formControlName="emailLogin" class="form-control" placeholder="email" [ngClass]="{
+        'is-invalid': wrongUser
+      }" />
+      <div *ngIf="wrongUser" class="invalid-feedback">
+        {{msgToShow}}
+      </div>
     </div>
     <div class="form-group">
       <label for="password"></label>
-      <input
-        type="password"
-        formControlName="passwordLogin"
-        class="form-control"
-        placeholder="password"
-      />
+      <input type="password" formControlName="passwordLogin" class="form-control" placeholder="password" [ngClass]="{
+          'is-invalid': wrongUser || wrongPass
+        }" />
+      <div *ngIf="wrongPass" class="invalid-feedback">
+        {{msgToShow}}
+      </div>
       <p class="forgot-password">
         <a routerLink="/forgotpassword">
           Forgot your password?
@@ -28,7 +31,9 @@
       <button class="btn btn-default login">Login</button>
     </div>
 
-    <div class="login-method"><span>OR</span></div>
+    <div class="login-method">
+      <span>OR</span>
+    </div>
 
     <div class="form-group">
       <button class="btn btn-default login facebook">
@@ -37,12 +42,12 @@
     </div>
   </form>
 
-  <div *ngIf="wrongPassUser" class="alert alert-danger">
+  <!-- <div *ngIf="wrongPassUser" class="alert alert-danger">
     Incorrect username or password
-  </div>
+  </div> -->
 
   <div class="form-group">
-    <button type="button" class="button-register" (click)="regsiterPage()">
+    <button type="button" class="btn btn-default register" (click)="regsiterPage()">
       Create An Account
     </button>
   </div>

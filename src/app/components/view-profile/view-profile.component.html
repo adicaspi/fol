@@ -3,24 +3,29 @@
 <body>
   <div *ngIf="desktop; else mobileView" class="display">
     <app-navbar></app-navbar>
-    <!-- <app-mutual-nav (change)="countChange($event)"></app-mutual-nav> -->
-    <!-- <div class="center">
-        <app-user-profile-info></app-user-profile-info>
-        <app-user-feed></app-user-feed>
-      </div> -->
-    <div [class]="classToApply">
+    <div *ngIf="searchedTouched | async;else userFeed">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </div>
+    <ng-template #userFeed>
       <app-user-profile-info></app-user-profile-info>
       <app-user-feed></app-user-feed>
-    </div>
+    </ng-template>
   </div>
-  <ng-template #mobileView>
-    <div class="hidden">
-      <app-shopping-nav>
+  <ng-template #mobileView class="mobile">
+    <app-shopping-nav>
+      <div *ngIf="searchedTouched | async;else userMobileFeed">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </div>
+      <ng-template #userMobileFeed>
         <app-user-profile-info></app-user-profile-info>
         <app-user-feed></app-user-feed>
-        <app-navbar></app-navbar>
-      </app-shopping-nav>
-    </div>
+        <app-bottom-navbar></app-bottom-navbar>
+      </ng-template>
+    </app-shopping-nav>
   </ng-template>
 </body>
 

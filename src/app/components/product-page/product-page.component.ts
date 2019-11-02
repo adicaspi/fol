@@ -75,18 +75,18 @@ export class ProductPageComponent implements OnInit {
       .subscribe(postInfo => {
         this.postInfo = postInfo;
         this.thumbnails.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.imageAddr
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
         );
-        if (postInfo.thumbnail1) {
-          this.thumbnails.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail1
-          );
-        }
-        if (postInfo.thumbnail2) {
-          this.thumbnails.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail2
-          );
-        }
+        // if (postInfo.thumbnail1) {
+        //   this.thumbnails.push(
+        //     this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail1
+        //   );
+        // }
+        // if (postInfo.thumbnail2) {
+        //   this.thumbnails.push(
+        //     this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnail2
+        //   );
+        // }
 
         this.setWebsiteLogo(postInfo.website);
         this.showSpinner = false;
@@ -144,30 +144,26 @@ export class ProductPageComponent implements OnInit {
     switch (website) {
       case 'www.terminalx.com':
         this.website_logo = '../../../assets/terminalx.PNG';
-        this.postInfo.currency = 'ils';
+
         //this.rtl = true;
         break;
       case 'www.zara.com':
         this.website_logo = '../../../assets/zara.PNG';
-        this.postInfo.currency = 'ils';
-        //this.rtl = true;
+
         break;
       case 'www.adikastyle.com':
         this.website_logo = '../../../assets/adika.PNG';
-        this.postInfo.currency = 'ils';
-        //this.rtl = true;
         break;
       case 'www.asos.com':
         this.website_logo = '../../../assets/asos.PNG';
-        this.postInfo.currency = 'usd';
         break;
       case 'www.farfetch.com':
         this.website_logo = '../../../assets/farfetch.PNG';
-        this.postInfo.currency = 'usd';
+
         break;
       case 'www.shein.com':
         this.website_logo = '../../../assets/shein.PNG';
-        this.postInfo.currency = 'usd';
+
         break;
     }
   }

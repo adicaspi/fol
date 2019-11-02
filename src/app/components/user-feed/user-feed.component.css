@@ -1,14 +1,22 @@
+
 @media only screen and (min-width: 900px) {
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
   }
 
-  /* #main-body {
+  .center{
+    margin: auto;
+    width: 900px;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-between;
+  }
+
+  /* .center {
+    margin: auto;
+    width: 900px;
   } */
 
   ngxMasonryItem:nth-of-type(3n) {
@@ -27,7 +35,6 @@
   }
 
   .card {
-    /* height: 337px; */
     width: 274px;
     margin-top: 39px;
     border: none;
@@ -70,69 +77,179 @@
     font-family: open sans, sans-serif;
     line-height: 1;
   }
-}
-
-@media (min-width: 576px) {
-}
-
-@media (min-width: 360px) and (max-width: 376px) {
+ }  
+@media (min-width: 600px) and (max-width: 900px) {
   #main-body {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  body {
     padding-right: 0px;
     padding-left: 0px;
   }
-  .center {
-    background-color: #f9f9f9;
-    margin-left: 0;
-    margin-right: 0;
+
+  .center{
+    margin: auto;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
-  .masonry-item {
-    width: 50%;
+
+  .center>.card{
+    width:47%;
   }
+
+  /* .center {
+    margin: auto;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+  } */
+
+  ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
+  }
+
   .masonry-item img {
-    /* width: 100px; */
-    width: 85%;
-    height: 200px;
+    width: 197px;
+    height: 295px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
     display: block;
+    border-radius: 5px;
+    object-fit: cover;
   }
 
   .card {
-    height: 300px;
-    margin: 20px;
-    /* margin-top: 35px; */
+    width: 274px;
+    margin-top: 39px;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
+
+  .card-text {
+    font-size: 15px;
+    height: 48px;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: 'helvetica', arial, sans-serif;
   }
 
   .description {
     text-align: center;
+    font-weight: 400;
+    color: black;
   }
 
-  span.store.text-right {
-    float: right;
-    clear: right;
+  .store.text-right {
+    position: absolute;
+    right: 12px;
+    margin-top: 8px;
     text-decoration: underline;
+    line-height: 1;
+    color: grey;
   }
-  span.text-left {
-    float: left;
-    clear: left;
+
+  span.price {
+    position: absolute;
+    left: 12px;
+    margin-top: 8px;
+    color: #2f2e2e;
+    font-weight: 200;
+    font-size: 14px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
+  }
+ }
+
+@media (max-width: 600px) {
+  #main-body {
+    padding-right: 0px;
+    padding-left: 0px;
+    overflow: visible;
+  }
+
+  /* .center {
+    margin: auto;
+    width: 375px;
+  } */
+
+  .center {
+    width:375px;
+    margin:auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  ngx-masonry{
+    margin: 0 auto;
+  }
+
+  ngxMasonryItem:nth-of-type(3n) {
+    margin-right: 0px;
+  }
+
+  .card {
+    /* width: 160px; */
+    width:170px;
+    margin-top: 26px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
+
+  .masonry-item img {
+    /* width: 150px;
+    height: 200px; */
+    width: 160px;
+    height: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
   }
 
   .card-text {
-    font-weight: 400px;
+    font-size: 10px;
+    height: 42px;
+    width: 100%;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
+
+  .card-text .description {
+    text-align: center;
+    font-weight: 400;
+    color: black;
     font-size: 12px;
-    height: 48px;
-    margin-top: 30px;
-    /* font-family: 'Roboto', sans-serif; */
-    font-family: 'helvetica', sans-serif;
+  }
+
+  .store.text-right {
+    position: absolute;
+    right: 8px;
+    margin-top: 5px;
+    text-decoration: underline;
+    line-height: 1;
+    color: grey;
+    font-size: 12px;
+  }
+
+  span.price {
+    position: absolute;
+    left: 8px;
+    margin-top: 5px;
+    color: #2f2e2e;
+    font-weight: 200;
+    font-size: 12px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
   }
 }

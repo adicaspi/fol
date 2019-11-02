@@ -51,10 +51,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.dialogRef.updateSize('550px', '580px');
     this.dialogRef._containerInstance._config.height = '580px';
-    console.log(
-      'im dialog ref',
-      this.dialogRef._containerInstance._config.height
-    );
 
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
@@ -88,7 +84,6 @@ export class RegisterComponent implements OnInit {
         this.userService.checkUserNameExists(val).subscribe(res => {
           this.userNameExists = res;
           this.userNameValidatorLength = false;
-          console.log(res);
         });
       } else {
         this.userNameValidatorLength = true;
@@ -101,7 +96,6 @@ export class RegisterComponent implements OnInit {
     this.registerForm.get('email').valueChanges.subscribe(val => {
       this.userService.checkEmailExists(val).subscribe(res => {
         this.emailExists = res;
-        console.log(res);
       });
     });
   }
@@ -109,10 +103,11 @@ export class RegisterComponent implements OnInit {
   onSubmitRegister() {
     this.submitted = true;
 
-    // stop here if form is invalid
-    // if (this.registerForm.invalid || this.emailExists || this.userNameExists) {
-    //   return;
-    // }
+    //   stop here if form is invalid
+    if (!this.registerForm.valid) {
+      console.log("form not valid");
+      return;
+    }
 
     this.loading = true;
 
@@ -174,7 +169,6 @@ export class RegisterComponent implements OnInit {
         error => {
           if (this.error.error == 'Invalid Authentication Data') {
             this.wrongPassUser = true;
-            console.log('im wrongpass', this.wrongPassUser);
           }
         }
       );

@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import * as $ from 'jquery';
 import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '../../../../node_modules/@angular/material';
+import { Options, LabelType } from 'ng5-slider';
+import { Ng5SliderModule } from 'ng5-slider';
+
 
 @Component({
   selector: 'app-mutual-nav',
@@ -14,40 +17,56 @@ export class MutualNavComponent implements OnInit {
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    step: 100,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '$' + value;
+        case LabelType.High:
+          return '$' + value;
+        default:
+          return '$' + value;
+      }
+    }
+  }
+  minValue: number = 0;
+  maxValue: number = 5000;
   categoryForm: FormGroup;
   productForm: FormGroup;
   categroyRadioButton: MatRadioButton = null;
   allCategroiesRadioButton: MatRadioButton = null;
   showProduct: boolean = false;
 
+
+
   class = 'filtered';
   menu_class = 'popup';
   aria_expanded = 'false';
   mainList = {};
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
-  prevOpenID: any;
-  currentOpenKey: any = null;
-  prevOpenKey: any = null;
-  categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothings', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accesories', checked: false }];
+  categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothings', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
-    { id: 1, name: 'All Clothings' },
-    { id: 2, name: 'Tops' },
-    { id: 3, name: 'Jackets & Coats' },
-    { id: 4, name: 'Dresses & Skirts' },
-    { id: 5, name: 'Pants' },
-    { id: 6, name: 'Swimwear' }
+    { id: 1, name: 'Tops', checked: false },
+    { id: 2, name: 'Jackets & Coats', checked: false },
+    { id: 3, name: 'Dresses & Skirts', checked: false },
+    { id: 4, name: 'Pants', checked: false },
+    { id: 5, name: 'Swimwear', checked: false }
   ];
-  shoes = [{ id: 1, name: 'All Shoes' },
-  { id: 2, name: 'Heels' },
-  { id: 3, name: 'Boots' },
-  { id: 4, name: 'Sneakers' }]
+  shoes = [
+    { id: 1, name: 'Heels' },
+    { id: 2, name: 'Boots' },
+    { id: 3, name: 'Sneakers' }]
   productsToShow = [];
-  designers = [{ id: 1, name: 'All Designers' }, { id: 2, name: 'Gucci' }, { id: 3, name: 'Prada' }, { id: 4, name: 'D&G' }];
-  stores = [{ id: 1, name: 'All Stores' }, { id: 2, name: 'ASOS' }, { id: 3, name: 'ZARA' }, { id: 4, name: 'Adika' }];
+  designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
+  stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 2, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 4, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 6, name: 'TerminalX', checked: false }, { id: 7, name: 'Net-A-Porter', checked: false }];
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
     this.mainList['Category'] = this.categories;
     this.mainList['Product type'] = this.clothings;
     this.mainList['Designer'] = this.designers;
@@ -67,11 +86,9 @@ export class MutualNavComponent implements OnInit {
 
   categoryValue() {
     let val = this.categoryForm.get('category');
-    console.log("im val", val);
   }
 
   clearCategoryForm() {
-    console.log("im in clear");
     if (this.categroyRadioButton) {
       this.categroyRadioButton.checked = false;
     }
@@ -92,85 +109,98 @@ export class MutualNavComponent implements OnInit {
       }
     } else {
       this.showProduct = false;
-
     }
     //this.categroyRadioButton = mrChange.source;
-
     //console.log(this.categroyRadioButton.name);
-
   }
 
-  OnChangeDesignerCheckBox($event) {
-    console.log("in designer");
-    console.log($event.source);
-    //$event.source.toggle();
-    //MatCheckboxChange {checked,MatCheckbox}
+  onChangeCheckBox($event, elem) {
+    if ($event.checked == true) {
+      elem.checked = true;
+    }
+    else {
+      elem.checked = false;
+    }
   }
 
-  OnChangeStoreCheckBox($event) {
-    console.log("in store");
-    console.log($event.source);
+  selectedProduct() {
+    var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].checked) {
+        console.log(elements[i].value);
+      }
+    }
+  }
+
+  selectedStore() {
+    var elements = (<HTMLInputElement[]><any>document.getElementsByName("store"));
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].checked) {
+        console.log(elements[i].value);
+      }
+    }
+  }
+
+  selectedDesigner() {
+    var elements = (<HTMLInputElement[]><any>document.getElementsByName("designer"));
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].checked) {
+        console.log(elements[i].value);
+      }
+    }
+  }
+
+  selectedPrice() {
+    (this.maxValue, this.minValue);
+  }
+
+  clearSelection(arrayToIterrate) {
+    console.log("in clear", arrayToIterrate);
+    arrayToIterrate.forEach(elem => {
+      elem.checked = false;
+    })
+  }
+
+  onChangeAllCheckBox($event, elem, arrayToIterrate) {
+
+    if (elem.id == 1) {
+      if ($event.checked == true) {
+        elem.checked = true;
+        arrayToIterrate.forEach(function (elem) {
+          elem.checked = true;
+        })
+      } else {
+        elem.checked = false
+        arrayToIterrate.forEach(function (elem) {
+          elem.checked = false;
+        })
+      }
+    } else {
+      if ($event.checked == false) {
+        elem.checked = false;
+        arrayToIterrate[0].checked = false;
+      }
+      else {
+        var allChecked = true;
+        elem.checked = true;
+        arrayToIterrate.forEach(function (elem) {
+          if (elem.id != 1) {
+            if (elem.checked == false) {
+              arrayToIterrate[0].checked = false;
+              allChecked = false;
+            }
+          }
+        })
+        if (allChecked) {
+          arrayToIterrate[0].checked = true;
+        }
+      }
+    }
   }
 
   OnChangePriceSlider($event) {
     console.log("in price");
     console.log($event.value);
-
-  }
-
-
-
-  changeMenu(key, i) {
-    //this.change.emit(this.class);
-    if (key == 'category') {
-      this.getProductTypeElement();
-    }
-    this.currentOpenKey = key;
-    let currentDropDownID = $('#_' + key);
-    let btn = $('.submit-btn');
-    let currentDropBtn = $('.dropbtn.' + key);
-
-    //checking if this isn't the first time user opens dropbtn, if it's not then display prev key as none;
-    if (this.prevOpenKey) {
-      let prevDropBtn = $('.dropbtn.' + this.prevOpenKey);
-      // prevDropBtn.css({
-      //   color: 'rgb(140, 140, 140)'
-      // });
-      this.prevOpenID.css({
-        display: 'none'
-      });
-
-      //if user opened and closes same dropdown then just clear all fields and return
-
-      if (this.prevOpenKey == key) {
-        this.currentOpenKey = null;
-        this.prevOpenKey = null;
-        btn.css({
-          display: 'none'
-        });
-        return;
-
-        //else user openes a new dropdown which is not the same dropdown currently opens
-      } else {
-        this.prevOpenKey = this.currentOpenKey;
-        this.prevOpenID = currentDropDownID;
-      }
-    }
-    // if this is the very first time the user filters the menu
-    else {
-      this.prevOpenKey = key;
-      this.prevOpenID = currentDropDownID;
-    }
-    //anyway do this when user clicks the menu
-    currentDropDownID.css({
-      display: 'block'
-    });
-    btn.css({
-      display: 'initial'
-    });
-    currentDropBtn.css({
-      color: 'black'
-    });
   }
   getKeys() {
     return this.keys;

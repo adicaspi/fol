@@ -1,12 +1,21 @@
+.wrapper{
+  height: 700px;
+}
+
 .slider {
   position: relative;
   margin-left: 20px;
+  margin-right: 20px;
+}
+
+.fs-container{
+  display:none;
 }
 
 #profileImage {
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   margin-top: 0;
   margin-right: 10px;
 }
@@ -26,11 +35,22 @@
 
 .product-upper-description {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.product-description {
-  float: right;
+.upper-footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
+
+/* .product-description {
+  float: right;
+  margin-right: 20px;
+} */
 
 button.mat-button {
   display: none;
@@ -46,7 +66,9 @@ button.mat-button {
   font-family: 'Maven Pro';
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 30px;
+  margin-right: 20px;
+  float:right;
+  font-size: 25px;
   float: right;
   clear: both;
 }
@@ -55,14 +77,16 @@ button.mat-button {
   font-family: 'Maven Pro';
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 25px;
+  float: left;
+  margin-left: 20px;
 }
 
 .card-text.profile {
-  line-height: 64px;
+  line-height: 50px;
   font-size: 25px;
-  height: 50px;
-  margin-bottom: 15px;
   display: inline-block;
+  vertical-align: bottom;
 }
 
 span.text-right {
@@ -85,17 +109,17 @@ button.shop_btn {
   outline: none;
   font-family: 'Maven Pro', sans-serif;
   font-size: 25px;
+  float: right;
 }
 
-img.store-logo-rtl {
+/* img.store-logo-rtl {
   width: 150px;
   float: right;
   margin-bottom: 10px;
-}
+} */
 
-img.store-logo-ltr {
-  width: 120px;
-  margin-bottom: 10px;
+img.store-logo {
+  width: 110px;
 }
 
 .thumbnails {
@@ -122,9 +146,6 @@ img.thumbnail {
 }
 
 span.price {
-  float: right;
-  margin-right: 30px;
-  margin-top: 20px;
   margin-bottom: 10px;
   font-size: 25px;
   color: black;

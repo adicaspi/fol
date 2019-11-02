@@ -60,6 +60,11 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
 import { FilePreviewOverlayComponent } from './components/file-preview-overlay/file-preview-overlay.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService } from './services/dialog.service';
+import { Ng5SliderModule } from 'ng5-slider';
+import { ErrorsService } from './services/errors.service';
+import { SlideshowModule } from 'ng-simple-slideshow';
+import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
+
 
 
 
@@ -95,7 +100,8 @@ import { DialogService } from './services/dialog.service';
     LoginComponent,
     ShoppingNavComponent,
     ProductPageMobileComponent,
-    FilePreviewOverlayComponent
+    FilePreviewOverlayComponent,
+    BottomNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -117,8 +123,11 @@ import { DialogService } from './services/dialog.service';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    Ng5SliderModule,
+    SlideshowModule,
     DeviceDetectorModule.forRoot()
   ],
+
 
   entryComponents: [
     UserProfileInfoComponent,
@@ -128,6 +137,7 @@ import { DialogService } from './services/dialog.service';
     RegisterComponent,
     LoginComponent,
     FilePreviewOverlayComponent,
+    MutualNavComponent
 
   ],
 
@@ -151,7 +161,9 @@ import { DialogService } from './services/dialog.service';
         configService.getSessionStorgae(),
       deps: [ConfigService, UserService],
       multi: true
-    }
+    },
+    { provide: 'windowObject', useValue: window },
+    ConfigService
   ],
   bootstrap: [AppComponent]
 })

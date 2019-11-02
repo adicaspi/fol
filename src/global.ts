@@ -1,4 +1,4 @@
 export const GlobalVariable = Object.freeze({
-  BASE_API_URL: 'https://www.followear.co.uk/api'
+  BASE_API_URL: 'https://www.followear.com/api'
   //... more of your variables
 });

@@ -27,41 +27,41 @@ export class ExploreFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter: 10
+    gutter: 10,
+    fitWidth: true
   };
   constructor(
     private userService: UserService,
     private feedService: FeedService,
     private postService: PostService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.id = this.userService.userId;
-    //this.id = 655; //DELETE ID
-    this.generateTimelineFeed(0, this.id);
+    this.generateExploreFeed(this.id);
   }
 
   private processData = posts => {
     this.posts = this.posts.concat(posts);
-    posts.forEach(post => {
+    posts['feedPosts'].forEach(post => {
       let baseAPI = this.baseApiUrl + '/image?s3key=';
       let postObject = {
         post: post,
         postImgSrc: baseAPI + post.postImageAddr,
-        profileImgSrc: baseAPI + post.userProfileImageAddr
+        // profileImgSrc: baseAPI + post.userProfileImageAddr
       };
       this.postsToShow.push(postObject);
     });
   };
 
-  generateTimelineFeed(offset: number, id: number) {
+  generateExploreFeed(id: number) {
     this.feedService
-      .getTimeLineFeed(offset, id)
+      .getExploreFeed(id)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(this.processData);
   }
   fetchImages() {
-    this.generateTimelineFeed(this.offset, this.id);
+    this.generateExploreFeed(this.id);
   }
 
   public ngOnDestroy(): void {

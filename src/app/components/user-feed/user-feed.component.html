@@ -1,61 +1,26 @@
-<div id="main-body">
-  <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
-    <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow">
-      <div class="masonry-img">
-        <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
-      </div>
-      <div class="card-text">
-        <div class="description">
-          little black dress
+<div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
+  <div id="main-body">
+    <div class="center">
+      <div class="card masonry-item" *ngFor="let post of postsToShow">
+        <!-- <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
+        <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow"> -->
+        <div class="masonry-img">
+          <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
         </div>
-        <span class="price">
-          $450
-        </span>
-        <a
-          class="store text-right"
-          href="https://www.net-a-porter.com"
-          target="_blank"
-        >
-          net-a-porter.com
-        </a>
+        <div class="card-text">
+          <div class="description">
+            {{ post['post']['description'] }}
+          </div>
+          <span class="price">
+            {{ post['post']['price'] }}
+          </span>
+          <a class="store text-right" href="https://www.net-a-porter.com" target="_blank">
+            {{ post['post']['website'] }}
+          </a>
+        </div>
+        <!-- </ngxMasonryItem>
+      </ngx-masonry> -->
       </div>
-    </ngxMasonryItem>
-  </ngx-masonry>
-  <div
-    class="search-results"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="1000"
-    (scrolled)="fetchImages()"
-  ></div>
-</div>
-<!-- 
-<div id="main-body">
-  <div class="card masonry-item" *ngFor="let post of postsToShow">
-    <div class="masonry-img">
-      <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
-    </div>
-    <div class="card-text">
-      <div class="description">
-        little black dress
-      </div>
-      <span class="price">
-        $450
-      </span>
-      <a
-        class="store text-right"
-        href="https://www.net-a-porter.com"
-        target="_blank"
-      >
-        net-a-porter.com
-      </a>
     </div>
   </div>
-  <div
-    class="search-results"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="1000"
-    (scrolled)="fetchImages()"
-  ></div>
-</div> -->
+</div>

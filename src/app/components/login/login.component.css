@@ -1,7 +1,13 @@
+button.mat-button{
+  float: right;
+  font-size: 20px;
+}
+
 .mat-dialog-content {
   width: 100%;
   overflow: hidden;
   margin: 0 auto;
+  max-height: 100vh;
 }
 a {
   color: black;
@@ -36,6 +42,11 @@ button.btn.btn-default.login {
   background-color: grey;
 }
 
+button.btn.btn-default.login:focus {
+  background-color: black;
+  color:white;  
+}
+
 p.forgot-password {
   width: 75%;
   margin-right: auto;
@@ -65,15 +76,42 @@ p.forgot-password {
 
 button.btn.btn-default.login.facebook {
   background-color: #6d84b4;
+  width: 50%;
 }
 
-button.button-register {
+/* .button-register {
   background: none;
-  border: none;
+  border: 1px solid;
   width: 50%;
   margin: 0 auto;
   display: block;
   margin-top: 15px;
+} */
+
+button.btn.btn-default.register {
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;
+  width: 50%;
+  background-color: white;
+  font-weight: 700;
+}
+
+
+button.btn.btn-default.register:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button.btn.btn-default.login {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  background-color: grey;
+}
+
+div.invalid-feedback{
+  text-align: center;
 }
 @media (min-width: 360px) and (max-width: 376px) {
   .mat-dialog-content {
@@ -81,10 +119,14 @@ button.button-register {
     overflow: hidden;
     margin: 0 auto;
   }
-  button {
-    width: 100;
-  }
+
   button.btn.btn-default.login.facebook {
     width: 100%;
+  }
+
+  button.btn.btn-default.register{
+    width:100%;
+    border:none;
+    outline: none;
   }
 }
