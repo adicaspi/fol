@@ -14,6 +14,7 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ErrorsService } from '../../services/errors.service';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-navbar',
@@ -24,8 +25,8 @@ export class NavbarComponent implements OnInit {
   //  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
   searchForm: FormGroup;
   firstChar: boolean = true;
-  options: string[] = [];
-  filteredOptions: Observable<string[]>;
+  options = [];
+  filteredOptions: Observable<any>;
   enabled: boolean = false;
   menuIsClosed: boolean = true;
   loggedin = false;
@@ -43,6 +44,7 @@ export class NavbarComponent implements OnInit {
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   onDestroy: Subject<void> = new Subject<void>();
   constructor(
     private userService: UserService,
@@ -114,36 +116,45 @@ export class NavbarComponent implements OnInit {
     if (this.firstChar && value != "") {
       this.getSearchResults(value);
       this.firstChar = false;
-      // this.showSearchSubject.next(true);
-
     }
     if (!this.firstChar) {
       this.filteredOptions = this._filter(value);
-      // this.showSearchSubject.next(true);
     }
   }
 
   getSearchResults(value: string) {
+    let baseAPI = this.baseApiUrl + '/image?s3key=';
     this.userService.search(value).subscribe(res => {
+      console.log("res", res);
       res.forEach(element => {
-        this.options.push(element.username);
+        let searchObject = {
+          userName: element.username,
+          profileImgSrc: baseAPI + element.userProfileImageAddr,
+          id: element.id
+        };
+        this.options.push(searchObject);
       })
       this.filteredOptions = this._filter(value);
     })
   }
 
-  private _filter(value: string): Observable<string[]> {
+  private _filter(value: string): Observable<any> {
     const filterValue = value.toLowerCase();
-    return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)));
+    return Observable.of(
+      this.options.filter(option => option.userName.toLowerCase().includes(filterValue))
+    );
   }
 
-
+  searchUser(searchResult) {
+    this.router.navigate(['profile', searchResult.id]);
+  }
 
   profilePage() {
     this.router.navigate(['profile', this.userService.userId]);
   }
 
   settingsPage() {
+    this.searchForm.reset();
     this.router.navigate(['settings', this.userService.userId]);
   }
 

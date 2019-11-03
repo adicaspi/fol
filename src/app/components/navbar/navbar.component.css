@@ -166,6 +166,17 @@ img.icon {
   height: 35px;
 }
 
+img.search-img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+span.search-user{
+  font-size: 10px;
+  margin-left: 5px;
+}
+
 }
 
 
@@ -334,6 +345,18 @@ img.icon {
     width: 23px;
     height: 23px;
   }
+
+  img.search-img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  span.search-user{
+    font-size: 10px;
+    margin-left: 5px;
+  }
+  
   }
 
   @media (max-width: 600px)  {
