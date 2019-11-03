@@ -263,6 +263,18 @@ div.submit{
   flex: 1 1 auto;
 }
 
+div.price-container{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    min-width: 300px;
+}
+
+.submit-price{
+  float: right;
+}
+
 @media (min-width: 600px) and (max-width: 900px)  {
   button.mat-button{
     color:black;

@@ -1,5 +1,10 @@
 @media only screen and (min-width: 900px) {
-#main {
+.center{
+  width:900px;
+  margin: 0 auto;
+}
+
+  #main {
   padding-top: 40px;
   padding-bottom: 40px;
   border-bottom: 1px solid #e9e9e9;
@@ -132,6 +137,11 @@ div.user-name{
 
 }
 @media only screen and (min-width: 600px) and (max-width: 900px) {
+  .center{
+    width:600px;
+    margin: 0 auto;
+  }
+  
   #main {
     padding-top: 40px;
     padding-bottom: 40px;

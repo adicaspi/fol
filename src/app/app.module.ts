@@ -20,16 +20,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { FollowListComponent } from './components/follow-list/follow-list.component';
 import { ImageComponentComponent } from './components/image-component/image-component.component';
-import {
-  MatDialogModule,
-  MatDialogRef,
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatMenuModule
-} from '@angular/material';
+import { MatDialogModule, MatDialogRef, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpErrorComponent } from './interceptor/http-error/http-error.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -64,10 +55,9 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { ErrorsService } from './services/errors.service';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
+import { IgxSliderModule } from 'igniteui-angular';
 
-
-
-
+//I keep the new line
 @NgModule({
   declarations: [
     AppComponent,
@@ -125,9 +115,9 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
     MatListModule,
     Ng5SliderModule,
     SlideshowModule,
+    IgxSliderModule,
     DeviceDetectorModule.forRoot()
   ],
-
 
   entryComponents: [
     UserProfileInfoComponent,
@@ -157,8 +147,7 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
     ConfigService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (configService: ConfigService) => () =>
-        configService.getSessionStorgae(),
+      useFactory: (configService: ConfigService) => () => configService.getSessionStorgae(),
       deps: [ConfigService, UserService],
       multi: true
     },
@@ -167,4 +156,5 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

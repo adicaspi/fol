@@ -47,15 +47,20 @@
 
 
 
+  <!-- <button mat-button [matMenuTriggerFor]="price">Price</button> -->
+
   <button mat-button [matMenuTriggerFor]="price">Price</button>
   <mat-menu #price="matMenu">
-    <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (click)="$event.stopPropagation();"></ng5-slider>
-    <div class="submit">
-      <button mat-button (click)="selectedPrice()">apply</button>
+    <div class="price-container">
+      <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="1000" [(ngModel)]="priceRange" (click)="$event.stopPropagation(); "></igx-slider>
+      <button mat-button (click)="selectedPrice() " class="submit-price">apply</button>
     </div>
+    <!-- <div class="submit-price">
+      <button mat-button (click)="selectedPrice() ">apply</button>
+    </div> -->
   </mat-menu>
 
-  <span class="filler"></span>
+  <span class="filler "></span>
 
 
 </mat-toolbar>

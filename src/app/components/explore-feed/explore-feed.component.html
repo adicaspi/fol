@@ -1,12 +1,13 @@
+<div class="center">
+  <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
+    <ngxMasonryItem class="masonry-item" *ngFor="let post of postsToShow">
+      <img [attr.src]="post['postImgSrc']" class="image-explore" />
+      <div class="description">
+        {{ post['post']['description'] }}
+      </div>
+    </ngxMasonryItem>
+  </ngx-masonry>
+</div>
+
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
-  <div class="center">
-    <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
-      <ngxMasonryItem class="masonry-item" *ngFor="let post of postsToShow">
-        <img [attr.src]="post['postImgSrc']" class="image" />
-        <div class="description">
-          {{ post['post']['description'] }}
-        </div>
-      </ngxMasonryItem>
-    </ngx-masonry>
-  </div>
 </div>
