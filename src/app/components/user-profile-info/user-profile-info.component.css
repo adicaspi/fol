@@ -47,12 +47,13 @@ span.text {
 }
 
 .button-follow {
-  background-color: #ff1493;
+  background-color: black;
   color: white;
   border: none;
   outline: none;
   font-family: 'Maven Pro', sans-serif;
   border-radius: 4px;
+  display: flex;
 }
 
 .description {
@@ -186,12 +187,13 @@ div.user-name{
   }
   
   .button-follow {
-    background-color: #ff1493;
+    background-color: black;
     color: white;
     border: none;
     outline: none;
     font-family: 'Maven Pro', sans-serif;
     border-radius: 4px;
+    display: flex;
   }
   
   .description {
@@ -323,6 +325,16 @@ div.user-name{
     height: 100px;
   }
 
+  .button-follow {
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+    font-family: 'Maven Pro', sans-serif;
+    border-radius: 4px;
+    display: flex;
+  }
+  
   div.upper-description-div{
     display: flex;
     flex-direction: row;
