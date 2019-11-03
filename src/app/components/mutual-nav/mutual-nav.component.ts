@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '../../../../node_modules/@angular/material';
 import { Options, LabelType } from 'ng5-slider';
 import { Ng5SliderModule } from 'ng5-slider';
+import { SliderType } from "igniteui-angular";
 
 
 @Component({
@@ -17,6 +18,8 @@ export class MutualNavComponent implements OnInit {
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
+  public sliderType = SliderType;
+  public priceRange: PriceRange = new PriceRange(200, 800);
   options: Options = {
     floor: 0,
     ceil: 5000,
@@ -39,9 +42,6 @@ export class MutualNavComponent implements OnInit {
   categroyRadioButton: MatRadioButton = null;
   allCategroiesRadioButton: MatRadioButton = null;
   showProduct: boolean = false;
-
-
-
   class = 'filtered';
   menu_class = 'popup';
   aria_expanded = 'false';
@@ -66,7 +66,6 @@ export class MutualNavComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-
     this.mainList['Category'] = this.categories;
     this.mainList['Product type'] = this.clothings;
     this.mainList['Designer'] = this.designers;
@@ -228,5 +227,14 @@ export class MutualNavComponent implements OnInit {
       display: 'initial'
     });
 
+  }
+
+}
+
+class PriceRange {
+  constructor(
+    public lower: number,
+    public upper: number
+  ) {
   }
 }
