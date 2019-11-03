@@ -72,13 +72,19 @@ ngxMasonryItem:nth-of-type(3n) {
   display: none;
 }
 
+.card-text {
+  font-size: 15px;
+  height: 48px;
+  width: 100%;
+  margin-top: 14px;
+  margin-bottom: 8px;
+  font-family: 'helvetica', arial, sans-serif;
+}
+
 .description {
   text-align: center;
   font-weight: 400;
   color: black;
-  width: 90%;
-  margin: auto;
-  font-size: 15px;
 }
 
 .store.text-right {
@@ -101,14 +107,6 @@ span.price {
   line-height: 1;
 }
 
-.fotter-card-text {
-  font-size: 15px;
-  height: 48px;
-  width: 100%;
-  margin-top: 14px;
-  margin-bottom: 8px;
-  font-family: 'helvetica', arial, sans-serif;
-}
  } 
 
 @media (min-width: 600px) and (max-width: 900px)  {
@@ -201,13 +199,19 @@ span.price {
     cursor: pointer; */
   }
     
+  .card-text {
+    font-size: 15px;
+    height: 48px;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
+
   .description {
     text-align: center;
     font-weight: 400;
     color: black;
-    width: 90%;
-    margin: auto;
-    font-size: 15px;
   }
 
   .store.text-right {
@@ -218,7 +222,7 @@ span.price {
     line-height: 1;
     color: grey;
   }
-  
+
   span.price {
     position: absolute;
     left: 12px;
@@ -229,15 +233,7 @@ span.price {
     font-family: open sans, sans-serif;
     line-height: 1;
   }
-  
-  .fotter-card-text {
-    font-size: 15px;
-    height: 48px;
-    width: 100%;
-    margin-top: 14px;
-    margin-bottom: 8px;
-    font-family: 'helvetica', arial, sans-serif;
-  }  
+
 }
 
 @media  (max-width: 600px)  {
