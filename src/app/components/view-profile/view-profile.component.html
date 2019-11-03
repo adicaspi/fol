@@ -3,15 +3,8 @@
 <body>
   <div *ngIf="desktop; else mobileView" class="display">
     <app-navbar></app-navbar>
-    <div *ngIf="searchedTouched | async;else userFeed">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option}}
-      </mat-option>
-    </div>
-    <ng-template #userFeed>
-      <app-user-profile-info></app-user-profile-info>
-      <app-user-feed></app-user-feed>
-    </ng-template>
+    <app-user-profile-info></app-user-profile-info>
+    <app-user-feed></app-user-feed>
   </div>
   <ng-template #mobileView class="mobile">
     <app-shopping-nav>

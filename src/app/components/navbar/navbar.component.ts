@@ -98,10 +98,46 @@ export class NavbarComponent implements OnInit {
 
   onChanges(): void {
 
-    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
-      this.errorService.setSearchInput(val);
+    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(value => {
+      this.setSearchInput(value);
     })
   }
+
+  setSearchInput(value: string) {
+    if (value == "") {
+      this.firstChar = true;
+      this.options = [];
+      this.filteredOptions = this._filter(value);
+      // this.showSearchSubject.next(false);
+
+    }
+    if (this.firstChar && value != "") {
+      this.getSearchResults(value);
+      this.firstChar = false;
+      // this.showSearchSubject.next(true);
+
+    }
+    if (!this.firstChar) {
+      this.filteredOptions = this._filter(value);
+      // this.showSearchSubject.next(true);
+    }
+  }
+
+  getSearchResults(value: string) {
+    this.userService.search(value).subscribe(res => {
+      res.forEach(element => {
+        this.options.push(element.username);
+      })
+      this.filteredOptions = this._filter(value);
+    })
+  }
+
+  private _filter(value: string): Observable<string[]> {
+    const filterValue = value.toLowerCase();
+    return Observable.of(this.options.filter(option => option.toLowerCase().includes(filterValue)));
+  }
+
+
 
   profilePage() {
     this.router.navigate(['profile', this.userService.userId]);
