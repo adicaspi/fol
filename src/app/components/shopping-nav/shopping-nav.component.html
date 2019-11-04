@@ -1,4 +1,4 @@
-<mat-toolbar class="header">
+<mat-toolbar class="header-shopping-nav">
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
     <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
   </button>
@@ -6,8 +6,16 @@
     <img src="../../../assets/fw_logo_white.png" />
 
     <form [formGroup]="searchForm" class="form-inline">
-      <input class="form-control " type="search" placeholder="search &#xF002;" formControlName="search" aria-label="Search" id="navBarSearchForm"
-      />
+      <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
+        [matAutocomplete]="auto" />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
+          <div class="search-item" (click)="searchUser(option)">
+            <img class="search-img" [attr.src]="option['profileImgSrc']" />
+            <span class="search-user">{{ option['userName'] }}</span>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
     </form>
   </div>
 </mat-toolbar>

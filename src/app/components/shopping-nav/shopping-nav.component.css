@@ -64,7 +64,7 @@ input#navBarSearchForm {
   background-color: blue;
 }
 
-.header {
+.header-shopping-nav {
   position: fixed;
   top: 0;
   z-index: 1;
@@ -141,4 +141,15 @@ img.logo {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+img.search-img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+span.search-user{
+  font-size: 10px;
+  margin-left: 5px;
 }
