@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder } from '../../../../node_modules/@angular/forms'
 import { UserService } from '../../services/user.service';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorsService } from '../../services/errors.service';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ShoppingNavComponent implements OnInit {
   firstChar: boolean = true;
   options: string[] = [];
   filteredOptions: Observable<string[]>;
+  sideNavOpend: boolean = false;
   mainList = ['CATEGORIES', 'DESIGNERS', 'STORES', 'PRICE'];
   originalList = {};
   displayList = {};
@@ -107,7 +109,7 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   onOpen() {
-    this.icon = 'arrow_back_ios';
+    this.sideNavOpend = true;
   }
 
   onClose() {

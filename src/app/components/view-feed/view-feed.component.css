@@ -20,11 +20,11 @@ body {
 }
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .hidden {
     display: initial;
   }
   .display {
     display: none;
   }
-}
+} */

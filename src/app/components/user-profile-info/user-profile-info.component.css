@@ -282,6 +282,16 @@ div.user-name{
 }
 
 @media  (max-width: 600px){
+  .center{
+    width:375px;
+    margin:auto;
+  }
+  
+  /* #main {
+    padding-top: 50px;
+    border-bottom: 1px solid #e9e9e9;
+  } */
+
   .simple-button {
     background: none;
     color: inherit;

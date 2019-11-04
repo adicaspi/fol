@@ -257,7 +257,7 @@ span.price {
     align-items: center;
     background-color: white;
   }
-
+  
   ngx-masonry{
     margin: 0 auto;
   }

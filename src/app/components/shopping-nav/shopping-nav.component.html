@@ -1,13 +1,39 @@
+<mat-toolbar class="header">
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+    <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
+  </button>
+  <div class="logo-drawer">
+    <img src="../../../assets/fw_logo_white.png" />
+
+    <form [formGroup]="searchForm" class="form-inline">
+      <input class="form-control " type="search" placeholder="search &#xF002;" formControlName="search" aria-label="Search" id="navBarSearchForm"
+      />
+    </form>
+  </div>
+</mat-toolbar>
+
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" [ngClass]="{ hidden: !(isHandset$ | async) }" fixedInViewport="false" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav #drawer class="sidenav" [ngClass]="{ hidden: !(isHandset$ | async) }" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'push' : 'side'" [opened]="(isHandset$ | async) === false" (opened)="onOpen()" (closed)="onClose()">
-    <div class="test">
-      <mat-toolbar>
+
+    <!-- <div class="test"> -->
+    <mat-toolbar class="sidenav-menu-content">
+      <span>
         <button *ngIf="showBack" class="back-button" (click)="getValues('back')">
           BACK
         </button>
-      </mat-toolbar>
-    </div>
+      </span>
+      <span class="fill"></span>
+      <span class="wrrow-back">
+        <mat-icon class="arrow-icon" aria-label="Side nav toggle icon" (click)="drawer.toggle()">arrow_back_ios</mat-icon>
+      </span>
+
+    </mat-toolbar>
+    <!-- <div class="close-drawer">
+        <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">'arrow_back_ios'</mat-icon>
+      </div> -->
+    <!-- </mat-toolbar> -->
+    <!-- </div> -->
     <mat-nav-list *ngFor="let key of mainList">
       <mat-list-item>
         <button class="nav-item" (click)="getValues(key)">
@@ -15,21 +41,11 @@
         </button>
       </mat-list-item>
     </mat-nav-list>
+
+
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
-      </button>
-      <div class="logo-drawer">
-        <img src="../../../assets/fw_logo_white.png" />
-
-        <form [formGroup]="searchForm" class="form-inline">
-          <input class="form-control " type="search" placeholder="search &#xF002;" formControlName="search" aria-label="Search" id="navBarSearchForm"
-          />
-        </form>
-      </div>
-    </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<app-bottom-navbar></app-bottom-navbar>
