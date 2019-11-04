@@ -24,7 +24,8 @@ export class UserFeedComponent implements OnInit {
   offset: number = 0;
   desktop: boolean = true;
   searchedTouched: boolean = false;
-  id = 0;
+  currId = 0;
+  prevId = 0;
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
@@ -60,9 +61,10 @@ export class UserFeedComponent implements OnInit {
     this.activatedRoute.params
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
-        this.id = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
-        this.generateUserFeed(0, this.id);
+        this.currId = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
+        this.generateUserFeed(0, this.currId);
       });
+    this.prevId = this.currId; //Updateing prevID in the first instantiating of the component
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
         if (value.width <= 900) {
@@ -79,6 +81,11 @@ export class UserFeedComponent implements OnInit {
   }
 
   private processData = posts => {
+    if (this.prevId != this.currId) { //loading the feed for a new user, clean the array
+      this.posts = [];
+      this.postsToShow = [];
+      this.prevId = this.currId;
+    }
     this.posts = this.posts.concat(posts);
     this.offset = posts['newOffset'];
     posts['feedPosts'].forEach(post => {
@@ -92,6 +99,7 @@ export class UserFeedComponent implements OnInit {
     });
   };
   generateUserFeed(offset: number, userId: number) {
+
     this.feedService
       .getUserFeed(userId, offset)
       .pipe(takeUntil(this.onDestroy))
@@ -99,7 +107,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   fetchImages() {
-    this.generateUserFeed(this.offset, this.id);
+    this.generateUserFeed(this.offset, this.currId);
   }
 
   openDialog(post): void {
