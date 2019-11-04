@@ -3,14 +3,14 @@
 <body>
   <div *ngIf="desktop; else mobileView" class="display">
     <app-navbar></app-navbar>
-    <div *ngIf="searchedTouched | async;else exploreFeed">
+    <!-- <div *ngIf="searchedTouched | async;else exploreFeed">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
         {{option}}
       </mat-option>
-    </div>
-    <ng-template #exploreFeed>
-      <app-explore-feed></app-explore-feed>
-    </ng-template>
+    </div> -->
+    <!-- <ng-template #exploreFeed> -->
+    <app-explore-feed></app-explore-feed>
+    <!-- </ng-template> -->
   </div>
   <ng-template #mobileView class="mobile">
     <app-shopping-nav>
