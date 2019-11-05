@@ -23,7 +23,7 @@ button.mat-icon-button{
   border: none;
 }
 
-mat-toolbar.sidenav-menu-content {
+.sidenav-menu-content {
   color: white;
   background-color: black;
   display: flex;
