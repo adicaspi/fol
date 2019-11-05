@@ -1,4 +1,4 @@
-<mat-toolbar class="header-shopping-nav">
+<!-- <mat-toolbar class="header-shopping-nav">
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
     <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
   </button>
@@ -18,13 +18,10 @@
       </mat-autocomplete>
     </form>
   </div>
-</mat-toolbar>
+</mat-toolbar> -->
 
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" [ngClass]="{ hidden: !(isHandset$ | async) }" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'push' : 'side'" [opened]="(isHandset$ | async) === false" (opened)="onOpen()" (closed)="onClose()">
-
-    <!-- <div class="test"> -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push" [opened]="false" (opened)="onOpen()" (closed)="onClose()">
     <mat-toolbar class="sidenav-menu-content">
       <span>
         <button *ngIf="showBack" class="back-button" (click)="getValues('back')">
@@ -32,16 +29,10 @@
         </button>
       </span>
       <span class="fill"></span>
-      <span class="wrrow-back">
-        <mat-icon class="arrow-icon" aria-label="Side nav toggle icon" (click)="drawer.toggle()">arrow_back_ios</mat-icon>
+      <span class="arrow-back">
+        <mat-icon class="arrow-icon" (click)="drawer.toggle()">{{arrow_back}}</mat-icon>
       </span>
-
     </mat-toolbar>
-    <!-- <div class="close-drawer">
-        <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">'arrow_back_ios'</mat-icon>
-      </div> -->
-    <!-- </mat-toolbar> -->
-    <!-- </div> -->
     <mat-nav-list *ngFor="let key of mainList">
       <mat-list-item>
         <button class="nav-item" (click)="getValues(key)">
@@ -49,11 +40,33 @@
         </button>
       </mat-list-item>
     </mat-nav-list>
-
-
   </mat-sidenav>
+  <!-- EO: Side nav-->
+
+  <!-- Side nav content-->
   <mat-sidenav-content>
+    <mat-toolbar class="header-shopping-nav">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
+      </button>
+      <div class="logo-drawer">
+        <img src="../../../assets/fw_logo_white.png" />
+
+        <form [formGroup]="searchForm" class="form-inline">
+          <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
+            [matAutocomplete]="auto" />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
+              <div class="search-item" (click)="searchUser(option)">
+                <img class="search-img" [attr.src]="option['profileImgSrc']" />
+                <span class="search-user">{{ option['userName'] }}</span>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+        </form>
+      </div>
+    </mat-toolbar>
     <ng-content></ng-content>
+    <app-bottom-navbar></app-bottom-navbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<app-bottom-navbar></app-bottom-navbar>
