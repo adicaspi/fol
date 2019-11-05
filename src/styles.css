@@ -179,6 +179,10 @@ igx-slider{
   height: 1rem !important;
 }
 
+mat-toolbar{
+  background-color: black;
+}
+
 @media (min-width: 600px) and (max-width: 900px)  {
 
 mat-toolbar.mat-toolbar.mat-toolbar-single-row{

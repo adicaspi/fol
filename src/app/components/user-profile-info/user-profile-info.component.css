@@ -282,6 +282,10 @@ div.user-name{
 }
 
 @media  (max-width: 600px){
+  .body{
+    margin-top:70px;
+  }
+  
   .center{
     width:375px;
     margin:auto;
