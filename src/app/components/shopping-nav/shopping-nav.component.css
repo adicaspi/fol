@@ -102,8 +102,9 @@ h2 {
   color: white;
 }
 
-.mat-sidenav-content {
-  /* height: 100vh; */
+mat-sidenav {
+  position: fixed;
+  top:0;
 }
 
 button.nav-item {

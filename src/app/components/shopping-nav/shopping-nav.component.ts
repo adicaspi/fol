@@ -53,7 +53,10 @@ export class ShoppingNavComponent implements OnInit {
   currKey: string;
   prevKey: string;
   onDestroy: Subject<void> = new Subject<void>();
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches
+  )
+
+  );
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
   constructor(
@@ -77,6 +80,9 @@ export class ShoppingNavComponent implements OnInit {
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
       search: ['']
+    })
+    this.isHandset$.subscribe(res => {
+      console.log(res, "is res");
     })
     this.onChanges();
   }
