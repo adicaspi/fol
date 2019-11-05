@@ -50,6 +50,7 @@ export class ShoppingNavComponent implements OnInit {
   ];
   price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
   icon = 'menu';
+  arrow_back = 'arrow_back_ios';
   currKey: string;
   prevKey: string;
   onDestroy: Subject<void> = new Subject<void>();
@@ -126,7 +127,7 @@ export class ShoppingNavComponent implements OnInit {
       this.filteredOptions = this._filter(value);
     }
 
-    $('input#navBarSearchForm').text = 'Search';
+
 
   }
 

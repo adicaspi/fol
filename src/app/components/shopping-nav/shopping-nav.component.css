@@ -56,10 +56,6 @@ input#navBarSearchForm {
   width: 80%;
 }
 
-/* .sidenav .mat-toolbar {
-  background: inherit;
-} */
-
 .mat-drawer-inner-container {
   background-color: blue;
 }
