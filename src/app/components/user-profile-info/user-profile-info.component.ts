@@ -125,22 +125,19 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   openDialog(flag) {
+    var title;
+    if (flag) {
+      title = 'Following';
+    } else {
+      title = 'Followers';
+    }
+    this.dialogService.followingDialogDataObject.flag = flag;
+    this.dialogService.followingDialogDataObject.userId = this.currMasterId;
+    this.dialogService.followingDialogDataObject.title = title;
     if (this.desktop) {
-      var title;
-      if (flag) {
-        title = 'Followers';
-      } else {
-        title = 'Following';
-      }
-      const data = {
-        flag: flag,
-        id: this.currMasterId,
-        title: title
-      };
       var componentName = 'followersList';
       this.dialogService.openModalWindow(
         GenerateFollowListComponent,
-        data,
         componentName
       );
       this.dialogService.desktop = true;

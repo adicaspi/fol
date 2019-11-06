@@ -38,6 +38,11 @@ export class DialogService {
   directingPage: string;
   followingDialogRef: MatDialogRef<{}, any>;
   desktop: boolean;
+  followingDialogDataObject = {
+    userId: 0,
+    flag: 0,
+    title: ''
+  }
 
   constructor(
     public dialog: MatDialog,
@@ -120,7 +125,7 @@ export class DialogService {
     return overlayConfig;
   }
 
-  openModalWindow(component, data?, componentName?) {
+  openModalWindow(component, componentName?, data?) {
     const modalWindowConfig = new MatDialogConfig<ProductPageComponent>();
 
     //dialogConfig.scrollStrategy = scrollStrategy;
@@ -129,6 +134,7 @@ export class DialogService {
     modalWindowConfig.closeOnNavigation = true;
 
     if (componentName == 'followersList') {
+      console.log("in compname");
       modalWindowConfig.data = data;
       modalWindowConfig.width = '400px';
       modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper-fol';

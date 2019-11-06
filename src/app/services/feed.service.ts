@@ -60,32 +60,31 @@ export class FeedService {
     );
   }
 
-  getSlavesMasters(
+  getFollowSlaves(
     id: number,
     offset: number,
-    flag: number
   ): Observable<Array<FollowItem>> {
     //get slaves
+    let params = new HttpParams().set('offset', offset.toString());
+    return this.http.get<Array<FollowItem>>(
+      this.globaSoicalURL + id + '/follow-slaves',
+      {
+        params
+      }
+    );
+  }
 
-    if (flag) {
-      let params = new HttpParams().set('offset', offset.toString());
-      return this.http.get<Array<FollowItem>>(
-        this.globaSoicalURL + id + '/follow-slaves',
-        {
-          params
-        }
-      );
-    }
-    //get masters
-    else {
-      let params = new HttpParams().set('offset', offset.toString());
-      return this.http.get<Array<FollowItem>>(
-        this.globaSoicalURL + id + '/follow-masters',
-        {
-          params
-        }
-      );
-    }
+  getFollowMasters(
+    id: number,
+    offset: number,
+  ): Observable<Array<FollowItem>> {
+    let params = new HttpParams().set('offset', offset.toString());
+    return this.http.get<Array<FollowItem>>(
+      this.globaSoicalURL + id + '/follow-masters',
+      {
+        params
+      }
+    )
   }
 
   sendMessage(message: any) {

@@ -37,17 +37,19 @@ export class GenerateFollowListComponent implements OnInit {
 
   ngOnInit() {
     this.desktop = this.dialogService.desktop;
-    // this.flag = this.data.flag;
-    // this.id = this.data.id;
-    // this.generateFollowsFeed(0);
-    // this.dialogTitle = this.data.title;
-    this.flag = 1;
-    this.id = 1;
-    this.generateFollowsFeed(0);
-    //this.dia = 'following';
+    this.flag = this.dialogService.followingDialogDataObject.flag;
+    this.id = this.dialogService.followingDialogDataObject.userId;
+    this.dialogTitle = this.dialogService.followingDialogDataObject.title;
+    if (this.flag) {
+      this.generateFollowsMasters(0);
+    }
+    else {
+      this.generateFollowsSlaves(0);
+    }
   }
 
   private processData = followsFeed => {
+    console.log("im follows feed", followsFeed);
     this.followsFeed = this.followsFeed.concat(followsFeed);
     followsFeed.forEach(follower => {
       this.userService.checkIsFollowing(follower.id).subscribe(res => {
@@ -63,10 +65,16 @@ export class GenerateFollowListComponent implements OnInit {
     });
   };
 
-  generateFollowsFeed(offset: number) {
-    console.log("in generate")
+  generateFollowsMasters(offset: number) {
     this.feedService
-      .getSlavesMasters(this.id, offset, this.flag)
+      .getFollowMasters(this.id, offset)
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(this.processData);
+  }
+
+  generateFollowsSlaves(offset: number) {
+    this.feedService
+      .getFollowSlaves(this.id, offset)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(this.processData);
   }

@@ -1,32 +1,26 @@
 <app-loading-spinner class="spinner" *ngIf="showSpinner; else mainPage"></app-loading-spinner>
 <ng-template #mainPage>
   <div class="title">
-    <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+    <span class="dialog-title">{{ dialogTitle }}</span>
     <i *ngIf="desktop" (click)="closeModal()" class="fal fa-times"></i>
   </div>
   <div class="wrapper">
-    <mat-dialog-content>
-      <div class="fol-card" *ngFor="let item of postsToShow">
-        <div class="row-class">
-          <div class="img-comp">
-            <img [attr.src]="item['imgSrc']" />
-          </div>
+    <div class="content">
+      <div class="user-result" *ngFor="let item of postsToShow">
+        <span class="img-comp">
+          <img [attr.src]="item['imgSrc']" />
+        </span>
 
-          <div class="username">
-            <span>{{ item['post']['username'] }}</span>
-            <div class="follower-button">
-              <button type="button" class="btn-follower" (click)="follow(item)">
-                {{ item['post']['follows'] ? 'Following' : 'Follow' }}
-              </button>
-            </div>
-          </div>
-          <div class="follower-button">
-            <button type="button" class="btn-follower" (click)="follow(item)">
-              {{ item['post']['follows'] ? 'unfollow' : 'follow' }}
-            </button>
-          </div>
-        </div>
+        <span class="username">
+          <span>{{ item['post']['username'] }}</span>
+        </span>
+        <span class="fill"></span>
+        <span class="follower-button">
+          <button type="button" class="btn-follower" (click)="follow(item)">
+            {{ item['post']['follows'] ? 'Following' : 'Follow' }}
+          </button>
+        </span>
       </div>
-    </mat-dialog-content>
+    </div>
   </div>
 </ng-template>

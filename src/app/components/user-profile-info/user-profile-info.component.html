@@ -31,12 +31,12 @@
               <span class="text"> posts</span>
             </button>
 
-            <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(0)">
+            <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(1)">
               <span class="metrics">{{ following | async }}</span>
               <span class="text"> following</span>
             </button>
 
-            <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(1)">
+            <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(0)">
               <span class="metrics">{{ followers | async }}</span>
               <span class="text"> followers </span>
             </button>
