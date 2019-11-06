@@ -27,7 +27,7 @@ export class ExploreFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter: 16,
+    gutter: 20,
     fitWidth: true
   };
   constructor(
