@@ -7,6 +7,10 @@ import { FormGroup, FormBuilder } from '../../../../node_modules/@angular/forms'
 import { UserService } from '../../services/user.service';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorsService } from '../../services/errors.service';
+import * as $ from 'jquery';
+import { GlobalVariable } from '../../../global';
+import { ViewProfileComponent } from '../view-profile/view-profile.component';
+import { Routes, Router } from '../../../../node_modules/@angular/router';
 
 
 @Component({
@@ -18,8 +22,10 @@ export class ShoppingNavComponent implements OnInit {
   showBack: boolean = false;
   searchForm: FormGroup;
   firstChar: boolean = true;
-  options: string[] = [];
+  placeholder = "search &#xF002";
+  options = [];
   filteredOptions: Observable<string[]>;
+  sideNavOpend: boolean = false;
   mainList = ['CATEGORIES', 'DESIGNERS', 'STORES', 'PRICE'];
   originalList = {};
   displayList = {};
@@ -44,20 +50,23 @@ export class ShoppingNavComponent implements OnInit {
   ];
   price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
   icon = 'menu';
+  arrow_back = 'arrow_back_ios';
   currKey: string;
   prevKey: string;
   onDestroy: Subject<void> = new Subject<void>();
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches));
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches
+  )
 
+  );
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
   constructor(
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private feedService: FeedService,
-    private errorService: ErrorsService
-  ) {
+    private errorService: ErrorsService,
+    private router: Router) {
     this.originalList['CATEGORIES'] = this.categories;
     this.originalList['CLOTHINGS'] = this.clothings;
     this.originalList['DESIGNERS'] = this.designers;
@@ -73,12 +82,14 @@ export class ShoppingNavComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
+    this.isHandset$.subscribe(res => {
+      console.log(res, "is res");
+    })
     this.onChanges();
   }
   onChanges(): void {
-
     this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
-      this.errorService.setSearchInput(val);
+      this.setSearchInput(val);
     })
   }
 
@@ -106,8 +117,54 @@ export class ShoppingNavComponent implements OnInit {
     }
   }
 
+  setSearchInput(value: string) {
+    if (value == "") {
+      this.firstChar = true;
+      this.options = [];
+      this.filteredOptions = this._filter(value);
+      // this.showSearchSubject.next(false);
+
+    }
+    if (this.firstChar && value != "") {
+      this.getSearchResults(value);
+      this.firstChar = false;
+    }
+    if (!this.firstChar) {
+      this.filteredOptions = this._filter(value);
+    }
+
+
+
+  }
+
+  getSearchResults(value: string) {
+    let baseAPI = this.baseApiUrl + '/image?s3key=';
+    this.userService.search(value).subscribe(res => {
+      res.forEach(element => {
+        let searchObject = {
+          userName: element.username,
+          profileImgSrc: baseAPI + element.userProfileImageAddr,
+          id: element.id
+        };
+        this.options.push(searchObject);
+      })
+      this.filteredOptions = this._filter(value);
+    })
+  }
+
+  private _filter(value: string): Observable<any> {
+    const filterValue = value.toLowerCase();
+    return Observable.of(
+      this.options.filter(option => option.userName.toLowerCase().includes(filterValue))
+    );
+  }
+
+  searchUser(searchResult) {
+    this.router.navigate(['profile', searchResult.id]);
+  }
+
   onOpen() {
-    this.icon = 'arrow_back_ios';
+    this.sideNavOpend = true;
   }
 
   onClose() {

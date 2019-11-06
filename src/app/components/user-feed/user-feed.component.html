@@ -14,7 +14,7 @@
           <span class="price">
             {{ post['post']['price'] }}
           </span>
-          <a class="store text-right" href="https://www.net-a-porter.com" target="_blank">
+          <a class="store text-right" [href]="post['post']['website']" target=" _blank ">
             {{ post['post']['website'] }}
           </a>
         </div>

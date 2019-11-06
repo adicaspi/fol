@@ -237,6 +237,10 @@ span.price {
 }
 
 @media  (max-width: 600px)  {
+  .infinite-scroll{
+    margin-top:70px;
+  }
+  
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
@@ -257,7 +261,7 @@ span.price {
     align-items: center;
     background-color: white;
   }
-
+  
   ngx-masonry{
     margin: 0 auto;
   }
@@ -354,7 +358,7 @@ span.price {
   } */
 
   .card-text {
-    font-size: 15px;
+    font-size: 18px;
     height: 48px;
     width: 100%;
     margin-top: 14px;
@@ -383,7 +387,6 @@ span.price {
     margin-top: 8px;
     color: #2f2e2e;
     font-weight: 200;
-    font-size: 14px;
     font-family: open sans, sans-serif;
     line-height: 1;
   }

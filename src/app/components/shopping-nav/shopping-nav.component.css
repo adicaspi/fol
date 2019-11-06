@@ -1,5 +1,15 @@
-.sidenav-container {
+/* mat-sidenav-container {
   height: 100%;
+}
+
+mat-sidenav-content {
+  height: 100%;
+} */
+
+
+.hamburger-icon{
+  color:white;
+  outline:none;
 }
 
 .sidenav {
@@ -8,9 +18,19 @@
   background-color: white;
 }
 
-.test {
+button.mat-icon-button{
+  outline: none;
+  border: none;
+}
+
+.sidenav-menu-content {
   color: white;
   background-color: black;
+  display: flex;
+}
+
+span.fill{
+  flex: 1 1 auto;
 }
 
 .logo-drawer img {
@@ -36,20 +56,24 @@ input#navBarSearchForm {
   width: 80%;
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
-}
-
 .mat-drawer-inner-container {
   background-color: blue;
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.header-shopping-nav {
+  position: fixed;
+  z-index: 1; 
   background-color: black;
-  width: 100%;
+  /* top: 0;
+  /* width: 100%;  */
+}
+
+mat-toolbar a {
+  display: inline-block;
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+  width: 20%;
 }
 
 .hidden {
@@ -74,18 +98,14 @@ h2 {
   color: white;
 }
 
-mat-toolbar a {
-  display: inline-block;
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-  width: 20%;
+<<<<<<< HEAD
+mat-sidenav {
+  position: fixed;
+  top:0;
 }
 
-.mat-sidenav-content {
-  /* height: 100vh; */
-}
-
+=======
+>>>>>>> responsive_design
 button.nav-item {
   background: none;
   border: none;
@@ -116,9 +136,20 @@ img.logo {
   height: 20px;
 }
 
-.example-footer {
+.footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+img.search-img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+span.search-user{
+  font-size: 10px;
+  margin-left: 5px;
 }

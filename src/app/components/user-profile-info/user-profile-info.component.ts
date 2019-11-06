@@ -16,7 +16,7 @@ import { DialogService } from '../../services/dialog.service';
   styleUrls: ['./user-profile-info.component.css']
 })
 export class UserProfileInfoComponent implements OnInit {
-  masterId: number;
+  currMasterId: number;
   slaveId: number;
   follows: boolean;
   // user: Observable<User>;
@@ -45,15 +45,21 @@ export class UserProfileInfoComponent implements OnInit {
 
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
-    this.masterId = parseInt(routeParams.id);
+    this.activatedRoute.params
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(params => {
+        this.currMasterId = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
+        this.updateUser(this.currMasterId);
+      });
+    this.currMasterId = parseInt(routeParams.id);
     this.userId = this.userService.userId;
-    this.userService.checkIsFollowing(this.masterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
+    this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.follows = res;
     })
-    this.updateUser();
-    this.following = this.userService.getNumberOfFollowing(this.masterId);
-    this.followers = this.userService.getNumberOfFollowers(this.masterId);
-    this.numberOfPosts = this.userService.getNumberOfPosts(this.masterId);
+
+    this.following = this.userService.getNumberOfFollowing(this.currMasterId);
+    this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
+    this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
   }
 
   updateProfileImage(user) {
@@ -69,14 +75,14 @@ export class UserProfileInfoComponent implements OnInit {
       });
   }
 
-  updateUser() {
+  updateUser(id) {
     this.userService
-      .getUserDetails(this.masterId)
+      .getUserDetails(id)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(user => {
         this.user = user;
         this.updateProfileImage(user);
-        if (this.userId == this.masterId) {
+        if (this.userId == this.currMasterId) {
           this.userProfile = true;
         }
       });
@@ -85,10 +91,10 @@ export class UserProfileInfoComponent implements OnInit {
   follow() {
     //if user is already following then unfollow
     if (this.follows) {
-      this.userService.unFollow(this.masterId);
+      this.userService.unFollow(this.currMasterId);
       this.follows = false;
     } else {
-      this.userService.follow(this.masterId);
+      this.userService.follow(this.currMasterId);
       this.follows = true;
     }
   }
@@ -107,7 +113,7 @@ export class UserProfileInfoComponent implements OnInit {
     }
     const data = {
       flag: flag,
-      id: this.masterId,
+      id: this.currMasterId,
       title: title
     };
 

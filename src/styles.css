@@ -80,7 +80,6 @@ body {
   pointer-events: auto !important;
 }
 
-
 mat-slider{
   position: 0;
 } 
@@ -178,6 +177,10 @@ div.mat-checkbox-frame{
 
 igx-slider{
   height: 1rem !important;
+}
+
+mat-toolbar{
+  background-color: black;
 }
 
 @media (min-width: 600px) and (max-width: 900px)  {

@@ -25,7 +25,16 @@
               </svg> -->
           </div>
           <div class="input-container">
-            <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" />
+            <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
+                <div class="search-item" (click)="searchUser(option)">
+                  <img class="search-img" [attr.src]="option['profileImgSrc']" />
+                  <span class="search-user">{{ option['userName'] }}</span>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
           </div>
         </div>
       </form>
