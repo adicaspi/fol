@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Routes, Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GenerateFollowListComponent } from '../generate-follow-list/generate-follow-list.component';
 import { PostService } from '../../services/post.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
+import { ConfigService } from '../../services/config.service';
+
 
 @Component({
   selector: 'app-user-profile-info',
@@ -19,7 +21,6 @@ export class UserProfileInfoComponent implements OnInit {
   currMasterId: number;
   slaveId: number;
   follows: boolean;
-  // user: Observable<User>;
   user: User;
   userId: number;
   userProfileImageSrc = [];
@@ -31,8 +32,13 @@ export class UserProfileInfoComponent implements OnInit {
   flag: number = 1;
   clicked: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
-  desktop: Boolean;
+  desktop: boolean = false;
   userProfile: boolean = false;
+  private subscription: Subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
+
+
 
   constructor(
     private userService: UserService,
@@ -40,7 +46,8 @@ export class UserProfileInfoComponent implements OnInit {
     private dialog: MatDialog,
     private postService: PostService,
     private dialogService: DialogService,
-    private router: Router
+    private router: Router,
+    private configService: ConfigService
   ) { }
 
   ngOnInit() {
@@ -60,6 +67,19 @@ export class UserProfileInfoComponent implements OnInit {
     this.following = this.userService.getNumberOfFollowing(this.currMasterId);
     this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
     this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
+    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
+      .subscribe(
+        value => {
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+          else {
+            this.desktop = true;
+          }
+        }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+
   }
 
   updateProfileImage(user) {
@@ -104,26 +124,33 @@ export class UserProfileInfoComponent implements OnInit {
     this.clicked = true;
   }
 
-  openDialog(flag): void {
-    var title;
-    if (flag) {
-      title = 'Followers';
-    } else {
-      title = 'Following';
+  openDialog(flag) {
+    if (this.desktop) {
+      var title;
+      if (flag) {
+        title = 'Followers';
+      } else {
+        title = 'Following';
+      }
+      const data = {
+        flag: flag,
+        id: this.currMasterId,
+        title: title
+      };
+      var componentName = 'followersList';
+      this.dialogService.openModalWindow(
+        GenerateFollowListComponent,
+        data,
+        componentName
+      );
+      this.dialogService.desktop = true;
     }
-    const data = {
-      flag: flag,
-      id: this.currMasterId,
-      title: title
-    };
-
-    var componentName = 'followersList';
-    this.dialogService.openModalWindow(
-      GenerateFollowListComponent,
-      data,
-      componentName
-    );
+    else {
+      this.dialogService.desktop = false;
+      this.router.navigate(['following']);
+    }
   }
+
 
   settingsPage() {
     this.router.navigate(['settings', this.userService.userId]);

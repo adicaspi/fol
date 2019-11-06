@@ -36,6 +36,8 @@ const DEFAULT_CONFIG: FilePreviewDialogConfig = {
 export class DialogService {
   userPost: UserPost;
   directingPage: string;
+  followingDialogRef: MatDialogRef<{}, any>;
+  desktop: boolean;
 
   constructor(
     public dialog: MatDialog,
@@ -119,7 +121,6 @@ export class DialogService {
   }
 
   openModalWindow(component, data?, componentName?) {
-    console.log('in openModalWinodw', component, data, componentName);
     const modalWindowConfig = new MatDialogConfig<ProductPageComponent>();
 
     //dialogConfig.scrollStrategy = scrollStrategy;
@@ -138,12 +139,17 @@ export class DialogService {
     //   modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper';
     // }
 
-    const dialogRef = this.dialog.open(component, modalWindowConfig);
+    const followingDialogRef = this.dialog.open(component, modalWindowConfig);
+    this.followingDialogRef = followingDialogRef;
 
 
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed');
     // });
+  }
+
+  closeFollowingDialog() {
+    this.followingDialogRef.close();
   }
 
   postData(post, directingPage) {

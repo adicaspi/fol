@@ -52,18 +52,19 @@ export class TimelineFeedComponent implements OnInit {
     this.id = this.userService.getCurrentUser();
     //this.id = 655;
     this.generateTimelineFeed(0, this.id);
-    this.subscription = this.configService.windowSizeChanged.subscribe(
-      value => {
-        if (value.width <= 900) {
-          // this.masonryOptions.gutter = 60;
-          this.masonryOptions.fitWidth = true;
-        }
-        if (value.width <= 600) {
-          this.masonryOptions.horizontalOrder = false;
-          this.desktop = false;
-          this.masonryOptions.gutter = 100;
-        }
-      }),
+    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
+      .subscribe(
+        value => {
+          if (value.width <= 900) {
+            // this.masonryOptions.gutter = 60;
+            this.masonryOptions.fitWidth = true;
+          }
+          if (value.width <= 600) {
+            this.masonryOptions.horizontalOrder = false;
+            this.desktop = false;
+            this.masonryOptions.gutter = 100;
+          }
+        }),
       error => this.anyErrors = true,
       () => this.finished = true
 

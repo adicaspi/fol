@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
 import { GlobalVariable } from '../../../global';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-generate-follow-list',
@@ -17,6 +18,7 @@ import { GlobalVariable } from '../../../global';
 export class GenerateFollowListComponent implements OnInit {
   // followsFeed: Observable<Array<FollowItem>>;
   followsFeed: Array<any> = [];
+  desktop: boolean;
   id: number;
   offset: number;
   flag: number;
@@ -28,15 +30,21 @@ export class GenerateFollowListComponent implements OnInit {
   constructor(
     private feedService: FeedService,
     private userService: UserService,
-    private dialogRef: MatDialogRef<GenerateFollowListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private dialogService: DialogService
+    // private dialogRef: MatDialogRef<GenerateFollowListComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
-    this.flag = this.data.flag;
-    this.id = this.data.id;
+    this.desktop = this.dialogService.desktop;
+    // this.flag = this.data.flag;
+    // this.id = this.data.id;
+    // this.generateFollowsFeed(0);
+    // this.dialogTitle = this.data.title;
+    this.flag = 1;
+    this.id = 1;
     this.generateFollowsFeed(0);
-    this.dialogTitle = this.data.title;
+    //this.dia = 'following';
   }
 
   private processData = followsFeed => {
@@ -56,6 +64,7 @@ export class GenerateFollowListComponent implements OnInit {
   };
 
   generateFollowsFeed(offset: number) {
+    console.log("in generate")
     this.feedService
       .getSlavesMasters(this.id, offset, this.flag)
       .pipe(takeUntil(this.onDestroy))
@@ -74,7 +83,7 @@ export class GenerateFollowListComponent implements OnInit {
   }
 
   closeModal() {
-    this.dialogRef.close();
+    this.dialogService.closeFollowingDialog();
   }
 
   public ngOnDestroy(): void {
