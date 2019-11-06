@@ -4,9 +4,9 @@
 
 
 .center {
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 40px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-top: 32px;
   background-color: white;
 }
 
@@ -15,8 +15,9 @@ ngx-masonry{
 }
 
 .masonry-item {
-  margin-bottom: 20px;
+  padding-bottom: 24px;
 }
+
 ngxMasonryItem:nth-of-type(5n) {
   margin-right: 0px;
 }
@@ -26,57 +27,18 @@ ngxMasonryItem:nth-of-type(5n) {
 }
 
 .masonry-item img {
-  width: 220px;
+  width: 238px;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 10px;
+  border-radius: 18px;
 }
 
 .description {
-  width: 200px;
-  margin-top: 5px;
+  width: 218px;
+  margin: 8px 10px;
   background-color: white;
-  font-weight: 700px;
-  font-size: 13px;
-}
-
-@media  (max-width: 600px)  {
-  .center {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 70px;
-    background-color: white;
-  }
-
-  ngx-masonry{
-    margin: 0 auto;
-  }
-  
-  .masonry-item {
-    margin-bottom: 20px;
-  }
-  ngxMasonryItem:nth-of-type(5n) {
-    margin-right: 0px;
-  }
-  
-  .masonry-item:hover {
-    opacity: 0.5;
-  }
-  
-  .masonry-item img {
-    width: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-  }
-  
-  .description {
-    width: 130px;
-    margin-top: 5px;
-    background-color: white;
-    font-weight: 700px;
-    font-size: 13px;
-  }
-  
-
+  font-size: 12px;
+  font-weight: 600;
+  font-family: Arial;
+  color: #4d4d4d;
 }
