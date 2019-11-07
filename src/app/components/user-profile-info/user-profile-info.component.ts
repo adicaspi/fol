@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
-import { ErrorsService } from '../../services/errors.service';
+import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-user-profile-info',
@@ -23,7 +23,7 @@ export class UserProfileInfoComponent implements OnInit {
   follows: boolean;
   user: User;
   userId: number;
-  userProfileImageSrc = [];
+  userProfileImageSrc: string;
   src: any;
   following: Observable<number>;
   followers: Observable<number>;
@@ -39,6 +39,7 @@ export class UserProfileInfoComponent implements OnInit {
   private anyErrors: boolean;
   private finished: boolean;
   followingDialogRef: MatDialogRef<{}, any>;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   constructor(
     private userService: UserService,
@@ -48,7 +49,6 @@ export class UserProfileInfoComponent implements OnInit {
     private dialogService: DialogService,
     private router: Router,
     private configService: ConfigService,
-    private errorsService: ErrorsService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -91,27 +91,14 @@ export class UserProfileInfoComponent implements OnInit {
     this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
   }
 
-  updateProfileImage(user) {
-    this.postService
-      .getImage(user.profileImageAddr)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(res => {
-        this.userProfileImageSrc = this.postService.createImageFromBlob(
-          res,
-          user.profileImageAddr,
-          this.userProfileImageSrc
-        );
-      });
-  }
-
   updateUser(id) {
     this.userService
       .getUserDetails(id)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(user => {
-        console.log("in user", user);
+        let baseAPI = this.baseApiUrl + '/image?s3key=';
         this.user = user;
-        this.updateProfileImage(user);
+        this.userProfileImageSrc = baseAPI + user.profileImageAddr;
         if (this.userId == this.currMasterId) {
           this.userProfile = true;
         }
