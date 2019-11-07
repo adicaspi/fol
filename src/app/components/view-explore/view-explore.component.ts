@@ -19,20 +19,6 @@ export class ViewExploreComponent implements OnInit {
   constructor(private errorService: ErrorsService, private configService: ConfigService) { }
 
   ngOnInit() {
-    this.filteredOptions = this.errorService.getSearchInput();
-    this.searchedTouched = this.errorService.getSearchCondition();
-    this.subscription = this.configService.windowSizeChanged.subscribe(
-      value => {
-        if (value.width <= 600) {
-          this.desktop = false;
-        }
-        else {
-          this.desktop = true;
-        }
-      }),
-      error => this.anyErrors = true,
-      () => this.finished = true
-
   }
 
 }
