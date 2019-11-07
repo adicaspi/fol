@@ -56,6 +56,7 @@ import { ErrorsService } from './services/errors.service';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
 import { IgxSliderModule } from 'igniteui-angular';
+import { FollowingListMobileComponent } from './components/following-list-mobile/following-list-mobile.component';
 
 //I keep the new line
 @NgModule({
@@ -91,7 +92,8 @@ import { IgxSliderModule } from 'igniteui-angular';
     ShoppingNavComponent,
     ProductPageMobileComponent,
     FilePreviewOverlayComponent,
-    BottomNavbarComponent
+    BottomNavbarComponent,
+    FollowingListMobileComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +123,7 @@ import { IgxSliderModule } from 'igniteui-angular';
 
   entryComponents: [
     UserProfileInfoComponent,
-    GenerateFollowListComponent,
+    // GenerateFollowListComponent,
     ImageComponentComponent,
     ProductPageComponent,
     RegisterComponent,

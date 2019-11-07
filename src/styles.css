@@ -16,9 +16,7 @@ body {
 
 .overlay-fol-list .mat-dialog-container {
   border-radius: 2px !important;
-  padding: 0px !important;
   overflow-x: hidden;
-  height: 100%;
 }
 
 /* .following-list > .mat-dialog-container {

@@ -1,12 +1,15 @@
+@media (min-width: 600px)  {
+
 .title {
   text-align: center;
   height: 43px;
   border-bottom: 1px solid #efefef;
   margin-bottom: 10px;
 }
-.mat-dialog-title {
-  display: inline-block;
-  text-align: center;
+
+.user-result{
+  display: flex;
+  flex-direction: row;
 }
 
 i.fal.fa-times {
@@ -14,6 +17,7 @@ i.fal.fa-times {
   line-height: 30px;
   font-size: 20px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 img {
@@ -21,23 +25,12 @@ img {
   height: 30px;
   border-radius: 50%;
   display: inline-block;
-}
-
-.img-comp {
-  line-height: 30px;
-  display: inline-block;
-  margin-left: 10px;
+  cursor: pointer;
 }
 
 .username {
-  display: inline-block;
-  line-height: 30px;
   margin-left: 10px;
-  width: 85%;
-}
-
-.follower-button {
-  float: right;
+  cursor: pointer;
 }
 
 .btn-follower {
@@ -53,22 +46,73 @@ img {
   border-radius: 4px;
 }
 
-.fol-card {
-  list-style: none;
-  /* width: 300px; */
-  height: 40px;
-  border: none;
+span.fill{
+  flex: 1 1 auto;
+}
 }
 
-.btn.active.focus,
-.btn.active:focus,
-.btn.focus,
-.btn.focus:active,
-.btn:active:focus,
-.btn:focus {
-  outline: 0 !important;
-  outline-offset: 0 !important;
-  background-image: none !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
+@media (max-width: 600px)  {
+
+  .title {
+    text-align: center;
+    border-bottom: 1px solid #efefef;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  
+  .user-result{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  /* i.fal.fa-times {
+    float: right;
+    line-height: 30px;
+    font-size: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+  } */
+
+  i.fa.fa-chevron-left{
+    float: left;
+    cursor: pointer;
+  }
+  
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .username {
+    margin-left: 10px;
+    line-height: 30px;
+    cursor: pointer;
+  }
+  
+  .btn-follower {
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+    width: 80px;
+    background-color: black;
+    border: none;
+    outline: 0;
+    border-radius: 4px;
+  }
+  
+  span.fill{
+    flex: 1 1 auto;
+  }
+
+  span.follower-button{
+    line-height: 30px;
+  }
+  
+
 }

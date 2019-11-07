@@ -1,13 +1,15 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
 import { GlobalVariable } from '../../../global';
+import { DialogService } from '../../services/dialog.service';
+import { ErrorsService } from '../../services/errors.service';
 
 @Component({
   selector: 'app-generate-follow-list',
@@ -17,6 +19,8 @@ import { GlobalVariable } from '../../../global';
 export class GenerateFollowListComponent implements OnInit {
   // followsFeed: Observable<Array<FollowItem>>;
   followsFeed: Array<any> = [];
+  var: Observable<any>;
+  desktop: boolean;
   id: number;
   offset: number;
   flag: number;
@@ -24,22 +28,33 @@ export class GenerateFollowListComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   postsToShow = [];
   showSpinner: boolean = true;
+  followingUsersChanged: boolean = false;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   constructor(
     private feedService: FeedService,
     private userService: UserService,
-    private dialogRef: MatDialogRef<GenerateFollowListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private dialogService: DialogService,
+    private router: Router,
+    private errorsService: ErrorsService
+    // private dialogRef: MatDialogRef<GenerateFollowListComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
-    this.flag = this.data.flag;
-    this.id = this.data.id;
-    this.generateFollowsFeed(0);
-    this.dialogTitle = this.data.title;
+    this.desktop = this.dialogService.desktop;
+    this.flag = this.dialogService.followingDialogDataObject.flag;
+    this.id = this.dialogService.followingDialogDataObject.userId;
+    this.dialogTitle = this.dialogService.followingDialogDataObject.title;
+    if (this.flag) {
+      this.generateFollowsMasters(0);
+    }
+    else {
+      this.generateFollowsSlaves(0);
+    }
   }
 
   private processData = followsFeed => {
+    console.log("im follows feed", followsFeed);
     this.followsFeed = this.followsFeed.concat(followsFeed);
     followsFeed.forEach(follower => {
       this.userService.checkIsFollowing(follower.id).subscribe(res => {
@@ -55,26 +70,45 @@ export class GenerateFollowListComponent implements OnInit {
     });
   };
 
-  generateFollowsFeed(offset: number) {
+  generateFollowsMasters(offset: number) {
     this.feedService
-      .getSlavesMasters(this.id, offset, this.flag)
+      .getFollowMasters(this.id, offset)
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(this.processData);
+  }
+
+  generateFollowsSlaves(offset: number) {
+    this.feedService
+      .getFollowSlaves(this.id, offset)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(this.processData);
   }
 
   follow(item) {
+
     //if user is already following then unfollow
     if (item['post']['follows']) {
-      //this.userService.unFollow(item['post']['id']);
+      this.userService.unFollow(item['post']['id']);
       item['post']['follows'] = false;
     } else {
-      //this.userService.follow(item['post']['id']);
+      this.userService.follow(item['post']['id']);
       item['post']['follows'] = true;
     }
+    this.followingUsersChanged = true;
+
+  }
+
+  userProfile(user) {
+    this.router.navigate(['profile', user['post']['id']]);
+    this.closeModal();
   }
 
   closeModal() {
-    this.dialogRef.close();
+    this.dialogService.closeFollowingDialog(this.followingUsersChanged)
+  }
+
+  goBackPage() {
+    this.router.navigate(['profile', this.id]);
   }
 
   public ngOnDestroy(): void {

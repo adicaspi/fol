@@ -17,6 +17,7 @@ import {
 } from '@angular/cdk/portal';
 
 import { FilePreviewOverlayRef } from '../components/file-preview-overlay/file-preview-overlay-ref';
+import { FollowingListMobileComponent } from '../components/following-list-mobile/following-list-mobile.component';
 
 interface FilePreviewDialogConfig {
   panelClass?: string;
@@ -36,6 +37,13 @@ const DEFAULT_CONFIG: FilePreviewDialogConfig = {
 export class DialogService {
   userPost: UserPost;
   directingPage: string;
+  followingDialogRef: MatDialogRef<{}, any>;
+  desktop: boolean;
+  followingDialogDataObject = {
+    userId: 0,
+    flag: 0,
+    title: ''
+  }
 
   constructor(
     public dialog: MatDialog,
@@ -118,8 +126,7 @@ export class DialogService {
     return overlayConfig;
   }
 
-  openModalWindow(component, data?, componentName?) {
-    console.log('in openModalWinodw', component, data, componentName);
+  openModalWindow(component, componentName?, data?) {
     const modalWindowConfig = new MatDialogConfig<ProductPageComponent>();
 
     //dialogConfig.scrollStrategy = scrollStrategy;
@@ -128,6 +135,7 @@ export class DialogService {
     modalWindowConfig.closeOnNavigation = true;
 
     if (componentName == 'followersList') {
+      console.log("in compname");
       modalWindowConfig.data = data;
       modalWindowConfig.width = '400px';
       modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper-fol';
@@ -138,12 +146,17 @@ export class DialogService {
     //   modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper';
     // }
 
-    const dialogRef = this.dialog.open(component, modalWindowConfig);
+    const followingDialogRef = this.dialog.open(component, modalWindowConfig);
+    this.followingDialogRef = followingDialogRef;
 
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
+    // followingDialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
     // });
+  }
+
+  closeFollowingDialog(followingFlag) {
+    this.followingDialogRef.close(followingFlag);
   }
 
   postData(post, directingPage) {

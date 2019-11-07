@@ -13,6 +13,8 @@ import { ExploreFeedComponent } from './components/explore-feed/explore-feed.com
 import { ViewExploreComponent } from './components/view-explore/view-explore.component';
 import { MutualNavComponent } from './components/mutual-nav/mutual-nav.component';
 import { ProductPageMobileComponent } from './components/product-page-mobile/product-page-mobile.component';
+import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
+
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
   {
@@ -37,7 +39,8 @@ const routes: Routes = [
   },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'explore/:id', component: ViewExploreComponent },
-  { path: 'product-page', component: ProductPageMobileComponent }
+  { path: 'product-page', component: ProductPageMobileComponent },
+  { path: 'following', component: GenerateFollowListComponent }
 ];
 
 @NgModule({
