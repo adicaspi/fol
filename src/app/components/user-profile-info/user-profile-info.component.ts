@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
+import { ErrorsService } from '../../services/errors.service';
 
 @Component({
   selector: 'app-user-profile-info',
@@ -34,10 +35,10 @@ export class UserProfileInfoComponent implements OnInit {
   desktop: boolean = false;
   userProfile: boolean = false;
   private subscription: Subscription;
+  private msgSubscription: Subscription;
   private anyErrors: boolean;
   private finished: boolean;
-
-
+  followingDialogRef: MatDialogRef<{}, any>;
 
   constructor(
     private userService: UserService,
@@ -46,8 +47,11 @@ export class UserProfileInfoComponent implements OnInit {
     private postService: PostService,
     private dialogService: DialogService,
     private router: Router,
-    private configService: ConfigService
-  ) { this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
+    private configService: ConfigService,
+    private errorsService: ErrorsService
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
@@ -57,9 +61,9 @@ export class UserProfileInfoComponent implements OnInit {
     this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.follows = res;
     })
-    this.following = this.userService.getNumberOfFollowing(this.currMasterId);
-    this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
-    this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
+    this.getNumFollowers();
+    this.getNumFollowing();
+    this.getNumPosts();
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
@@ -73,6 +77,18 @@ export class UserProfileInfoComponent implements OnInit {
       error => this.anyErrors = true,
       () => this.finished = true
 
+  }
+
+  getNumFollowing() {
+    this.following = this.userService.getNumberOfFollowing(this.currMasterId);
+  }
+
+  getNumFollowers() {
+    this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
+  }
+
+  getNumPosts() {
+    this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
   }
 
   updateProfileImage(user) {
@@ -135,6 +151,13 @@ export class UserProfileInfoComponent implements OnInit {
         componentName
       );
       this.dialogService.desktop = true;
+      this.followingDialogRef = this.dialogService.followingDialogRef;
+      this.followingDialogRef.afterClosed().pipe(takeUntil(this.onDestroy)).subscribe(result => {
+        if (result) {
+          this.getNumFollowing();
+        }
+      });
+
     }
     else {
       this.dialogService.desktop = false;

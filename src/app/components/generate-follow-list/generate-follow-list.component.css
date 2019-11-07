@@ -15,6 +15,7 @@ i.fal.fa-times {
   line-height: 30px;
   font-size: 20px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 img {
@@ -66,6 +67,7 @@ span.fill{
     line-height: 30px;
     font-size: 20px;
     margin-right: 5px;
+    cursor: pointer;
   }
   
   img {

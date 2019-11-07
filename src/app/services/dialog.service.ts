@@ -17,6 +17,7 @@ import {
 } from '@angular/cdk/portal';
 
 import { FilePreviewOverlayRef } from '../components/file-preview-overlay/file-preview-overlay-ref';
+import { FollowingListMobileComponent } from '../components/following-list-mobile/following-list-mobile.component';
 
 interface FilePreviewDialogConfig {
   panelClass?: string;
@@ -149,13 +150,13 @@ export class DialogService {
     this.followingDialogRef = followingDialogRef;
 
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
+    // followingDialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
     // });
   }
 
-  closeFollowingDialog() {
-    this.followingDialogRef.close();
+  closeFollowingDialog(followingFlag) {
+    this.followingDialogRef.close(followingFlag);
   }
 
   postData(post, directingPage) {
