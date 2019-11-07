@@ -16,7 +16,7 @@ import { UserService } from '../../services/user.service';
   }
 })
 export class ViewProfileComponent implements OnInit {
-  desktop: Boolean = true;
+  desktop: boolean = true;
   classToApply: string = 'center';
   options: string[] = [];
   filteredOptions: Observable<string[]>;
@@ -37,12 +37,6 @@ export class ViewProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.filteredOptions = this.errorService.getSearchInput();
-    this.searchedTouched = this.errorService.getSearchCondition();
-    // if (this.deviceService.isDesktop()) {
-    //   this.desktop = true;
-    // }
-
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 600) {
