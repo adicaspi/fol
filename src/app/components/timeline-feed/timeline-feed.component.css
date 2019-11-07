@@ -85,6 +85,8 @@ ngxMasonryItem:nth-of-type(3n) {
   text-align: center;
   font-weight: 400;
   color: black;
+  width: 90%;
+  margin: auto;
 }
 
 .store.text-right {
