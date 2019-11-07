@@ -11,7 +11,6 @@ import { Subject } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
 
-
 @Component({
   selector: 'app-user-profile-info',
   templateUrl: './user-profile-info.component.html',
@@ -48,22 +47,16 @@ export class UserProfileInfoComponent implements OnInit {
     private dialogService: DialogService,
     private router: Router,
     private configService: ConfigService
-  ) { }
+  ) { this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
 
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
-    this.activatedRoute.params
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(params => {
-        this.currMasterId = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
-        this.updateUser(this.currMasterId);
-      });
     this.currMasterId = parseInt(routeParams.id);
+    this.updateUser(this.currMasterId);
     this.userId = this.userService.userId;
     this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.follows = res;
     })
-
     this.following = this.userService.getNumberOfFollowing(this.currMasterId);
     this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
     this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
@@ -100,6 +93,7 @@ export class UserProfileInfoComponent implements OnInit {
       .getUserDetails(id)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(user => {
+        console.log("in user", user);
         this.user = user;
         this.updateProfileImage(user);
         if (this.userId == this.currMasterId) {

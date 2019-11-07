@@ -8,7 +8,7 @@ import {
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
 import { GlobalVariable } from '../../global';
 
@@ -88,26 +88,24 @@ export class UserService {
         params: params
       });
   }
-  follow(master: any) {
-    let params = new HttpParams().set('masterId', master);
-    return this.http.put(
-      this.globaSoicalURL + this.userId + '/follow',
-      master,
+
+  follow(masterId: number) {
+    let params = new HttpParams().set('masterId', masterId.toString());
+    return this.http.post(
+      this.globaSoicalURL + this.userId + '/follow', { headers: httpOptions.headers },
       {
         params: params
-      }
-    );
+      }).subscribe(res => {
+      });
   }
 
-  unFollow(master: any) {
-    let params = new HttpParams().set('masterId', master);
-    return this.http.put(
-      this.globaSoicalURL + this.userId + '/follow',
-      master,
-      {
+  unFollow(masterId) {
+    let params = new HttpParams().set('masterId', masterId.toString());
+    return this.http.post<any>(
+      this.globaSoicalURL + this.userId + '/unfollow', { headers: httpOptions.headers }, {
         params: params
       }
-    );
+    ).subscribe(res => { });
   }
 
   getUserDetails(id: number): Observable<any> {
@@ -115,6 +113,7 @@ export class UserService {
   }
 
   getNumberOfFollowing(id: number): Observable<any> {
+    console.log("in get num following");
     return this.http.get<any>(this.globalInfoURL + id + '/num-following');
   }
 

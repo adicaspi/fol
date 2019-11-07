@@ -7,11 +7,11 @@
   <div class="wrapper">
     <div class="content">
       <div class="user-result" *ngFor="let item of postsToShow">
-        <span class="img-comp">
+        <span class="img-comp" (click)="userProfile(item)">
           <img [attr.src]="item['imgSrc']" />
         </span>
 
-        <span class="username">
+        <span class="username" (click)="userProfile(item)">
           <span>{{ item['post']['username'] }}</span>
         </span>
         <span class="fill"></span>

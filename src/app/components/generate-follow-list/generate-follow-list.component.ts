@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
@@ -18,6 +18,7 @@ import { DialogService } from '../../services/dialog.service';
 export class GenerateFollowListComponent implements OnInit {
   // followsFeed: Observable<Array<FollowItem>>;
   followsFeed: Array<any> = [];
+  var: Observable<any>;
   desktop: boolean;
   id: number;
   offset: number;
@@ -30,12 +31,14 @@ export class GenerateFollowListComponent implements OnInit {
   constructor(
     private feedService: FeedService,
     private userService: UserService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router,
     // private dialogRef: MatDialogRef<GenerateFollowListComponent>,
     // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
+    console.log("in gen on init");
     this.desktop = this.dialogService.desktop;
     this.flag = this.dialogService.followingDialogDataObject.flag;
     this.id = this.dialogService.followingDialogDataObject.userId;
@@ -80,14 +83,25 @@ export class GenerateFollowListComponent implements OnInit {
   }
 
   follow(item) {
+
     //if user is already following then unfollow
     if (item['post']['follows']) {
-      //this.userService.unFollow(item['post']['id']);
+      console.log("in unfollow", item);
+      this.userService.unFollow(item['post']['id']);
+
       item['post']['follows'] = false;
+
     } else {
-      //this.userService.follow(item['post']['id']);
+      console.log("in follow", item);
+      this.userService.follow(item['post']['id']);
       item['post']['follows'] = true;
     }
+
+  }
+
+  userProfile(user) {
+    this.router.navigate(['profile', user['post']['id']]);
+    this.closeModal();
   }
 
   closeModal() {

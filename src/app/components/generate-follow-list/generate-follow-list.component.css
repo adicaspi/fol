@@ -22,10 +22,12 @@ img {
   height: 30px;
   border-radius: 50%;
   display: inline-block;
+  cursor: pointer;
 }
 
 .username {
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .btn-follower {
@@ -71,10 +73,12 @@ span.fill{
     height: 30px;
     border-radius: 50%;
     display: inline-block;
+    cursor: pointer;
   }
   
   .username {
     margin-left: 10px;
+    cursor: pointer;
   }
   
   .btn-follower {
