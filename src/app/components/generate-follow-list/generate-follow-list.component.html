@@ -3,6 +3,7 @@
   <div class="title">
     <span class="dialog-title">{{ dialogTitle }}</span>
     <i *ngIf="desktop" (click)="closeModal()" class="fal fa-times"></i>
+    <i *ngIf="!desktop" (click)="goBackPage()" class="fa fa-chevron-left"></i>
   </div>
   <div class="wrapper">
     <div class="content">

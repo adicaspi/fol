@@ -1,3 +1,5 @@
+@media (min-width: 600px)  {
+
 .title {
   text-align: center;
   height: 43px;
@@ -47,14 +49,16 @@ img {
 span.fill{
   flex: 1 1 auto;
 }
+}
 
-@media (min-width: 600px)  {
+@media (max-width: 600px)  {
 
   .title {
     text-align: center;
-    height: 43px;
     border-bottom: 1px solid #efefef;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
   }
   
   .user-result{
@@ -62,11 +66,16 @@ span.fill{
     flex-direction: row;
   }
   
-  i.fal.fa-times {
+  /* i.fal.fa-times {
     float: right;
     line-height: 30px;
     font-size: 20px;
     margin-right: 5px;
+    cursor: pointer;
+  } */
+
+  i.fa.fa-chevron-left{
+    float: left;
     cursor: pointer;
   }
   
@@ -80,6 +89,7 @@ span.fill{
   
   .username {
     margin-left: 10px;
+    line-height: 30px;
     cursor: pointer;
   }
   
@@ -98,6 +108,10 @@ span.fill{
   
   span.fill{
     flex: 1 1 auto;
+  }
+
+  span.follower-button{
+    line-height: 30px;
   }
   
 

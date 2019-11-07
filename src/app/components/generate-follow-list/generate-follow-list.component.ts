@@ -107,6 +107,10 @@ export class GenerateFollowListComponent implements OnInit {
     this.dialogService.closeFollowingDialog(this.followingUsersChanged)
   }
 
+  goBackPage() {
+    this.router.navigate(['profile', this.id]);
+  }
+
   public ngOnDestroy(): void {
     this.onDestroy.next();
   }
