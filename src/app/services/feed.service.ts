@@ -13,10 +13,12 @@ import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { GlobalVariable } from '../../global';
-
+import { FilteringDTO } from '../models/FilteringDTO';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +28,7 @@ export class FeedService {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
+  filteringDTO = new FilteringDTO();
 
   constructor(private http: HttpClient) { }
 
@@ -34,12 +37,9 @@ export class FeedService {
     offset: number,
     userId: number
   ): Observable<Array<TimelinePost>> {
-    let params = new HttpParams().set('offset', offset.toString());
+    console.log("in timeline feed", this.filteringDTO);
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/timeline-feed', { headers: httpOptions.headers },
-      {
-        params: params
-      }
+      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.filteringDTO, { headers: httpOptions.headers }
     );
   }
 

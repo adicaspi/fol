@@ -5,6 +5,8 @@ import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } fro
 import { Options, LabelType } from 'ng5-slider';
 import { Ng5SliderModule } from 'ng5-slider';
 import { SliderType } from "igniteui-angular";
+import { FilteringDTO } from '../../models/FilteringDTO';
+import { FeedService } from '../../services/feed.service';
 
 
 @Component({
@@ -46,14 +48,16 @@ export class MutualNavComponent implements OnInit {
   menu_class = 'popup';
   aria_expanded = 'false';
   mainList = {};
+  filteringDTO = new FilteringDTO();
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
-  categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothings', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
+  categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
     { id: 1, name: 'Tops', checked: false },
     { id: 2, name: 'Jackets & Coats', checked: false },
     { id: 3, name: 'Dresses & Skirts', checked: false },
     { id: 4, name: 'Pants', checked: false },
-    { id: 5, name: 'Swimwear', checked: false }
+    { id: 5, name: 'Shorts', checked: false },
+    { id: 6, name: 'Lingerie', checked: false }
   ];
   shoes = [
     { id: 1, name: 'Heels' },
@@ -63,7 +67,7 @@ export class MutualNavComponent implements OnInit {
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 2, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 4, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 6, name: 'TerminalX', checked: false }, { id: 7, name: 'Net-A-Porter', checked: false }];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private feedService: FeedService) { }
 
   ngOnInit() {
     this.mainList['Category'] = this.categories;
@@ -94,14 +98,14 @@ export class MutualNavComponent implements OnInit {
   }
 
   onChange(mrChange: MatRadioChange) {
-    console.log(mrChange.value);
-    if (mrChange.value != 1) {
+    this.filteringDTO.category = mrChange.value;
+    if (mrChange.value != "All") {
       this.showProduct = true;
       switch (mrChange.value) {
-        case 2:
+        case "Clothing":
           this.productsToShow = this.clothings;
           break;
-        case 3:
+        case "Shoes":
           this.productsToShow = this.shoes;
           break;
 
@@ -113,12 +117,63 @@ export class MutualNavComponent implements OnInit {
     //console.log(this.categroyRadioButton.name);
   }
 
-  onChangeCheckBox($event, elem) {
+  onChangeCheckBox(key, $event, elem) {
     if ($event.checked == true) {
       elem.checked = true;
+      this.filtering(key, elem, true)
     }
     else {
       elem.checked = false;
+      this.filtering(key, elem, false)
+
+    }
+  }
+
+  filtering(key, elem, checked) {
+    switch (key) {
+      case "products":
+        if (checked) {
+          if (elem.name == 'Jackets & Coats') {
+            this.filteringDTO.productTypes.push('JacketsOrCoats');
+          }
+          if (elem.name == 'Dresses & Skirts')
+            this.filteringDTO.productTypes.push('DressesOrSkirts');
+          else {
+            this.filteringDTO.productTypes.push(elem.name);
+          }
+        }
+        else {
+        }
+        const index = this.filteringDTO.productTypes.indexOf(elem, 0);
+        if (index > -1) {
+          this.filteringDTO.productTypes.splice(index, 1);
+        }
+        this.updateFeedFilteringDTO();
+        break;
+      case "designers":
+        if (checked) {
+          this.filteringDTO.designers.push(elem.name);
+        }
+        else {
+          const index = this.filteringDTO.designers.indexOf(elem, 0);
+          if (index > -1) {
+            this.filteringDTO.productTypes.splice(index, 1);
+          }
+          this.updateFeedFilteringDTO();
+        }
+        break;
+      case "stores":
+        if (checked) {
+          this.filteringDTO.designers.push(elem.name);
+        }
+        else {
+          const index = this.filteringDTO.stores.indexOf(elem, 0);
+          if (index > -1) {
+            this.filteringDTO.productTypes.splice(index, 1);
+          }
+          this.updateFeedFilteringDTO();
+        }
+        break;
     }
   }
 
@@ -127,6 +182,7 @@ export class MutualNavComponent implements OnInit {
     for (let i = 0; i < elements.length; i++) {
       if (elements[i].checked) {
         console.log(elements[i].value);
+        this.filteringDTO.productTypes.push(elements[i].value);
       }
     }
   }
@@ -150,7 +206,9 @@ export class MutualNavComponent implements OnInit {
   }
 
   selectedPrice() {
-    (this.maxValue, this.minValue);
+    this.filteringDTO.minPrice = this.minValue;
+    this.filteringDTO.maxPrice = this.maxValue;
+    this.updateFeedFilteringDTO();
   }
 
   clearSelection(arrayToIterrate) {
@@ -158,43 +216,6 @@ export class MutualNavComponent implements OnInit {
     arrayToIterrate.forEach(elem => {
       elem.checked = false;
     })
-  }
-
-  onChangeAllCheckBox($event, elem, arrayToIterrate) {
-
-    if (elem.id == 1) {
-      if ($event.checked == true) {
-        elem.checked = true;
-        arrayToIterrate.forEach(function (elem) {
-          elem.checked = true;
-        })
-      } else {
-        elem.checked = false
-        arrayToIterrate.forEach(function (elem) {
-          elem.checked = false;
-        })
-      }
-    } else {
-      if ($event.checked == false) {
-        elem.checked = false;
-        arrayToIterrate[0].checked = false;
-      }
-      else {
-        var allChecked = true;
-        elem.checked = true;
-        arrayToIterrate.forEach(function (elem) {
-          if (elem.id != 1) {
-            if (elem.checked == false) {
-              arrayToIterrate[0].checked = false;
-              allChecked = false;
-            }
-          }
-        })
-        if (allChecked) {
-          arrayToIterrate[0].checked = true;
-        }
-      }
-    }
   }
 
   OnChangePriceSlider($event) {
@@ -227,6 +248,10 @@ export class MutualNavComponent implements OnInit {
       display: 'initial'
     });
 
+  }
+
+  updateFeedFilteringDTO() {
+    this.feedService.filteringDTO = this.filteringDTO;
   }
 
 }
