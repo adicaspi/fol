@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import * as $ from 'jquery';
 import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '../../../../node_modules/@angular/material';
@@ -7,6 +7,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { SliderType } from "igniteui-angular";
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { FeedService } from '../../services/feed.service';
+import { ErrorsService } from '../../services/errors.service';
 
 
 @Component({
@@ -19,24 +20,10 @@ export class MutualNavComponent implements OnInit {
   //mainList = ['Categories', 'Designers', 'Stores', 'Price'];
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
-  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: false }) categoryController: MatMenuTrigger;
+  @ViewChildren(MatMenuTrigger) trigger: QueryList<MatMenuTrigger>;
   public sliderType = SliderType;
-  public priceRange: PriceRange = new PriceRange(200, 800);
-  options: Options = {
-    floor: 0,
-    ceil: 5000,
-    step: 100,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return '$' + value;
-        case LabelType.High:
-          return '$' + value;
-        default:
-          return '$' + value;
-      }
-    }
-  }
+  public priceRange: PriceRange = new PriceRange(0, 5000);
   minValue: number = 0;
   maxValue: number = 5000;
   categoryForm: FormGroup;
@@ -44,11 +31,9 @@ export class MutualNavComponent implements OnInit {
   categroyRadioButton: MatRadioButton = null;
   allCategroiesRadioButton: MatRadioButton = null;
   showProduct: boolean = false;
-  class = 'filtered';
-  menu_class = 'popup';
-  aria_expanded = 'false';
-  mainList = {};
+  //mainList = {};
   filteringDTO = new FilteringDTO();
+  menuChanged: boolean = false;
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
   categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
@@ -67,24 +52,34 @@ export class MutualNavComponent implements OnInit {
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 2, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 4, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 6, name: 'TerminalX', checked: false }, { id: 7, name: 'Net-A-Porter', checked: false }];
 
-  constructor(private formBuilder: FormBuilder, private feedService: FeedService) { }
+  constructor(private formBuilder: FormBuilder, private feedService: FeedService, private errorsService: ErrorsService) { }
 
   ngOnInit() {
-    this.mainList['Category'] = this.categories;
-    this.mainList['Product type'] = this.clothings;
-    this.mainList['Designer'] = this.designers;
-    this.mainList['Store'] = this.stores;
     this.categoryForm = this.formBuilder.group({
       category: ['']
     });
     this.productForm = this.formBuilder.group({
-
       Clothings: [''],
       Shoes: [''],
       Bags: [''],
       Accesories: ['']
     });
+    this.filteringDTO.category = "";
+    this.filteringDTO.productTypes = [];
+    this.filteringDTO.designers = [];
+    this.filteringDTO.stores = [];
+    this.filteringDTO.minPrice = 0;
+    this.filteringDTO.maxPrice = this.maxValue;
+  }
 
+  menuOpened() {
+
+  }
+  menuClosed() {
+    if (this.menuChanged) {
+      this.updateFeedFilteringDTO();
+      this.menuChanged = false;
+    }
   }
 
   categoryValue() {
@@ -98,8 +93,10 @@ export class MutualNavComponent implements OnInit {
   }
 
   onChange(mrChange: MatRadioChange) {
+    this.menuChanged = true;
     this.filteringDTO.category = mrChange.value;
-    if (mrChange.value != "All") {
+
+    if (mrChange.source.id.toString() != '1') {
       this.showProduct = true;
       switch (mrChange.value) {
         case "Clothing":
@@ -108,24 +105,23 @@ export class MutualNavComponent implements OnInit {
         case "Shoes":
           this.productsToShow = this.shoes;
           break;
-
       }
     } else {
+      this.filteringDTO.category = null;
       this.showProduct = false;
     }
-    //this.categroyRadioButton = mrChange.source;
-    //console.log(this.categroyRadioButton.name);
+    this.updateFeedFilteringDTO();
   }
 
   onChangeCheckBox(key, $event, elem) {
+    this.menuChanged = true;
     if ($event.checked == true) {
       elem.checked = true;
-      this.filtering(key, elem, true)
+      this.filtering(key, elem, true);
     }
     else {
       elem.checked = false;
       this.filtering(key, elem, false)
-
     }
   }
 
@@ -143,12 +139,11 @@ export class MutualNavComponent implements OnInit {
           }
         }
         else {
+          const index = this.filteringDTO.productTypes.indexOf(elem.name, 0);
+          if (index > -1) {
+            this.filteringDTO.productTypes.splice(index, 1);
+          }
         }
-        const index = this.filteringDTO.productTypes.indexOf(elem, 0);
-        if (index > -1) {
-          this.filteringDTO.productTypes.splice(index, 1);
-        }
-        this.updateFeedFilteringDTO();
         break;
       case "designers":
         if (checked) {
@@ -159,99 +154,56 @@ export class MutualNavComponent implements OnInit {
           if (index > -1) {
             this.filteringDTO.productTypes.splice(index, 1);
           }
-          this.updateFeedFilteringDTO();
         }
         break;
       case "stores":
         if (checked) {
-          this.filteringDTO.designers.push(elem.name);
+          this.filteringDTO.designers.push(elem.id);
         }
         else {
           const index = this.filteringDTO.stores.indexOf(elem, 0);
           if (index > -1) {
             this.filteringDTO.productTypes.splice(index, 1);
           }
-          this.updateFeedFilteringDTO();
         }
         break;
     }
   }
 
   selectedProduct() {
-    var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].checked) {
-        console.log(elements[i].value);
-        this.filteringDTO.productTypes.push(elements[i].value);
-      }
-    }
+    this.updateFeedFilteringDTO();
+    // var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
+    // for (let i = 0; i < elements.length; i++) {
+    //   if (elements[i].checked) {
+    //     console.log(elements[i].value);
+    //     this.filteringDTO.productTypes.push(elements[i].value);
+    //   }
+    // }
   }
 
   selectedStore() {
-    var elements = (<HTMLInputElement[]><any>document.getElementsByName("store"));
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].checked) {
-        console.log(elements[i].value);
-      }
-    }
+    this.updateFeedFilteringDTO();
   }
 
   selectedDesigner() {
-    var elements = (<HTMLInputElement[]><any>document.getElementsByName("designer"));
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].checked) {
-        console.log(elements[i].value);
-      }
-    }
+    this.updateFeedFilteringDTO();
   }
 
   selectedPrice() {
-    this.filteringDTO.minPrice = this.minValue;
-    this.filteringDTO.maxPrice = this.maxValue;
+    this.filteringDTO.minPrice = this.priceRange.lower;
+    this.filteringDTO.maxPrice = this.priceRange.upper;
     this.updateFeedFilteringDTO();
   }
 
   clearSelection(arrayToIterrate) {
-    console.log("in clear", arrayToIterrate);
     arrayToIterrate.forEach(elem => {
       elem.checked = false;
     })
   }
 
-  OnChangePriceSlider($event) {
-    console.log("in price");
-    console.log($event.value);
-  }
-  getKeys() {
-    return this.keys;
-  }
-
-  getValues(key) {
-    return Object.values(this.mainList[key]);
-  }
-
-  formatLabel(value: number | null) {
-    if (!value) {
-      return 0;
-    }
-
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-
-    return value;
-  }
-
-  getProductTypeElement() {
-    let productType = $('.dropbtn.product');
-    productType.css({
-      display: 'initial'
-    });
-
-  }
-
   updateFeedFilteringDTO() {
     this.feedService.filteringDTO = this.filteringDTO;
+    this.errorsService.sendMessage('update-feed');
   }
 
 }

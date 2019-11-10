@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { DialogService } from '../../services/dialog.service';
@@ -24,6 +24,7 @@ export class TimelineFeedComponent implements OnInit {
   desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   error: string;
+  private feedSubsription: Subscription
 
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
@@ -44,6 +45,7 @@ export class TimelineFeedComponent implements OnInit {
     private dialogService: DialogService,
     private configService: ConfigService,
     private router: Router,
+    private errorsService: ErrorsService
 
   ) { }
 
@@ -67,6 +69,14 @@ export class TimelineFeedComponent implements OnInit {
         }),
       error => this.anyErrors = true,
       () => this.finished = true
+
+    this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
+      if (msg.error == 'update-feed') {
+        console.log("in timeline feed");
+        this.postsToShow = [];
+        this.generateTimelineFeed(0, this.id);
+      }
+    });
 
   }
 

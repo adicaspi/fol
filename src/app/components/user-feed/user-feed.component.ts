@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
-import { Subject, Observer, Observable } from 'rxjs';
+import { Subject, Observer, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { PostService } from '../../services/post.service';
@@ -11,6 +11,7 @@ import { GlobalVariable } from '../../../global';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
 import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
+import { ErrorsService } from '../../services/errors.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class UserFeedComponent implements OnInit {
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
+  private feedSubsription: Subscription
   private anyErrors: boolean;
   private finished: boolean;
   routes: Routes = [
@@ -53,6 +55,7 @@ export class UserFeedComponent implements OnInit {
     private router: Router,
     private configService: ConfigService,
     private postService: PostService,
+    private errorsService: ErrorsService
 
   ) { }
 
@@ -77,6 +80,11 @@ export class UserFeedComponent implements OnInit {
       }),
       error => this.anyErrors = true,
       () => this.finished = true
+    this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
+      if (msg.error == 'update-feed') {
+        this.generateUserFeed(0, this.currId);
+      }
+    });
 
   }
 

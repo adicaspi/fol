@@ -264,8 +264,8 @@ div.submit{
 }
 
 div.price-container{
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 50px;
     margin-bottom: 5px;
     min-width: 300px;
@@ -275,12 +275,20 @@ div.price-container{
   float: right;
 }
 
+span.price.max{
+  float: right;
+}
+
 @media (min-width: 600px) and (max-width: 900px)  {
   button.mat-button{
     color:black;
     font-size: 12px;
     font-family: 'Maven Pro', sans-serif;
     outline:none;
+  }
+
+  span.price.max{
+    float: right;
   }
   
 }
