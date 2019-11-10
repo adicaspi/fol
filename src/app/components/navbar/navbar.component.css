@@ -13,7 +13,7 @@
   .fw-navbar {
     list-style-type: none;
     background-color: white;
-    height: 80px;
+    height: 74px;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -26,19 +26,16 @@
   }
 
   img.logo {
-      height: 35px;
-      margin-left: 20px;
-      margin-right: 20px;
+      height: 28px;
+      padding-left: 26px;
+      padding-right: 30px;
       cursor: pointer;
-      position: relative;
-      bottom: 4px;
   }
 
   li.search {
-    height: 48px;
+    height: 45px;
     background-color: rgb(241,241,241);
-    border: 1px solid #e6e6e6;
-    border-radius: 30px;
+    border-radius: 11px;
     display: inline-block;
     position: relative;
     transition: box-shadow 200ms, background-color 200ms ease-in !important;
@@ -57,7 +54,7 @@
   }
 
   ::placeholder {
-    color: #595959;
+    color: rgb(123,123,123);
   }
 
   div.search-container {
@@ -75,7 +72,9 @@
   div.search-icon {
     padding-left: 5px;
     padding-right: 8px;
-    height: 100%;
+    color: rgb(123,123,123);
+    position: relative;
+    top: 1px;
   }
 
   svg.search-icon {
