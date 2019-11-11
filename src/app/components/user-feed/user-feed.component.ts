@@ -81,7 +81,7 @@ export class UserFeedComponent implements OnInit {
       error => this.anyErrors = true,
       () => this.finished = true
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
-      if (msg.error == 'update-feed') {
+      if (msg.error == 'update-userfeed') {
         this.generateUserFeed(0, this.currId);
       }
     });

@@ -71,8 +71,7 @@ export class TimelineFeedComponent implements OnInit {
       () => this.finished = true
 
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
-      if (msg.error == 'update-feed') {
-        console.log("in timeline feed");
+      if (msg.error == 'update-timelinefeed') {
         this.postsToShow = [];
         this.generateTimelineFeed(0, this.id);
       }

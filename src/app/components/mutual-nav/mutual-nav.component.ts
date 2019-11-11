@@ -8,6 +8,7 @@ import { SliderType } from "igniteui-angular";
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { FeedService } from '../../services/feed.service';
 import { ErrorsService } from '../../services/errors.service';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 
 @Component({
@@ -52,7 +53,7 @@ export class MutualNavComponent implements OnInit {
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 2, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 4, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 6, name: 'TerminalX', checked: false }, { id: 7, name: 'Net-A-Porter', checked: false }];
 
-  constructor(private formBuilder: FormBuilder, private feedService: FeedService, private errorsService: ErrorsService) { }
+  constructor(private formBuilder: FormBuilder, private feedService: FeedService, private errorsService: ErrorsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.categoryForm = this.formBuilder.group({
@@ -203,7 +204,15 @@ export class MutualNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.filteringDTO = this.filteringDTO;
-    this.errorsService.sendMessage('update-feed');
+    if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
+      this.errorsService.sendMessage('update-timelinefeed');
+    }
+    if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
+      this.errorsService.sendMessage('update-userfeed');
+    }
+    if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
+      this.errorsService.sendMessage('update-exlporefeed');
+    }
   }
 
 }
