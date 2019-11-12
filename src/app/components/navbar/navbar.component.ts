@@ -125,7 +125,6 @@ export class NavbarComponent implements OnInit {
   getSearchResults(value: string) {
     let baseAPI = this.baseApiUrl + '/image?s3key=';
     this.userService.search(value).subscribe(res => {
-      console.log("res", res);
       res.forEach(element => {
         let searchObject = {
           userName: element.username,

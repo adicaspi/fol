@@ -28,7 +28,9 @@ export class FeedService {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
-  filteringDTO = new FilteringDTO();
+  timelinefeedFilteringDTO = new FilteringDTO();
+  userfeedFilteringDTO = new FilteringDTO();
+  explorefeedFilteringDTO = new FilteringDTO();
 
   constructor(private http: HttpClient) { }
 
@@ -37,15 +39,15 @@ export class FeedService {
     offset: number,
     userId: number
   ): Observable<Array<TimelinePost>> {
-    console.log("in timeline feed", this.filteringDTO);
+    console.log("in timeline feed", this.timelinefeedFilteringDTO);
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.filteringDTO, { headers: httpOptions.headers }
+      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.timelinefeedFilteringDTO, { headers: httpOptions.headers }
     );
   }
 
   getExploreFeed(userId: number): Observable<Array<TimelinePost>> {
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/explore-feed', { headers: httpOptions.headers }
+      this.globalFeedURL + userId + '/explore-feed', this.explorefeedFilteringDTO, { headers: httpOptions.headers }
     );
 
   }
@@ -53,10 +55,7 @@ export class FeedService {
   getUserFeed(userId: number, offset: number) {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed', { headers: httpOptions.headers },
-      {
-        params: params
-      }
+      this.globalFeedURL + userId + '/user-feed?offset=' + offset, this.userfeedFilteringDTO, { headers: httpOptions.headers },
     );
   }
 

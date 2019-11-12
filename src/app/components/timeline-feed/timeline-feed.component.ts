@@ -53,7 +53,7 @@ export class TimelineFeedComponent implements OnInit {
 
     this.id = this.userService.getCurrentUser();
     //this.id = 655;
-    this.generateTimelineFeed(0, this.id);
+    //this.generateTimelineFeed(0, this.id);
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
@@ -99,6 +99,7 @@ export class TimelineFeedComponent implements OnInit {
       .subscribe(this.processData);
   }
   fetchImages() {
+    console.log("in fetch");
     this.generateTimelineFeed(this.offset, this.id);
   }
 

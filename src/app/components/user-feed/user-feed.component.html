@@ -1,4 +1,4 @@
-<div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
+<div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
   <div id="main-body">
     <div class="center">
       <div class="card masonry-item" *ngFor="let post of postsToShow">

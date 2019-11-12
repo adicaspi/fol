@@ -66,6 +66,7 @@ export class UserFeedComponent implements OnInit {
       .subscribe(params => {
         this.currId = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
         this.generateUserFeed(0, this.currId);
+        console.log("in query params");
       });
     this.prevId = this.currId; //Updateing prevID in the first instantiating of the component
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
@@ -82,6 +83,8 @@ export class UserFeedComponent implements OnInit {
       () => this.finished = true
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-userfeed') {
+        this.postsToShow = [];
+        console.log("in feed subscription");
         this.generateUserFeed(0, this.currId);
       }
     });
@@ -107,7 +110,6 @@ export class UserFeedComponent implements OnInit {
     });
   };
   generateUserFeed(offset: number, userId: number) {
-
     this.feedService
       .getUserFeed(userId, offset)
       .pipe(takeUntil(this.onDestroy))
@@ -115,6 +117,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   fetchImages() {
+    console.log("in fetch");
     this.generateUserFeed(this.offset, this.currId);
   }
 

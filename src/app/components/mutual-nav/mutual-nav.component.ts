@@ -10,7 +10,6 @@ import { FeedService } from '../../services/feed.service';
 import { ErrorsService } from '../../services/errors.service';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
-
 @Component({
   selector: 'app-mutual-nav',
   templateUrl: './mutual-nav.component.html',
@@ -32,18 +31,17 @@ export class MutualNavComponent implements OnInit {
   categroyRadioButton: MatRadioButton = null;
   allCategroiesRadioButton: MatRadioButton = null;
   showProduct: boolean = false;
-  //mainList = {};
   filteringDTO = new FilteringDTO();
   menuChanged: boolean = false;
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
   categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
-    { id: 1, name: 'Tops', checked: false },
-    { id: 2, name: 'Jackets & Coats', checked: false },
-    { id: 3, name: 'Dresses & Skirts', checked: false },
-    { id: 4, name: 'Pants', checked: false },
-    { id: 5, name: 'Shorts', checked: false },
-    { id: 6, name: 'Lingerie', checked: false }
+    { id: 1, name: 'Tops', checked: false, servername: 'Tops' },
+    { id: 2, name: 'Jackets & Coats', checked: false, servername: 'JacketsOrCoats' },
+    { id: 3, name: 'Dresses & Skirts', checked: false, servername: 'DressesOrSkirts' },
+    { id: 4, name: 'Pants', checked: false, servername: 'Pants' },
+    { id: 5, name: 'Shorts', checked: false, servername: 'Shorts' },
+    { id: 6, name: 'Lingerie', checked: false, servername: 'Lingerie' }
   ];
   shoes = [
     { id: 1, name: 'Heels' },
@@ -65,6 +63,11 @@ export class MutualNavComponent implements OnInit {
       Bags: [''],
       Accesories: ['']
     });
+    this.initFilteringDTO();
+
+  }
+
+  initFilteringDTO() {
     this.filteringDTO.category = "";
     this.filteringDTO.productTypes = [];
     this.filteringDTO.designers = [];
@@ -72,14 +75,12 @@ export class MutualNavComponent implements OnInit {
     this.filteringDTO.minPrice = 0;
     this.filteringDTO.maxPrice = this.maxValue;
   }
-
-  menuOpened() {
-
-  }
   menuClosed() {
     if (this.menuChanged) {
+      console.log("in meun close");
       this.updateFeedFilteringDTO();
       this.menuChanged = false;
+
     }
   }
 
@@ -94,9 +95,7 @@ export class MutualNavComponent implements OnInit {
   }
 
   onChange(mrChange: MatRadioChange) {
-    this.menuChanged = true;
     this.filteringDTO.category = mrChange.value;
-
     if (mrChange.source.id.toString() != '1') {
       this.showProduct = true;
       switch (mrChange.value) {
@@ -130,17 +129,10 @@ export class MutualNavComponent implements OnInit {
     switch (key) {
       case "products":
         if (checked) {
-          if (elem.name == 'Jackets & Coats') {
-            this.filteringDTO.productTypes.push('JacketsOrCoats');
-          }
-          if (elem.name == 'Dresses & Skirts')
-            this.filteringDTO.productTypes.push('DressesOrSkirts');
-          else {
-            this.filteringDTO.productTypes.push(elem.name);
-          }
+          this.filteringDTO.productTypes.push(elem.servername);
         }
         else {
-          const index = this.filteringDTO.productTypes.indexOf(elem.name, 0);
+          const index = this.filteringDTO.productTypes.indexOf(elem.servername, 0);
           if (index > -1) {
             this.filteringDTO.productTypes.splice(index, 1);
           }
@@ -172,7 +164,7 @@ export class MutualNavComponent implements OnInit {
   }
 
   selectedProduct() {
-    this.updateFeedFilteringDTO();
+    //this.updateFeedFilteringDTO();
     // var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
     // for (let i = 0; i < elements.length; i++) {
     //   if (elements[i].checked) {
@@ -183,34 +175,36 @@ export class MutualNavComponent implements OnInit {
   }
 
   selectedStore() {
-    this.updateFeedFilteringDTO();
   }
 
   selectedDesigner() {
-    this.updateFeedFilteringDTO();
   }
 
   selectedPrice() {
     this.filteringDTO.minPrice = this.priceRange.lower;
     this.filteringDTO.maxPrice = this.priceRange.upper;
-    this.updateFeedFilteringDTO();
   }
 
-  clearSelection(arrayToIterrate) {
+  clearSelection(arrayToIterrate, filteringDTOarray) {
     arrayToIterrate.forEach(elem => {
       elem.checked = false;
     })
+    this.filteringDTO[filteringDTOarray] = [];
+    this.menuChanged = true;
+    this.menuClosed();
   }
 
   updateFeedFilteringDTO() {
-    this.feedService.filteringDTO = this.filteringDTO;
     if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
+      this.feedService.timelinefeedFilteringDTO = this.filteringDTO;
       this.errorsService.sendMessage('update-timelinefeed');
     }
     if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
+      this.feedService.userfeedFilteringDTO = this.filteringDTO;
       this.errorsService.sendMessage('update-userfeed');
     }
     if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
+      this.feedService.explorefeedFilteringDTO = this.filteringDTO;
       this.errorsService.sendMessage('update-exlporefeed');
     }
   }

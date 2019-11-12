@@ -1,6 +1,6 @@
 <mat-toolbar>
 
-  <button mat-button [matMenuTriggerFor]="category" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Category</button>
+  <button mat-button [matMenuTriggerFor]="category">Category</button>
   <mat-menu #category="matMenu" xPosition="after">
     <mat-radio-group class="category-radio-group" (change)="onChange($event)" aria-label="Select an option">
       <mat-radio-button *ngFor="let category of categories" [value]="category.name" [id]="category.id" [checked]="category.checked">
@@ -19,7 +19,7 @@
 
     <div class="submit">
       <button (click)="selectedProduct()">apply</button>
-      <button (click)="clearSelection(productsToShow)">clear</button>
+      <button (click)="clearSelection(productsToShow,'productTypes')">clear</button>
     </div>
   </mat-menu>
 
@@ -30,7 +30,7 @@
     </mat-checkbox>
     <div class="submit">
       <button (click)="selectedDesigner()">apply</button>
-      <button (click)="clearSelection(designers)">clear</button>
+      <button (click)="clearSelection(designers,'designers')">clear</button>
     </div>
   </mat-menu>
 
