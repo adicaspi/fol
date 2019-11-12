@@ -10,7 +10,7 @@ import { ErrorsService } from '../../services/errors.service';
 import * as $ from 'jquery';
 import { GlobalVariable } from '../../../global';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
-import { Routes, Router } from '../../../../node_modules/@angular/router';
+import { Routes, Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '../../../../node_modules/@angular/material';
 
@@ -62,6 +62,7 @@ export class ShoppingNavComponent implements OnInit {
     private feedService: FeedService,
     private errorsService: ErrorsService,
     private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -150,8 +151,18 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   updateFeedFilteringDTO() {
-    this.feedService.filteringDTO = this.filteringDTO;
-    this.errorsService.sendMessage('update-feed');
+    if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
+      this.feedService.timelinefeedFilteringDTO = this.filteringDTO;
+      this.errorsService.sendMessage('update-timelinefeed');
+    }
+    if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
+      this.feedService.userfeedFilteringDTO = this.filteringDTO;
+      this.errorsService.sendMessage('update-userfeed');
+    }
+    if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
+      this.feedService.explorefeedFilteringDTO = this.filteringDTO;
+      this.errorsService.sendMessage('update-exlporefeed');
+    }
   }
 
   setSearchInput(value: string) {
