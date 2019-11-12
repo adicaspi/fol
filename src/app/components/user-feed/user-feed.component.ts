@@ -57,7 +57,7 @@ export class UserFeedComponent implements OnInit {
     private postService: PostService,
     private errorsService: ErrorsService
 
-  ) { }
+  ) { this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
 
   ngOnInit() {
 
@@ -65,8 +65,7 @@ export class UserFeedComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         this.currId = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
-        this.generateUserFeed(0, this.currId);
-        console.log("in query params");
+        this.generateUserFeed(this.offset, this.currId);
       });
     this.prevId = this.currId; //Updateing prevID in the first instantiating of the component
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
@@ -84,20 +83,20 @@ export class UserFeedComponent implements OnInit {
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-userfeed') {
         this.postsToShow = [];
-        console.log("in feed subscription");
-        this.generateUserFeed(0, this.currId);
+        this.offset = 0;
+        this.generateUserFeed(this.offset, this.currId);
       }
     });
 
   }
 
   private processData = posts => {
-    if (this.prevId != this.currId) { //loading the feed for a new user, clean the array
-      this.posts = [];
-      this.postsToShow = [];
-      this.prevId = this.currId;
-    }
+
+
     this.posts = this.posts.concat(posts);
+    if (this.offset == posts['newOffset']) {
+      return;
+    }
     this.offset = posts['newOffset'];
     posts['feedPosts'].forEach(post => {
       let baseAPI = this.baseApiUrl + '/image?s3key=';
@@ -117,7 +116,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   fetchImages() {
-    console.log("in fetch");
+    console.log("in fetch", (this.offset));
     this.generateUserFeed(this.offset, this.currId);
   }
 

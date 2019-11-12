@@ -73,13 +73,17 @@ export class TimelineFeedComponent implements OnInit {
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-timelinefeed') {
         this.postsToShow = [];
-        this.generateTimelineFeed(0, this.id);
+        this.offset = 0;
+        this.generateTimelineFeed(this.offset, this.id);
       }
     });
 
   }
 
   private processData = posts => {
+    if (this.offset == posts['newOffset']) {
+      return;
+    }
     this.offset = posts['newOffset'];
     posts['feedPosts'].forEach(post => {
       let baseAPI = this.baseApiUrl + '/image?s3key=';
