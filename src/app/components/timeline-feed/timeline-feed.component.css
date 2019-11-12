@@ -238,7 +238,7 @@ span.price {
 
 @media  (max-width: 600px)  {
   .infinite-scroll{
-    margin-top:70px;
+    margin-top:50px;
   }
   
   #main-body {
@@ -247,11 +247,6 @@ span.price {
      overflow: visible;
     /* height: 100vh;  */
   }
-
-  /* .center {
-    width:375px;
-    margin:auto;
-  } */
 
   .center {
     width:375px;

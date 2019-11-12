@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,7 +18,10 @@ import { MatSidenav } from '../../../../node_modules/@angular/material';
 @Component({
   selector: 'app-shopping-nav',
   templateUrl: './shopping-nav.component.html',
-  styleUrls: ['./shopping-nav.component.css']
+  styleUrls: ['./shopping-nav.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class ShoppingNavComponent implements OnInit {
   @ViewChild('drawer', { static: false }) public drawer: MatSidenav;
@@ -55,6 +58,7 @@ export class ShoppingNavComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
+  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
   constructor(
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
@@ -121,9 +125,12 @@ export class ShoppingNavComponent implements OnInit {
       this.filteringDTO.category = item;
       if (item == 'Clothing') {
         this.currMenu = 'prd-clothings';
+        this.mainMenu = true;
+        this.updateFeedFilteringDTO();
+        this.toggle();
       }
     }
-    this.updateFeedFilteringDTO();
+
   }
 
   initMenu() {
@@ -135,7 +142,7 @@ export class ShoppingNavComponent implements OnInit {
   filterByProduct(item) {
     this.filteringDTO.productTypes.push(item);
     this.updateFeedFilteringDTO();
-    this.initMenu();
+    //this.initMenu();
   }
 
   filterByDesigner(item) {
@@ -220,7 +227,7 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   initFilteringDTO() {
-    this.filteringDTO.category = "";
+    this.filteringDTO.category = null;
     this.filteringDTO.productTypes = [];
     this.filteringDTO.designers = [];
     this.filteringDTO.stores = [];

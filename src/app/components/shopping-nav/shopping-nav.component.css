@@ -6,6 +6,7 @@ mat-sidenav-content {
   height: 100%;
 } */
 
+html, body {height:100%;overflow:auto}
 
 .hamburger-icon{
   color:white;
@@ -57,12 +58,13 @@ input#navBarSearchForm {
 }
 
 .mat-drawer-inner-container {
-  background-color: blue;
+  background-color: white;
+
 }
 
 .header-shopping-nav {
-  position: fixed;
-  z-index: 1; 
+  /* position: fixed;
+  z-index: 1;  */
   background-color: black;
   /* top: 0;
   /* width: 100%;  */
@@ -108,6 +110,7 @@ button.nav-item {
   text-align: left;
   outline: 0;
   font-size: 13px;
+  color:black;
 }
 
 button.back-button {
@@ -144,4 +147,35 @@ img.search-img{
 span.search-user{
   font-size: 10px;
   margin-left: 5px;
+}
+
+
+.cdk-virtual-scroll-data-source-example .example-viewport {
+  height: 50px;
+  background-color: white;
+  width: 380px;
+}
+
+.cdk-virtual-scroll-data-source-example .example-viewport .cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.cdk-virtual-scroll-data-source-example .example-item {
+  width: 80px;
+  /* height: 100%; */
+  /* writing-mode: vertical-lr; */
+}
+
+.mat-wrapper{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1000;
+  transform: translateZ(0);
+}
+
+div.filler{
+  height: 50px;
 }

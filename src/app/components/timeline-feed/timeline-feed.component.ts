@@ -53,7 +53,7 @@ export class TimelineFeedComponent implements OnInit {
 
     this.id = this.userService.getCurrentUser();
     //this.id = 655;
-    //this.generateTimelineFeed(0, this.id);
+
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
@@ -65,6 +65,7 @@ export class TimelineFeedComponent implements OnInit {
             this.masonryOptions.horizontalOrder = false;
             this.desktop = false;
             this.masonryOptions.gutter = 100;
+            this.generateTimelineFeed(0, this.id);
           }
         }),
       error => this.anyErrors = true,
