@@ -77,10 +77,8 @@ export class MutualNavComponent implements OnInit {
   }
   menuClosed() {
     if (this.menuChanged) {
-      console.log("in meun close");
       this.updateFeedFilteringDTO();
       this.menuChanged = false;
-
     }
   }
 
