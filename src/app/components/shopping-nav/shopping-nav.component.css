@@ -163,9 +163,14 @@ span.search-user{
 }
 
 .cdk-virtual-scroll-data-source-example .example-item {
-  width: 80px;
+  width: 130px;
+  font-family: FontAwesome, 'Maven Pro', sans-serif;
   /* height: 100%; */
   /* writing-mode: vertical-lr; */
+}
+
+div.example-item{
+  line-height: 50px;
 }
 
 .mat-wrapper{

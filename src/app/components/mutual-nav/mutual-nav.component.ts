@@ -82,6 +82,10 @@ export class MutualNavComponent implements OnInit {
     }
   }
 
+  menuOpened() {
+
+  }
+
   categoryValue() {
     let val = this.categoryForm.get('category');
   }
