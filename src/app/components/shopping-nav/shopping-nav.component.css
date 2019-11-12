@@ -154,6 +154,7 @@ span.search-user{
   height: 50px;
   background-color: white;
   width: 380px;
+  border-bottom: 1px solid black;
 }
 
 .cdk-virtual-scroll-data-source-example .example-viewport .cdk-virtual-scroll-content-wrapper {
