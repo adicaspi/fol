@@ -29,9 +29,14 @@
             />
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of options" [value]="option.userName">
-                <div class="search-item" (click)="searchUser(option)">
-                  <img class="search-img" [attr.src]="option['profileImgSrc']" />
-                  <span class="search-user">{{ option['userName'] }}</span>
+                <div class="search-result" (click)="searchUser(option)">
+                  <div class="search-res-user-img">
+                    <img class="search-img" [attr.src]="option['profileImgSrc']" />
+                  </div>
+                  <div class="search-res-user-details">
+                    <span class="search-username">{{ option['userName'] }}</span>
+                    <span class="search-fullname">{{ option['fullName'] }}</span>
+                  </div>
                 </div>
               </mat-option>
             </mat-autocomplete>
