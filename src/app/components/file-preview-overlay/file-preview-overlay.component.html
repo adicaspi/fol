@@ -26,20 +26,30 @@
           <div class="footer">
             <div class="upper-footer">
               <a href="{{ userPost?.link }}" target="_blank">
-                <button type="button" class="shop_btn">
+                <button mat-button class="shop_btn">
                   Shop
                 </button>
               </a>
-
-              <button mat-button>
-                <i class="material-icons">more_horiz</i>
-              </button>
-              <span class="price">{{postInfo.price}}</span>
+              <div class="views">
+                <span class="num-views">
+                  {{postInfo.numViews}}
+                  <i class="far fa-eye"></i>
+                </span>
+                <!-- <div>
+                  <i class="far fa-eye"></i>
+                </div> -->
+              </div>
             </div>
+            <!-- <button mat-button> -->
+            <!-- <i class="material-icons">more_horiz</i> -->
+            <!-- </button> -->
+            <div class="price">{{postInfo.price}}</div>
+
           </div>
         </div>
 
         <div class="lower-part">
+
           <div class="thumbnails">
             <img *ngFor="let image of thumbnails" class="thumbnail" [attr.src]="image" (click)="setImage(image)" />
           </div>

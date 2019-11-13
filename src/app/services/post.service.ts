@@ -42,7 +42,15 @@ export class PostService {
     return this.http.get<any>(postInfoURL, {
       params: params
     });
+  }
 
+  incrementPostViews(masterUserId: number, postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.post<any>(
+      this.socialUrl + '/' + masterUserId + '/inc-post-view', { headers: httpOptions.headers }, {
+        params: params
+      }
+    ).subscribe(res => { });;
   }
 
   createImageFromBlob(

@@ -59,6 +59,7 @@ export class FilePreviewOverlayComponent implements OnInit {
       });
     this.getMoreFromUser();
     this.getPostInfo();
+    this.incNumViews();
   }
 
   getPostInfo() {
@@ -95,6 +96,10 @@ export class FilePreviewOverlayComponent implements OnInit {
           this.postsToShow.push(postObject);
         });
       });
+  }
+
+  incNumViews() {
+    this.postService.incrementPostViews(this.userPost['post']['userId'], this.userPost['post']['postId']);
   }
 
   setImage(image) {
