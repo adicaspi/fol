@@ -167,15 +167,43 @@ img.icon {
 }
 
 img.search-img{
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+}
+
+.search-result{
+  display: flex;
+}
+
+.search-res-user-img{
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.search-res-user-details{
+  display: flex;
+  flex-direction: column;
+  line-height: 15px;
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+/* .res-first-row{
+  line-height: 20px;
+}  
+
+.res-second-row{
+  line-height: 20px;
+  font-size: 10px;
+  margin-left: 25px;
 }
 
 span.search-user{
   font-size: 10px;
   margin-left: 5px;
-}
+} */
 
 }
 
@@ -347,15 +375,29 @@ span.search-user{
   }
 
   img.search-img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
   }
 
-  span.search-user{
+  .search-result{
+    display: flex;
+  }
+  
+  .search-res-user-img{
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-res-user-details{
+    display: flex;
+    flex-direction: column;
+    line-height: 15px;
     font-size: 10px;
     margin-left: 5px;
   }
+  
   
   }
 

@@ -1,3 +1,4 @@
+@media (min-width: 600px)  {
 button.mat-button{
   float: right;
   font-size: 20px;
@@ -34,6 +35,16 @@ button.btn.btn-default.register {
   margin: 0 auto;
   margin-top: 15px;
   background-color: black;
+  color:white;
+  cursor: pointer;
+}
+
+button.btn.btn-default.register.unvalid {
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+  background-color: black;
+  color:white;
 }
 
 p.forgot-password {
@@ -64,8 +75,74 @@ div.invalid-feedback{
   width: 50%;
   margin: 0 auto;
 }
-@media (min-width: 360px) {
-  button.btn {
-    background-color: #32cd32;
+}
+@media (max-width: 600px) {
+  button.mat-button{
+    float: right;
+    font-size: 20px;
+  }
+  
+  .wrapper {
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  a {
+    color: black;
+  }
+  
+  h2 {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .form-control {
+    margin: 0 auto;
+    width: 50%;
+  }
+  
+  .form-group {
+    margin: 0;
+  }
+  
+  button.btn.btn-default.register {
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    background-color: black;
+    color:white;
+    cursor: pointer;
+  }
+  
+  p.forgot-password {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 25px;
+    margin-top: 0;
+    font-size: 12px;
+  }
+  
+  .login-method {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  button.btn.facebook {
+    background-color: #6d84b4;
+  }
+  
+  div.invalid-feedback{
+    width: 50%;
+    margin: 0 auto;
   }
 }

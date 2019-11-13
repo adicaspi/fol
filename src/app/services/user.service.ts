@@ -126,9 +126,9 @@ export class UserService {
   }
 
   login(userForm: any): Observable<any> {
-    return this.http.get<any>(this.globalRegisterURL + 'signin', {
-      params: { username: userForm.email, password: userForm.password }
-    });
+    let reqbody = { username: userForm.email, password: userForm.password };
+    return this.http.post<any>(this.globalRegisterURL + 'signin', reqbody, { headers: httpOptions.headers }
+    );
   }
 
   logout(): Observable<any> {

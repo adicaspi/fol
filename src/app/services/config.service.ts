@@ -23,6 +23,7 @@ export class ConfigService {
     private userService: UserService,
     private http: HttpClient,
     private injector: Injector,
+
     @Inject('windowObject') private window: Window
 
   ) {
@@ -67,7 +68,5 @@ export class ConfigService {
       console.log('session storage not initiliazed yet');
     }
   }
-
-
 }
 

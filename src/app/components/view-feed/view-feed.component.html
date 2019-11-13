@@ -1,20 +1,13 @@
 <body>
-  <div *ngIf="userId">
-    <div *ngIf="desktop; else mobileView" class="display">
-      <app-navbar></app-navbar>
-      <app-timeline-feed></app-timeline-feed>
-    </div>
-    <ng-template #mobileView class="mobile">
-      <app-shopping-nav>
-        <!-- <div *ngIf=" searchedTouched | async;else mobileTimelineFeed">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
-        </div> -->
-        <!-- <ng-template #mobileTimelineFeed> -->
-        <app-timeline-feed></app-timeline-feed>
-        <!-- </ng-template> -->
-      </app-shopping-nav>
-    </ng-template>
+  <!-- <div *ngIf="userId"> -->
+  <div *ngIf="desktop; else mobileView" class="display">
+    <app-navbar></app-navbar>
+    <app-timeline-feed></app-timeline-feed>
   </div>
+  <ng-template #mobileView class="mobile">
+    <app-shopping-nav>
+      <app-timeline-feed></app-timeline-feed>
+    </app-shopping-nav>
+  </ng-template>
+  <!-- </div> -->
 </body>

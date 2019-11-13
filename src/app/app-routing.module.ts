@@ -6,7 +6,6 @@ import { ViewFeedComponent } from './components/view-feed/view-feed.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { LandingNavComponent } from './components/landing-nav/landing-nav.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ExploreFeedComponent } from './components/explore-feed/explore-feed.component';

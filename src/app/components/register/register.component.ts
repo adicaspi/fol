@@ -135,6 +135,7 @@ export class RegisterComponent implements OnInit {
           this.userService.updateUser(data.userId);
           this.configSerivce.setSessionStorage(data.userId.toString());
           this.router.navigate(['/feed/' + data.userId]);
+          this.dialogRef.close();
           this.ngOnDestroy();
         },
         error => {

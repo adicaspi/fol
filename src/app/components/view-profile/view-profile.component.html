@@ -6,15 +6,8 @@
   </div>
   <ng-template #mobileView class="mobile">
     <app-shopping-nav>
-      <!-- <div *ngIf="searchedTouched | async;else userMobileFeed">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </div> -->
-      <!-- <ng-template #userMobileFeed> -->
       <app-user-profile-info></app-user-profile-info>
       <app-user-feed></app-user-feed>
-      <!-- </ng-template> -->
     </app-shopping-nav>
   </ng-template>
 </body>

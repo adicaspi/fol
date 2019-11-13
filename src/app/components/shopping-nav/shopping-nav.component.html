@@ -1,30 +1,8 @@
-<!-- <mat-toolbar class="header-shopping-nav">
-  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
-    <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
-  </button>
-  <div class="logo-drawer">
-    <img src="../../../assets/fw_logo_white.png" />
-
-    <form [formGroup]="searchForm" class="form-inline">
-      <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
-        [matAutocomplete]="auto" />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
-          <div class="search-item" (click)="searchUser(option)">
-            <img class="search-img" [attr.src]="option['profileImgSrc']" />
-            <span class="search-user">{{ option['userName'] }}</span>
-          </div>
-        </mat-option>
-      </mat-autocomplete>
-    </form>
-  </div>
-</mat-toolbar> -->
-
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push" [opened]="false" (opened)="onOpen()" (closed)="onClose()">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push" [opened]="opened" (opened)="onOpen()" (closed)="onClose()">
     <mat-toolbar class="sidenav-menu-content">
       <span>
-        <button *ngIf="showBack" class="back-button" (click)="getValues('back')">
+        <button *ngIf="showBack" class="back-button" (click)="goBack()">
           BACK
         </button>
       </span>
@@ -33,40 +11,99 @@
         <mat-icon class="arrow-icon" (click)="drawer.toggle()">{{arrow_back}}</mat-icon>
       </span>
     </mat-toolbar>
-    <mat-nav-list *ngFor="let key of mainList">
+    <mat-nav-list *ngIf="mainMenu ;else displaySecondaryMenu">
       <mat-list-item>
-        <button class="nav-item" (click)="getValues(key)">
-          {{ key }}
-        </button>
+        <button class="nav-item" (click)="currentMenu('categories')">Categories</button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button class="nav-item" (click)="currentMenu('designers')">Designers</button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button class="nav-item" (click)="currentMenu('stores')">Stores</button>
       </mat-list-item>
     </mat-nav-list>
+
+    <ng-template #displaySecondaryMenu>
+      <mat-nav-list *ngIf="currMenu == 'cat'">
+        <mat-list-item *ngFor="let item of categories">
+          <button class="nav-item" (click)="filterByCategory(item.name)">
+            {{ item.name }}
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+
+      <!-- <mat-nav-list *ngIf="currMenu == 'prd-clothings'">
+        <mat-list-item *ngFor="let item of clothings">
+          <button class="nav-item" (click)="filterByProduct(item.servername)">
+            {{ item.name }}
+          </button>
+        </mat-list-item>
+      </mat-nav-list> -->
+
+      <mat-nav-list *ngIf="currMenu == 'des'">
+        <mat-list-item *ngFor="let item of designers">
+          <button class="nav-item" (click)="filterByDesigner(item.name)">
+            {{ item.name }}
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="currMenu == 'str'">
+        <mat-list-item *ngFor="let item of stores">
+          <button class="nav-item" (click)="filterByStore(item.id)">
+            {{ item.name }}
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+
+    </ng-template>
   </mat-sidenav>
   <!-- EO: Side nav-->
 
   <!-- Side nav content-->
   <mat-sidenav-content>
-    <mat-toolbar class="header-shopping-nav">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
-      </button>
-      <div class="logo-drawer">
-        <img src="../../../assets/fw_logo_white.png" />
+    <div class="mat-wrapper">
+      <mat-toolbar class="header-shopping-nav">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
+        </button>
+        <div class="logo-drawer">
+          <img src="../../../assets/fw_logo_white.png" />
 
-        <form [formGroup]="searchForm" class="form-inline">
-          <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
-            [matAutocomplete]="auto" />
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
-              <div class="search-item" (click)="searchUser(option)">
-                <img class="search-img" [attr.src]="option['profileImgSrc']" />
-                <span class="search-user">{{ option['userName'] }}</span>
-              </div>
-            </mat-option>
-          </mat-autocomplete>
-        </form>
+          <form [formGroup]="searchForm" class="form-inline">
+            <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
+              [matAutocomplete]="auto" />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
+                <div class="search-item" (click)="searchUser(option)">
+                  <img class="search-img" [attr.src]="option['profileImgSrc']" />
+                  <span class="search-user">{{ option['userName'] }}</span>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+          </form>
+        </div>
+      </mat-toolbar>
+
+
+      <div class="cdk-virtual-scroll-data-source-example" *ngIf="currMenu == 'prd-clothings'">
+        <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="example-viewport">
+          <div *cdkVirtualFor="let item of clothings" class="example-item">
+            <a (click)="filterByProduct(item.servername)">{{item.name}}
+            </a>
+          </div>
+        </cdk-virtual-scroll-viewport>
       </div>
-    </mat-toolbar>
+    </div>
+
+
     <ng-content></ng-content>
-    <app-bottom-navbar></app-bottom-navbar>
+    <div class="filler"></div>
+    <div class="bottom-navbar">
+      <app-bottom-navbar></app-bottom-navbar>
+    </div>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

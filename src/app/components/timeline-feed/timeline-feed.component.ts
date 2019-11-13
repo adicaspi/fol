@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { DialogService } from '../../services/dialog.service';
@@ -24,6 +24,7 @@ export class TimelineFeedComponent implements OnInit {
   desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   error: string;
+  private feedSubsription: Subscription
 
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
@@ -44,14 +45,15 @@ export class TimelineFeedComponent implements OnInit {
     private dialogService: DialogService,
     private configService: ConfigService,
     private router: Router,
+    private errorsService: ErrorsService
 
   ) { }
 
   ngOnInit() {
-
     this.id = this.userService.getCurrentUser();
+    this.generateTimelineFeed(this.offset, this.id);
     //this.id = 655;
-    this.generateTimelineFeed(0, this.id);
+
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
@@ -63,14 +65,26 @@ export class TimelineFeedComponent implements OnInit {
             this.masonryOptions.horizontalOrder = false;
             this.desktop = false;
             this.masonryOptions.gutter = 100;
+            this.generateTimelineFeed(0, this.id);
           }
         }),
       error => this.anyErrors = true,
       () => this.finished = true
 
+    this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
+      if (msg.error == 'update-timelinefeed') {
+        this.postsToShow = [];
+        this.offset = 0;
+        this.generateTimelineFeed(this.offset, this.id);
+      }
+    });
+
   }
 
   private processData = posts => {
+    if (this.offset == posts['newOffset']) {
+      return;
+    }
     this.offset = posts['newOffset'];
     posts['feedPosts'].forEach(post => {
       let baseAPI = this.baseApiUrl + '/image?s3key=';
@@ -90,6 +104,7 @@ export class TimelineFeedComponent implements OnInit {
       .subscribe(this.processData);
   }
   fetchImages() {
+    console.log("in fetch");
     this.generateTimelineFeed(this.offset, this.id);
   }
 

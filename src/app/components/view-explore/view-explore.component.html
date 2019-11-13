@@ -3,6 +3,7 @@
 <body>
   <div *ngIf="desktop; else mobileView" class="display">
     <app-navbar></app-navbar>
+<<<<<<< HEAD
     <!-- <div *ngIf="searchedTouched | async;else exploreFeed">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
         {{option}}
@@ -11,6 +12,9 @@
     <!-- <ng-template #exploreFeed> -->
     <app-explore-feed></app-explore-feed>
     <!-- </ng-template> -->
+=======
+    <app-explore-feed></app-explore-feed>
+>>>>>>> responsive_design
   </div>
   <ng-template #mobileView class="mobile">
     <app-shopping-nav>

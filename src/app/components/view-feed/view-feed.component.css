@@ -3,7 +3,7 @@
 }
 html,
 body {
-  background-color: white;
+  overflow: auto;
   height: 100%;
 }
 
@@ -20,11 +20,3 @@ body {
 }
 }
 
-/* @media (max-width: 600px) {
-  .hidden {
-    display: initial;
-  }
-  .display {
-    display: none;
-  }
-} */

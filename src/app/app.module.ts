@@ -57,6 +57,7 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
 import { IgxSliderModule } from 'igniteui-angular';
 import { FollowingListMobileComponent } from './components/following-list-mobile/following-list-mobile.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 //I keep the new line
 @NgModule({
@@ -93,7 +94,8 @@ import { FollowingListMobileComponent } from './components/following-list-mobile
     ProductPageMobileComponent,
     FilePreviewOverlayComponent,
     BottomNavbarComponent,
-    FollowingListMobileComponent
+    FollowingListMobileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -118,6 +120,7 @@ import { FollowingListMobileComponent } from './components/following-list-mobile
     Ng5SliderModule,
     SlideshowModule,
     IgxSliderModule,
+    ScrollingModule,
     DeviceDetectorModule.forRoot()
   ],
 
@@ -129,7 +132,11 @@ import { FollowingListMobileComponent } from './components/following-list-mobile
     RegisterComponent,
     LoginComponent,
     FilePreviewOverlayComponent,
-    MutualNavComponent
+    MutualNavComponent,
+    ShoppingNavComponent,
+    ViewFeedComponent,
+    ViewProfileComponent,
+    TimelineFeedComponent
 
   ],
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,15 +10,21 @@ import { ErrorsService } from '../../services/errors.service';
 import * as $ from 'jquery';
 import { GlobalVariable } from '../../../global';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
-import { Routes, Router } from '../../../../node_modules/@angular/router';
+import { Routes, Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { FilteringDTO } from '../../models/FilteringDTO';
+import { MatSidenav } from '../../../../node_modules/@angular/material';
 
 
 @Component({
   selector: 'app-shopping-nav',
   templateUrl: './shopping-nav.component.html',
-  styleUrls: ['./shopping-nav.component.css']
+  styleUrls: ['./shopping-nav.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class ShoppingNavComponent implements OnInit {
+  @ViewChild('drawer', { static: false }) public drawer: MatSidenav;
   showBack: boolean = false;
   searchForm: FormGroup;
   firstChar: boolean = true;
@@ -26,59 +32,54 @@ export class ShoppingNavComponent implements OnInit {
   options = [];
   filteredOptions: Observable<string[]>;
   sideNavOpend: boolean = false;
-  mainList = ['CATEGORIES', 'DESIGNERS', 'STORES', 'PRICE'];
+  mainList = ['Categories', 'Designers', 'Stores', 'Price'];
   originalList = {};
   displayList = {};
-  categories = ['CLOTHINGS', 'SHOES', 'BAGS', 'ACCESSORIES'];
+  categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
   clothings = [
-    'ALL CLOTHING',
-    'TOPS',
-    'JACKETS & COATS',
-    'DRESSES & SKIRTS',
-    'PANTS',
-    'SWIMWEAR'
+    { id: 1, name: 'All Clothings', servername: 'Default' },
+    { id: 2, name: 'Tops', servername: 'Tops' },
+    { id: 3, name: 'Pants', servername: 'Pants' },
+    { id: 4, name: 'Jackets & Coats', servername: 'JacketsOrCoats' },
+    { id: 5, name: 'Shorts', servername: 'Shorts' },
+    { id: 6, name: 'Lingerie', servername: 'Lingerie' },
+    { id: 7, name: 'Dresses & Skirts', servername: 'DressesOrSkirts' }
   ];
-  designers = ['ALL DESIGNERS', 'GUCCI', 'PRADA', 'D&G'];
-  stores = [
-    'ALL STORES',
-    'ZARA',
-    'FAR FETCH',
-    'SHOPBOP',
-    'ASOS',
-    'TerminalX',
-    'ADIKA'
-  ];
+  designers = [{ id: 0, name: 'All Designers' }, { id: 1, name: 'Gucci' }, { id: 2, name: 'Prada' }, { id: 3, name: 'D&G', }, { id: 4, name: 'Isabel Marant' }, { id: 5, name: 'Loewe' }, { id: 6, name: 'Saint Laurent' }, { id: 7, name: 'Celine' }, { id: 8, name: 'Givenchy' }, { id: 9, name: 'Fendi' }];
+  stores = [{ id: 1, name: 'All Stores' }, { id: 1, name: 'ASOS' }, { id: 2, name: 'ZARA' }, { id: 3, name: 'Farfetch' }, { id: 4, name: 'Shopbop' }, { id: 5, name: 'Shein' }, { id: 6, name: 'TerminalX' }, { id: 7, name: 'Net-A-Porter' }];
   price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
+  mainMenu: boolean = true;
+  secondaryMenu = {};
   icon = 'menu';
   arrow_back = 'arrow_back_ios';
-  currKey: string;
-  prevKey: string;
   onDestroy: Subject<void> = new Subject<void>();
+<<<<<<< HEAD
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches
   )
 
   );
+=======
+  filteringDTO = new FilteringDTO();
+  opened: boolean = false;
+  currMenu: string;
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+>>>>>>> responsive_design
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
+  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
   constructor(
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private feedService: FeedService,
-    private errorService: ErrorsService,
-    private router: Router) {
-    this.originalList['CATEGORIES'] = this.categories;
-    this.originalList['CLOTHINGS'] = this.clothings;
-    this.originalList['DESIGNERS'] = this.designers;
-    this.originalList['STORES'] = this.stores;
-    this.originalList['PRICE'] = this.price;
-    this.displayList['CATEGORIES'] = this.categories;
-    this.displayList['DESIGNERS'] = this.designers;
-    this.displayList['STORES'] = this.stores;
-    this.displayList['PRICE'] = this.price;
+    private errorsService: ErrorsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
+    this.initFilteringDTO();
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
@@ -93,27 +94,97 @@ export class ShoppingNavComponent implements OnInit {
     })
   }
 
-
-  getKeys() {
-    return Object.keys(this.displayList);
+  public toggle(): void {
+    console.log("in toggle");
+    this.drawer.toggle();
   }
 
-  getValues(key) {
-    this.prevKey = this.currKey;
-    this.currKey = key;
+  currentMenu(menuItem) {
+    this.mainMenu = false;
+    this.showBack = true;
+    switch (menuItem) {
+      case 'categories':
+        this.currMenu = 'cat';
+        break;
+      case 'designers':
+        this.currMenu = 'des';
+        break;
+      case 'stores':
+        this.currMenu = 'str';
+        break;
+    }
+  }
 
-    if (key === 'back') {
-      if (this.prevKey == 'CLOTHINGS') {
-        this.mainList = Object.values(this.originalList['CATEGORIES']);
-      }
-      else {
-        this.mainList = this.getKeys();
-        this.showBack = false;
-      }
+  goBack() {
+    if (this.currMenu == 'prd-clothings') {
+      this.currMenu = 'cat';
+    }
+    else {
+      this.mainMenu = true;
+      this.currMenu = '';
+    }
+    this.initFilteringDTO();
+    this.updateFeedFilteringDTO();
+    this.toggle();
+  }
 
-    } else {
-      this.mainList = Object.values(this.originalList[key]);
-      this.showBack = true;
+  filterByCategory(item) {
+    if (item == 'All Categories') {
+      this.initFilteringDTO();
+      this.initMenu();
+      return;
+    }
+    else {
+      this.filteringDTO.category = item;
+      if (item == 'Clothing') {
+        this.currMenu = 'prd-clothings';
+        this.mainMenu = true;
+        this.updateFeedFilteringDTO();
+        this.toggle();
+      }
+    }
+
+  }
+
+  initMenu() {
+    this.toggle();
+    this.currMenu = null;
+    this.mainMenu = true;
+  }
+
+  filterByProduct(item) {
+    this.filteringDTO.productTypes = [];
+    if (item != 'Default') {
+      this.filteringDTO.productTypes.push(item);
+    }
+    this.updateFeedFilteringDTO();
+    //this.initMenu();
+  }
+
+  filterByDesigner(item) {
+    this.filteringDTO.designers.push(item);
+    this.updateFeedFilteringDTO();
+    this.initMenu();
+  }
+
+  filterByStore(id) {
+    this.filteringDTO.stores.push(id);
+    this.updateFeedFilteringDTO();
+    this.initMenu();
+  }
+
+  updateFeedFilteringDTO() {
+    if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
+      this.feedService.timelinefeedFilteringDTO = this.filteringDTO;
+      this.errorsService.sendMessage('update-timelinefeed');
+    }
+    if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
+      this.feedService.userfeedFilteringDTO = this.filteringDTO;
+      this.errorsService.sendMessage('update-userfeed');
+    }
+    if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
+      this.feedService.explorefeedFilteringDTO = this.filteringDTO;
+      this.errorsService.sendMessage('update-exlporefeed');
     }
   }
 
@@ -169,5 +240,14 @@ export class ShoppingNavComponent implements OnInit {
 
   onClose() {
     this.icon = 'menu';
+  }
+
+  initFilteringDTO() {
+    this.filteringDTO.category = null;
+    this.filteringDTO.productTypes = [];
+    this.filteringDTO.designers = [];
+    this.filteringDTO.stores = [];
+    this.filteringDTO.minPrice = 0;
+    this.filteringDTO.maxPrice = 0;
   }
 }
