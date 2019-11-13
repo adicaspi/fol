@@ -37,12 +37,13 @@ export class ShoppingNavComponent implements OnInit {
   displayList = {};
   categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
   clothings = [
-    { id: 1, name: 'Tops', servername: 'Tops' },
-    { id: 4, name: 'Pants', servername: 'Pants' },
+    { id: 1, name: 'All Clothings', servername: 'Default' },
+    { id: 2, name: 'Tops', servername: 'Tops' },
+    { id: 3, name: 'Pants', servername: 'Pants' },
+    { id: 4, name: 'Jackets & Coats', servername: 'JacketsOrCoats' },
     { id: 5, name: 'Shorts', servername: 'Shorts' },
     { id: 6, name: 'Lingerie', servername: 'Lingerie' },
-    { id: 2, name: 'Jackets & Coats', servername: 'JacketsOrCoats' },
-    { id: 3, name: 'Dresses & Skirts', servername: 'DressesOrSkirts' }
+    { id: 7, name: 'Dresses & Skirts', servername: 'DressesOrSkirts' }
   ];
   designers = [{ id: 1, name: 'Gucci' }, { id: 2, name: 'Prada' }, { id: 3, name: 'D&G', }, { id: 4, name: 'Isabel Marant' }, { id: 5, name: 'Loewe' }, { id: 6, name: 'Saint Laurent' }, { id: 7, name: 'Celine' }, { id: 8, name: 'Givenchy' }, { id: 9, name: 'Fendi' }];
   stores = [{ id: 1, name: 'ASOS' }, { id: 2, name: 'ZARA' }, { id: 3, name: 'Farfetch' }, { id: 4, name: 'Shopbop' }, { id: 5, name: 'Shein' }, { id: 6, name: 'TerminalX' }, { id: 7, name: 'Net-A-Porter' }];
@@ -140,6 +141,8 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   filterByProduct(item) {
+    console.log("im event");
+    this.filteringDTO.productTypes = [];
     this.filteringDTO.productTypes.push(item);
     this.updateFeedFilteringDTO();
     //this.initMenu();

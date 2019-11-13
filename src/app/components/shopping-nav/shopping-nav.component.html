@@ -124,14 +124,19 @@
 
       <div class="cdk-virtual-scroll-data-source-example" *ngIf="currMenu == 'prd-clothings'">
         <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="example-viewport">
-          <div *cdkVirtualFor="let item of clothings" class="example-item" (click)="filterByProduct(item.servername)">{{item.name}}</div>
+          <div *cdkVirtualFor="let item of clothings" class="example-item">
+            <a (click)="filterByProduct(item.servername)">{{item.name}}
+            </a>
+          </div>
         </cdk-virtual-scroll-viewport>
       </div>
     </div>
     <div class="filler" *ngIf="currMenu == 'prd-clothings'"></div>
 
     <ng-content></ng-content>
-    <app-bottom-navbar></app-bottom-navbar>
+    <div class="bottom-navbar">
+      <app-bottom-navbar></app-bottom-navbar>
+    </div>
 
   </mat-sidenav-content>
 </mat-sidenav-container>
