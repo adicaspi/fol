@@ -50,8 +50,8 @@ export class TimelineFeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.id = this.userService.getCurrentUser();
+    this.generateTimelineFeed(this.offset, this.id);
     //this.id = 655;
 
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
