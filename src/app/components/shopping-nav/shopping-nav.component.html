@@ -1,37 +1,3 @@
-<!-- <div class="mat-wrapper">
-  <mat-toolbar class="header-shopping-nav">
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-      <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
-    </button>
-    <div class="logo-drawer">
-      <img src="../../../assets/fw_logo_white.png" />
-
-      <form [formGroup]="searchForm" class="form-inline">
-        <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
-          [matAutocomplete]="auto" />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
-            <div class="search-item" (click)="searchUser(option)">
-              <img class="search-img" [attr.src]="option['profileImgSrc']" />
-              <span class="search-user">{{ option['userName'] }}</span>
-            </div>
-          </mat-option>
-        </mat-autocomplete>
-      </form>
-    </div>
-  </mat-toolbar>
-
-
-  <div class="cdk-virtual-scroll-data-source-example" *ngIf="currMenu == 'prd-clothings'">
-    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="example-viewport">
-      <div *cdkVirtualFor="let item of clothings" class="example-item">{{item.name}}</div>
-    </cdk-virtual-scroll-viewport>
-  </div>
-</div>
-<div class="filler" *ngIf="currMenu == 'prd-clothings'"></div> -->
-
-
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push" [opened]="opened" (opened)="onOpen()" (closed)="onClose()">
     <mat-toolbar class="sidenav-menu-content">
@@ -47,15 +13,15 @@
     </mat-toolbar>
     <mat-nav-list *ngIf="mainMenu ;else displaySecondaryMenu">
       <mat-list-item>
-        <button class="nav-item" (click)="currentMenu('categories')">CATEGORIES</button>
+        <button class="nav-item" (click)="currentMenu('categories')">Categories</button>
       </mat-list-item>
 
       <mat-list-item>
-        <button class="nav-item" (click)="currentMenu('designers')">DESIGNERS</button>
+        <button class="nav-item" (click)="currentMenu('designers')">Designers</button>
       </mat-list-item>
 
       <mat-list-item>
-        <button class="nav-item" (click)="currentMenu('stores')">STORES</button>
+        <button class="nav-item" (click)="currentMenu('stores')">Stores</button>
       </mat-list-item>
     </mat-nav-list>
 
@@ -131,12 +97,13 @@
         </cdk-virtual-scroll-viewport>
       </div>
     </div>
-    <div class="filler" *ngIf="currMenu == 'prd-clothings'"></div>
+
 
     <ng-content></ng-content>
+    <div class="filler"></div>
     <div class="bottom-navbar">
       <app-bottom-navbar></app-bottom-navbar>
     </div>
-
   </mat-sidenav-content>
+
 </mat-sidenav-container>

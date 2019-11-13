@@ -32,7 +32,7 @@ export class ShoppingNavComponent implements OnInit {
   options = [];
   filteredOptions: Observable<string[]>;
   sideNavOpend: boolean = false;
-  mainList = ['CATEGORIES', 'DESIGNERS', 'STORES', 'PRICE'];
+  mainList = ['Categories', 'Designers', 'Stores', 'Price'];
   originalList = {};
   displayList = {};
   categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
@@ -45,8 +45,8 @@ export class ShoppingNavComponent implements OnInit {
     { id: 6, name: 'Lingerie', servername: 'Lingerie' },
     { id: 7, name: 'Dresses & Skirts', servername: 'DressesOrSkirts' }
   ];
-  designers = [{ id: 1, name: 'Gucci' }, { id: 2, name: 'Prada' }, { id: 3, name: 'D&G', }, { id: 4, name: 'Isabel Marant' }, { id: 5, name: 'Loewe' }, { id: 6, name: 'Saint Laurent' }, { id: 7, name: 'Celine' }, { id: 8, name: 'Givenchy' }, { id: 9, name: 'Fendi' }];
-  stores = [{ id: 1, name: 'ASOS' }, { id: 2, name: 'ZARA' }, { id: 3, name: 'Farfetch' }, { id: 4, name: 'Shopbop' }, { id: 5, name: 'Shein' }, { id: 6, name: 'TerminalX' }, { id: 7, name: 'Net-A-Porter' }];
+  designers = [{ id: 0, name: 'All Designers' }, { id: 1, name: 'Gucci' }, { id: 2, name: 'Prada' }, { id: 3, name: 'D&G', }, { id: 4, name: 'Isabel Marant' }, { id: 5, name: 'Loewe' }, { id: 6, name: 'Saint Laurent' }, { id: 7, name: 'Celine' }, { id: 8, name: 'Givenchy' }, { id: 9, name: 'Fendi' }];
+  stores = [{ id: 1, name: 'All Stores' }, { id: 1, name: 'ASOS' }, { id: 2, name: 'ZARA' }, { id: 3, name: 'Farfetch' }, { id: 4, name: 'Shopbop' }, { id: 5, name: 'Shein' }, { id: 6, name: 'TerminalX' }, { id: 7, name: 'Net-A-Porter' }];
   price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
   mainMenu: boolean = true;
   secondaryMenu = {};
@@ -115,11 +115,13 @@ export class ShoppingNavComponent implements OnInit {
     }
     this.initFilteringDTO();
     this.updateFeedFilteringDTO();
+    this.toggle();
   }
 
   filterByCategory(item) {
     if (item == 'All Categories') {
-      this.filteringDTO.category = null;
+      this.initFilteringDTO();
+      this.initMenu();
       return;
     }
     else {
@@ -141,9 +143,10 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   filterByProduct(item) {
-    console.log("im event");
     this.filteringDTO.productTypes = [];
-    this.filteringDTO.productTypes.push(item);
+    if (item != 'Default') {
+      this.filteringDTO.productTypes.push(item);
+    }
     this.updateFeedFilteringDTO();
     //this.initMenu();
   }

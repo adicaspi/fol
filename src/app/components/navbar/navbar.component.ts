@@ -101,7 +101,9 @@ export class NavbarComponent implements OnInit {
   onChanges(): void {
 
     this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(value => {
-      this.setSearchInput(value);
+      if (value != "") {
+        this.getSearchResults(value);
+      }
     })
   }
 
@@ -123,6 +125,8 @@ export class NavbarComponent implements OnInit {
   }
 
   getSearchResults(value: string) {
+    console.log(value, "val");
+    this.options = [];
     let baseAPI = this.baseApiUrl + '/image?s3key=';
     this.userService.search(value).subscribe(res => {
       res.forEach(element => {
@@ -133,7 +137,7 @@ export class NavbarComponent implements OnInit {
         };
         this.options.push(searchObject);
       })
-      this.filteredOptions = this._filter(value);
+      //this.filteredOptions = this._filter(value);
     })
   }
 
