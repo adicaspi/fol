@@ -56,8 +56,9 @@ export class FilePreviewOverlayComponent implements OnInit {
         this.user = user;
         this.userProfileSrc =
           this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
-        this.getMoreFromUser(this.userPost['post']['userId']);
       });
+    this.getMoreFromUser();
+    this.getPostInfo();
   }
 
   getPostInfo() {
@@ -68,7 +69,6 @@ export class FilePreviewOverlayComponent implements OnInit {
       )
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
-        console.log("im post info", postInfo);
         this.postInfo = postInfo;
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
@@ -82,27 +82,18 @@ export class FilePreviewOverlayComponent implements OnInit {
       });
   }
 
-  getMoreFromUser(userId: number) {
-    this.feedService
-      .getUserFeed(userId, 0)
-      .toPromise()
-      .then(result => {
-        let len = result.length;
-        var i = Math.min(3, len);
-        var arr = [];
-        while (arr.length < i) {
-          var r = Math.floor(Math.random() * len);
-          if (arr.indexOf(r) === -1) arr.push(r);
-        }
-        arr.forEach(index => {
+  getMoreFromUser() {
+    this.postService
+      .getMorePostsFromUser(this.userPost['post']['userId'], this.userPost['post']['postId'])
+      .subscribe(arr => {
+        arr.forEach(elem => {
           let baseAPI = this.baseApiUrl + '/image?s3key=';
           let postObject = {
-            post: result[index],
-            postImgSrc: baseAPI + result[index].postImageAddr
+            postId: elem.postId,
+            postImgSrc: baseAPI + elem.postImageAddr
           };
           this.postsToShow.push(postObject);
         });
-        this.getPostInfo();
       });
   }
 

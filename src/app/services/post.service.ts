@@ -16,7 +16,7 @@ export class PostService {
   postsUrl: string = this.baseApiUrl + '/image';
   socialUrl: string = this.baseApiUrl + '/social';
   userPost: UserPost;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getImage(image_adr: string): Observable<Blob> {
     let params = new HttpParams().set('s3key', image_adr);
@@ -33,6 +33,16 @@ export class PostService {
     return this.http.get<PostInfo>(postInfoURL, {
       params: params
     });
+  }
+
+  getMorePostsFromUser(masterUserId: number, currPostId: number): Observable<any> {
+    let postInfoURL = this.socialUrl + '/' + masterUserId + '/more-from';
+    let params = new HttpParams().set('masterUserId', masterUserId.toString()).append('currPostId', currPostId.toString());
+
+    return this.http.get<any>(postInfoURL, {
+      params: params
+    });
+
   }
 
   createImageFromBlob(
