@@ -53,17 +53,10 @@ export class ShoppingNavComponent implements OnInit {
   icon = 'menu';
   arrow_back = 'arrow_back_ios';
   onDestroy: Subject<void> = new Subject<void>();
-<<<<<<< HEAD
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches
-  )
-
-  );
-=======
   filteringDTO = new FilteringDTO();
   opened: boolean = false;
   currMenu: string;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
->>>>>>> responsive_design
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
