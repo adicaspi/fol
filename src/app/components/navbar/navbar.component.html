@@ -1,19 +1,10 @@
 <nav>
   <ul class="fw-navbar">
-    <!-- <li>
-      <img src="../../../assets/FW-Icon-1.png" class="logo nav-item" (click)="feedPage()" />
-    </li> -->
-    <!-- <div class="center-container"> -->
     <li>
-      <img src="../../../assets/FW-Icon-1.png" class="logo nav-item" (click)="feedPage()" />
+      <img src="../../../assets/FW-Logo-pink5-fat.png" class="logo" (click)="feedPage()" />
     </li>
 
-    <li>
-      <app-mutual-nav></app-mutual-nav>
-    </li>
-
-
-    <li class="nav-item search">
+    <li class="search">
       <form [formGroup]="searchForm">
         <div class="search-container">
           <div class="search-icon">
@@ -24,9 +15,8 @@
                 2.9-.5 4-1.2l2.9 2.8c.2.3.5.4.9.4.3 0 .6-.1.8-.4.5-.5.5-1.2 0-1.7"></path>
               </svg> -->
           </div>
-          <div class="input-container">
-            <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"
-            />
+          <div id="search-input-container">
+            <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"/>
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of options" [value]="option.userName">
                 <div class="search-result" (click)="searchUser(option)">
@@ -45,29 +35,19 @@
       </form>
     </li>
 
-    <li class="nav-item explore" (click)="explorePage()">
+    <li>
+      <app-mutual-nav></app-mutual-nav>
+    </li>
+
+    <li class="seperating-line">
+    </li>
+
+    <li class="explore" (click)="explorePage()">
       Explore
     </li>
     <li>
       <img src="../../../assets/kloss_profile.jpg" class="profile" (click)="profilePage()" />
     </li>
-    <!-- </div> -->
-
-    <!-- <li>
-      <img src="../../../assets/kloss_profile.jpg" class="profile" (click)="profilePage()" />
-    </li> -->
 
   </ul>
 </nav>
-
-<!-- <div *ngIf="mobile" class="bottom-navbar">
-  <div class="icon-img" [ngClass]="{ active: feed }" (click)="feedPage()">
-    <i class="fa fa-home"></i>
-  </div>
-  <div class="icon-img" [ngClass]="{ active: profile }" (click)="profilePage()">
-    <i class="fa fa-user"></i>
-  </div>
-  <div class="icon-img" [ngClass]="{ active: explore }" (click)="explorePage()">
-    <i class="fa fa-search"></i>
-  </div>
-</div> -->
