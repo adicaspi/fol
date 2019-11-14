@@ -44,10 +44,10 @@ export class PostService {
     });
   }
 
-  incrementPostViews(masterUserId: number, postId: number) {
+  incrementPostViews(userId: number, postId: number) {
     let params = new HttpParams().set('postId', postId.toString());
     return this.http.post<any>(
-      this.socialUrl + '/' + masterUserId + '/inc-post-views?postId=' + postId, { headers: httpOptions.headers }
+      this.socialUrl + '/' + userId + '/inc-post-views?postId=' + postId, { headers: httpOptions.headers }
     ).subscribe(res => { });
   }
 

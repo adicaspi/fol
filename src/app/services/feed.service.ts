@@ -86,17 +86,6 @@ export class FeedService {
     )
   }
 
-  getMorePostsFromUser(userId: number, postId: number): Observable<any> {
-    let postIdString = postId.toString();
-    let postInfoURL = this.globaSoicalURL + '/' + userId + '/more-from';
-    let params = new HttpParams().set('userId', postIdString).append('currPostId', postId.toString());
-
-    return this.http.get<any>(postInfoURL, {
-      params: params
-    });
-
-  }
-
   sendMessage(message: any) {
     this.subject.next({ post: message });
   }
