@@ -45,6 +45,7 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   ngOnInit() {
     this.userPost = this.postService.userPost;
+    console.log("im user post", this.userPost);
     this.postImageAddr = this.userPost.postImageAddr;
 
     this.userProfileSrc = '../../../assets/placeholder.png';
@@ -88,6 +89,7 @@ export class FilePreviewOverlayComponent implements OnInit {
       .getMorePostsFromUser(this.userPost['post']['userId'], this.userPost['post']['postId'])
       .subscribe(arr => {
         arr.forEach(elem => {
+          console.log("im elem more from", elem);
           let baseAPI = this.baseApiUrl + '/image?s3key=';
           let postObject = {
             postId: elem.postId,
@@ -125,38 +127,6 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.showSpinner = true;
     this.ngOnInit();
   }
-
-  // setWebsiteLogo(postInfo:PostInfo) {
-  //   switch (postInfo.website) {
-  //     case 'www.terminalx.com':
-  //       this.website_logo = '../../../assets/terminalx.PNG';
-  //       this.postInfo.currency = 'ils';
-
-  //       break;
-  //     case 'www.zara.com':
-  //       this.website_logo = '../../../assets/zara.PNG';
-  //       this.postInfo.currency = 'ils';
-
-  //       break;
-  //     case 'www.adikastyle.com':
-  //       this.website_logo = '../../../assets/adika.PNG';
-  //       this.postInfo.currency = 'ils';
-
-  //       break;
-  //     case 'www.asos.com':
-  //       this.website_logo = '../../../assets/asos.PNG';
-  //       this.postInfo.currency = 'usd';
-  //       break;
-  //     case 'www.farfetch.com':
-  //       this.website_logo = '../../../assets/farfetch.PNG';
-  //       this.postInfo.currency = 'usd';
-  //       break;
-  //     case 'www.shein.com':
-  //       this.website_logo = '../../../assets/shein.PNG';
-  //       this.postInfo.currency = 'usd';
-  //       break;
-  //   }
-  // }
 
   closeModal() {
     this.dialogRef.close();
