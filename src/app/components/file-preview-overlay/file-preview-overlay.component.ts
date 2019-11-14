@@ -118,6 +118,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   openDialog(post): void {
+    console.log("im post", post);
     this.postService.userPost = post;
     this.postsToShow = [];
     this.thumbnails = [];

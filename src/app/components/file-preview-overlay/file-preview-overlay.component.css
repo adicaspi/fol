@@ -101,13 +101,14 @@
   }
 
   button.shop_btn {
-    background-color: rgb(40, 192, 94);
+    background-color: #ff4081;
+    font-family: FontAwesome, 'Maven Pro', sans-serif;
     color: white;
     border-radius: 50px;
-    width: 105px;
-    height: 55px;
+    width: 65px;
+    height: 40px;
     border: none;
-    font-size: 22px;
+    font-size: 15px;
     outline: none;
   }
 
@@ -176,7 +177,7 @@
   }
 
   i.far.fa-eye{
-    font-size: 15px;
+    font-size: 13px;
   }
 }
 /* } */

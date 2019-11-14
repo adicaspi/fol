@@ -5,7 +5,7 @@ import { GlobalVariable } from '../../global';
 import { PostInfo } from '../models/PostInfo';
 import { UserPost } from '../models/UserPost';
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'image/jpeg' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
 
 @Injectable({
@@ -47,10 +47,8 @@ export class PostService {
   incrementPostViews(masterUserId: number, postId: number) {
     let params = new HttpParams().set('postId', postId.toString());
     return this.http.post<any>(
-      this.socialUrl + '/' + masterUserId + '/inc-post-view', { headers: httpOptions.headers }, {
-        params: params
-      }
-    ).subscribe(res => { });;
+      this.socialUrl + '/' + masterUserId + '/inc-post-views?postId=' + postId, { headers: httpOptions.headers }
+    ).subscribe(res => { });
   }
 
   createImageFromBlob(
