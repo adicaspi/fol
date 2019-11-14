@@ -1,3 +1,4 @@
+@media (min-width: 900px) {
 .wrapper {
   /* background: #fafafa;
   margin-top: 50px;
@@ -155,4 +156,330 @@ button {
   clear: both;
   font-family: 'Maven Pro', sans-serif;
   font-size: 12px;
+}
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .wrapper {
+    /* background: #fafafa;
+    margin-top: 50px;
+    padding: 50px; */
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    background: white;
+    padding: 50px;
+    height: 100%;
+  }
+  
+  .column.controlers {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px 0px 0px 3px;
+    border-right: none;
+    padding: 0px;
+  }
+  
+  ul.form-sections {
+    padding-left: 0px;
+  }
+  
+  .controlers {
+    list-style: none;
+    border-left: 2px solid transparent;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 16px 80px 16px 30px;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 14px;
+    color: #262626;
+  }
+  
+  .password-clicked {
+    color: black;
+    border-left-color: black;
+    font-weight: 600;
+  }
+  
+  .profile-clicked {
+    color: black;
+    border-left-color: black;
+    font-weight: 600;
+  }
+  
+  li.controlers:hover {
+    background-color: #fafafa;
+    cursor: pointer;
+  }
+  
+  #form {
+    background-color: #fff;
+    height: 100%;
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid #dbdbdb;
+    border-radius: 0px 3px 3px 0px;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .form-group {
+    float: left;
+    margin-top: 20px;
+    clear: both;
+  }
+  
+  .form-group.user {
+    margin-bottom: 10px;
+    display: block;
+    float: none;
+  }
+  
+  label {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 14px;
+    color: #333;
+    height: 20px;
+    width: 150px;
+    text-align: right;
+    margin-right: 15px;
+    float: left;
+    line-height: 32px;
+  }
+  input {
+    height: 32px;
+    width: 200px;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 14px;
+    float: left;
+    font-family: 'Maven Pro', sans-serif;
+  }
+  
+  img.profile {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    display: inline;
+  }
+  
+  span.user {
+    font-family: 'Maven Pro', sans-serif;
+    float: left;
+    clear: both;
+    line-height: initial;
+  }
+  
+  span.user.pass {
+    line-height: 38px;
+    font-family: 'Maven Pro', sans-serif;
+  }
+  
+  .user-info {
+    float: right;
+    clear: right;
+  }
+  
+  .change-profile-image button {
+    border: none;
+    background-color: white;
+    color: #ff1493;
+    outline: none;
+    padding: 0;
+  }
+  
+  .form-group.submit-button {
+    float: none;
+    margin-top: 50px;
+  }
+  
+  .submit-button {
+    display: block;
+  }
+  
+  button {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  .invalid-feedback {
+    float: right;
+    clear: both;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px){
+  .wrapper {
+    /* background: #fafafa;
+    margin-top: 50px;
+    padding: 50px; */
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    text-align: center;
+    background: white;
+    padding: 50px;
+    height: 100%;
+  }
+  
+  .column.controlers {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px 0px 0px 3px;
+    border-right: none;
+    padding: 0px;
+    width:100px;
+  }
+  
+  ul.form-sections {
+    padding-left: 0px;
+  }
+  
+  .controlers {
+    list-style: none;
+    border-left: 2px solid transparent;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 16px 80px 16px 30px;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 14px;
+    color: #262626;
+  }
+  
+  .password-clicked {
+    color: black;
+    border-left-color: black;
+    font-weight: 600;
+  }
+  
+  .profile-clicked {
+    color: black;
+    border-left-color: black;
+    font-weight: 600;
+  }
+  
+  li.controlers:hover {
+    background-color: #fafafa;
+    cursor: pointer;
+  }
+  
+  #form {
+    background-color: #fff;
+    height: 100%;
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid #dbdbdb;
+    border-radius: 0px 3px 3px 0px;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .form-group {
+    /* float: left; */
+    margin-top: 20px;
+    display: flex;
+    clear: both;
+  }
+  
+  .form-group.user {
+    margin-bottom: 10px;
+    display: block;
+    float: none;
+  }
+  
+  label {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 12px;
+    color: #333;
+    height: 20px;
+    width: 80px;
+    text-align: right;
+    /* margin-right: 15px; */
+    /* float: left; */
+    text-align: start;
+    line-height: 32px;
+  }
+  input {
+    height: 32px;
+    width: 90px;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 12px;
+    /* float: left; */
+    font-family: 'Maven Pro', sans-serif;
+  }
+  
+  img.profile {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    display: inline;
+  }
+  
+  span.user {
+    font-family: 'Maven Pro', sans-serif;
+    float: left;
+    clear: both;
+    line-height: initial;
+  }
+  
+  span.user.pass {
+    line-height: 38px;
+    font-family: 'Maven Pro', sans-serif;
+  }
+  
+  .user-info {
+    float: right;
+    clear: right;
+  }
+  
+  .change-profile-image button {
+    border: none;
+    background-color: white;
+    color: #ff1493;
+    outline: none;
+    padding: 0;
+    text-align: start;
+  }
+  
+  .form-group.submit-button {
+    float: none;
+    margin-top: 50px;
+  }
+  
+  .submit-button {
+    display: block;
+  }
+  
+  button {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  .invalid-feedback {
+    float: right;
+    clear: both;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 12px;
+  }
 }
