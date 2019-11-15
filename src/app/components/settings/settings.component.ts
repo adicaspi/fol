@@ -36,12 +36,12 @@ export class SettingsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group(
       {
-        username: [''],
+        username: [{ value: '', disabled: true }],
         fullname: [''],
         description: [''],
         email: [''],

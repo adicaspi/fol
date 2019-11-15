@@ -300,7 +300,6 @@ span.search-user{
     padding-left: 1px;
     padding-right: 3px;
     display: inline-block;
-    height: 100%;
   }
   
   svg.search-icon {
@@ -320,7 +319,7 @@ span.search-user{
     height: 100%;
     width: 100%;
     text-align: left;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: #333;
     background-color: transparent;
@@ -375,8 +374,8 @@ span.search-user{
   }
 
   img.search-img{
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
   }
 
@@ -385,7 +384,7 @@ span.search-user{
   }
   
   .search-res-user-img{
-    line-height: 30px;
+    line-height: 15px;
     display: flex;
     align-items: center;
   }

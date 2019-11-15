@@ -111,7 +111,10 @@ export class TimelineFeedComponent implements OnInit {
   openDialog(post): void {
     // if (this.deviceService.isDesktop()) {
     //this.dialogService.openModalWindow(ProductPageComponent, post);
-    this.postService.userPost = post;
+    //this.postService.userPost = post;
+    console.log(post);
+    this.postService.userPostUserId = post.post.userId;
+    this.postService.userPostPostId = post.post.postId;
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {

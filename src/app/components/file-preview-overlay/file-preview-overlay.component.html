@@ -3,15 +3,16 @@
 </div>
 <div class="basic-container">
   <ng-template #product>
-    <div *ngIf="user as currentUser" class="wrapper">
+    <div *ngIf="postInfo" class="wrapper">
       <i (click)="closeModal()" class="fal fa-times"></i>
       <div class="profile-img-comp">
+        <!-- <img id="profileImage" [attr.src]="userProfileSrc" /> -->
         <img id="profileImage" [attr.src]="userProfileSrc" />
-        <div class="card-text profile">{{ currentUser.username }}</div>
+        <div class="card-text profile">{{ postInfo.userName }}</div>
       </div>
 
-      <div *ngIf="postInfo" class="slider">
-        <img id="mainImage" [attr.src]="userPost.postImgSrc" />
+      <div class="slider">
+        <img id="mainImage" [attr.src]="postImageAddr" />
 
         <div class="product-description">
           <div class="card-text title">
@@ -25,29 +26,40 @@
 
           <div class="footer">
             <div class="upper-footer">
-              <a href="{{ userPost?.link }}" target="_blank">
-                <button type="button" class="shop_btn">
-                  Shop
-                </button>
-              </a>
-
-              <button mat-button>
-                <i class="material-icons">more_horiz</i>
+              <!-- <a href="{{ postInfo.link }}" target="_blank"> -->
+              <button mat-button class="shop_btn">
+                Shop
               </button>
-              <span class="price">{{postInfo.price}}</span>
+              <!-- </a> -->
+              <div class="views">
+                <span class="num-views">
+                  {{postInfo.numViews}}
+                  <i class="far fa-eye"></i>
+                </span>
+                <!-- <div>
+                  <i class="far fa-eye"></i>
+                </div> -->
+              </div>
             </div>
+            <!-- <button mat-button> -->
+            <!-- <i class="material-icons">more_horiz</i> -->
+            <!-- </button> -->
+            <div class="price">{{postInfo.price}}</div>
+
           </div>
         </div>
 
         <div class="lower-part">
+
           <div class="thumbnails">
             <img *ngFor="let image of thumbnails" class="thumbnail" [attr.src]="image" (click)="setImage(image)" />
           </div>
 
           <div class="more-from-user">
-            <div class="more-text">more from {{ currentUser.username }}</div>
+            <div class="more-text">more from {{ postInfo.userName }}</div>
             <div class="more-from-container">
-              <img *ngFor="let post of postsToShow" class="more-from" [attr.src]="post['postImgSrc']" (click)="openDialog(post)" />
+              <img *ngFor="let post of postsToShow | async" class="more-from" [attr.src]="post.postImageAddr" (click)="openDialog(post)"
+              />
             </div>
           </div>
         </div>
