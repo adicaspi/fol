@@ -60,9 +60,11 @@ export class FilePreviewOverlayComponent implements OnInit {
       .subscribe(postInfo => {
         this.postInfo = postInfo;
         this.postImageAddr = this.postInfo.postImageAddr;
-        this.thumbnails.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
-        );
+        if (this.postInfo.thumbnailAddr) {
+          this.thumbnails.push(
+            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+          );
+        }
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
@@ -78,7 +80,6 @@ export class FilePreviewOverlayComponent implements OnInit {
   getMoreFromUser() {
     this.postsToShow = this.postService
       .getMorePostsFromUser();
-
   }
 
   incNumViews() {
