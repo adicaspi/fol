@@ -36,7 +36,6 @@ export class PostService {
   }
 
   getPostInfo(): Observable<PostInfo> {
-    console.log(this.userPostUserId, this.userPostPostId);
     let postInfoURL = this.socialUrl + '/' + this.userPostUserId + '/post-info';
     let params = new HttpParams().set('postId', this.userPostPostId.toString());
     return this.http.get<PostInfo>(postInfoURL, {

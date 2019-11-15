@@ -113,7 +113,6 @@ export class UserService {
   }
 
   getNumberOfFollowing(id: number): Observable<any> {
-    console.log("in get num following");
     return this.http.get<any>(this.globalInfoURL + id + '/num-following');
   }
 

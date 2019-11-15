@@ -121,8 +121,8 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    // if (this.deviceService.isDesktop()) {
-    //this.dialogService.openModalWindow(ProductPageComponent, post);
+    this.postService.userPostUserId = post.post.userId;
+    this.postService.userPostPostId = post.post.postId;
     this.postService.userPost = post;
     if (this.desktop) {
       this.dialogService.openDialog();

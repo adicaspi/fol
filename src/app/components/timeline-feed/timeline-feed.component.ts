@@ -104,15 +104,10 @@ export class TimelineFeedComponent implements OnInit {
       .subscribe(this.processData);
   }
   fetchImages() {
-    console.log("in fetch");
     this.generateTimelineFeed(this.offset, this.id);
   }
 
   openDialog(post): void {
-    // if (this.deviceService.isDesktop()) {
-    //this.dialogService.openModalWindow(ProductPageComponent, post);
-    //this.postService.userPost = post;
-    console.log(post);
     this.postService.userPostUserId = post.post.userId;
     this.postService.userPostPostId = post.post.postId;
     if (this.desktop) {
