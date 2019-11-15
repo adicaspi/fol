@@ -23,7 +23,7 @@ import { MorePosts } from '../../models/MorePosts';
   styleUrls: ['./file-preview-overlay.component.css']
 })
 export class FilePreviewOverlayComponent implements OnInit {
-  showSpinner: boolean = false;
+  showSpinner: boolean = true;
   userPost: UserPost;
   postInfo: PostInfo;
   timelinePost: TimelinePost;
@@ -60,9 +60,11 @@ export class FilePreviewOverlayComponent implements OnInit {
       .subscribe(postInfo => {
         this.postInfo = postInfo;
         this.postImageAddr = this.postInfo.postImageAddr;
-        this.thumbnails.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
-        );
+        if (this.postInfo.thumbnailAddr) {
+          this.thumbnails.push(
+            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+          );
+        }
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
@@ -75,29 +77,9 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   }
 
-  getUser(): Promise<any> {
-    var promise = new Promise<any>((resolve, reject) => {
-      this.userService
-        .getUserDetails(this.postInfo.userId)
-        .pipe(takeUntil(this.onDestroy))
-        .subscribe(user => {
-          this.user = user;
-          this.userProfileSrc =
-            this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
-        });
-      setTimeout(() => {
-        console.log("Async getUser() Complete");
-        resolve();
-      }, 1000);
-    });
-    return promise;
-  }
-
   getMoreFromUser() {
-
     this.postsToShow = this.postService
       .getMorePostsFromUser();
-
   }
 
   incNumViews() {
@@ -120,11 +102,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   openDialog(post): void {
-    console.log("im post", post);
-    //this.postService.userPost = post;
-
     this.postService.userPostPostId = post.postId;
-    //this.postsToShow = [];
     this.thumbnails = [];
     this.showSpinner = true;
     this.ngOnInit();
