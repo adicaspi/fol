@@ -4,9 +4,16 @@ import { Observable } from 'rxjs';
 import { GlobalVariable } from '../../global';
 import { PostInfo } from '../models/PostInfo';
 import { UserPost } from '../models/UserPost';
+import { MorePosts } from '../models/MorePosts';
+import { catchError, map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
+
+interface ResponseMorePosts {
+  results: MorePosts[];
+}
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +23,8 @@ export class PostService {
   postsUrl: string = this.baseApiUrl + '/image';
   socialUrl: string = this.baseApiUrl + '/social';
   userPost: UserPost;
+  userPostUserId: number;
+  userPostPostId: number;
   constructor(private http: HttpClient) { }
 
   getImage(image_adr: string): Observable<Blob> {
@@ -26,23 +35,29 @@ export class PostService {
     });
   }
 
-  getPostInfo(userId: number, postId: number): Observable<PostInfo> {
-    let postIdString = postId.toString();
-    let postInfoURL = this.socialUrl + '/' + userId + '/post-info';
-    let params = new HttpParams().set('postId', postIdString);
+  getPostInfo(): Observable<PostInfo> {
+    console.log(this.userPostUserId, this.userPostPostId);
+    let postInfoURL = this.socialUrl + '/' + this.userPostUserId + '/post-info';
+    let params = new HttpParams().set('postId', this.userPostPostId.toString());
     return this.http.get<PostInfo>(postInfoURL, {
       params: params
     });
   }
 
-  getMorePostsFromUser(masterUserId: number, currPostId: number): Observable<any> {
-    let postInfoURL = this.socialUrl + '/' + masterUserId + '/more-from';
-    let params = new HttpParams().set('masterUserId', masterUserId.toString()).append('currPostId', currPostId.toString());
+  getMorePostsFromUser(): Observable<MorePosts[]> {
+    let postInfoURL = this.socialUrl + '/' + this.userPostUserId + '/more-from';
+    let params = new HttpParams().set('masterUserId', this.userPostUserId.toString()).append('currPostId', this.userPostPostId.toString());
 
-    return this.http.get<any>(postInfoURL, {
+    return this.http.get<MorePosts[]>(postInfoURL, {
       params: params
-    });
+    }).pipe(
+    )
+      .map(res => {
+        let response: any = res;
+        return response.map((item) => new MorePosts(item.postId, item.postImageAddr));
+      });
   }
+
 
   incrementPostViews(userId: number, postId: number) {
     let params = new HttpParams().set('postId', postId.toString());

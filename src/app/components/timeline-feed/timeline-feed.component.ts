@@ -87,7 +87,6 @@ export class TimelineFeedComponent implements OnInit {
     }
     this.offset = posts['newOffset'];
     posts['feedPosts'].forEach(post => {
-      console.log("post user feed", post);
       let baseAPI = this.baseApiUrl + '/image?s3key=';
       let postObject = {
         post: post,
@@ -112,7 +111,10 @@ export class TimelineFeedComponent implements OnInit {
   openDialog(post): void {
     // if (this.deviceService.isDesktop()) {
     //this.dialogService.openModalWindow(ProductPageComponent, post);
-    this.postService.userPost = post;
+    //this.postService.userPost = post;
+    console.log(post);
+    this.postService.userPostUserId = post.post.userId;
+    this.postService.userPostPostId = post.post.postId;
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {

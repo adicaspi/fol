@@ -9,12 +9,13 @@ import { User } from '../../models/User';
 import { TimelinePost } from '../../models/TimelinePost';
 import { PostService } from '../../services/post.service';
 import * as $ from 'jquery';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
 import { ProductPageComponent } from '../product-page/product-page.component';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { FilePreviewOverlayRef } from '../file-preview-overlay/file-preview-overlay-ref';
+import { MorePosts } from '../../models/MorePosts';
 
 @Component({
   selector: 'app-file-preview-overlay',
@@ -22,12 +23,12 @@ import { FilePreviewOverlayRef } from '../file-preview-overlay/file-preview-over
   styleUrls: ['./file-preview-overlay.component.css']
 })
 export class FilePreviewOverlayComponent implements OnInit {
-  showSpinner: boolean = true;
+  showSpinner: boolean = false;
   userPost: UserPost;
   postInfo: PostInfo;
   timelinePost: TimelinePost;
   storeLogoSrc: string;
-  postsToShow = [];
+  postsToShow: Observable<MorePosts[]>;
   user: User;
   mainImageSrc: any;
   postImageAddr: any;
@@ -44,75 +45,74 @@ export class FilePreviewOverlayComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userPost = this.postService.userPost;
-    console.log("im user post", this.userPost);
-    this.postImageAddr = this.userPost.postImageAddr;
-
+    this.getPostInfo();
+    this.getMoreFromUser();
+    this.incNumViews();
+    //this.postImageAddr = this.postInfo.postImageAddr;
     this.userProfileSrc = '../../../assets/placeholder.png';
 
-    this.userService
-      .getUserDetails(this.userPost['post']['userId'])
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(user => {
-        this.user = user;
-        this.userProfileSrc =
-          this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
-      });
-    this.getMoreFromUser();
-    this.getPostInfo();
-    this.incNumViews();
   }
 
   getPostInfo() {
     this.postService
-      .getPostInfo(
-        this.userPost['post']['userId'],
-        this.userPost['post']['postId']
-      )
+      .getPostInfo()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
+        this.postImageAddr = this.postInfo.postImageAddr;
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
         );
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
-        this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr
+        this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
+        this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
+        this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
         this.showSpinner = false;
         this.feedService.sendMessage('done-loading');
       });
+
+  }
+
+  getUser(): Promise<any> {
+    var promise = new Promise<any>((resolve, reject) => {
+      this.userService
+        .getUserDetails(this.postInfo.userId)
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(user => {
+          this.user = user;
+          this.userProfileSrc =
+            this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
+        });
+      setTimeout(() => {
+        console.log("Async getUser() Complete");
+        resolve();
+      }, 1000);
+    });
+    return promise;
   }
 
   getMoreFromUser() {
-    this.postService
-      .getMorePostsFromUser(this.userPost['post']['userId'], this.userPost['post']['postId'])
-      .subscribe(arr => {
-        arr.forEach(elem => {
-          console.log("im elem more from", elem);
-          let baseAPI = this.baseApiUrl + '/image?s3key=';
-          let postObject = {
-            postId: elem.postId,
-            postImgSrc: baseAPI + elem.postImageAddr
-          };
-          this.postsToShow.push(postObject);
-        });
-      });
+
+    this.postsToShow = this.postService
+      .getMorePostsFromUser();
+
   }
 
   incNumViews() {
-    this.postService.incrementPostViews(this.userService.userId, this.userPost['post']['postId']);
+    this.postService.incrementPostViews(this.userService.userId, this.postService.userPostPostId);
   }
 
   setImage(image) {
     var mainImageElement = $('#mainImage');
     mainImageElement.attr('src', image);
     var description = $('#description');
-    description.text(this.userPost['post']['description']);
+    description.text(this.postInfo.description);
     var link = $('#link');
-    link.attr('href', this.userPost['post']['link']);
+    link.attr('href', this.postInfo.website);
     var price = $('span.price');
-    price.text(this.userPost['post']['price']);
+    price.text(this.postInfo.price);
   }
 
   setImageAndText(post) {
@@ -121,8 +121,10 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   openDialog(post): void {
     console.log("im post", post);
-    this.postService.userPost = post;
-    this.postsToShow = [];
+    //this.postService.userPost = post;
+
+    this.postService.userPostPostId = post.postId;
+    //this.postsToShow = [];
     this.thumbnails = [];
     this.showSpinner = true;
     this.ngOnInit();
@@ -136,3 +138,5 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.onDestroy.next();
   }
 }
+
+

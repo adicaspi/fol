@@ -55,8 +55,7 @@ export class ProductPageMobileComponent implements OnInit {
   getPostInfo() {
     this.postService
       .getPostInfo(
-        this.userPost['post']['userId'],
-        this.userPost['post']['postId']
+
       )
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
