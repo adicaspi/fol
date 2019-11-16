@@ -1,6 +1,9 @@
 <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
   <div id="main-body">
     <div class="center">
+
+      <div class="feed-label">feed</div>
+
       <div class="card masonry-item" *ngFor="let post of postsToShow">
         <!-- <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
         <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow"> -->
