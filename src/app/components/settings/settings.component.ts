@@ -19,8 +19,10 @@ class fieldItem {
 })
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
+  changePasswordForm: FormGroup;
   user: User;
   description: string;
+  descriptionInputChanged: boolean = false;
   selectedFile: File = null;
   submitted: boolean = false;
   updateImageProfile: boolean = false;
@@ -45,6 +47,11 @@ export class SettingsComponent implements OnInit {
         fullname: [''],
         description: [''],
         email: [''],
+      }
+    );
+
+    this.changePasswordForm = this.formBuilder.group(
+      {
         oldPass: ['', Validators.minLength(6)],
         newPass: ['', Validators.minLength(6)],
         confirmPass: ['', Validators.required]
@@ -52,7 +59,8 @@ export class SettingsComponent implements OnInit {
       {
         validator: this.MustMatch('newPass', 'confirmPass')
       }
-    );
+
+    )
     this.updateUser();
     this.editProfile();
   }
@@ -66,6 +74,10 @@ export class SettingsComponent implements OnInit {
       this.user = user;
       this.patchValue(this.user);
     });
+  }
+
+  updateUserDescription(description: string) {
+
   }
 
   patchValue(user: User) {
@@ -138,18 +150,20 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("in sumbit");
     this.submitted = true;
     let description = this.settingsForm.get('description').value;
-    let post_description = this.settingsForm.get('post_description').value;
+    if (description == this.user.description) { console.log("desc", description); }
+    //let post_description = this.settingsForm.get('post_description').value;
 
-    this.userService.updateUserDescription(description);
-    if (this.updateImageProfile) {
-      const fd = new FormData();
-      fd.append('image', this.selectedFile, this.selectedFile.name);
-      console.log(fd);
-      this.userService.uploadPost(fd, post_description).subscribe(res => {
-        console.log(res);
-      });
-    }
+    //this.userService.updateUserDescription(description);
+    // if (this.updateImageProfile) {
+    //   const fd = new FormData();
+    //   fd.append('image', this.selectedFile, this.selectedFile.name);
+    //   console.log(fd);
+    //   this.userService.uploadPost(fd, post_description).subscribe(res => {
+    //     console.log(res);
+    //   });
+    // }
   }
 }

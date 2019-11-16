@@ -13,7 +13,7 @@
   </div>
   <div class="column">
     <div id="form">
-      <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="settingsForm">
         <fieldset>
           <div class="user">
             <div class="form-group">
@@ -23,13 +23,7 @@
               <div class="user-info">
                 <span [class]="spanClass">Adi Caspi</span>
                 <div *ngIf="section == 'profile'" class="upload-image">
-                  <input
-                    style="display:none"
-                    type="file"
-                    class="profile-image"
-                    (change)="onFileSelected($event)"
-                    #fileInput
-                  />
+                  <input style="display:none" type="file" class="profile-image" (change)="onFileSelected($event)" #fileInput />
                   <div class="change-profile-image">
                     <button type="button" (click)="fileInput.click()">
                       Change Profile Image
@@ -41,48 +35,26 @@
             <div *ngIf="section == 'profile'">
               <div class="form-group">
                 <label>User Name</label>
-                <input
-                  type="text"
-                  formControlName="username"
-                  class="form-control"
-                />
+                <input type="text" formControlName="username" class="form-control" />
               </div>
 
               <div class="form-group">
                 <label>Full Name</label>
-                <input
-                  type="text"
-                  formControlName="fullname"
-                  class="form-control"
-                />
+                <input type="text" formControlName="fullname" class="form-control" />
               </div>
 
               <div class="form-group">
                 <label>Description</label>
-                <input
-                  type="text"
-                  formControlName="description"
-                  class="form-control"
-                />
+                <input type="text" formControlName="description" class="form-control" />
               </div>
 
               <div class="form-group">
                 <label>E-mail</label>
-                <input
-                  type="email"
-                  formControlName="email"
-                  class="form-control"
-                />
+                <input type="email" formControlName="email" class="form-control" />
               </div>
 
               <div class="form-group submit-button">
                 <div class="submit-button">
-                  <input
-                    style="display:none"
-                    type="button"
-                    class="submit-button"
-                    #submitButtn
-                  />
                   <button type="button" (click)="onSubmit()">
                     Submit
                   </button>
@@ -90,20 +62,17 @@
               </div>
             </div>
           </div>
+        </fieldset>
+      </form>
 
-          <div *ngIf="section == 'password'" class="upload-image">
+      <div *ngIf="section == 'password'" class="upload-image">
+        <form [formGroup]="changePasswordForm">
+          <fieldset>
             <div class="form-group">
               <label>Old Password</label>
-              <input
-                type="password"
-                formControlName="oldPass"
-                class="form-control"
-                [ngClass]="{ 'is-invalid': submittedPass && f.oldPass.errors }"
+              <input type="password" formControlName="oldPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && f.oldPass.errors }"
               />
-              <div
-                *ngIf="submittedPass && f.oldPass.errors"
-                class="invalid-feedback"
-              >
+              <div *ngIf="submittedPass && f.oldPass.errors" class="invalid-feedback">
                 <div *ngIf="f.oldPass.errors.required">
                   Password is required
                 </div>
@@ -111,16 +80,9 @@
             </div>
             <div class="form-group">
               <label>New Password</label>
-              <input
-                type="password"
-                formControlName="newPass"
-                class="form-control"
-                [ngClass]="{ 'is-invalid': submittedPass && f.newPass.errors }"
+              <input type="password" formControlName="newPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && f.newPass.errors }"
               />
-              <div
-                *ngIf="submittedPass && f.newPass.errors"
-                class="invalid-feedback"
-              >
+              <div *ngIf="submittedPass && f.newPass.errors" class="invalid-feedback">
                 <div *ngIf="f.newPass.errors.required">
                   Password is required
                 </div>
@@ -132,18 +94,10 @@
 
             <div class="form-group">
               <label>Confirm New Password</label>
-              <input
-                type="password"
-                formControlName="confirmPass"
-                class="form-control"
-                [ngClass]="{
+              <input type="password" formControlName="confirmPass" class="form-control" [ngClass]="{
                   'is-invalid': submittedPass && f.confirmPass.errors
-                }"
-              />
-              <div
-                *ngIf="submittedPass && f.confirmPass.errors"
-                class="invalid-feedback"
-              >
+                }" />
+              <div *ngIf="submittedPass && f.confirmPass.errors" class="invalid-feedback">
                 <div *ngIf="f.confirmPass.errors.required">
                   Confirm Password is required
                 </div>
@@ -153,21 +107,17 @@
               </div>
               <div class="form-group submit-button">
                 <div class="submit-button">
-                  <input
-                    style="display:none"
-                    type="button"
-                    class="submit-button"
-                    #submitButtn
-                  />
                   <button type="button" (click)="onSubmitChangePassword()">
                     Change Password
                   </button>
                 </div>
               </div>
             </div>
-          </div>
-        </fieldset>
-      </form>
+          </fieldset>
+        </form>
+      </div>
+
+
     </div>
   </div>
 </div>

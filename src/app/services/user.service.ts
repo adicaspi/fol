@@ -10,6 +10,12 @@ import { Observable } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
+
+const httpFormDataOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'multipart/form-data'
+  })
+}
 import { GlobalVariable } from '../../global';
 
 
@@ -50,6 +56,17 @@ export class UserService {
       {
         params: params
       }
+    );
+  }
+
+  updateProfileImage(fd: FormData): Observable<any> {
+    //let params = new HttpParams().set('image', fd.toString());
+    return this.http.post<any>(
+      this.globalInfoURL + this.userId + '/upload-profile-image',
+      fd, {
+        headers: httpFormDataOptions.headers
+      }
+
     );
   }
 
