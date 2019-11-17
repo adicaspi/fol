@@ -108,10 +108,12 @@
   li.explore {
     top: 4px;
     font-size: 18px;
-    font-family: 'Maven Pro';
+    font-family: 'Helvetica Neue';
+    font-weight: 500;
     cursor: pointer;
     border-radius: 25px;
     padding: 2px 12px;
+    color: #8e8e8e;
   }
 
   li.explore:hover {

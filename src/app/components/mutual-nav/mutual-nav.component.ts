@@ -75,6 +75,7 @@ export class MutualNavComponent implements OnInit {
     this.filteringDTO.minPrice = 0;
     this.filteringDTO.maxPrice = this.maxValue;
   }
+  
   menuClosed() {
     if (this.menuChanged) {
       this.updateFeedFilteringDTO();
