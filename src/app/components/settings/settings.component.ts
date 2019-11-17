@@ -30,6 +30,7 @@ export class SettingsComponent implements OnInit {
   profileClass = 'controlers profile';
   passClass = 'controlers password';
   spanClass = 'user';
+  userInfoClass = 'user-info';
   section: string;
   button_text: string;
   submittedPass: boolean = false;
@@ -102,6 +103,7 @@ export class SettingsComponent implements OnInit {
     this.profileClass = 'controlers profile-clicked';
     this.passClass = 'controlers password';
     this.spanClass = 'user';
+    this.userInfoClass = 'user-info';
   }
 
   changePassword() {
@@ -110,6 +112,7 @@ export class SettingsComponent implements OnInit {
     this.passClass = 'controlers password-clicked';
     this.profileClass = 'controlers profile';
     this.spanClass = 'user pass';
+    this.userInfoClass = 'user-info-pass';
   }
 
   MustMatch(controlName: string, matchingControlName: string) {
@@ -152,18 +155,17 @@ export class SettingsComponent implements OnInit {
   onSubmit() {
     console.log("in sumbit");
     this.submitted = true;
-    let description = this.settingsForm.get('description').value;
-    if (description == this.user.description) { console.log("desc", description); }
-    //let post_description = this.settingsForm.get('post_description').value;
 
-    //this.userService.updateUserDescription(description);
-    // if (this.updateImageProfile) {
-    //   const fd = new FormData();
-    //   fd.append('image', this.selectedFile, this.selectedFile.name);
-    //   console.log(fd);
-    //   this.userService.uploadPost(fd, post_description).subscribe(res => {
-    //     console.log(res);
-    //   });
-    // }
+    let updatedDescription = this.settingsForm.get('description').value;
+    if (updatedDescription != this.user.description) {
+      this.userService.updateUserDescription(updatedDescription);
+    }
+    if (this.updateImageProfile) {
+      const fd = new FormData();
+      fd.append('image', this.selectedFile, this.selectedFile.name);
+      this.userService.updateProfileImage(fd).subscribe(res => {
+
+      });
+    }
   }
 }

@@ -20,7 +20,7 @@
               <label>
                 <img src="../../../assets/kloss_profile.jpg" class="profile" />
               </label>
-              <div class="user-info">
+              <div [class]="userInfoClass">
                 <span [class]="spanClass">Adi Caspi</span>
                 <div *ngIf="section == 'profile'" class="upload-image">
                   <input style="display:none" type="file" class="profile-image" (change)="onFileSelected($event)" #fileInput />

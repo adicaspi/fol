@@ -123,7 +123,7 @@ span.user.pass {
   font-family: 'Maven Pro', sans-serif;
 }
 
-.user-info {
+.user-info, .user-info-pass {
   float: right;
   clear: right;
 }
@@ -284,7 +284,7 @@ button {
     font-family: 'Maven Pro', sans-serif;
   }
   
-  .user-info {
+  .user-info,.user-info-pass {
     float: right;
     clear: right;
   }
@@ -393,8 +393,8 @@ button {
   
   .form-group {
     /* float: left; */
-    margin-top: 20px;
     display: flex;
+    flex-wrap: wrap;
     clear: both;
   }
   
@@ -418,7 +418,7 @@ button {
   }
   input {
     height: 32px;
-    width: 90px;
+    width: 160px;
     border: 1px solid #efefef;
     border-radius: 3px;
     box-sizing: border-box;
@@ -448,8 +448,11 @@ button {
   }
   
   .user-info {
-    float: right;
-    clear: right;
+    margin-top:10px;
+  }
+
+  .user-info-pass {
+    margin-top:0;
   }
   
   .change-profile-image button {
