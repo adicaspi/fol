@@ -195,26 +195,6 @@ mat-toolbar{
   background-color: white;
 }
 
-#category {
-  width: 110px;
-}
-
-#product-type {
-  width: 142px;
-}
-
-#designer {
-  width: 106px;
-}
-
-#store {
-  width: 78px;
-}
-
-#price {
-  width: 75px;
-}
-
 button.filter-button{
   font-family: 'Helvetica Neue';
   font-size: 18px;
@@ -222,14 +202,15 @@ button.filter-button{
   text-align: center;
   outline:none;
   padding: 0px 16px;
-  color: #7e7e7e;
-  transition: color 0.2s;
+  background: #7e7e7e;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 button.filter-button:hover {
-  color: #333;
-  text-decoration: none;
-  /* font-weight: 600; */
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .category-radio-group {
