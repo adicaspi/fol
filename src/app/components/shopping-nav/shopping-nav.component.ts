@@ -46,7 +46,7 @@ export class ShoppingNavComponent implements OnInit {
     { id: 7, name: 'Dresses & Skirts', servername: 'DressesOrSkirts' }
   ];
   designers = [{ id: 0, name: 'All Designers' }, { id: 1, name: 'Gucci' }, { id: 2, name: 'Prada' }, { id: 3, name: 'D&G', }, { id: 4, name: 'Isabel Marant' }, { id: 5, name: 'Loewe' }, { id: 6, name: 'Saint Laurent' }, { id: 7, name: 'Celine' }, { id: 8, name: 'Givenchy' }, { id: 9, name: 'Fendi' }];
-  stores = [{ id: 1, name: 'All Stores' }, { id: 1, name: 'ASOS' }, { id: 2, name: 'ZARA' }, { id: 3, name: 'Farfetch' }, { id: 4, name: 'Shopbop' }, { id: 5, name: 'Shein' }, { id: 6, name: 'TerminalX' }, { id: 7, name: 'Net-A-Porter' }];
+  stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
   price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
   mainMenu: boolean = true;
   secondaryMenu = {};
