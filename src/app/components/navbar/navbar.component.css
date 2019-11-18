@@ -102,7 +102,7 @@
   li.seperating-line {
     height: 30px;
     border-left: 2px solid #efefef;
-    width: 24px;
+    width: 20px;
   }
 
   li.explore {
@@ -110,17 +110,15 @@
     font-family: Roboto;
     font-weight: 400;
     cursor: pointer;
-    padding: 0px 8px;
-    margin: 0px 4px;
+    padding: 4px 16px;
+    border-radius: 20px;
     color: rgb(72,72,72);
-    height: 100%;
-    display: flex;
-    align-items: center;
+    letter-spacing: -0.2px;
   }
 
   li.explore:hover {
-    color: rgb(102,102,102);
-    font-weight: 600;
+    background-color: rgba(0,0,0,0.07);
+    color: rgb(82,82,82);
   }
 
   .profile {
