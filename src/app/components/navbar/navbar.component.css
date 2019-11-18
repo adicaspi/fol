@@ -106,26 +106,27 @@
   }
 
   li.explore {
-    top: 4px;
     font-size: 18px;
     font-family: Roboto;
     font-weight: 400;
     cursor: pointer;
-    border-radius: 25px;
-    padding: 2px 12px;
-    color: rgb(33,37,41);
+    padding: 0px 8px;
+    margin: 0px 4px;
+    color: rgb(72,72,72);
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   li.explore:hover {
-    background-color: rgba(0,0,0,0.1);
+    color: rgb(102,102,102);
+    font-weight: 600;
   }
 
   .profile {
     width: 40px;
     height: 40px;
     margin-left: 24px;
-    position: relative;
-    top: 4px;
     border-radius: 50%;
     border: 2px solid rgba(128,128,128,0.25);
     cursor: pointer;
