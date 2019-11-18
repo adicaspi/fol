@@ -39,7 +39,6 @@ export class FeedService {
     offset: number,
     userId: number
   ): Observable<Array<TimelinePost>> {
-    console.log("in timeline feed", this.timelinefeedFilteringDTO);
     return this.http.post<TimelinePost[]>(
       this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.timelinefeedFilteringDTO, { headers: httpOptions.headers }
     );

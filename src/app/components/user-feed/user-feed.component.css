@@ -179,7 +179,7 @@
   } */
 
   .center {
-    width:375px;
+    width:100%;
     margin:auto;
     display: flex;
     flex-direction: row;
@@ -196,8 +196,8 @@
   }
 
   .card {
-    /* width: 160px; */
-    width:170px;
+    width:33%;
+    height: 360px;
     margin-top: 26px;
     border: none;
     border-radius: 20px;
@@ -228,6 +228,7 @@
     font-weight: 400;
     color: black;
     font-size: 12px;
+    height: 30px;
   }
 
   .store.text-right {
@@ -237,7 +238,7 @@
     text-decoration: underline;
     line-height: 1;
     color: grey;
-    font-size: 12px;
+    font-size: 10px;
   }
 
   span.price {
@@ -246,7 +247,7 @@
     margin-top: 5px;
     color: #2f2e2e;
     font-weight: 200;
-    font-size: 12px;
+    font-size: 10px;
     font-family: open sans, sans-serif;
     line-height: 1;
   }

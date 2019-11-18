@@ -250,12 +250,22 @@ span.price {
     /* height: 100vh;  */
   }
 
-  .center {
+  /* .center {
     width:375px;
     margin:auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white;
+  } */
+
+  .center {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
     background-color: white;
   }
   
@@ -266,15 +276,13 @@ span.price {
   ngxMasonryItem:nth-of-type(3n) {
     margin-right: 0px;
   }
-  
+
   .card {
-    /* width: 160px; */
-    /* width:220px; */
-    margin-top: 10px;
+    width:48%;
+    margin-top: 26px;
     border: none;
-    /* border-radius: 20px; */
+    border-radius: 20px;
     display: inline-block;
-    /* border: 1px solid rgb(235,235,235); */
   }
   
   .profile-image {
@@ -303,75 +311,39 @@ span.price {
   }
   
   .masonry-img .img-main {
-/*   
-    width: 210px;
-    height: 310px; */
+    width: 160px;
+    height: 280px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
     display: block;
-    /* border-radius: 5px; */
     object-fit: cover;
   }
   
   .masonry-img .img-hover {
     display: none;
   }
-  
-  /* .description {
-    text-align: center;
-    font-weight: 400;
-    color: black;
-    width: 90%;
-    margin: auto;
-    font-size: 12px;
-  }
-  
-  .store.text-right {
-    position: absolute;
-    right: 8px;
-    margin-top: 5px;
-    text-decoration: underline;
-    line-height: 1;
-    color: grey;
-    font-size: 12px;
-  }
-  
-  span.price {
-    position: absolute;
-    left: 8px;
-    margin-top: 5px;
-    color: #2f2e2e;
-    font-weight: 200;
-    font-size: 12px;
-    font-family: open sans, sans-serif;
-    line-height: 1;
-  }
-  
-  .fotter-card-text {
-    font-size: 10px;
-    height: 28px;
-    width: 100%;
-    font-family: 'helvetica', arial, sans-serif;
-  } */
 
   .card-text {
     font-size: 18px;
     height: 48px;
     width: 100%;
-    margin-top: 14px;
+    margin-top: 8px;
     margin-bottom: 8px;
     font-family: 'helvetica', arial, sans-serif;
   }
 
-  .description {
+  .card-text .description {
     text-align: center;
     font-weight: 400;
     color: black;
+    font-size: 10px;
   }
 
   .store.text-right {
     position: absolute;
     right: 12px;
+    font-size: 12px;
     margin-top: 8px;
     text-decoration: underline;
     line-height: 1;
@@ -380,8 +352,9 @@ span.price {
 
   span.price {
     position: absolute;
-    left: 12px;
+    left: 14px;
     margin-top: 8px;
+    font-size: 12px;
     color: #2f2e2e;
     font-weight: 200;
     font-family: open sans, sans-serif;
