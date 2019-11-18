@@ -12,13 +12,8 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
-
-/* .center {
-  margin: auto;
-  width: 900px;
-}  */
 
 ngxMasonryItem:nth-of-type(3n) {
   margin-right: 0px;
@@ -27,10 +22,15 @@ ngxMasonryItem:nth-of-type(3n) {
 .card {
   width: 274px;
   margin-top: 39px;
+  margin-right: 39px;
   border: none;
   border-radius: 20px;
   display: inline-block;
   border: 1px solid rgb(235,235,235);
+}
+
+.card:nth-of-type(3n){
+  margin-right: 0px;
 }
 
 .profile-image {
@@ -127,10 +127,6 @@ span.price {
     justify-content: space-between;
     flex-wrap: wrap;
   }
-
-  .center>.card{
-    width:47%;
-  }
   
   /* .center {
     margin: auto;
@@ -148,6 +144,10 @@ span.price {
     border-radius: 20px;
     display: inline-block;
     border: 1px solid rgb(235,235,235);
+  }
+
+  .card:nth-of-type(2n){
+    margin-right: 0px;
   }
 
   .profile-image {
@@ -260,7 +260,7 @@ span.price {
   } */
 
   .center {
-    width: 100%;
+    width: 360px;
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -278,11 +278,16 @@ span.price {
   }
 
   .card {
-    width:48%;
+    width:170px;
+    margin-right: 20px;
     margin-top: 26px;
     border: none;
     border-radius: 20px;
     display: inline-block;
+  }
+
+  .card:nth-of-type(2n){
+    margin-right: 0px;
   }
   
   .profile-image {

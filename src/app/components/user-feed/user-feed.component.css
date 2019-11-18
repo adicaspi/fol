@@ -11,16 +11,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  /* .center {
-    margin: auto;
-    width: 900px;
-  } */
-
-  ngxMasonryItem:nth-of-type(3n) {
-    margin-right: 0px;
+    justify-content: flex-start;
   }
 
   .masonry-item img {
@@ -36,11 +27,16 @@
 
   .card {
     width: 274px;
+    margin-right: 39px;
     margin-top: 39px;
     border: none;
     border-radius: 20px;
     display: inline-block;
     border: 1px solid rgb(235,235,235);
+  }
+
+  .card:nth-of-type(3n){
+    margin-right: 0px;
   }
 
   .card-text {
@@ -91,23 +87,8 @@
     width: 600px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
-  }
-
-  .center>.card{
-    width:47%;
-  }
-
-  /* .center {
-    margin: auto;
-    width: 600px;
-    display: flex;
-    justify-content: center;
-  } */
-
-  ngxMasonryItem:nth-of-type(3n) {
-    margin-right: 0px;
   }
 
   .masonry-item img {
@@ -124,10 +105,15 @@
   .card {
     width: 274px;
     margin-top: 39px;
+    margin-right: 52px;
     border: none;
     border-radius: 20px;
     display: inline-block;
     border: 1px solid rgb(235,235,235);
+  }
+
+  .card:nth-of-type(2n){
+    margin-right: 0px;
   }
 
   .card-text {
@@ -179,29 +165,34 @@
   } */
 
   .center {
-    width:100%;
+    width:360px;
     margin:auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
 
-  ngx-masonry{
+  /* ngx-masonry{
     margin: 0 auto;
   }
 
   ngxMasonryItem:nth-of-type(3n) {
     margin-right: 0px;
-  }
+  } */
 
   .card {
-    width:33%;
-    height: 360px;
+    width:110px;
+    /* height: 360px; */
     margin-top: 26px;
+    margin-right: 15px;
     border: none;
     border-radius: 20px;
     display: inline-block;
+  }
+
+  .card:nth-of-type(3n){
+    margin-right: 0px;
   }
 
   .masonry-item img {
