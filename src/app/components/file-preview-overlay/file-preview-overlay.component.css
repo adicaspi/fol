@@ -1,11 +1,25 @@
 @media (min-width: 900px) {
+  .basic-container{
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+  }
+  
   .wrapper {
     background: white;
-    width: 800px;
-    height: 625px;
-    padding: 30px;
+    width: 400px;
+    height: 600px;
     margin-top: 40px;
     margin-bottom: 40px;
+  }
+
+  .product-page-info{
+    position: relative;
+    margin-top:40px;
+    margin-bottom: 40px;
+    width: 400px;
+    height: 600px;
+    background-color: white; 
   }
 
   .fal {
@@ -19,21 +33,23 @@
   }
 
   .footer {
-    margin-top: 20px;
-    margin-left: -7px;
+    margin-top: 40px;
+    margin-left: 10px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: space-between;
   }
 
-  .upper-footer{
+  .shop{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     text-align:center;
+    margin-left: 10px;
   }
 
-  p#description{
+  div#description{
     margin-top:0;
+    font-size: 20px;
   }
 
   /* .fal {
@@ -45,9 +61,9 @@
   }
 
   .profile-img-comp {
-    margin-top: -10px;
+    margin-top: 10px;
     margin-bottom: 28px;
-    margin-left: 3px;
+    margin-left: 10px;
   }
 
   #profileImage {
@@ -60,9 +76,9 @@
   .card-text.profile {
     display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 26px;
+    font-size: 20px;
     color: rgb(47, 46, 46);
-    padding-left: 16px;
+    padding-left: 8px;
     vertical-align: middle;
   }
 
@@ -80,15 +96,15 @@
   }
 
   .product-description {
-    width: 400px;
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    margin-left: 50px;
+    width: 390px;
+    margin-top:70px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       'Helvetica Neue' Helvetica, Arial, sans-serif;
     font-size: 24px;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   #description {
@@ -96,11 +112,10 @@
   }
 
   .price {
-    right: 10px;
+    margin-right: 10px;
     font-size: 22px;
+    line-height: 50px;
     font-family: FontAwesome, 'Maven Pro', sans-serif;
-    position: absolute;
-    right:0px;
   }
 
   button.shop_btn {
@@ -120,8 +135,12 @@
     color: white;
   }
 
-  .lower-part {
-    position: relative;
+  .more-products{
+    bottom: 0;
+    position: absolute;
+    margin-left: 10px;
+    margin-bottom:10px;
+    margin-right: 10px;
   }
 
   .thumbnails {
@@ -156,7 +175,7 @@
 
   img.more-from {
     height: 120px;
-    width: 90px;
+    width: 85px;
     object-fit: cover;
     margin-right: 10px;
     border-radius: 6px;
@@ -179,119 +198,149 @@
     font-size: 15px;
   }
 
+  span.views-text{
+      letter-spacing: -0.7px;
+      font-weight: bold;
+  }
+
   i.far.fa-eye{
     font-size: 13px;
   }
+
+  a.slides.selceted{
+    background-size: auto;
+    background-position: left;
+  }
 }
-/* } */
-.basic-container {
-  overflow-y: auto !important;
-  pointer-events: auto !important;
-}
+
 
 
 @media (min-width: 600px) and (max-width: 900px) {
+  .basic-container{
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+  }
+  
   .wrapper {
     background: white;
-    width: 400px;
-    height: 500px;
-    padding: 30px;
+    width: 300px;
+    height: 600px;
     margin-top: 40px;
     margin-bottom: 40px;
   }
 
+  .product-page-info{
+    position: relative;
+    margin-top:40px;
+    margin-bottom: 40px;
+    width: 300px;
+    height: 600px;
+    background-color: white; 
+  }
+
   .fal {
     font-size: 26px;
-    font-weight: 500;
     position: absolute;
+    font-weight: 500;
     color: white;
     right: 15px;
     top: 10px;
     cursor: pointer;
   }
 
+  .footer {
+    margin-top: 40px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .shop{
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    margin-left: 10px;
+  }
+
+  div#description{
+    margin-top:0;
+    font-size: 20px;
+  }
+
+  /* .fal {
+    display: none;
+  } */
+
   .slider {
     position: relative;
   }
 
   .profile-img-comp {
-    margin-top: -10px;
+    margin-top: 10px;
     margin-bottom: 28px;
-    margin-left: 3px;
+    margin-left: 10px;
   }
 
   #profileImage {
     border-radius: 50%;
-    width: 33px;
-    height: 33px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
   }
 
   .card-text.profile {
     display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
+    font-size: 20px;
     color: rgb(47, 46, 46);
-    padding-left: 16px;
+    padding-left: 8px;
     vertical-align: middle;
   }
 
   #mainImage {
-    width: 186px;
-    height: 273px;
+    width: 280px;
+    height: 410px;
     object-fit: cover;
     display: inline-block;
     border-radius: 20px;
   }
 
   .store-logo {
-    width: 53px;
-    height: 20px;
-    margin-bottom: 10px;
+    width: 100px;
+    height: 50px;
   }
 
   .product-description {
-    width: 266px;
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    margin-left: 33px;
+    width: 290px;
+    margin-top:70px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       'Helvetica Neue' Helvetica, Arial, sans-serif;
-    font-size: 11px;
+    font-size: 24px;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   #description {
     vertical-align: top;
   }
-  .footer {
-    margin-top: 20px;
-    margin-left: -7px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .upper-footer{
-    display: flex;
-    flex-direction: row;
-    text-align:center;
-  }
 
   .price {
-    right: 10px;
+    margin-right: 10px;
     font-size: 22px;
+    line-height: 50px;
     font-family: FontAwesome, 'Maven Pro', sans-serif;
-    position: absolute;
-    right:0px;
   }
 
   button.shop_btn {
-    background-color: rgb(40, 192, 94);
+    background-color: #ff4081;
+    font-family: FontAwesome, 'Maven Pro', sans-serif;
     color: white;
     border-radius: 50px;
-    width: 60px;
+    width: 65px;
     height: 40px;
     border: none;
     font-size: 15px;
@@ -303,8 +352,12 @@
     color: white;
   }
 
-  .lower-part {
-    position: relative;
+  .more-products{
+    bottom: 0;
+    position: absolute;
+    margin-left: 10px;
+    margin-bottom:10px;
+    margin-right: 10px;
   }
 
   .thumbnails {
@@ -339,7 +392,7 @@
 
   img.more-from {
     height: 120px;
-    width: 90px;
+    width: 85px;
     object-fit: cover;
     margin-right: 10px;
     border-radius: 6px;
@@ -362,99 +415,238 @@
     font-size: 15px;
   }
 
-  i.far.fa-eye{
-    font-size: 15px;
+  span.views-text{
+      letter-spacing: -0.7px;
+      font-weight: bold;
   }
+
+  i.far.fa-eye{
+    font-size: 13px;
+  }
+
+  a.slides.selceted{
+    background-size: auto;
+    background-position: left;
+  }
+
 }
 
 
 
 @media (max-width: 600px) {
+  .basic-container{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+  }
+  
   .wrapper {
-    height: 430px;
-    background:white;
+    background: white;
+    width: 200px;
+    height: 600px;
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
 
-  .lower-part {
+  .product-page-info{
+    position: relative;
+    margin-top:40px;
+    margin-bottom: 40px;
+    width: 200px;
+    height: 600px;
+    background-color: white; 
+  }
+
+  .fal {
+    font-size: 26px;
+    position: absolute;
+    font-weight: 500;
+    color: white;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+  }
+
+  .footer {
+    margin-top: 40px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .shop{
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    margin-left: 10px;
+  }
+
+  div#description{
+    margin-top:0;
+    font-size: 20px;
+  }
+
+  /* .fal {
     display: none;
+  } */
+
+  .slider {
+    position: relative;
+  }
+
+  .profile-img-comp {
+    margin-top: 10px;
+    margin-bottom: 28px;
+    margin-left: 10px;
   }
 
   #profileImage {
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    margin-top: 0;
-  }
-
-  #mainImage {
-    width: 200px;
-    height: 250px;
-    border: solid 0.8px;
-    border-color: lightgray;
-  }
-
-  .product-description {
-    width: 250px;
-    float: center;
-    clear: right;
-    margin-top: 10px;
-  }
-
-  button.mat-button {
-    display: none;
-  }
-
-  .imgStyle {
     width: 50px;
-    height: 60px;
-    margin-right: 10px;
-  }
-
-  .card-text.profile {
-    line-height: 64px;
-    font-size: 15px;
     height: 50px;
-    margin-bottom: 15px;
     display: inline-block;
   }
 
-  span.text-right {
-    float: right;
-    clear: right;
-    line-height: 30px;
-    font-weight: 400;
-    color: gray;
-    font-size: 16px;
+  .card-text.profile {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: rgb(47, 46, 46);
+    padding-left: 8px;
+    vertical-align: middle;
   }
 
-  .more-from-user {
-    display: none;
+  #mainImage {
+    width: 280px;
+    height: 410px;
+    object-fit: cover;
+    display: inline-block;
+    border-radius: 20px;
   }
 
-  .more-text {
-    font-weight: 500;
+  .store-logo {
+    width: 100px;
+    height: 50px;
+  }
+
+  .product-description {
+    width: 190px;
+    margin-top:70px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue' Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #description {
+    vertical-align: top;
+  }
+
+  .price {
+    margin-right: 10px;
+    font-size: 20px;
+    line-height: 40px;
+    font-family: FontAwesome, 'Maven Pro', sans-serif;
   }
 
   button.shop_btn {
-    background-color: rgb(255, 140, 0);
+    background-color: #ff4081;
+    font-family: FontAwesome, 'Maven Pro', sans-serif;
     color: white;
     border-radius: 50px;
-    width: 60px;
-    height: 30px;
+    width: 65px;
+    height: 40px;
     border: none;
-    font-size: 18px;
+    font-size: 15px;
     outline: none;
   }
 
-  img.store-logo {
-    width: 60px;
-    height: 20px;
+  a {
+    text-decoration: none;
+    color: white;
   }
 
-  .users-additional {
-    height: 90px;
-    width: 80px;
+  .more-products{
+    bottom: 0;
+    position: absolute;
+    margin-left: 10px;
+    margin-bottom:10px;
   }
+
+  .thumbnails {
+    margin-top: 18px;
+    display: inline-block;
+  }
+
+  img.thumbnail {
+    width: 54px;
+    height: 72px;
+    margin-right: 16px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .more-from-user {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin-right: 10px;
+  }
+
+  .more-text {
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+  }
+
+  img.more-from:last-of-type {
+    margin-right: 0px;
+  }
+
+  img.more-from {
+    height: 90px;
+    width: 55px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 6px;
+  }
+
+  .material-icons {
+    color: rgb(166, 166, 166);
+    font-size: 40px;
+  }
+
+  .views{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+  }
+
+  .num-views{
+    margin-right: 2px;
+    font-family: FontAwesome, 'Maven Pro', sans-serif;
+    font-size: 15px;
+  }
+
+  span.views-text{
+      letter-spacing: -0.7px;
+      font-weight: bold;
+  }
+
+  i.far.fa-eye{
+    font-size: 13px;
+  }
+
+  a.slides.selceted{
+    background-size: auto;
+    background-position: left;
+  }
+
 }
 
 /* @media (min-width: 900px) { */

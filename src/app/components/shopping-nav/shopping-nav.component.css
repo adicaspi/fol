@@ -1,10 +1,3 @@
-/* mat-sidenav-container {
-  height: 100%;
-}
-
-mat-sidenav-content {
-  height: 100%;
-} */
 
 html, body {height:100%;overflow:auto}
 
@@ -12,7 +5,7 @@ html, body {height:100%;overflow:auto}
   color:white;
   outline:none;
 }
-
+/* 
 .sidenav {
   width: 200px;
   box-shadow: 3px 0 6px rgba(0, 0, 0, 24);
@@ -62,14 +55,6 @@ input#navBarSearchForm {
 
 }
 
-.header-shopping-nav {
-  /* position: fixed;
-  z-index: 1;  */
-  background-color: black;
-  /* top: 0;
-  /* width: 100%;  */
-}
-
 mat-toolbar a {
   display: inline-block;
   margin: 0 10px;
@@ -100,14 +85,6 @@ h2 {
   color: white;
 }
 
-<<<<<<< HEAD
-mat-sidenav {
-  position: fixed;
-  top:0;
-}
-
-=======
->>>>>>> responsive_design
 button.nav-item {
   background: none;
   border: none;
@@ -155,7 +132,7 @@ img.search-img{
 span.search-user{
   font-size: 10px;
   margin-left: 5px;
-}
+} */
 
 
 .cdk-virtual-scroll-data-source-example .example-viewport {
@@ -187,6 +164,7 @@ div.example-item:visited{
 }
 
 .mat-wrapper{
+  width: 100%;  
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -216,3 +194,28 @@ a.button-scroll{
 a:visited{
   color:red !important;
 }
+
+button.mat-button{
+  color:black;
+  border: solid;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.mat-toolbar-row{
+  flex-wrap: wrap;
+}
+
+.header-shopping-nav {
+  flex-wrap: wrap;
+}
+
+div.arrow-back{
+  width:100%;
+  margin-bottom: 10px;
+}
+
+.arrow-icon{
+  float: right;
+}
+

@@ -34,6 +34,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   postImageAddr: any;
   userProfileSrc: any;
   thumbnails = [];
+  height: string = '600px';
 
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
@@ -60,14 +61,15 @@ export class FilePreviewOverlayComponent implements OnInit {
       .subscribe(postInfo => {
         this.postInfo = postInfo;
         this.postImageAddr = this.postInfo.postImageAddr;
+        this.thumbnails.push(
+          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+        );
         if (this.postInfo.thumbnailAddr) {
           this.thumbnails.push(
             this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
           );
         }
-        this.thumbnails.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
-        );
+
         this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
         this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
         this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
