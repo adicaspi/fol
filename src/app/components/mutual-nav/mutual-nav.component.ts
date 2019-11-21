@@ -33,6 +33,8 @@ export class MutualNavComponent implements OnInit {
   showProduct: boolean = false;
   filteringDTO = new FilteringDTO();
   menuChanged: boolean = false;
+
+
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
   categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
@@ -66,6 +68,8 @@ export class MutualNavComponent implements OnInit {
     this.initFilteringDTO();
 
   }
+
+
 
   initFilteringDTO() {
     this.filteringDTO.category = "";

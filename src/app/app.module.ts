@@ -58,6 +58,7 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
 import { IgxSliderModule } from 'igniteui-angular';
 import { FollowingListMobileComponent } from './components/following-list-mobile/following-list-mobile.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatExpansionModule } from '@angular/material/expansion'
 
 //I keep the new line
 @NgModule({
@@ -102,6 +103,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatDialogModule,
     BrowserAnimationsModule,
     InfiniteScrollModule,
+    MatExpansionModule,
     DeferLoadModule,
     MaterialDesignModule,
     AppRoutingModule,

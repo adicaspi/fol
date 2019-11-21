@@ -13,12 +13,33 @@ import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { Routes, Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '../../../../node_modules/@angular/material';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
   selector: 'app-shopping-nav',
   templateUrl: './shopping-nav.component.html',
   styleUrls: ['./shopping-nav.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 1, width: '150px' }),
+        animate('400ms ease-in', style({ transform: 'translateX(0%)' }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ transform: 'translateX(100%)' }))
+      ])
+    ]),
+    trigger('expandCollapse', [
+      state('open', style({
+        'height': '*'
+      })),
+      state('close', style({
+        'height': '0px'
+      })),
+      transition('open <=> close', animate(1000))
+    ])
+  ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 
@@ -45,7 +66,7 @@ export class ShoppingNavComponent implements OnInit {
     { id: 6, name: 'Lingerie', servername: 'Lingerie' },
     { id: 7, name: 'Dresses & Skirts', servername: 'DressesOrSkirts' }
   ];
-  designers = [{ id: 0, name: 'All Designers' }, { id: 1, name: 'Gucci' }, { id: 2, name: 'Prada' }, { id: 3, name: 'D&G', }, { id: 4, name: 'Isabel Marant' }, { id: 5, name: 'Loewe' }, { id: 6, name: 'Saint Laurent' }, { id: 7, name: 'Celine' }, { id: 8, name: 'Givenchy' }, { id: 9, name: 'Fendi' }];
+  designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
   price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
   mainMenu: boolean = true;
@@ -60,6 +81,14 @@ export class ShoppingNavComponent implements OnInit {
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
   items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
+  visible = false;
+  panelOpenState = true;
+  openCloseStores = false;
+  openCloseDesigners = false;
+  seeMoreDesigners = 'see more+';
+  seeMoreStores = 'see more+';
+  seeMoreFilters = '+filters';
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
@@ -69,6 +98,7 @@ export class ShoppingNavComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
+
   }
 
   ngOnInit() {
@@ -86,6 +116,41 @@ export class ShoppingNavComponent implements OnInit {
       this.setSearchInput(val);
     })
   }
+
+  openReportsFilter(category): void {
+    if (category == 'designers') {
+      this.openCloseDesigners = !this.openCloseDesigners;
+      if (this.openCloseDesigners) {
+        this.seeMoreDesigners = 'see less-';
+      }
+      else {
+        this.seeMoreDesigners = 'see more+';
+      }
+
+    }
+    if (category == 'stores') {
+      this.openCloseStores = !this.openCloseStores;
+      if (this.seeMoreStores) {
+        this.seeMoreStores = 'see less-';
+      }
+      else {
+        this.seeMoreStores = 'see more+';
+      }
+
+    }
+
+  }
+
+  toggleRightSide() {
+    this.visible = !this.visible;
+    if (this.visible) {
+      this.seeMoreFilters = '-filtres';
+    }
+    else {
+      this.seeMoreFilters = '+filters';
+    }
+  }
+
 
   public toggle(): void {
     console.log("in toggle");

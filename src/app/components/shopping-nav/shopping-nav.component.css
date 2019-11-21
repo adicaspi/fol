@@ -219,3 +219,51 @@ div.arrow-back{
   float: right;
 }
 
+.anim{
+  right: 0;
+  margin-top:40px;
+  position: absolute; 
+  z-index: 1;
+  overflow: auto;
+  height: 100%;
+  background-color: white;
+}
+
+.filters{
+  background-color: white;
+  width:150px;
+}
+
+button.button-filters{
+  background: none;
+  border: none;
+  outline: none;  
+  margin-bottom:20px;
+}
+
+.items-list{
+  font-size:10px;
+  height: 20px;
+  margin:5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-items{
+  height: 250px;
+}
+
+div.mat-checkbox-inner-container{
+  position: absolute;
+  right: 0px;
+}
+
+div.mat-checkbox-frame{
+border:none;
+}
+
+div.title{
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 13px;
+}

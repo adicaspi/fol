@@ -1,27 +1,89 @@
-<mat-toolbar>
-  <!-- <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button> -->
+<div class="anim">
+  <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
+  <div *ngIf="visible" [@slideInOut] class="filters">
+    <div class="designers">
+      <div class="title">Designers</div>
+      <div class="designers items-list" *ngFor="let designer of designers | slice:0:3">
+        <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
+          (click)="$event.stopPropagation();"> {{designer.name}}
+        </mat-checkbox>
+      </div>
+
+      <button *ngIf="!openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
+      <div *ngIf="openCloseDesigners" [@expandCollapse]='openCloseAnim'>
+        <!-- <cdk-virtual-scroll-viewport itemSize="50" class="scroll-items"> -->
+        <div *ngFor="let designer of designers| slice:3:9" class="designers items-list">
+          <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
+            (click)="$event.stopPropagation();"> {{designer.name}}
+          </mat-checkbox>
+        </div>
+        <!-- </cdk-virtual-scroll-viewport> -->
+      </div>
+      <button *ngIf="openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
+
+    </div>
+
+
+
+    <div class="stores">
+      <div class="title">Stores</div>
+      <div class="stores items-list" *ngFor="let store of stores | slice:0:3">
+        <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
+          (click)="$event.stopPropagation();"> {{store.name}}
+        </mat-checkbox>
+      </div>
+      <button *ngIf="!openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
+      <div *ngIf="openCloseStores" [@expandCollapse]='openCloseAnim'>
+        <!-- <cdk-virtual-scroll-viewport itemSize="50" class="scroll-items"> -->
+        <div *ngFor="let store of stores | slice:3:8" class="stores items-list">
+          <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
+            (click)="$event.stopPropagation();"> {{store.name}}
+          </mat-checkbox>
+        </div>
+        <!-- </cdk-virtual-scroll-viewport> -->
+      </div>
+      <button *ngIf="openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
+    </div>
+
+    <!-- <div class="price">
+      <div class="title">Price</div>
+      <div class="price items-list">
+        100
+      </div>
+    </div> -->
+
+
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <mat-toolbar>
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon class="hamburger-icon" aria-label="Side nav toggle icon">{{ icon }}</mat-icon>
   </button>
 </mat-toolbar>
-<mat-drawer-container class="example-container" [hasBackdrop]="true"></mat-drawer-container>
-<mat-drawer #drawer [mode]="over">
-  <div class="arrow-back">
-    <mat-icon class="arrow-icon" (click)="drawer.toggle()">{{arrow_back}}</mat-icon>
-  </div>
-  <mat-list role="list">
-    <mat-list-item role="listitem">Clothings</mat-list-item>
-    <mat-list-item role="listitem">Shoes</mat-list-item>
-    <mat-list-item role="listitem">Bags</mat-list-item>
-    <mat-list-item role="listitem">Accessories</mat-list-item>
-    <mat-list-item role="listitem">Designers</mat-list-item>
-    <mat-list-item role="listitem">Stores</mat-list-item>
-  </mat-list>
-</mat-drawer>
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+  <mat-drawer #drawer [mode]="over">
+    <div class="arrow-back">
+      <mat-icon class="arrow-icon" (click)="drawer.toggle()">{{arrow_back}}</mat-icon>
+    </div>
+    <mat-list role="list">
+      <mat-list-item role="listitem">Clothings</mat-list-item>
+      <mat-list-item role="listitem">Shoes</mat-list-item>
+      <mat-list-item role="listitem">Bags</mat-list-item>
+      <mat-list-item role="listitem">Accessories</mat-list-item>
+      <mat-list-item role="listitem">Designers</mat-list-item>
+      <mat-list-item role="listitem">Stores</mat-list-item>
+    </mat-list>
+  </mat-drawer>
 
 
 
-
+</mat-drawer-container> -->
 
 
 <!-- <mat-sidenav-container class="sidenav-container">
