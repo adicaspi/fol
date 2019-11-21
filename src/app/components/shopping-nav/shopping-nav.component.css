@@ -226,12 +226,13 @@ div.arrow-back{
   z-index: 1;
   overflow: auto;
   height: 100%;
-  background-color: white;
+  
 }
 
 .filters{
   background-color: white;
   width:150px;
+  height: 100%;
 }
 
 button.button-filters{

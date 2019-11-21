@@ -117,6 +117,18 @@ export class ShoppingNavComponent implements OnInit {
     })
   }
 
+  onChangeCheckBox(key, $event, elem) {
+
+    if ($event.checked == true) {
+      elem.checked = true;
+      //this.filtering(key, elem, true);
+    }
+    else {
+      elem.checked = false;
+      //this.filtering(key, elem, false)
+    }
+  }
+
   openReportsFilter(category): void {
     if (category == 'designers') {
       this.openCloseDesigners = !this.openCloseDesigners;
@@ -130,7 +142,7 @@ export class ShoppingNavComponent implements OnInit {
     }
     if (category == 'stores') {
       this.openCloseStores = !this.openCloseStores;
-      if (this.seeMoreStores) {
+      if (this.openCloseStores) {
         this.seeMoreStores = 'see less-';
       }
       else {
