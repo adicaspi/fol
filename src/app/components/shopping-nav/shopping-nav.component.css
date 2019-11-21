@@ -268,3 +268,7 @@ div.title{
   font-weight: bold;
   font-size: 13px;
 }
+
+span.mat-checkbox-label{
+  width:110px;
+}
