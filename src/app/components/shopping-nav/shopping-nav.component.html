@@ -1,6 +1,6 @@
-<div class="anim" [@slideInOut]="visible">
+<div class="anim">
   <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
-  <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear">clear</button>
+  <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
   <div *ngIf="visible" class="filters">
 
     <div class="stores">

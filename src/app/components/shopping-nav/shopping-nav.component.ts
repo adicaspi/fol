@@ -91,6 +91,7 @@ export class ShoppingNavComponent implements OnInit {
   currSelectedPrice;
   prevSelectedPrice;
   priceIsSelected: boolean = false;
+  filteringChanged: boolean = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -129,6 +130,7 @@ export class ShoppingNavComponent implements OnInit {
           this.currSelectedPrice = elem;
           this.prevSelectedPrice.checked = false;
           this.prevSelectedPrice = this.currSelectedPrice;
+          this.filteringChanged = true;
         }
         else {
           this.currSelectedPrice = elem;
@@ -140,6 +142,7 @@ export class ShoppingNavComponent implements OnInit {
         this.priceIsSelected = false
         elem.checked = false;
         this.filteringDTO.maxPrice = 0;
+        this.filteringChanged = false;
       }
       this.updateFeedFilteringDTO();
     }
@@ -147,11 +150,15 @@ export class ShoppingNavComponent implements OnInit {
       if ($event.checked == true) {
         elem.checked = true;
         this.filteringDTO.stores.push(elem.id);
+        this.filteringChanged = true;
       }
       else {
         const index = this.filteringDTO.stores.indexOf(elem.id, 0);
         if (index > -1) {
           this.filteringDTO.stores.splice(index, 1);
+        }
+        if (this.filteringDTO.stores.length = 0) {
+          this.filteringChanged = false;
         }
       }
       this.updateFeedFilteringDTO();
@@ -160,11 +167,15 @@ export class ShoppingNavComponent implements OnInit {
       if ($event.checked == true) {
         elem.checked = true;
         this.filteringDTO.designers.push(elem.name);
+        this.filteringChanged = true;
       }
       else {
         const index = this.filteringDTO.designers.indexOf(elem.name, 0);
         if (index > -1) {
-          this.filteringDTO.productTypes.splice(index, 1);
+          this.filteringDTO.designers.splice(index, 1);
+        }
+        if (this.filteringDTO.designers.length = 0) {
+          this.filteringChanged = false;
         }
       }
       this.updateFeedFilteringDTO();
@@ -216,6 +227,8 @@ export class ShoppingNavComponent implements OnInit {
     this.filteringDTO.stores = [];
     this.filteringDTO.maxPrice = 0;
     this.filteringDTO.minPrice = 0;
+    this.filteringChanged = false;
+    this.updateFeedFilteringDTO();
 
   }
 
