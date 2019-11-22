@@ -116,8 +116,10 @@ export class ShoppingNavComponent implements OnInit {
     this.onChanges();
   }
   onChanges(): void {
-    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(val => {
-      this.setSearchInput(val);
+    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(value => {
+      if (value != "") {
+        this.getSearchResults(value);
+      }
     })
   }
 
@@ -327,46 +329,21 @@ export class ShoppingNavComponent implements OnInit {
     }
   }
 
-  setSearchInput(value: string) {
-    if (value == "") {
-      this.firstChar = true;
-      this.options = [];
-      this.filteredOptions = this._filter(value);
-      // this.showSearchSubject.next(false);
-
-    }
-    if (this.firstChar && value != "") {
-      this.getSearchResults(value);
-      this.firstChar = false;
-    }
-    if (!this.firstChar) {
-      this.filteredOptions = this._filter(value);
-    }
-
-
-
-  }
-
   getSearchResults(value: string) {
     let baseAPI = this.baseApiUrl + '/image?s3key=';
     this.userService.search(value).subscribe(res => {
+      this.options = [];
       res.forEach(element => {
         let searchObject = {
+          fullName: element.fullName,
           userName: element.username,
           profileImgSrc: baseAPI + element.userProfileImageAddr,
           id: element.id
         };
         this.options.push(searchObject);
       })
-      this.filteredOptions = this._filter(value);
+      //this.filteredOptions = this._filter(value);
     })
-  }
-
-  private _filter(value: string): Observable<any> {
-    const filterValue = value.toLowerCase();
-    return Observable.of(
-      this.options.filter(option => option.userName.toLowerCase().includes(filterValue))
-    );
   }
 
   searchUser(searchResult) {
