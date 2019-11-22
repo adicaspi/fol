@@ -1,3 +1,20 @@
+<div class="logo-drawer">
+  <img src="../../../assets/fw_logo.PNG" class="logo" />
+  <form [formGroup]="searchForm" class="form-inline">
+    <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
+      [matAutocomplete]="auto" />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.userName">
+        <div class="search-item" (click)="searchUser(option)">
+          <img class="search-img" [attr.src]="option['profileImgSrc']" />
+          <span class="search-user">{{ option['userName'] }}</span>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+  </form>
+</div>
+
+
 <div class="anim">
   <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
   <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
