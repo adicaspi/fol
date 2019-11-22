@@ -68,7 +68,7 @@ export class ShoppingNavComponent implements OnInit {
   ];
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
-  price = ['ALL PRICES', '>1000', '1000-5000', '<5000'];
+  prices = [{ value: 100, checked: false }, { value: 200, checked: false }, { value: 300, checked: false }, { value: 400, checked: false }, { value: 500, checked: false }];
   mainMenu: boolean = true;
   secondaryMenu = {};
   icon = 'menu';
@@ -88,6 +88,9 @@ export class ShoppingNavComponent implements OnInit {
   seeMoreDesigners = 'see more+';
   seeMoreStores = 'see more+';
   seeMoreFilters = '+filters';
+  currSelectedPrice;
+  prevSelectedPrice;
+  priceIsSelected: boolean = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -118,14 +121,37 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   onChangeCheckBox(key, $event, elem) {
+    if (key == 'prices') {
 
-    if ($event.checked == true) {
-      elem.checked = true;
-      //this.filtering(key, elem, true);
+      if ($event.checked == true) {
+        elem.checked = true;
+        if (this.priceIsSelected) {
+          this.currSelectedPrice = elem;
+          this.prevSelectedPrice.checked = false;
+          this.prevSelectedPrice = this.currSelectedPrice;
+        }
+        else {
+          this.currSelectedPrice = elem;
+          this.prevSelectedPrice = elem;
+          this.priceIsSelected = true;
+        }
+      } else {
+        this.priceIsSelected = false
+        elem.checked = false;
+      }
+
     }
     else {
-      elem.checked = false;
-      //this.filtering(key, elem, false)
+
+
+      if ($event.checked == true) {
+        elem.checked = true;
+        //this.filtering(key, elem, true);
+      }
+      else {
+        elem.checked = false;
+        //this.filtering(key, elem, false)
+      }
     }
   }
 
@@ -150,7 +176,6 @@ export class ShoppingNavComponent implements OnInit {
       }
 
     }
-
   }
 
   toggleRightSide() {
@@ -161,6 +186,20 @@ export class ShoppingNavComponent implements OnInit {
     else {
       this.seeMoreFilters = '+filters';
     }
+  }
+
+  clearSelection() {
+    this.designers.forEach(elem => {
+      elem.checked = false;
+    });
+    this.stores.forEach(elem => {
+      elem.checked = false;
+    });
+    this.filteringDTO.designers = [];
+    this.filteringDTO.stores = [];
+    this.filteringDTO.maxPrice = 0;
+    this.filteringDTO.minPrice = 0;
+
   }
 
 
