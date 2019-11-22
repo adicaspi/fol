@@ -24,7 +24,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateX(100%)', opacity: 1, width: '150px' }),
-        animate('400ms ease-in', style({ transform: 'translateX(0%)' }))
+        animate('1000ms ease-in', style({ transform: 'translateX(0%)' }))
       ]),
       transition(':leave', [
         animate('200ms ease-in', style({ transform: 'translateX(100%)' }))
@@ -101,7 +101,7 @@ export class ShoppingNavComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-
+    this.visible = false;
   }
 
   ngOnInit() {
@@ -135,24 +135,41 @@ export class ShoppingNavComponent implements OnInit {
           this.prevSelectedPrice = elem;
           this.priceIsSelected = true;
         }
+        this.filteringDTO.maxPrice = this.currSelectedPrice.value;
       } else {
         this.priceIsSelected = false
         elem.checked = false;
+        this.filteringDTO.maxPrice = 0;
       }
-
+      this.updateFeedFilteringDTO();
     }
-    else {
-
-
+    if (key == "stores") {
       if ($event.checked == true) {
         elem.checked = true;
-        //this.filtering(key, elem, true);
+        this.filteringDTO.stores.push(elem.id);
       }
       else {
-        elem.checked = false;
-        //this.filtering(key, elem, false)
+        const index = this.filteringDTO.stores.indexOf(elem.id, 0);
+        if (index > -1) {
+          this.filteringDTO.stores.splice(index, 1);
+        }
       }
+      this.updateFeedFilteringDTO();
     }
+    if (key == "desginers") {
+      if ($event.checked == true) {
+        elem.checked = true;
+        this.filteringDTO.designers.push(elem.name);
+      }
+      else {
+        const index = this.filteringDTO.designers.indexOf(elem.name, 0);
+        if (index > -1) {
+          this.filteringDTO.productTypes.splice(index, 1);
+        }
+      }
+      this.updateFeedFilteringDTO();
+    }
+
   }
 
   openReportsFilter(category): void {

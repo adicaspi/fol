@@ -151,7 +151,7 @@ export class MutualNavComponent implements OnInit {
         else {
           const index = this.filteringDTO.designers.indexOf(elem.name, 0);
           if (index > -1) {
-            this.filteringDTO.productTypes.splice(index, 1);
+            this.filteringDTO.designers.splice(index, 1);
           }
         }
         break;
@@ -162,7 +162,7 @@ export class MutualNavComponent implements OnInit {
         else {
           const index = this.filteringDTO.stores.indexOf(elem.id, 0);
           if (index > -1) {
-            this.filteringDTO.productTypes.splice(index, 1);
+            this.filteringDTO.stores.splice(index, 1);
           }
         }
         break;

@@ -1,6 +1,7 @@
-<div class="anim">
+<div class="anim" [@slideInOut]="visible">
   <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
-  <div *ngIf="visible" [@slideInOut] class="filters">
+  <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear">clear</button>
+  <div *ngIf="visible" class="filters">
 
     <div class="stores">
       <div class="title">Stores</div>
@@ -40,7 +41,7 @@
       <button *ngIf="openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
     </div>
     <div class="price">
-      <div class="title">Price</div>
+      <div class="title">Prices (ILS)</div>
       <div class="price items-list">
         <div *ngFor="let price of prices" class="prices items-list">
           <mat-checkbox name="price-tag" [value]="price.value" [checked]="price.checked" labelPosition="before" (change)="onChangeCheckBox('prices',$event,price)"

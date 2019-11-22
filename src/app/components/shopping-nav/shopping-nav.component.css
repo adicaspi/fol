@@ -242,6 +242,10 @@ button.button-filters{
   margin-bottom:20px;
 }
 
+button.button-filters.clear{
+  float: right;
+}
+
 .items-list{
   font-size:10px;
   height: 20px;
@@ -262,6 +266,11 @@ div.mat-checkbox-inner-container{
 div.mat-checkbox-frame{
 border:none;
 }
+
+label.mat-checkbox-layout{
+  align-items: center;
+}
+
 
 div.title{
   margin-left: 5px;
