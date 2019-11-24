@@ -270,7 +270,10 @@ export class ShoppingNavComponent implements OnInit {
       this.currSelectedProductType = null;
       this.prevSelectedProductType = null;
     }
+  }
 
+  feedPage() {
+    this.router.navigate(['feed', this.userService.userId]);
   }
 
   initMenu() {

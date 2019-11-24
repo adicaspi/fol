@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="logo-drawer">
-    <img src="../../../assets/fw_logo.PNG" class="logo" />
+    <img src="../../../assets/fw_logo.PNG" class="logo" (click)="feedPage()" />
     <form [formGroup]="searchForm" class="form-inline">
       <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
         [matAutocomplete]="auto" />
