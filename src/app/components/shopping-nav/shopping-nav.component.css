@@ -10,7 +10,7 @@ html, body {height:100%;overflow:auto}
 .cdk-virtual-scroll-data-product-type .cdk-viewport {
   height: 30px;
   background-color: white;
-  width: 380px;
+  width: 350px;
   font-size: 12px;
 }
 

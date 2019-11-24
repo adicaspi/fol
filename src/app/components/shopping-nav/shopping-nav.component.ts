@@ -58,7 +58,7 @@ export class ShoppingNavComponent implements OnInit {
   displayList = {};
   categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
   clothings = [
-    { id: 1, name: 'All Clothings', servername: 'Default', checked: false },
+    { id: 1, name: 'All Clothing', servername: 'Default', checked: false },
     { id: 2, name: 'Tops', servername: 'Tops', checked: false },
     { id: 3, name: 'Pants', servername: 'Pants', checked: false },
     { id: 4, name: 'Jackets & Coats', servername: 'JacketsOrCoats', checked: false },
@@ -89,6 +89,9 @@ export class ShoppingNavComponent implements OnInit {
   seeMoreFilters = '+filters';
   currSelectedPrice;
   prevSelectedPrice;
+  currSelectedProductType;
+  prevSelectedProductType;
+  productIsSelected: boolean = false;
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = false;
@@ -269,20 +272,44 @@ export class ShoppingNavComponent implements OnInit {
     this.mainMenu = true;
   }
 
-  filterByProduct(item) {
+  filterByProduct(elem) {
+    console.log("im all clothin", elem);
     this.filteringDTO.productTypes = [];
-    if (item.checked) {
-      item.checked = false;
+
+    if (this.productIsSelected) {
+      if (this.prevSelectedProductType == elem) {
+        console.log("product is selected in same");
+        this.productIsSelected = false;
+        this.prevSelectedProductType = null;
+        this.currSelectedProductType = null;
+        elem.checked = false;
+      }
+      else {
+        console.log("product is selecetd not in same")
+        this.currSelectedProductType = elem;
+        elem.checked = true;
+        this.prevSelectedProductType.checked = false;
+        this.prevSelectedProductType = this.currSelectedProductType;
+        if (elem.servername != 'Default') {
+          this.filteringDTO.productTypes.push(elem.servername);
+        }
+      }
     }
     else {
-      if (item.servername != 'Default') {
-        this.filteringDTO.productTypes.push(item.servername);
-        item.checked = true;
+      console.log("product isnt selected");
+      elem.checked = true;
+      this.currSelectedProductType = elem;
+      this.prevSelectedProductType = elem;
+      this.productIsSelected = true;
+      if (elem.servername != 'Default') {
+        this.filteringDTO.productTypes.push(elem.servername);
       }
     }
     this.updateFeedFilteringDTO();
-    //this.initMenu();
   }
+
+
+
 
   updateFeedFilteringDTO() {
     if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
