@@ -36,7 +36,7 @@ body {
 } */
 
 .cdk-overlay-container > .backdrop-product {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   overflow-y: auto !important;
   pointer-events: auto !important;

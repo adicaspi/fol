@@ -14,14 +14,11 @@
         <img id="mainImage" [attr.src]="userPost.postImgSrc" />
 
         <div class="product-description">
-          <div class="card-text title">
-            <!-- <img  src="../../../assets/zara.PNG" class="store-logo" /> -->
-            <img class="store-logo" [attr.src]="storeLogoSrc">
-          </div>
+          <img class="store-logo" [attr.src]="storeLogoSrc">
 
-          <p id="description" class="card-text description">
+          <div class="product-description" class="card-text description">
             {{postInfo.description}}
-          </p>
+          </div>
 
           <div class="footer">
             <div class="upper-footer">
