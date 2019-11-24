@@ -113,9 +113,6 @@ export class ShoppingNavComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
-    this.isHandset$.subscribe(res => {
-      console.log(res, "is res");
-    })
     this.onChanges();
   }
   onChanges(): void {
@@ -258,6 +255,9 @@ export class ShoppingNavComponent implements OnInit {
   filterByCategory(item) {
     if (item == 'Clothing') {
       this.showProductType = true;
+    }
+    else {
+      this.showProductType = false;
     }
     this.filteringDTO.category = item;
     this.updateFeedFilteringDTO();

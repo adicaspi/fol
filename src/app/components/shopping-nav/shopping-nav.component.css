@@ -195,7 +195,7 @@ span.mat-checkbox-label{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 46px;
+  height: 46px !important;
   margin-top: 10px;
   background-color: black;
   color: white;
@@ -210,4 +210,8 @@ span.toolbar-item{
 mat-toolbar.product-type{
   background-color: white;
   height: 35px;
+}
+
+i.fal.fa-times{
+  font-size: 18px;
 }
