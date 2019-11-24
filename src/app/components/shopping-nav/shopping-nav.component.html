@@ -1,99 +1,100 @@
-<div class="logo-drawer">
-  <img src="../../../assets/fw_logo.PNG" class="logo" />
-  <form [formGroup]="searchForm" class="form-inline">
-    <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
-      [matAutocomplete]="auto" />
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of options" [value]="option.userName">
-        <div class="search-result" (click)="searchUser(option)">
-          <div class="search-res-user-img">
-            <img class="search-img" [attr.src]="option['profileImgSrc']" />
+<div class="wrapper">
+  <div class="logo-drawer">
+    <img src="../../../assets/fw_logo.PNG" class="logo" />
+    <form [formGroup]="searchForm" class="form-inline">
+      <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
+        [matAutocomplete]="auto" />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option.userName">
+          <div class="search-result" (click)="searchUser(option)">
+            <div class="search-res-user-img">
+              <img class="search-img" [attr.src]="option['profileImgSrc']" />
+            </div>
+            <div class="search-res-user-details">
+              <span class="search-username">{{ option['userName'] }}</span>
+              <span class="search-fullname">{{ option['fullName'] }}</span>
+            </div>
           </div>
-          <div class="search-res-user-details">
-            <span class="search-username">{{ option['userName'] }}</span>
-            <span class="search-fullname">{{ option['fullName'] }}</span>
-          </div>
-        </div>
-      </mat-option>
-    </mat-autocomplete>
-  </form>
-</div>
-
-<mat-toolbar class="categories-toolbar">
-  <span class="toolbar-item" (click)="filterByCategory('Clothing')">Clothing</span>
-  <span class="toolbar-item" (click)="filterByCategory('Shoes')">Shoes</span>
-  <span class="toolbar-item" (click)="filterByCategory('Bags')">Bags</span>
-  <span class="toolbar-item" (click)="filterByCategory('Accessories')">Accessories</span>
-</mat-toolbar>
-
-<mat-toolbar *ngIf="showProductType" class="product-type">
-  <i class="fal fa-times" (click)="closeProductType()"></i>
-  <div class="cdk-virtual-scroll-data-product-type">
-    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport">
-      <div *cdkVirtualFor="let item of clothings" [ngClass]="{'scroll-item-checked':item.checked,'scroll-item':!(item.checked)}">
-        <a (click)="filterByProduct(item)">{{item.name}}
-        </a>
-      </div>
-    </cdk-virtual-scroll-viewport>
+        </mat-option>
+      </mat-autocomplete>
+    </form>
   </div>
-</mat-toolbar>
 
-<div class="anim">
-  <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
-  <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
-  <div *ngIf="visible" class="filters">
+  <mat-toolbar class="categories-toolbar">
+    <span class="toolbar-item" (click)="filterByCategory('Clothing')">Clothing</span>
+    <span class="toolbar-item" (click)="filterByCategory('Shoes')">Shoes</span>
+    <span class="toolbar-item" (click)="filterByCategory('Bags')">Bags</span>
+    <span class="toolbar-item" (click)="filterByCategory('Accessories')">Accessories</span>
+  </mat-toolbar>
 
-    <div class="stores">
-      <div class="title">Stores</div>
-      <div class="stores items-list" *ngFor="let store of stores | slice:0:3">
-        <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
-          (click)="$event.stopPropagation();"> {{store.name}}
-        </mat-checkbox>
-      </div>
-      <button *ngIf="!openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
-      <div *ngIf="openCloseStores" [@expandCollapse]='openCloseAnim'>
-        <div *ngFor="let store of stores | slice:3:8" class="stores items-list">
+  <mat-toolbar *ngIf="showProductType" class="product-type">
+    <i class="fal fa-times" (click)="closeProductType()"></i>
+    <div class="cdk-virtual-scroll-data-product-type">
+      <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport">
+        <div *cdkVirtualFor="let item of clothings" [ngClass]="{'scroll-item-checked':item.checked,'scroll-item':!(item.checked)}">
+          <a (click)="filterByProduct(item)">{{item.name}}
+          </a>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </mat-toolbar>
+
+  <div class="anim">
+    <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
+    <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
+    <div *ngIf="visible" class="filters">
+
+      <div class="stores">
+        <div class="title">Stores</div>
+        <div class="stores items-list" *ngFor="let store of stores | slice:0:3">
           <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
             (click)="$event.stopPropagation();"> {{store.name}}
           </mat-checkbox>
         </div>
-      </div>
-      <button *ngIf="openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
-    </div>
-
-
-    <div class="designers">
-      <div class="title">Designers</div>
-      <div class="designers items-list" *ngFor="let designer of designers | slice:0:3">
-        <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
-          (click)="$event.stopPropagation();"> {{designer.name}}
-        </mat-checkbox>
+        <button *ngIf="!openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
+        <div *ngIf="openCloseStores" [@expandCollapse]='openCloseAnim'>
+          <div *ngFor="let store of stores | slice:3:8" class="stores items-list">
+            <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
+              (click)="$event.stopPropagation();"> {{store.name}}
+            </mat-checkbox>
+          </div>
+        </div>
+        <button *ngIf="openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
       </div>
 
-      <button *ngIf="!openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
-      <div *ngIf="openCloseDesigners" [@expandCollapse]='openCloseAnim'>
-        <div *ngFor="let designer of designers| slice:3:9" class="designers items-list">
+
+      <div class="designers">
+        <div class="title">Designers</div>
+        <div class="designers items-list" *ngFor="let designer of designers | slice:0:3">
           <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
             (click)="$event.stopPropagation();"> {{designer.name}}
           </mat-checkbox>
         </div>
-      </div>
-      <button *ngIf="openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
-    </div>
-    <div class="price">
-      <div class="title">Prices (ILS)</div>
-      <div class="price items-list">
-        <div *ngFor="let price of prices" class="prices items-list">
-          <mat-checkbox name="price-tag" [value]="price.value" [checked]="price.checked" labelPosition="before" (change)="onChangeCheckBox('prices',$event,price)"
-            (click)="$event.stopPropagation();"> {{price.value}}
-          </mat-checkbox>
-        </div>
 
+        <button *ngIf="!openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
+        <div *ngIf="openCloseDesigners" [@expandCollapse]='openCloseAnim'>
+          <div *ngFor="let designer of designers| slice:3:9" class="designers items-list">
+            <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
+              (click)="$event.stopPropagation();"> {{designer.name}}
+            </mat-checkbox>
+          </div>
+        </div>
+        <button *ngIf="openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
+      </div>
+      <div class="price">
+        <div class="title">Prices (ILS)</div>
+        <div class="price items-list">
+          <div *ngFor="let price of prices" class="prices items-list">
+            <mat-checkbox name="price-tag" [value]="price.value" [checked]="price.checked" labelPosition="before" (change)="onChangeCheckBox('prices',$event,price)"
+              (click)="$event.stopPropagation();"> {{price.value}}
+            </mat-checkbox>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 
 
 
