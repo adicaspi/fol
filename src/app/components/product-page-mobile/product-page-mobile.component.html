@@ -1,10 +1,10 @@
-<div *ngIf="user as currentUser" class="wrapper">
+<div *ngIf="postInfo" class="wrapper">
   <div class="icon-img">
     <i (click)="goBackPage()" class="fa fa-chevron-left"></i>
   </div>
   <div class="profile-img-comp" (click)="profilePage()">
     <img id="profileImage" [attr.src]="userProfileSrc" />
-    <div class="card-text profile">{{ currentUser.username }}</div>
+    <div class="card-text profile">{{ postInfo.userName }}</div>
   </div>
 
   <div *ngIf="postInfo" class="product-upper-description">
@@ -18,9 +18,8 @@
     </div>
   </div>
   <div *ngIf="imageUrls" class="slider">
-    <slideshow [imageUrls]="imageUrls"></slideshow>
-    <slideshow [height]="height" [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1"
-      [autoPlayWaitForLazyLoad]="false" showDots="true">
+    <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false"
+      showDots="true">
     </slideshow>
   </div>
 
@@ -28,7 +27,7 @@
     <span class="price">
       {{ postInfo.price }}
     </span>
-    <a href="{{ userPost.post.link }}" target="_blank">
+    <a href="{{ postInfo.link }}" target="_blank">
       <button type="button" class="shop_btn">
         Shop
       </button>

@@ -24,10 +24,11 @@ export class ProductPageMobileComponent implements OnInit {
   userProfileSrc: any;
   storeLogoSrc: string;
   postInfo: PostInfo;
+  postImageAddr: string;
   imageUrls: string[] = [];
   onDestroy: Subject<void> = new Subject<void>();
   rtl: boolean = false;
-  height: string = '400px';
+  // height: string = '400px';
 
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   constructor(
@@ -40,15 +41,8 @@ export class ProductPageMobileComponent implements OnInit {
   ngOnInit() {
     this.userPost = this.postService.userPost;
     this.directingPage = this.dialogService.directingPage;
-    this.userService
-      .getUserDetails(this.userPost['post']['userId'])
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(user => {
-        this.user = user;
-        this.userProfileSrc =
-          this.baseApiUrl + '/image?s3key=' + this.user.profileImageAddr;
-        this.getPostInfo();
-      });
+    this.getPostInfo();
+
 
   }
 
@@ -59,7 +53,6 @@ export class ProductPageMobileComponent implements OnInit {
       )
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
-        console.log("post info", postInfo);
         this.postInfo = postInfo;
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
@@ -67,7 +60,9 @@ export class ProductPageMobileComponent implements OnInit {
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
         );
+        this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
         this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
+        this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
         if (postInfo.storeId == 5 || postInfo.storeId == 7) {
           this.rtl = true;
         }
@@ -93,13 +88,13 @@ export class ProductPageMobileComponent implements OnInit {
 
   goBackPage() {
     if (this.directingPage == 'profile') {
-      this.router.navigate(['profile', this.user.id]);
+      this.router.navigate(['profile', this.postInfo.userId]);
     }
     if (this.directingPage == 'feed') {
-      this.router.navigate(['feed', this.user.id]);
+      this.router.navigate(['feed', this.postInfo.userId]);
     }
     if (this.directingPage == 'explore') {
-      this.router.navigate(['explore', this.user.id]);
+      this.router.navigate(['explore', this.postInfo.userId]);
     }
   }
 
