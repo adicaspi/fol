@@ -128,8 +128,9 @@ img.search-img{
 
 
 .anim{
-  right: 0;
-  position: absolute; 
+  /* right: 0;
+  position: absolute;  */
+  float: right;
   z-index: 1;
   overflow: auto;
   height: 100%;
