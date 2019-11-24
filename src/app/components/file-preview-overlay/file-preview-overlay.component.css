@@ -70,7 +70,7 @@
     font-family: Arial;
     font-weight: 500;
     font-size: 22px;
-    color: #333;
+    color: rgb(38,38,38);
   }
 
   #description {
@@ -108,6 +108,20 @@
   a {
     text-decoration: none;
     color: white;
+  }
+
+  .num-views {
+    font-size: 15px;
+    font-family: Helvetica, sans-serif;
+    font-weight: 900;
+    margin-top: 20px;
+    margin-left: 10px;
+    color: rgb(52,52,52);
+    letter-spacing: -0.2px;
+  }
+
+  #int-num-views {
+    letter-spacing: -0.2px;
   }
 
   .lower-part {
