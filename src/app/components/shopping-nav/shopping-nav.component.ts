@@ -58,13 +58,13 @@ export class ShoppingNavComponent implements OnInit {
   displayList = {};
   categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
   clothings = [
-    { id: 1, name: 'All Clothings', servername: 'Default' },
-    { id: 2, name: 'Tops', servername: 'Tops' },
-    { id: 3, name: 'Pants', servername: 'Pants' },
-    { id: 4, name: 'Jackets & Coats', servername: 'JacketsOrCoats' },
-    { id: 5, name: 'Shorts', servername: 'Shorts' },
-    { id: 6, name: 'Lingerie', servername: 'Lingerie' },
-    { id: 7, name: 'Dresses & Skirts', servername: 'DressesOrSkirts' }
+    { id: 1, name: 'All Clothings', servername: 'Default', checked: false },
+    { id: 2, name: 'Tops', servername: 'Tops', checked: false },
+    { id: 3, name: 'Pants', servername: 'Pants', checked: false },
+    { id: 4, name: 'Jackets & Coats', servername: 'JacketsOrCoats', checked: false },
+    { id: 5, name: 'Shorts', servername: 'Shorts', checked: false },
+    { id: 6, name: 'Lingerie', servername: 'Lingerie', checked: false },
+    { id: 7, name: 'Dresses & Skirts', servername: 'DressesOrSkirts', checked: false }
   ];
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
@@ -80,7 +80,6 @@ export class ShoppingNavComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
-  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
   visible = false;
   panelOpenState = true;
   openCloseStores = false;
@@ -92,6 +91,7 @@ export class ShoppingNavComponent implements OnInit {
   prevSelectedPrice;
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
+  showProductType: boolean = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -234,26 +234,9 @@ export class ShoppingNavComponent implements OnInit {
 
   }
 
-
   public toggle(): void {
     console.log("in toggle");
     this.drawer.toggle();
-  }
-
-  currentMenu(menuItem) {
-    this.mainMenu = false;
-    this.showBack = true;
-    switch (menuItem) {
-      case 'categories':
-        this.currMenu = 'cat';
-        break;
-      case 'designers':
-        this.currMenu = 'des';
-        break;
-      case 'stores':
-        this.currMenu = 'str';
-        break;
-    }
   }
 
   goBack() {
@@ -270,21 +253,14 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   filterByCategory(item) {
-    if (item == 'All Categories') {
-      this.initFilteringDTO();
-      this.initMenu();
-      return;
+    if (item == 'Clothing') {
+      this.showProductType = true;
     }
-    else {
-      this.filteringDTO.category = item;
-      if (item == 'Clothing') {
-        this.currMenu = 'prd-clothings';
-        this.mainMenu = true;
-        this.updateFeedFilteringDTO();
-        this.toggle();
-      }
-    }
-
+    this.filteringDTO.category = item;
+    this.updateFeedFilteringDTO();
+  }
+  closeProductType() {
+    this.showProductType = false;
   }
 
   initMenu() {
@@ -295,23 +271,17 @@ export class ShoppingNavComponent implements OnInit {
 
   filterByProduct(item) {
     this.filteringDTO.productTypes = [];
-    if (item != 'Default') {
-      this.filteringDTO.productTypes.push(item);
+    if (item.checked) {
+      item.checked = false;
+    }
+    else {
+      if (item.servername != 'Default') {
+        this.filteringDTO.productTypes.push(item.servername);
+        item.checked = true;
+      }
     }
     this.updateFeedFilteringDTO();
     //this.initMenu();
-  }
-
-  filterByDesigner(item) {
-    this.filteringDTO.designers.push(item);
-    this.updateFeedFilteringDTO();
-    this.initMenu();
-  }
-
-  filterByStore(id) {
-    this.filteringDTO.stores.push(id);
-    this.updateFeedFilteringDTO();
-    this.initMenu();
   }
 
   updateFeedFilteringDTO() {

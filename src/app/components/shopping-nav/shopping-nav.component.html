@@ -19,6 +19,24 @@
   </form>
 </div>
 
+<mat-toolbar class="categories-toolbar">
+  <span class="toolbar-item" (click)="filterByCategory('Clothing')">Clothing</span>
+  <span class="toolbar-item" (click)="filterByCategory('Shoes')">Shoes</span>
+  <span class="toolbar-item" (click)="filterByCategory('Bags')">Bags</span>
+  <span class="toolbar-item" (click)="filterByCategory('Accessories')">Accessories</span>
+</mat-toolbar>
+
+<mat-toolbar *ngIf="showProductType" class="product-type">
+  <i class="fal fa-times" (click)="closeProductType()"></i>
+  <div class="cdk-virtual-scroll-data-product-type">
+    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport">
+      <div *cdkVirtualFor="let item of clothings" [ngClass]="{'scroll-item-checked':item.checked,'scroll-item':!(item.checked)}">
+        <a (click)="filterByProduct(item)">{{item.name}}
+        </a>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</mat-toolbar>
 
 <div class="anim">
   <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
