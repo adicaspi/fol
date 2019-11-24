@@ -104,6 +104,10 @@ export class FilePreviewOverlayComponent implements OnInit {
         });
         this.getPostInfo();
       });
+      this.postsToShow = [
+    {post: null, postImgSrc: "https://www.followear.com/api/image?s3key=images/post-images/6bfe77f7-f73f-11e9-a6b8-63361825303d.jpg"},
+    {post: null, postImgSrc: "https://www.followear.com/api/image?s3key=images/post-images/1b5ccb95-f73e-11e9-a6b8-475b1f172eb8.jpg"},
+    {post: null, postImgSrc: "https://www.followear.com/api/image?s3key=images/post-images/580be7d5-fa30-11e9-848e-95ebe9addac4.jpg"}];
   }
 
   setImage(image) {
