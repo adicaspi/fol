@@ -264,6 +264,13 @@ export class ShoppingNavComponent implements OnInit {
   }
   closeProductType() {
     this.showProductType = false;
+    if (this.productIsSelected) {
+      this.currSelectedProductType.checked = false;
+      this.prevSelectedProductType.checked = false;
+      this.currSelectedProductType = null;
+      this.prevSelectedProductType = null;
+    }
+
   }
 
   initMenu() {
@@ -273,19 +280,16 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   filterByProduct(elem) {
-    console.log("im all clothin", elem);
     this.filteringDTO.productTypes = [];
 
     if (this.productIsSelected) {
       if (this.prevSelectedProductType == elem) {
-        console.log("product is selected in same");
         this.productIsSelected = false;
         this.prevSelectedProductType = null;
         this.currSelectedProductType = null;
         elem.checked = false;
       }
       else {
-        console.log("product is selecetd not in same")
         this.currSelectedProductType = elem;
         elem.checked = true;
         this.prevSelectedProductType.checked = false;
@@ -296,7 +300,6 @@ export class ShoppingNavComponent implements OnInit {
       }
     }
     else {
-      console.log("product isnt selected");
       elem.checked = true;
       this.currSelectedProductType = elem;
       this.prevSelectedProductType = elem;
