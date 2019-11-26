@@ -1,9 +1,8 @@
-<div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
+<!-- <div class="feed-wrapper">
+  <div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="fetchImages()">
   <div id="main-body">
     <div class="center">
       <div class="card masonry-item" *ngFor="let post of postsToShow">
-        <!-- <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
-        <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow"> -->
         <div class="profile-image">
           <img (click)="profilePage(post)" [attr.src]="post['profileImgSrc']" />
           <span (click)="profilePage(post)" class="card-text-profile">{{ post['post']['userName'] }}</span>
@@ -17,7 +16,6 @@
           <div class="description">
             {{ post['post']['description'] }}
           </div>
-          <!-- <div class="fotter-card-text"> -->
           <span class="price">
             {{ post['post']['price'] }}
           </span>
@@ -27,7 +25,40 @@
         </div>
       </div>
     </div>
-    <!-- </ngxMasonryItem>
-      </ngx-masonry> -->
   </div>
-</div>
+  </div>
+</div> -->
+<cdk-virtual-scroll-viewport itemSize="100" class="example-viewport">
+  <div id="main-body">
+    <div class="center">
+
+
+      <div *cdkVirtualFor="let post of postsToShow" class="card masonry-item">
+
+        <div class="profile-image">
+          <img (click)="profilePage(post)" [attr.src]="post['profileImgSrc']" />
+          <span (click)="profilePage(post)" class="card-text-profile">{{ post['post']['userName'] }}</span>
+        </div>
+
+        <div class="masonry-img">
+          <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" class="img-main" />
+        </div>
+
+        <div class="card-text">
+          <div class="description">
+            {{ post['post']['description'] }}
+          </div>
+          <span class="price">
+            {{ post['post']['price'] }}
+          </span>
+          <a class="store text-right">
+            {{ post['post']['website'] }}
+          </a>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</cdk-virtual-scroll-viewport>

@@ -1,3 +1,19 @@
+.example-viewport {
+  height: 100vh;
+  width: 100%;
+  margin:auto;
+ 
+}
+
+.cdk-virtual-scroll-content-wrapper{
+  width: 900px;
+    margin: auto;
+    position: relative;
+    transform: translateY(0px);
+    min-width: none !important;
+}
+
+
 @media only screen and (min-width: 900px) {
 #main-body {
   padding-right: 0px;
@@ -47,9 +63,6 @@ ngxMasonryItem:nth-of-type(3n) {
 }
 
 .profile-image span {
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue' Helvetica, Arial, sans-serif; */
-
   font-size: 18px;
   margin-left: 10px;
   color: rgb(33, 37, 41);
@@ -241,6 +254,7 @@ span.price {
 @media  (max-width: 600px)  {
   .infinite-scroll{
     margin-top:50px;
+    height: 900px;
   }
   
   #main-body {

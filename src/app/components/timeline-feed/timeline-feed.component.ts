@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, Observable, Subscription } from 'rxjs';
+import { Subject, Observable, Subscription, of } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { DialogService } from '../../services/dialog.service';
@@ -10,6 +10,9 @@ import { ConfigService } from '../../services/config.service';
 import { GlobalVariable } from '../../../global';
 import { Router } from '../../../../node_modules/@angular/router';
 import { ErrorsService } from '../../services/errors.service';
+import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { BehaviorSubject } from 'rxjs';
+import { map, tap, scan, mergeMap, throttleTime, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -17,6 +20,7 @@ import { ErrorsService } from '../../services/errors.service';
   styleUrls: ['./timeline-feed.component.css']
 })
 export class TimelineFeedComponent implements OnInit {
+  @ViewChild(CdkVirtualScrollViewport, { static: false }) virtualScroll: CdkVirtualScrollViewport;
   id: number;
   posts: Array<any> = [];
   postsToShow = [];
@@ -24,19 +28,15 @@ export class TimelineFeedComponent implements OnInit {
   desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   error: string;
+  endOfFeed = false;
   private feedSubsription: Subscription
+  newoffset = new BehaviorSubject(null);
+  infinite: Observable<any[]>;
 
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
-
-  public masonryOptions: NgxMasonryOptions = {
-    transitionDuration: '0',
-    horizontalOrder: true,
-    fitWidth: true,
-    gutter: 39
-  };
 
   constructor(
     private userService: UserService,
@@ -45,27 +45,22 @@ export class TimelineFeedComponent implements OnInit {
     private dialogService: DialogService,
     private configService: ConfigService,
     private router: Router,
-    private errorsService: ErrorsService
+    private errorsService: ErrorsService,
+    private scrollDispatcher: ScrollDispatcher
 
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.id = this.userService.getCurrentUser();
     this.generateTimelineFeed(this.offset, this.id);
-    //this.id = 655;
-
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
           if (value.width <= 900) {
-            // this.masonryOptions.gutter = 60;
-            this.masonryOptions.fitWidth = true;
           }
           if (value.width <= 600) {
-            this.masonryOptions.horizontalOrder = false;
             this.desktop = false;
-            this.masonryOptions.gutter = 100;
-            this.generateTimelineFeed(0, this.id);
           }
         }),
       error => this.anyErrors = true,
@@ -78,10 +73,41 @@ export class TimelineFeedComponent implements OnInit {
         this.generateTimelineFeed(this.offset, this.id);
       }
     });
-
   }
 
-  private processData = posts => {
+  ngAfterViewInit(): void {
+    console.log("in after view");
+    this.scrollDispatcher.scrolled().pipe(
+      filter(event => this.virtualScroll.getRenderedRange().end === this.virtualScroll.getDataLength())
+    ).subscribe(event => {
+      console.log('new result append', this.offset);
+      if (!this.endOfFeed) {
+        this.generateTimelineFeed(this.offset, this.id);
+      }
+    })
+  }
+
+  // private processData = posts => {
+  //   if (this.offset == posts['newOffset']) {
+  //     return;
+  //   }
+  //   this.offset = posts['newOffset'];
+  //   posts['feedPosts'].forEach(post => {
+  //     let baseAPI = this.baseApiUrl + '/image?s3key=';
+  //     let postObject = {
+  //       post: post,
+  //       postImgSrc: baseAPI + post.postImageAddr,
+  //       profileImgSrc: baseAPI + post.userProfileImageAddr
+  //     };
+  //     this.postsToShow.push(postObject);
+
+  //   });
+  //   console.log("im posts to tshow", this.postsToShow);
+  // };
+
+
+  processData(posts): Observable<any> {
+    let newPosts = [];
     if (this.offset == posts['newOffset']) {
       return;
     }
@@ -93,16 +119,38 @@ export class TimelineFeedComponent implements OnInit {
         postImgSrc: baseAPI + post.postImageAddr,
         profileImgSrc: baseAPI + post.userProfileImageAddr
       };
-      this.postsToShow.push(postObject);
+
+      newPosts.push(postObject);
+
     });
+    console.log("in procress newpossts", newPosts);
+    return of(newPosts);
   };
 
   generateTimelineFeed(offset: number, id: number) {
+    console.log("in gen time");
     this.feedService
       .getTimeLineFeed(offset, id)
       .pipe(takeUntil(this.onDestroy))
-      .subscribe(this.processData);
+      .subscribe(posts => {
+        if (posts == null) {
+          this.endOfFeed = true;
+        }
+        else {
+          this.processData(posts).subscribe(res => {
+            this.postsToShow = this.postsToShow.concat(res)
+            console.log("im posts to show", this.postsToShow);
+          })
+        }
+      });
   }
+
+  // generateTimelineFeed(offset: number, id: number) {
+  //   this.feedService
+  //     .getTimeLineFeed(offset, id)
+  //     .pipe(takeUntil(this.onDestroy))
+  //     .subscribe(this.processData);
+  // }
   fetchImages() {
     this.generateTimelineFeed(this.offset, this.id);
   }

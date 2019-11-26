@@ -3,7 +3,8 @@
 }
 html,
 body {
-  overflow: auto;
+  /* overflow: auto; */
+  overflow: hidden;
   height: 100%;
 }
 
