@@ -264,7 +264,10 @@ export class ShoppingNavComponent implements OnInit {
   }
   closeProductType() {
     this.showProductType = false;
+    this.filteringDTO.productTypes = [];
+    this.filteringDTO.category = null;
     if (this.productIsSelected) {
+      this.updateFeedFilteringDTO();
       this.currSelectedProductType.checked = false;
       this.prevSelectedProductType.checked = false;
       this.currSelectedProductType = null;
