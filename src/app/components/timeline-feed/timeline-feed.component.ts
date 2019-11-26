@@ -70,7 +70,7 @@ export class TimelineFeedComponent implements OnInit {
       if (msg.error == 'update-timelinefeed') {
         this.postsToShow = [];
         this.offset = 0;
-        this.generateTimelineFeed(this.offset, this.id);
+        this.generateTimelineFeed(this.offset, this.userService.getCurrentUser());
       }
     });
   }
