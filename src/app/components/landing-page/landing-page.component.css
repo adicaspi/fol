@@ -8,7 +8,7 @@
 
 .content .landing {
   background-size: cover;
-  background-image: url('../../../assets/landing_medium.jpg');
+  background: url('../../../assets/landing_medium.jpg');
   height: 100%;
   -webkit-filter: blur(3px);
   -moz-filter: blur(3px);
@@ -106,9 +106,9 @@ button.right-button {
   width: 150px;
   height: 40px;
   margin-top: 40px;
-  color: white;
+  /* color: white; */
   background: none;
-  border: 2px solid white;
+  /* border: 2px solid white; */
   outline: none;
   border-radius: 25px;
   font-size: 12px;

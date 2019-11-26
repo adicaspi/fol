@@ -4,10 +4,10 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
 
 
- html,
+ /* html,
 body {
   height: 100%;
-} 
+}  */
 
  .cdk-overlay-container {
   /* pointer-events: auto !important; */
