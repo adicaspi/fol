@@ -37,6 +37,7 @@ ngxMasonryItem:nth-of-type(3n) {
 
 .card {
   width: 274px;
+  /* height: 439px; */
   margin-top: 39px;
   margin-right: 39px;
   border: none;

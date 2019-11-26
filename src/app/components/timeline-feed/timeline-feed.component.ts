@@ -75,39 +75,19 @@ export class TimelineFeedComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    console.log("in after view");
-    this.scrollDispatcher.scrolled().pipe(
-      filter(event => this.virtualScroll.getRenderedRange().end === this.virtualScroll.getDataLength())
-    ).subscribe(event => {
-      console.log('new result append', this.offset);
-      if (!this.endOfFeed) {
-        this.generateTimelineFeed(this.offset, this.id);
-      }
-    })
-  }
+  // ngAfterViewInit(): void {
+  //   console.log("in after view");
+  //   this.scrollDispatcher.scrolled().pipe(
+  //     filter(event => this.virtualScroll.getRenderedRange().end === this.virtualScroll.getDataLength())
+  //   ).subscribe(event => {
+  //     console.log('new result append', this.offset);
+  //     if (!this.endOfFeed) {
+  //       this.generateTimelineFeed(this.offset, this.id);
+  //     }
+  //   })
+  // }
 
-  // private processData = posts => {
-  //   if (this.offset == posts['newOffset']) {
-  //     return;
-  //   }
-  //   this.offset = posts['newOffset'];
-  //   posts['feedPosts'].forEach(post => {
-  //     let baseAPI = this.baseApiUrl + '/image?s3key=';
-  //     let postObject = {
-  //       post: post,
-  //       postImgSrc: baseAPI + post.postImageAddr,
-  //       profileImgSrc: baseAPI + post.userProfileImageAddr
-  //     };
-  //     this.postsToShow.push(postObject);
-
-  //   });
-  //   console.log("im posts to tshow", this.postsToShow);
-  // };
-
-
-  processData(posts): Observable<any> {
-    let newPosts = [];
+  private processData = posts => {
     if (this.offset == posts['newOffset']) {
       return;
     }
@@ -119,38 +99,58 @@ export class TimelineFeedComponent implements OnInit {
         postImgSrc: baseAPI + post.postImageAddr,
         profileImgSrc: baseAPI + post.userProfileImageAddr
       };
-
-      newPosts.push(postObject);
+      this.postsToShow.push(postObject);
 
     });
-    console.log("in procress newpossts", newPosts);
-    return of(newPosts);
+    console.log("im posts to tshow", this.postsToShow);
   };
 
-  generateTimelineFeed(offset: number, id: number) {
-    console.log("in gen time");
-    this.feedService
-      .getTimeLineFeed(offset, id)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(posts => {
-        if (posts == null) {
-          this.endOfFeed = true;
-        }
-        else {
-          this.processData(posts).subscribe(res => {
-            this.postsToShow = this.postsToShow.concat(res)
-            console.log("im posts to show", this.postsToShow);
-          })
-        }
-      });
-  }
+
+  // processData(posts): Observable<any> {
+  //   let newPosts = [];
+  //   if (this.offset == posts['newOffset']) {
+  //     return;
+  //   }
+  //   this.offset = posts['newOffset'];
+  //   posts['feedPosts'].forEach(post => {
+  //     let baseAPI = this.baseApiUrl + '/image?s3key=';
+  //     let postObject = {
+  //       post: post,
+  //       postImgSrc: baseAPI + post.postImageAddr,
+  //       profileImgSrc: baseAPI + post.userProfileImageAddr
+  //     };
+
+  //     newPosts.push(postObject);
+
+  //   });
+  //   console.log("in procress newpossts", newPosts);
+  //   return of(newPosts);
+  // };
 
   // generateTimelineFeed(offset: number, id: number) {
+  //   console.log("in gen time");
   //   this.feedService
   //     .getTimeLineFeed(offset, id)
   //     .pipe(takeUntil(this.onDestroy))
-  //     .subscribe(this.processData);
+  //     .subscribe(posts => {
+  //       if (posts == null) {
+  //         this.endOfFeed = true;
+  //       }
+  //       else {
+  //         this.processData(posts).subscribe(res => {
+  //           this.postsToShow = this.postsToShow.concat(res)
+  //           console.log("im posts to show", this.postsToShow);
+  //         })
+  //       }
+  //     });
   // }
+
+  generateTimelineFeed(offset: number, id: number) {
+    this.feedService
+      .getTimeLineFeed(offset, id)
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(this.processData);
+  }
   fetchImages() {
     this.generateTimelineFeed(this.offset, this.id);
   }
