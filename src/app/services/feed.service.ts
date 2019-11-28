@@ -14,6 +14,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { GlobalVariable } from '../../global';
 import { FilteringDTO } from '../models/FilteringDTO';
+import { FeedReturnObject } from '../models/FeedReturnObject';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -23,39 +24,104 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class FeedService {
-  private subject = new Subject<any>();
+  private postsSubject = new Subject<any>();
+  private offsetSubject = new Subject<any>();
   private scrollingSubjebt = new Subject<any>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
+  offset: number = 0;
+  prevOffset: number = 0;
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
-  timelinefeedFilteringDTO = new FilteringDTO();
-  userfeedFilteringDTO = new FilteringDTO();
-  explorefeedFilteringDTO = new FilteringDTO();
+  timelinefeedFilteringDTO: any = {};
+  userfeedFilteringDTO: any = {};
+  explorefeedFilteringDTO: any = {};
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
+
+  updateTimelineFeed(id, offset) {
+    this.postsSubject.next(this.getTimeLineFeed(id, offset));
+  }
+
+  updateUserFeed(id, offset) {
+    this.postsSubject.next(this.getUserFeed(id, offset));
+  }
+
+  updateExploreFeed(id) {
+    this.postsSubject.next(this.getExploreFeed(id));
+  }
+
+  getNewPosts(): Observable<any> {
+    return this.postsSubject.asObservable();
+  }
 
   //returns time line feed for the user in stupid json format
-  getTimeLineFeed(
-    offset: number,
-    userId: number
-  ): Observable<Array<TimelinePost>> {
+  // getTimeLineFeed(
+  //   offset: number,
+  //   userId: number
+  // ): Observable<Array<TimelinePost>> {
+  //   console.log("im timelinefeed");
+  //   return this.http.post<TimelinePost[]>(
+  //     this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.timelinefeedFilteringDTO, { headers: httpOptions.headers }
+  //   );
+  // }
+
+  getTimeLineFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
       this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.timelinefeedFilteringDTO, { headers: httpOptions.headers }
-    );
+    ).pipe(
+    )
+      .map(res => {
+        let posts: any = res['feedPosts'];
+        let offset: any = res['newOffset'];
+        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr));
+
+        let feedReturnObject = new FeedReturnObject();
+        feedReturnObject.newPosts = newPosts;
+        feedReturnObject.offset = offset;
+        return feedReturnObject;
+
+      });
   }
 
-  getExploreFeed(userId: number): Observable<Array<TimelinePost>> {
+
+  getExploreFeed(userId: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
       this.globalFeedURL + userId + '/explore-feed', this.explorefeedFilteringDTO, { headers: httpOptions.headers }
-    );
+    ).pipe(
+    )
+      .map(res => {
+        let posts: any = res['feedPosts'];
+        let offset: any = res['newOffset'];
+        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr));
+
+        let feedReturnObject = new FeedReturnObject();
+        feedReturnObject.newPosts = newPosts;
+        feedReturnObject.offset = offset;
+        return feedReturnObject;
+
+      });
 
   }
 
-  getUserFeed(userId: number, offset: number) {
+  getUserFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
       this.globalFeedURL + userId + '/user-feed?offset=' + offset, this.userfeedFilteringDTO, { headers: httpOptions.headers },
-    );
+    ).pipe(
+    )
+      .map(res => {
+        let posts: any = res['feedPosts'];
+        let offset: any = res['newOffset'];
+        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr));
+
+        let feedReturnObject = new FeedReturnObject();
+        feedReturnObject.newPosts = newPosts;
+        feedReturnObject.offset = offset;
+        return feedReturnObject;
+
+      });;
   }
 
   getFollowSlaves(
@@ -83,25 +149,5 @@ export class FeedService {
         params
       }
     )
-  }
-
-  sendMessage(message: any) {
-    this.subject.next({ post: message });
-  }
-
-  clearMessage() {
-    this.subject.next();
-  }
-
-  getMessage(): Observable<any> {
-    return this.subject.asObservable();
-  }
-
-  scrollingEventSendMsg(message: any) {
-    this.scrollingSubjebt.next(message);
-  }
-
-  scrollingEventGetMsg(): Observable<any> {
-    return this.scrollingSubjebt.asObservable();
   }
 }

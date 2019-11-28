@@ -1,5 +1,5 @@
 import { GlobalVariable } from '../../global';
-import { post } from '../../../node_modules/@types/selenium-webdriver/http';
+import { post } from 'selenium-webdriver/http';
 
 export class MorePosts {
   postId: number;

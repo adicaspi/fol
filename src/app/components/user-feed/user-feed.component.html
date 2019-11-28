@@ -1,9 +1,7 @@
-<div class="infinite-scroll" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="1000" (scrolled)="fetchImages()">
+<div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
   <div id="main-body">
     <div class="center">
-      <div class="card masonry-item" *ngFor="let post of postsToShow">
-        <!-- <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="false">
-        <ngxMasonryItem class="card masonry-item" *ngFor="let post of postsToShow"> -->
+      <div class="card masonry-item" *ngFor="let post of posts">
         <div class="masonry-img">
           <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
         </div>
@@ -18,8 +16,6 @@
             {{ post['post']['website'] }}
           </a>
         </div>
-        <!-- </ngxMasonryItem>
-      </ngx-masonry> -->
       </div>
     </div>
   </div>

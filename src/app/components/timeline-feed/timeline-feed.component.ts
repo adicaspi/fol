@@ -1,18 +1,17 @@
-import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, Observable, Subscription, of } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import { PostService } from '../../services/post.service';
-import { NgxMasonryOptions } from 'ngx-masonry';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
 import { GlobalVariable } from '../../../global';
-import { Router } from '../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 import { ErrorsService } from '../../services/errors.service';
 import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { BehaviorSubject } from 'rxjs';
-import { map, tap, scan, mergeMap, throttleTime, filter } from 'rxjs/operators';
+import { FeedReturnObject } from '../../models/FeedReturnObject';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -20,16 +19,15 @@ import { map, tap, scan, mergeMap, throttleTime, filter } from 'rxjs/operators';
   styleUrls: ['./timeline-feed.component.css']
 })
 export class TimelineFeedComponent implements OnInit {
-  @ViewChild(CdkVirtualScrollViewport, { static: false }) virtualScroll: CdkVirtualScrollViewport;
   id: number;
-  posts: Array<any> = [];
-  postsToShow = [];
+  posts = [];
   offset: number = 0;
   desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   error: string;
   endOfFeed = false;
   private feedSubsription: Subscription
+  private updateFeed: Subscription
   newoffset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
 
@@ -46,14 +44,20 @@ export class TimelineFeedComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private errorsService: ErrorsService,
-    private scrollDispatcher: ScrollDispatcher
-
   ) {
+    this.id = this.userService.getCurrentUser();
   }
 
   ngOnInit() {
-    this.id = this.userService.getCurrentUser();
-    this.generateTimelineFeed(this.offset, this.id);
+
+    this.updateFeed = this.feedService
+      .getNewPosts().subscribe(observablePosts => {
+        observablePosts.subscribe((observablePosts: FeedReturnObject) => {
+          this.posts = this.posts.concat(observablePosts.newPosts);
+          this.offset = observablePosts.offset;
+        })
+      });
+    this.feedService.updateTimelineFeed(this.id, this.offset);
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
@@ -68,91 +72,16 @@ export class TimelineFeedComponent implements OnInit {
 
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-timelinefeed') {
-        this.postsToShow = [];
+        console.log("in msg im timeline-feed");
+        this.posts = [];
         this.offset = 0;
-        this.generateTimelineFeed(this.offset, this.userService.getCurrentUser());
+        this.feedService.updateTimelineFeed(this.id, this.offset);
       }
     });
   }
 
-  // ngAfterViewInit(): void {
-  //   console.log("in after view");
-  //   this.scrollDispatcher.scrolled().pipe(
-  //     filter(event => this.virtualScroll.getRenderedRange().end === this.virtualScroll.getDataLength())
-  //   ).subscribe(event => {
-  //     console.log('new result append', this.offset);
-  //     if (!this.endOfFeed) {
-  //       this.generateTimelineFeed(this.offset, this.id);
-  //     }
-  //   })
-  // }
-
-  private processData = posts => {
-    if (this.offset == posts['newOffset']) {
-      return;
-    }
-    this.offset = posts['newOffset'];
-    posts['feedPosts'].forEach(post => {
-      let baseAPI = this.baseApiUrl + '/image?s3key=';
-      let postObject = {
-        post: post,
-        postImgSrc: baseAPI + post.postImageAddr,
-        profileImgSrc: baseAPI + post.userProfileImageAddr
-      };
-      this.postsToShow.push(postObject);
-
-    });
-    console.log("im posts to tshow", this.postsToShow);
-  };
-
-
-  // processData(posts): Observable<any> {
-  //   let newPosts = [];
-  //   if (this.offset == posts['newOffset']) {
-  //     return;
-  //   }
-  //   this.offset = posts['newOffset'];
-  //   posts['feedPosts'].forEach(post => {
-  //     let baseAPI = this.baseApiUrl + '/image?s3key=';
-  //     let postObject = {
-  //       post: post,
-  //       postImgSrc: baseAPI + post.postImageAddr,
-  //       profileImgSrc: baseAPI + post.userProfileImageAddr
-  //     };
-
-  //     newPosts.push(postObject);
-
-  //   });
-  //   console.log("in procress newpossts", newPosts);
-  //   return of(newPosts);
-  // };
-
-  // generateTimelineFeed(offset: number, id: number) {
-  //   console.log("in gen time");
-  //   this.feedService
-  //     .getTimeLineFeed(offset, id)
-  //     .pipe(takeUntil(this.onDestroy))
-  //     .subscribe(posts => {
-  //       if (posts == null) {
-  //         this.endOfFeed = true;
-  //       }
-  //       else {
-  //         this.processData(posts).subscribe(res => {
-  //           this.postsToShow = this.postsToShow.concat(res)
-  //           console.log("im posts to show", this.postsToShow);
-  //         })
-  //       }
-  //     });
-  // }
-
-  generateTimelineFeed(offset: number, id: number) {
-    this.feedService
-      .getTimeLineFeed(offset, id)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(this.processData);
-  }
-  fetchImages() {
-    this.generateTimelineFeed(this.offset, this.id);
+  onScroll() {
+    this.feedService.updateTimelineFeed(this.id, this.offset);
   }
 
   openDialog(post): void {
@@ -167,11 +96,13 @@ export class TimelineFeedComponent implements OnInit {
     }
   }
 
+  profilePage(post) {
+    this.router.navigate(['profile', post['post']['userId']]);
+  }
+
   public ngOnDestroy(): void {
     this.onDestroy.next();
   }
 
-  profilePage(post) {
-    this.router.navigate(['profile', post['post']['userId']]);
-  }
+
 }

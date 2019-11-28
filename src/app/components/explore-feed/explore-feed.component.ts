@@ -10,6 +10,7 @@ import { PostService } from '../../services/post.service';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { GlobalVariable } from '../../../global';
 import { ErrorsService } from '../../services/errors.service';
+import { FeedReturnObject } from '../../models/FeedReturnObject';
 
 @Component({
   selector: 'app-explore-feed',
@@ -18,12 +19,12 @@ import { ErrorsService } from '../../services/errors.service';
 })
 export class ExploreFeedComponent implements OnInit {
   id: number;
-  posts: Array<any> = [];
-  postsToShow = [];
+  posts = [];
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
   private feedSubsription: Subscription
   private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private updateFeed: Subscription
 
   count = 0;
   public masonryOptions: NgxMasonryOptions = {
@@ -41,36 +42,27 @@ export class ExploreFeedComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.userService.userId;
-    this.generateExploreFeed(this.id);
+    this.updateFeed = this.feedService
+      .getNewPosts().subscribe(observablePosts => {
+        observablePosts.subscribe((observablePosts: FeedReturnObject) => {
+          this.posts = this.posts.concat(observablePosts.newPosts);
+          this.offset = observablePosts.offset;
+        })
+      });
+    this.feedService.updateExploreFeed(this.id);
+
+
+
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-exlporefeed') {
-        this.postsToShow = [];
-        this.generateExploreFeed(this.id);
+        this.posts = [];
+        this.feedService.updateExploreFeed(this.id);
       }
     });
   }
 
-  private processData = posts => {
-    this.posts = this.posts.concat(posts);
-    posts['feedPosts'].forEach(post => {
-      let baseAPI = this.baseApiUrl + '/image?s3key=';
-      let postObject = {
-        post: post,
-        postImgSrc: baseAPI + post.postImageAddr,
-        // profileImgSrc: baseAPI + post.userProfileImageAddr
-      };
-      this.postsToShow.push(postObject);
-    });
-  };
-
-  generateExploreFeed(id: number) {
-    this.feedService
-      .getExploreFeed(id)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(this.processData);
-  }
-  fetchImages() {
-    this.generateExploreFeed(this.id);
+  onScroll() {
+    this.feedService.updateExploreFeed(this.id);
   }
 
   public ngOnDestroy(): void {

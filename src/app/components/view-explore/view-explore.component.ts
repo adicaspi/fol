@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from '../../../../node_modules/rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ErrorsService } from '../../services/errors.service';
 import { ConfigService } from '../../services/config.service';
 

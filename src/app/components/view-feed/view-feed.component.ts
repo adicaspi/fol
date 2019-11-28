@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
 import { UserService } from '../../services/user.service';
-import { HttpClient } from '../../../../node_modules/@angular/common/http';
-import { Router } from '../../../../node_modules/@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 @Component({

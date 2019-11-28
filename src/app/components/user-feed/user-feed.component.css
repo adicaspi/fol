@@ -1,5 +1,9 @@
 
 @media only screen and (min-width: 900px) {
+  .search-results{
+    height:100%;   
+}
+  
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
@@ -77,6 +81,10 @@
   }
  }  
 @media (min-width: 600px) and (max-width: 900px) {
+  .search-results{
+    height:100%;   
+}
+  
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
@@ -153,16 +161,15 @@
  }
 
 @media (max-width: 600px) {
+  .search-results{
+    height:100%;   
+}
+  
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
     overflow: visible;
   }
-
-  /* .center {
-    margin: auto;
-    width: 375px;
-  } */
 
   .center {
     width:360px;

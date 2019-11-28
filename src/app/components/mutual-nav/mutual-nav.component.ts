@@ -1,14 +1,14 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import * as $ from 'jquery';
-import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '../../../../node_modules/@angular/material';
+import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '@angular/material';
 import { Options, LabelType } from 'ng5-slider';
 import { Ng5SliderModule } from 'ng5-slider';
 import { SliderType } from "igniteui-angular";
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { FeedService } from '../../services/feed.service';
 import { ErrorsService } from '../../services/errors.service';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mutual-nav',

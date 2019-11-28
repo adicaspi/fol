@@ -89,7 +89,6 @@ export class ProductPageComponent implements OnInit {
 
         this.setWebsiteLogo(postInfo.website);
         this.showSpinner = false;
-        this.feedService.sendMessage('done-loading');
         console.log('im spiiner', this.showSpinner);
       });
   }

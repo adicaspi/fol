@@ -2,7 +2,7 @@ import { Injectable, Injector, Inject } from '@angular/core';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { GlobalVariable } from '../../global';
-import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 export interface WindowSize {

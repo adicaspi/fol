@@ -3,16 +3,16 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeedService } from '../../services/feed.service';
-import { FormGroup, FormBuilder } from '../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorsService } from '../../services/errors.service';
 import * as $ from 'jquery';
 import { GlobalVariable } from '../../../global';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
-import { Routes, Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { FilteringDTO } from '../../models/FilteringDTO';
-import { MatSidenav } from '../../../../node_modules/@angular/material';
+import { MatSidenav } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
@@ -109,7 +109,8 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initFilteringDTO();
+
+
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
@@ -139,11 +140,11 @@ export class ShoppingNavComponent implements OnInit {
           this.prevSelectedPrice = elem;
           this.priceIsSelected = true;
         }
-        this.filteringDTO.maxPrice = this.currSelectedPrice.value;
+        this.filteringDTO.setMaxPrice(this.currSelectedPrice.value);
       } else {
         this.priceIsSelected = false
         elem.checked = false;
-        this.filteringDTO.maxPrice = 0;
+        this.filteringDTO.setMaxPrice(0);
         this.filteringChanged = false;
       }
       this.updateFeedFilteringDTO();
@@ -151,15 +152,14 @@ export class ShoppingNavComponent implements OnInit {
     if (key == "stores") {
       if ($event.checked == true) {
         elem.checked = true;
-        this.filteringDTO.stores.push(elem.id);
+        this.filteringDTO.setStores(elem);
         this.filteringChanged = true;
+
       }
       else {
-        const index = this.filteringDTO.stores.indexOf(elem.id, 0);
-        if (index > -1) {
-          this.filteringDTO.stores.splice(index, 1);
-        }
-        if (this.filteringDTO.stores.length = 0) {
+        elem.checked = false;
+        this.filteringDTO.removeStore(elem);
+        if (this.filteringDTO.getStores().length == 0) {
           this.filteringChanged = false;
         }
       }
@@ -168,15 +168,13 @@ export class ShoppingNavComponent implements OnInit {
     if (key == "desginers") {
       if ($event.checked == true) {
         elem.checked = true;
-        this.filteringDTO.designers.push(elem.name);
+        this.filteringDTO.setDesigners(elem);
         this.filteringChanged = true;
       }
       else {
-        const index = this.filteringDTO.designers.indexOf(elem.name, 0);
-        if (index > -1) {
-          this.filteringDTO.designers.splice(index, 1);
-        }
-        if (this.filteringDTO.designers.length = 0) {
+        elem.checked = false;
+        const index = this.filteringDTO.removeDesigner(elem);
+        if (this.filteringDTO.designers.length == 0) {
           this.filteringChanged = false;
         }
       }
@@ -225,11 +223,7 @@ export class ShoppingNavComponent implements OnInit {
     this.stores.forEach(elem => {
       elem.checked = false;
     });
-    this.filteringDTO.designers = [];
-    this.filteringDTO.stores = [];
-    this.filteringDTO.maxPrice = 0;
-    this.filteringDTO.minPrice = 0;
-    this.filteringChanged = false;
+    this.filteringDTO = new FilteringDTO();
     this.updateFeedFilteringDTO();
 
   }
@@ -264,8 +258,8 @@ export class ShoppingNavComponent implements OnInit {
   }
   closeProductType() {
     this.showProductType = false;
-    this.filteringDTO.productTypes = [];
-    this.filteringDTO.category = null;
+    this.filteringDTO.removeProductType();
+    this.filteringDTO.setCategory(null);
     if (this.productIsSelected) {
       this.updateFeedFilteringDTO();
       this.currSelectedProductType.checked = false;
@@ -301,7 +295,7 @@ export class ShoppingNavComponent implements OnInit {
         this.prevSelectedProductType.checked = false;
         this.prevSelectedProductType = this.currSelectedProductType;
         if (elem.servername != 'Default') {
-          this.filteringDTO.productTypes.push(elem.servername);
+          this.filteringDTO.setProductTypes(elem);
         }
       }
     }
@@ -311,7 +305,7 @@ export class ShoppingNavComponent implements OnInit {
       this.prevSelectedProductType = elem;
       this.productIsSelected = true;
       if (elem.servername != 'Default') {
-        this.filteringDTO.productTypes.push(elem.servername);
+        this.filteringDTO.setProductTypes(elem);
       }
     }
     this.updateFeedFilteringDTO();
@@ -321,16 +315,17 @@ export class ShoppingNavComponent implements OnInit {
 
 
   updateFeedFilteringDTO() {
+    this.feedService.offset = 0;
     if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
-      this.feedService.timelinefeedFilteringDTO = this.filteringDTO;
+      this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-timelinefeed');
     }
     if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
-      this.feedService.userfeedFilteringDTO = this.filteringDTO;
+      this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-userfeed');
     }
     if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
-      this.feedService.explorefeedFilteringDTO = this.filteringDTO;
+      this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-exlporefeed');
     }
   }
@@ -365,7 +360,7 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   initFilteringDTO() {
-    this.filteringDTO.category = null;
+    this.filteringDTO.category = 'Clothing';
     this.filteringDTO.productTypes = [];
     this.filteringDTO.designers = [];
     this.filteringDTO.stores = [];

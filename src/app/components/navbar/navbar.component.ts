@@ -7,7 +7,7 @@ import { SettingsComponent } from '../settings/settings.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MatMenuTrigger } from '../../../../node_modules/@angular/material';
+import { MatMenuTrigger } from '@angular/material';
 import { MutualNavComponent } from '../mutual-nav/mutual-nav.component';
 import { ConfigService } from '../../services/config.service';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';

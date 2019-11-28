@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { RegisterComponent } from '../register/register.component';
 import { SettingsComponent } from '../settings/settings.component';

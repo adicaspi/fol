@@ -1,20 +1,9 @@
-.example-viewport {
-  height: 100vh;
-  width: 100%;
-  margin:auto;
- 
-}
-
-.cdk-virtual-scroll-content-wrapper{
-  width: 900px;
-    margin: auto;
-    position: relative;
-    transform: translateY(0px);
-    min-width: none !important;
-}
-
 
 @media only screen and (min-width: 900px) {
+.search-results{
+    height:100%;
+    
+}
 #main-body {
   padding-right: 0px;
   padding-left: 0px;
@@ -123,9 +112,15 @@ span.price {
   line-height: 1;
 }
 
+
+
  } 
 
 @media (min-width: 600px) and (max-width: 900px)  {
+  .search-results{
+    height:100%;   
+}
+  
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
@@ -253,10 +248,9 @@ span.price {
 }
 
 @media  (max-width: 600px)  {
-  .infinite-scroll{
-    margin-top:50px;
-    height: 900px;
-  }
+  .search-results{
+    height:100%;   
+}
   
   #main-body {
     padding-right: 0px;

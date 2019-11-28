@@ -12,6 +12,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
 import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
 import { ErrorsService } from '../../services/errors.service';
+import { FeedReturnObject } from '../../models/FeedReturnObject';
 
 
 @Component({
@@ -20,29 +21,22 @@ import { ErrorsService } from '../../services/errors.service';
   styleUrls: ['./user-feed.component.css']
 })
 export class UserFeedComponent implements OnInit {
-  posts: Array<any> = [];
-  postsToShow = [];
+  posts = [];
   offset: number = 0;
   desktop: boolean = true;
   searchedTouched: boolean = false;
-  currId = 0;
+  id = 0;
   prevId = 0;
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
   private feedSubsription: Subscription
+  private updateFeed: Subscription
   private anyErrors: boolean;
   private finished: boolean;
   routes: Routes = [
     { path: 'product-page', component: ProductPageMobileComponent }
   ];
-
-  public masonryOptions: NgxMasonryOptions = {
-    transitionDuration: '0',
-    horizontalOrder: true,
-    fitWidth: true,
-    gutter: 39
-  };
 
   onDestroy: Subject<void> = new Subject<void>();
   error: string = "";
@@ -57,67 +51,52 @@ export class UserFeedComponent implements OnInit {
     private postService: PostService,
     private errorsService: ErrorsService
 
-  ) { this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
 
     this.activatedRoute.params
-      .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
-        this.currId = +params['id']; // CHNAGE TAKE USER ID FROM USER SERVICE
-        this.generateUserFeed(this.offset, this.currId);
+        this.id = +params['id'];
       });
-    this.prevId = this.currId; //Updateing prevID in the first instantiating of the component
+
+    this.updateFeed = this.feedService
+      .getNewPosts().subscribe(observablePosts => {
+        observablePosts.subscribe((observablePosts: FeedReturnObject) => {
+          this.posts = this.posts.concat(observablePosts.newPosts);
+          this.offset = observablePosts.offset;
+        })
+      });
+    this.feedService.updateUserFeed(this.id, this.offset);
+
+
+    //this.prevId = this.currId; //Updateing prevID in the first instantiating of the component
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
         if (value.width <= 900) {
-          // this.masonryOptions.gutter = 20;
         }
         if (value.width <= 600) {
           this.desktop = false;
-          this.masonryOptions.gutter = 20;
+
         }
       }),
       error => this.anyErrors = true,
       () => this.finished = true
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-userfeed') {
-        this.postsToShow = [];
+        this.posts = [];
         this.offset = 0;
-        this.generateUserFeed(this.offset, this.currId);
+        this.feedService.updateUserFeed(this.id, this.offset);
       }
     });
 
   }
 
-  private processData = posts => {
 
-
-    this.posts = this.posts.concat(posts);
-    if (this.offset == posts['newOffset']) {
-      return;
-    }
-    this.offset = posts['newOffset'];
-    posts['feedPosts'].forEach(post => {
-      let baseAPI = this.baseApiUrl + '/image?s3key=';
-      let postObject = {
-        post: post,
-        postImgSrc: baseAPI + post.postImageAddr
-      };
-
-      this.postsToShow.push(postObject);
-    });
-  };
-  generateUserFeed(offset: number, userId: number) {
-    this.feedService
-      .getUserFeed(userId, offset)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(this.processData);
-  }
-
-  fetchImages() {
-    console.log("in fetch", (this.offset));
-    this.generateUserFeed(this.offset, this.currId);
+  onScroll() {
+    this.feedService.updateUserFeed(this.id, this.offset);
   }
 
   openDialog(post): void {

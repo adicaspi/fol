@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
 import { ProductPageComponent } from '../product-page/product-page.component';
 import { OverlayRef } from '@angular/cdk/overlay';
-import { FilePreviewOverlayRef } from '../file-preview-overlay/file-preview-overlay-ref';
+import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
 import { MorePosts } from '../../models/MorePosts';
 
 @Component({
@@ -74,7 +74,6 @@ export class FilePreviewOverlayComponent implements OnInit {
         this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
         this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
         this.showSpinner = false;
-        this.feedService.sendMessage('done-loading');
       });
 
   }
