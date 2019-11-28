@@ -33,7 +33,6 @@ import { MutualNavComponent } from './components/mutual-nav/mutual-nav.component
 import { XsrfInterceptorComponent } from './interceptor/xsrf-interceptor/xsrf-interceptor.component';
 import { MaterialDesignModule } from './material-design/material-design.module';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ProductPageComponent } from './components/product-page/product-page.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { UserService } from './services/user.service';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
@@ -84,7 +83,6 @@ import { MatExpansionModule } from '@angular/material/expansion'
     MutualNavComponent,
     XsrfInterceptorComponent,
     ForgotPasswordComponent,
-    ProductPageComponent,
     LoadingSpinnerComponent,
     LandingPageComponent,
     ExploreFeedComponent,
@@ -130,7 +128,6 @@ import { MatExpansionModule } from '@angular/material/expansion'
     UserProfileInfoComponent,
     // GenerateFollowListComponent,
     ImageComponentComponent,
-    ProductPageComponent,
     RegisterComponent,
     LoginComponent,
     FilePreviewOverlayComponent,

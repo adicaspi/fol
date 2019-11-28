@@ -12,7 +12,6 @@ import * as $ from 'jquery';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
-import { ProductPageComponent } from '../product-page/product-page.component';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
 import { MorePosts } from '../../models/MorePosts';

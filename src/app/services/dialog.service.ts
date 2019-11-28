@@ -7,7 +7,6 @@ import {
 } from '@angular/material';
 import { UserPost } from '../models/UserPost';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ProductPageComponent } from '../components/product-page/product-page.component';
 import { LoginComponent } from '../components/login/login.component';
 import { FilePreviewOverlayComponent } from '../components/file-preview-overlay/file-preview-overlay.component';
 import {
@@ -127,7 +126,7 @@ export class DialogService {
   }
 
   openModalWindow(component, componentName?, data?) {
-    const modalWindowConfig = new MatDialogConfig<ProductPageComponent>();
+    const modalWindowConfig = new MatDialogConfig<any>();
 
     //dialogConfig.scrollStrategy = scrollStrategy;
     modalWindowConfig.autoFocus = false;

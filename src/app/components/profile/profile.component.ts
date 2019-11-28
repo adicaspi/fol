@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UserPost } from '../../models/UserPost';
-import { ProductPageComponent } from '../product-page/product-page.component';
 import { DialogService } from '../../services/dialog.service';
 @Component({
   selector: 'app-profile',
@@ -10,11 +9,11 @@ import { DialogService } from '../../services/dialog.service';
 export class ProfileComponent implements OnInit {
   @Input('post') userPost: UserPost;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(private dialogService: DialogService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  openDialog(): void {
-    this.dialogService.openModalWindow(ProductPageComponent, this.userPost);
-  }
+  // openDialog(): void {
+  //   this.dialogService.openModalWindow(ProductPageComponent, this.userPost);
+  // }
 }
