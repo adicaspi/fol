@@ -49,8 +49,10 @@ export class ExploreFeedComponent implements OnInit {
     this.updateFeed = this.feedService
       .getNewPosts().subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: FeedReturnObject) => {
-          this.posts = this.posts.concat(observablePosts.newPosts);
-          this.offset = observablePosts.offset;
+          if (this.offset != observablePosts.offset) {
+            this.posts = this.posts.concat(observablePosts.newPosts);
+            this.offset = observablePosts.offset;
+          }
         })
       });
     this.feedService.updateExploreFeed(this.id);

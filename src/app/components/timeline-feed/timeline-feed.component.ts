@@ -63,8 +63,10 @@ export class TimelineFeedComponent implements OnInit {
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
-          this.posts = this.posts.concat(observablePosts.newPosts);
-          this.offset = observablePosts.offset;
+          if (this.offset != observablePosts.offset) {
+            this.posts = this.posts.concat(observablePosts.newPosts);
+            this.offset = observablePosts.offset;
+          }
         })
       });
     this.feedService.updateTimelineFeed(this.id, this.offset);
