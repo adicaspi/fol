@@ -68,8 +68,27 @@ export class FilteringDTO {
     }
   }
 
+  removeProduct(elem) {
+    let index = this.productTypes.indexOf(elem.servername, 0);
+    if (index > -1) {
+      this.productTypes.splice(index, 1);
+    }
+  }
+
   removeProductType() {
     this.productTypes = [];
+  }
+
+  clearProductType() {
+    this.productTypes = [];
+  }
+
+  clearDesigners() {
+    this.designers = [];
+  }
+
+  clearStores() {
+    this.stores = [];
   }
 
   getFilteringDTO() {

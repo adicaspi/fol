@@ -37,7 +37,7 @@ export class MutualNavComponent implements OnInit {
 
   keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
   categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
-  clothings = [
+  clothing = [
     { id: 1, name: 'Tops', checked: false, servername: 'Tops' },
     { id: 2, name: 'Jackets & Coats', checked: false, servername: 'JacketsOrCoats' },
     { id: 3, name: 'Dresses & Skirts', checked: false, servername: 'DressesOrSkirts' },
@@ -65,20 +65,8 @@ export class MutualNavComponent implements OnInit {
       Bags: [''],
       Accesories: ['']
     });
-    this.initFilteringDTO();
-
   }
 
-
-
-  initFilteringDTO() {
-    this.filteringDTO.category = "";
-    this.filteringDTO.productTypes = [];
-    this.filteringDTO.designers = [];
-    this.filteringDTO.stores = [];
-    this.filteringDTO.minPrice = 0;
-    this.filteringDTO.maxPrice = this.maxValue;
-  }
   menuClosed() {
     if (this.menuChanged) {
       this.updateFeedFilteringDTO();
@@ -101,19 +89,19 @@ export class MutualNavComponent implements OnInit {
   }
 
   onChange(mrChange: MatRadioChange) {
-    this.filteringDTO.category = mrChange.value;
+    this.filteringDTO.setCategory(mrChange.value);
     if (mrChange.source.id.toString() != '1') {
       this.showProduct = true;
       switch (mrChange.value) {
         case "Clothing":
-          this.productsToShow = this.clothings;
+          this.productsToShow = this.clothing;
           break;
         case "Shoes":
           this.productsToShow = this.shoes;
           break;
       }
     } else {
-      this.filteringDTO.category = null;
+      this.filteringDTO.setCategory(null);
       this.showProduct = false;
     }
     this.updateFeedFilteringDTO();
@@ -135,35 +123,26 @@ export class MutualNavComponent implements OnInit {
     switch (key) {
       case "products":
         if (checked) {
-          this.filteringDTO.productTypes.push(elem.servername);
+          this.filteringDTO.setProductTypes(elem);
         }
         else {
-          const index = this.filteringDTO.productTypes.indexOf(elem.servername, 0);
-          if (index > -1) {
-            this.filteringDTO.productTypes.splice(index, 1);
-          }
+          this.filteringDTO.removeProduct(elem);
         }
         break;
       case "designers":
         if (checked) {
-          this.filteringDTO.designers.push(elem.name);
+          this.filteringDTO.setDesigners(elem);
         }
         else {
-          const index = this.filteringDTO.designers.indexOf(elem.name, 0);
-          if (index > -1) {
-            this.filteringDTO.designers.splice(index, 1);
-          }
+          this.filteringDTO.removeDesigner(elem);
         }
         break;
       case "stores":
         if (checked) {
-          this.filteringDTO.designers.push(elem.id);
+          this.filteringDTO.setStores(elem);
         }
         else {
-          const index = this.filteringDTO.stores.indexOf(elem.id, 0);
-          if (index > -1) {
-            this.filteringDTO.stores.splice(index, 1);
-          }
+          this.filteringDTO.removeStore(elem);
         }
         break;
     }
@@ -187,30 +166,43 @@ export class MutualNavComponent implements OnInit {
   }
 
   selectedPrice() {
-    this.filteringDTO.minPrice = this.priceRange.lower;
-    this.filteringDTO.maxPrice = this.priceRange.upper;
+    this.filteringDTO.setMinPrice(this.priceRange.lower);
+    this.filteringDTO.setMaxPrice(this.priceRange.upper);
   }
 
   clearSelection(arrayToIterrate, filteringDTOarray) {
     arrayToIterrate.forEach(elem => {
       elem.checked = false;
     })
-    this.filteringDTO[filteringDTOarray] = [];
+    switch (filteringDTOarray) {
+      case "productTypes":
+        this.filteringDTO.clearProductType();
+        break;
+      case "designers":
+        this.filteringDTO.clearDesigners();
+        break;
+      case "stores":
+        this.filteringDTO.clearStores();
+
+
+
+
+    }
     this.menuChanged = true;
     this.menuClosed();
   }
 
   updateFeedFilteringDTO() {
     if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
-      this.feedService.timelinefeedFilteringDTO = this.filteringDTO;
+      this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-timelinefeed');
     }
     if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
-      this.feedService.userfeedFilteringDTO = this.filteringDTO;
+      this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-userfeed');
     }
     if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
-      this.feedService.explorefeedFilteringDTO = this.filteringDTO;
+      this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-exlporefeed');
     }
   }
