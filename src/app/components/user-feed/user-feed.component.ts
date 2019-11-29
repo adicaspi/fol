@@ -11,6 +11,7 @@ import { ConfigService } from '../../services/config.service';
 import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
 import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
+import { FilteringDTO } from '../../models/FilteringDTO';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.feedService.userfeedFilteringDTO = new FilteringDTO();
 
     this.activatedRoute.params
       .subscribe(params => {

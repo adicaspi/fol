@@ -12,6 +12,7 @@ import { ErrorsService } from '../../services/errors.service';
 import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { BehaviorSubject } from 'rxjs';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
+import { FilteringDTO } from '../../models/FilteringDTO';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -26,8 +27,9 @@ export class TimelineFeedComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   error: string;
   endOfFeed = false;
-  private feedSubsription: Subscription
-  private updateFeed: Subscription
+  feedMessage: string;
+  feedSubscription: Subscription;
+  updateFeed: Subscription
   newoffset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
 
@@ -46,13 +48,21 @@ export class TimelineFeedComponent implements OnInit {
     private errorsService: ErrorsService,
   ) {
     this.id = this.userService.getCurrentUser();
+    this.feedSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
+      if (msg.error == 'update-timelinefeed') {
+        console.log("in msg im timeline-feed");
+        this.posts = [];
+        this.offset = 0;
+        this.feedService.updateTimelineFeed(this.id, this.offset);
+      }
+    });
   }
 
   ngOnInit() {
-
+    this.feedService.timelinefeedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
-      .getNewPosts().subscribe(observablePosts => {
-        observablePosts.subscribe((observablePosts: FeedReturnObject) => {
+      .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
+        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
           this.offset = observablePosts.offset;
         })
@@ -64,20 +74,10 @@ export class TimelineFeedComponent implements OnInit {
           if (value.width <= 900) {
           }
           if (value.width <= 600) {
+            console.log("in winodw changed");
             this.desktop = false;
           }
-        }),
-      error => this.anyErrors = true,
-      () => this.finished = true
-
-    this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
-      if (msg.error == 'update-timelinefeed') {
-        console.log("in msg im timeline-feed");
-        this.posts = [];
-        this.offset = 0;
-        this.feedService.updateTimelineFeed(this.id, this.offset);
-      }
-    });
+        });
   }
 
   onScroll() {
@@ -101,6 +101,8 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.feedSubscription.unsubscribe();
     this.onDestroy.next();
   }
 

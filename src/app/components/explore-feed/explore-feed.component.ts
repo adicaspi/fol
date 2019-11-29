@@ -11,6 +11,7 @@ import { NgxMasonryOptions } from 'ngx-masonry';
 import { GlobalVariable } from '../../../global';
 import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
+import { FilteringDTO } from '../../models/FilteringDTO';
 
 @Component({
   selector: 'app-explore-feed',
@@ -41,6 +42,9 @@ export class ExploreFeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.feedService.explorefeedFilteringDTO = new FilteringDTO();
+
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
       .getNewPosts().subscribe(observablePosts => {

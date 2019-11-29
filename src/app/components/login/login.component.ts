@@ -91,6 +91,7 @@ export class LoginComponent implements OnInit {
         error => {
 
           if (this.error.error == 'Invalid Authentication Data') {
+            console.log("in login comp msg recived");
             this.wrongPass = true;
             this.msgToShow = 'The password you entered is incorrect.'
           }
@@ -131,6 +132,6 @@ export class LoginComponent implements OnInit {
   ngOnDestroy() {
     // this.onDestroy.next();
     // unsubscribe to ensure no memory leaks
-    //this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
