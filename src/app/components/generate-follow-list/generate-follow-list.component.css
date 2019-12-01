@@ -64,6 +64,7 @@ span.fill{
   .user-result{
     display: flex;
     flex-direction: row;
+    margin-left: 5px;
   }
   
   /* i.fal.fa-times {
