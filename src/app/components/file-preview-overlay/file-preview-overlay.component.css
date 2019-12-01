@@ -71,9 +71,8 @@
   }
 
   .store-logo {
-    width: 80px;
-    height: 30px;
-    margin-bottom: 10px;
+    height: 40px;
+    margin-bottom: 28px;
   }
 
   .product-description {
@@ -82,38 +81,61 @@
     position: absolute;
     top: 0px;
     margin-left: 50px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      'Helvetica Neue' Helvetica, Arial, sans-serif;
-    font-size: 24px;
-    color: #333;
+    font-family: Arial;
+    font-weight: 500;
+    font-size: 22px;
+    color: rgb(38,38,38);
   }
 
   #description {
     vertical-align: top;
   }
 
-  .price {
-    right: 10px;
-    font-size: 22px;
-    font-family: FontAwesome, 'Maven Pro', sans-serif;
+  .footer {
+    margin-top: 26px;
+    margin-left: -7px;
+  }
+
+  span.price {
     position: absolute;
-    right:0px;
+    right: 10px;
+    line-height: 68px;
+    color: #111;
+    font-size: 22px;
+    font-family: sans-serif;
   }
 
   button.shop_btn {
     background-color: rgb(40, 192, 94);
     color: white;
     border-radius: 50px;
-    width: 105px;
-    height: 55px;
+    width: 102px;
+    height: 58px;
     border: none;
     font-size: 22px;
+    font-weight: 500;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
     outline: none;
+    cursor: pointer;
   }
 
   a {
     text-decoration: none;
     color: white;
+  }
+
+  .num-views {
+    font-size: 15px;
+    font-family: Helvetica, sans-serif;
+    font-weight: 900;
+    margin-top: 20px;
+    margin-left: 10px;
+    color: rgb(52,52,52);
+    letter-spacing: -0.2px;
+  }
+
+  #int-num-views {
+    letter-spacing: -0.2px;
   }
 
   .lower-part {
@@ -167,12 +189,6 @@
     display: flex;
     align-items: center;
     margin-left: 5px;
-  }
-
-  .num-views{
-    margin-right: 2px;
-    font-family: FontAwesome, 'Maven Pro', sans-serif;
-    font-size: 15px;
   }
 
   i.far.fa-eye{
@@ -275,14 +291,6 @@
     text-align:center;
   }
 
-  .price {
-    right: 10px;
-    font-size: 22px;
-    font-family: FontAwesome, 'Maven Pro', sans-serif;
-    position: absolute;
-    right:0px;
-  }
-
   button.shop_btn {
     background-color: rgb(40, 192, 94);
     color: white;
@@ -346,21 +354,6 @@
     font-size: 40px;
   }
 
-  .views{
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
-  }
-
-  .num-views{
-    margin-right: 2px;
-    font-family: FontAwesome, 'Maven Pro', sans-serif;
-    font-size: 15px;
-  }
-
-  i.far.fa-eye{
-    font-size: 15px;
-  }
 }
 
 
