@@ -32,10 +32,6 @@
     text-align:center;
   }
 
-  p#description{
-    margin-top:0;
-  }
-
   /* .fal {
     display: none;
   } */
@@ -75,8 +71,9 @@
   }
 
   .store-logo {
-    width: 100px;
-    height: 50px;
+    width: 80px;
+    height: 30px;
+    margin-bottom: 10px;
   }
 
   .product-description {
@@ -104,14 +101,13 @@
   }
 
   button.shop_btn {
-    background-color: #ff4081;
-    font-family: FontAwesome, 'Maven Pro', sans-serif;
+    background-color: rgb(40, 192, 94);
     color: white;
     border-radius: 50px;
-    width: 65px;
-    height: 40px;
+    width: 105px;
+    height: 55px;
     border: none;
-    font-size: 15px;
+    font-size: 22px;
     outline: none;
   }
 
@@ -180,7 +176,7 @@
   }
 
   i.far.fa-eye{
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 /* } */
