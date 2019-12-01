@@ -181,14 +181,6 @@ mat-toolbar{
   background-color: black;
 }
 
-div.arrow-container.prev:before{
-  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0))!important;
-}
-
-div.arrow-container.next:before{
-  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0))!important;
-}
-
 @media (min-width: 600px) and (max-width: 900px)  {
 
 mat-toolbar.mat-toolbar.mat-toolbar-single-row{

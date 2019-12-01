@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import { DeviceDetectorService } from '../../../../node_modules/ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 import { UserService } from '../../services/user.service';
@@ -26,7 +26,6 @@ export class ViewProfileComponent implements OnInit {
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
-  height: string = '400px';
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
