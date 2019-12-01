@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ErrorsService } from '../../services/errors.service';
 import { ConfigService } from '../../services/config.service';
+import { FeedService } from '../../services/feed.service';
 
 @Component({
   selector: 'app-view-explore',
@@ -16,9 +17,10 @@ export class ViewExploreComponent implements OnInit {
   private finished: boolean;
   desktop: Boolean = true;
 
-  constructor(private errorService: ErrorsService, private configService: ConfigService) { }
+  constructor(private feedService: FeedService, private configService: ConfigService) { }
 
   ngOnInit() {
+    this.feedService.currentLoadedFeedComponent = "explore";
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 600) {

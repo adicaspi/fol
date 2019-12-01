@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
+import { FeedService } from '../../services/feed.service';
 @Component({
   selector: 'app-view-feed',
   templateUrl: './view-feed.component.html',
@@ -31,7 +32,7 @@ export class ViewFeedComponent implements OnInit {
     private userService: UserService,
     private http: HttpClient,
     private configService: ConfigService,
-    private errorService: ErrorsService
+    private feedService: FeedService
   ) { }
 
   ngOnInit() {
@@ -40,6 +41,7 @@ export class ViewFeedComponent implements OnInit {
     } else {
       this.loadConfigurationData();
     }
+    this.feedService.currentLoadedFeedComponent = "feed";
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 600) {

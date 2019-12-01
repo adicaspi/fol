@@ -316,15 +316,15 @@ export class ShoppingNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
+    if (this.feedService.currentLoadedFeedComponent == 'feed') {
       this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-timelinefeed');
     }
-    if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
+    if (this.feedService.currentLoadedFeedComponent == 'profile') {
       this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-userfeed');
     }
-    if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
+    if (this.feedService.currentLoadedFeedComponent == 'explore') {
       this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-exlporefeed');
     }

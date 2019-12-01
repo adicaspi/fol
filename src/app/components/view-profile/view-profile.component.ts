@@ -6,6 +6,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 import { UserService } from '../../services/user.service';
+import { FeedService } from '../../services/feed.service';
 
 @Component({
   selector: 'app-view-profile',
@@ -34,10 +35,11 @@ export class ViewProfileComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private deviceService: DeviceDetectorService,
     private configService: ConfigService,
-    private errorService: ErrorsService
+    private feedService: FeedService
   ) { }
 
   ngOnInit() {
+    this.feedService.currentLoadedFeedComponent = "profile";
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 600) {

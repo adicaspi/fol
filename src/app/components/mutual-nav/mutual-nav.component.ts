@@ -56,6 +56,7 @@ export class MutualNavComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private feedService: FeedService, private errorsService: ErrorsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.categoryForm = this.formBuilder.group({
       category: ['']
     });
@@ -193,15 +194,16 @@ export class MutualNavComponent implements OnInit {
   }
 
   updateFeedFilteringDTO() {
-    if (this.activatedRoute.routeConfig.component.name == 'ViewFeedComponent') {
+    this.feedService.offset = 0;
+    if (this.feedService.currentLoadedFeedComponent == 'feed') {
       this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-timelinefeed');
     }
-    if (this.activatedRoute.routeConfig.component.name == 'ViewProfileComponent') {
+    if (this.feedService.currentLoadedFeedComponent == 'profile') {
       this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-userfeed');
     }
-    if (this.activatedRoute.routeConfig.component.name == 'ViewExploreComponent') {
+    if (this.feedService.currentLoadedFeedComponent == 'explore') {
       this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-exlporefeed');
     }

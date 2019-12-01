@@ -35,6 +35,7 @@ export class FeedService {
   timelinefeedFilteringDTO: any = {};
   userfeedFilteringDTO: any = {};
   explorefeedFilteringDTO: any = {};
+  currentLoadedFeedComponent: string;
 
 
   constructor(private http: HttpClient) {
