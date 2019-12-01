@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
 import { UserService } from '../../services/user.service';
@@ -21,7 +21,9 @@ export class ViewFeedComponent implements OnInit {
   desktop: Boolean = true;
   filteredOptions: Observable<string[]>;
   searchedTouched: Observable<boolean>;
+  error: any = {};
   private subscription;
+  private autoLoginSubscription: Subscription;
   private anyErrors: boolean;
   private finished: boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -32,8 +34,14 @@ export class ViewFeedComponent implements OnInit {
     private userService: UserService,
     private http: HttpClient,
     private configService: ConfigService,
-    private feedService: FeedService
-  ) { }
+    private feedService: FeedService,
+    private router: Router,
+    private errorsService: ErrorsService
+  ) {
+    this.autoLoginSubscription = this.errorsService.getMessage().subscribe(msg => {
+      this.error = msg;
+    });
+  }
 
   ngOnInit() {
     if (this.userService.userId) {
@@ -72,7 +80,7 @@ export class ViewFeedComponent implements OnInit {
           this.userService.updateUser(data.body.userId);
           this.configService.setSessionStorage(data.body.userId.toString());
         })
-      )
-      .toPromise();
+      ).toPromise();
+
   }
 }

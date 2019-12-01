@@ -1,8 +1,9 @@
 <body>
-  <!-- <div *ngIf="userId"> -->
-  <div *ngIf="desktop; else mobileView" class="display">
-    <app-navbar></app-navbar>
-    <app-timeline-feed></app-timeline-feed>
+  <div *ngIf="userId">
+    <div *ngIf="desktop; else mobileView" class="display">
+      <app-navbar></app-navbar>
+      <app-timeline-feed></app-timeline-feed>
+    </div>
   </div>
   <ng-template #mobileView class="mobile">
     <app-shopping-nav> </app-shopping-nav>

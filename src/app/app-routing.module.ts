@@ -30,7 +30,7 @@ const routes: Routes = [
   // },
   {
     path: '',
-    component: LandingPageComponent
+    component: ViewFeedComponent
   },
   {
     path: 'landing',
