@@ -218,7 +218,7 @@ button.filter-button:hover {
   display: flex;
   flex-direction: row;
   margin: 15px 0;
-  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* .checkbox-menu{
@@ -270,13 +270,15 @@ div.submit{
 div.price-container{
     margin-left: auto;
     margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-top: 50px;
-    margin-bottom: 5px;
-    min-width: 300px;
+    min-width: 200px;
 }
 
 .submit-price{
   float: right;
+  margin-left: 10px;
 }
 
 span.price.max{

@@ -9,11 +9,6 @@ body {
   height: 100%;
 } 
 
- .cdk-overlay-container {
-  /* pointer-events: auto !important; */
-  /* overflow-y: auto !important; */
-} 
-
 .overlay-fol-list .mat-dialog-container {
   border-radius: 2px !important;
   overflow-x: hidden;
@@ -60,13 +55,12 @@ body {
   height: 40px;
 }
 
-.cdk-overlay-pane {
+/* .cdk-overlay-pane {
   display: inline-block;
   position: relative;
   text-align: left;
   white-space: normal;
-  /* background-color: rgba(0, 0, 0, 0.4); */
-}
+} */
 
 .cdk-global-overlay-wrapper{
   overflow-y: auto !important;
@@ -101,10 +95,10 @@ div.mat-slider-thumb{
 
 } */
 
- div.mat-menu-panel{
+ /* div.mat-menu-panel{
   max-width: 400px !important;
   overflow: hidden;
-}
+} */
 
 div.mat-menu-content{
   display: flex;
