@@ -29,4 +29,8 @@ font-size: 27px;
 .bottom-navbar .icon-img.active{
 color: #f2f2f2;
 }
+
+.icon-img{
+  width: 33%;
+}
   
