@@ -195,17 +195,24 @@ mat-toolbar{
   background-color: white;
 }
 
-button.mat-button{
-  color:#444;
+button.filter-button{
+  font-family: Roboto;
   font-size: 18px;
+  font-weight: 400;
+  text-align: center;
   outline:none;
+  padding: 0px 16px;
+  background: #404040;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* span.mat-radio-button{
-  font-size:12px;
-  font-family: 'Maven Pro', sans-serif;
-  padding-right: 10px;
-} */
+button.filter-button:hover {
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
 
 .category-radio-group {
   display: flex;

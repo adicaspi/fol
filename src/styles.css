@@ -36,7 +36,7 @@ body {
 } */
 
 .cdk-overlay-container > .backdrop-product {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   overflow-y: auto !important;
   pointer-events: auto !important;
@@ -179,14 +179,6 @@ igx-slider{
 
 mat-toolbar{
   background-color: black;
-}
-
-div.arrow-container.prev:before{
-  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0))!important;
-}
-
-div.arrow-container.next:before{
-  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0))!important;
 }
 
 @media (min-width: 600px) and (max-width: 900px)  {

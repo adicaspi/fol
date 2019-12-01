@@ -102,28 +102,29 @@
   li.seperating-line {
     height: 30px;
     border-left: 2px solid #efefef;
-    width: 24px;
+    width: 20px;
   }
 
   li.explore {
-    top: 4px;
     font-size: 18px;
-    font-family: 'Maven Pro';
+    font-family: Roboto;
+    font-weight: 400;
     cursor: pointer;
-    border-radius: 25px;
-    padding: 2px 12px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    color: rgb(72,72,72);
+    letter-spacing: -0.2px;
   }
 
   li.explore:hover {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.07);
+    color: rgb(82,82,82);
   }
 
   .profile {
     width: 40px;
     height: 40px;
     margin-left: 24px;
-    position: relative;
-    top: 4px;
     border-radius: 50%;
     border: 2px solid rgba(128,128,128,0.25);
     cursor: pointer;

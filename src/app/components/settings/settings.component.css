@@ -82,8 +82,8 @@ li.controlers:hover {
 }
 
 label {
-  font-family: 'Maven Pro', sans-serif;
   font-size: 14px;
+  font-weight: 500;
   color: #333;
   height: 20px;
   width: 150px;
@@ -92,6 +92,7 @@ label {
   float: left;
   line-height: 32px;
 }
+
 input {
   height: 32px;
   width: 300px;
