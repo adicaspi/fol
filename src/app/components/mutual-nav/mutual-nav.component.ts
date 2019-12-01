@@ -45,10 +45,6 @@ export class MutualNavComponent implements OnInit {
     { id: 5, name: 'Shorts', checked: false, servername: 'Shorts' },
     { id: 6, name: 'Lingerie', checked: false, servername: 'Lingerie' }
   ];
-  shoes = [
-    { id: 1, name: 'Heels' },
-    { id: 2, name: 'Boots' },
-    { id: 3, name: 'Sneakers' }]
   productsToShow = [];
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
@@ -96,9 +92,6 @@ export class MutualNavComponent implements OnInit {
       switch (mrChange.value) {
         case "Clothing":
           this.productsToShow = this.clothing;
-          break;
-        case "Shoes":
-          this.productsToShow = this.shoes;
           break;
       }
     } else {
