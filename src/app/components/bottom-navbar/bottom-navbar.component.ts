@@ -74,25 +74,27 @@ export class BottomNavbarComponent implements OnInit {
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
 
-    // console.log("in host listener", event);
-
-    let currentScrollPos = window.pageYOffset;
-    if (this.prevScrollpos >= currentScrollPos) {
-      // scrolling up
+    if (window.pageYOffset == 0) {
       this.show = true;
-    } else {
-      // scrolling down
-      this.show = false;
     }
-    this.prevScrollpos = currentScrollPos;
+    else {
+
+      let currentScrollPos = window.pageYOffset;
+      if (this.prevScrollpos >= currentScrollPos) {
+        // scrolling up
+        this.show = true;
+      } else {
+        // scrolling down
+        this.show = false;
+      }
+      this.prevScrollpos = currentScrollPos;
+    }
   }
 
 
   get stateName() {
     return this.show ? 'show' : 'hide'
   }
-
-
 
   profilePage() {
     this.profile = true;
