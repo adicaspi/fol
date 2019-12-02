@@ -1,21 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { RegisterComponent } from '../register/register.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { UserService } from '../../services/user.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-bottom-navbar',
   templateUrl: './bottom-navbar.component.html',
-  styleUrls: ['./bottom-navbar.component.css']
+  styleUrls: ['./bottom-navbar.component.css'],
+  animations: [
+    trigger('popOverState', [
+      state('show', style({
+        opacity: 1
+      })),
+      state('hide', style({
+        opacity: 0
+      })),
+      transition('show => hide', animate('600ms ease-out')),
+      transition('hide => show', animate('1000ms ease-in'))
+    ])
+  ]
 })
 export class BottomNavbarComponent implements OnInit {
+  @ViewChild('bottomnavbar', { static: false }) bottomNavBar: ElementRef;
   feed: boolean = false;
   explore: boolean = false;
   profile: boolean = false;
+  bottomNavBarClass = "bottom-navbar";
   masterId: number;
   userId: number;
+  prevScrollpos: number;
+  currentScrollPos: number;
+  show: boolean = true;
+  init: boolean = false;
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
     { path: '', component: RegisterComponent },
@@ -41,8 +66,33 @@ export class BottomNavbarComponent implements OnInit {
     if (this.router.url.includes('explore')) {
       this.explore = true;
     }
-
+    this.prevScrollpos = window.pageYOffset;
   }
+
+
+
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll(event) {
+
+    // console.log("in host listener", event);
+
+    let currentScrollPos = window.pageYOffset;
+    if (this.prevScrollpos >= currentScrollPos) {
+      // scrolling up
+      this.show = true;
+    } else {
+      // scrolling down
+      this.show = false;
+    }
+    this.prevScrollpos = currentScrollPos;
+  }
+
+
+  get stateName() {
+    return this.show ? 'show' : 'hide'
+  }
+
+
 
   profilePage() {
     this.profile = true;
@@ -68,6 +118,7 @@ export class BottomNavbarComponent implements OnInit {
     this.explore = true;
     this.router.navigate(['/explore', this.userService.userId]);
   }
+
 
 
 }

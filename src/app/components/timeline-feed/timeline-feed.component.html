@@ -9,17 +9,17 @@
         </div>
 
         <div class="masonry-img">
-          <img (click)="openDialog(post)" [attr.src]="post.postImgSrc" class="img-main" />
+          <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
         </div>
 
-        <div class="card-text">
-          <div class="description">
+        <div class="card-text ">
+          <div class="description ">
             {{ post.post.description }}
           </div>
-          <span class="price">
+          <span class="price ">
             {{ post.post.price }}
           </span>
-          <a class="store text-right">
+          <a class="store text-right ">
             {{ post.post.website }}
           </a>
         </div>

@@ -1,13 +1,15 @@
 <body>
-  <div class="bottom-navbar">
-    <div class="icon-img" [ngClass]="{ active: feed }" (click)="feedPage()">
-      <i class="fa fa-home"></i>
-    </div>
-    <div class="icon-img" [ngClass]="{ active: profile }" (click)="profilePage()">
-      <i class="fa fa-user"></i>
-    </div>
-    <div class="icon-img" [ngClass]="{ active: explore }" (click)="explorePage()">
-      <i class="fa fa-search"></i>
+  <div class="bottom-navbar-container">
+    <div class="bottom-navbar" [@popOverState]="stateName">
+      <div class="icon-img" [ngClass]="{ active: feed }" (click)="feedPage()">
+        <i class="fa fa-home"></i>
+      </div>
+      <div class="icon-img" [ngClass]="{ active: profile }" (click)="profilePage()">
+        <i class="fa fa-user"></i>
+      </div>
+      <div class="icon-img" [ngClass]="{ active: explore }" (click)="explorePage()">
+        <i class="fa fa-search"></i>
+      </div>
     </div>
   </div>
 </body>
