@@ -142,19 +142,18 @@ img.search-img{
 }
 
 
-.anim{
+.filters-wrapper{
   right: 0;
   position: absolute; 
   z-index: 1;
-  overflow: auto;
   height: 100%;
-  
 }
 
 .filters{
   background-color: white;
   width:150px;
   height: 100%;
+  clear: both;
 }
 
 button.button-filters{
@@ -162,9 +161,14 @@ button.button-filters{
   border: none;
   outline: none;  
   margin-bottom:20px;
+ 
 }
 
 button.button-filters.clear{
+  float: right;
+}
+
+button.button-filters.show-more{
   float: right;
 }
 

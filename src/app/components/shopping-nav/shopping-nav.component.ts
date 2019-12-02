@@ -22,13 +22,20 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./shopping-nav.component.css'],
   animations: [
     trigger('slideInOut', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 1, width: '150px' }),
-        animate('1000ms ease-in', style({ transform: 'translateX(0%)' }))
-      ]),
-      transition(':leave', [
-        animate('200ms ease-in', style({ transform: 'translateX(100%)' }))
-      ])
+      state('open',
+        style({
+          width: '150px',
+          transform: 'translateX(-10%)',
+          opacity: 1,
+
+        })),
+      state('close', style({
+        transform: 'translateX(0%)',
+        opacity: 0
+      })),
+      transition('open => close', animate('500ms ease-out')),
+      transition('close => open', animate('500ms ease-in'))
+
     ]),
     trigger('expandCollapse', [
       state('open', style({
@@ -57,6 +64,7 @@ export class ShoppingNavComponent implements OnInit {
   originalList = {};
   displayList = {};
   categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
+  close: boolean = true;
   clothings = [
     { id: 1, name: 'All Clothing', servername: 'Default', checked: false },
     { id: 2, name: 'Tops', servername: 'Tops', checked: false },
@@ -116,6 +124,14 @@ export class ShoppingNavComponent implements OnInit {
     })
     this.onChanges();
   }
+
+  get stateName() {
+    return this.close ? 'close' : 'open'
+  }
+
+
+
+
   onChanges(): void {
     this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(value => {
       if (value != "") {
@@ -208,11 +224,14 @@ export class ShoppingNavComponent implements OnInit {
 
   toggleRightSide() {
     this.visible = !this.visible;
+    this.close = !this.close;
     if (this.visible) {
       this.seeMoreFilters = '-filtres';
+
     }
     else {
       this.seeMoreFilters = '+filters';
+
     }
   }
 

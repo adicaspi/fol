@@ -39,10 +39,13 @@
     </div>
   </mat-toolbar>
 
-  <div class="anim">
-    <button (click)="toggleRightSide()" class="button-filters">{{seeMoreFilters}}</button>
+
+  <div class="filters-wrapper">
+
+    <button (click)="toggleRightSide()" class="button-filters show-more">{{seeMoreFilters}} </button>
     <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
-    <div *ngIf="visible" class="filters">
+
+    <div class="filters" [@slideInOut]="stateName">
 
       <div class="stores">
         <div class="title">Stores</div>
