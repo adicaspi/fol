@@ -1,132 +1,131 @@
 
 @media only screen and (min-width: 900px) {
-.search-results{
-    height:100%;
-    
-}
-#main-body {
-  padding-right: 0px;
-  padding-left: 0px;
-  overflow: visible;
-  margin-top: 20px;
-}
 
-.center{
-  margin: auto;
-  width: 900px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
-}
+  .search-results{
+      height:100%;
+      
+  }
 
-.feed-label {
-  width: 900px;
-  font-size: 16px;
-  padding-left: 12px;
-  padding-top: 20px;
-  color: #999;
-  font-weight: 600;
-  margin-bottom: -21px;
-  margin-left: auto;
-  margin-right: auto;
-}
+  #main-body {
+    padding-right: 0px;
+    padding-left: 0px;
+    overflow: visible;
+    margin-top: 20px;
+  }
 
-.card {
-  width: 274px;
-  margin-top: 39px;
-  margin-right: 39px;
-  border: none;
-  border-radius: 20px;
-  display: inline-block;
-  border: 1px solid rgb(235,235,235);
-}
+  .center {
+    margin: auto;
+    width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
 
-.card:nth-of-type(3n){
-  margin-right: 0px;
-}
+  .feed-label {
+    width: 900px;
+    font-size: 16px;
+    padding-left: 12px;
+    padding-top: 20px;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: -21px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.profile-image {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
+  .card {
+    width: 274px;
+    margin-top: 39px;
+    margin-right: 39px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
 
-.profile-image img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  margin-left: 14px;
-  cursor: pointer;
-}
+  .card:nth-of-type(3n){
+    margin-right: 0px;
+  }
 
-.profile-image span {
-  font-size: 18px;
-  margin-left: 10px;
-  color: rgb(33, 37, 41);
-  font-family: arial, 'helvetica', sans-serif;
-  text-align: left;
-  cursor: pointer;
-}
+  .profile-image {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
 
-.masonry-img .img-main {
-  width: 197px;
-  height: 295px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  border-radius: 5px;
-  object-fit: cover;
-}
+  .profile-image img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-left: 14px;
+    cursor: pointer;
+  }
 
-.masonry-img .img-hover {
-  display: none;
-}
+  .profile-image span {
+    font-size: 18px;
+    margin-left: 10px;
+    color: rgb(33, 37, 41);
+    font-family: arial, 'helvetica', sans-serif;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.card-text {
-  font-size: 15px;
-  height: 48px;
-  width: 100%;
-  margin-top: 14px;
-  margin-bottom: 8px;
-  font-family: 'helvetica', arial, sans-serif;
-}
+  .masonry-img .img-main {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+  }
 
-.description {
-  text-align: center;
-  font-weight: 400;
-  color: black;
-  width: 90%;
-  margin: auto;
-}
+  .masonry-img .img-hover {
+    display: none;
+  }
 
-.store.text-right {
-  position: absolute;
-  right: 12px;
-  margin-top: 8px;
-  text-decoration: underline;
-  line-height: 1;
-  color: grey;
-}
+  .card-text {
+    font-size: 15px;
+    height: 48px;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
 
-span.price {
-  position: absolute;
-  left: 12px;
-  margin-top: 8px;
-  color: #2f2e2e;
-  font-weight: 200;
-  font-size: 14px;
-  font-family: open sans, sans-serif;
-  line-height: 1;
-}
+  .description {
+    text-align: center;
+    font-weight: 400;
+    color: black;
+    width: 90%;
+    margin: auto;
+  }
 
+  .store.text-right {
+    position: absolute;
+    right: 12px;
+    margin-top: 8px;
+    text-decoration: underline;
+    line-height: 1;
+    color: grey;
+  }
 
-
- } 
+  span.price {
+    position: absolute;
+    left: 12px;
+    margin-top: 8px;
+    color: #2f2e2e;
+    font-weight: 200;
+    font-size: 14px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
+  }
+} 
 
 @media (min-width: 600px) and (max-width: 900px)  {
   .search-results{
     height:100%;   
-}
+  }
   
   #main-body {
     padding-right: 0px;
@@ -200,18 +199,6 @@ span.price {
   .masonry-img .img-hover {
     display: none;
   }
-  
-  .profile-image span {
-    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      'Helvetica Neue' Helvetica, Arial, sans-serif; */
-  
-    /* font-size: 12px;
-    margin-left: 6px;
-    color: rgb(33, 37, 41);
-    font-family: arial, 'helvetica', sans-serif;
-    text-align: left;
-    cursor: pointer; */
-  }
     
   .card-text {
     font-size: 15px;
@@ -251,51 +238,55 @@ span.price {
 }
 
 @media  (max-width: 600px)  {
+
+  * {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -msbox-sizing: border-box;
+  }
+  
+  body{
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   .search-results{
-    height:100%;   
-}
+    height:100%; 
+    margin: 0;
+    padding: 0;  
+  }
   
   #main-body {
-    padding-right: 0px;
-    padding-left: 0px;
-     overflow: visible;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
     /* height: 100vh;  */
   }
 
-  /* .center {
-    width:375px;
-    margin:auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-  } */
-
   .center {
-    width: 360px;
-    margin: auto;
-    display: flex;
+    width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    /* display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: center;
+    flex-wrap: wrap; */
     background-color: white;
+    padding: 0px 12px;
   }
   
-  ngx-masonry{
-    margin: 0 auto;
-  }
-  
-  ngxMasonryItem:nth-of-type(3n) {
-    margin-right: 0px;
+  .feed-label {
+    display: none;
   }
 
   .card {
-    width:170px;
-    margin-right: 20px;
+    width: 40%;
     margin-top: 26px;
     border: none;
     border-radius: 20px;
     display: inline-block;
+    /* padding: 0 12px; */
   }
 
   .card:nth-of-type(2n){
@@ -316,9 +307,6 @@ span.price {
   }
   
   .profile-image span {
-    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      'Helvetica Neue' Helvetica, Arial, sans-serif; */
-  
     font-size: 12px;
     margin-left: 6px;
     color: rgb(33, 37, 41);
@@ -328,11 +316,10 @@ span.price {
   }
   
   .masonry-img .img-main {
-    width: 160px;
+    width: 100%;
     height: 280px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
     display: block;
     object-fit: cover;
   }
