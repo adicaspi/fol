@@ -105,8 +105,9 @@ export class ShoppingNavComponent implements OnInit {
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = false;
-  sidenavClass = 'sidenav-container';
+  sidenavClass: string = 'sidenav-container';
   showFilters: boolean = true;
+  mode: string = "over";
 
   constructor(
     private breakpointObserver: BreakpointObserver,
