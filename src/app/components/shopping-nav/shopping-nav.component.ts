@@ -24,17 +24,19 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('slideInOut', [
       state('open',
         style({
-          width: '150px',
-          transform: 'translateX(-10%)',
+          transform: 'translateX(-100%)',
           opacity: 1,
+          marginTop: '0'
 
         })),
       state('close', style({
-        transform: 'translateX(0%)',
+        display: 'none',
+        transform: 'translateX(100%)',
         opacity: 0
+
       })),
-      transition('open => close', animate('500ms ease-out')),
-      transition('close => open', animate('500ms ease-in'))
+      transition('open => close', animate(500)),
+      transition('close => open', animate(500))
 
     ]),
     trigger('expandCollapse', [
@@ -52,7 +54,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 })
 export class ShoppingNavComponent implements OnInit {
-  @ViewChild('drawer', { static: false }) public drawer: MatSidenav;
+  @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
   showBack: boolean = false;
   searchForm: FormGroup;
   firstChar: boolean = true;
@@ -103,6 +105,8 @@ export class ShoppingNavComponent implements OnInit {
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = false;
+  sidenavClass = 'sidenav-container';
+  showFilters: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -247,9 +251,23 @@ export class ShoppingNavComponent implements OnInit {
 
   }
 
-  public toggle(): void {
+  toggle(): void {
     console.log("in toggle");
-    this.drawer.toggle();
+    this.sidenav.toggle();
+    if (this.sidenav.opened) {
+      this.sidenavClass = 'sidenav-container-open';
+      this.showFilters = false;
+      this.seeMoreFilters = '-filtres';
+      this.visible = true;
+    }
+    else {
+      this.sidenavClass = 'sidenav-container';
+      this.showFilters = true;
+      this.seeMoreFilters = '+filtres';
+    }
+
+
+
   }
 
   goBack() {

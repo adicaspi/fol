@@ -143,10 +143,11 @@ img.search-img{
 
 
 .filters-wrapper{
+  /* position: absolute;
   right: 0;
-  position: absolute; 
-  z-index: 1;
   height: 100%;
+  margin-top: -150px;
+  background-color: white; */
 }
 
 .filters{
@@ -154,6 +155,25 @@ img.search-img{
   width:150px;
   height: 100%;
   clear: both;
+}
+
+.sidenav-container{
+  position: absolute !important;
+  right:0;
+  height: 40px;
+  width: 70px;
+}
+
+.sidenav-container-open{
+  width:150px;
+  position: absolute !important;
+  right:0;
+  height: 100%;
+  background-color: white;
+}
+
+.mat-sidenav{
+  box-shadow: none !important;
 }
 
 button.button-filters{
@@ -169,7 +189,11 @@ button.button-filters.clear{
 }
 
 button.button-filters.show-more{
-  float: right;
+  
+}
+
+.mat-sidenav-content{
+  background-color: white;
 }
 
 .items-list{

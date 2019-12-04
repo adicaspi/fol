@@ -40,61 +40,72 @@
   </mat-toolbar>
 
 
-  <div class="filters-wrapper">
 
-    <button (click)="toggleRightSide()" class="button-filters show-more">{{seeMoreFilters}} </button>
-    <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
+  <!-- <div *ngIf="visible" class="filters-wrapper" [@slideInOut]="stateName"> -->
 
-    <div class="filters" [@slideInOut]="stateName">
 
-      <div class="stores">
-        <div class="title">Stores</div>
-        <div class="stores items-list" *ngFor="let store of stores | slice:0:3">
-          <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
-            (click)="$event.stopPropagation();"> {{store.name}}
-          </mat-checkbox>
-        </div>
-        <button *ngIf="!openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
-        <div *ngIf="openCloseStores" [@expandCollapse]='openCloseAnim'>
-          <div *ngFor="let store of stores | slice:3:8" class="stores items-list">
+
+
+
+  <div class="filters">
+    <mat-sidenav-container [ngClass]="sidenavClass" [hasBackdrop]="false">
+      <mat-sidenav #sidenav [mode]="over" position="end" class="mat-sidenav">
+        <button (click)="toggle()" class="button-filters show-more">{{seeMoreFilters}} </button>
+        <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
+
+        <div class="stores">
+          <div class="title">Stores</div>
+          <div class="stores items-list" *ngFor="let store of stores | slice:0:3">
             <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
               (click)="$event.stopPropagation();"> {{store.name}}
             </mat-checkbox>
           </div>
-        </div>
-        <button *ngIf="openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
-      </div>
-
-
-      <div class="designers">
-        <div class="title">Designers</div>
-        <div class="designers items-list" *ngFor="let designer of designers | slice:0:3">
-          <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
-            (click)="$event.stopPropagation();"> {{designer.name}}
-          </mat-checkbox>
+          <button *ngIf="!openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
+          <div *ngIf="openCloseStores" [@expandCollapse]='openCloseAnim'>
+            <div *ngFor="let store of stores | slice:3:8" class="stores items-list">
+              <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
+                (click)="$event.stopPropagation();"> {{store.name}}
+              </mat-checkbox>
+            </div>
+          </div>
+          <button *ngIf="openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
         </div>
 
-        <button *ngIf="!openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
-        <div *ngIf="openCloseDesigners" [@expandCollapse]='openCloseAnim'>
-          <div *ngFor="let designer of designers| slice:3:9" class="designers items-list">
+
+        <div class="designers">
+          <div class="title">Designers</div>
+          <div class="designers items-list" *ngFor="let designer of designers | slice:0:3">
             <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
               (click)="$event.stopPropagation();"> {{designer.name}}
             </mat-checkbox>
           </div>
-        </div>
-        <button *ngIf="openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
-      </div>
-      <div class="price">
-        <div class="title">Prices (ILS)</div>
-        <div class="price items-list">
-          <div *ngFor="let price of prices" class="prices items-list">
-            <mat-checkbox name="price-tag" [value]="price.value" [checked]="price.checked" labelPosition="before" (change)="onChangeCheckBox('prices',$event,price)"
-              (click)="$event.stopPropagation();"> {{price.value}}
-            </mat-checkbox>
-          </div>
 
+          <button *ngIf="!openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
+          <div *ngIf="openCloseDesigners" [@expandCollapse]='openCloseAnim'>
+            <div *ngFor="let designer of designers| slice:3:9" class="designers items-list">
+              <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
+                (click)="$event.stopPropagation();"> {{designer.name}}
+              </mat-checkbox>
+            </div>
+          </div>
+          <button *ngIf="openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
         </div>
-      </div>
-    </div>
+        <div class="price">
+          <div class="title">Prices (ILS)</div>
+          <div class="price items-list">
+            <div *ngFor="let price of prices" class="prices items-list">
+              <mat-checkbox name="price-tag" [value]="price.value" [checked]="price.checked" labelPosition="before" (change)="onChangeCheckBox('prices',$event,price)"
+                (click)="$event.stopPropagation();"> {{price.value}}
+              </mat-checkbox>
+            </div>
+
+          </div>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content *ngIf="showFilters" class="mat-sidenav-content">
+        <button (click)="toggle()" class="button-filters show-more">{{seeMoreFilters}} </button>
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
 </div>
