@@ -49,7 +49,7 @@
 
   <div class="filters">
     <mat-sidenav-container [ngClass]="sidenavClass" [hasBackdrop]="false">
-      <mat-sidenav #sidenav [mode]="mode" position="end" class="mat-sidenav">
+      <mat-sidenav #sidenav [mode]="mode" position="end" autoFocus="false" class="mat-sidenav">
         <button (click)="toggle()" class="button-filters show-more">{{seeMoreFilters}} </button>
         <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
 
