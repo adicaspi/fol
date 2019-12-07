@@ -61,7 +61,7 @@
             </mat-checkbox>
           </div>
           <button *ngIf="!openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
-          <div *ngIf="openCloseStores" [@expandCollapse]='openCloseAnim'>
+          <div *ngIf="openCloseStores" [@expandCollapse]="openCloseAnim">
             <div *ngFor="let store of stores | slice:3:8" class="stores items-list">
               <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
                 (click)="$event.stopPropagation();"> {{store.name}}
@@ -81,7 +81,7 @@
           </div>
 
           <button *ngIf="!openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
-          <div *ngIf="openCloseDesigners" [@expandCollapse]='openCloseAnim'>
+          <div *ngIf="openCloseDesigners" [@expandCollapse]="openCloseAnimDesigners">
             <div *ngFor="let designer of designers| slice:3:9" class="designers items-list">
               <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
                 (click)="$event.stopPropagation();"> {{designer.name}}

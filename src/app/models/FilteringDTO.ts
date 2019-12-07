@@ -19,7 +19,7 @@ export class FilteringDTO {
   }
 
   setDesigners(designer) {
-    this.designers.push(designer);
+    this.designers.push(designer.name);
   }
 
   setStores(store) {

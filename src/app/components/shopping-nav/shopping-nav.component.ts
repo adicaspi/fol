@@ -41,7 +41,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
     trigger('expandCollapse', [
       state('open', style({
-        'height': '*'
+        'height': '100%',
+        transform: 'translateY(100%)'
       })),
       state('close', style({
         'height': '0px'
@@ -109,6 +110,7 @@ export class ShoppingNavComponent implements OnInit {
   git = 'sidenav-container';
   showFilters: boolean = true;
   mode: string = "over";
+  designersStateClosed: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -135,8 +137,9 @@ export class ShoppingNavComponent implements OnInit {
     return this.close ? 'close' : 'open'
   }
 
-
-
+  get openCloseAnimDesignersState() {
+    return this.designersStateClosed ? 'open' : 'close'
+  }
 
   onChanges(): void {
     this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(value => {
@@ -187,7 +190,7 @@ export class ShoppingNavComponent implements OnInit {
       }
       this.updateFeedFilteringDTO();
     }
-    if (key == "desginers") {
+    if (key == "designers") {
       if ($event.checked == true) {
         elem.checked = true;
         this.filteringDTO.setDesigners(elem);
@@ -208,6 +211,7 @@ export class ShoppingNavComponent implements OnInit {
   openReportsFilter(category): void {
     if (category == 'designers') {
       this.openCloseDesigners = !this.openCloseDesigners;
+      //this.designersClosed = !this.designersClosed;
       if (this.openCloseDesigners) {
         this.seeMoreDesigners = 'see less-';
       }
