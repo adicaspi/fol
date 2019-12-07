@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
@@ -20,7 +20,8 @@ import { User } from '../../models/User';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
   //  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
@@ -34,7 +35,7 @@ export class NavbarComponent implements OnInit {
   feed: boolean = false;
   masterId: number;
   userId: number;
-  // user: User;
+  panelWidth: string = "60%";
   user: Observable<User>;
   userProfileImgSrc: string;
   explore: boolean = false;
