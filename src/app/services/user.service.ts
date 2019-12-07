@@ -125,8 +125,13 @@ export class UserService {
     ).subscribe(res => { });
   }
 
-  getUserDetails(id: number): Observable<any> {
-    return this.http.get(this.globalInfoURL + id + '/details');
+  getUserDetails(id: number): Observable<User> {
+    console.log("in get user details");
+    return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
+    )
+      .map(res => {
+        return new User(res.profileImageAddr)
+      });
   }
 
   getNumberOfFollowing(id: number): Observable<any> {

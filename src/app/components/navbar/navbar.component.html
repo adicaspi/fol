@@ -16,7 +16,8 @@
               </svg> -->
           </div>
           <div id="search-input-container">
-            <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"/>
+            <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"
+            />
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of options" [value]="option.userName">
                 <div class="search-result" (click)="searchUser(option)">
@@ -44,11 +45,11 @@
 
     <li class="explore" (click)="explorePage()">
       <div class="explore">
-          Explore
+        Explore
       </div>
     </li>
-    <li>
-      <img src="../../../assets/kloss_profile.jpg" class="profile" (click)="profilePage()" />
+    <li *ngIf="user | async; let user">
+      <img [src]="user.profileImageAddr" class="profile" (click)="profilePage()" />
     </li>
 
   </ul>

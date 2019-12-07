@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ErrorsService } from '../../services/errors.service';
 import { GlobalVariable } from '../../../global';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-navbar',
@@ -33,6 +34,9 @@ export class NavbarComponent implements OnInit {
   feed: boolean = false;
   masterId: number;
   userId: number;
+  // user: User;
+  user: Observable<User>;
+  userProfileImgSrc: string;
   explore: boolean = false;
   profile: boolean = false;
   mobile: boolean = false;
@@ -57,18 +61,15 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userId = this.userService.userId;
+    this.user = this.userService.getUserDetails(this.userId);
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
     this.onChanges();
-    // this.errorService.filteredOptions = this.searchForm.valueChanges
-    //   .pipe(
-    //     startWith(''),
-    //     map(value => this._filter(value))
-    //   );
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
-    this.userId = this.userService.userId;
+
     if (this.router.url.includes('profile')) {
       if (this.userId == this.masterId) {
         this.profile = true;
