@@ -5,10 +5,10 @@
     <div class="center">
       <div class="card masonry-item" *ngFor="let post of posts">
 
-        <!-- <div class="profile-image">
+        <div class="profile-image">
           <img (click)="profilePage(post)" [attr.src]="post.profileImgSrc" />
           <span (click)="profilePage(post)" class="card-text-profile">{{ post.post.userName }}</span>
-        </div> -->
+        </div>
 
         <div class="masonry-img">
           <img (click)="openDialog(post)" [attr.src]="post.postImgSrc" class="img-main" heightWidthRatio/>

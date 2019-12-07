@@ -289,34 +289,31 @@
   .card {
     /* width: calc(50% - 6px); */
     width: 169.5px;
-    margin-top: 26px;
+    margin-top: 30px;
     border: none;
     display: inline-block;
     margin-right: 12px;
   }
 
-  .card:nth-of-type(2n){
+  .card:nth-of-type(2n) {
     margin-right: 0px;
   }
   
   .profile-image {
-    margin-top: 6px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   
   .profile-image img {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    margin-left: 9px;
-    cursor: pointer;
+    border: 1px solid rgb(212,212,212);
   }
   
   .profile-image span {
-    font-size: 12px;
-    margin-left: 6px;
-    color: rgb(33, 37, 41);
-    font-family: arial, 'helvetica', sans-serif;
+    font-size: 14px;
+    margin-left: 7px;
+    color: rgb(51, 51, 51);
     text-align: left;
     cursor: pointer;
   }
@@ -328,7 +325,7 @@
     margin-right: auto;
     display: block;
     object-fit: cover;
-    border-radius: 14px;
+    border-radius: 8px;
     border: 1px solid rgb(212,212,212);
   }
   
@@ -346,7 +343,7 @@
   .card-text .description {
     text-align: left;
     font-weight: 600;
-    color: rgb(54,54,54);
+    color: rgb(51,51,51);
     font-size: 16px;
   }
 
