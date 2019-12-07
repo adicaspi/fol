@@ -13,11 +13,19 @@ import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolli
 import { BehaviorSubject } from 'rxjs';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-timeline-feed',
   templateUrl: './timeline-feed.component.html',
-  styleUrls: ['./timeline-feed.component.css']
+  styleUrls: ['./timeline-feed.component.css'],
+
 })
 export class TimelineFeedComponent implements OnInit {
   id: number;
@@ -32,6 +40,7 @@ export class TimelineFeedComponent implements OnInit {
   updateFeed: Subscription
   newoffset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
+
 
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private subscription;
@@ -76,7 +85,6 @@ export class TimelineFeedComponent implements OnInit {
           if (value.width <= 900) {
           }
           if (value.width <= 600) {
-            console.log("in winodw changed");
             this.desktop = false;
           }
         });

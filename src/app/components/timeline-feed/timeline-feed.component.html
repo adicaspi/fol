@@ -8,8 +8,11 @@
           <span (click)="profilePage(post)" class="card-text-profile">{{ post.post.userName }}</span>
         </div>
 
-        <div class="masonry-img">
+        <div [ngClass]="post.thumbnail ? 'masonry-img-thumb' : 'masonry-img' ">
           <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
+          <div *ngIf="post.thumbnail" class="overlay">
+            <img [src]="post.thumbnail" class="img-main-hover" (click)="openDialog(post)" />
+          </div>
         </div>
 
         <div class="card-text ">

@@ -76,7 +76,7 @@ export class FeedService {
       .map(res => {
         let posts: any = res['feedPosts'];
         let offset: any = res['newOffset'];
-        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr));
+        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
         let feedReturnObject = new FeedReturnObject();
         feedReturnObject.newPosts = newPosts;
@@ -95,7 +95,7 @@ export class FeedService {
       .map(res => {
         let posts: any = res['feedPosts'];
         let offset: any = res['newOffset'];
-        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr));
+        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
         let feedReturnObject = new FeedReturnObject();
         feedReturnObject.newPosts = newPosts;
@@ -115,7 +115,7 @@ export class FeedService {
       .map(res => {
         let posts: any = res['feedPosts'];
         let offset: any = res['newOffset'];
-        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr));
+        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
         let feedReturnObject = new FeedReturnObject();
         feedReturnObject.newPosts = newPosts;
