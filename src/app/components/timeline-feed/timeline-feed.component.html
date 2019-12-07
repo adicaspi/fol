@@ -11,20 +11,20 @@
         </div> -->
 
         <div class="masonry-img">
-          <img (click)="openDialog(post)" [attr.src]="post.postImgSrc" class="img-main" />
+          <img (click)="openDialog(post)" [attr.src]="post.postImgSrc" class="img-main" heightWidthRatio/>
         </div>
 
-        <!-- <div class="card-text">
+        <div class="card-text">
           <div class="description">
             {{ post.post.description }}
           </div>
-          <span class="price">
+          <div class="price">
             {{ post.post.price }}
-          </span>
+          </div>
           <a class="store text-right">
-            {{ post.post.website }}
+            (asos)<!-- {{ post.post.website }} -->
           </a>
-        </div> -->
+        </div>
 
       </div>
     </div>
