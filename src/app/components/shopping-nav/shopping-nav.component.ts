@@ -125,8 +125,6 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
@@ -205,13 +203,12 @@ export class ShoppingNavComponent implements OnInit {
       }
       this.updateFeedFilteringDTO();
     }
-
   }
 
-  openReportsFilter(category): void {
+  SeeMoreSideFilters(category): void {
     if (category == 'designers') {
       this.openCloseDesigners = !this.openCloseDesigners;
-      //this.designersClosed = !this.designersClosed;
+      this.designersStateClosed = !this.designersStateClosed;
       if (this.openCloseDesigners) {
         this.seeMoreDesigners = 'see less-';
       }
@@ -228,24 +225,10 @@ export class ShoppingNavComponent implements OnInit {
       else {
         this.seeMoreStores = 'see more+';
       }
-
     }
   }
 
-  toggleRightSide() {
-    this.visible = !this.visible;
-    this.close = !this.close;
-    if (this.visible) {
-      this.seeMoreFilters = '-filtres';
-
-    }
-    else {
-      this.seeMoreFilters = '+filters';
-
-    }
-  }
-
-  clearSelection() {
+  clearSideFiltersSelection() {
     this.designers.forEach(elem => {
       elem.checked = false;
     });
@@ -257,8 +240,7 @@ export class ShoppingNavComponent implements OnInit {
 
   }
 
-  toggle(): void {
-    console.log("in toggle");
+  toggleSidenav(): void {
     this.sidenav.toggle();
     if (this.sidenav.opened) {
       this.sidenavClass = 'sidenav-container-open';
@@ -271,22 +253,6 @@ export class ShoppingNavComponent implements OnInit {
       this.showFilters = true;
       this.seeMoreFilters = '+filtres';
     }
-
-
-
-  }
-
-  goBack() {
-    if (this.currMenu == 'prd-clothings') {
-      this.currMenu = 'cat';
-    }
-    else {
-      this.mainMenu = true;
-      this.currMenu = '';
-    }
-    this.initFilteringDTO();
-    this.updateFeedFilteringDTO();
-    this.toggle();
   }
 
   filterByCategory(item) {
@@ -299,6 +265,7 @@ export class ShoppingNavComponent implements OnInit {
     this.filteringDTO.category = item;
     this.updateFeedFilteringDTO();
   }
+
   closeProductType() {
     this.showProductType = false;
     this.filteringDTO.removeProductType();
@@ -310,16 +277,6 @@ export class ShoppingNavComponent implements OnInit {
       this.currSelectedProductType = null;
       this.prevSelectedProductType = null;
     }
-  }
-
-  feedPage() {
-    this.router.navigate(['feed', this.userService.userId]);
-  }
-
-  initMenu() {
-    this.toggle();
-    this.currMenu = null;
-    this.mainMenu = true;
   }
 
   filterByProduct(elem) {
@@ -354,8 +311,9 @@ export class ShoppingNavComponent implements OnInit {
     this.updateFeedFilteringDTO();
   }
 
-
-
+  feedPage() {
+    this.router.navigate(['feed', this.userService.userId]);
+  }
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
@@ -386,28 +344,10 @@ export class ShoppingNavComponent implements OnInit {
         };
         this.options.push(searchObject);
       })
-      //this.filteredOptions = this._filter(value);
     })
   }
 
   searchUser(searchResult) {
     this.router.navigate(['profile', searchResult.id]);
-  }
-
-  onOpen() {
-    this.sideNavOpend = true;
-  }
-
-  onClose() {
-    this.icon = 'menu';
-  }
-
-  initFilteringDTO() {
-    this.filteringDTO.category = 'Clothing';
-    this.filteringDTO.productTypes = [];
-    this.filteringDTO.designers = [];
-    this.filteringDTO.stores = [];
-    this.filteringDTO.minPrice = 0;
-    this.filteringDTO.maxPrice = 0;
   }
 }

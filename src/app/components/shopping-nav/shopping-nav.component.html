@@ -50,8 +50,8 @@
   <div class="filters">
     <mat-sidenav-container [ngClass]="sidenavClass" [hasBackdrop]="false">
       <mat-sidenav #sidenav [mode]="mode" position="end" autoFocus="false" class="mat-sidenav">
-        <button (click)="toggle()" class="button-filters show-more">{{seeMoreFilters}} </button>
-        <button *ngIf="visible" (click)="clearSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
+        <button (click)="toggleSidenav()" class="button-filters show-more">{{seeMoreFilters}} </button>
+        <button *ngIf="visible" (click)="clearSideFiltersSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
 
         <div class="stores">
           <div class="title">Stores</div>
@@ -60,7 +60,7 @@
               (click)="$event.stopPropagation();"> {{store.name}}
             </mat-checkbox>
           </div>
-          <button *ngIf="!openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
+          <button *ngIf="!openCloseStores" (click)="SeeMoreSideFilters('stores')" class="button-filters">{{seeMoreStores}}</button>
           <div *ngIf="openCloseStores" [@expandCollapse]="openCloseAnim">
             <div *ngFor="let store of stores | slice:3:8" class="stores items-list">
               <mat-checkbox name="store" [value]="store.id" [checked]="store.checked" labelPosition="before" (change)="onChangeCheckBox('stores',$event,store)"
@@ -68,7 +68,7 @@
               </mat-checkbox>
             </div>
           </div>
-          <button *ngIf="openCloseStores" (click)="openReportsFilter('stores')" class="button-filters">{{seeMoreStores}}</button>
+          <button *ngIf="openCloseStores" (click)="SeeMoreSideFilters('stores')" class="button-filters">{{seeMoreStores}}</button>
         </div>
 
 
@@ -80,7 +80,7 @@
             </mat-checkbox>
           </div>
 
-          <button *ngIf="!openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
+          <button *ngIf="!openCloseDesigners" (click)="SeeMoreSideFilters('designers')" class="button-filters">{{seeMoreDesigners}}</button>
           <div *ngIf="openCloseDesigners" [@expandCollapse]="openCloseAnimDesigners">
             <div *ngFor="let designer of designers| slice:3:9" class="designers items-list">
               <mat-checkbox name="designer" [value]="designer.id" [checked]="designer.checked" labelPosition="before" (change)="onChangeCheckBox('designers',$event,designer)"
@@ -88,7 +88,7 @@
               </mat-checkbox>
             </div>
           </div>
-          <button *ngIf="openCloseDesigners" (click)="openReportsFilter('designers')" class="button-filters">{{seeMoreDesigners}}</button>
+          <button *ngIf="openCloseDesigners" (click)="SeeMoreSideFilters('designers')" class="button-filters">{{seeMoreDesigners}}</button>
         </div>
         <div class="price">
           <div class="title">Prices (ILS)</div>
@@ -103,7 +103,7 @@
         </div>
       </mat-sidenav>
       <mat-sidenav-content *ngIf="showFilters" class="mat-sidenav-content">
-        <button (click)="toggle()" class="button-filters show-more">{{seeMoreFilters}} </button>
+        <button (click)="toggleSidenav()" class="button-filters show-more">{{seeMoreFilters}} </button>
 
       </mat-sidenav-content>
     </mat-sidenav-container>
