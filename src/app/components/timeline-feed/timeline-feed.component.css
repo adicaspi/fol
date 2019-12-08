@@ -68,6 +68,7 @@
   cursor: pointer;
 }
 
+
 .masonry-img .img-main {
   width: 197px;
   height: 295px;
@@ -79,11 +80,11 @@
   transition: .6s ease;
 }
 
-.masonry-img-thumb{
+.masonry-img.thumb{
   position: relative;
 }
 
-.masonry-img-thumb .img-main {
+/* .masonry-img-thumb .img-main {
   width: 197px;
   height: 295px;
   margin-left: auto;
@@ -92,9 +93,9 @@
   border-radius: 5px;
   object-fit: cover;
   transition: .6s ease;
-}
+} */
 
-.masonry-img-thumb:hover .overlay {
+.masonry-img.thumb:hover .overlay {
   opacity: 1;
 }
 
@@ -110,7 +111,7 @@
   transition: .5s ease;
 }
 
-.overlay .img-main-hover {
+.overlay .img-main.hover {
   width: 197px;
   height: 295px;
   margin-left: auto;
@@ -121,9 +122,13 @@
   opacity: 1;
 }
 
-.masonry-img-thumb:hover .img-main {
+.masonry-img.thumb:hover .img-main {
     opacity: 0;
 } 
+
+.masonry-img.thumb:hover .img-main.hover {
+  opacity: 1;
+}
 
 .card-text {
   font-size: 15px;
