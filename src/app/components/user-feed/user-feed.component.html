@@ -13,7 +13,7 @@
             {{ post['post']['price'] }}
           </div>
           <a class="store text-right" [href]="post['post']['website']" target=" _blank ">
-            (asos) <!-- {{ post['post']['website'] }} -->
+              {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
           </a>
         </div>
       </div>
