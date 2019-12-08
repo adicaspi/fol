@@ -12,7 +12,6 @@ export class TimelinePost {
     postImgSrc: string,
     profileImgSrc: string,
     thumbnail?: string
-
   ) {
     this.post = post;
     this.postImgSrc = this.baseApiUrl + '/image?s3key=' + postImgSrc;
@@ -23,6 +22,11 @@ export class TimelinePost {
     else {
       this.thumbnail = null;
     }
+  }
 
+  get storeNameMobile() {
+    var website = this.post.website;
+    var str = website.substring(0, website.length - 4); //remove .com from store name
+    return str; 
   }
 }

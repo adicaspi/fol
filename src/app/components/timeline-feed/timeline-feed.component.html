@@ -1,8 +1,10 @@
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+
   <div id="main-body">
     <div *ngIf="desktop" class="feed-label">feed</div>
     <div class="center">
       <div class="card masonry-item" *ngFor="let post of posts">
+
         <div class="profile-image">
           <img (click)="profilePage(post)" [attr.src]="post.profileImgSrc" />
           <span (click)="profilePage(post)" class="card-text-profile">{{ post.post.userName }}</span>
@@ -19,7 +21,7 @@
 
         <div *ngIf="!desktop">
           <div class="masonry-img">
-            <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
+            <img (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" heightWidthRatio/>
           </div>
         </div>
 
@@ -27,17 +29,16 @@
           <div class="description ">
             {{ post.post.description }}
           </div>
-          <span class="price ">
+          <div class="price">
             {{ post.post.price }}
-          </span>
-          <a class="store text-right ">
-            {{ post.post.website }}
+          </div>
+          <a class="store text-right">
+              {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
           </a>
         </div>
+
       </div>
     </div>
   </div>
-
-
 
 </div>
