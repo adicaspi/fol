@@ -1,13 +1,12 @@
 <div class="body">
   <div class="center">
     <div id="main">
-      <div class="container">
-        <div *ngIf="userProfileImageSrc" class="img-comp">
-          <img [attr.src]="userProfileImageSrc" />
-          <!-- <img src="../../../assets/kloss_profile.jpg" /> -->
+      <div *ngIf="user | async; let user" class="container">
+        <div class="img-comp">
+          <img [attr.src]="user.profileImageAddr" />
         </div>
 
-        <div *ngIf="user" class="description">
+        <div class="description">
           <div class="upper-description-div">
             <div class="user-name">{{ user.username }}</div>
             <div *ngIf="!userProfile; else settings" class="button-follow">

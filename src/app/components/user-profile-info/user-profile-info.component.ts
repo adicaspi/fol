@@ -21,7 +21,7 @@ export class UserProfileInfoComponent implements OnInit {
   currMasterId: number;
   slaveId: number;
   follows: boolean;
-  user: User;
+  user: Observable<User>;
   userId: number;
   userProfileImageSrc: string;
   src: any;
@@ -39,13 +39,10 @@ export class UserProfileInfoComponent implements OnInit {
   private anyErrors: boolean;
   private finished: boolean;
   followingDialogRef: MatDialogRef<{}, any>;
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog,
-    private postService: PostService,
     private dialogService: DialogService,
     private router: Router,
     private configService: ConfigService,
@@ -55,9 +52,12 @@ export class UserProfileInfoComponent implements OnInit {
 
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
-    this.currMasterId = parseInt(routeParams.id);
-    this.updateUser(this.currMasterId);
     this.userId = this.userService.userId;
+    this.currMasterId = parseInt(routeParams.id);
+    if (this.userId == this.currMasterId) {
+      this.userProfile = true;
+    }
+    this.updateUser(this.currMasterId);
     this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.follows = res;
     })
@@ -92,17 +92,7 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   updateUser(id) {
-    this.userService
-      .getUserDetails(id)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(user => {
-        let baseAPI = this.baseApiUrl + '/image?s3key=';
-        this.user = user;
-        this.userProfileImageSrc = baseAPI + user.profileImageAddr;
-        if (this.userId == this.currMasterId) {
-          this.userProfile = true;
-        }
-      });
+    this.user = this.userService.getUserDetails(id);
   }
 
   follow() {
