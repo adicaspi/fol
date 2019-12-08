@@ -1,4 +1,8 @@
 
+.price {
+  display: inline-block;
+}
+
 @media only screen and (min-width: 900px) {
   .search-results{
     height:100%;   
@@ -69,7 +73,7 @@
     color: grey;
   }
 
-  span.price {
+  .price {
     position: absolute;
     left: 12px;
     margin-top: 8px;
@@ -81,16 +85,16 @@
   }
  }  
 @media (min-width: 600px) and (max-width: 900px) {
-  .search-results{
+  .search-results {
     height:100%;   
-}
+  }
   
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
   }
 
-  .center{
+  .center {
     margin: auto;
     width: 600px;
     display: flex;
@@ -148,7 +152,7 @@
     color: grey;
   }
 
-  span.price {
+  .price {
     position: absolute;
     left: 12px;
     margin-top: 8px;
@@ -161,91 +165,96 @@
  }
 
 @media (max-width: 600px) {
-  .search-results{
-    height:100%;   
-}
+  * {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -msbox-sizing: border-box;
+  }
+  
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .search-results {
+    height:100%; 
+    margin: 0;
+    padding: 0;  
+  }
   
   #main-body {
-    padding-right: 0px;
-    padding-left: 0px;
-    overflow: visible;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    /* height: 100vh;  */
   }
 
   .center {
-    width:360px;
-    margin:auto;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
+    background-color: white;
+    padding: 0px 12px;
   }
-
-  /* ngx-masonry{
-    margin: 0 auto;
-  }
-
-  ngxMasonryItem:nth-of-type(3n) {
-    margin-right: 0px;
-  } */
 
   .card {
-    width:150px;
-    margin-right: 60px;
-    margin-top: 26px;
+    /* width: calc(50% - 6px); */
+    width: 169.5px;
+    margin-top: 30px;
     border: none;
-    border-radius: 20px;
     display: inline-block;
+    margin-right: 12px;
   }
 
-  .card:nth-of-type(2n){
+  .card:nth-of-type(2n) {
     margin-right: 0px;
   }
-
-  .masonry-item img {
-    width: 160px;
-    height: 280px;
+  
+  .masonry-img .img-main {
+    width: 100%;
+    height: 220px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
     display: block;
     object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgb(212,212,212);
+  }
+  
+  .masonry-img .img-hover {
+    display: none;
   }
 
   .card-text {
-    font-size: 10px;
-    height: 42px;
     width: 100%;
-    margin-top: 9px;
-    margin-bottom: 5px;
-    font-family: 'helvetica', arial, sans-serif;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: inherit;
   }
 
   .card-text .description {
-    text-align: center;
-    font-weight: 400;
-    color: black;
-    font-size: 12px;
-    height: 30px;
+    text-align: left;
+    font-weight: 600;
+    color: rgb(51,51,51);
+    font-size: 16px;
+  }
+
+  .price {
+    margin-top: 8px;
+    font-size: 14px;
+    color: rgb(120,120, 120);
+    font-weight: 600;
   }
 
   .store.text-right {
-    position: absolute;
-    right: 8px;
-    margin-top: 5px;
-    text-decoration: underline;
-    line-height: 1;
-    color: grey;
-    font-size: 10px;
-  }
-
-  span.price {
-    position: absolute;
-    left: 8px;
-    margin-top: 5px;
-    color: #2f2e2e;
-    font-weight: 200;
-    font-size: 10px;
-    font-family: open sans, sans-serif;
-    line-height: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(120,120,120);
   }
 }

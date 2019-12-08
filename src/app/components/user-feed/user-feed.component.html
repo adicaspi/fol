@@ -3,17 +3,17 @@
     <div class="center">
       <div class="card masonry-item" *ngFor="let post of posts">
         <div class="masonry-img">
-          <img (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
+          <img class="img-main" (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
         </div>
         <div class="card-text">
           <div class="description">
             {{ post['post']['description'] }}
           </div>
-          <span class="price">
+          <div class="price">
             {{ post['post']['price'] }}
-          </span>
+          </div>
           <a class="store text-right" [href]="post['post']['website']" target=" _blank ">
-            {{ post['post']['website'] }}
+            (asos) <!-- {{ post['post']['website'] }} -->
           </a>
         </div>
       </div>
