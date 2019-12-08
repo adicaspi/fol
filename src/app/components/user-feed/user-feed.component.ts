@@ -28,7 +28,7 @@ export class UserFeedComponent implements OnInit {
   prevId = 0;
   deviceInfo = null;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
-  private subscription;
+  private WindowSizeSubscription: Subscription
   private feedSubsription: Subscription
   private updateFeed: Subscription
   private anyErrors: boolean;
@@ -52,6 +52,15 @@ export class UserFeedComponent implements OnInit {
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 900) {
+          this.desktop = true;
+        }
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+      });
   }
 
   ngOnInit() {
@@ -74,18 +83,7 @@ export class UserFeedComponent implements OnInit {
     this.feedService.updateUserFeed(this.id, this.offset);
 
 
-    //this.prevId = this.currId; //Updateing prevID in the first instantiating of the component
-    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
-      value => {
-        if (value.width <= 900) {
-        }
-        if (value.width <= 600) {
-          this.desktop = false;
 
-        }
-      }),
-      error => this.anyErrors = true,
-      () => this.finished = true
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-userfeed') {
         this.posts = [];
@@ -114,6 +112,7 @@ export class UserFeedComponent implements OnInit {
     }
   }
   public ngOnDestroy(): void {
+    this.WindowSizeSubscription.unsubscribe();
     this.onDestroy.next();
   }
 }

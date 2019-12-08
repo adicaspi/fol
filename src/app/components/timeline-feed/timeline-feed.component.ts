@@ -43,7 +43,7 @@ export class TimelineFeedComponent implements OnInit {
 
 
   private baseApiUrl = GlobalVariable.BASE_API_URL;
-  private subscription;
+  private WindowSizeSubscription: Subscription;
   private anyErrors: boolean;
   private finished: boolean;
 
@@ -79,11 +79,13 @@ export class TimelineFeedComponent implements OnInit {
         })
       });
     this.feedService.updateTimelineFeed(this.id, this.offset);
-    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
-          if (value.width <= 900) {
+          if (value.width >= 600) {
+            this.desktop = true;
           }
+
           if (value.width <= 600) {
             this.desktop = false;
           }
@@ -111,7 +113,7 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.WindowSizeSubscription.unsubscribe();
     this.feedSubscription.unsubscribe();
     this.onDestroy.next();
   }

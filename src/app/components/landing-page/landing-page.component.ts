@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,8 +17,10 @@ import { ConfigService } from '../../services/config.service';
 })
 export class LandingPageComponent implements OnInit {
   routes: Routes = [{ path: 'register', component: RegisterComponent }];
+  desktop: boolean;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
+  private WindowSizeSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -25,10 +28,24 @@ export class LandingPageComponent implements OnInit {
     private http: HttpClient,
     private userService: UserService,
     private configService: ConfigService
-  ) { }
+  ) {
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
+
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+        });
+  }
   // 'use strict';
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 
   registerPage() {
     this.dialogService.openModalWindow(LoginComponent);
@@ -56,5 +73,9 @@ export class LandingPageComponent implements OnInit {
         })
       )
       .toPromise();
+  }
+
+  ngOnDestroy(): void {
+    this.WindowSizeSubscription.unsubscribe();
   }
 }
