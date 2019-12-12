@@ -58,6 +58,7 @@ import { IgxSliderModule } from 'igniteui-angular';
 import { FollowingListMobileComponent } from './components/following-list-mobile/following-list-mobile.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HeightWidthRatioDirective } from './directives/height-width-ratio.directive';
 
 
 //I keep the new line
@@ -95,7 +96,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     FilePreviewOverlayComponent,
     BottomNavbarComponent,
     FollowingListMobileComponent,
-
+    HeightWidthRatioDirective
   ],
   imports: [
     BrowserModule,
