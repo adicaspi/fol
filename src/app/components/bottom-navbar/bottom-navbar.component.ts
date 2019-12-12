@@ -41,6 +41,9 @@ export class BottomNavbarComponent implements OnInit {
   currentScrollPos: number;
   show: boolean = true;
   init: boolean = false;
+  scroll: boolean = false;
+  timeout: any;
+
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
     { path: '', component: RegisterComponent },
@@ -74,21 +77,33 @@ export class BottomNavbarComponent implements OnInit {
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
 
-    if (window.pageYOffset == 0) {
+    this.scroll = true;
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      this.scroll = false;
       this.show = true;
-    }
-    else {
+    }, 350);
+    if (this.scroll) {
 
-      let currentScrollPos = window.pageYOffset;
-      if (this.prevScrollpos >= currentScrollPos) {
-        // scrolling up
+      this.show = true;
+      console.log("in else");
+      if (window.pageYOffset == 0) {
         this.show = true;
-      } else {
-        // scrolling down
-        this.show = false;
       }
-      this.prevScrollpos = currentScrollPos;
+      else {
+        console.log("in second else");
+        let currentScrollPos = window.pageYOffset;
+        if (this.prevScrollpos >= currentScrollPos) {
+          // scrolling up
+          this.show = true;
+        } else {
+          // scrolling down
+          this.show = false;
+        }
+        this.prevScrollpos = currentScrollPos;
+      }
     }
+
   }
 
 
