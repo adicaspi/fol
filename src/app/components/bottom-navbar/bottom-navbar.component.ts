@@ -86,12 +86,10 @@ export class BottomNavbarComponent implements OnInit {
     if (this.scroll) {
 
       this.show = true;
-      console.log("in else");
       if (window.pageYOffset == 0) {
         this.show = true;
       }
       else {
-        console.log("in second else");
         let currentScrollPos = window.pageYOffset;
         if (this.prevScrollpos >= currentScrollPos) {
           // scrolling up
