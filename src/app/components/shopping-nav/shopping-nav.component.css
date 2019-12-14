@@ -111,6 +111,10 @@ button.nav-item {
   color:black;
 }
 
+.search-form{
+  width: 100%;
+}
+
 #navBarSearchForm{
   border: none;
   border-radius: 0;
