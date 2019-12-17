@@ -1,26 +1,26 @@
 <div *ngIf="postInfo" class="wrapper">
+
   <div class="icon-img">
     <i (click)="goBackPage()" class="fa fa-chevron-left"></i>
   </div>
-  <div class="profile-img-comp" (click)="profilePage()">
+
+  <!-- <div class="profile-img-comp" (click)="profilePage()">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">{{ postInfo.userName }}</div>
+  </div> -->
+
+  <div *ngIf="imageUrls" class="slider">
+    <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls"
+     [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false" showDots="true">
+    </slideshow>
   </div>
 
   <div *ngIf="postInfo" class="product-upper-description">
-    <div class="card-text title">
-      <img [attr.src]="storeLogoSrc" class="store-logo" />
-    </div>
     <div class="product-description">
       <p id="description" class="card-text-description-ltr">
         {{ postInfo.description }}
       </p>
     </div>
-  </div>
-  <div *ngIf="imageUrls" class="slider">
-    <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false"
-      showDots="true">
-    </slideshow>
   </div>
 
   <div class="upper-footer">
@@ -33,4 +33,5 @@
       </button>
     </a>
   </div>
+
   <app-navbar></app-navbar>
