@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation, HostListener } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
@@ -16,6 +16,8 @@ import { Subject } from 'rxjs';
 import { ErrorsService } from '../../services/errors.service';
 import { GlobalVariable } from '../../../global';
 import { User } from '../../models/User';
+import { $ } from 'protractor';
+import * as jquery from 'jquery';
 
 @Component({
   selector: 'app-navbar',
@@ -41,6 +43,7 @@ export class NavbarComponent implements OnInit {
   explore: boolean = false;
   profile: boolean = false;
   mobile: boolean = false;
+  prevScrollPos = window.pageYOffset;
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
     { path: '', component: RegisterComponent },
@@ -98,6 +101,17 @@ export class NavbarComponent implements OnInit {
     // if (this.deviceService.isMobile() || this.deviceService.isTablet()) {
     //   this.mobile = true;
     // }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    let currScrollPos: number = window.pageYOffset;
+    if(currScrollPos > this.prevScrollPos && currScrollPos > 25) {
+      jquery("nav").css("top", "-70px");
+    } else {
+      jquery("nav").css("top", "0px")
+    }
+    this.prevScrollPos = currScrollPos;
   }
 
   onChanges(): void {
