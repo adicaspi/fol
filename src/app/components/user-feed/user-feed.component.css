@@ -209,7 +209,7 @@
 
   .card {
     width: calc(50% - 6px);
-    margin-top: 26px;
+    margin-top: 24px;
     border: none;
     display: inline-block;
     margin-right: 12px;
@@ -244,18 +244,18 @@
     text-align: left;
     font-weight: 600;
     color: rgb(51,51,51);
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .price {
-    margin-top: 8px;
-    font-size: 14px;
+    margin-top: 6px;
+    font-size: 12px;
     color: rgb(120,120, 120);
     font-weight: 600;
   }
 
   .store.text-right {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: rgb(120,120,120);
   }
