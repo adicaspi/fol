@@ -1,8 +1,9 @@
 <body>
   <div class="bottom-navbar-container">
     <div class="bottom-navbar" [@popOverState]="stateName">
-      <div class="icon-img" [ngClass]="{ active: feed }" (click)="feedPage()">
-        <i class="fa fa-home"></i>
+      <div class="icon-img" (click)="feedPage()">
+        <img *ngIf="!feed" src="../../../assets/fw_logo.PNG" class="fw-logo" (click)="feedPage()" />
+        <img *ngIf="feed" src="../../../assets/fw_logo_pink.png" class="fw-logo" (click)="feedPage()" />
       </div>
       <div class="icon-img" [ngClass]="{ active: profile }" (click)="profilePage()">
         <i class="fa fa-user"></i>

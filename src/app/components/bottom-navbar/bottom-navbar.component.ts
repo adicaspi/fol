@@ -59,15 +59,21 @@ export class BottomNavbarComponent implements OnInit {
     this.masterId = parseInt(routeParams.id);
     this.userId = this.userService.userId;
     if (this.router.url.includes('profile')) {
-      if (this.userId == this.masterId) {
-        this.profile = true;
-      }
+      // if (this.userId == this.masterId) {
+      this.profile = true;
+      this.feed = false;
+      this.explore = false;
+      // }
     }
     if (this.router.url.includes('feed')) {
       this.feed = true;
+      this.explore = false;
+      this.profile = false;
     }
     if (this.router.url.includes('explore')) {
       this.explore = true;
+      this.feed = false;
+      this.profile = false;
     }
     this.prevScrollpos = window.pageYOffset;
   }
@@ -86,12 +92,10 @@ export class BottomNavbarComponent implements OnInit {
     if (this.scroll) {
 
       this.show = true;
-      console.log("in else");
       if (window.pageYOffset == 0) {
         this.show = true;
       }
       else {
-        console.log("in second else");
         let currentScrollPos = window.pageYOffset;
         if (this.prevScrollpos >= currentScrollPos) {
           // scrolling up
