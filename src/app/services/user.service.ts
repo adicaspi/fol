@@ -130,7 +130,7 @@ export class UserService {
     return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
     )
       .map(res => {
-        return new User(res.profileImageAddr)
+        return new User(res.id, res.username, res.fullName, res.description, res.email, res.hashedPassword, res.birthDate, res.profileImageAddr)
       });
   }
 
