@@ -13,7 +13,23 @@ export class User {
 
 
   constructor(
+    id: number,
+    username: string,
+    fullName: string,
+    description: string,
+    email: string,
+    hashedPassword: any,
+    birthDate: any,
     profileImageAddr: string
-  ) { this.profileImageAddr = this.baseApiUrl + '/image?s3key=' + profileImageAddr }
+  ) {
+    this.id = id;
+    this.username = username;
+    this.fullName = fullName;
+    this.description = description;
+    this.email = email;
+    this.hashedPassword = hashedPassword,
+      this.birthDate = birthDate,
+      this.profileImageAddr = this.baseApiUrl + '/image?s3key=' + profileImageAddr
+  }
 
 }
