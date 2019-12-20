@@ -2,18 +2,36 @@
   height: 700px;
 }
 
-.icon-img {
-  font-family: FontAwesome;
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 30px;
+.header {
+  display: flex;
   vertical-align: middle;
   font-weight: lighter;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  position: relative;
+  padding: 18px;
+}
+
+.header img {
+  height: 16px;
+}
+
+.header .store {
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  font-family: Roboto;
+  color: #333;
+}
+
+.header .balance-header {
+  width: 16px;
 }
 
 .slider {
   margin: auto;
-  margin-top: 10px;
   width: 100%;
   height: 500px;
 }
