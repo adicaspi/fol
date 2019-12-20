@@ -25,6 +25,8 @@
     margin-top: -10px;
     margin-bottom: 28px;
     margin-left: 3px;
+    display: flex;
+    flex-direction: row;
   }
 
   #profileImage {
@@ -201,6 +203,8 @@
     margin-top: -10px;
     margin-bottom: 28px;
     margin-left: 3px;
+    display: flex;
+    flex-direction: row;
   }
 
   #profileImage {
@@ -210,7 +214,7 @@
     display: inline-block;
   }
 
-  .card-text.profile {
+  .card-text {
     display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
@@ -371,7 +375,7 @@
     margin-right: 10px;
   }
 
-  .card-text.profile {
+  .card-text {
     line-height: 64px;
     font-size: 15px;
     height: 50px;
