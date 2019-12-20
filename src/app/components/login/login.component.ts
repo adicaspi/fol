@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
     private errorsService: ErrorsService,
     private http: HttpClient,
     private configSerivce: ConfigService,
-    private dialogRef: MatDialogRef<LoginComponent>,
     private dialogService: DialogService,
+    private dialogRef: MatDialogRef<LoginComponent>
   ) {
     this.subscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('400px', '580px');
     this.loginForm = this.formBuilder.group({
       emailLogin: [''], //[Validators.required, Validators.email]],
       passwordLogin: [''] //[Validators.required]]
