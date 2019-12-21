@@ -20,7 +20,7 @@ import { RegisterComponent } from '../register/register.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  subscription: Subscription;
+  errorSubscription: Subscription;
   error: any = {};
   loginForm: FormGroup;
   submitted = false;
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     private dialogService: DialogService,
     private dialogRef: MatDialogRef<LoginComponent>
   ) {
-    this.subscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
+    this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
     });
   }
@@ -129,8 +129,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    // this.onDestroy.next();
+    this.onDestroy.next();
     // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 }

@@ -55,10 +55,15 @@ export class LandingPageComponent implements OnInit {
 
 
   registerPage(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      width: '400px',
-      height: '580px',
-    });
+    if (this.desktop) {
+      const dialogRef = this.dialog.open(LoginComponent, {
+        width: '400px',
+        height: '580px',
+      });
+    }
+    else {
+      this.router.navigate(['/login-mobile']);
+    }
   }
 
 
