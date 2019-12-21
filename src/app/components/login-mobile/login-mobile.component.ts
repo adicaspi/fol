@@ -18,7 +18,8 @@ export class LoginMobileComponent implements OnInit {
   error: any = {};
   wrongPass: boolean = false;
   wrongUser: boolean = false;
-  msgToShow: string;
+  emailMsgToShow: string = '';
+  passMsgToShow: string = '';
   onDestroy: Subject<void> = new Subject<void>();
 
   constructor(
@@ -36,10 +37,18 @@ export class LoginMobileComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      emailLogin: ['', [Validators.required, Validators.email]], //[Validators.required, Validators.email]],
-      passwordLogin: ['', Validators.required] //[Validators.required]]
+      emailLogin: ['', Validators.required],
+      passwordLogin: ['', Validators.required]
     });
 
+  }
+
+  get emailLogin() {
+    return this.loginForm.get('emailLogin');
+  }
+
+  get passwordLogin() {
+    return this.loginForm.get('passwordLogin');
   }
 
   get l() {
@@ -47,42 +56,47 @@ export class LoginMobileComponent implements OnInit {
   }
 
   onSubmitLogin() {
-    this.wrongPass = false;
-    this.wrongUser = false;
-    let email = this.loginForm.value.emailLogin;
-    let password = this.loginForm.value.passwordLogin;
-    let res = {
-      email: email,
-      password: password
-    };
+    console.log(this.loginForm.valid);
+    if (this.loginForm.valid) {
+      this.wrongPass = false;
+      this.wrongUser = false;
+      let email = this.loginForm.value.emailLogin;
+      let password = this.loginForm.value.passwordLogin;
+      let res = {
+        email: email,
+        password: password
+      };
 
-    this.userService
-      .login(res)
-      .subscribe(
-        data => {
-          this.userService.userId = data.userId;
-          this.userService.username = data.username;
-          this.userService.updateUser(data.userId);
+      this.userService
+        .login(res)
+        .subscribe(
+          data => {
+            this.userService.userId = data.userId;
+            this.userService.username = data.username;
+            this.userService.updateUser(data.userId);
 
-          this.configSerivce.setSessionStorage(data.userId.toString());
-          this.router.navigate(['/feed/' + data.userId]);
+            this.configSerivce.setSessionStorage(data.userId.toString());
+            this.router.navigate(['/feed/' + data.userId]);
+            this.ngOnDestroy();
+          },
+          error => {
 
-          this.ngOnDestroy();
-        },
-        error => {
+            if (this.error.error == 'Invalid Authentication Data') {
+              console.log("in login comp msg recived");
+              this.wrongPass = true;
+              this.passMsgToShow = 'The password you entered is incorrect.'
+            }
+            if (this.error.error == 'Invalid User') {
+              this.wrongUser = true;
+              this.emailMsgToShow = "Username doesn't exist."
 
-          if (this.error.error == 'Invalid Authentication Data') {
-            console.log("in login comp msg recived");
-            this.wrongPass = true;
-            this.msgToShow = 'The password you entered is incorrect.'
+            }
           }
-          if (this.error.error == 'Invalid User') {
-            this.wrongUser = true;
-            this.msgToShow = "Username doesn't exist."
-
-          }
-        }
-      );
+        );
+    }
+    else {
+      console.log("not valid");
+    }
   }
 
   regsiterPage() {
