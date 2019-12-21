@@ -41,7 +41,8 @@ const routes: Routes = [
   { path: 'explore/:id', component: ViewExploreComponent },
   { path: 'product-page', component: ProductPageMobileComponent },
   { path: 'following', component: GenerateFollowListComponent },
-  { path: 'login-mobile', component: LoginMobileComponent }
+  { path: 'login-mobile', component: LoginMobileComponent },
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({

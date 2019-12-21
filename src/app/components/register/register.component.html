@@ -1,10 +1,11 @@
 <!-- <app-landing-nav></app-landing-nav> -->
-<button mat-button [mat-dialog-close]="true">
+<button *ngIf="modal" mat-button [mat-dialog-close]="true">
   <i class="fal fa-times"></i>
 </button>
 <div class="wrapper">
-  <!-- <div mat-dialog-content> -->
-  <h2>Register</h2>
+  <div class="img-logo">
+    <img src="../../../assets/fw_logo_2A.png" class="fw-logo" />
+  </div>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
     <div class="form-group">
       <label for="fullName"></label>

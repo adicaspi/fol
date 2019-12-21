@@ -100,7 +100,8 @@ export class LoginMobileComponent implements OnInit {
   }
 
   regsiterPage() {
-    //this.dialogService.openModalWindow(RegisterComponent);
+    console.log("in reg");
+    this.router.navigate(['/register']);
   }
 
   ngOnDestroy() {

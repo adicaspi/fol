@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
   userNameExists = false;
   userNameValidatorLength = false;
   emailExists = false;
+  modal: boolean = false;
   minLength = 3;
   wrongPassUser: boolean = false;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
@@ -41,8 +42,11 @@ export class RegisterComponent implements OnInit {
     private errorsService: ErrorsService,
     private http: HttpClient,
     private configSerivce: ConfigService,
-    private dialogRef: MatDialogRef<RegisterComponent>
+    @Optional() private dialogRef?: MatDialogRef<RegisterComponent>
   ) {
+    if (dialogRef) {
+      this.modal = true;
+    }
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
     });
