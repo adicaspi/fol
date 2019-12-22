@@ -34,7 +34,6 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   overflow-y: auto !important;
-  pointer-events: auto !important;
 }
 
 .cdk-global-overlay-wrapper-fol::before {
@@ -64,12 +63,10 @@ body {
 
 .cdk-global-overlay-wrapper{
   overflow-y: auto !important;
- pointer-events: auto !important;
 }
 
 .cdk-overlay-backdrop.backdrop-product.cdk-overlay-backdrop-showing{
   overflow-y: auto !important;
-  pointer-events: auto !important;
 }
 
 mat-slider{
