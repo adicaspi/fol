@@ -5,6 +5,7 @@ import {
   HttpParams,
   HttpResponse
 } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
 const httpOptions = {
@@ -16,7 +17,6 @@ const httpFormDataOptions = {
     'Content-Type': 'multipart/form-data'
   })
 }
-import { GlobalVariable } from '../../global';
 
 
 @Injectable({
@@ -27,7 +27,7 @@ export class UserService {
   userId: number;
   username: string;
   user: Observable<User>;
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   globalRegisterURL = this.baseApiUrl + '/registration/';
   globaSoicalURL = this.baseApiUrl + '/social/';
   globalInfoURL = this.baseApiUrl + '/user-info/';

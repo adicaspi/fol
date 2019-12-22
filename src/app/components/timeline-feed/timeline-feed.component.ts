@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
@@ -6,7 +7,6 @@ import { Subject, Observable, Subscription } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
-import { GlobalVariable } from '../../../global';
 import { Router } from '@angular/router';
 import { ErrorsService } from '../../services/errors.service';
 import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
@@ -42,7 +42,7 @@ export class TimelineFeedComponent implements OnInit {
   infinite: Observable<any[]>;
 
 
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription;
   private anyErrors: boolean;
   private finished: boolean;

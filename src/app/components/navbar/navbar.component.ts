@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
@@ -14,7 +15,6 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ErrorsService } from '../../services/errors.service';
-import { GlobalVariable } from '../../../global';
 import { User } from '../../models/User';
 
 @Component({
@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   onDestroy: Subject<void> = new Subject<void>();
   constructor(
     private userService: UserService,

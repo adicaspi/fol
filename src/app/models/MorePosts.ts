@@ -1,10 +1,9 @@
-import { GlobalVariable } from '../../global';
-import { post } from 'selenium-webdriver/http';
+import { environment } from '../../environments/environment';
 
 export class MorePosts {
   postId: number;
   postImageAddr: string;
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
     postId: number,

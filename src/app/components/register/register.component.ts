@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { ErrorsService } from '../../services/errors.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { GlobalVariable } from '../../../global';
 import { ConfigService } from '../../services/config.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   emailExists = false;
   minLength = 3;
   wrongPassUser: boolean = false;
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
 
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
 

@@ -10,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
-import { GlobalVariable } from '../../../global';
 
 @Component({
   selector: 'app-user-profile-info',
