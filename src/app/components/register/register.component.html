@@ -5,8 +5,30 @@
 <div class="wrapper">
   <div class="img-logo">
     <img src="../../../assets/fw_logo_2A.png" class="fw-logo" />
+
+    <div class="img-logo-caption">
+      Sign up to see fashion items discovered by your friends
+    </div>
   </div>
+
+  <div class="sign-up-facebook">
+    <button class="facebook-button">
+      <span class="facebook-icon">
+        <img src="../../../assets/fb_logo.png" class="fb-logo" />
+      </span>
+      Log in with Facebook
+    </button>
+  </div>
+
+  <div class="login-method">
+    OR
+  </div>
+
+
   <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+
+
+
     <div class="form-group">
       <label for="fullName"></label>
       <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
@@ -19,10 +41,29 @@
     </div>
 
     <div class="form-group">
+      <label for="username"></label>
+      <input type="text" formControlName="username" class="form-control" [ngClass]="{
+              'is-invalid': submitted && f.username.errors || userNameExists || userNameValidatorLength
+            }" placeholder="Username" />
+
+      <div *ngIf="userNameValidatorLength" class="invalid-feedback">
+        Username must be at least 3 characters
+      </div>
+      <div *ngIf="userNameExists" class="invalid-feedback">
+        Username already exists
+      </div>
+
+      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div *ngIf="f.username.errors.required">Username is required</div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
       <label for="email"></label>
       <input type="text" formControlName="email" class="form-control" [ngClass]="{
-          'is-invalid': (submitted && f.email.errors) || emailExists
-        }" placeholder="Email" />
+            'is-invalid': (submitted && f.email.errors) || emailExists
+      }" placeholder="E-mail" />
       <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
         <div *ngIf="f.email.errors.required">E-mail is required</div>
       </div>
@@ -36,9 +77,13 @@
       </div>
     </div>
 
+
+
+
+
     <div class="form-group">
       <label for="birthDate"></label>
-      <input type="text" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
+      <input type="date" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
         placeholder="Birthdate" />
       <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
         <div *ngIf="f.birthDate.errors.required">
@@ -46,23 +91,8 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="username"></label>
-      <input type="text" formControlName="username" class="form-control" [ngClass]="{
-          'is-invalid': submitted && f.username.errors || userNameExists || userNameValidatorLength
-        }" placeholder="Username" />
 
-      <div *ngIf="userNameValidatorLength" class="invalid-feedback">
-        Username must be at least 3 characters
-      </div>
-      <div *ngIf="userNameExists" class="invalid-feedback">
-        Username already exists
-      </div>
 
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Username is required</div>
-      </div>
-    </div>
     <div class="form-group">
       <label for="password"></label>
       <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
@@ -74,19 +104,21 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <button type="submit" [disabled]="!registerForm.valid" class="btn btn-default register">
+    <div class="submit-form">
+      <button *ngIf="!loading" type="submit" class="btn btn-default register" (click)="onSubmitRegister()">
         Register
       </button>
 
-      <!-- <button type="submit" class="btn btn-default register">
-        Register
-      </button> -->
-      <!-- <img
-        *ngIf="loading"
-        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-      /> -->
+      <div class="loading-spinner">
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+      </div>
     </div>
   </form>
-  <!-- </div> -->
+  <div class="login">
+    <span>Have an account?</span>
+    <a class="login" (click)="loginPage()">
+      Log in
+    </a>
+  </div>
 </div>

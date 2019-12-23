@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   userId: number;
   wrongPass: boolean = false;
   wrongUser: boolean = false;
+  modal: boolean = false;
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = GlobalVariable.BASE_API_URL;
@@ -40,8 +41,11 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private configSerivce: ConfigService,
     private dialogService: DialogService,
-    private dialogRef: MatDialogRef<LoginComponent>
+    @Optional() private dialogRef: MatDialogRef<LoginComponent>
   ) {
+    if (dialogRef) {
+      this.modal = true;
+    }
     this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
     });
@@ -49,8 +53,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      emailLogin: [''], //[Validators.required, Validators.email]],
-      passwordLogin: [''] //[Validators.required]]
+      emailLogin: ['', Validators.required],
+      passwordLogin: ['', Validators.required]
     });
 
     //Check if user can auto-login
@@ -64,6 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin() {
+    this.submitted = true;
     this.wrongPass = false;
     this.wrongUser = false;
     let email = this.loginForm.value.emailLogin;
@@ -104,8 +109,13 @@ export class LoginComponent implements OnInit {
   }
 
   regsiterPage() {
-    this.dialogRef.close();
-    this.dialogService.openModalWindow(RegisterComponent);
+    if (this.dialogRef) {
+      this.dialogRef.close();
+      this.dialogService.openModalWindow(RegisterComponent);
+    }
+    else {
+      this.router.navigate(['/register']);
+    }
   }
 
   loadConfigurationData() {

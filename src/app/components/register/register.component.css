@@ -5,7 +5,6 @@ button.mat-button{
 }
 
 .wrapper {
-  height: 500px;
   width: 100%;
   overflow: hidden;
   margin: 0 auto;
@@ -57,14 +56,11 @@ p.forgot-password {
 }
 
 .login-method {
-  width: 50%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 25px;
+  display:flex;
+  justify-content: center;
   margin-top: 15px;
   font-size: 12px;
   font-weight: 700;
-  text-align: center;
 }
 
 button.btn.facebook {
@@ -75,164 +71,63 @@ div.invalid-feedback{
   width: 50%;
   margin: 0 auto;
 }
-}
-@media (max-width: 600px) {
-  button.mat-button{
-    float: right;
-    font-size: 20px;
-  }
-  
-  .wrapper {
-    height: 500px;
-    width: 100%;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-  
-  a {
-    color: black;
-  }
-  
-  h2 {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .form-control {
-    margin: 0 auto;
-    width: 50%;
-  }
-  
-  .form-group {
-    margin: 0;
-  }
-  
-  button.btn.btn-default.register {
-    display: block;
-    margin: 0 auto;
-    margin-top: 15px;
-    background-color: black;
-    color:white;
-    cursor: pointer;
-  }
-  
-  p.forgot-password {
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 25px;
-    margin-top: 0;
-    font-size: 12px;
-  }
-  
-  .login-method {
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 25px;
-    margin-top: 15px;
-    font-size: 12px;
-    font-weight: 700;
-    text-align: center;
-  }
-  
-  button.btn.facebook {
-    background-color: #6d84b4;
-  }
-  
-  div.invalid-feedback{
-    width: 50%;
-    margin: 0 auto;
-  }
+
+.img-logo{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
+img.fw-logo{
+  height: 40px;
+  width: 240px;
+  margin:0 auto;
+  margin-bottom: 20px;
+}
 
-@media (max-width: 600px)  {
-  .wrapper {
-    height: 500px;
-    width: 100%;
-    overflow: hidden;
-    margin: 0 auto;
-  }
+.img-logo-caption{
+  margin:0 auto;
+  line-height: 20px;
+  width: 220px;
+  font-size: 13px;
+  width:200px;
+  color: #999;
+}
 
-  .img-logo{
-    display:flex;
-    justify-content: center;
-  }
+button.facebook-button{
+  background-color: white;
+  color: rgb(56,81,133);
+  border:none;
+}
 
-  img.fw-logo{
-    margin-top:20px;
-    margin-bottom:40px;
-    width: 280px;
-    height: 51px;
-  }
-  
-  a {
-    color: black;
-  }
-  
-  h2 {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .form-control {
-    margin: 0 auto;
-    width: 50%;
-  }
-  
-  .form-group {
-    margin: 0;
-  }
-  
-  button.btn.btn-default.register {
-    display: block;
-    margin: 0 auto;
-    margin-top: 15px;
-    background-color: black;
-    color:white;
-    cursor: pointer;
-  }
-  
-  button.btn.btn-default.register.unvalid {
-    display: block;
-    margin: 0 auto;
-    margin-top: 15px;
-    background-color: black;
-    color:white;
-  }
-  
-  p.forgot-password {
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 25px;
-    margin-top: 0;
-    font-size: 12px;
-  }
-  
-  .login-method {
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 25px;
-    margin-top: 15px;
-    font-size: 12px;
-    font-weight: 700;
-    text-align: center;
-  }
-  
-  button.btn.facebook {
-    background-color: #6d84b4;
-  }
-  
-  div.invalid-feedback{
-    width: 50%;
-    margin: 0 auto;
-  }
-  }
+img.fb-logo{
+  height: 30px;
+  width: 30px;
+}
+.sign-up-facebook{
+  display: flex;
+  justify-content: center;
+}
+
+.loading-spinner{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.login{
+  display: flex;
+  justify-content: center;
+}
+
+a.login{
+  color: rgb(56,81,133);
+  cursor: pointer;
+  margin-left: 5px;
+}
+}
+
   @media (max-width: 600px) {
     button.mat-button{
       float: right;
@@ -240,7 +135,6 @@ div.invalid-feedback{
     }
     
     .wrapper {
-      height: 500px;
       width: 100%;
       overflow: hidden;
       margin: 0 auto;
@@ -284,14 +178,11 @@ div.invalid-feedback{
     }
     
     .login-method {
-      width: 50%;
-      margin-right: auto;
-      margin-left: auto;
-      margin-bottom: 25px;
+      display:flex;
+      justify-content: center;
       margin-top: 15px;
       font-size: 12px;
       font-weight: 700;
-      text-align: center;
     }
     
     button.btn.facebook {
@@ -301,6 +192,70 @@ div.invalid-feedback{
     div.invalid-feedback{
       width: 50%;
       margin: 0 auto;
+    }
+
+    .img-logo{
+      display: flex;
+      flex-direction: column;
+      margin-top: 55px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    img.fw-logo{
+      height: 40px;
+      width: 240px;
+      margin:0 auto;
+      margin-bottom: 10px;
+    }
+    
+    .img-logo-caption{
+      margin:0 auto;
+      line-height: 20px;
+      width: 220px;
+      font-size: 13px;
+      width:200px;
+      color: #999;
+    }
+
+    button.facebook-button{
+      background-color: white;
+      color: rgb(56,81,133);
+      border:none;
+      margin: 0 auto;
+    }
+    
+    img.fb-logo{
+      height: 30px;
+      width: 30px;
+    }
+
+    .sign-up-facebook{
+      display: flex;
+      justify-content: center;
+    }
+
+    .sign-up-facebook{
+      display: flex;
+      justify-content: center;
+    }
+
+    .loading-spinner{
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .login{
+      display: flex;
+      justify-content: center;
+      
+    }
+
+    a.login{
+      color: rgb(56,81,133);
+      cursor: pointer;
+      margin-left: 5px;
     }
   }
   

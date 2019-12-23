@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { GlobalVariable } from '../../../global';
 import { ConfigService } from '../../services/config.service';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,6 @@ export class RegisterComponent implements OnInit {
   wrongPassUser: boolean = false;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
 
-  private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
   // TODO - FIXED TOUCHED INVALID CLASS
   constructor(
@@ -42,6 +42,7 @@ export class RegisterComponent implements OnInit {
     private errorsService: ErrorsService,
     private http: HttpClient,
     private configSerivce: ConfigService,
+    private dialogService: DialogService,
     @Optional() private dialogRef?: MatDialogRef<RegisterComponent>
   ) {
     if (dialogRef) {
@@ -53,9 +54,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('550px', '580px');
-    this.dialogRef._containerInstance._config.height = '580px';
-
+    if (this.dialogRef) {
+      this.dialogRef.updateSize('550px', '580px');
+    }
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', Validators.required],
@@ -63,23 +64,13 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]]
     });
-    this.loginForm = this.formBuilder.group({
-      emailLogin: [''], //[Validators.required, Validators.email]],
-      passwordLogin: [''] //[Validators.required, Validators.minLength(6)]]
-    });
 
     this.onChanges();
-    //Check if user can auto-login
-    //this.loadConfigurationData();
   }
 
   // convenience getter for easy access to form fields
   get f() {
     return this.registerForm.controls;
-  }
-
-  get l() {
-    return this.loginForm.controls;
   }
 
   onChanges(): void {
@@ -106,7 +97,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmitRegister() {
     this.submitted = true;
-
     //   stop here if form is invalid
     if (!this.registerForm.valid) {
       console.log("form not valid");
@@ -143,60 +133,22 @@ export class RegisterComponent implements OnInit {
           this.ngOnDestroy();
         },
         error => {
+          this.loading = false;
           if (this.error.error == 'User Collision') {
-            alert('already exist');
             this.emailExists = true;
           }
         }
       );
   }
 
-  onSubmitLogin() {
-    let email = this.loginForm.value.emailLogin;
-    let password = this.loginForm.value.passwordLogin;
-    let res = {
-      email: email,
-      password: password
-    };
-
-    this.userService
-      .login(res)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.userService.userId = data.userId;
-          this.userService.username = data.username;
-          this.userService.updateUser(data.userId);
-          this.configSerivce.setSessionStorage(data.userId.toString());
-          this.router.navigate(['/feed/' + data.userId]);
-          this.ngOnDestroy();
-        },
-        error => {
-          if (this.error.error == 'Invalid Authentication Data') {
-            this.wrongPassUser = true;
-          }
-        }
-      );
-  }
-
-  loadConfigurationData() {
-    this.http
-      .get<any>(this.autoLogin, { observe: 'response' })
-      .pipe(
-        map(data => {
-          console.log(
-            'IM IN DATA CONFIG SERVICE, USER CRED ARE',
-            data.body.userId,
-            data.body.userName
-          );
-          this.userService.userId = data.body.userId;
-          this.userService.username = data.body.userName;
-          this.userService.updateUser(data.body.userId);
-          this.router.navigate(['/feed/' + data.body.userId]);
-          this.configSerivce.setSessionStorage(data.body.userId.toString());
-        })
-      )
-      .toPromise();
+  loginPage(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+      this.dialogService.openModalWindow(RegisterComponent);
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
 
   ngOnDestroy() {

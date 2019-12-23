@@ -62,7 +62,7 @@ export class LandingPageComponent implements OnInit {
       });
     }
     else {
-      this.router.navigate(['/login-mobile']);
+      this.router.navigate(['/login']);
     }
   }
 
