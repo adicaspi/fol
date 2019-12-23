@@ -27,12 +27,22 @@ h2 {
   width: 75%;
 }
 
-.form-group {
+/* .form-group {
   margin: 0;
+} */
+
+.form-group{
+  display:flex;
+  flex-direction: column;
 }
 
 button {
   font-size: 14px;
+}
+
+input.form-control{
+  width:300px;
+  margin: 0 auto;
 }
 
 button.btn.btn-default.login {
@@ -40,15 +50,17 @@ button.btn.btn-default.login {
   margin: 0 auto;
   width: 50%;
   background-color: grey;
+  cursor: pointer;
 }
 
 button.btn.btn-default.login:focus {
   background-color: black;
   color:white;  
+  cursor: pointer;
 }
 
 p.forgot-password {
-  width: 75%;
+  width: 300px;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 25px;
@@ -79,15 +91,6 @@ button.btn.btn-default.login.facebook {
   width: 50%;
 }
 
-/* .button-register {
-  background: none;
-  border: 1px solid;
-  width: 50%;
-  margin: 0 auto;
-  display: block;
-  margin-top: 15px;
-} */
-
 button.btn.btn-default.register {
   display: block;
   cursor: pointer;
@@ -113,12 +116,56 @@ button.btn.btn-default.login {
 div.invalid-feedback{
   text-align: center;
 }
-@media (min-width: 360px) and (max-width: 376px) {
+
+button.facebook-button{
+  background-color: white;
+  color: rgb(56,81,133);
+  border:none;
+}
+
+img.fb-logo{
+  height: 30px;
+  width: 30px;
+}
+
+.sign-up{
+  display: flex;
+  justify-content: center;
+  
+}
+
+a.register{
+  color: rgb(0,53,105);
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+.img-logo{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+img.fw-logo{
+  width: 280px;
+  height: 51px;
+}
+@media (max-width: 600px) {
   .mat-dialog-content {
     width: 100%;
     overflow: hidden;
     margin: 0 auto;
   }
+
+  button{
+    width: 300px;
+    margin: 0 auto;
+    border: none;
+    height: 38px;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  } 
 
   button.btn.btn-default.login.facebook {
     width: 100%;
@@ -128,5 +175,49 @@ div.invalid-feedback{
     width:100%;
     border:none;
     outline: none;
+  }
+
+  button.facebook-button{
+    background-color: white;
+    color: rgb(56,81,133);
+  }
+
+  .sign-up{
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  a.register{
+    color: rgb(0,53,105);
+    margin-left: 3px;
+    cursor: pointer;
+  }
+
+  img.fb-logo{
+    height: 30px;
+    width: 30px;
+  }
+
+  .form-group{
+    display:flex;
+    flex-direction: column;
+  }
+
+  input.form-control{
+    width:300px;
+    margin: 0 auto;
+  }
+
+  .img-logo{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  img.fw-logo{
+    width: 280px;
+    height: 51px;
   }
 }
