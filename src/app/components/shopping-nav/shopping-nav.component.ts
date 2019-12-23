@@ -56,16 +56,14 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class ShoppingNavComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
-  showBack: boolean = false;
   searchForm: FormGroup;
   firstChar: boolean = true;
   placeholder = "search &#xF002";
   options = [];
   filteredOptions: Observable<string[]>;
   sideNavOpend: boolean = false;
-  mainList = ['Categories', 'Designers', 'Stores', 'Price'];
-  originalList = {};
-  displayList = {};
+  menu = [{ id: 1, name: 'Clothing' }, { id: 2, name: 'Shoes' }, { id: 3, name: 'Bags' }, { id: 4, name: 'Accessories' }];
+
   categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
   close: boolean = true;
   clothings = [
@@ -80,10 +78,7 @@ export class ShoppingNavComponent implements OnInit {
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
   prices = [{ value: 100, checked: false }, { value: 200, checked: false }, { value: 300, checked: false }, { value: 400, checked: false }, { value: 500, checked: false }];
-  mainMenu: boolean = true;
   secondaryMenu = {};
-  icon = 'menu';
-  arrow_back = 'arrow_back_ios';
   onDestroy: Subject<void> = new Subject<void>();
   filteringDTO = new FilteringDTO();
   opened: boolean = false;
@@ -95,8 +90,10 @@ export class ShoppingNavComponent implements OnInit {
   panelOpenState = true;
   openCloseStores = false;
   openCloseDesigners = false;
+  openCloseProducts = false;
   seeMoreDesigners = 'see more+';
   seeMoreStores = 'see more+';
+  seeMoreProducts = 'see more+'
   seeMoreFilters = '+filters';
   currSelectedPrice;
   prevSelectedPrice;
@@ -203,9 +200,36 @@ export class ShoppingNavComponent implements OnInit {
       }
       this.updateFeedFilteringDTO();
     }
+    if (key == "clothings") {
+      if ($event.checked == true) {
+        elem.checked = true;
+        this.filteringDTO.setProductTypes(elem);
+        this.filteringChanged = true;
+      }
+      else {
+        elem.checked = false;
+        const index = this.filteringDTO.removeProduct(elem);
+        if (this.filteringDTO.productTypes.length == 0) {
+          this.filteringChanged = false;
+        }
+      }
+      this.updateFeedFilteringDTO();
+    }
+
+
   }
 
   SeeMoreSideFilters(category): void {
+    if (category == 'clothings') {
+      this.openCloseProducts = !this.openCloseProducts;
+      if (this.openCloseProducts) {
+        this.seeMoreProducts = 'see less-';
+      }
+      else {
+        this.seeMoreProducts = 'see more+';
+      }
+    }
+
     if (category == 'designers') {
       this.openCloseDesigners = !this.openCloseDesigners;
       this.designersStateClosed = !this.designersStateClosed;

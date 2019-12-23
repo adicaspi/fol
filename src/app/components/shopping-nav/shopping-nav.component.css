@@ -235,16 +235,6 @@ span.mat-checkbox-label{
   width:110px;
 }
 
-.categories-toolbar{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  height: 46px !important;
-  margin-top: 10px;
-  background-color: black;
-  color: white;
-}
-
 span.toolbar-item{
   font-size: 15px;
   height: 46px;
@@ -258,4 +248,26 @@ mat-toolbar.product-type{
 
 i.fal.fa-times{
   font-size: 18px;
+}
+
+
+
+.cdk-virtual-scroll-data-source .scroll-viewport {
+  height: 50px;
+  width: 100%;
+}
+
+.cdk-virtual-scroll-data-source .scroll-viewport .cdk-virtual-scroll-content-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.cdk-virtual-scroll-data-source .menu-item {
+  height: 100%;
+}
+
+a.a-item{
+  color:black;
 }
