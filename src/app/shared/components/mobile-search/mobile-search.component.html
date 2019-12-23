@@ -1,0 +1,40 @@
+<div class="mobile-search-container">
+
+	<div class="search-field">
+		<input type="search"
+           #search
+		       [formControl]="searchControl"
+		       [matAutocomplete]="auto"
+		       [placeholder]="placeholder"
+		       class="form-control search-field__input"
+		       aria-label="Search"
+		       autocapitalize="none"
+		/>
+
+		<i class="fa fa-search search-field__icon-search" aria-hidden="true"></i>
+		<span *ngIf="isLoading" class="search-field__spinner"></span>
+		<i *ngIf="!isLoading" (click)="onResetInput()" class="fa fa-times-circle search-field__icon-close" aria-hidden="true"></i>
+
+		<mat-autocomplete #auto="matAutocomplete" class="mobile-search-autocomplete">
+			<div class="mobile-search-autocomplete__container">
+				<mat-option *ngFor="let option of options" [value]="option" (click)="onGoToUser(option)">
+					<div class="mobile-search-autocomplete__img">
+						<img [src]="option.userAvatar" alt="">
+					</div>
+					<div class="mobile-search-autocomplete__info">
+						<span class="mobile-search-autocomplete__firstrow">{{option.username}}</span>
+						<span class="mobile-search-autocomplete__secondrow">{{option.fullName}}</span>
+					</div>
+				</mat-option>
+
+				<mat-option *ngIf="!options.length && searchControl.value.length && !isLoading" class="no-results">No results available.</mat-option>
+
+			</div>
+		</mat-autocomplete>
+	</div>
+
+	<div *ngIf="isVisibleStaticInput" class="input-placeholder" (click)="onClickPlaceholder($event)">
+		<i class="fa fa-search input-placeholder__icon" aria-hidden="true"></i>
+		<span class="input-placeholder__text">{{searchControl.value || placeholder}}</span>
+	</div>
+</div>

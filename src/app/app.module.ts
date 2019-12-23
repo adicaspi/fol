@@ -60,6 +60,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HeightWidthRatioDirective } from './directives/height-width-ratio.directive';
 import { LoginMobileComponent } from './components/login-mobile/login-mobile.component';
+import { SharedModule } from './shared/shared.module';
 
 
 //I keep the new line
@@ -125,7 +126,8 @@ import { LoginMobileComponent } from './components/login-mobile/login-mobile.com
     SlideshowModule,
     IgxSliderModule,
     ScrollingModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    SharedModule.forRoot()
   ],
 
   entryComponents: [

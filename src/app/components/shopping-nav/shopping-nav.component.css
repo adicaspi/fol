@@ -87,12 +87,6 @@ div.arrow-back{
   float: right;
 }
 
-div.logo-drawer{
-  justify-content: space-between;
-  display: flex;
-  flex-direction: row;
-}
-
 img.logo{
   height:35px;
   margin:5px;
@@ -110,41 +104,6 @@ button.nav-item {
   font-size: 13px;
   color:black;
 }
-
-.search-form{
-  width: 100%;
-}
-
-#navBarSearchForm{
-  border: none;
-  border-radius: 0;
-  border-bottom: 1px solid black;
-}
-
-img.search-img{
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-}
-
-.search-result{
-  display: flex;
-}
-
-.search-res-user-img{
-  line-height: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.search-res-user-details{
-  display: flex;
-  flex-direction: column;
-  line-height: 15px;
-  font-size: 10px;
-  margin-left: 5px;
-}
-
 
 .filters-wrapper{
   /* position: absolute;
