@@ -23,7 +23,7 @@
   <div class="cdk-virtual-scroll-data-source">
     <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport" class="scroll-viewport">
       <div *cdkVirtualFor="let item of menu" class="menu-item">
-        <a (click)="filterByCategory(item.name)" class="menu-item">{{item.name}}
+        <a (click)="filterByCategory(item.name)" class="a-item">{{item.name}}
         </a>
       </div>
     </cdk-virtual-scroll-viewport>
