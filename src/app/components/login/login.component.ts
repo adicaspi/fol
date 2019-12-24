@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -20,13 +20,14 @@ import { RegisterComponent } from '../register/register.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  subscription: Subscription;
+  errorSubscription: Subscription;
   error: any = {};
   loginForm: FormGroup;
   submitted = false;
   userId: number;
   wrongPass: boolean = false;
   wrongUser: boolean = false;
+  modal: boolean = false;
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
@@ -39,19 +40,21 @@ export class LoginComponent implements OnInit {
     private errorsService: ErrorsService,
     private http: HttpClient,
     private configSerivce: ConfigService,
-    private dialogRef: MatDialogRef<LoginComponent>,
     private dialogService: DialogService,
+    @Optional() private dialogRef: MatDialogRef<LoginComponent>
   ) {
-    this.subscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
+    if (dialogRef) {
+      this.modal = true;
+    }
+    this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
     });
   }
 
   ngOnInit() {
-    this.dialogRef.updateSize('400px', '580px');
     this.loginForm = this.formBuilder.group({
-      emailLogin: [''], //[Validators.required, Validators.email]],
-      passwordLogin: [''] //[Validators.required]]
+      emailLogin: ['', Validators.required],
+      passwordLogin: ['', Validators.required]
     });
 
     //Check if user can auto-login
@@ -65,6 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin() {
+    this.submitted = true;
     this.wrongPass = false;
     this.wrongUser = false;
     let email = this.loginForm.value.emailLogin;
@@ -105,8 +109,13 @@ export class LoginComponent implements OnInit {
   }
 
   regsiterPage() {
-    this.dialogRef.close();
-    this.dialogService.openModalWindow(RegisterComponent);
+    if (this.dialogRef) {
+      this.dialogRef.close();
+      this.dialogService.openModalWindow(RegisterComponent);
+    }
+    else {
+      this.router.navigate(['/register']);
+    }
   }
 
   loadConfigurationData() {
@@ -130,8 +139,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    // this.onDestroy.next();
+    this.onDestroy.next();
     // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 }

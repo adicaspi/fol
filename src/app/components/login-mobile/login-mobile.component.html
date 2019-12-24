@@ -1,7 +1,4 @@
-<button *ngIf="modal" mat-button [mat-dialog-close]="true">
-  <i class="fal fa-times"></i>
-</button>
-<div mat-dialog-content>
+<div>
   <div class="img-logo">
     <img src="../../../assets/fw_logo_2A.png" class="fw-logo" />
   </div>
@@ -9,36 +6,40 @@
     <div class="form-group">
       <label for="email"></label>
       <input type="text" formControlName="emailLogin" class="form-control" placeholder="E-mail, username" [ngClass]="{
-        'is-invalid': submitted && l.emailLogin.errors || wrongUser
+        'is-invalid': emailLogin.errors && emailLogin.touched || wrongUser
       }" />
       <div *ngIf="wrongUser" class="invalid-feedback">
-        {{msgToShow}}
+        {{emailMsgToShow}}
       </div>
-      <div *ngIf="submitted && l.emailLogin.errors.required" class="invalid-feedback">
-        E-mail or username are required
-      </div>
-    </div>
 
+      <div *ngIf="emailLogin.errors.required && emailLogin.touched" class="invalid-feedback">
+        E-mail is required
+      </div>
+
+    </div>
     <div class="form-group">
       <label for="password"></label>
-      <input type="password" formControlName="passwordLogin" class="form-control" placeholder="password" [ngClass]="{
-          'is-invalid': submitted && l.passwordLogin.errors || wrongPass
-        }" />
+      <input type="password" formControlName="passwordLogin" class="form-control" placeholder="Password" [ngClass]="{
+            'is-invalid': passwordLogin.errors && passwordLogin.touched || wrongPass
+          }" />
       <div *ngIf="wrongPass" class="invalid-feedback">
-        {{msgToShow}}
-      </div>
-      <div *ngIf="submitted && l.passwordLogin.errors.required" class="invalid-feedback">
-        Password is required
+        {{passMsgToShow}}
       </div>
 
-      <p class="forgot-password">
-        <a routerLink="/forgotpassword">
-          Forgot your password?
-        </a>
-      </p>
+      <div *ngIf="passwordLogin.errors.required && passwordLogin.touched" class="invalid-feedback">
+        Password is required
+      </div>
     </div>
-    <div class="form-group">
-      <button class="btn btn-default login">Login</button>
+
+
+    <div class="forgot-password-container">
+      <a routerLink="/forgotpassword">
+        Forgot password?
+      </a>
+    </div>
+
+    <div class="form-group login">
+      <button class="login-button" type="submit">Login</button>
     </div>
 
     <div class="login-method">
@@ -54,11 +55,6 @@
       </button>
     </div>
   </form>
-
-  <!-- <div *ngIf="wrongPassUser" class="alert alert-danger">
-    Incorrect username or password
-  </div> -->
-
   <div class="sign-up">
     <span>Don't have an account?</span>
     <a class="register" (click)="regsiterPage()">

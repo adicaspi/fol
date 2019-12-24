@@ -25,15 +25,13 @@ body {
   height: 625px !important;
 }
 
-/* .cdk-overlay-container > .cdk-overlay-backdrop {
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-} */
-
 .cdk-overlay-container > .backdrop-product {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
+<<<<<<< HEAD
   overflow-y: auto !important;
+=======
+>>>>>>> 294d8ad339ca237cc66fb82bde14f2e07ed748d6
 }
 
 .cdk-global-overlay-wrapper-fol::before {
@@ -61,12 +59,21 @@ body {
   white-space: normal;
 } */
 
+<<<<<<< HEAD
 .cdk-global-overlay-wrapper{
   overflow-y: auto !important;
 }
 
 .cdk-overlay-backdrop.backdrop-product.cdk-overlay-backdrop-showing{
   overflow-y: auto !important;
+=======
+.cdk-overlay-container  {
+  overflow-y: auto;
+  pointer-events: auto;
+}
+.cdk-global-overlay-wrapper{
+  height: auto;
+>>>>>>> 294d8ad339ca237cc66fb82bde14f2e07ed748d6
 }
 
 mat-slider{

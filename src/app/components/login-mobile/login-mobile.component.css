@@ -1,0 +1,84 @@
+.img-logo{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+img.fw-logo{
+  width: 280px;
+  height: 51px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction: column;
+}
+
+.form-group.login{
+  margin-top: 20px;
+}
+
+input.form-control{
+  width:300px;
+  margin: 0 auto;
+}
+
+.forgot-password-container{
+  width: 300px;
+  margin: 0 auto;
+}
+
+.forgot-password-container a{
+  color: rgb(0,53,105);
+}
+
+.login-method{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.invalid-feedback{
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+.sign-up{
+  display: flex;
+  justify-content: center;
+  
+}
+
+a.register{
+  color: rgb(0,53,105);
+  margin-left: 3px;
+}
+
+button{
+  width: 300px;
+  margin: 0 auto;
+  border: none;
+  height: 38px;
+  border-radius: 0.25rem;
+}
+
+button.login-button{
+  /* background-color: deeppink; */
+  color: white;
+}
+
+button.facebook-button{
+  background-color: white;
+  color: rgb(56,81,133);
+}
+
+span.facebook-icon{
+
+}
+
+img.fb-logo{
+  height: 30px;
+  width: 30px;
+}

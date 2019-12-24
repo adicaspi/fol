@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-landing-page',
@@ -23,10 +24,11 @@ export class LandingPageComponent implements OnInit {
   private WindowSizeSubscription: Subscription;
 
   constructor(
+    private dialog: MatDialog,
     private router: Router,
-    private dialogService: DialogService,
     private http: HttpClient,
     private userService: UserService,
+    private dialogService: DialogService,
     private configService: ConfigService
   ) {
     this.WindowSizeSubscription = this.configService.windowSizeChanged
@@ -47,9 +49,24 @@ export class LandingPageComponent implements OnInit {
 
   }
 
-  registerPage() {
-    this.dialogService.openModalWindow(LoginComponent);
+  // registerPage() {
+  //   this.dialogService.openModalWindow(LoginComponent);
+  // }
+
+
+  registerPage(): void {
+    if (this.desktop) {
+      const dialogRef = this.dialog.open(LoginComponent, {
+        width: '400px',
+        height: '580px',
+      });
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
+
+
 
   explorePage() {
     this.router.navigate(['/explore']);
