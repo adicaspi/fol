@@ -7,10 +7,11 @@
   vertical-align: middle;
   font-weight: lighter;
   width: 100%;
-  height: 50px;
+  height: 46px;
   align-items: center;
   position: relative;
-  padding: 18px;
+  padding: 19px;
+  border-bottom: 1px solid rgb(236, 236, 236);
 }
 
 .header img {
@@ -30,33 +31,43 @@
   width: 16px;
 }
 
-.slider {
-  margin: auto;
-  width: 100%;
-  height: 500px;
-}
-
-.fs-container{
-  display:none;
+.profile-img-comp {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  border-bottom: 0.5px solid rgb(236,236,236);
 }
 
 #profileImage {
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin-top: 0;
-  margin-right: 10px;
+  width: 32px;
+  height: 32px;
+  margin-left: 16px;
 }
 
-.profile-img-comp {
-  margin-top: 20px;
+.card-text.profile {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Roboto;
   display: inline-block;
+  vertical-align: bottom;
+  margin-left: 12px;
+  color: #333;
+}
+
+.slider {
+  margin: auto;
+  width: 100%;
+  display: block;
+  overflow: auto;
+  height: 400px;
 }
 
 #mainImage {
   width: 100%;
   border: solid 0.8px;
   border-color: lightgray;
+  height: auto;
   height: 400px;
   object-fit: cover;
 }
@@ -103,13 +114,6 @@ button.mat-button {
   font-size: 25px;
   float: left;
   margin-left: 20px;
-}
-
-.card-text.profile {
-  line-height: 50px;
-  font-size: 25px;
-  display: inline-block;
-  vertical-align: bottom;
 }
 
 span.text-right {

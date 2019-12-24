@@ -6,10 +6,10 @@
     <div class="balance-header"></div>
   </div>
 
-  <!-- <div class="profile-img-comp" (click)="profilePage()">
+  <div class="profile-img-comp" (click)="profilePage()">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="card-text profile">{{ postInfo.userName }}</div>
-  </div> -->
+  </div>
 
   <div *ngIf="imageUrls" class="slider">
     <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls"
@@ -17,7 +17,7 @@
     </slideshow>
   </div>
 
-  <div *ngIf="postInfo" class="product-upper-description">
+  <!-- <div *ngIf="postInfo" class="product-upper-description">
     <div class="product-description">
       <p id="description" class="card-text-description-ltr">
         {{ postInfo.description }}
@@ -34,6 +34,6 @@
         Shop
       </button>
     </a>
-  </div>
+  </div> -->
 
   <app-navbar></app-navbar>
