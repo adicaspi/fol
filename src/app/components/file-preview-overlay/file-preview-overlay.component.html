@@ -29,9 +29,15 @@
                 </button>
               </a>
 
-              <button mat-button class="vertical-menu">
+              <button mat-button class="vertical-menu" [matMenuTriggerFor]="soldOut">
                 <i class="material-icons">more_horiz</i>
               </button>
+              <mat-menu #soldOut="matMenu" yPosition="below" class="menu-out-of-stock">
+                <button mat-button class="out-of-stock">
+                  Report
+                  <br> out of stock
+                </button>
+              </mat-menu>
               <span class="price">{{postInfo.price}}</span>
             </div>
             <div class="num-views">
