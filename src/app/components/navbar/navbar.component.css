@@ -173,8 +173,17 @@ img.search-img{
   display: flex;
   flex-direction: column;
   line-height: 15px;
-  font-size: 10px;
-  margin-left: 5px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+span.search-username{
+  font-weight: 600;
+}
+
+span.search-fullname{
+  color: #999;
+  font-weight: 300;
 }
 }
 
@@ -354,13 +363,20 @@ img.search-img{
     display: flex;
     flex-direction: column;
     line-height: 15px;
-    font-size: 10px;
-    margin-left: 5px;
-  }
-  
-  
+    font-size: 12px;
+    margin-left: 10px;
   }
 
+  span.search-username{
+    font-weight: 600;
+  }
+
+  span.search-fullname{
+    color: #999;
+    font-weight: 300;
+  }
+  }
+/* 
   @media (max-width: 600px)  {
   .fw-navbar {
       display: none;
@@ -394,8 +410,8 @@ img.search-img{
 
   .bottom-navbar .icon-img.active{
     color: #f2f2f2;
-  }
+  } */
 
-} 
+/* }  */
   
   
