@@ -1,21 +1,43 @@
-<div class="mobile-search-container">
 
-	<div class="search-field">
-		<input type="search"
-           #search
-		       [formControl]="searchControl"
-		       [matAutocomplete]="auto"
-		       [placeholder]="placeholder"
-		       class="form-control search-field__input"
-		       aria-label="Search"
-		       autocapitalize="none"
-		/>
+<div class="mobile-search-container" matAutocompleteOrigin #origin="matAutocompleteOrigin">
 
-		<i class="fa fa-search search-field__icon-search" aria-hidden="true"></i>
-		<span *ngIf="isLoading" class="search-field__spinner"></span>
-		<i *ngIf="!isLoading" (click)="onResetInput()" class="fa fa-times-circle search-field__icon-close" aria-hidden="true"></i>
+	<div class="search-field-container">
+		<div class="search-field">
+			<input type="search"
+             #search
+			       [formControl]="searchControl"
+			       [matAutocomplete]="auto"
+			       [matAutocompleteConnectedTo]="origin"
+			       (focus)="onInputFocus()"
+			       class="form-control search-field__input"
+			       aria-label="Search"
+			       autocapitalize="none"
+			       autocomplete="off"
+			/>
 
-		<mat-autocomplete #auto="matAutocomplete" class="mobile-search-autocomplete">
+			<div class="input-placeholder" [ngClass]="{'input-placeholder--has-value': hasValue}">
+				<i class="fa fa-search input-placeholder__icon" aria-hidden="true"></i>
+				<span *ngIf="!hasValue" class="input-placeholder__text">{{placeholder}}</span>
+			</div>
+
+			<span *ngIf="isLoading && hasValue" class="search-field__spinner">
+				<svg viewBox="0 0 100 100">
+					<rect fill="#555555" height="10" opacity="0" rx="5" ry="5" transform="rotate(-90 50 50)" width="28" x="67" y="45"></rect>
+					<rect fill="#555555" height="10" opacity="0.125" rx="5" ry="5" transform="rotate(-45 50 50)" width="28" x="67" y="45"></rect>
+					<rect fill="#555555" height="10" opacity="0.25" rx="5" ry="5" transform="rotate(0 50 50)" width="28" x="67" y="45"></rect>
+					<rect fill="#555555" height="10" opacity="0.375" rx="5" ry="5" transform="rotate(45 50 50)" width="28" x="67" y="45"></rect>
+					<rect fill="#555555" height="10" opacity="0.5" rx="5" ry="5" transform="rotate(90 50 50)" width="28" x="67" y="45"></rect>
+					<rect fill="#555555" height="10" opacity="0.625" rx="5" ry="5" transform="rotate(135 50 50)" width="28" x="67" y="45"></rect>
+					<rect fill="#555555" height="10" opacity="0.75" rx="5" ry="5" transform="rotate(180 50 50)" width="28" x="67" y="45"></rect>
+					<rect fill="#555555" height="10" opacity="0.875" rx="5" ry="5" transform="rotate(225 50 50)" width="28" x="67" y="45"></rect>
+				</svg>
+			</span>
+			<i *ngIf="!isLoading && hasValue" (click)="onClearInput($event)" class="fa fa-times-circle search-field__icon-close" aria-hidden="true"></i>
+		</div>
+
+		<span *ngIf="isCancelBtnVisible" class="cancel-search-btn" (click)="onCancelSearch()">Cancel</span>
+
+		<mat-autocomplete #auto="matAutocomplete" class="mobile-search-autocomplete" panelWidth="100%">
 			<div class="mobile-search-autocomplete__container">
 				<mat-option *ngFor="let option of options" [value]="option" (click)="onGoToUser(option)">
 					<div class="mobile-search-autocomplete__img">
@@ -27,14 +49,10 @@
 					</div>
 				</mat-option>
 
-				<mat-option *ngIf="!options.length && searchControl.value.length && !isLoading" class="no-results">No results available.</mat-option>
+				<mat-option *ngIf="!options.length && hasValue && !isLoading" class="no-results">No results available.</mat-option>
 
+				<mat-option hidden value=""></mat-option>
 			</div>
 		</mat-autocomplete>
-	</div>
-
-	<div *ngIf="isVisibleStaticInput" class="input-placeholder" (click)="onClickPlaceholder($event)">
-		<i class="fa fa-search input-placeholder__icon" aria-hidden="true"></i>
-		<span class="input-placeholder__text">{{searchControl.value || placeholder}}</span>
 	</div>
 </div>

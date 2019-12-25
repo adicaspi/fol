@@ -1,32 +1,42 @@
+import { BlockScrollStrategy, Overlay } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener, OnDestroy,
+  OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material';
+import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY, MatAutocomplete, MatAutocompleteTrigger } from '@angular/material';
 import { Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { debounceTime, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { SearchItem } from '../../../models/SearchItem';
 import { UserService } from '../../../services/user.service';
 
+export function scrollFactory(overlay: Overlay): () => BlockScrollStrategy {
+  return () => overlay.scrollStrategies.block();
+}
+
 @Component({
   selector: 'fw-mobile-search',
   templateUrl: 'mobile-search.component.html',
   styleUrls: ['./mobile-search.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{
+    provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY,
+    useFactory: scrollFactory,
+    deps: [Overlay]
+  }]
 })
 export class MobileSearchComponent implements OnInit, OnDestroy {
   options: SearchItem[] = [];
   searchControl = new FormControl('');
-  isVisibleStaticInput = true;
   placeholder = 'Search';
   isLoading = false;
+  isCancelBtnVisible = false;
   @ViewChild('auto', {static: false}) autocompleteRef: MatAutocomplete;
   @ViewChild('search', {static: false}) inputElement: ElementRef;
   @ViewChild('search', {static: false, read: MatAutocompleteTrigger}) autocompleteTrigger: MatAutocompleteTrigger;
@@ -80,31 +90,28 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     );
   }
 
-  @HostListener('document:click', ['$event']) onDocumentClick(event) {
-    const isClickedOnSearch = event.path.some(item => item.className && item.className.includes('mobile-search-container'));
-    if (isClickedOnSearch) {
-      return;
-    }
-
-    this.isVisibleStaticInput = true;
+  onInputFocus() {
+    this.isCancelBtnVisible = true;
   }
 
-  onClickPlaceholder(event) {
+  onClearInput(event) {
     event.stopPropagation();
-    this.isVisibleStaticInput = false;
-
-    if (this.inputElement && this.inputElement.nativeElement) {
-      this.inputElement.nativeElement.focus();
-    }
-  }
-
-  onResetInput() {
     this.searchControl.setValue('');
-    this.isVisibleStaticInput = true;
     this.options = [];
+    this.inputElement.nativeElement.focus();
   }
 
   onGoToUser(user) {
     this.router.navigate(['profile', user.id]);
+  }
+
+  onCancelSearch() {
+    this.searchControl.setValue('');
+    this.options = [];
+    this.isCancelBtnVisible = false;
+  }
+
+  get hasValue() {
+    return !!this.searchControl.value.length;
   }
 }
