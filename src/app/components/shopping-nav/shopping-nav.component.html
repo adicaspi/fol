@@ -19,24 +19,16 @@
     </form>
   </div>
 
-  <mat-toolbar class="categories-toolbar">
-    <span class="toolbar-item" (click)="filterByCategory('Clothing')">Clothing</span>
-    <span class="toolbar-item" (click)="filterByCategory('Shoes')">Shoes</span>
-    <span class="toolbar-item" (click)="filterByCategory('Bags')">Bags</span>
-    <span class="toolbar-item" (click)="filterByCategory('Accessories')">Accessories</span>
-  </mat-toolbar>
-
-  <mat-toolbar *ngIf="showProductType" class="product-type">
-    <i class="fal fa-times" (click)="closeProductType()"></i>
-    <div class="cdk-virtual-scroll-data-product-type">
-      <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport">
-        <div *cdkVirtualFor="let item of clothings" [ngClass]="{'scroll-item-checked':item.checked,'scroll-item':!(item.checked)}">
-          <a (click)="filterByProduct(item)">{{item.name}}
-          </a>
-        </div>
-      </cdk-virtual-scroll-viewport>
-    </div>
-  </mat-toolbar>
+  <!-- <mat-toolbar class="categories-toolbar"> -->
+  <div class="cdk-virtual-scroll-data-source">
+    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport" class="scroll-viewport">
+      <div *cdkVirtualFor="let item of menu" class="menu-item">
+        <a (click)="filterByCategory(item.name)" class="a-item">{{item.name}}
+        </a>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+  <!-- </mat-toolbar> -->
 
 
 
@@ -51,6 +43,28 @@
       <mat-sidenav #sidenav [mode]="mode" position="end" autoFocus="false" class="mat-sidenav">
         <button (click)="toggleSidenav()" class="button-filters show-more">{{seeMoreFilters}} </button>
         <button *ngIf="visible" (click)="clearSideFiltersSelection()" class="button-filters clear" [disabled]="!filteringChanged">clear</button>
+
+
+        <div class="product-type">
+          <div class="title">Prodcut type</div>
+          <div class="stores items-list" *ngFor="let product of clothings | slice:0:3">
+            <mat-checkbox name="product" [value]="product.id" [checked]="product.checked" labelPosition="before" (change)="onChangeCheckBox('clothings',$event,product)"
+              (click)="$event.stopPropagation();"> {{product.name}}
+            </mat-checkbox>
+          </div>
+          <button *ngIf="!openCloseProducts" (click)="SeeMoreSideFilters('clothings')" class="button-filters">{{seeMoreProducts}}</button>
+          <div *ngIf="openCloseProducts" [@expandCollapse]="openCloseAnim">
+            <div *ngFor="let product of clothings | slice:3:8" class="products items-list">
+              <mat-checkbox name="product" [value]="product.id" [checked]="product.checked" labelPosition="before" (change)="onChangeCheckBox('clothings',$event,product)"
+                (click)="$event.stopPropagation();"> {{product.name}}
+              </mat-checkbox>
+            </div>
+          </div>
+          <button *ngIf="openCloseProducts" (click)="SeeMoreSideFilters('clothings')" class="button-filters">{{seeMoreProducts}}</button>
+        </div>
+
+
+
 
         <div class="stores">
           <div class="title">Stores</div>

@@ -8,7 +8,7 @@
       <div class="profile-img-comp">
         <!-- <img id="profileImage" [attr.src]="userProfileSrc" /> -->
         <img id="profileImage" [attr.src]="userProfileSrc" />
-        <div class="card-text">{{ postInfo.userName }}</div>
+        <div class="card-text img-profile">{{ postInfo.userName }}</div>
       </div>
 
       <div class="slider">
@@ -29,7 +29,7 @@
                 </button>
               </a>
 
-              <button mat-button>
+              <button mat-button class="vertical-menu">
                 <i class="material-icons">more_horiz</i>
               </button>
               <span class="price">{{postInfo.price}}</span>

@@ -73,6 +73,10 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  get registerFormValid() {
+    return this.registerForm.valid;
+  }
+
   onChanges(): void {
     this.registerForm.get('username').valueChanges.subscribe(val => {
       if (val.length >= this.minLength) {

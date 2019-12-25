@@ -45,12 +45,19 @@ input.form-control{
   margin: 0 auto;
 }
 
-button.btn.btn-default.login {
+button.login-button:disabled{
+  background-color:lightgray;
+}
+
+button.login-button{
   display: block;
   margin: 0 auto;
   width: 50%;
   background-color: grey;
+  color:white;
   cursor: pointer;
+  border:none;
+  border-radius: 0.25rem;
 }
 
 button.btn.btn-default.login:focus {
@@ -101,16 +108,9 @@ button.btn.btn-default.register {
 }
 
 
-button.btn.btn-default.register:hover{
+a.register:hover{
   text-decoration: underline;
   cursor: pointer;
-}
-
-button.btn.btn-default.login {
-  display: block;
-  margin: 0 auto;
-  width: 50%;
-  background-color: grey;
 }
 
 div.invalid-feedback{
@@ -137,6 +137,11 @@ img.fb-logo{
 a.register{
   color: rgb(0,53,105);
   margin-left: 3px;
+  cursor: pointer;
+}
+
+a.register:hover{
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -169,6 +174,10 @@ img.fw-logo{
 
   button.btn.btn-default.login.facebook {
     width: 100%;
+  }
+
+  button.login-button:disabled{
+    background-color:lightgray;
   }
 
   button.btn.btn-default.register{
