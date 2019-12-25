@@ -47,13 +47,13 @@ span.text {
 }
 
 .button-follow {
-  background-color: black;
-  color: white;
-  border: none;
+  border: 1px solid rgba(var(--d0b,219,219,219),1);
+  background-color: transparent;
+  color: rgba(var(--f07,38,38,38),1);
   outline: none;
   font-family: 'Maven Pro', sans-serif;
-  border-radius: 4px;
   display: flex;
+  border-radius: 4px;
 }
 
 .description {
@@ -187,13 +187,13 @@ div.user-name{
   }
   
   .button-follow {
-    background-color: black;
-    color: white;
-    border: none;
+    border: 1px solid rgba(var(--d0b,219,219,219),1);
+    background-color: transparent;
+    color: rgba(var(--f07,38,38,38),1);
     outline: none;
     font-family: 'Maven Pro', sans-serif;
-    border-radius: 4px;
     display: flex;
+    border-radius: 4px;
   }
   
   .description {
@@ -340,13 +340,13 @@ div.user-name{
   }
 
   .button-follow {
-    background-color: black;
-    color: white;
-    border: none;
+    border: 1px solid rgba(var(--d0b,219,219,219),1);
+    background-color: transparent;
+    color: rgba(var(--f07,38,38,38),1);
     outline: none;
     font-family: 'Maven Pro', sans-serif;
-    border-radius: 4px;
     display: flex;
+    border-radius: 4px;
   }
   
   div.upper-description-div{
