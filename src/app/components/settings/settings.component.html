@@ -12,60 +12,63 @@
     </ul>
   </div>
   <div class="column">
-    <div id="form">
-      <form [formGroup]="settingsForm">
-        <fieldset>
-          <div class="user">
-            <div class="form-group">
-              <label>
-                <img src="../../../assets/kloss_profile.jpg" class="profile" />
-              </label>
-              <div [class]="userInfoClass">
-                <span [class]="spanClass">Adi Caspi</span>
-                <div *ngIf="section == 'profile'" class="upload-image">
-                  <input style="display:none" type="file" class="profile-image" (change)="onFileSelected($event)" #fileInput />
-                  <div class="change-profile-image">
-                    <button type="button" (click)="fileInput.click()">
-                      Change Profile Image
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div *ngIf="section == 'profile'">
-              <div class="form-group">
-                <label>User Name</label>
-                <input type="text" formControlName="username" class="form-control" />
-              </div>
 
-              <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" formControlName="fullname" class="form-control" />
-              </div>
-
-              <div class="form-group">
-                <label>Description</label>
-                <input type="text" formControlName="description" class="form-control" />
-              </div>
-
-              <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" formControlName="email" class="form-control" />
-              </div>
-
-              <div class="form-group submit-button">
-                <div class="submit-button">
-                  <button type="button" (click)="onSubmit()">
-                    Submit
-                  </button>
-                </div>
-              </div>
+    <div class="user">
+      <div class="form-group">
+        <label>
+          <img [src]="user.profileImageAddr" class="profile" />
+        </label>
+        <div [class]="userInfoClass">
+          <span [class]="spanClass">{{user.username}}</span>
+          <div *ngIf="profile" class="upload-image">
+            <input style="display:none" type="file" class="profile-image" (change)="onFileSelected($event)" #fileInput />
+            <div class="change-profile-image">
+              <button type="button" (click)="fileInput.click()">
+                Change Profile Image
+              </button>
             </div>
           </div>
-        </fieldset>
-      </form>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="profile">
+      <div class="form">
+        <form [formGroup]="settingsForm">
+          <fieldset>
 
-      <div *ngIf="section == 'password'" class="upload-image">
+            <div class="form-group">
+              <label>User Name</label>
+              <input type="text" formControlName="username" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" formControlName="fullname" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" formControlName="description" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" formControlName="email" class="form-control" />
+            </div>
+
+            <div class="form-group submit-button">
+              <div class="submit-button">
+                <button type="button" (click)="onSubmit()">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="password" class="upload-image">
+      <div class="form password">
         <form [formGroup]="changePasswordForm">
           <fieldset>
             <div class="form-group">
