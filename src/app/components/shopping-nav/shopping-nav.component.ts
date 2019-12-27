@@ -3,14 +3,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeedService } from '../../services/feed.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { takeUntil } from 'rxjs/operators';
 import { ErrorsService } from '../../services/errors.service';
-import * as $ from 'jquery';
 import { GlobalVariable } from '../../../global';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
-import { Routes, Router, ActivatedRoute } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -57,7 +54,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class ShoppingNavComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
   showBack: boolean = false;
-  searchForm: FormGroup;
   firstChar: boolean = true;
   placeholder = "search &#xF002";
   options = [];
@@ -114,22 +110,15 @@ export class ShoppingNavComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private formBuilder: FormBuilder,
     private userService: UserService,
     private feedService: FeedService,
     private errorsService: ErrorsService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {
     this.visible = false;
   }
 
-  ngOnInit() {
-    this.searchForm = this.formBuilder.group({
-      search: ['']
-    })
-    this.onChanges();
-  }
+  ngOnInit() {}
 
   get stateName() {
     return this.close ? 'close' : 'open'
@@ -137,14 +126,6 @@ export class ShoppingNavComponent implements OnInit {
 
   get openCloseAnimDesignersState() {
     return this.designersStateClosed ? 'open' : 'close'
-  }
-
-  onChanges(): void {
-    this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(value => {
-      if (value != "") {
-        this.getSearchResults(value);
-      }
-    })
   }
 
   onChangeCheckBox(key, $event, elem) {
@@ -329,25 +310,5 @@ export class ShoppingNavComponent implements OnInit {
       this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-exlporefeed');
     }
-  }
-
-  getSearchResults(value: string) {
-    let baseAPI = this.baseApiUrl + '/image?s3key=';
-    this.userService.search(value).subscribe(res => {
-      this.options = [];
-      res.forEach(element => {
-        let searchObject = {
-          fullName: element.fullName,
-          userName: element.username,
-          profileImgSrc: baseAPI + element.userProfileImageAddr,
-          id: element.id
-        };
-        this.options.push(searchObject);
-      })
-    })
-  }
-
-  searchUser(searchResult) {
-    this.router.navigate(['profile', searchResult.id]);
   }
 }

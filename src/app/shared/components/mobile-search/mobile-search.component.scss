@@ -1,0 +1,123 @@
+.search-field-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+  }
+
+  .cancel-search-btn {
+    color: #262626;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+    margin-left: 12px;
+  }
+}
+
+.mobile-search-container {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 44px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-grow: 1;
+
+  &__input {
+    font-size: 14px;
+    font-weight: 500;
+    background: #fff;
+    padding: 4px 12px 4px 22px;
+    border: solid 1px #dbdbdb;
+    border-radius: 6px;
+    color: #262626;
+    outline: 0;
+    line-height: 20px;
+    height: 28px;
+
+    &:focus {
+      box-shadow: none;
+      border: solid 1px #b2b2b2;
+
+      & + .input-placeholder {
+        left: 0;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  .fa-search {
+    font-size: 11px;
+    color: #a6a7aa;
+  }
+
+  &__icon-close {
+    position: absolute;
+    z-index: 2;
+    right: 5px;
+    color: #c7c7c7;
+  }
+
+  &__spinner {
+    position: absolute;
+    background-size: 100%;
+    height: 18px;
+    width: 18px;
+    right: 4px;
+    z-index: 3;
+
+    svg {
+      animation: spinner-spin8 .8s steps(8) infinite;
+    }
+  }
+}
+
+.input-placeholder {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  left: 50%;
+  max-width: 100%;
+  padding: 0 8px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  transition: left .15s ease-out, transform .15s ease-out;
+  display: flex;
+
+  &--has-value {
+    left: 0;
+    transform: translateX(0);
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 28px;
+    margin-left: 5px;
+    color: rgb(153, 153, 153);
+  }
+}
+
+@keyframes spinner-spin8 {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(540deg);
+  }
+}

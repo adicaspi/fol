@@ -1,13 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import '~@angular/cdk/overlay-prebuilt.css';
-
-
- html,
+html,
 body {
   height: 100%;
-} 
+}
 
 .overlay-fol-list .mat-dialog-container {
   border-radius: 2px !important;
@@ -68,7 +62,7 @@ body {
 
 mat-slider{
   position: 0;
-} 
+}
 
 div.mat-slider-thumb-label{
   background-color: #ff4081 !important;
@@ -89,25 +83,25 @@ div.mat-slider-thumb{
 
 } */
 
- /* div.mat-menu-panel{
-  max-width: 400px !important;
-  overflow: hidden;
+/* div.mat-menu-panel{
+ max-width: 400px !important;
+ overflow: hidden;
 } */
 
 div.mat-menu-content{
   display: flex;
   flex-direction: row;
-   flex-wrap: wrap;
-   justify-content: space-evenly;
-   justify-content: flex-start;
-   padding: 8px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  justify-content: flex-start;
+  padding: 8px;
 }
 
- div.mat-radio-container{
+div.mat-radio-container{
   height: 15px;
   width: 15px;
 }
- div.mat-radio-outer-circle{
+div.mat-radio-outer-circle{
   height: 15px;
   width: 15px;
 }
@@ -122,10 +116,10 @@ div.mat-radio-inner-circle{
   background-color: #ff4081 !important;
 }
 div.mat-radio-button div.mat-radio-ripple{
-  height: 30px; 
-  width: 30px; 
-  left: calc(50% - 10px); 
-  top: calc(50% - 10px); 
+  height: 30px;
+  width: 30px;
+  left: calc(50% - 10px);
+  top: calc(50% - 10px);
 }
 
 div.mat-radio-label-content{
@@ -171,8 +165,8 @@ mat-toolbar{
 
 @media (min-width: 600px) and (max-width: 900px)  {
 
-mat-toolbar.mat-toolbar.mat-toolbar-single-row{
-  height: 40px;
-}
+  mat-toolbar.mat-toolbar.mat-toolbar-single-row {
+    height: 40px;
+  }
 
 }
