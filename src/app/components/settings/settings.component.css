@@ -16,12 +16,20 @@
   height: 100%;
 }
 
+.column{
+  border: 1px solid #dbdbdb;
+  border-left: none;
+}
+
 .column.controlers {
   background-color: #fff;
   border: 1px solid #dbdbdb;
   border-radius: 3px 0px 0px 3px;
-  border-right: none;
   padding: 0px;
+}
+
+.user{
+  display: inline-block;
 }
 
 ul.form-sections {
@@ -57,13 +65,12 @@ li.controlers:hover {
   cursor: pointer;
 }
 
-#form {
+.form {
   background-color: #fff;
   height: 100%;
   width: 600px;
   margin-right: auto;
   margin-left: auto;
-  border: 1px solid #dbdbdb;
   border-radius: 0px 3px 3px 0px;
   text-align: center;
   padding: 15px;
@@ -174,16 +181,23 @@ button {
     align-items: stretch;
     text-align: center;
     background: white;
-    padding: 50px;
     height: 100%;
+  }
+
+  .column{
+    border: 1px solid #dbdbdb;
+    border-left: none;
   }
   
   .column.controlers {
     background-color: #fff;
     border: 1px solid #dbdbdb;
     border-radius: 3px 0px 0px 3px;
-    border-right: none;
     padding: 0px;
+  }
+
+  .user{
+    display: inline-block;
   }
   
   ul.form-sections {
@@ -219,13 +233,12 @@ button {
     cursor: pointer;
   }
   
-  #form {
+  .form {
     background-color: #fff;
     height: 100%;
     width: 400px;
     margin-right: auto;
     margin-left: auto;
-    border: 1px solid #dbdbdb;
     border-radius: 0px 3px 3px 0px;
     text-align: center;
     padding: 15px;
@@ -334,17 +347,24 @@ button {
     align-items: stretch;
     text-align: center;
     background: white;
-    padding: 50px;
     height: 100%;
+  }
+
+  .column{
+    border: 1px solid #dbdbdb;
+    border-left: none;
   }
   
   .column.controlers {
     background-color: #fff;
     border: 1px solid #dbdbdb;
     border-radius: 3px 0px 0px 3px;
-    border-right: none;
     padding: 0px;
     width:100px;
+  }
+
+  .user{
+    display: inline-block;
   }
   
   ul.form-sections {
@@ -380,13 +400,12 @@ button {
     cursor: pointer;
   }
   
-  #form {
+  .form {
     background-color: #fff;
     height: 100%;
     width: 200px;
     margin-right: auto;
     margin-left: auto;
-    border: 1px solid #dbdbdb;
     border-radius: 0px 3px 3px 0px;
     text-align: center;
     padding: 15px;

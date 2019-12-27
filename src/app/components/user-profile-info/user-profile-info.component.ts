@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
@@ -14,7 +14,8 @@ import { ConfigService } from '../../services/config.service';
 @Component({
   selector: 'app-user-profile-info',
   templateUrl: './user-profile-info.component.html',
-  styleUrls: ['./user-profile-info.component.css']
+  styleUrls: ['./user-profile-info.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserProfileInfoComponent implements OnInit {
   currMasterId: number;

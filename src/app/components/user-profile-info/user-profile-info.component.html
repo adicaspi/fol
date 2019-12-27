@@ -16,7 +16,15 @@
             </div>
             <ng-template #settings>
               <div class="settings">
-                <i (click)="settingsPage()" class="fal fa-cog"></i>
+                <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
+                <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
+                  <button mat-button class="settings-menu-button" (click)="settingsPage()">
+                    Edit profile
+                  </button>
+                  <button mat-button class="settings-menu-button">
+                    Log Out
+                  </button>
+                </mat-menu>
               </div>
             </ng-template>
           </div>

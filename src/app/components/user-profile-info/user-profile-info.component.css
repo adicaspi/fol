@@ -1,3 +1,15 @@
+.mat-menu-content{
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+button.settings-menu-button{
+  border:none;
+  outline:none;
+  background-color: white;
+  text-align: left;
+}
+
 @media only screen and (min-width: 900px) {
 .center{
   width:900px;

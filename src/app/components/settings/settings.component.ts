@@ -27,11 +27,12 @@ export class SettingsComponent implements OnInit {
   submitted: boolean = false;
   updateImageProfile: boolean = false;
   fields = [];
-  profileClass = 'controlers profile';
+  profileClass = 'controlers edit-profile';
   passClass = 'controlers password';
   spanClass = 'user';
   userInfoClass = 'user-info';
-  section: string;
+  profile: boolean = true;
+  password: boolean = false;
   button_text: string;
   submittedPass: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
@@ -98,8 +99,9 @@ export class SettingsComponent implements OnInit {
   }
 
   editProfile() {
+    this.profile = true;
+    this.password = false;
     this.button_text = 'Submit';
-    this.section = 'profile';
     this.profileClass = 'controlers profile-clicked';
     this.passClass = 'controlers password';
     this.spanClass = 'user';
@@ -107,16 +109,16 @@ export class SettingsComponent implements OnInit {
   }
 
   changePassword() {
-    this.section = 'password';
+    this.password = true;
+    this.profile = false;
     this.button_text = 'Change Password';
     this.passClass = 'controlers password-clicked';
-    this.profileClass = 'controlers profile';
+    this.profileClass = 'controlers edit-profile';
     this.spanClass = 'user pass';
     this.userInfoClass = 'user-info-pass';
   }
 
   MustMatch(controlName: string, matchingControlName: string) {
-    console.log('in must match');
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
