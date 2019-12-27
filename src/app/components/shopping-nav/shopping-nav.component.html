@@ -1,23 +1,6 @@
 <div class="wrapper">
-  <div class="logo-drawer">
-    <form [formGroup]="searchForm" class="search-form">
-      <input class="form-control " type="search" placeholder="Search" formControlName="search" aria-label="Search" id="navBarSearchForm"
-        [matAutocomplete]="auto" />
-      <mat-autocomplete #auto="matAutocomplete" class="search">
-        <mat-option *ngFor="let option of options" [value]="option.userName">
-          <div class="search-result" (click)="searchUser(option)">
-            <div class="search-res-user-img">
-              <img class="search-img" [attr.src]="option['profileImgSrc']" />
-            </div>
-            <div class="search-res-user-details">
-              <span class="search-username">{{ option['userName'] }}</span>
-              <span class="search-fullname">{{ option['fullName'] }}</span>
-            </div>
-          </div>
-        </mat-option>
-      </mat-autocomplete>
-    </form>
-  </div>
+
+  <fw-mobile-search></fw-mobile-search>
 
   <!-- <mat-toolbar class="categories-toolbar"> -->
   <div class="cdk-virtual-scroll-data-source">
