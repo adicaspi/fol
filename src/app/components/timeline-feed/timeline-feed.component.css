@@ -372,7 +372,7 @@
     overflow-x: hidden;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
     background-color: white;
     padding: 0px 12px;
