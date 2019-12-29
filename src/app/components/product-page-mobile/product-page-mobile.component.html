@@ -8,7 +8,7 @@
 
   <div class="profile-img-comp" (click)="profilePage()">
     <img id="profileImage" [attr.src]="userProfileSrc" />
-    <div class="card-text profile">{{ postInfo.userName }}</div>
+    <div class="profile">{{ postInfo.userName }}</div>
   </div>
 
   <div *ngIf="imageUrls" class="slider">
@@ -17,23 +17,19 @@
     </slideshow>
   </div>
 
-  <!-- <div *ngIf="postInfo" class="product-upper-description">
-    <div class="product-description">
-      <p id="description" class="card-text-description-ltr">
-        {{ postInfo.description }}
-      </p>
-    </div>
+  <div class="product-description">
+    {{ postInfo.description }}
+  </div>
+  <div class="price">
+    {{ postInfo.price }}
   </div>
 
-  <div class="upper-footer">
-    <span class="price">
-      {{ postInfo.price }}
-    </span>
+  <div class="sticky-bottom">
     <a href="{{ postInfo.link }}" target="_blank">
       <button type="button" class="shop_btn">
         Shop
       </button>
     </a>
-  </div> -->
+  </div>
 
   <app-navbar></app-navbar>
