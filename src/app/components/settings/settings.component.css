@@ -19,6 +19,8 @@
 .column{
   border: 1px solid #dbdbdb;
   border-left: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .column.controlers {
@@ -26,10 +28,6 @@
   border: 1px solid #dbdbdb;
   border-radius: 3px 0px 0px 3px;
   padding: 0px;
-}
-
-.user{
-  display: inline-block;
 }
 
 ul.form-sections {
@@ -187,6 +185,8 @@ button {
   .column{
     border: 1px solid #dbdbdb;
     border-left: none;
+    display: flex;
+    flex-direction: column;
   }
   
   .column.controlers {
@@ -194,10 +194,6 @@ button {
     border: 1px solid #dbdbdb;
     border-radius: 3px 0px 0px 3px;
     padding: 0px;
-  }
-
-  .user{
-    display: inline-block;
   }
   
   ul.form-sections {
@@ -347,12 +343,13 @@ button {
     align-items: stretch;
     text-align: center;
     background: white;
-    height: 100%;
   }
 
   .column{
     border: 1px solid #dbdbdb;
     border-left: none;
+    display: flex;
+    flex-direction: column;
   }
   
   .column.controlers {
@@ -361,10 +358,6 @@ button {
     border-radius: 3px 0px 0px 3px;
     padding: 0px;
     width:100px;
-  }
-
-  .user{
-    display: inline-block;
   }
   
   ul.form-sections {
@@ -377,7 +370,7 @@ button {
     display: block;
     font-size: 16px;
     line-height: 20px;
-    padding: 16px 80px 16px 30px;
+    padding: 16px 80px 16px 15px;
     font-family: 'Maven Pro', sans-serif;
     font-size: 14px;
     color: #262626;
@@ -429,10 +422,8 @@ button {
     font-size: 12px;
     color: #333;
     height: 20px;
-    width: 80px;
+    width: 65px;
     text-align: right;
-    /* margin-right: 15px; */
-    /* float: left; */
     text-align: start;
     line-height: 32px;
   }
@@ -453,6 +444,8 @@ button {
     width: 38px;
     border-radius: 50%;
     display: inline;
+    margin-top: 10px;
+    margin-left: 15px;
   }
   
   span.user {
