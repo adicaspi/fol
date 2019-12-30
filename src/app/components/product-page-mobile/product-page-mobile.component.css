@@ -115,4 +115,16 @@ div.buffer {
   margin-left: auto;
 }
 
+.title {
+  color: rgb(38,38,38);
+  font-size: 18px;
+  font-family: Roboto;
+  font-weight: 500;
+  padding-top: 4px;
+}
+
+.placeholder {
+  height: 500px;
+}
+
 
