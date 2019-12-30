@@ -1,10 +1,5 @@
 <div *ngIf="postInfo" class="wrapper">
 
-  <!-- <div class="profile-img-comp" (click)="profilePage()">
-    <img id="profileImage" [attr.src]="userProfileSrc" />
-    <div class="profile">{{ postInfo.userName }}</div>
-  </div> -->
-
   <div *ngIf="imageUrls" class="slider">
     <div class="back-button-container">
       <img id="back-button" (click)="goBackPage()" src="../../../assets/back.png">
@@ -15,7 +10,6 @@
   </div>
 
   <div class="center">
-
     <div class="product-description">
       {{ postInfo.description }}
     </div>
@@ -31,7 +25,27 @@
         View on Website
       </button>
     </a>
-
   </div>
+
+  <div class="buffer">
+  </div>
+
+  <div class="center">
+    <div class="profile-img-comp" (click)="profilePage()">
+      <img id="profileImage" [attr.src]="userProfileSrc" />
+      <div class="profile-text">
+        <div class="username">{{ postInfo.userName }}</div>
+        <div class="num-followers">1.1k followers</div>
+      </div>
+      <img src="../../../assets/right-arrow.png" class="next-arrow" aria-hidden="true">
+    </div> 
+  </div>
+
+  <div class="buffer">
+  </div>
+
+</div>
+
+
 
   <app-navbar></app-navbar>

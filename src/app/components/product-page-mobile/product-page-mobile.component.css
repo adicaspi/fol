@@ -2,59 +2,6 @@
   height: 700px;
 }
 
-.header {
-  display: flex;
-  vertical-align: middle;
-  font-weight: lighter;
-  width: 100%;
-  height: 46px;
-  align-items: center;
-  position: relative;
-  padding: 19px;
-  border-bottom: 1px solid rgb(236, 236, 236);
-}
-
-.header img {
-  height: 16px;
-}
-
-.header .store {
-  width: 100%;
-  text-align: center;
-  font-weight: 500;
-  font-size: 18px;
-  font-family: Roboto;
-  color: #333;
-}
-
-.header .balance-header {
-  width: 16px;
-}
-
-.profile-img-comp {
-  height: 58px;
-  display: flex;
-  align-items: center;
-  border-bottom: 0.5px solid rgb(236,236,236);
-}
-
-#profileImage {
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  margin-left: 16px;
-}
-
-.profile {
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Roboto;
-  display: inline-block;
-  vertical-align: bottom;
-  margin-left: 12px;
-  color: #333;
-}
-
 .slider {
   margin: auto;
   width: 100%;
@@ -116,7 +63,7 @@ button.shop-btn {
   width: 100%;
   height: 40px;
   color: white;
-  margin: 20px 0px;
+  margin: 20px 0px 4px;
   border: none;
   border-radius: 6px;
   font-size: 16px;
@@ -126,12 +73,46 @@ button.shop-btn {
   outline: none;
 }
 
-div.sticky-bottom {
+div.buffer {
+  background-color: #f2f2f2;
+  height: 4px;
   width: 100%;
-  background-color: white;
-  position: fixed;
-  bottom: 0;
-  border-top: 1px solid rgb(236, 236, 236);
-  z-index: 10;
+  margin: 16px 0px;
 }
+
+.profile-img-comp {
+  display: flex;
+  align-items: center;
+}
+
+#profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgb(212,212,212);
+}
+
+.profile-text {
+  font-size: 16px;
+  display: inline-block;
+  margin-left: 12px;
+  color: rgb(38,38,38);
+  height: 30px;
+}
+
+.profile-text div.username {
+  font-weight: 500;
+  font-family: Roboto;
+}
+
+.profile-text .num-followers {
+  color: grey;
+  font-size: 13px;
+}
+
+.next-arrow {
+  height: 13px;
+  margin-left: auto;
+}
+
 
