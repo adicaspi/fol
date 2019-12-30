@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { RegisterComponent } from '../register/register.component';
 import { DialogService } from '../../services/dialog.service';
 import { LoginComponent } from '../login/login.component';
+import { GlobalVariable } from '../../../global';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
@@ -19,7 +19,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 export class LandingPageComponent implements OnInit {
   routes: Routes = [{ path: 'register', component: RegisterComponent }];
   desktop: boolean;
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private WindowSizeSubscription: Subscription;
 

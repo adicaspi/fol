@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { GlobalVariable } from '../../../global';
 import { UserService } from '../../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { FeedService } from '../../services/feed.service';
   styleUrls: ['./view-feed.component.css']
 })
 export class ViewFeedComponent implements OnInit {
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   userId: boolean = false;
   desktop: Boolean = true;

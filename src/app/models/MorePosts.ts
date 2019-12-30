@@ -1,9 +1,9 @@
-import { environment } from '../../environments/environment';
+import { GlobalVariable } from '../../global';
 
 export class MorePosts {
   postId: number;
   postImageAddr: string;
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   constructor(
     postId: number,

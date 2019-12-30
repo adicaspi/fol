@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrateg
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
 import { UserService } from '../../services/user.service';
 import { ErrorsService } from '../../services/errors.service';
-import * as $ from 'jquery';
+import { GlobalVariable } from '../../../global';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { Routes, Router } from '@angular/router';
 import { FilteringDTO } from '../../models/FilteringDTO';
@@ -81,7 +80,7 @@ export class ShoppingNavComponent implements OnInit {
   opened: boolean = false;
   currMenu: string;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
   visible = false;
   panelOpenState = true;

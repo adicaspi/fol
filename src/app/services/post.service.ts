@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { GlobalVariable } from '../../global';
 import { PostInfo } from '../models/PostInfo';
 import { UserPost } from '../models/UserPost';
 import { MorePosts } from '../models/MorePosts';
@@ -19,7 +19,7 @@ interface ResponseMorePosts {
   providedIn: 'root'
 })
 export class PostService {
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   postsUrl: string = this.baseApiUrl + '/image';
   socialUrl: string = this.baseApiUrl + '/social';
   userPost: UserPost;
