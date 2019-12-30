@@ -1,12 +1,6 @@
 <div *ngIf="postInfo" class="wrapper">
 
-  <!-- <div class="header">
-    <img (click)="goBackPage()" src="../../../assets/back.png">
-    <div class="store">Asos</div>
-    <div class="balance-header"></div>
-  </div>
-
-  <div class="profile-img-comp" (click)="profilePage()">
+  <!-- <div class="profile-img-comp" (click)="profilePage()">
     <img id="profileImage" [attr.src]="userProfileSrc" />
     <div class="profile">{{ postInfo.userName }}</div>
   </div> -->
@@ -28,21 +22,16 @@
     <div class="price">
       {{ postInfo.price }} (net-a-porter)
     </div>
+    <div class="num-views">
+      567 views
+    </div>
 
     <a href="{{ postInfo.link }}" target="_blank">
-      <button type="button" class="shop_btn">
+      <button type="button" class="shop-btn">
         View on Website
       </button>
     </a>
 
   </div>
-
-  <!-- <div class="sticky-bottom">
-    <a href="{{ postInfo.link }}" target="_blank">
-      <button type="button" class="shop_btn">
-        Shop
-      </button>
-    </a>
-  </div> -->
 
   <app-navbar></app-navbar>

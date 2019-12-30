@@ -100,11 +100,18 @@
   font-size: 16px;
 }
 
+div.num-views {
+  font-size: 14px;
+  color: rgb(96,96,96);
+  margin-top: 8px;
+  font-weight: bold;
+}
+
 button.mat-button {
   display: none;
 }
 
-button.shop_btn {
+button.shop-btn {
   background-color: #00AA5B;
   width: 100%;
   height: 40px;
@@ -115,6 +122,8 @@ button.shop_btn {
   font-size: 16px;
   font-family: Roboto;
   font-weight: 500;
+  display: inline-block;
+  outline: none;
 }
 
 div.sticky-bottom {
