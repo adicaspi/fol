@@ -60,23 +60,44 @@
   width: 100%;
   display: block;
   overflow: auto;
-  height: 560px;
+  height: 520px;
+  position: relative;
+}
+
+.back-button-container {
+  z-index: 1;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+#back-button {
+  height: 16px;
+  position: relative;
+  top: 4px;
+  left: 4px;
+}
+
+.center {
+  margin: 0px 16px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .product-description {
-  margin-top: 16px;
-  margin-left: 16px;
-  font-size: 22px;
+  margin-top: 20px;
+  font-size: 24px;
   color: rgb(38,38,38);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .price {
-  margin-left: 16px;
   margin-top: 8px;
-  color: grey;
+  color: rgb(96,96,96);
   font-size: 16px;
-  margin-bottom: 80px; /* margin so it won't overlap the fixed 'shop'*/
 }
 
 button.mat-button {
@@ -85,13 +106,13 @@ button.mat-button {
 
 button.shop_btn {
   background-color: #00AA5B;
-  width: calc(100% - 32px);
-  height: 48px;
+  width: 100%;
+  height: 40px;
   color: white;
-  margin: 12px 16px 12px;
+  margin: 20px 0px;
   border: none;
-  border-radius: 8px;
-  font-size: 20px;
+  border-radius: 6px;
+  font-size: 16px;
   font-family: Roboto;
   font-weight: 500;
 }
@@ -103,9 +124,5 @@ div.sticky-bottom {
   bottom: 0;
   border-top: 1px solid rgb(236, 236, 236);
   z-index: 10;
-}
-
-.more-from-user {
-  display: none;
 }
 
