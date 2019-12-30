@@ -1,4 +1,4 @@
-import { Injectable, Injector, ComponentRef } from '@angular/core';
+import { Injectable, Injector, ComponentRef, Renderer2, RendererFactory2 } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -42,13 +42,17 @@ export class DialogService {
     userId: 0,
     flag: 0,
     title: ''
-  }
+  };
+  private renderer: Renderer2;
 
   constructor(
     public dialog: MatDialog,
     private overlay: Overlay,
-    private injector: Injector
-  ) { }
+    private injector: Injector,
+    private rendererFactory: RendererFactory2
+  ) {
+    this.renderer = rendererFactory.createRenderer(null, null);
+  }
 
   openDialog(config: FilePreviewDialogConfig = {}) {
     config.backdropClass = "backdrop-product";
@@ -66,7 +70,11 @@ export class DialogService {
       dialogRef
     );
 
-    overlayRef.backdropClick().subscribe(_ => dialogRef.close());
+    this.renderer.addClass(overlayRef.hostElement.parentElement, 'product-overlay-container');
+    overlayRef.backdropClick().subscribe(_ => {
+      this.renderer.removeClass(overlayRef.hostElement.parentElement, 'product-overlay-container');
+      dialogRef.close();
+    });
     // const scrollStrategy = this.overlay.scrollStrategies.reposition();
     return dialogRef;
   }
