@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
 import { DialogService } from '../../services/dialog.service';
 import { UserPost } from '../../models/UserPost';
@@ -12,6 +11,7 @@ import { PostService } from '../../services/post.service';
 import * as $ from 'jquery';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { GlobalVariable } from '../../../global';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
 import { MorePosts } from '../../models/MorePosts';
@@ -35,7 +35,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   thumbnails = [];
 
   onDestroy: Subject<void> = new Subject<void>();
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   constructor(
     private feedService: FeedService,
     private userService: UserService,

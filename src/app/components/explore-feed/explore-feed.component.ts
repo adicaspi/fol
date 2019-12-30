@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
+import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
+import * as $ from 'jquery';
 
 import { PostService } from '../../services/post.service';
 
 import { NgxMasonryOptions } from 'ngx-masonry';
+import { GlobalVariable } from '../../../global';
 import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
@@ -22,7 +24,7 @@ export class ExploreFeedComponent implements OnInit {
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
   private feedSubsription: Subscription
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   private updateFeed: Subscription
 
   count = 0;

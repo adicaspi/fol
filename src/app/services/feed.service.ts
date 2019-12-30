@@ -6,13 +6,13 @@ import {
   HttpParams,
   HttpErrorResponse
 } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { TimelinePost } from '../models/TimelinePost';
 import { UserPost } from '../models/UserPost';
 import { FollowItem } from '../models/FollowItem';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { GlobalVariable } from '../../global';
 import { FilteringDTO } from '../models/FilteringDTO';
 import { FeedReturnObject } from '../models/FeedReturnObject';
 const httpOptions = {
@@ -27,7 +27,7 @@ export class FeedService {
   private postsSubject = new Subject<any>();
   private offsetSubject = new Subject<any>();
   private scrollingSubjebt = new Subject<any>();
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   offset: number = 0;
   prevOffset: number = 0;
   globalFeedURL = this.baseApiUrl + '/social/';
