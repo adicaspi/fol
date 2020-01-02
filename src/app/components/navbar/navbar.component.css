@@ -3,7 +3,11 @@
   nav {
     background-color: white;
     width: 100%;
-    border-bottom: 1px solid #efefef;
+    box-shadow: 0 1px 6px 2px rgba(0,0,0,.05);
+    transition: top 0.4s;
+    position: fixed;
+    top: 0;
+    z-index: 100;
   }
 
   .bottom-navbar {
@@ -26,9 +30,9 @@
   }
 
   img.logo {
-      height: 30px;
-      padding-left: 24px;
-      padding-right: 24px;
+      height: 32px;
+      padding-left: 22px;
+      padding-right: 22px;
       cursor: pointer;
   }
 

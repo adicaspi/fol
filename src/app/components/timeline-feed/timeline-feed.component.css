@@ -15,7 +15,7 @@
     padding-right: 0px;
     padding-left: 0px;
     overflow: visible;
-    margin-top: 20px;
+    margin-top: calc(68px + 20px);
   }
 
   .center {
