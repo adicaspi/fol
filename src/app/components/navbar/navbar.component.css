@@ -3,32 +3,31 @@ display: none;
 } 
 
 
-#navBar{
-  background-color: rgb(250, 250, 250);
-  width: 100%;
-  outline: none;
-  border: none;
-  border-radius: 11px;
-  height: 42px;
-  margin-left: 10px;
-}
+
 
 
 @media only screen and (min-width: 900px) {
 
 
-  .example-form {
+  .search-form {
     min-width: 150px;
     /* max-width: 500px; */
     width: 100%;
   }
   
-  .example-full-width {
+  .search-full-width {
     width: 100%;
   }
 
-
-
+  #navBar{
+    background-color: rgb(250, 250, 250);
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 11px;
+    height: 42px;
+    margin-left: 10px;
+  }
 
   nav {
     background-color: white;
@@ -74,6 +73,11 @@ display: none;
     position: relative;
     transition: box-shadow 200ms, background-color 200ms ease-in !important;
     flex-grow: 1;
+  }
+
+  .search-autocomplete-panel{
+    border-radius: 5px;
+    margin-top: 13px;
   }
 
   li.search:focus {
@@ -245,6 +249,40 @@ span.search-fullname{
     padding: 0;
     justify-content: center;
   }
+
+  .search-form {
+    min-width: 150px;
+    width: 100%;
+  }
+  
+  .search-full-width {
+    width: 100%;
+  }
+
+  .search-autocomplete-panel{
+    border-radius: 5px;
+    margin-top: 8px;
+  }
+
+  li.search {
+    height: 42px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 11px;
+    display: inline-block;
+    position: relative;
+    transition: box-shadow 200ms, background-color 200ms ease-in !important;
+    flex-grow: 1;
+  }
+
+  #navBar{
+    background-color: rgb(250, 250, 250);
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 11px;
+    height: 42px;
+    margin-left: 10px;
+  }
   
   li {
     display: inline-block;
@@ -274,19 +312,7 @@ span.search-fullname{
     margin-top: 10px;
     right: 20px;
   }
-  
-  li.search {
-    height: 32px;
-    width: 200px;
-    background-color: rgb(241,241,241);
-    border: 1px solid #e6e6e6;
-    border-radius: 30px;
-    display: inline-block;
-    position: relative;
-    margin-left: auto;
-    transition: box-shadow 200ms, background-color 200ms ease-in !important
-  }
-  
+    
   li.search:focus {
     box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
     background-color: white;
@@ -336,18 +362,27 @@ span.search-fullname{
     color: #333;
     background-color: transparent;
   }
-  
-  li.explore {
-    top: 2px;
-    font-size: 12px;
-    font-family: 'Maven Pro';
-    cursor: pointer;
-    border-radius: 25px;
-    padding: 1px 8px;
+
+  li.seperating-line {
+    height: 30px;
+    border-left: 2px solid #efefef;
+    width: 20px;
   }
   
+  li.explore {
+    font-size: 18px;
+    font-family: Roboto;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 4px 16px;
+    border-radius: 20px;
+    color: rgb(72,72,72);
+    letter-spacing: -0.2px;
+  }
+
   li.explore:hover {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.07);
+    color: rgb(82,82,82);
   }
   
   .profile {
