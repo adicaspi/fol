@@ -1,11 +1,11 @@
-import { environment } from '../../environments/environment';
+import { GlobalVariable } from '../../global';
 
 export class TimelinePost {
   profileImgSrc: string;
   post: any;
   postImgSrc: string;
   thumbnail: string;
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   constructor(
     post: any,

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { Subject, Observer, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
 import { DialogService } from '../../services/dialog.service';
+import { GlobalVariable } from '../../../global';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
 import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
@@ -27,7 +27,7 @@ export class UserFeedComponent implements OnInit {
   id = 0;
   prevId = 0;
   deviceInfo = null;
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubsription: Subscription
   private updateFeed: Subscription

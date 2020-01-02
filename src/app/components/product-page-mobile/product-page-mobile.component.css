@@ -3,163 +3,128 @@
 }
 
 .slider {
-  margin: 0 auto;
-  width: 250px;
-  height: 460px;
-}
-
-.fs-container{
-  display:none;
-}
-
-#profileImage {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin-top: 0;
-  margin-right: 10px;
-}
-
-.profile-img-comp {
-  margin-top: 20px;
-  display: inline-block;
-}
-
-#mainImage {
+  margin: auto;
   width: 100%;
-  border: solid 0.8px;
-  border-color: lightgray;
-  height: 400px;
-  object-fit: cover;
+  display: block;
+  overflow: auto;
+  height: 520px;
+  position: relative;
 }
 
-.product-upper-description {
+.back-button-container {
+  z-index: 1;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+#back-button {
+  height: 16px;
+  position: relative;
+  top: 4px;
+  left: 4px;
+}
+
+.center {
+  margin: 0px 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-description {
   margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 24px;
+  color: rgb(38,38,38);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.upper-footer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
+.price {
+  margin-top: 8px;
+  color: rgb(96,96,96);
+  font-size: 16px;
 }
 
-/* .product-description {
-  float: right;
-  margin-right: 20px;
-} */
+div.num-views {
+  font-size: 14px;
+  color: rgb(96,96,96);
+  margin-top: 8px;
+  font-weight: bold;
+}
 
 button.mat-button {
   display: none;
 }
 
-.imgStyle {
-  width: 50px;
-  height: 60px;
-  margin-right: 10px;
-}
-
-.card-text-description-rtl {
-  font-family: 'Maven Pro';
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 20px;
-  float:right;
-  font-size: 25px;
-  float: right;
-  clear: both;
-}
-
-.card-text-description-ltr {
-  font-family: 'Maven Pro';
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 25px;
-  float: left;
-  margin-left: 20px;
-}
-
-.card-text.profile {
-  line-height: 50px;
-  font-size: 25px;
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-span.text-right {
-  float: right;
-  clear: right;
-  line-height: 30px;
-  font-weight: 400;
-  color: gray;
-  font-size: 16px;
-}
-
-button.shop_btn {
-  background-color: rgb(255, 20, 147);
+button.shop-btn {
+  background-color: #00AA5B;
+  width: 100%;
+  height: 40px;
   color: white;
-  border-radius: 50px;
-  width: 90px;
-  height: 50px;
+  margin: 20px 0px 4px;
   border: none;
-  font-size: 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  display: inline-block;
   outline: none;
-  font-family: 'Maven Pro', sans-serif;
-  font-size: 25px;
-  text-align: center;
 }
 
-/* img.store-logo-rtl {
-  width: 150px;
-  float: right;
-  margin-bottom: 10px;
-} */
-
-img.store-logo {
-  width: 110px;
+div.buffer {
+  background-color: #f2f2f2;
+  height: 4px;
+  width: 100%;
+  margin: 16px 0px;
 }
 
-.thumbnails {
-  margin-top: 18px;
-  margin-bottom: 80px;
+.profile-img-comp {
+  display: flex;
+  align-items: center;
+}
+
+#profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgb(212,212,212);
+}
+
+.profile-text {
+  font-size: 16px;
   display: inline-block;
+  margin-left: 12px;
+  color: rgb(38,38,38);
+  height: 30px;
 }
 
-img.thumbnail {
-  width: 54px;
-  height: 120px;
-  margin-right: 16px;
-  border-radius: 8px;
-  object-fit: cover;
+.profile-text div.username {
+  font-weight: 500;
+  font-family: Roboto;
 }
 
-.more-from-user {
-  display: none;
+.profile-text .num-followers {
+  color: grey;
+  font-size: 13px;
 }
 
-.material-icons {
-  color: rgb(166, 166, 166);
-  font-size: 40px;
+.next-arrow {
+  height: 13px;
+  margin-left: auto;
 }
 
-span.price {
-  margin-bottom: 10px;
-  font-size: 25px;
-  color: black;
-  font-family: FontAwesome;
+.title {
+  color: rgb(38,38,38);
+  font-size: 18px;
+  font-family: Roboto;
+  font-weight: 500;
+  padding-top: 4px;
 }
 
-i {
-  margin-right: 10px;
+.placeholder {
+  height: 500px;
 }
 
-.icon-img {
-  font-family: FontAwesome;
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 30px;
-  vertical-align: middle;
-}
+

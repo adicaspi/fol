@@ -1,7 +1,7 @@
 import { Injectable, Injector, Inject } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { GlobalVariable } from '../../global';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
@@ -17,7 +17,7 @@ export interface WindowSize {
 export class ConfigService {
 
 
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   constructor(
     private userService: UserService,

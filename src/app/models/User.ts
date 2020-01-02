@@ -1,4 +1,4 @@
-import { environment } from '../../environments/environment';
+import { GlobalVariable } from '../../global';
 
 export class User {
   id: number;
@@ -9,7 +9,7 @@ export class User {
   email: string;
   hashedPassword: any;
   birthDate: any;
-  private baseApiUrl = environment.BASE_API_URL;
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
 
 
   constructor(

@@ -15,7 +15,7 @@
     padding-right: 0px;
     padding-left: 0px;
     overflow: visible;
-    margin-top: 20px;
+    margin-top: calc(68px + 20px);
   }
 
   .center {
@@ -384,7 +384,7 @@
     overflow-x: hidden;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
     background-color: white;
     padding: 0px 12px;
@@ -441,8 +441,8 @@
 
   .card-text {
     width: 100%;
-    margin-top: 14px;
-    margin-bottom: 8px;
+    margin-top: 8px;
+    margin-bottom: 4px;
     font-family: inherit;
   }
 

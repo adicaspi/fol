@@ -1,36 +1,52 @@
 <div *ngIf="postInfo" class="wrapper">
-  <div class="icon-img">
-    <i (click)="goBackPage()" class="fa fa-chevron-left"></i>
-  </div>
-  <div class="profile-img-comp" (click)="profilePage()">
-    <img id="profileImage" [attr.src]="userProfileSrc" />
-    <div class="card-text profile">{{ postInfo.userName }}</div>
-  </div>
 
-  <div *ngIf="postInfo" class="product-upper-description">
-    <div class="card-text title">
-      <img [attr.src]="storeLogoSrc" class="store-logo" />
-    </div>
-    <div class="product-description">
-      <p id="description" class="card-text-description-ltr">
-        {{ postInfo.description }}
-      </p>
-    </div>
-  </div>
   <div *ngIf="imageUrls" class="slider">
-    <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false"
-      showDots="true">
+    <div class="back-button-container">
+      <img id="back-button" (click)="goBackPage()" src="../../../assets/back.png">
+    </div>
+    <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls"
+     [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false" showDots="true">
     </slideshow>
   </div>
 
-  <div class="upper-footer">
-    <span class="price">
-      {{ postInfo.price }}
-    </span>
+  <div class="center">
+    <div class="product-description">
+      {{ postInfo.description }}
+    </div>
+    <div class="price">
+      {{ postInfo.price }} (net-a-porter)
+    </div>
+    <div class="num-views">
+      567 views
+    </div>
+
     <a href="{{ postInfo.link }}" target="_blank">
-      <button type="button" class="shop_btn">
-        Shop
+      <button type="button" class="shop-btn">
+        View on Website
       </button>
     </a>
   </div>
-  <app-navbar></app-navbar>
+
+  <div class="buffer">
+  </div>
+
+  <div class="center">
+    <div class="profile-img-comp" (click)="profilePage()">
+      <img id="profileImage" [attr.src]="userProfileSrc" />
+      <div class="profile-text">
+        <div class="username">{{ postInfo.userName }}</div>
+        <div class="num-followers">1.1k followers</div>
+      </div>
+      <img src="../../../assets/right-arrow.png" class="next-arrow" aria-hidden="true">
+    </div> 
+  </div>
+
+  <div class="buffer">
+  </div>
+
+  <div class="center">
+    <div class="title">More from {{postInfo.userName}}</div>
+    <div class="placeholder"></div> <!-- this will be replaced by more from posts-->
+  </div>
+
+</div>
