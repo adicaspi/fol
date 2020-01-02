@@ -5,18 +5,13 @@
     </li>
 
     <li class="search">
-      <form [formGroup]="searchForm">
+      <!-- <form [formGroup]="searchForm">
         <div class="search-container">
           <div class="search-icon">
             <i class="fas fa-search"></i>
-            <!-- <svg class="search-icon" view-box="0 0 16 16" role="presentatino" aria-hidden="true">
-                <path d="m2.5 7c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5-4.5-2-4.5-4.5m13.1
-                6.9-2.8-2.9c.7-1.1 1.2-2.5 1.2-4 0-3.9-3.1-7-7-7s-7 3.1-7 7 3.1 7 7 7c1.5 0 
-                2.9-.5 4-1.2l2.9 2.8c.2.3.5.4.9.4.3 0 .6-.1.8-.4.5-.5.5-1.2 0-1.7"></path>
-              </svg> -->
           </div>
           <div id="search-input-container">
-            <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"
+            <input type="search" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"
             />
             <mat-autocomplete #auto="matAutocomplete" class="search-autocomplete" [panelWidth]="panelWidth">
               <mat-option *ngFor="let option of options" [value]="option.userName">
@@ -33,7 +28,45 @@
             </mat-autocomplete>
           </div>
         </div>
+      </form> -->
+
+
+
+
+
+      <form [formGroup]="searchForm" class="example-form">
+        <div class="example-full-width">
+          <input type="search" placeholder="Search" spellcheck="false" formControlName="search" id="navBar" [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete" class="search-autocomplete-adi">
+            <mat-option *ngFor="let option of options" [value]="option.userName">
+              <div class="search-result" (click)="searchUser(option)">
+                <div class="search-res-user-img">
+                  <img class="search-img" [attr.src]="option['profileImgSrc']" />
+                </div>
+                <div class="search-res-user-details">
+                  <span class="search-username">{{ option['userName'] }}</span>
+                  <span class="search-fullname">{{ option['fullName'] }}</span>
+                </div>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
       </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </li>
 
     <li>
