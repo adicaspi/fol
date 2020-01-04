@@ -61,6 +61,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { HeightWidthRatioDirective } from './directives/height-width-ratio.directive';
 import { LoginMobileComponent } from './components/login-mobile/login-mobile.component';
 import { SharedModule } from './shared/shared.module';
+import { UserProfileInfoMobileComponent } from './components/user-profile-info-mobile/user-profile-info-mobile.component';
+import { UserProfileInfoDesktopComponent } from './components/user-profile-info-desktop/user-profile-info-desktop.component';
 
 
 //I keep the new line
@@ -99,7 +101,9 @@ import { SharedModule } from './shared/shared.module';
     BottomNavbarComponent,
     FollowingListMobileComponent,
     HeightWidthRatioDirective,
-    LoginMobileComponent
+    LoginMobileComponent,
+    UserProfileInfoMobileComponent,
+    UserProfileInfoDesktopComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +135,7 @@ import { SharedModule } from './shared/shared.module';
   ],
 
   entryComponents: [
-    UserProfileInfoComponent,
+    //UserProfileInfoComponent,
     // GenerateFollowListComponent,
     ImageComponentComponent,
     RegisterComponent,
