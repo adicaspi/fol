@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { UserPost } from '../../models/UserPost';
 import { DialogService } from '../../services/dialog.service';
 import { UserService } from '../../services/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { GlobalVariable } from '../../../global';
 import { User } from '../../models/User';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
@@ -30,7 +30,7 @@ export class ProductPageMobileComponent implements OnInit {
   rtl: boolean = false;
   // height: string = '400px';
 
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   constructor(
     private dialogService: DialogService,
     private userService: UserService,

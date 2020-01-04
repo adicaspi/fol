@@ -2,18 +2,11 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
-  HttpParams,
-  HttpResponse,
-  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 import { ReplaySubject, Subject } from 'rxjs';
-import { throwError } from 'rxjs';
-
-import { GlobalVariable } from '../../global';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private logIns: Subject<boolean> = new ReplaySubject(1);
   constructor(private router: Router, private http: HttpClient) {}

@@ -5,11 +5,11 @@ import { first } from 'rxjs/operators';
 import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { ErrorsService } from '../../services/errors.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { GlobalVariable } from '../../../global';
 import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { RegisterComponent } from '../register/register.component';
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   modal: boolean = false;
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
   constructor(
