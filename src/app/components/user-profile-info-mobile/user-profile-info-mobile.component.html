@@ -24,13 +24,13 @@
             </button>
             <ng-template #unclickableFollowers>
               <button type="button" class="simple-button-metrics third">
-                <span class="metrics">{{ followers | async }} </span>
+                <span class="metrics">0</span>
                 <span class="text"> followers </span>
               </button>
             </ng-template>
             <ng-template #unclickableFollowing>
               <button type="button" class="simple-button-metrics second">
-                <span class="metrics">{{ following | async }}</span>
+                <span class="metrics">0</span>
                 <span class="text"> following </span>
               </button>
             </ng-template>
@@ -40,24 +40,20 @@
         <div class="description">
           <div class="upper-description-div">
             <div class="user-name">{{ user.username }}</div>
-            <div *ngIf="!userProfile; else settings">
-              <button type="button" class="button-follow setiings" (click)="follow()">
-                {{ follows ? 'following' : 'follow' }}
-              </button>
+
+
+            <div *ngIf="userProfile" class="settings">
+              <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
+              <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
+                <button mat-button class="settings-menu-button" (click)="settingsPage()">
+                  Edit profile
+                </button>
+                <button mat-button class="settings-menu-button">
+                  Log Out
+                </button>
+              </mat-menu>
             </div>
-            <ng-template #settings>
-              <div class="settings">
-                <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
-                <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
-                  <button mat-button class="settings-menu-button" (click)="settingsPage()">
-                    Edit profile
-                  </button>
-                  <button mat-button class="settings-menu-button">
-                    Log Out
-                  </button>
-                </mat-menu>
-              </div>
-            </ng-template>
+
           </div>
 
 
@@ -65,6 +61,11 @@
             <p class="full-name">{{ user.fullName }}</p>
             <p class="bio">{{ user.description }}
             </p>
+          </div>
+          <div *ngIf="!userProfile" class="following-button">
+            <button type="button" class="button-follow" (click)="follow()">
+              <div class="following-text">{{ follows ? 'following' : 'follow' }}</div>
+            </button>
           </div>
         </div>
       </div>
