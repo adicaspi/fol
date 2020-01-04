@@ -4,7 +4,7 @@ import {
   HttpParams
   , HttpClient
 } from '@angular/common/http';
-import { GlobalVariable } from '../../global';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import { GlobalVariable } from '../../global';
 })
 export class ErrorsService {
   private subject = new Subject<any>();
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
 
   constructor(private http: HttpClient) { }
 

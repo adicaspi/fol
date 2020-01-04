@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
 import { Subject, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
-import { GlobalVariable } from '../../../global';
 import { DialogService } from '../../services/dialog.service';
 import { ErrorsService } from '../../services/errors.service';
 
@@ -29,7 +29,7 @@ export class GenerateFollowListComponent implements OnInit {
   postsToShow = [];
   showSpinner: boolean = true;
   followingUsersChanged: boolean = false;
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   constructor(
     private feedService: FeedService,
     private userService: UserService,

@@ -1,8 +1,5 @@
-//import { GlobalVariable } from '../../global';
 import { environment } from '../../environments/environment';
 
-
-//const apiUrl = GlobalVariable.BASE_API_URL;
 const apiUrl = environment.BASE_API_URL;
 
 export class SearchItem {

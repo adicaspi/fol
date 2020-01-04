@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GlobalVariable } from '../../global';
+import { environment } from '../../environments/environment';
 import { PostInfo } from '../models/PostInfo';
 import { UserPost } from '../models/UserPost';
 import { MorePosts } from '../models/MorePosts';
-import { catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
@@ -19,7 +17,7 @@ interface ResponseMorePosts {
   providedIn: 'root'
 })
 export class PostService {
-  private baseApiUrl = GlobalVariable.BASE_API_URL;
+  private baseApiUrl = environment.BASE_API_URL;
   postsUrl: string = this.baseApiUrl + '/image';
   socialUrl: string = this.baseApiUrl + '/social';
   userPost: UserPost;
