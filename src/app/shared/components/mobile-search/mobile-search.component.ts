@@ -99,6 +99,7 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     this.searchControl.setValue('');
     this.options = [];
     this.inputElement.nativeElement.focus();
+    this.cd.detectChanges();
   }
 
   onGoToUser(user) {
@@ -109,6 +110,7 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     this.searchControl.setValue('');
     this.options = [];
     this.isCancelBtnVisible = false;
+    this.cd.detectChanges();
   }
 
   get hasValue() {

@@ -96,7 +96,7 @@
   position: absolute;
   top: 0;
   transform: translateX(-50%);
-  transition: left .15s ease-out, transform .15s ease-out;
+  transition: .15s;
   display: flex;
 
   &--has-value {
