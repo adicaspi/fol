@@ -149,6 +149,11 @@ export class UserProfileInfoComponent implements OnInit {
     this.router.navigate(['settings', this.userService.userId]);
   }
 
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['landing']);
+  }
+
   public ngOnDestroy(): void {
     this.WindowSizeSubscription.unsubscribe();
   }
