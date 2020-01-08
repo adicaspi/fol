@@ -54,7 +54,7 @@ export class TimelineFeedComponent implements OnInit {
     private dialogService: DialogService,
     private configService: ConfigService,
     private router: Router,
-    private errorsService: ErrorsService,
+    private errorsService: ErrorsService
   ) {
     this.id = this.userService.getCurrentUser();
     this.feedSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
@@ -102,8 +102,9 @@ export class TimelineFeedComponent implements OnInit {
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {
-      //this.dialogService.userPost = post;
-      this.dialogService.directingPage = 'feed';
+      this.configService.setGeneralSession('product_id', post.post.postId);
+      this.configService.setGeneralSession('user_id_post_id', post.post.userId);
+
       this.router.navigate(['product-page', post.post.postId]);
     }
   }

@@ -11,6 +11,7 @@ import { PostInfo } from '../../models/PostInfo';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThousandSuffixesPipe } from './pipe-transform';
 import * as $ from 'jquery';
+import { ConfigService } from '../../services/config.service';
 
 
 @Component({
@@ -21,6 +22,8 @@ import * as $ from 'jquery';
 export class ProductPageMobileComponent implements OnInit {
   userPost: UserPost;
   user: User;
+  postId: number;
+  userPostUserId: number;
   numFollowers: number;
   directingPage: string;
   userProfileSrc: any;
@@ -39,8 +42,11 @@ export class ProductPageMobileComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private configService: ConfigService
+  ) {
+    this.postId = this.configService.getProductSession('product_id');
+    this.userPostUserId = this.configService.getProductSession('user_id_post_id');
+  }
 
   ngOnInit() {
     this.userService.getNumberOfFollowers(this.postService.userPostUserId).subscribe(res => {
@@ -54,7 +60,7 @@ export class ProductPageMobileComponent implements OnInit {
 
   getPostInfo() {
     this.postService
-      .getPostInfo()
+      .getMobilePostInfo(this.postId, this.userPostUserId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;

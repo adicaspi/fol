@@ -67,19 +67,19 @@ export class ConfigService {
     }
   }
 
-  setProductSession(postId) {
+  setGeneralSession(key, val) {
     if (typeof Storage !== 'undefined') {
-      sessionStorage.setItem('product_id', postId);
+      sessionStorage.setItem(key, val);
     } else {
       alert('no session storgae');
     }
   }
 
-  getProductSession() {
-    const product_id = sessionStorage.getItem('product_id');
-    if (product_id) {
-      var productId = parseInt(product_id);
-      return product_id;
+  getProductSession(key) {
+    const res = sessionStorage.getItem(key);
+    if (res) {
+      var val = parseInt(res);
+      return val;
     }
   }
 }
