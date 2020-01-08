@@ -104,7 +104,8 @@ import { ThousandSuffixesPipe } from './components/product-page-mobile/pipe-tran
     HeightWidthRatioDirective,
     LoginMobileComponent,
     UserProfileInfoMobileComponent,
-    UserProfileInfoDesktopComponent
+    UserProfileInfoDesktopComponent,
+    ThousandSuffixesPipe
   ],
   imports: [
     BrowserModule,
@@ -131,7 +132,6 @@ import { ThousandSuffixesPipe } from './components/product-page-mobile/pipe-tran
     SlideshowModule,
     IgxSliderModule,
     ScrollingModule,
-    ThousandSuffixesPipe,
     DeviceDetectorModule.forRoot(),
     SharedModule.forRoot()
   ],
