@@ -58,7 +58,7 @@ export class ShoppingNavComponent implements OnInit {
   options = [];
   filteredOptions: Observable<string[]>;
   sideNavOpend: boolean = false;
-  menu = [{ id: 1, name: 'VIEW ALL' }, { id: 2, name: 'CLOTHING' }, { id: 3, name: 'SHOES' }, { id: 4, name: 'BAGS' }, { id: 5, name: 'ACCESSORIES' }];
+  menu = [{ id: 1, name: 'View all' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
 
   categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
   close: boolean = true;

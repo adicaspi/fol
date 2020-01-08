@@ -4,8 +4,8 @@
     <div class="back-button-container">
       <img id="back-button" (click)="goBackPage()" src="../../../assets/back.png">
     </div>
-    <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls"
-     [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false" showDots="true">
+    <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false"
+      showDots="true">
     </slideshow>
   </div>
 
@@ -14,7 +14,7 @@
       {{ postInfo.description }}
     </div>
     <div class="price">
-      {{ postInfo.price }} (net-a-porter)
+      {{ postInfo.price }} {{'('+postInfo.storeName+')'}}
     </div>
     <div class="num-views">
       567 views
@@ -35,10 +35,10 @@
       <img id="profileImage" [attr.src]="userProfileSrc" />
       <div class="profile-text">
         <div class="username">{{ postInfo.userName }}</div>
-        <div class="num-followers">1.1k followers</div>
+        <div class="num-followers">{{ numFollowers }} followers</div>
       </div>
       <img src="../../../assets/right-arrow.png" class="next-arrow" aria-hidden="true">
-    </div> 
+    </div>
   </div>
 
   <div class="buffer">
@@ -46,7 +46,8 @@
 
   <div class="center">
     <div class="title">More from {{postInfo.userName}}</div>
-    <div class="placeholder"></div> <!-- this will be replaced by more from posts-->
+    <div class="placeholder"></div>
+    <!-- this will be replaced by more from posts-->
   </div>
 
 </div>

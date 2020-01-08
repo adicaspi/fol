@@ -9,6 +9,7 @@ import { User } from '../../models/User';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
 import { Router } from '@angular/router';
+import { ThousandSuffixesPipe } from './pipe-transform';
 import * as $ from 'jquery';
 
 
@@ -20,6 +21,7 @@ import * as $ from 'jquery';
 export class ProductPageMobileComponent implements OnInit {
   userPost: UserPost;
   user: User;
+  numFollowers: number;
   directingPage: string;
   userProfileSrc: any;
   storeLogoSrc: string;
@@ -28,6 +30,7 @@ export class ProductPageMobileComponent implements OnInit {
   imageUrls: string[] = [];
   onDestroy: Subject<void> = new Subject<void>();
   rtl: boolean = false;
+  pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   // height: string = '400px';
 
   private baseApiUrl = environment.BASE_API_URL;
@@ -39,7 +42,9 @@ export class ProductPageMobileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userPost = this.postService.userPost;
+    this.userService.getNumberOfFollowers(this.postService.userPostUserId).subscribe(res => {
+      this.numFollowers = this.pipeTransform.transform(res);
+    })
     this.directingPage = this.dialogService.directingPage;
     this.getPostInfo();
 
@@ -48,9 +53,7 @@ export class ProductPageMobileComponent implements OnInit {
 
   getPostInfo() {
     this.postService
-      .getPostInfo(
-
-      )
+      .getPostInfo()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;

@@ -104,7 +104,7 @@ export class TimelineFeedComponent implements OnInit {
     } else {
       //this.dialogService.userPost = post;
       this.dialogService.directingPage = 'feed';
-      this.router.navigate(['product-page']);
+      this.router.navigate(['product-page', post.post.postId]);
     }
   }
 
