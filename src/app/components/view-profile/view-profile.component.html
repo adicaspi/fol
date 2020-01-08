@@ -6,6 +6,14 @@
   </div>
   <ng-template #mobileView class="mobile">
     <!-- <app-shopping-nav></app-shopping-nav> -->
+
+    <div *ngIf="masterUser" class="go-back">
+      <i class="fas fa-chevron-left" (click)="goBack()"></i>
+      <div class="user-go-back">
+        {{ masterUser.username }}
+      </div>
+    </div>
+
     <app-user-profile-info></app-user-profile-info>
     <app-user-feed></app-user-feed>
     <app-bottom-navbar></app-bottom-navbar>

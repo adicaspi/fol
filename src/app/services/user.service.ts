@@ -23,10 +23,10 @@ import { GlobalVariable } from '../../global';
   providedIn: 'root'
 })
 export class UserService {
-  // userId: number = 655; //DELETE SHOULD BE UPDATED FORM CONFIG
   userId: number;
   username: string;
   user: Observable<User>;
+  masterUser: Observable<User>;
   private baseApiUrl = GlobalVariable.BASE_API_URL;
   globalRegisterURL = this.baseApiUrl + '/registration/';
   globaSoicalURL = this.baseApiUrl + '/social/';
@@ -46,6 +46,10 @@ export class UserService {
 
   updateUser(id: number) {
     this.user = this.getUserDetails(id);
+  }
+
+  updateMasterUser(id: number) {
+    this.masterUser = this.getUserDetails(id);
   }
 
   uploadPost(fd: FormData, desc: string): Observable<any> {
@@ -125,12 +129,21 @@ export class UserService {
     ).subscribe(res => { });
   }
 
+  // getUserDetails(id: number): Observable<User> {
+  //   console.log("in get user details");
+  //   return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
+  //   )
+  //     .map(res => {
+  //       return new User(res.id, res.username, res.fullName, res.description, res.email, res.hashedPassword, res.birthDate, res.profileImageAddr)
+  //     });
+  // }
+
   getUserDetails(id: number): Observable<User> {
     console.log("in get user details");
     return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
     )
       .map(res => {
-        return new User(res.id, res.username, res.fullName, res.description, res.email, res.hashedPassword, res.birthDate, res.profileImageAddr)
+        return new User(res);
       });
   }
 

@@ -52,16 +52,7 @@ export class UserProfileInfoComponent implements OnInit {
     public dialogService: DialogService,
     public router: Router,
     public configService: ConfigService,
-  ) {
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.previousUrl = this.currentUrl;
-        this.currentUrl = event.url;
-        console.log("i'm prev", this.previousUrl);
-        console.log("i'm curr", this.currentUrl);
-      };
-    });
-  }
+  ) { }
 
   ngOnInit() {
     this.userId = this.userService.userId;
@@ -166,11 +157,6 @@ export class UserProfileInfoComponent implements OnInit {
   logout() {
     this.userService.logout();
     this.router.navigate(['landing']);
-  }
-
-  goBack() {
-    console.log("in go back", this.previousUrl);
-    this.router.navigate([this.previousUrl]);
   }
 
   public ngOnDestroy(): void {

@@ -15,8 +15,10 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { LoginComponent } from './components/login/login.component';
 
+
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
+
   {
     path: 'profile/:id',
     component: ViewProfileComponent
