@@ -126,4 +126,23 @@
   div.img-comp{
     margin-top: 10px;
   }
+
+  .go-back{
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    padding: 0 16px;
+    border-bottom: 1px solid;
+    border-color: lightgray;
+  }
+
+  .user-go-back{
+    flex:1;
+    text-align: center;
+    line-height: 44px;
+  }
+
+  i.fas.fa-chevron-left{
+    line-height: 44px;
+  }
 }

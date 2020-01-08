@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Routes, Router, ActivatedRoute } from '@angular/router';
+import { Routes, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { Observable, Subscription } from 'rxjs';
@@ -43,6 +43,8 @@ export class UserProfileInfoComponent implements OnInit {
   public finished: boolean;
   public followingDialogRef: MatDialogRef<{}, any>;
   public WindowSizeSubscription: Subscription;
+  public previousUrl: string = "";
+  public currentUrl: string = "";
 
   constructor(
     public userService: UserService,
@@ -51,10 +53,24 @@ export class UserProfileInfoComponent implements OnInit {
     public router: Router,
     public configService: ConfigService,
   ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+        console.log("i'm prev", this.previousUrl);
+        console.log("i'm curr", this.currentUrl);
+      };
+    });
   }
 
   ngOnInit() {
+    this.userId = this.userService.userId;
+    const routeParams = this.activatedRoute.snapshot.params;
+    this.currMasterId = parseInt(routeParams.id);
+    if (this.userId == this.currMasterId) {
+      this.userProfile = true;
+    }
+
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
@@ -66,12 +82,10 @@ export class UserProfileInfoComponent implements OnInit {
             this.desktop = false;
           }
         });
-    const routeParams = this.activatedRoute.snapshot.params;
-    this.userId = this.userService.userId;
-    this.currMasterId = parseInt(routeParams.id);
-    if (this.userId == this.currMasterId) {
-      this.userProfile = true;
-    }
+
+
+
+
     this.updateUser(this.currMasterId);
     this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.follows = res;
@@ -152,6 +166,11 @@ export class UserProfileInfoComponent implements OnInit {
   logout() {
     this.userService.logout();
     this.router.navigate(['landing']);
+  }
+
+  goBack() {
+    console.log("in go back", this.previousUrl);
+    this.router.navigate([this.previousUrl]);
   }
 
   public ngOnDestroy(): void {

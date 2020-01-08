@@ -25,10 +25,6 @@ const routes: Routes = [
     path: 'settings/:id',
     component: SettingsComponent
   },
-  // {
-  //   path: 'login',
-  //   component: MutualNavComponent
-  // },
   {
     path: '',
     component: ViewFeedComponent
@@ -46,7 +42,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }), HttpClientModule],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled', onSameUrlNavigation: 'reload' }), HttpClientModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,3 +1,11 @@
+<div *ngIf="user | async; let goBackUser">
+  <div *ngIf="!userProfile" class="go-back">
+    <i class="fas fa-chevron-left" (click)="goBack()"></i>
+    <div class="user-go-back">
+      {{ goBackUser.username }}
+    </div>
+  </div>
+</div>
 <div class="body">
   <div class="center">
     <div id="main">
@@ -6,7 +14,6 @@
           <div class="img-comp">
             <img [attr.src]="user.profileImageAddr" />
           </div>
-
           <div *ngIf="numberOfPosts | async" class="btn-group">
             <button type="button" class="simple-button-metrics first">
               <span class="metrics">{{ numberOfPosts | async }} </span>
@@ -48,7 +55,7 @@
                 <button mat-button class="settings-menu-button" (click)="settingsPage()">
                   Edit profile
                 </button>
-                <button mat-button class="settings-menu-button">
+                <button mat-button class="settings-menu-button" (click)="logout()">
                   Log Out
                 </button>
               </mat-menu>
