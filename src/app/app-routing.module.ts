@@ -15,8 +15,10 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { LoginComponent } from './components/login/login.component';
 
+
 const routes: Routes = [
   { path: 'feed/:id', component: ViewFeedComponent },
+
   {
     path: 'profile/:id',
     component: ViewProfileComponent
@@ -25,10 +27,6 @@ const routes: Routes = [
     path: 'settings/:id',
     component: SettingsComponent
   },
-  // {
-  //   path: 'login',
-  //   component: MutualNavComponent
-  // },
   {
     path: '',
     component: ViewFeedComponent
@@ -46,7 +44,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }), HttpClientModule],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled', onSameUrlNavigation: 'reload' }), HttpClientModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Routes, Router, ActivatedRoute } from '@angular/router';
+import { Routes, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { Observable, Subscription } from 'rxjs';
@@ -17,46 +17,64 @@ import { ConfigService } from '../../services/config.service';
   styleUrls: ['./user-profile-info.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class UserProfileInfoComponent implements OnInit {
-  currMasterId: number;
-  slaveId: number;
-  follows: boolean;
-  user: Observable<User>;
-  userId: number;
-  userProfileImageSrc: string;
-  src: any;
-  following: Observable<number>;
-  followers: Observable<number>;
-  numberOfPosts: Observable<number>;
-  userLoaded: Promise<boolean>;
-  flag: number = 1;
-  clicked: boolean = false;
-  onDestroy: Subject<void> = new Subject<void>();
-  desktop: boolean = false;
-  userProfile: boolean = false;
-  private subscription: Subscription;
-  private msgSubscription: Subscription;
-  private anyErrors: boolean;
-  private finished: boolean;
-  followingDialogRef: MatDialogRef<{}, any>;
+  public currMasterId: number;
+  public slaveId: number;
+  public follows: boolean;
+  public user: Observable<User>;
+  public userId: number;
+  public userProfileImageSrc: string;
+  public src: any;
+  public following: Observable<number>;
+  public followers: Observable<number>;
+  public numberOfPosts: Observable<number>;
+  public userLoaded: Promise<boolean>;
+  public flag: number = 1;
+  public clicked: boolean = false;
+  public onDestroy: Subject<void> = new Subject<void>();
+  public desktop: boolean = false;
+  public userProfile: boolean = false;
+  public subscription: Subscription;
+  public msgSubscription: Subscription;
+  public anyErrors: boolean;
+  public finished: boolean;
+  public followingDialogRef: MatDialogRef<{}, any>;
+  public WindowSizeSubscription: Subscription;
+  public previousUrl: string = "";
+  public currentUrl: string = "";
 
   constructor(
-    private userService: UserService,
-    private activatedRoute: ActivatedRoute,
-    private dialogService: DialogService,
-    private router: Router,
-    private configService: ConfigService,
-  ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+    public userService: UserService,
+    public activatedRoute: ActivatedRoute,
+    public dialogService: DialogService,
+    public router: Router,
+    public configService: ConfigService,
+  ) { }
 
   ngOnInit() {
-    const routeParams = this.activatedRoute.snapshot.params;
     this.userId = this.userService.userId;
+    const routeParams = this.activatedRoute.snapshot.params;
     this.currMasterId = parseInt(routeParams.id);
     if (this.userId == this.currMasterId) {
       this.userProfile = true;
     }
+
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
+
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+        });
+
+
+
+
     this.updateUser(this.currMasterId);
     this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.follows = res;
@@ -64,19 +82,6 @@ export class UserProfileInfoComponent implements OnInit {
     this.getNumFollowers();
     this.getNumFollowing();
     this.getNumPosts();
-    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
-      .subscribe(
-        value => {
-          if (value.width <= 600) {
-            this.desktop = false;
-          }
-          else {
-            this.desktop = true;
-          }
-        }),
-      error => this.anyErrors = true,
-      () => this.finished = true
-
   }
 
   getNumFollowing() {
@@ -145,5 +150,14 @@ export class UserProfileInfoComponent implements OnInit {
 
   settingsPage() {
     this.router.navigate(['settings', this.userService.userId]);
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['landing']);
+  }
+
+  public ngOnDestroy(): void {
+    this.WindowSizeSubscription.unsubscribe();
   }
 }

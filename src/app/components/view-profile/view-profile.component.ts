@@ -7,6 +7,8 @@ import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
+import { Router, NavigationEnd, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-view-profile',
@@ -23,19 +25,47 @@ export class ViewProfileComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   searchedTouched: Observable<boolean>;
   mobileSearchedTouched: Observable<boolean>;
+  userId: number;
+  masterId: number;
+  userProfile: boolean = false;
+  masterUser: User;
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches));
+  public previousUrl: string = "";
+  public currentUrl: string = "";
+  // isHandset$: Observable<boolean> = this.breakpointObserver
+  //   .observe(Breakpoints.Handset)
+  //   .pipe(map(result => result.matches));
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private deviceService: DeviceDetectorService,
     private configService: ConfigService,
-    private feedService: FeedService
-  ) { }
+    private feedService: FeedService,
+    public router: Router,
+    public userService: UserService,
+    public activatedRoute: ActivatedRoute,
+  ) {
+    this.userId = this.userService.userId;
+    const routeParams = this.activatedRoute.snapshot.params;
+    this.masterId = parseInt(routeParams.id);
+    if (this.userId == this.masterId) {
+      this.userProfile = true;
+    } else {
+      this.userService.getUserDetails(this.masterId).subscribe(res => {
+        this.masterUser = res
+      });
+    }
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+        console.log("i'm prev", this.previousUrl);
+        console.log("i'm curr", this.currentUrl);
+      };
+    });
+  }
 
   ngOnInit() {
     this.feedService.currentLoadedFeedComponent = "profile";
@@ -50,5 +80,10 @@ export class ViewProfileComponent implements OnInit {
       }),
       error => this.anyErrors = true,
       () => this.finished = true
+  }
+
+  goBack() {
+    console.log("in go back", this.previousUrl);
+    this.router.navigate([this.previousUrl]);
   }
 }

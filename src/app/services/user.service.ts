@@ -22,7 +22,6 @@ const httpFormDataOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  // userId: number = 655; //DELETE SHOULD BE UPDATED FORM CONFIG
   userId: number;
   username: string;
   user: Observable<User>;
@@ -124,12 +123,21 @@ export class UserService {
     ).subscribe(res => { });
   }
 
+  // getUserDetails(id: number): Observable<User> {
+  //   console.log("in get user details");
+  //   return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
+  //   )
+  //     .map(res => {
+  //       return new User(res.id, res.username, res.fullName, res.description, res.email, res.hashedPassword, res.birthDate, res.profileImageAddr)
+  //     });
+  // }
+
   getUserDetails(id: number): Observable<User> {
     console.log("in get user details");
     return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
     )
       .map(res => {
-        return new User(res.id, res.username, res.fullName, res.description, res.email, res.hashedPassword, res.birthDate, res.profileImageAddr)
+        return new User(res);
       });
   }
 
