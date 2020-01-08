@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { User } from '../../models/User';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ThousandSuffixesPipe } from './pipe-transform';
 import * as $ from 'jquery';
 
@@ -38,7 +38,8 @@ export class ProductPageMobileComponent implements OnInit {
     private dialogService: DialogService,
     private userService: UserService,
     private postService: PostService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -90,15 +91,7 @@ export class ProductPageMobileComponent implements OnInit {
   // }
 
   goBackPage() {
-    if (this.directingPage == 'profile') {
-      this.router.navigate(['profile', this.postInfo.userId]);
-    }
-    if (this.directingPage == 'feed') {
-      this.router.navigate(['feed', this.postInfo.userId]);
-    }
-    if (this.directingPage == 'explore') {
-      this.router.navigate(['explore', this.postInfo.userId]);
-    }
+    this.router.navigate(['../']);
   }
 
   profilePage() {
