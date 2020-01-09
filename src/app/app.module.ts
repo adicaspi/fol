@@ -63,6 +63,7 @@ import { LoginMobileComponent } from './components/login-mobile/login-mobile.com
 import { SharedModule } from './shared/shared.module';
 import { UserProfileInfoMobileComponent } from './components/user-profile-info-mobile/user-profile-info-mobile.component';
 import { UserProfileInfoDesktopComponent } from './components/user-profile-info-desktop/user-profile-info-desktop.component';
+import { ThousandSuffixesPipe } from './components/product-page-mobile/pipe-transform';
 
 
 //I keep the new line
@@ -103,7 +104,8 @@ import { UserProfileInfoDesktopComponent } from './components/user-profile-info-
     HeightWidthRatioDirective,
     LoginMobileComponent,
     UserProfileInfoMobileComponent,
-    UserProfileInfoDesktopComponent
+    UserProfileInfoDesktopComponent,
+    ThousandSuffixesPipe
   ],
   imports: [
     BrowserModule,

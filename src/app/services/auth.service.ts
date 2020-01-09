@@ -19,7 +19,7 @@ export class AuthService {
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private logIns: Subject<boolean> = new ReplaySubject(1);
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
 
   // get isLoggedIn() {
   //   return this.loggedIn.asObservable();

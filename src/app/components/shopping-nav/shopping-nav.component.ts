@@ -15,7 +15,7 @@ import { MatSidenav } from '@angular/material';
 export class ShoppingNavComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
   placeholder = "search &#xF002";
-  menu = [{ id: 1, name: 'VIEW ALL' }, { id: 2, name: 'CLOTHING' }, { id: 3, name: 'SHOES' }, { id: 4, name: 'BAGS' }, { id: 5, name: 'ACCESSORIES' }];
+  menu = [{ id: 1, name: 'View all' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
   clothings = [
     { id: 1, name: 'All Clothing', servername: 'Default', checked: false },
     { id: 2, name: 'Tops', servername: 'Tops', checked: false },

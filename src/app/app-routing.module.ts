@@ -37,10 +37,11 @@ const routes: Routes = [
   },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'explore/:id', component: ViewExploreComponent },
-  { path: 'product-page', component: ProductPageMobileComponent },
+  { path: 'product-page/:id', component: ProductPageMobileComponent },
   { path: 'following', component: GenerateFollowListComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+
 ];
 
 @NgModule({
