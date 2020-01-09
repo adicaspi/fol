@@ -126,7 +126,7 @@ button.nav-item {
   bottom: 0;
   transition: transform .3s;
   transform: translateX(100%);
-  width: 350px;
+  width: 280px;
   background-color: white;
 
   &.opened {
@@ -149,7 +149,7 @@ button.nav-item {
   justify-content: space-between;
   transition: width .3s;
   font-size: 12px;
-  width: 113px;
+  width: 90px;
   box-sizing: border-box;
   display: flex;
   float: right;
@@ -177,7 +177,7 @@ button.nav-item {
   }
 
   &.opened {
-    width: 350px;
+    width: 280px;
 
     #{$this}__btn {
       &.toggle {
