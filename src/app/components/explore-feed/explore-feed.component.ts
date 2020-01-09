@@ -52,9 +52,6 @@ export class ExploreFeedComponent implements OnInit {
         })
       });
     this.feedService.updateExploreFeed(this.id);
-
-
-
     this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
       if (msg.error == 'update-exlporefeed') {
         this.posts = [];

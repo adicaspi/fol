@@ -93,7 +93,7 @@ export class ProductPageMobileComponent implements OnInit {
 
 
   goBackPage() {
-    this.router.navigate(['../']);
+    window.history.back();
   }
 
   profilePage() {

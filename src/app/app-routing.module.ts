@@ -18,15 +18,16 @@ import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
-    path: 'feed/:id', component: ViewFeedComponent,
-    children: [{ path: 'product/:id', component: ProductPageMobileComponent }]
-  },
-
-  {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    children: [{ path: 'product/:id', component: ProductPageMobileComponent }]
+    // children: [{ path: 'product-page/:id', component: ProductPageMobileComponent }]
   },
+  {
+    path: 'feed/:id', component: ViewFeedComponent,
+    // children: [{ path: 'product-page/:id', component: ProductPageMobileComponent }]
+  },
+
+
   {
     path: 'settings/:id',
     component: SettingsComponent

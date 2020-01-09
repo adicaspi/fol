@@ -61,8 +61,6 @@ export class ViewProfileComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
-        console.log("i'm prev", this.previousUrl);
-        console.log("i'm curr", this.currentUrl);
       };
     });
   }
