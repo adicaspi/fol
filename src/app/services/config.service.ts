@@ -75,7 +75,7 @@ export class ConfigService {
     }
   }
 
-  getProductSession(key) {
+  getGeneralSession(key) {
     const res = sessionStorage.getItem(key);
     if (res) {
       var val = parseInt(res);

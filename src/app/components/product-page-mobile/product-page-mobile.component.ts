@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { UserPost } from '../../models/UserPost';
 import { DialogService } from '../../services/dialog.service';
 import { UserService } from '../../services/user.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from '../../models/User';
 import { PostService } from '../../services/post.service';
@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ThousandSuffixesPipe } from './pipe-transform';
 import * as $ from 'jquery';
 import { ConfigService } from '../../services/config.service';
+import { MorePosts } from '../../models/MorePosts';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ProductPageMobileComponent implements OnInit {
   postImageAddr: string;
   imageUrls: string[] = [];
   onDestroy: Subject<void> = new Subject<void>();
-  rtl: boolean = false;
+  postsToShow: Observable<MorePosts[]>;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   // height: string = '400px';
 
@@ -44,18 +45,17 @@ export class ProductPageMobileComponent implements OnInit {
     private router: Router,
     private configService: ConfigService
   ) {
-    this.postId = this.configService.getProductSession('product_id');
-    this.userPostUserId = this.configService.getProductSession('user_id_post_id');
+    this.postId = this.configService.getGeneralSession('product_id');
+    this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
   }
 
   ngOnInit() {
-    this.userService.getNumberOfFollowers(this.postService.userPostUserId).subscribe(res => {
+    this.userService.getNumberOfFollowers(this.userPostUserId).subscribe(res => {
       this.numFollowers = this.pipeTransform.transform(res);
     })
     this.directingPage = this.dialogService.directingPage;
     this.getPostInfo();
-
-
+    this.getMoreFromUser();
   }
 
   getPostInfo() {
@@ -73,28 +73,23 @@ export class ProductPageMobileComponent implements OnInit {
         this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
         this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
         this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
-        if (postInfo.storeId == 5 || postInfo.storeId == 7) {
-          this.rtl = true;
-        }
       })
   }
 
 
-  setThumbnailImage(image) {
-    var mainImageElement = $('#mainImage');
-    mainImageElement.attr('src', image);
+  getMoreFromUser() {
+    this.postsToShow = this.postService
+      .getMorePostsFromUserMobile(this.postId, this.userPostUserId);
   }
 
-  // setImage(image) {
-  //   var mainImageElement = $('#mainImage');
-  //   mainImageElement.attr('src', image);
-  //   var description = $('#description');
-  //   description.text(this.userPost['post']['description']);
-  //   var link = $('#link');
-  //   link.attr('href', this.userPost['post']['link']);
-  //   var price = $('span.price');
-  //   price.text(this.userPost['post']['price']);
-  // }
+  openMorePosts(post) {
+    console.log("more from rani", post);
+    this.configService.setGeneralSession('product_id', post.postId);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['product-page', post.postId]);
+    });
+  }
+
 
   goBackPage() {
     this.router.navigate(['../']);

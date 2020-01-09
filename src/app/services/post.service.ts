@@ -41,14 +41,6 @@ export class PostService {
     });
   }
 
-  getMobilePostInfo(postId, userPostUserId): Observable<PostInfo> {
-    let postInfoURL = this.socialUrl + '/' + userPostUserId + '/post-info';
-    let params = new HttpParams().set('postId', postId.toString());
-    return this.http.get<PostInfo>(postInfoURL, {
-      params: params
-    });
-  }
-
   getMorePostsFromUser(): Observable<MorePosts[]> {
     let postInfoURL = this.socialUrl + '/' + this.userPostUserId + '/more-from';
     let params = new HttpParams().set('masterUserId', this.userPostUserId.toString()).append('currPostId', this.userPostPostId.toString());
@@ -62,6 +54,30 @@ export class PostService {
         return response.map((item) => new MorePosts(item.postId, item.postImageAddr));
       });
   }
+
+  getMobilePostInfo(postId, userPostUserId): Observable<PostInfo> {
+    let postInfoURL = this.socialUrl + '/' + userPostUserId + '/post-info';
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.get<PostInfo>(postInfoURL, {
+      params: params
+    });
+  }
+
+  getMorePostsFromUserMobile(postId, userPostUserId): Observable<MorePosts[]> {
+    let postInfoURL = this.socialUrl + '/' + userPostUserId + '/more-from';
+    let params = new HttpParams().set('masterUserId', userPostUserId.toString()).append('currPostId', postId.toString());
+
+    return this.http.get<MorePosts[]>(postInfoURL, {
+      params: params
+    }).pipe(
+    )
+      .map(res => {
+        let response: any = res;
+        return response.map((item) => new MorePosts(item.postId, item.postImageAddr));
+      });
+  }
+
+
 
 
   incrementPostViews(userId: number, postId: number) {
