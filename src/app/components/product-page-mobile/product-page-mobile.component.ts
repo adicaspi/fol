@@ -26,6 +26,7 @@ export class ProductPageMobileComponent implements OnInit {
   postId: number;
   userPostUserId: number;
   numFollowers: number;
+  numViews: number;
   directingPage: string;
   userProfileSrc: any;
   storeLogoSrc: string;
@@ -64,6 +65,7 @@ export class ProductPageMobileComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
+        this.numViews = this.pipeTransform.transform(postInfo.numViews);
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
@@ -83,7 +85,6 @@ export class ProductPageMobileComponent implements OnInit {
   }
 
   openMorePosts(post) {
-    console.log("more from rani", post);
     this.configService.setGeneralSession('product_id', post.postId);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['product-page', post.postId]);

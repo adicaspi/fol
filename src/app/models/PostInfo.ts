@@ -11,6 +11,7 @@ export class PostInfo {
   userName: string;
   userProfileImageAddr: string;
   website: string;
+  numViews: number;
 
   // link: string;
   // designer: string;

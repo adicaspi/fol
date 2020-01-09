@@ -121,10 +121,19 @@ div.buffer {
   font-family: Roboto;
   font-weight: 500;
   padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-.placeholder {
-  height: 500px;
+.more-from-container {
+  height: 130px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.more-from-container img{
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
 }
 
 
