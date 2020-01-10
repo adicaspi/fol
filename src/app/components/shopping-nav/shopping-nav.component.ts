@@ -1,67 +1,21 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Subject } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
-import { UserService } from '../../services/user.service';
 import { ErrorsService } from '../../services/errors.service';
-import { ViewProfileComponent } from '../view-profile/view-profile.component';
-import { Routes, Router } from '@angular/router';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '@angular/material';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-
 
 @Component({
   selector: 'app-shopping-nav',
   templateUrl: './shopping-nav.component.html',
-  styleUrls: ['./shopping-nav.component.css'],
-  animations: [
-    trigger('slideInOut', [
-      state('open',
-        style({
-          transform: 'translateX(-100%)',
-          opacity: 1,
-          marginTop: '0'
-
-        })),
-      state('close', style({
-        display: 'none',
-        transform: 'translateX(100%)',
-        opacity: 0
-
-      })),
-      transition('open => close', animate(500)),
-      transition('close => open', animate(500))
-
-    ]),
-    trigger('expandCollapse', [
-      state('open', style({
-        'height': '100%',
-        transform: 'translateY(100%)'
-      })),
-      state('close', style({
-        'height': '0px'
-      })),
-      transition('open <=> close', animate(1000))
-    ])
-  ],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./shopping-nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
-
 })
 export class ShoppingNavComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
-  firstChar: boolean = true;
   placeholder = "search &#xF002";
-  options = [];
-  filteredOptions: Observable<string[]>;
-  sideNavOpend: boolean = false;
   menu = [{ id: 1, name: 'View all' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
-
-  categories = [{ id: 1, name: 'All Categories' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
-  close: boolean = true;
   clothings = [
     { id: 1, name: 'All Clothing', servername: 'Default', checked: false },
     { id: 2, name: 'Tops', servername: 'Tops', checked: false },
@@ -74,162 +28,106 @@ export class ShoppingNavComponent implements OnInit {
   designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
   stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
   prices = [{ value: 100, checked: false }, { value: 200, checked: false }, { value: 300, checked: false }, { value: 400, checked: false }, { value: 500, checked: false }];
-  secondaryMenu = {};
   onDestroy: Subject<void> = new Subject<void>();
   filteringDTO = new FilteringDTO();
-  opened: boolean = false;
-  currMenu: string;
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
-  private baseApiUrl = environment.BASE_API_URL;
-  routes: Routes = [{ path: 'profile/:id', component: ViewProfileComponent }];
-  visible = false;
-  panelOpenState = true;
-  openCloseStores = false;
-  openCloseDesigners = false;
-  openCloseProducts = false;
-  seeMoreDesigners = 'see more+';
-  seeMoreStores = 'see more+';
-  seeMoreProducts = 'see more+'
-  seeMoreFilters = '+filters';
+  openCloseStores = true;
+  openCloseDesigners = true;
+  openCloseProducts = true;
   currSelectedPrice;
   prevSelectedPrice;
-  currSelectedProductType;
-  prevSelectedProductType;
-  productIsSelected: boolean = false;
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = false;
-  sidenavClass: string
-  git = 'sidenav-container';
-  showFilters: boolean = true;
-  mode: string = "over";
-  designersStateClosed: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private userService: UserService,
     private feedService: FeedService,
     private errorsService: ErrorsService,
-    private router: Router
   ) {
-    this.visible = false;
   }
 
   ngOnInit() { }
 
-  get stateName() {
-    return this.close ? 'close' : 'open'
-  }
+  onChangeCheckBox(key, elem) {
+    if (key === 'prices') {
 
-  get openCloseAnimDesignersState() {
-    return this.designersStateClosed ? 'open' : 'close'
-  }
-
-  onChangeCheckBox(key, $event, elem) {
-    if (key == 'prices') {
-
-      if ($event.checked == true) {
+      if (!elem.checked) {
         elem.checked = true;
         if (this.priceIsSelected) {
           this.currSelectedPrice = elem;
           this.prevSelectedPrice.checked = false;
           this.prevSelectedPrice = this.currSelectedPrice;
           this.filteringChanged = true;
-        }
-        else {
+        } else {
           this.currSelectedPrice = elem;
           this.prevSelectedPrice = elem;
           this.priceIsSelected = true;
         }
         this.filteringDTO.setMaxPrice(this.currSelectedPrice.value);
       } else {
-        this.priceIsSelected = false
+        this.priceIsSelected = false;
         elem.checked = false;
         this.filteringDTO.setMaxPrice(0);
         this.filteringChanged = false;
       }
       this.updateFeedFilteringDTO();
     }
-    if (key == "stores") {
-      if ($event.checked == true) {
+    if (key === 'stores') {
+      if (!elem.checked) {
         elem.checked = true;
         this.filteringDTO.setStores(elem);
         this.filteringChanged = true;
 
-      }
-      else {
+      } else {
         elem.checked = false;
         this.filteringDTO.removeStore(elem);
-        if (this.filteringDTO.getStores().length == 0) {
+        if (this.filteringDTO.getStores().length === 0) {
           this.filteringChanged = false;
         }
       }
       this.updateFeedFilteringDTO();
     }
-    if (key == "designers") {
-      if ($event.checked == true) {
+    if (key === 'designers') {
+      if (!elem.checked) {
         elem.checked = true;
         this.filteringDTO.setDesigners(elem);
         this.filteringChanged = true;
-      }
-      else {
+      } else {
         elem.checked = false;
         const index = this.filteringDTO.removeDesigner(elem);
-        if (this.filteringDTO.designers.length == 0) {
+        if (this.filteringDTO.designers.length === 0) {
           this.filteringChanged = false;
         }
       }
       this.updateFeedFilteringDTO();
     }
-    if (key == "clothings") {
-      if ($event.checked == true) {
+    if (key === 'clothings') {
+      if (!elem.checked) {
         elem.checked = true;
         this.filteringDTO.setProductTypes(elem);
         this.filteringChanged = true;
-      }
-      else {
+      } else {
         elem.checked = false;
         const index = this.filteringDTO.removeProduct(elem);
-        if (this.filteringDTO.productTypes.length == 0) {
+        if (this.filteringDTO.productTypes.length === 0) {
           this.filteringChanged = false;
         }
       }
       this.updateFeedFilteringDTO();
     }
-
-
   }
 
-  SeeMoreSideFilters(category): void {
-    if (category == 'clothings') {
+  onSeeMoreSideFilters(category): void {
+    if (category === 'clothings') {
       this.openCloseProducts = !this.openCloseProducts;
-      if (this.openCloseProducts) {
-        this.seeMoreProducts = 'see less-';
-      }
-      else {
-        this.seeMoreProducts = 'see more+';
-      }
     }
 
-    if (category == 'designers') {
+    if (category === 'designers') {
       this.openCloseDesigners = !this.openCloseDesigners;
-      this.designersStateClosed = !this.designersStateClosed;
-      if (this.openCloseDesigners) {
-        this.seeMoreDesigners = 'see less-';
-      }
-      else {
-        this.seeMoreDesigners = 'see more+';
-      }
-
     }
-    if (category == 'stores') {
+
+    if (category === 'stores') {
       this.openCloseStores = !this.openCloseStores;
-      if (this.openCloseStores) {
-        this.seeMoreStores = 'see less-';
-      }
-      else {
-        this.seeMoreStores = 'see more+';
-      }
     }
   }
 
@@ -242,95 +140,29 @@ export class ShoppingNavComponent implements OnInit {
     });
     this.filteringDTO = new FilteringDTO();
     this.updateFeedFilteringDTO();
-
   }
 
   toggleSidenav(): void {
     this.sidenav.toggle();
-    if (this.sidenav.opened) {
-      this.sidenavClass = 'sidenav-container-open';
-      this.showFilters = false;
-      this.seeMoreFilters = '-filtres';
-      this.visible = true;
-    }
-    else {
-      this.sidenavClass = 'sidenav-container';
-      this.showFilters = true;
-      this.seeMoreFilters = '+filtres';
-    }
   }
 
   filterByCategory(item) {
-    if (item == 'Clothing') {
-      this.showProductType = true;
-    }
-    else {
-      this.showProductType = false;
-    }
+    this.showProductType = (item && item.toLowerCase() === 'clothing');
     this.filteringDTO.category = item;
     this.updateFeedFilteringDTO();
   }
 
-  closeProductType() {
-    this.showProductType = false;
-    this.filteringDTO.removeProductType();
-    this.filteringDTO.setCategory(null);
-    if (this.productIsSelected) {
-      this.updateFeedFilteringDTO();
-      this.currSelectedProductType.checked = false;
-      this.prevSelectedProductType.checked = false;
-      this.currSelectedProductType = null;
-      this.prevSelectedProductType = null;
-    }
-  }
-
-  filterByProduct(elem) {
-    this.filteringDTO.productTypes = [];
-
-    if (this.productIsSelected) {
-      if (this.prevSelectedProductType == elem) {
-        this.productIsSelected = false;
-        this.prevSelectedProductType = null;
-        this.currSelectedProductType = null;
-        elem.checked = false;
-      }
-      else {
-        this.currSelectedProductType = elem;
-        elem.checked = true;
-        this.prevSelectedProductType.checked = false;
-        this.prevSelectedProductType = this.currSelectedProductType;
-        if (elem.servername != 'Default') {
-          this.filteringDTO.setProductTypes(elem);
-        }
-      }
-    }
-    else {
-      elem.checked = true;
-      this.currSelectedProductType = elem;
-      this.prevSelectedProductType = elem;
-      this.productIsSelected = true;
-      if (elem.servername != 'Default') {
-        this.filteringDTO.setProductTypes(elem);
-      }
-    }
-    this.updateFeedFilteringDTO();
-  }
-
-  feedPage() {
-    this.router.navigate(['feed', this.userService.userId]);
-  }
-
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    if (this.feedService.currentLoadedFeedComponent == 'feed') {
+    if (this.feedService.currentLoadedFeedComponent === 'feed') {
       this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-timelinefeed');
     }
-    if (this.feedService.currentLoadedFeedComponent == 'profile') {
+    if (this.feedService.currentLoadedFeedComponent === 'profile') {
       this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-userfeed');
     }
-    if (this.feedService.currentLoadedFeedComponent == 'explore') {
+    if (this.feedService.currentLoadedFeedComponent === 'explore') {
       this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
       this.errorsService.sendMessage('update-exlporefeed');
     }
