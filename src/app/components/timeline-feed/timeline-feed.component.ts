@@ -98,13 +98,11 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.postService.userPostUserId = post.post.userId;
-    this.postService.userPostPostId = post.post.postId;
+    this.configService.setGeneralSession('product_id', post.post.postId);
+    this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {
-      this.configService.setGeneralSession('product_id', post.post.postId);
-      this.configService.setGeneralSession('user_id_post_id', post.post.userId);
       this.router.navigate(['product-page', post.post.postId]);
     }
   }

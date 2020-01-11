@@ -100,15 +100,12 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.postService.userPostUserId = post.post.userId;
-    this.postService.userPostPostId = post.post.postId;
+    this.configService.setGeneralSession('product_id', post.post.postId);
+    this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     this.postService.userPost = post;
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {
-      console.log("i post", this.activatedRoute.component);
-      this.configService.setGeneralSession('product_id', post.post.postId);
-      this.configService.setGeneralSession('user_id_post_id', post.post.userId);
       this.router.navigate(['product-page', post.post.postId]);
     }
   }

@@ -14,6 +14,7 @@ import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
 import { MorePosts } from '../../models/MorePosts';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-file-preview-overlay',
@@ -32,28 +33,32 @@ export class FilePreviewOverlayComponent implements OnInit {
   postImageAddr: any;
   userProfileSrc: any;
   thumbnails = [];
+  postId: number;
+  userPostUserId: number;
 
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
-    private feedService: FeedService,
+    private configService: ConfigService,
     private userService: UserService,
     private postService: PostService,
     private dialogRef: FilePreviewOverlayRef
-  ) { }
+  ) {
+    this.postId = this.configService.getGeneralSession('product_id');
+    this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
+  }
 
   ngOnInit() {
     this.getPostInfo();
     this.getMoreFromUser();
     this.incNumViews();
-    //this.postImageAddr = this.postInfo.postImageAddr;
     this.userProfileSrc = '../../../assets/placeholder.png';
 
   }
 
   getPostInfo() {
     this.postService
-      .getPostInfo()
+      .getMobilePostInfo(this.postId, this.userPostUserId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
@@ -76,7 +81,7 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   getMoreFromUser() {
     this.postsToShow = this.postService
-      .getMorePostsFromUser();
+      .getMorePostsFromUserMobile(this.postId, this.userPostUserId);
   }
 
   incNumViews() {
@@ -98,8 +103,15 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.openDialog(post);
   }
 
+  // openDialog(post): void {
+  //   this.postService.userPostPostId = post.postId;
+  //   this.thumbnails = [];
+  //   this.showSpinner = true;
+  //   this.ngOnInit();
+  // }
+
   openDialog(post): void {
-    this.postService.userPostPostId = post.postId;
+    this.configService.setGeneralSession('product_id', post.postId);
     this.thumbnails = [];
     this.showSpinner = true;
     this.ngOnInit();
@@ -109,7 +121,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public ngOnDestroy(): void {
+  public OnDestroy(): void {
     this.onDestroy.next();
   }
 }
