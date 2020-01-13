@@ -1,8 +1,8 @@
 <div *ngIf="postInfo" class="wrapper">
 
   <div *ngIf="imageUrls" class="slider">
-    <div class="back-button-container">
-      <img id="back-button" (click)="goBackPage()" src="../../../assets/back.png">
+    <div class="back-button-container" (click)="goBackPage()">
+      <img id="back-button" src="../../../assets/back.png">
     </div>
     <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="imageUrls?.length > 1" [autoPlayWaitForLazyLoad]="false"
       showDots="true">
