@@ -14,7 +14,7 @@
       {{ postInfo.description }}
     </div>
     <div class="price">
-      {{ postInfo.price }} {{'('+postInfo.storeName+')'}}
+      {{ postInfo.price }} {{'('+ (postInfo.storeName | lowercase)+')'}}
     </div>
     <div class="num-views">
       {{ numViews }} views

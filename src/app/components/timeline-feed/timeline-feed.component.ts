@@ -60,7 +60,6 @@ export class TimelineFeedComponent implements OnInit {
     this.id = this.userService.getCurrentUser();
     this.feedSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg.error == 'update-timelinefeed') {
-        console.log("in msg im timeline-feed");
         this.posts = [];
         this.offset = 0;
         this.feedService.updateTimelineFeed(this.id, this.offset);
