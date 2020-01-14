@@ -411,8 +411,8 @@
   }
   
   .profile-image img {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     border: 1px solid rgb(212,212,212);
   }
