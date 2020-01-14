@@ -109,6 +109,7 @@ button.nav-item {
 }
 
 .wrapper {
+  padding-top: 5px;
   position: fixed;
   left: 0;
   right: 0;
@@ -344,6 +345,12 @@ i.fal.fa-times{
 
     .a-item{
       color:black;
+      font-family: 'Maven Pro', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .a-item-checked{
+      font-weight: 500;
     }
   }
 }

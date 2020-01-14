@@ -3,7 +3,7 @@
   <div class="cdk-virtual-scroll-data-source">
     <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport scroll-viewport">
       <div *cdkVirtualFor="let item of menu" class="menu-item">
-        <a (click)="filterByCategory(item.name)" class="a-item">{{item.name}}
+        <a (click)="filterByCategory(item)" [ngClass]="item.checked?'a-item-checked':'a-item'">{{item.name}}
         </a>
       </div>
     </cdk-virtual-scroll-viewport>
@@ -11,24 +11,18 @@
 
   <div class="filter-buttons" [ngClass]="{'opened': sidenav.opened}">
     <button (click)="toggleSidenav()" class="filter-buttons__btn toggle">Filters</button>
-    <button *ngIf="sidenav.opened"
-            (click)="clearSideFiltersSelection()"
-            class="filter-buttons__btn clear"
-            [disabled]="!filteringChanged"
-    >Clear</button>
+    <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear" [disabled]="!filteringChanged">Clear</button>
   </div>
   <mat-sidenav-container class="sidenav-container" [ngClass]="{'opened': sidenav.opened}" [hasBackdrop]="false">
     <mat-sidenav #sidenav mode="over" autoFocus="false" class="mat-sidenav">
-      <div class="filter-section">
+      <div *ngIf="showProductType" class="filter-section">
         <div class="filter-section__title">Product type</div>
-        <div *ngFor="let product of clothings; let i = index"
-             [hidden]="i > 2 && openCloseProducts"
-             class="filter-section__prop"
-             [ngClass]="{'selected': product.checked}"
-             (click)="onChangeCheckBox('clothings', product)"
-        >
+        <div *ngFor="let product of clothings; let i = index" [hidden]="i > 2 && openCloseProducts" class="filter-section__prop"
+          [ngClass]="{'selected': product.checked}" (click)="onChangeCheckBox('clothings', product)">
           <span>{{product.name}}</span>
-          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159" overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
+          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159"
+            overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
             <polyline fill="none" stroke="#000000" stroke-width="30" stroke-miterlimit="10" points="11.289,64.606 74.289,136.606 200.289,10.606 "></polyline>
           </svg>
         </div>
@@ -37,14 +31,12 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Stores</div>
-        <div *ngFor="let store of stores; let i = index"
-             [hidden]="i > 2 && openCloseStores"
-             class="filter-section__prop"
-             [ngClass]="{'selected': store.checked}"
-             (click)="onChangeCheckBox('stores', store)"
-        >
+        <div *ngFor="let store of stores; let i = index" [hidden]="i > 2 && openCloseStores" class="filter-section__prop" [ngClass]="{'selected': store.checked}"
+          (click)="onChangeCheckBox('stores', store)">
           <span>{{store.name}}</span>
-          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159" overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
+          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159"
+            overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
             <polyline fill="none" stroke="#000000" stroke-width="30" stroke-miterlimit="10" points="11.289,64.606 74.289,136.606 200.289,10.606 "></polyline>
           </svg>
         </div>
@@ -53,14 +45,12 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Designers</div>
-        <div *ngFor="let designer of designers; let i = index"
-             [hidden]="i > 2 && openCloseDesigners"
-             class="filter-section__prop"
-             [ngClass]="{'selected': designer.checked}"
-             (click)="onChangeCheckBox('designers', designer)"
-        >
+        <div *ngFor="let designer of designers; let i = index" [hidden]="i > 2 && openCloseDesigners" class="filter-section__prop"
+          [ngClass]="{'selected': designer.checked}" (click)="onChangeCheckBox('designers', designer)">
           <span>{{designer.name}}</span>
-          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159" overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
+          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159"
+            overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
             <polyline fill="none" stroke="#000000" stroke-width="30" stroke-miterlimit="10" points="11.289,64.606 74.289,136.606 200.289,10.606 "></polyline>
           </svg>
         </div>
@@ -69,13 +59,11 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Prices (ILS)</div>
-        <div *ngFor="let price of prices; let i = index"
-             class="filter-section__prop"
-             [ngClass]="{'selected': price.checked}"
-             (click)="onChangeCheckBox('prices', price)"
-        >
+        <div *ngFor="let price of prices; let i = index" class="filter-section__prop" [ngClass]="{'selected': price.checked}" (click)="onChangeCheckBox('prices', price)">
           <span>{{price.value}}</span>
-          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159" overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
+          <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159"
+            overflow="visible" enable-background="new -0.711 -0.394 212 159" xml:space="preserve">
             <polyline fill="none" stroke="#000000" stroke-width="30" stroke-miterlimit="10" points="11.289,64.606 74.289,136.606 200.289,10.606 "></polyline>
           </svg>
         </div>
