@@ -452,10 +452,10 @@
     font-weight: 600;
     color: rgb(51,51,51);
     font-size: 12px;
+    margin-bottom: -4px;
   }
 
   .price {
-    margin-top: 6px;
     font-size: 10px;
     color: rgb(120,120, 120);
     font-weight: 600;
