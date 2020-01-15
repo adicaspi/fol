@@ -14,6 +14,7 @@ import { MutualNavComponent } from './components/mutual-nav/mutual-nav.component
 import { ProductPageMobileComponent } from './components/product-page-mobile/product-page-mobile.component';
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'following', component: GenerateFollowListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'terms', component: TermsComponent },
 
 ];
 
