@@ -72,8 +72,8 @@ export class UserFeedComponent implements OnInit {
       });
 
     this.updateFeed = this.feedService
-      .getNewPosts().subscribe(observablePosts => {
-        observablePosts.subscribe((observablePosts: FeedReturnObject) => {
+      .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
+        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
@@ -100,15 +100,13 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.postService.userPostUserId = post.post.userId;
-    this.postService.userPostPostId = post.post.postId;
+    this.configService.setGeneralSession('product_id', post.post.postId);
+    this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     this.postService.userPost = post;
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {
-      //this.dialogService.userPost = post;
-      this.dialogService.directingPage = 'profile';
-      this.router.navigate(['product-page']);
+      this.router.navigate(['product-page', post.post.postId]);
     }
   }
   public ngOnDestroy(): void {

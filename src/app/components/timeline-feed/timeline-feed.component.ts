@@ -7,7 +7,7 @@ import { Subject, Observable, Subscription } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorsService } from '../../services/errors.service';
 import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { BehaviorSubject } from 'rxjs';
@@ -54,12 +54,12 @@ export class TimelineFeedComponent implements OnInit {
     private dialogService: DialogService,
     private configService: ConfigService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private errorsService: ErrorsService
   ) {
     this.id = this.userService.getCurrentUser();
     this.feedSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg.error == 'update-timelinefeed') {
-        console.log("in msg im timeline-feed");
         this.posts = [];
         this.offset = 0;
         this.feedService.updateTimelineFeed(this.id, this.offset);
@@ -97,14 +97,11 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.postService.userPostUserId = post.post.userId;
-    this.postService.userPostPostId = post.post.postId;
+    this.configService.setGeneralSession('product_id', post.post.postId);
+    this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {
-      this.configService.setGeneralSession('product_id', post.post.postId);
-      this.configService.setGeneralSession('user_id_post_id', post.post.userId);
-
       this.router.navigate(['product-page', post.post.postId]);
     }
   }

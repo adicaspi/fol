@@ -15,7 +15,7 @@ import { MatSidenav } from '@angular/material';
 export class ShoppingNavComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
   placeholder = "search &#xF002";
-  menu = [{ id: 1, name: 'View all' }, { id: 2, name: 'Clothing' }, { id: 3, name: 'Shoes' }, { id: 4, name: 'Bags' }, { id: 5, name: 'Accessories' }];
+  menu = [{ id: 1, name: 'View all', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
     { id: 1, name: 'All Clothing', servername: 'Default', checked: false },
     { id: 2, name: 'Tops', servername: 'Tops', checked: false },
@@ -35,9 +35,10 @@ export class ShoppingNavComponent implements OnInit {
   openCloseProducts = true;
   currSelectedPrice;
   prevSelectedPrice;
+  currCategory: number = 0;
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
-  showProductType: boolean = false;
+  showProductType: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -147,8 +148,18 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   filterByCategory(item) {
-    this.showProductType = (item && item.toLowerCase() === 'clothing');
-    this.filteringDTO.category = item;
+
+    let prevItem = this.menu[this.currCategory];
+    prevItem.checked = false;
+    item.checked = true;
+    this.currCategory = item.id - 1;
+    this.showProductType = (item && item.name.toLowerCase() === 'clothing');
+    if (item.name == "View all") {
+      this.filteringDTO.category = "Clothing";
+    }
+    else {
+      this.filteringDTO.category = item.name;
+    }
     this.updateFeedFilteringDTO();
   }
 

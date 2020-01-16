@@ -14,19 +14,21 @@ import { MutualNavComponent } from './components/mutual-nav/mutual-nav.component
 import { ProductPageMobileComponent } from './components/product-page-mobile/product-page-mobile.component';
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 
 const routes: Routes = [
   {
-    path: 'feed/:id', component: ViewFeedComponent,
-    children: [{ path: 'product/:id', component: ProductPageMobileComponent }]
-  },
-
-  {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    children: [{ path: 'product/:id', component: ProductPageMobileComponent }]
+    // children: [{ path: 'product-page/:id', component: ProductPageMobileComponent }]
   },
+  {
+    path: 'feed/:id', component: ViewFeedComponent,
+    // children: [{ path: 'product-page/:id', component: ProductPageMobileComponent }]
+  },
+
+
   {
     path: 'settings/:id',
     component: SettingsComponent
@@ -45,6 +47,7 @@ const routes: Routes = [
   { path: 'following', component: GenerateFollowListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'terms', component: TermsComponent },
 
 ];
 
