@@ -15,6 +15,7 @@ import { ProductPageMobileComponent } from './components/product-page-mobile/pro
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: TermsComponent },
+  { path: 'cookies-policy', component: TermsCookiesComponent },
 
 ];
 
