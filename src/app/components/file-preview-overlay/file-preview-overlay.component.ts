@@ -35,6 +35,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   thumbnails = [];
   postId: number;
   userPostUserId: number;
+  userProfile: boolean = false;
 
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
@@ -54,6 +55,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.incNumViews();
     this.userProfileSrc = '../../../assets/placeholder.png';
 
+
   }
 
   getPostInfo() {
@@ -62,6 +64,9 @@ export class FilePreviewOverlayComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
+        if (this.postInfo.userId == this.userService.userId) {
+          this.userProfile = true;
+        }
         this.postImageAddr = this.postInfo.postImageAddr;
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
@@ -119,6 +124,14 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   closeModal() {
     this.dialogRef.close();
+  }
+
+  hidePost(postId: number) {
+    this.userService.hidePost(postId);
+  }
+
+  removePost(postId: number) {
+    this.userService.removePost(postId);
   }
 
   public OnDestroy(): void {

@@ -99,4 +99,16 @@ export class ProductPageMobileComponent implements OnInit {
   profilePage() {
     this.router.navigate(['profile', this.postInfo.userId]);
   }
+
+  hidePost(postId: number) {
+    this.userService.hidePost(postId);
+  }
+
+  removePost(postId: number) {
+    this.userService.removePost(postId);
+  }
+
+  OnDestroy(): void {
+    this.onDestroy.next();
+  }
 }

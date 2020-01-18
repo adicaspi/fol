@@ -19,6 +19,19 @@
     <div class="num-views">
       {{ numViews }} views
     </div>
+    <div class="horiz-menu">
+      <button mat-button class="vertical-menu" [matMenuTriggerFor]="soldOut">
+        <i class="material-icons">more_horiz</i>
+      </button>
+      <mat-menu #soldOut="matMenu" yPosition="below">
+        <div class="mat-menu-content">
+          <button mat-menu-item class="btn-menu"> Report out of stock</button>
+          <button mat-menu-item class="btn-menu" (click)="hidePost(postInfo.postId)"> Hide </button>
+          <button *ngIf="userProfile" mat-menu-item class="btn-menu" (click)="removePost(postInfo.postId)"> Remove
+          </button>
+        </div>
+      </mat-menu>
+    </div>
 
     <a href="{{ postInfo.link }}" target="_blank">
       <button type="button" class="shop-btn">

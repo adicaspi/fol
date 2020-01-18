@@ -196,4 +196,24 @@ export class UserService {
       params: params
     });
   }
+
+  removePost(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.delete(
+      this.globaSoicalURL + this.userId + '/remove-post',
+      {
+        params
+      }
+    ).subscribe(res => { });
+  }
+
+  hidePost(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.delete(
+      this.globaSoicalURL + this.userId + '/hide-post',
+      {
+        params
+      }
+    ).subscribe(res => { });
+  }
 }

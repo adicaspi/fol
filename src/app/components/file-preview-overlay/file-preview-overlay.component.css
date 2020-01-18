@@ -8,6 +8,14 @@ button.mat-button{
   outline: none;
 }
 
+.mat-menu-content{
+  width:180px !important;
+}
+
+button.btn-menu.mat-menu-item{
+  outline:none;
+}
+
 
 @media (min-width: 900px) {
   .wrapper {
@@ -178,15 +186,6 @@ button.mat-button{
   .material-icons {
     color: rgb(166, 166, 166);
     font-size: 40px;
-  }
-
-  button.out-of-stock{
-    background-color: white;
-    font-size: 15px;
-    cursor: pointer;
-    margin: 0 auto;
-    padding:0px;
-    color: red;
   }
 }
 /* } */
@@ -366,15 +365,6 @@ button.mat-button{
     color: rgb(166, 166, 166);
     font-size: 40px;
   }
-
-  button.out-of-stock{
-    background-color: white;
-    font-size: 15px;
-    cursor: pointer;
-    margin: 0 auto;
-    padding:0px;
-    color: red;
-  }
 }
 
 
@@ -548,15 +538,6 @@ button.mat-button{
   .material-icons {
     color: rgb(166, 166, 166);
     font-size: 40px;
-  }
-
-  button.out-of-stock{
-    background-color: white;
-    font-size: 15px;
-    cursor: pointer;
-    margin: 0 auto;
-    padding:0px;
-    color: red;
   }
 }
 
