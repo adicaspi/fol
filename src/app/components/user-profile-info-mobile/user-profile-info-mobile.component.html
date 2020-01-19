@@ -3,6 +3,10 @@
 
       <div *ngIf="user | async; let user" class="main">
 
+        <div class="header">
+          <div class="username"> {{user.username}}</div>
+        </div>
+
         <div class="user-section">
 
           <div class="img-comp">
@@ -73,6 +77,6 @@
         </div>
 
       </div>
-      
+
   </div>
 </div>

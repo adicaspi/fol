@@ -5,6 +5,7 @@
     padding: 0;
     overflow-x: hidden;
     width: 100%;
+    color: rgb(38,38,38);
   }
   
   .center{
@@ -16,10 +17,16 @@
     padding: 0px 12px;
   }
   
-  /* #main {
-    padding-top: 50px;
-    border-bottom: 1px solid #e9e9e9;
-  } */
+  .header {
+    width: 100%;
+  }
+
+  .username {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 16px 0px;
+  }
 
   .simple-button {
     background: none;
@@ -85,7 +92,6 @@
   
   .img-comp img {
     border-radius: 50%;
-    border: 2px solid rgba(128,128,128,0.25);
     width: 100px;
     height: 100px;
   }
@@ -130,9 +136,5 @@
   .following-text{
     margin:0 auto;  
     font-weight: bold;
-  }
-
-  div.img-comp{
-    margin-top: 10px;
   }
 }
