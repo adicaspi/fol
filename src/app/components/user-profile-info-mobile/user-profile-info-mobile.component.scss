@@ -1,11 +1,19 @@
 @media  (max-width: 600px){
+
   .body{
-    margin-top:70px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
   }
   
   .center{
-    width:375px;
-    margin:auto;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    overflow-x: hidden;
+    background-color: white;
+    padding: 0px 12px;
   }
   
   /* #main {
@@ -50,12 +58,12 @@
     font-weight: 300
   }
 
-  .user-name{
-    font-weight: bold;
+  p.full-name, p.bio{
+    margin:0; 
   }
 
-  p.full-name, p.bio{
-    margin:0;  
+  .full-name {
+    font-weight: bold;
   }
 
   .user-section{
