@@ -108,13 +108,6 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.openDialog(post);
   }
 
-  // openDialog(post): void {
-  //   this.postService.userPostPostId = post.postId;
-  //   this.thumbnails = [];
-  //   this.showSpinner = true;
-  //   this.ngOnInit();
-  // }
-
   openDialog(post): void {
     this.configService.setGeneralSession('product_id', post.postId);
     this.thumbnails = [];
@@ -134,7 +127,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.userService.removePost(postId);
   }
 
-  public OnDestroy(): void {
+  OnDestroy(): void {
     this.onDestroy.next();
   }
 }
