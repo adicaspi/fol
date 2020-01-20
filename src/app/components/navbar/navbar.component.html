@@ -81,9 +81,11 @@
         Explore
       </div>
     </li>
-    <li *ngIf="user | async; let user">
-      <img [src]="user.profileImageAddr" class="profile" (click)="profilePage()" />
+    <li class="user-image">
+      <img *ngIf="user | async; let user" [src]="user.profileImageAddr" class="profile" (click)="profilePage()" />
     </li>
+
+
 
   </ul>
 </nav>
