@@ -1,4 +1,5 @@
 import { BlockScrollStrategy, Overlay } from '@angular/cdk/overlay';
+import { Location } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -10,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY, MatAutocomplete, MatAutocompleteTrigger } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { debounceTime, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { SearchItem } from '../../../models/SearchItem';
@@ -37,6 +38,7 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   placeholder = 'Search';
   isLoading = false;
   isCancelBtnVisible = false;
+  lastSearchValue = '';
   @ViewChild('auto', {static: false}) autocompleteRef: MatAutocomplete;
   @ViewChild('search', {static: false}) inputElement: ElementRef;
   @ViewChild('search', {static: false, read: MatAutocompleteTrigger}) autocompleteTrigger: MatAutocompleteTrigger;
@@ -45,12 +47,15 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private userService: UserService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private location: Location,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
     this.handleUsersSearch();
+    this.searchFromQuery();
   }
 
   ngOnDestroy(): void {
@@ -58,7 +63,19 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     this.onDestroy.complete();
   }
 
+  private searchFromQuery() {
+    const query = this.route.snapshot.queryParamMap.get('query') || '';
+    if (!query) {
+      return;
+    }
+
+    this.searchControl.setValue(query);
+    this.autocompleteTrigger.openPanel();
+    this.inputElement.nativeElement.focus();
+  }
+
   private handleUsersSearch() {
+    this.lastSearchValue = '';
     this.searchControl.valueChanges
       .pipe(
         tap(() => {
@@ -67,6 +84,7 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
         }),
         debounceTime(300),
         switchMap((value) => {
+          this.lastSearchValue = value;
           return this.loadUsers(value).pipe(
             finalize(() => {
               this.isLoading = false;
@@ -103,6 +121,12 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   }
 
   onGoToUser(user) {
+    const query = this.lastSearchValue;
+    if (!query) {
+      return;
+    }
+
+    this.location.replaceState(this.location.path(), `query=${query}`);
     this.router.navigate(['profile', user.id]);
   }
 

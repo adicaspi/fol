@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, OnDestroy } from '@angular/core';
 
 import { Subject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -6,6 +6,7 @@ import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
+import { LocationService } from '../../services/location.service';
 import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
 import { DialogService } from '../../services/dialog.service';
@@ -16,7 +17,7 @@ import { ErrorsService } from '../../services/errors.service';
   templateUrl: './generate-follow-list.component.html',
   styleUrls: ['./generate-follow-list.component.css']
 })
-export class GenerateFollowListComponent implements OnInit {
+export class GenerateFollowListComponent implements OnInit, OnDestroy {
   // followsFeed: Observable<Array<FollowItem>>;
   followsFeed: Array<any> = [];
   var: Observable<any>;
@@ -35,7 +36,7 @@ export class GenerateFollowListComponent implements OnInit {
     private userService: UserService,
     private dialogService: DialogService,
     private router: Router,
-    private errorsService: ErrorsService
+    private location: LocationService
     // private dialogRef: MatDialogRef<GenerateFollowListComponent>,
     // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -108,10 +109,11 @@ export class GenerateFollowListComponent implements OnInit {
   }
 
   goBackPage() {
-    this.router.navigate(['profile', this.id]);
+    this.location.goBack();
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.onDestroy.next();
+    this.onDestroy.complete();
   }
 }

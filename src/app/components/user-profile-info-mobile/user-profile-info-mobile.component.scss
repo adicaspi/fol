@@ -1,8 +1,33 @@
 @media  (max-width: 600px){
   .body{
-    margin-top:70px;
+    padding-top:119px;
   }
-  
+
+  .top-row {
+    position: fixed;
+    height: 44px;
+    display: flex;
+    padding: 0 16px;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    top: 75px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 100;
+    align-items: center;
+
+    &__title {
+      flex: 1;
+      text-align: center;
+    }
+
+    &__back-btn {
+      cursor: pointer;
+      padding: 10px 15px 10px 0;
+    }
+  }
+
   .center{
     width:375px;
     margin:auto;

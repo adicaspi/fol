@@ -1,16 +1,10 @@
-<html>
-
-<body>
   <div *ngIf="desktop; else mobileView" class="display">
     <app-navbar></app-navbar>
     <app-explore-feed></app-explore-feed>
   </div>
   <ng-template #mobileView class="mobile">
     <fw-mobile-search></fw-mobile-search>
-    <app-shopping-nav></app-shopping-nav>
+    <app-shopping-nav class="with-search-space"></app-shopping-nav>
     <app-explore-feed></app-explore-feed>
     <app-bottom-navbar></app-bottom-navbar>
   </ng-template>
-</body>
-
-</html>

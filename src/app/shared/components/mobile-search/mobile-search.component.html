@@ -3,7 +3,7 @@
 
 	<div class="search-field-container">
 		<div class="search-field">
-			<input type="search"
+			<input type="text"
              #search
 			       [formControl]="searchControl"
 			       [matAutocomplete]="auto"
@@ -39,7 +39,7 @@
 
 		<mat-autocomplete #auto="matAutocomplete" class="mobile-search-autocomplete" panelWidth="100%">
 			<div class="mobile-search-autocomplete__container">
-				<mat-option *ngFor="let option of options" [value]="option" (click)="onGoToUser(option)">
+				<mat-option *ngFor="let option of options" (click)="onGoToUser(option)">
 					<div class="mobile-search-autocomplete__img">
 						<img [src]="option.userAvatar" alt="">
 					</div>

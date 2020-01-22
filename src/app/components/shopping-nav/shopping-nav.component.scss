@@ -1,6 +1,18 @@
 :host {
   padding-top: 75px;
   display: block;
+
+  &.with-search-space {
+    padding-top: 119px;
+
+    .wrapper {
+      top: 44px;
+    }
+
+    .sidenav-container {
+      top: 119px;
+    }
+  }
 }
 
 .hamburger-icon{
@@ -183,6 +195,7 @@ button.nav-item {
     #{$this}__btn {
       &.toggle {
         font-weight: 700;
+
         &:before {
           content: '- ';
         }
@@ -223,6 +236,7 @@ button.nav-item {
 
     &.selected {
       font-weight: 700;
+
       #{$this}__check-icon {
         display: block;
       }

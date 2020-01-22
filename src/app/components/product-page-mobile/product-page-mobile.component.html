@@ -35,7 +35,7 @@
       <img id="profileImage" [attr.src]="userProfileSrc" />
       <div class="profile-text">
         <div class="username">{{ postInfo.userName }}</div>
-        <div class="num-followers">{{ numFollowers }} followers</div>
+        <div class="num-followers">{{ numFollowers$ | async }} followers</div>
       </div>
       <img src="../../../assets/right-arrow.png" class="next-arrow" aria-hidden="true">
     </div>
@@ -47,7 +47,7 @@
   <div class="center">
     <div class="title">More from {{postInfo.userName}}</div>
     <div class="more-from-container">
-      <img *ngFor="let post of postsToShow | async" class="more-from" [attr.src]="post.postImageAddr" (click)="openMorePosts(post)"
+      <img *ngFor="let post of postsToShow$ | async" class="more-from" [attr.src]="post.postImageAddr" (click)="openMorePosts(post)"
       />
     </div>
   </div>

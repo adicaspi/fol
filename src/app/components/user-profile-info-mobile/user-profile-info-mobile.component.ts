@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { LocationService } from '../../services/location.service';
 import { UserService } from '../../services/user.service';
-import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
 import { UserProfileInfoComponent } from '../user-profile-info/user-profile-info.component';
@@ -16,8 +17,13 @@ export class UserProfileInfoMobileComponent extends UserProfileInfoComponent {
     public activatedRoute: ActivatedRoute,
     public dialogService: DialogService,
     public router: Router,
-    public configService: ConfigService) {
+    public configService: ConfigService,
+    private location: LocationService
+  ) {
     super(userService, activatedRoute, dialogService, router, configService);
   }
 
+  goBack() {
+    this.location.goBack();
+  }
 }
