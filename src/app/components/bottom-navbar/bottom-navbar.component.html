@@ -1,16 +1,17 @@
-<body>
-  <div class="bottom-navbar-container">
-    <div class="bottom-navbar" [@popOverState]="stateName">
-      <div class="icon-img" (click)="feedPage()">
-        <img *ngIf="!feed" src="../../../assets/fw_logo.PNG" class="fw-logo" (click)="feedPage()" />
-        <img *ngIf="feed" src="../../../assets/fw_logo_pink.png" class="fw-logo" (click)="feedPage()" />
-      </div>
-      <div class="icon-img" [ngClass]="{ active: profile }" (click)="profilePage()">
-        <i class="fa fa-user"></i>
-      </div>
-      <div class="icon-img" [ngClass]="{ active: explore }" (click)="explorePage()">
-        <i class="fa fa-search"></i>
-      </div>
+<div class="bottom-navbar-container">
+  <div class="bottom-navbar">
+    <div class="icon-img" (click)="feedPage()">
+      <img class="fw-logo" *ngIf="!feed" src="../../../assets/fw_logo.ico" (click)="feedPage()" />
+      <img class="fw-logo" *ngIf="feed" src="../../../assets/fw_logo_pink.ico" (click)="feedPage()" />
+      <div class="link-text">Home</div>
+    </div>
+    <div class="icon-img" [ngClass]="{ active: profile }" (click)="profilePage()">
+      <i class="fa fa-user"></i>
+      <div class="link-text">Profile</div>
+    </div>
+    <div class="icon-img" [ngClass]="{ active: explore }" (click)="explorePage()">
+      <i class="fa fa-search"></i>
+      <div class="link-text">Search</div>
     </div>
   </div>
-</body>
+</div>

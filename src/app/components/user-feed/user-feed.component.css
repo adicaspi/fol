@@ -20,6 +20,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: flex-start;
+    margin-bottom: 60px;
   }
 
   .masonry-item img {
@@ -106,6 +107,7 @@
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
+    margin-bottom: 60px;
   }
 
   .masonry-item img {
@@ -206,6 +208,7 @@
     flex-wrap: wrap;
     background-color: white;
     padding: 0px 12px;
+    margin-bottom: 60px;
   }
 
   .card {

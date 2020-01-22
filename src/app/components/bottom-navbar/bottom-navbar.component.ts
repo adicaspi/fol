@@ -11,23 +11,13 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import * as jquery from 'jquery';
+
 
 @Component({
   selector: 'app-bottom-navbar',
   templateUrl: './bottom-navbar.component.html',
-  styleUrls: ['./bottom-navbar.component.css'],
-  animations: [
-    trigger('popOverState', [
-      state('show', style({
-        opacity: 1
-      })),
-      state('hide', style({
-        opacity: 0
-      })),
-      transition('show => hide', animate('600ms ease-out')),
-      transition('hide => show', animate('1000ms ease-in'))
-    ])
-  ]
+  styleUrls: ['./bottom-navbar.component.css']
 })
 export class BottomNavbarComponent implements OnInit {
   @ViewChild('bottomnavbar', { static: false }) bottomNavBar: ElementRef;
@@ -87,22 +77,21 @@ export class BottomNavbarComponent implements OnInit {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.scroll = false;
-      this.show = true;
-    }, 350);
+      jquery(".bottom-navbar-container").css("bottom", "0px");
+    }, 200);
     if (this.scroll) {
 
-      this.show = true;
       if (window.pageYOffset == 0) {
-        this.show = true;
+        jquery(".bottom-navbar-container").css("bottom", "0px");
       }
       else {
         let currentScrollPos = window.pageYOffset;
         if (this.prevScrollpos >= currentScrollPos) {
           // scrolling up
-          this.show = true;
+          jquery(".bottom-navbar-container").css("bottom", "0px");
         } else {
           // scrolling down
-          this.show = false;
+          jquery(".bottom-navbar-container").css("bottom", "-70px");
         }
         this.prevScrollpos = currentScrollPos;
       }
