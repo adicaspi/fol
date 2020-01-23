@@ -26,4 +26,8 @@ export class UserProfileInfoMobileComponent extends UserProfileInfoComponent {
   goBack() {
     this.location.goBack();
   }
+
+  isVisibleGoBackButton() {
+    return this.activatedRoute.snapshot.queryParamMap.get('fromBottom') !== 'true';
+  }
 }

@@ -3,7 +3,7 @@
     <div id="main">
       <div *ngIf="user | async; let user" class="container">
         <div class="top-row">
-          <span class="top-row__back-btn" (click)="goBack()">
+          <span *ngIf="isVisibleGoBackButton()" class="top-row__back-btn" (click)="goBack()">
             <i class="fas fa-chevron-left"></i>
           </span>
           <div class="top-row__title">{{ user.username }}</div>
