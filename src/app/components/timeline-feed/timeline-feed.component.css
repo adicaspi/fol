@@ -136,7 +136,7 @@
     cursor: pointer;
   }
 
-  .masonry-img .img-main {
+  /* .masonry-img .img-main {
     width: 197px;
     height: 295px;
     margin-left: auto;
@@ -144,7 +144,7 @@
     display: block;
     border-radius: 5px;
     object-fit: cover;
-  }
+  } */
 
   .masonry-img .img-hover {
     display: none;
