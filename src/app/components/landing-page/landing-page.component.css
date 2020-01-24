@@ -7,14 +7,17 @@
 }
 
 .content .landing {
-  background-size: cover;
-  background: url('../../../assets/landing_medium.jpg');
+  background: url('../../../assets/landing_medium.jpg') no-repeat center center fixed;
   height: 100%;
   -webkit-filter: blur(3px);
   -moz-filter: blur(3px);
   -o-filter: blur(3px);
   -ms-filter: blur(3px);
   filter: blur(3px);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   z-index: 0;
 }
 
