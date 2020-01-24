@@ -18,12 +18,14 @@
               <div class="settings">
                 <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
                 <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
-                  <button mat-button class="settings-menu-button" (click)="settingsPage()">
-                    Edit profile
-                  </button>
-                  <button mat-button class="settings-menu-button" (click)="logout()">
-                    Log Out
-                  </button>
+                  <div class="mat-menu-content">
+                    <button mat-button class="settings-menu-button" (click)="settingsPage()">
+                      Edit profile
+                    </button>
+                    <button mat-button class="settings-menu-button" (click)="logout()">
+                      Log Out
+                    </button>
+                  </div>
                 </mat-menu>
               </div>
             </ng-template>

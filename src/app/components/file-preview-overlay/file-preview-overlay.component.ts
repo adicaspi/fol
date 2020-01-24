@@ -90,7 +90,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   incNumViews() {
-    this.postService.incrementPostViews(this.userService.userId, this.postService.userPostPostId);
+    this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
   setImage(image) {
