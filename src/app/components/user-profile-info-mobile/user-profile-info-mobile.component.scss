@@ -29,7 +29,7 @@
   .username {
     text-align: center;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 600;
     margin: 16px 0px;
   }
 
@@ -67,7 +67,7 @@
   }
   
   span.metrics {
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: -4px;
   }
   
@@ -78,19 +78,19 @@
   }
 
   .full-name {
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 6px;
   }
 
   .button-follow {
     border: 1px solid rgba(var(--d0b,219,219,219),1);
     background-color: transparent;
-    color: rgba(var(--f07,38,38,38),1);
+    color: rgb(38,38,38);
     outline: none;
-    font-family: 'Maven Pro', sans-serif;
     display: flex;
     border-radius: 4px;
     width: 100%;
+    padding: 2px 0px;
   }
 
   .settings {
@@ -100,11 +100,11 @@
 
   .following-button{
     display: flex;
-    margin-top: 10px;
   }
 
   .following-text{
     margin:0 auto;  
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 15px;
   }
 }
