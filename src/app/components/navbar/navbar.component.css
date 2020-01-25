@@ -244,10 +244,16 @@ span.search-fullname{
   display: none;
   }
 
+
   nav {
     background-color: white;
     width: 100%;
-    border-bottom: 2px solid;
+    box-shadow: 0 1px 6px 2px rgba(0,0,0,.05);
+    transition: top 0.4s;
+    position: fixed;
+    top: 0;
+    height: 53px;
+    z-index: 100;
   }
   
   .fw-navbar {
@@ -471,7 +477,7 @@ span.search-fullname{
       outline: none;
       border: none;
       border-radius: 11px;
-      height: 42px;
+      height: 20px;
       margin-left: 10px;
     }
     

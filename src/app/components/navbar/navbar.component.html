@@ -5,35 +5,6 @@
     </li>
 
     <li class="search">
-      <!-- <form [formGroup]="searchForm">
-        <div class="search-container">
-          <div class="search-icon">
-            <i class="fas fa-search"></i>
-          </div>
-          <div id="search-input-container">
-            <input type="search" placeholder="Search" spellcheck="false" formControlName="search" id="navBarSearchForm" [matAutocomplete]="auto"
-            />
-            <mat-autocomplete #auto="matAutocomplete" class="search-autocomplete" [panelWidth]="panelWidth">
-              <mat-option *ngFor="let option of options" [value]="option.userName">
-                <div class="search-result" (click)="searchUser(option)">
-                  <div class="search-res-user-img">
-                    <img class="search-img" [attr.src]="option['profileImgSrc']" />
-                  </div>
-                  <div class="search-res-user-details">
-                    <span class="search-username">{{ option['userName'] }}</span>
-                    <span class="search-fullname">{{ option['fullName'] }}</span>
-                  </div>
-                </div>
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-      </form> -->
-
-
-
-
-
       <form [formGroup]="searchForm" class="search-form">
         <div class="search-full-width">
           <input type="search" placeholder="Search" spellcheck="false" formControlName="search" id="navBar" [matAutocomplete]="auto"
