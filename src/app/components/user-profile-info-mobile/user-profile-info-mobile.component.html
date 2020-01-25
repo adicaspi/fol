@@ -16,30 +16,30 @@
           <div *ngIf="numberOfPosts | async" class="btn-group">
             <button type="button" class="simple-button-metrics first">
               <span class="metrics">{{ numberOfPosts | async }} </span>
-              <span class="text"> posts</span>
+              <span class="text"> Posts</span>
             </button>
 
             <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(1)">
               <span class="metrics">{{ following | async }}</span>
-              <span class="text"> following</span>
+              <span class="text"> Following</span>
             </button>
 
             <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(0)">
               <span class="metrics">{{ followers | async }}</span>
-              <span class="text"> followers </span>
+              <span class="text"> Followers </span>
             </button>
 
             <ng-template #unclickableFollowers>
               <button type="button" class="simple-button-metrics third">
                 <span class="metrics">0</span>
-                <span class="text"> followers </span>
+                <span class="text"> Followers </span>
               </button>
             </ng-template>
 
             <ng-template #unclickableFollowing>
               <button type="button" class="simple-button-metrics second">
                 <span class="metrics">0</span>
-                <span class="text"> following </span>
+                <span class="text"> Following </span>
               </button>
             </ng-template>
 

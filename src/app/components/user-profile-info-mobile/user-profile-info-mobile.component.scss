@@ -23,24 +23,24 @@
 
   .username {
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     margin: 16px 0px;
   }
 
   .img-comp img {
     border-radius: 50%;
-    min-width: 72px;
-    height: 72px;
+    min-width: 86px;
+    height: 86px;
   }
 
-  .btn-group{
+  .btn-group {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin: auto;
     width: 100%;
-    margin-left: 10px;
+    margin-left: 18px;
   }
   
   .simple-button-metrics {
@@ -49,23 +49,25 @@
     background: none;
     outline: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
+    color: inherit;
 
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  .simple-button-metrics.first {
-    cursor: none;
+  .simple-button-metrics:first {
+    cursor: auto;
   }
   
   span.metrics {
     font-weight: bold;
+    margin-bottom: -4px;
   }
   
   span.text {
-    font-weight: 300
+    font-weight: 400;
   }
 
   p.full-name, p.bio{
