@@ -14,8 +14,7 @@ import { ConfigService } from '../../services/config.service';
 @Component({
   selector: 'app-user-profile-info',
   templateUrl: './user-profile-info.component.html',
-  styleUrls: ['./user-profile-info.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./user-profile-info.component.css']
 })
 
 export class UserProfileInfoComponent implements OnInit {

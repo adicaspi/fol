@@ -2,9 +2,29 @@
   <div id="main-body">
     <div class="center">
       <div class="card masonry-item" *ngFor="let post of posts">
-        <div class="masonry-img">
-          <img heightWidthRatio="1.35" class="img-main" (click)="openDialog(post)" [attr.src]="post['postImgSrc']" />
+
+        <div *ngIf="desktop">
+          <div [ngClass]="post.thumbnail ? 'masonry-img thumb' : 'masonry-img' ">
+            <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
+            <div *ngIf="post.thumbnail" class="overlay">
+              <img [src]="post.thumbnail" class="img-main hover" (click)="openDialog(post)" />
+            </div>
+          </div>
         </div>
+
+
+
+        <div *ngIf="!desktop">
+          <div class="masonry-img">
+            <img heightWidthRatio="1.35" (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" />
+          </div>
+        </div>
+
+
+
+
+
+
         <div class="card-text">
           <div class="description">
             {{ post['post']['description'] }}
@@ -13,7 +33,7 @@
             {{ post['post']['price'] }}
           </div>
           <a class="store text-right" [href]="post['post']['website']" target=" _blank ">
-              {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
+            {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
           </a>
         </div>
       </div>

@@ -20,17 +20,65 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: flex-start;
+    margin-bottom: 60px;
   }
 
-  .masonry-item img {
+  .masonry-img{
+    margin-top:20px;
+  }
+
+  .masonry-img .img-main {
     width: 197px;
     height: 295px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
     display: block;
     border-radius: 5px;
     object-fit: cover;
+    transition: .6s ease;
+  }
+
+  .masonry-img.thumb{
+    position: relative;
+  }
+
+  .masonry-img.thumb:hover .overlay {
+    opacity: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+  }
+
+  .overlay .img-main.hover {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+    opacity: 1;
+  }
+
+  .masonry-img.thumb:hover .img-main {
+      opacity: 0;
+  } 
+
+  .masonry-img.thumb:hover .img-main.hover {
+    opacity: 1;
+  }
+
+  .masonry-img .img-hover {
+    display: none;
   }
 
   .card {
@@ -106,18 +154,63 @@
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
+    margin-bottom: 60px;
   }
 
-  .masonry-item img {
+  .masonry-img{
+    margin-top:20px;
+  }
+
+  .masonry-img .img-main {
     width: 197px;
     height: 295px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
     display: block;
     border-radius: 5px;
     object-fit: cover;
+    transition: .6s ease;
   }
+  
+  .masonry-img.thumb{
+    position: relative;
+  }
+  
+  .masonry-img.thumb:hover .overlay {
+    opacity: 1;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+  }
+  
+  .overlay .img-main.hover {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+    opacity: 1;
+  }
+  
+  .masonry-img.thumb:hover .img-main {
+      opacity: 0;
+  } 
+  
+  .masonry-img.thumb:hover .img-main.hover {
+    opacity: 1;
+  }
+   
 
   .card {
     width: 274px;
@@ -206,6 +299,7 @@
     flex-wrap: wrap;
     background-color: white;
     padding: 0px 12px;
+    margin-bottom: 60px;
   }
 
   .card {

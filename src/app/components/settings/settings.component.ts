@@ -4,7 +4,8 @@ import { UserService } from '../../services/user.service';
 import * as $ from 'jquery';
 import { User } from '../../models/User';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { ConfigService } from '../../services/config.service';
 
 class fieldItem {
   label: string;
@@ -35,11 +36,14 @@ export class SettingsComponent implements OnInit {
   password: boolean = false;
   button_text: string;
   submittedPass: boolean = false;
+  desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
+  private WindowSizeSubscription: Subscription;
 
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private configService: ConfigService
   ) { }
 
   ngOnInit() {
@@ -65,6 +69,17 @@ export class SettingsComponent implements OnInit {
     )
     this.updateUser();
     this.editProfile();
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
+
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+        });
   }
 
   get f() {
@@ -155,7 +170,6 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("in sumbit");
     this.submitted = true;
 
     let updatedDescription = this.settingsForm.get('description').value;
@@ -170,4 +184,9 @@ export class SettingsComponent implements OnInit {
       });
     }
   }
+
+  public ngOnDestroy(): void {
+    this.WindowSizeSubscription.unsubscribe();
+  }
+
 }

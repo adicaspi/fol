@@ -12,6 +12,9 @@ import { NgxMasonryOptions } from 'ngx-masonry';
 import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
+import { ConfigService } from '../../services/config.service';
+import { DialogService } from '../../services/dialog.service';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-explore-feed',
@@ -23,6 +26,7 @@ export class ExploreFeedComponent implements OnInit {
   posts = [];
   offset: number = 0;
   onDestroy: Subject<void> = new Subject<void>();
+  desktop: boolean;
   private feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -31,14 +35,17 @@ export class ExploreFeedComponent implements OnInit {
   public masonryOptions: NgxMasonryOptions = {
     transitionDuration: '0',
     horizontalOrder: true,
-    gutter: 18,
+    gutter: 10,
     fitWidth: true
   };
+  private WindowSizeSubscription: Subscription;
   constructor(
     private userService: UserService,
     private feedService: FeedService,
-    private postService: PostService,
-    private errorsService: ErrorsService
+    private configService: ConfigService,
+    private errorsService: ErrorsService,
+    private dialogService: DialogService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -58,10 +65,32 @@ export class ExploreFeedComponent implements OnInit {
         this.feedService.updateExploreFeed(this.id);
       }
     });
+
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
+
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+        });
   }
 
   onScroll() {
     this.feedService.updateExploreFeed(this.id);
+  }
+
+  openDialog(post): void {
+    this.configService.setGeneralSession('product_id', post.post.postId);
+    this.configService.setGeneralSession('user_id_post_id', post.post.userId);
+    if (this.desktop) {
+      this.dialogService.openDialog();
+    } else {
+      this.router.navigate(['product-page', post.post.postId]);
+    }
   }
 
   public ngOnDestroy(): void {

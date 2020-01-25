@@ -35,6 +35,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   thumbnails = [];
   postId: number;
   userPostUserId: number;
+  userProfile: boolean = false;
 
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
@@ -54,6 +55,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.incNumViews();
     this.userProfileSrc = '../../../assets/placeholder.png';
 
+
   }
 
   getPostInfo() {
@@ -62,6 +64,9 @@ export class FilePreviewOverlayComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
+        if (this.postInfo.userId == this.userService.userId) {
+          this.userProfile = true;
+        }
         this.postImageAddr = this.postInfo.postImageAddr;
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
@@ -85,7 +90,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   incNumViews() {
-    this.postService.incrementPostViews(this.userService.userId, this.postService.userPostPostId);
+    this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
   setImage(image) {
@@ -103,13 +108,6 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.openDialog(post);
   }
 
-  // openDialog(post): void {
-  //   this.postService.userPostPostId = post.postId;
-  //   this.thumbnails = [];
-  //   this.showSpinner = true;
-  //   this.ngOnInit();
-  // }
-
   openDialog(post): void {
     this.configService.setGeneralSession('product_id', post.postId);
     this.thumbnails = [];
@@ -121,7 +119,15 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public OnDestroy(): void {
+  hidePost(postId: number) {
+    this.userService.hidePost(postId);
+  }
+
+  removePost(postId: number) {
+    this.userService.removePost(postId);
+  }
+
+  OnDestroy(): void {
     this.onDestroy.next();
   }
 }

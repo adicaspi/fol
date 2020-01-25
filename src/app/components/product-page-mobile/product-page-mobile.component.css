@@ -53,10 +53,11 @@ div.num-views {
   color: rgb(96,96,96);
   margin-top: 8px;
   font-weight: bold;
+  display: inline-block;
 }
 
 button.mat-button {
-  display: none;
+  outline: none;
 }
 
 button.shop-btn {
@@ -146,6 +147,19 @@ div.buffer {
 
 .more-from-container img:nth-of-type(2n) {
   margin-right: 0px;
+}
+
+.horiz-menu{
+  display: inline-block;
+  float: right;
+}
+
+i.material-icons{
+  font-size: 25px;
+}
+
+button.btn-menu.mat-menu-item{
+  outline:none;
 }
 
 

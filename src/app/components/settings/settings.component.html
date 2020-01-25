@@ -1,4 +1,10 @@
-<app-navbar></app-navbar>
+<div *ngIf="desktop">
+  <app-navbar></app-navbar>
+</div>
+<div *ngIf="!desktop">
+  <app-bottom-navbar></app-bottom-navbar>
+  <app-shopping-nav> </app-shopping-nav>
+</div>
 
 <div class="row">
   <div class="column controlers">

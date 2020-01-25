@@ -36,7 +36,7 @@ export class ProductPageMobileComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   postsToShow: Observable<MorePosts[]>;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
-  // height: string = '400px';
+  userProfile: boolean = false;
 
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
@@ -65,6 +65,9 @@ export class ProductPageMobileComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
+        if (this.postInfo.userId == this.userService.userId) {
+          this.userProfile = true;
+        }
         this.numViews = this.pipeTransform.transform(postInfo.numViews);
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
@@ -98,5 +101,17 @@ export class ProductPageMobileComponent implements OnInit {
 
   profilePage() {
     this.router.navigate(['profile', this.postInfo.userId]);
+  }
+
+  hidePost(postId: number) {
+    this.userService.hidePost(postId);
+  }
+
+  removePost(postId: number) {
+    this.userService.removePost(postId);
+  }
+
+  OnDestroy(): void {
+    this.onDestroy.next();
   }
 }
