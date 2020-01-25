@@ -46,8 +46,6 @@
           </div>
         </div>
 
-        <div class="description">
-
 
           <!-- <div *ngIf="userProfile" class="settings">
             <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
@@ -62,19 +60,16 @@
           </div> -->
 
 
-          <!-- <div class="user-description">
-            <p class="full-name">{{ user.fullName }}</p>
-            <p class="bio">{{ user.description }}
-            </p>
-          </div> -->
+          <div class="user-description">
+            <div class="full-name">{{ user.fullName }} </div>
+            <div class="bio">{{ user.description }} </div>
+          </div>
 
           <div *ngIf="!userProfile" class="following-button">
             <button type="button" class="button-follow" (click)="follow()">
               <div class="following-text">{{ follows ? 'following' : 'follow' }}</div>
             </button>
           </div>
-
-        </div>
 
       </div>
 

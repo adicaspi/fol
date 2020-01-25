@@ -21,9 +21,14 @@
     width: 100%;
   }
 
+  .user-section{
+    display: flex;
+    flex-direction: row;
+  }
+
   .username {
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     margin: 16px 0px;
   }
@@ -49,7 +54,7 @@
     background: none;
     outline: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     color: inherit;
 
     display: flex;
@@ -66,21 +71,15 @@
     margin-bottom: -4px;
   }
   
-  span.text {
-    font-weight: 400;
-  }
-
-  p.full-name, p.bio{
-    margin:0; 
+  .user-description {
+    font-size: 12px;
+    margin: 16px 0px;
+    color: inherit;
   }
 
   .full-name {
     font-weight: bold;
-  }
-
-  .user-section{
-    display: flex;
-    flex-direction: row;
+    margin-bottom: 6px;
   }
 
   .button-follow {
@@ -92,22 +91,6 @@
     display: flex;
     border-radius: 4px;
     width: 100%;
-  }
-
-  .description{
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-  
-  div.upper-description-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-
-  .upper-description-div::after {
-    clear: both;
   }
 
   .settings {
