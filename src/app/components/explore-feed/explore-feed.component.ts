@@ -15,6 +15,7 @@ import { FilteringDTO } from '../../models/FilteringDTO';
 import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { Router } from '../../../../node_modules/@angular/router';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-explore-feed',
@@ -43,7 +44,7 @@ export class ExploreFeedComponent implements OnInit {
     private userService: UserService,
     private feedService: FeedService,
     private configService: ConfigService,
-    private errorsService: ErrorsService,
+    private massageService: MessageService,
     private dialogService: DialogService,
     private router: Router
   ) { }
@@ -59,8 +60,8 @@ export class ExploreFeedComponent implements OnInit {
         })
       });
     this.feedService.updateExploreFeed(this.id);
-    this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
-      if (msg.error == 'update-exlporefeed') {
+    this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
+      if (msg.msg == 'update-exlporefeed') {
         this.posts = [];
         this.feedService.updateExploreFeed(this.id);
       }

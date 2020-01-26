@@ -5,6 +5,7 @@ import { FeedService } from '../../services/feed.service';
 import { ErrorsService } from '../../services/errors.service';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '@angular/material';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-shopping-nav',
@@ -43,7 +44,7 @@ export class ShoppingNavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private feedService: FeedService,
-    private errorsService: ErrorsService,
+    private massageService: MessageService,
   ) {
   }
 
@@ -139,8 +140,12 @@ export class ShoppingNavComponent implements OnInit {
     this.stores.forEach(elem => {
       elem.checked = false;
     });
+    this.clothings.forEach(elem => {
+      elem.checked = false;
+    });
     this.filteringDTO = new FilteringDTO();
     this.updateFeedFilteringDTO();
+
   }
 
   toggleSidenav(): void {
@@ -148,7 +153,10 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   filterByCategory(item) {
-
+    if (this.sidenav.opened) {
+      this.clearSideFiltersSelection();
+      this.toggleSidenav();
+    }
     let prevItem = this.menu[this.currCategory];
     prevItem.checked = false;
     item.checked = true;
@@ -160,6 +168,7 @@ export class ShoppingNavComponent implements OnInit {
     else {
       this.filteringDTO.category = item.name;
     }
+    console.log("im fltering dto", this.filteringDTO);
     this.updateFeedFilteringDTO();
   }
 
@@ -167,15 +176,15 @@ export class ShoppingNavComponent implements OnInit {
     this.feedService.offset = 0;
     if (this.feedService.currentLoadedFeedComponent === 'feed') {
       this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.errorsService.sendMessage('update-timelinefeed');
+      this.massageService.sendMessage('update-timelinefeed');
     }
     if (this.feedService.currentLoadedFeedComponent === 'profile') {
       this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.errorsService.sendMessage('update-userfeed');
+      this.massageService.sendMessage('update-userfeed');
     }
     if (this.feedService.currentLoadedFeedComponent === 'explore') {
       this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.errorsService.sendMessage('update-exlporefeed');
+      this.massageService.sendMessage('update-exlporefeed');
     }
   }
 }
