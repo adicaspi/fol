@@ -38,8 +38,9 @@
       </p>
     </div>
     <div class="form-group">
-      <button class="login-button" [disabled]="!loginFormValid">Login</button>
+      <button [ngClass]="loading? 'spinner': 'login-button'" [disabled]="!loginFormValid">Login</button>
     </div>
+
 
     <div class="login-method">
       <span>OR</span>
@@ -55,9 +56,6 @@
     </div>
   </form>
 
-  <!-- <div *ngIf="wrongPassUser" class="alert alert-danger">
-    Incorrect username or password
-  </div> -->
 
   <div class="sign-up">
     <span>Don't have an account?</span>
