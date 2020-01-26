@@ -34,14 +34,16 @@ body{
   padding: 5px 5px;
   text-decoration: none;
   width: 20%;
+  color: rgb(118,118,118);
 }
 
 div.icon-img .fa{
-font-size: 24px;
+  font-size: 24px;
+  
 }
 
 .bottom-navbar .icon-img.active{
-color: #FF99CC;
+ color: rgb(255,13,239);
 }
 
 img.fw-logo{
