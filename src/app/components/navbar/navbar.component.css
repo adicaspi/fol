@@ -68,6 +68,8 @@ img.logo {
       padding-left: 22px;
       padding-right: 22px;
       cursor: pointer;
+      margin: 0;
+      position: initial;
   }
 
   li.search {
