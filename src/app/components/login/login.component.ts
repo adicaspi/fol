@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   wrongUser: boolean = false;
   modal: boolean = false;
   msgToShow: string;
-  loading: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
@@ -73,7 +72,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin() {
-    this.loading = true;
     this.submitted = true;
     this.wrongPass = false;
     this.wrongUser = false;
@@ -84,7 +82,7 @@ export class LoginComponent implements OnInit {
       password: password
     };
 
-    console.log(this.loading);
+
     this.userService
       .login(res)
       .pipe(first())
@@ -99,7 +97,7 @@ export class LoginComponent implements OnInit {
           this.dialogRef.close();
         },
         error => {
-          //this.loading = false;
+          this.submitted = false;
 
           if (this.error.error == 'Invalid Authentication Data') {
             console.log("in login comp msg recived");
