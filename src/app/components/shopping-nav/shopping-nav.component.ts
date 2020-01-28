@@ -154,9 +154,10 @@ export class ShoppingNavComponent implements OnInit {
 
   filterByCategory(item) {
     if (this.sidenav.opened) {
-      this.clearSideFiltersSelection();
       this.toggleSidenav();
+      this.clearSideFiltersSelection()
     }
+    this.filteringDTO = new FilteringDTO();
     let prevItem = this.menu[this.currCategory];
     prevItem.checked = false;
     item.checked = true;
