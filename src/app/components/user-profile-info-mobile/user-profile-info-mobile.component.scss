@@ -74,6 +74,7 @@
   .user-description {
     font-size: 12px;
     margin: 16px 0px;
+    float: left;
     color: inherit;
   }
 
@@ -95,7 +96,15 @@
 
   .settings {
     font-size: 23px;
+    float: right;
+    margin-top: 24px;
     cursor: pointer;
+  }
+
+  .mat-menu-contet{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .following-button{
