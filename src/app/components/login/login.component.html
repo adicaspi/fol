@@ -41,6 +41,7 @@
       <button class="login-button" [disabled]="!loginFormValid">Login</button>
     </div>
 
+
     <div class="login-method">
       <span>OR</span>
     </div>
@@ -55,9 +56,9 @@
     </div>
   </form>
 
-  <!-- <div *ngIf="wrongPassUser" class="alert alert-danger">
-    Incorrect username or password
-  </div> -->
+
+
+
 
   <div class="sign-up">
     <span>Don't have an account?</span>
@@ -65,4 +66,8 @@
       Sign up
     </a>
   </div>
+</div>
+
+<div *ngIf="submitted">
+  adi
 </div>

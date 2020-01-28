@@ -12,6 +12,7 @@ import { ProductPageMobileComponent } from '../product-page-mobile/product-page-
 import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
+import { MessageService } from '../../services/message.service';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class UserFeedComponent implements OnInit {
     private router: Router,
     private configService: ConfigService,
     private postService: PostService,
-    private errorsService: ErrorsService
+    private massageService: MessageService
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -84,8 +85,8 @@ export class UserFeedComponent implements OnInit {
 
 
 
-    this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
-      if (msg.error == 'update-userfeed') {
+    this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
+      if (msg.msg == 'update-userfeed') {
         this.posts = [];
         this.offset = 0;
         this.feedService.updateUserFeed(this.id, this.offset);

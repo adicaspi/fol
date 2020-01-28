@@ -1,8 +1,8 @@
 <div class="bottom-navbar-container">
   <div class="bottom-navbar">
-    <div class="icon-img" (click)="feedPage()">
-      <img class="fw-logo" *ngIf="!feed" src="../../../assets/fw_logo.ico" (click)="feedPage()" />
-      <img class="fw-logo" *ngIf="feed" src="../../../assets/fw_logo_pink.ico" (click)="feedPage()" />
+    <div class="icon-img" [ngClass]="{ active: feed }" (click)="feedPage()">
+      <img class="fw-logo" *ngIf="!feed" src="../../../assets/fw_logo_grey.png" (click)="feedPage()" />
+      <img class="fw-logo" *ngIf="feed" src="../../../assets/fw_logo_pink.png" (click)="feedPage()" />
       <div class="link-text">Home</div>
     </div>
     <div class="icon-img" [ngClass]="{ active: profile }" (click)="profilePage()">

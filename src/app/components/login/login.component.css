@@ -1,6 +1,10 @@
+
+
+
 button.mat-button{
   float: right;
   font-size: 20px;
+  outline: none;
 }
 
 .mat-dialog-content {
@@ -114,7 +118,10 @@ a.register:hover{
 }
 
 div.invalid-feedback{
-  text-align: center;
+  text-align: left;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 5px;
 }
 
 button.facebook-button{

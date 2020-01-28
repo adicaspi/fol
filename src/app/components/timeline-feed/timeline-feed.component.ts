@@ -20,6 +20,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -55,11 +56,11 @@ export class TimelineFeedComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private errorsService: ErrorsService
+    private massageService: MessageService
   ) {
     this.id = this.userService.getCurrentUser();
-    this.feedSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
-      if (msg.error == 'update-timelinefeed') {
+    this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
+      if (msg.msg == 'update-timelinefeed') {
         this.posts = [];
         this.offset = 0;
         this.feedService.updateTimelineFeed(this.id, this.offset);
