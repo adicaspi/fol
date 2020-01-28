@@ -78,7 +78,7 @@ export class BottomNavbarComponent implements OnInit {
     this.timeout = setTimeout(() => {
       this.scroll = false;
       jquery(".bottom-navbar-container").css("bottom", "0px");
-    }, 200);
+    }, 900);
     if (this.scroll) {
 
       if (window.pageYOffset == 0) {
