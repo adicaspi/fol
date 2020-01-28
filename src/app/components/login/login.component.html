@@ -38,9 +38,8 @@
       </p>
     </div>
     <div class="form-group">
-      <button *ngIf="!submitted" class="login-button" [disabled]="!loginFormValid">Login</button>
+      <button class="login-button" [disabled]="!loginFormValid">Login</button>
     </div>
-    <div *ngIf="submitted" class="spinner"></div>
 
 
     <div class="login-method">
@@ -67,4 +66,8 @@
       Sign up
     </a>
   </div>
+</div>
+
+<div *ngIf="submitted">
+  adi
 </div>

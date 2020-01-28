@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   errorSubscription: Subscription;
   error: any = {};
   loginForm: FormGroup;
-  submitted = false;
+  submitted: boolean = false;
   userId: number;
   wrongPass: boolean = false;
   wrongUser: boolean = false;
