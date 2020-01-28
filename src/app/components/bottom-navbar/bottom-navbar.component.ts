@@ -49,11 +49,12 @@ export class BottomNavbarComponent implements OnInit {
     this.masterId = parseInt(routeParams.id);
     this.userId = this.userService.userId;
     if (this.router.url.includes('profile')) {
-      // if (this.userId == this.masterId) {
-      this.profile = true;
+      if (this.userId == this.masterId) {
+        this.profile = true;
+      }
       this.feed = false;
       this.explore = false;
-      // }
+
     }
     if (this.router.url.includes('feed')) {
       this.feed = true;
