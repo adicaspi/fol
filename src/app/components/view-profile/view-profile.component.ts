@@ -79,9 +79,4 @@ export class ViewProfileComponent implements OnInit {
       error => this.anyErrors = true,
       () => this.finished = true
   }
-
-  goBack() {
-    console.log("in go back", this.previousUrl);
-    this.router.navigate([this.previousUrl]);
-  }
 }

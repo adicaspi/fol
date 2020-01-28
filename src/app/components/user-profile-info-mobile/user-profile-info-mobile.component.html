@@ -1,53 +1,55 @@
 <div class="body">
   <div class="center">
 
-      <div *ngIf="user | async; let user" class="main">
+    <div *ngIf="user | async; let user" class="main">
 
-        <div class="header">
-          <div class="username"> {{user.username}}</div>
+      <div class="header">
+        <div class="username">
+          <img *ngIf=!userProfile src="../../../assets/back.png" class="go-back" (click)="goBackPage()" /> {{user.username}}</div>
+
+      </div>
+
+      <div class="user-section">
+
+        <div class="img-comp">
+          <img [attr.src]="user.profileImageAddr" />
         </div>
 
-        <div class="user-section">
+        <div *ngIf="numberOfPosts | async" class="btn-group">
+          <button type="button" class="simple-button-metrics first">
+            <span class="metrics">{{ numberOfPosts | async }} </span>
+            <span class="text"> Posts</span>
+          </button>
 
-          <div class="img-comp">
-            <img [attr.src]="user.profileImageAddr" />
-          </div>
+          <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(1)">
+            <span class="metrics">{{ following | async }}</span>
+            <span class="text"> Following</span>
+          </button>
 
-          <div *ngIf="numberOfPosts | async" class="btn-group">
-            <button type="button" class="simple-button-metrics first">
-              <span class="metrics">{{ numberOfPosts | async }} </span>
-              <span class="text"> Posts</span>
-            </button>
+          <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(0)">
+            <span class="metrics">{{ followers | async }}</span>
+            <span class="text"> Followers </span>
+          </button>
 
-            <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(1)">
-              <span class="metrics">{{ following | async }}</span>
-              <span class="text"> Following</span>
-            </button>
-
-            <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(0)">
-              <span class="metrics">{{ followers | async }}</span>
+          <ng-template #unclickableFollowers>
+            <button type="button" class="simple-button-metrics third">
+              <span class="metrics">0</span>
               <span class="text"> Followers </span>
             </button>
+          </ng-template>
 
-            <ng-template #unclickableFollowers>
-              <button type="button" class="simple-button-metrics third">
-                <span class="metrics">0</span>
-                <span class="text"> Followers </span>
-              </button>
-            </ng-template>
+          <ng-template #unclickableFollowing>
+            <button type="button" class="simple-button-metrics second">
+              <span class="metrics">0</span>
+              <span class="text"> Following </span>
+            </button>
+          </ng-template>
 
-            <ng-template #unclickableFollowing>
-              <button type="button" class="simple-button-metrics second">
-                <span class="metrics">0</span>
-                <span class="text"> Following </span>
-              </button>
-            </ng-template>
-
-          </div>
         </div>
+      </div>
 
 
-          <!-- <div *ngIf="userProfile" class="settings">
+      <!-- <div *ngIf="userProfile" class="settings">
             <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
             <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
               <button mat-button class="settings-menu-button" (click)="settingsPage()">
@@ -60,18 +62,18 @@
           </div> -->
 
 
-          <div class="user-description">
-            <div class="full-name">{{ user.fullName }} </div>
-            <div class="bio">{{ user.description }} </div>
-          </div>
-
-          <div *ngIf="!userProfile" class="following-button">
-            <button type="button" class="button-follow" (click)="follow()">
-              <div class="following-text">{{ follows ? 'following' : 'follow' }}</div>
-            </button>
-          </div>
-
+      <div class="user-description">
+        <div class="full-name">{{ user.fullName }} </div>
+        <div class="bio">{{ user.description }} </div>
       </div>
+
+      <div *ngIf="!userProfile" class="following-button">
+        <button type="button" class="button-follow" (click)="follow()">
+          <div class="following-text">{{ follows ? 'following' : 'follow' }}</div>
+        </button>
+      </div>
+
+    </div>
 
   </div>
 </div>
