@@ -156,7 +156,11 @@ export class UserProfileInfoComponent implements OnInit {
     this.router.navigate(['landing']);
   }
 
-  public ngOnDestroy(): void {
+  goBackPage() {
+    window.history.back();
+  }
+
+  ngOnDestroy(): void {
     this.WindowSizeSubscription.unsubscribe();
   }
 }
