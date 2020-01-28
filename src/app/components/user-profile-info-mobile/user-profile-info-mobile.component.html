@@ -1,75 +1,77 @@
 <div class="body">
   <div class="center">
-    <div id="main">
-      <div *ngIf="user | async; let user" class="container">
+
+      <div *ngIf="user | async; let user" class="main">
+
+        <div class="header">
+          <div class="username"> {{user.username}}</div>
+        </div>
+
         <div class="user-section">
+
           <div class="img-comp">
             <img [attr.src]="user.profileImageAddr" />
           </div>
+
           <div *ngIf="numberOfPosts | async" class="btn-group">
             <button type="button" class="simple-button-metrics first">
               <span class="metrics">{{ numberOfPosts | async }} </span>
-              <span class="text"> posts</span>
+              <span class="text"> Posts</span>
             </button>
 
             <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(1)">
               <span class="metrics">{{ following | async }}</span>
-              <span class="text"> following</span>
+              <span class="text"> Following</span>
             </button>
 
             <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(0)">
               <span class="metrics">{{ followers | async }}</span>
-              <span class="text"> followers </span>
+              <span class="text"> Followers </span>
             </button>
+
             <ng-template #unclickableFollowers>
               <button type="button" class="simple-button-metrics third">
                 <span class="metrics">0</span>
-                <span class="text"> followers </span>
+                <span class="text"> Followers </span>
               </button>
             </ng-template>
+
             <ng-template #unclickableFollowing>
               <button type="button" class="simple-button-metrics second">
                 <span class="metrics">0</span>
-                <span class="text"> following </span>
+                <span class="text"> Following </span>
               </button>
             </ng-template>
+
           </div>
         </div>
 
-        <div class="description">
-          <div class="upper-description-div">
-            <div class="user-name">{{ user.username }}</div>
 
-
-            <div *ngIf="userProfile" class="settings">
-              <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
-              <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
-                <div class="mat-menu-content">
-                  <button mat-button class="settings-menu-button" (click)="settingsPage()">
-                    Edit profile
-                  </button>
-                  <button mat-button class="settings-menu-button" (click)="logout()">
-                    Log Out
-                  </button>
-                </div>
-              </mat-menu>
-            </div>
-
-          </div>
+          <!-- <div *ngIf="userProfile" class="settings">
+            <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
+            <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
+              <button mat-button class="settings-menu-button" (click)="settingsPage()">
+                Edit profile
+              </button>
+              <button mat-button class="settings-menu-button" (click)="logout()">
+                Log Out
+              </button>
+            </mat-menu>
+          </div> -->
 
 
           <div class="user-description">
-            <p class="full-name">{{ user.fullName }}</p>
-            <p class="bio">{{ user.description }}
-            </p>
+            <div class="full-name">{{ user.fullName }} </div>
+            <div class="bio">{{ user.description }} </div>
           </div>
+
           <div *ngIf="!userProfile" class="following-button">
             <button type="button" class="button-follow" (click)="follow()">
               <div class="following-text">{{ follows ? 'following' : 'follow' }}</div>
             </button>
           </div>
-        </div>
+
       </div>
-    </div>
+
   </div>
 </div>
