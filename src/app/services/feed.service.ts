@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { TimelinePost } from '../models/TimelinePost';
 import { FollowItem } from '../models/FollowItem';
 import { FeedReturnObject } from '../models/FeedReturnObject';
+import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -26,6 +27,7 @@ export class FeedService {
   prevOffset: number = 0;
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
+  generalURL = this.baseApiUrl + '/general/'
   timelinefeedFilteringDTO: any = {};
   userfeedFilteringDTO: any = {};
   explorefeedFilteringDTO: any = {};
@@ -117,6 +119,15 @@ export class FeedService {
         return feedReturnObject;
 
       });;
+  }
+
+  discoverPeople(): Observable<Array<DiscoverPeopleDTO>> {
+    return this.http.get<Array<DiscoverPeopleDTO>>(this.generalURL + '/discover-people').pipe().map(res => {
+      let items: any = res;
+      let discoverPeopleArray: Array<DiscoverPeopleDTO> =
+        items.map((doc) => new DiscoverPeopleDTO(doc));
+      return discoverPeopleArray;
+    })
   }
 
   getFollowSlaves(
