@@ -163,6 +163,12 @@ img.fw-logo{
   width: 280px;
   height: 51px;
 }
+
+.spin{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
 @media (max-width: 600px) {
   .mat-dialog-content {
     width: 100%;
@@ -235,5 +241,15 @@ img.fw-logo{
   img.fw-logo{
     width: 280px;
     height: 51px;
+  }
+
+  .spin{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .spin img{
+    width:25px;
   }
 }
