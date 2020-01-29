@@ -85,10 +85,12 @@ export class UserProfileInfoComponent implements OnInit {
 
   getNumFollowing() {
     this.following = this.userService.getNumberOfFollowing(this.currMasterId);
+    console.log("following", this.following);
   }
 
   getNumFollowers() {
     this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
+    console.log("following", this.followers);
   }
 
   getNumPosts() {

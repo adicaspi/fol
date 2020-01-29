@@ -15,8 +15,8 @@
           <img [attr.src]="user.profileImageAddr" />
         </div>
 
-        <div *ngIf="numberOfPosts | async" class="btn-group">
-          <button type="button" class="simple-button-metrics first">
+        <div class="btn-group">
+          <button type="button" *ngIf="numberOfPosts | async ; else noPosts" class="simple-button-metrics first">
             <span class="metrics">{{ numberOfPosts | async }} </span>
             <span class="text"> Posts</span>
           </button>
@@ -30,6 +30,13 @@
             <span class="metrics">{{ followers | async }}</span>
             <span class="text"> Followers </span>
           </button>
+
+          <ng-template #noPosts>
+            <button type="button" class="simple-button-metrics first">
+              <span class="metrics">{{ numberOfPosts | async }} </span>
+              <span class="text"> Posts</span>
+            </button>
+          </ng-template>
 
           <ng-template #unclickableFollowers>
             <button type="button" class="simple-button-metrics third">
