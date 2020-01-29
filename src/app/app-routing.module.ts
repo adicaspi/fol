@@ -16,6 +16,7 @@ import { GenerateFollowListComponent } from './components/generate-follow-list/g
 import { LoginComponent } from './components/login/login.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
+import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
+  { path: 'discover-people', component: DiscoverPeopleComponent },
 
 ];
 

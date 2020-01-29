@@ -1,0 +1,112 @@
+.main{
+  background-color: #F6F6F6;
+  height: 100%;
+}
+
+.mat-toolbar{
+  justify-content: center;
+  background-color: white;
+  border-bottom: 1px solid #000;
+}
+
+.mat-toolbar img{
+  width:40px;
+}
+
+.welcome{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: 24px;
+  padding-top: 24px;
+  text-align: center;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+.welcome-title{
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.welcome-subtitle{
+  font-size: 14px;
+  line-height: 18px;
+  color: grey;
+  letter-spacing: 0.5px;
+}
+
+.cdk-virtual-scroll-data-source {
+  ::ng-deep {
+    .scroll-viewport {
+      height: 388px;
+    }
+
+    .scroll-viewport .cdk-virtual-scroll-content-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      margin-top:30px;
+      margin-bottom:30px;
+    }
+
+    .card-item-wrapeer{
+      width: 252px;
+    }
+
+    .card-item {
+      height: 100%;
+      width: 236px;
+      height: 344px;
+      border-radius: 22px;
+      text-align: center;
+      padding:16px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-image img{
+      width:88px;
+      height: 88px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .user-info{
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .username{
+      font-weight: bold;
+    }
+
+    .user-posts{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .user-posts img{
+      width: 76px;
+      height: 110px;
+      object-fit: cover;
+      margin: 1px;
+    }
+
+    .follow-button{
+      margin-top: 25px;
+    }
+
+    .follow-button button{
+      width: 100%;
+      background: green;
+      color:white;
+    }
+  }
+}

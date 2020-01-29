@@ -4,7 +4,7 @@ const apiUrl = environment.BASE_API_URL;
 
 export class DiscoverPeopleDTO {
   userId: number;
-  userProﬁleImageAddr: string;
+  userProfileImageAddr: string;
   username: string;
   fullName: string;
   numFollowers: number;
@@ -12,14 +12,20 @@ export class DiscoverPeopleDTO {
 
   constructor(doc) {
     this.userId = doc.userId;
-    this.userProﬁleImageAddr = doc.userProﬁleImageAddr;
+    this.userProfileImageAddr = doc.userProfileImageAddr;
     this.username = doc.username;
     this.fullName = doc.fullName;
     this.numFollowers = doc.numFollowers;
-    this.items = doc.items;
+    doc.items.forEach(item => {
+      let newItem = {
+        postId: item.postId,
+        imageAddr: (`${apiUrl}/image?s3key=${item.postImageAddr}`)
+      }
+      this.items.push(newItem);
+    })
   }
 
   get userAvatar() {
-    return `${apiUrl}/image?s3key=${this.userProﬁleImageAddr}`;
+    return `${apiUrl}/image?s3key=${this.userProfileImageAddr}`;
   }
 }
