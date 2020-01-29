@@ -41,7 +41,7 @@ export class TimelineFeedComponent implements OnInit {
   updateFeed: Subscription
   newoffset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
-  public following: Observable<number>;
+  public following: number;
 
 
   private baseApiUrl = environment.BASE_API_URL;
@@ -71,7 +71,12 @@ export class TimelineFeedComponent implements OnInit {
 
   ngOnInit() {
     this.feedService.timelinefeedFilteringDTO = new FilteringDTO();
-    this.following = this.userService.getNumberOfFollowing(this.id);
+    this.userService.getNumberOfFollowing(this.id).subscribe(res => {
+      this.following = res;
+      if (!this.following) {
+        this.router.navigate(['feed-discover-people']);
+      }
+    });
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
