@@ -82,9 +82,6 @@ export class TimelineFeedComponent implements OnInit {
           }
         })
       });
-    if ((!this.posts) || (!this.following)) {
-      this.router.navigate(['discover-people']);
-    }
     this.feedService.updateTimelineFeed(this.id, this.offset);
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
