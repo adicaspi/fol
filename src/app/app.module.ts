@@ -66,6 +66,7 @@ import { UserProfileInfoDesktopComponent } from './components/user-profile-info-
 import { ThousandSuffixesPipe } from './components/product-page-mobile/pipe-transform';
 import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
+import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
 
 
 //I keep the new line
@@ -109,7 +110,8 @@ import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.
     UserProfileInfoDesktopComponent,
     ThousandSuffixesPipe,
     TermsComponent,
-    TermsCookiesComponent
+    TermsCookiesComponent,
+    DiscoverPeopleComponent
   ],
   imports: [
     BrowserModule,
