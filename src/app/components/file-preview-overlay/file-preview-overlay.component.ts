@@ -45,17 +45,15 @@ export class FilePreviewOverlayComponent implements OnInit {
     private postService: PostService,
     private dialogRef: FilePreviewOverlayRef
   ) {
-    this.postId = this.configService.getGeneralSession('product_id');
-    this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
   }
 
   ngOnInit() {
+    this.postId = this.configService.getGeneralSession('product_id');
+    this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
     this.getPostInfo();
     this.getMoreFromUser();
     this.incNumViews();
     this.userProfileSrc = '../../../assets/placeholder.png';
-
-
   }
 
   getPostInfo() {
@@ -109,6 +107,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   openDialog(post): void {
+    console.log(post);
     this.configService.setGeneralSession('product_id', post.postId);
     this.thumbnails = [];
     this.showSpinner = true;
