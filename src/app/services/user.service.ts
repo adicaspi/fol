@@ -17,6 +17,12 @@ const httpFormDataOptions = {
   })
 }
 
+const httpFormDataImage = {
+  headers: new HttpHeaders({
+    'Content-Type': 'image/jpeg'
+  })
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,12 +63,25 @@ export class UserService {
     );
   }
 
-  updateProfileImage(fd: FormData): Observable<any> {
-    //let params = new HttpParams().set('image', fd.toString());
+  // updateProfileImage(fd): Observable<any> {
+  //   console.log(typeof fd)
+  //   return this.http.post<any>(
+  //     this.globalInfoURL + this.userId + '/update-profile-image',
+  //     fd, {
+  //       headers: httpFormDataImage.headers
+  //     }
+
+  //   );
+  // }
+
+  updateProfileImage(fd): Observable<any> {
     return this.http.post<any>(
-      this.globalInfoURL + this.userId + '/upload-profile-image',
-      fd, {
-        headers: httpFormDataOptions.headers
+      this.globalInfoURL + this.userId + '/update-profile-image',
+      {
+        headers: httpFormDataImage.headers
+      },
+      {
+        params: fd
       }
 
     );

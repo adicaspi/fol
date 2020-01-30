@@ -178,6 +178,7 @@ export class SettingsComponent implements OnInit {
     }
     if (this.updateImageProfile) {
       const fd = new FormData();
+      console.log("in update image");
       fd.append('image', this.selectedFile, this.selectedFile.name);
       this.userService.updateProfileImage(fd).subscribe(res => {
 
