@@ -26,6 +26,7 @@ export class ExploreFeedComponent implements OnInit {
   id: number;
   posts = [];
   offset: number = 0;
+  enfOfFeed: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
   desktop: boolean;
   private feedSubsription: Subscription
@@ -57,6 +58,10 @@ export class ExploreFeedComponent implements OnInit {
       .getNewPosts().subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: FeedReturnObject) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
+          if (observablePosts.offset == -1) {
+            this.enfOfFeed = true;
+          }
+
         })
       });
     this.feedService.updateExploreFeed(this.id);
@@ -81,7 +86,9 @@ export class ExploreFeedComponent implements OnInit {
   }
 
   onScroll() {
-    this.feedService.updateExploreFeed(this.id);
+    if (!this.enfOfFeed) {
+      this.feedService.updateExploreFeed(this.id);
+    }
   }
 
   openDialog(post): void {
