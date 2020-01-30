@@ -78,7 +78,7 @@ export class UserService {
     return this.http.post<any>(
       this.globalInfoURL + this.userId + '/update-profile-image',
       {
-        headers: httpFormDataImage.headers
+        headers: httpFormDataOptions.headers
       },
       {
         params: fd
