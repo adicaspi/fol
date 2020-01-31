@@ -6,7 +6,7 @@
     <div *ngIf="postInfo" class="wrapper">
       <i (click)="closeModal()" class="fal fa-times"></i>
       <div class="profile-img-comp">
-        <!-- <img id="profileImage" [attr.src]="userProfileSrc" /> -->
+
         <img id="profileImage" [attr.src]="userProfileSrc" />
         <div class="card-text img-profile">{{ postInfo.userName }}</div>
       </div>
@@ -15,8 +15,9 @@
         <img id="mainImage" [attr.src]="postImageAddr" />
 
         <div class="product-description">
-          <img class="store-logo" [attr.src]="storeLogoSrc">
-
+          <div class="image-container">
+            <img class="store-logo" [attr.src]="storeLogoSrc">
+          </div>
           <div class="product-description" class="card-text description">
             {{postInfo.description}}
           </div>

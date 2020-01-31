@@ -41,6 +41,8 @@ export class TimelineFeedComponent implements OnInit {
   updateFeed: Subscription
   newoffset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
+  loading: boolean = true;
+  enfOfFeed: boolean = false;
   public following: number;
 
 
@@ -61,7 +63,8 @@ export class TimelineFeedComponent implements OnInit {
   ) {
     this.id = this.userService.getCurrentUser();
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
-      if (msg.msg == 'update-timelinefeed') {
+      // if (msg.msg == 'update-timelinefeed') {
+      if (msg.msg == 'update-feed') {
         this.posts = [];
         this.offset = 0;
         this.feedService.updateTimelineFeed(this.id, this.offset);
@@ -70,7 +73,8 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.feedService.timelinefeedFilteringDTO = new FilteringDTO();
+    // this.feedService.timelinefeedFilteringDTO = new FilteringDTO();
+    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.userService.getNumberOfFollowing(this.id).subscribe(res => {
       this.following = res;
       if (!this.following) {
@@ -83,8 +87,9 @@ export class TimelineFeedComponent implements OnInit {
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
-
+            this.loading = false;
           }
+          this.endOfFeed = true;
         })
       });
     this.feedService.updateTimelineFeed(this.id, this.offset);
@@ -102,7 +107,12 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   onScroll() {
-    this.feedService.updateTimelineFeed(this.id, this.offset);
+    if (!this.endOfFeed) {
+      this.feedService.updateTimelineFeed(this.id, this.offset);
+      this.loading = true;
+    } else {
+      this.loading = false;
+    }
   }
 
   openDialog(post): void {

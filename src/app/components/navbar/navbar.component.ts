@@ -22,8 +22,7 @@ import * as jquery from 'jquery';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
   //  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;

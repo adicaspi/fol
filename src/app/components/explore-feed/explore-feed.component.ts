@@ -26,7 +26,8 @@ export class ExploreFeedComponent implements OnInit {
   id: number;
   posts = [];
   offset: number = 0;
-  enfOfFeed: boolean = false;
+  endOfFeed: boolean = false;
+  loading: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   desktop: boolean;
   private feedSubsription: Subscription
@@ -52,21 +53,23 @@ export class ExploreFeedComponent implements OnInit {
 
   ngOnInit() {
 
-    this.feedService.explorefeedFilteringDTO = new FilteringDTO();
+    //this.feedService.explorefeedFilteringDTO = new FilteringDTO();
+    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
       .getNewPosts().subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: FeedReturnObject) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
           if (observablePosts.offset == -1) {
-            this.enfOfFeed = true;
+            this.endOfFeed = true;
           }
 
         })
       });
     this.feedService.updateExploreFeed(this.id);
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
-      if (msg.msg == 'update-exlporefeed') {
+      // if (msg.msg == 'update-exlporefeed') {
+      if (msg.msg == 'update-feed') {
         this.posts = [];
         this.feedService.updateExploreFeed(this.id);
       }
@@ -86,8 +89,11 @@ export class ExploreFeedComponent implements OnInit {
   }
 
   onScroll() {
-    if (!this.enfOfFeed) {
+    if (!this.endOfFeed) {
       this.feedService.updateExploreFeed(this.id);
+      this.loading = true;
+    } else {
+      this.loading = false;
     }
   }
 
