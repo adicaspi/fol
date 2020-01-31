@@ -41,6 +41,8 @@ export class TimelineFeedComponent implements OnInit {
   updateFeed: Subscription
   newoffset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
+  loading: boolean = true;
+  enfOfFeed: boolean = false;
   public following: number;
 
 
@@ -85,8 +87,9 @@ export class TimelineFeedComponent implements OnInit {
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
-
+            this.loading = false;
           }
+          this.endOfFeed = true;
         })
       });
     this.feedService.updateTimelineFeed(this.id, this.offset);
@@ -104,7 +107,12 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   onScroll() {
-    this.feedService.updateTimelineFeed(this.id, this.offset);
+    if (!this.endOfFeed) {
+      this.feedService.updateTimelineFeed(this.id, this.offset);
+      this.loading = true;
+    } else {
+      this.loading = false;
+    }
   }
 
   openDialog(post): void {
