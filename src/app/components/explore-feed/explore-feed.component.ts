@@ -52,7 +52,8 @@ export class ExploreFeedComponent implements OnInit {
 
   ngOnInit() {
 
-    this.feedService.explorefeedFilteringDTO = new FilteringDTO();
+    //this.feedService.explorefeedFilteringDTO = new FilteringDTO();
+    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
       .getNewPosts().subscribe(observablePosts => {
@@ -66,7 +67,8 @@ export class ExploreFeedComponent implements OnInit {
       });
     this.feedService.updateExploreFeed(this.id);
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
-      if (msg.msg == 'update-exlporefeed') {
+      // if (msg.msg == 'update-exlporefeed') {
+      if (msg.msg == 'update-feed') {
         this.posts = [];
         this.feedService.updateExploreFeed(this.id);
       }

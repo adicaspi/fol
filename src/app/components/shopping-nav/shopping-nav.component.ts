@@ -187,17 +187,19 @@ export class ShoppingNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    if (this.feedService.currentLoadedFeedComponent === 'feed') {
-      this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.massageService.sendMessage('update-timelinefeed');
-    }
-    if (this.feedService.currentLoadedFeedComponent === 'profile') {
-      this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.massageService.sendMessage('update-userfeed');
-    }
-    if (this.feedService.currentLoadedFeedComponent === 'explore') {
-      this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.massageService.sendMessage('update-exlporefeed');
-    }
+    this.feedService.feedFilteringDTO = this.filteringDTO;
+    this.massageService.sendMessage('update-feed');
+    // if (this.feedService.currentLoadedFeedComponent === 'feed') {
+    //   this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
+    //   this.massageService.sendMessage('update-timelinefeed');
+    // }
+    // if (this.feedService.currentLoadedFeedComponent === 'profile') {
+    //   this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
+    //   this.massageService.sendMessage('update-userfeed');
+    // }
+    // if (this.feedService.currentLoadedFeedComponent === 'explore') {
+    //   this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
+    //   this.massageService.sendMessage('update-exlporefeed');
+    // }
   }
 }

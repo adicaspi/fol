@@ -31,6 +31,7 @@ export class FeedService {
   timelinefeedFilteringDTO: any = {};
   userfeedFilteringDTO: any = {};
   explorefeedFilteringDTO: any = {};
+  feedFilteringDTO: any = {};
   currentLoadedFeedComponent: string;
 
 
@@ -66,7 +67,7 @@ export class FeedService {
 
   getTimeLineFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.timelinefeedFilteringDTO, { headers: httpOptions.headers }
+      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
     ).pipe(
     )
       .map(res => {
@@ -85,7 +86,7 @@ export class FeedService {
 
   getExploreFeed(userId: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/explore-feed', this.explorefeedFilteringDTO, { headers: httpOptions.headers }
+      this.globalFeedURL + userId + '/explore-feed', this.feedFilteringDTO, { headers: httpOptions.headers }
     ).pipe(
     )
       .map(res => {
@@ -105,7 +106,7 @@ export class FeedService {
   getUserFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed?offset=' + offset, this.userfeedFilteringDTO, { headers: httpOptions.headers },
+      this.globalFeedURL + userId + '/user-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
     ).pipe(
     )
       .map(res => {

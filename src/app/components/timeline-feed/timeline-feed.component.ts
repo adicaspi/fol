@@ -61,7 +61,8 @@ export class TimelineFeedComponent implements OnInit {
   ) {
     this.id = this.userService.getCurrentUser();
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
-      if (msg.msg == 'update-timelinefeed') {
+      // if (msg.msg == 'update-timelinefeed') {
+      if (msg.msg == 'update-feed') {
         this.posts = [];
         this.offset = 0;
         this.feedService.updateTimelineFeed(this.id, this.offset);
@@ -70,7 +71,8 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.feedService.timelinefeedFilteringDTO = new FilteringDTO();
+    // this.feedService.timelinefeedFilteringDTO = new FilteringDTO();
+    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.userService.getNumberOfFollowing(this.id).subscribe(res => {
       this.following = res;
       if (!this.following) {

@@ -65,8 +65,8 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.feedService.userfeedFilteringDTO = new FilteringDTO();
-
+    //this.feedService.userfeedFilteringDTO = new FilteringDTO();
+    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.activatedRoute.params
       .subscribe(params => {
         this.id = +params['id'];
@@ -86,7 +86,8 @@ export class UserFeedComponent implements OnInit {
 
 
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
-      if (msg.msg == 'update-userfeed') {
+      // if (msg.msg == 'update-userfeed') {
+      if (msg.msg == 'update-feed') {
         this.posts = [];
         this.offset = 0;
         this.feedService.updateUserFeed(this.id, this.offset);
