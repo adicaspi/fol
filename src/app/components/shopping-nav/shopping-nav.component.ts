@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
@@ -6,6 +6,7 @@ import { ErrorsService } from '../../services/errors.service';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '@angular/material';
 import { MessageService } from '../../services/message.service';
+import * as jquery from 'jquery';
 
 @Component({
   selector: 'app-shopping-nav',
@@ -40,6 +41,7 @@ export class ShoppingNavComponent implements OnInit {
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = true;
+  prevScrollPos = window.pageYOffset;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -49,6 +51,17 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    let currScrollPos: number = window.pageYOffset;
+    if (currScrollPos > this.prevScrollPos) {
+      if (this.sidenav.opened) {
+        this.toggleSidenav();
+      }
+    }
+    this.prevScrollPos = currScrollPos;
+  }
 
   onChangeCheckBox(key, elem) {
     if (key === 'prices') {
@@ -169,7 +182,6 @@ export class ShoppingNavComponent implements OnInit {
     else {
       this.filteringDTO.category = item.name;
     }
-    console.log("im fltering dto", this.filteringDTO);
     this.updateFeedFilteringDTO();
   }
 
