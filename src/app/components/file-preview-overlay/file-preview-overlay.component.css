@@ -73,10 +73,20 @@ button.btn-menu.mat-menu-item{
     border-radius: 20px;
   }
 
-  .store-logo {
+  .image-container{
     height: 40px;
     margin-bottom: 28px;
   }
+
+   .store-logo {
+    height: 100%;
+  } 
+
+  /* .store-logo {
+    height: 40px;
+    width:180px;
+    margin-bottom: 28px;
+  } */
 
   .product-description {
     width: 400px;
