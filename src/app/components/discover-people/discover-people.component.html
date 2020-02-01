@@ -8,7 +8,7 @@
     <div class="welcome-subtitle">When you follow people, you'll discvoer fashion items they post here.</div>
   </div>
 
-  <div class="cdk-virtual-scroll-data-source">
+  <!-- <div class="cdk-virtual-scroll-data-source">
     <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport scroll-viewport">
       <div *cdkVirtualFor="let item of discoverPeopleArray" class="card-item-wrapeer">
         <div class="card-item">
@@ -32,7 +32,40 @@
         </div>
       </div>
     </cdk-virtual-scroll-viewport>
+  </div> -->
+
+
+
+
+  <div class="scrollmenu">
+    <div *ngFor="let item of discoverPeopleArray" class="card-item-wrapeer">
+      <div class="card-item">
+        <div class="user-image">
+          <img [src]="item.userAvatar" alt="" (click)="profilePage(item)">
+        </div>
+        <div (click)="profilePage(item)" class="user-info">
+          <div class="username">{{item.username}}</div>
+          <div class="fullname">{{item.fullName}}</div>
+        </div>
+
+
+        <div class="user-posts">
+          <img *ngFor="let post of item.items" [src]="post.imageAddr" alt="" (click)="openDialog(item,post.postId)">
+        </div>
+
+        <div class="follow-button">
+          <button mat-button (click)="follow(item)">Follow</button>
+        </div>
+
+      </div>
+    </div>
   </div>
+
+
+
+
+
+
 </div>
 
 
