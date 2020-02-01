@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute, Router, Routes } from '@angular/router';
+import { ActivatedRoute, Router, Routes, ParamMap } from '@angular/router';
 import { Subject, Observer, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
@@ -67,12 +67,11 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("in user-feed");
     //this.feedService.userfeedFilteringDTO = new FilteringDTO();
     this.feedService.feedFilteringDTO = new FilteringDTO();
-    this.activatedRoute.params
-      .subscribe(params => {
-        this.id = +params['id'];
-      });
+
+
 
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
@@ -85,19 +84,39 @@ export class UserFeedComponent implements OnInit {
           this.endOfFeed = true;
         })
       });
-    this.feedService.updateUserFeed(this.id, this.offset);
+    this.getActivatedRoute();
+
+    // this.feedService.updateUserFeed(this.id, this.offset);
 
 
 
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
-      // if (msg.msg == 'update-userfeed') {
-      if (msg.msg == 'update-feed') {
-        this.posts = [];
-        this.offset = 0;
-        this.feedService.updateUserFeed(this.id, this.offset);
+
+      if (msg) {
+        console.log("im msg", msg);
+        if (msg.msg == 'update-feed') {
+          this.posts = [];
+          this.offset = 0;
+
+          this.getActivatedRoute();
+        }
       }
     });
 
+  }
+
+  getActivatedRoute() {
+    // this.activatedRoute.params
+    //   .subscribe(params => {
+    //     this.id = +params['id'];
+    //     console.log("im id", params);
+    //     this.feedService.updateUserFeed(this.id, this.offset);
+    //   });
+    this.activatedRoute.paramMap.subscribe(
+      (params: ParamMap) => {
+        console.log("im parms", params);
+      }
+    )
   }
 
 
@@ -123,5 +142,6 @@ export class UserFeedComponent implements OnInit {
   public ngOnDestroy(): void {
     this.WindowSizeSubscription.unsubscribe();
     this.onDestroy.next();
+    this.feedSubsription.unsubscribe();
   }
 }
