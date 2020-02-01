@@ -85,19 +85,11 @@ export class UserFeedComponent implements OnInit {
         })
       });
     this.getActivatedRoute();
-
-    // this.feedService.updateUserFeed(this.id, this.offset);
-
-
-
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
-
       if (msg) {
-        console.log("im msg", msg);
         if (msg.msg == 'update-feed') {
           this.posts = [];
           this.offset = 0;
-
           this.getActivatedRoute();
         }
       }
@@ -106,17 +98,12 @@ export class UserFeedComponent implements OnInit {
   }
 
   getActivatedRoute() {
-    // this.activatedRoute.params
-    //   .subscribe(params => {
-    //     this.id = +params['id'];
-    //     console.log("im id", params);
-    //     this.feedService.updateUserFeed(this.id, this.offset);
-    //   });
-    this.activatedRoute.paramMap.subscribe(
-      (params: ParamMap) => {
-        console.log("im parms", params);
-      }
-    )
+    this.activatedRoute.params
+      .subscribe(params => {
+        this.id = +params['id'];
+        this.feedService.updateUserFeed(this.id, this.offset);
+      });
+
   }
 
 
