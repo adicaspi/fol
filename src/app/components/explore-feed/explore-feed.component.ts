@@ -16,6 +16,7 @@ import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { MessageService } from '../../services/message.service';
+import * as jquery from 'jquery';
 
 @Component({
   selector: 'app-explore-feed',
@@ -52,8 +53,7 @@ export class ExploreFeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    //this.feedService.explorefeedFilteringDTO = new FilteringDTO();
+    jquery("mat-sidenav-container").css("top", "122px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
@@ -68,10 +68,11 @@ export class ExploreFeedComponent implements OnInit {
       });
     this.feedService.updateExploreFeed(this.id);
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
-      // if (msg.msg == 'update-exlporefeed') {
-      if (msg.msg == 'update-feed') {
-        this.posts = [];
-        this.feedService.updateExploreFeed(this.id);
+      if (msg) {
+        if (msg.msg == 'update-feed') {
+          this.posts = [];
+          this.feedService.updateExploreFeed(this.id);
+        }
       }
     });
 
