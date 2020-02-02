@@ -10,12 +10,10 @@ export class MessageService {
   constructor() { }
 
   sendMessage(message: string) {
-    console.log("in msg sercive");
     this.subject.next({ msg: message });
   }
 
   clearMessage() {
-    console.log("in msg clear");
     this.subject.next();
   }
 
