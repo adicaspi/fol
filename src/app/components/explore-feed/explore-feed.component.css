@@ -8,7 +8,7 @@
   margin-top: 30px;
 }
 
-/* @media (min-width: 900px)  { */
+@media (min-width: 600px)  {
 
 .center {
   margin-left: 18px;
@@ -49,7 +49,7 @@ ngxMasonryItem:nth-of-type(5n) {
   font-family: Arial;
   color: #4d4d4d;
 }
-/* } */
+}
 @media (max-width: 600px)  {
 
   .center {
@@ -62,7 +62,8 @@ ngxMasonryItem:nth-of-type(5n) {
 
   ngx-masonry{
     width:100%;
-  }
+    margin:0 auto;
+  } 
 
   .masonry-item{
     width: calc(50% - 6px);

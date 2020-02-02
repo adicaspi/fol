@@ -10,6 +10,7 @@ import { User } from '../../models/User';
 import { TimelinePost } from '../../models/TimelinePost';
 import { PostService } from '../../services/post.service';
 import * as $ from 'jquery';
+import * as jquery from 'jquery';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FilePreviewOverlayRef } from './file-preview-overlay-ref';

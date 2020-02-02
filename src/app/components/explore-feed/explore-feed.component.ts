@@ -60,6 +60,7 @@ export class ExploreFeedComponent implements OnInit {
       .getNewPosts().subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: FeedReturnObject) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
+          this.loading = false;
           if (observablePosts.offset == -1) {
             this.endOfFeed = true;
           }
@@ -85,6 +86,7 @@ export class ExploreFeedComponent implements OnInit {
 
           if (value.width <= 600) {
             this.desktop = false;
+            let w = (value.width);
           }
         });
   }
@@ -111,5 +113,6 @@ export class ExploreFeedComponent implements OnInit {
   public ngOnDestroy(): void {
     this.onDestroy.next();
     this.feedSubsription.unsubscribe();
+    this.WindowSizeSubscription.unsubscribe();
   }
 }
