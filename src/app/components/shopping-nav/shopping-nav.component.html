@@ -1,12 +1,10 @@
 <div class="wrapper">
 
-  <div class="cdk-virtual-scroll-data-source">
-    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="150" class="cdk-viewport scroll-viewport">
-      <div *cdkVirtualFor="let item of menu" class="menu-item">
-        <a (click)="filterByCategory(item)" [ngClass]="item.checked?'a-item-checked':'a-item'">{{item.name}}
-        </a>
-      </div>
-    </cdk-virtual-scroll-viewport>
+  <div class="scrollmenu">
+    <div class="scroll-item" *ngFor="let item of menu">
+      <a (click)="filterByCategory(item)" [ngClass]="item.checked?'a-item-checked':'a-item'">{{item.name}}
+      </a>
+    </div>
   </div>
 
   <div class="filter-buttons" [ngClass]="{'opened': sidenav.opened}">

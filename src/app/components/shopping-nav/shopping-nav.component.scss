@@ -324,33 +324,31 @@ i.fal.fa-times{
   font-size: 18px;
 }
 
-
-.cdk-virtual-scroll-data-source {
-  ::ng-deep {
-    .scroll-viewport {
-      height: 50px;
-    }
-
-    .scroll-viewport .cdk-virtual-scroll-content-wrapper {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-
-    .menu-item {
-      height: 100%;
-      width: 100px;
-      text-align: center;
-    }
-
-    .a-item{
-      color:black;
-      font-family: 'Maven Pro', sans-serif;
-      letter-spacing: 1px;
-    }
-
-    .a-item-checked{
-      font-weight: 500;
-    }
-  }
+.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
 }
+
+.scroll-item a {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.a-item{
+  color:black;
+  font-family: 'Maven Pro', sans-serif;
+  letter-spacing: 1px;
+}
+
+.a-item-checked{
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
