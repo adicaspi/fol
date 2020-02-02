@@ -61,26 +61,12 @@ export class TimelineFeedComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private massageService: MessageService
   ) {
-    this.id = this.userService.getCurrentUser();
-    this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
-      if (msg) {
-        if (msg.msg == 'update-feed') {
-          this.posts = [];
-          this.offset = 0;
-          this.feedService.updateTimelineFeed(this.id, this.offset);
-        }
-      }
-    });
+
   }
 
   ngOnInit() {
+    this.id = this.userService.getCurrentUser();
     this.feedService.feedFilteringDTO = new FilteringDTO();
-    this.userService.getNumberOfFollowing(this.id).subscribe(res => {
-      this.following = res;
-      if (!this.following) {
-        this.router.navigate(['feed-discover-people']);
-      }
-    });
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
@@ -92,6 +78,22 @@ export class TimelineFeedComponent implements OnInit {
           this.endOfFeed = true;
         })
       });
+    this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
+      if (msg) {
+        if (msg.msg == 'update-feed') {
+          this.posts = [];
+          this.offset = 0;
+          this.feedService.updateTimelineFeed(this.id, this.offset);
+        }
+      }
+    });
+    this.userService.getNumberOfFollowing(this.id).subscribe(res => {
+      this.following = res;
+      if (!this.following) {
+        this.router.navigate(['feed-discover-people']);
+      }
+    });
+
     this.feedService.updateTimelineFeed(this.id, this.offset);
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
