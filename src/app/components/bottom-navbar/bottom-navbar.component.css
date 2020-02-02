@@ -43,7 +43,11 @@ div.icon-img .fa{
 }
 
 .bottom-navbar .icon-img.active{
-  color: rgb(255,13,239);
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+ -webkit-text-fill-color:transparent;
 }
 
 img.fw-logo{
