@@ -110,14 +110,25 @@ export class FeedService {
     ).pipe(
     )
       .map(res => {
-        let posts: any = res['feedPosts'];
-        let offset: any = res['newOffset'];
-        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
-        let feedReturnObject = new FeedReturnObject();
-        feedReturnObject.newPosts = newPosts;
-        feedReturnObject.offset = offset;
-        return feedReturnObject;
+        if (res) {
+          let posts: any = res['feedPosts'];
+          let offset: any = res['newOffset'];
+          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject;
+        } else {
+          let newPosts: any = null;
+          let offset: any = null;
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject
+        }
+
 
       });;
   }

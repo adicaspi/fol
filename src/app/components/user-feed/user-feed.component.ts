@@ -30,6 +30,7 @@ export class UserFeedComponent implements OnInit {
   deviceInfo = null;
   loading: boolean = true;
   endOfFeed: boolean = false;
+  showNoPostsMessage: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubsription: Subscription
@@ -67,15 +68,14 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("in user-feed");
-    //this.feedService.userfeedFilteringDTO = new FilteringDTO();
     this.feedService.feedFilteringDTO = new FilteringDTO();
-
-
-
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
+          if (!observablePosts.newPosts) {
+            this.showNoPostsMessage = true;
+            this.loading = false;
+          }
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
@@ -94,7 +94,6 @@ export class UserFeedComponent implements OnInit {
         }
       }
     });
-
   }
 
   getActivatedRoute() {

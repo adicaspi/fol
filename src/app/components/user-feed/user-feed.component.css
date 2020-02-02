@@ -9,6 +9,22 @@
   margin-top: 30px;
 }
 
+.no-posts{
+  margin-top: 20px; 
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 350px;
+}
+
+.share-posts{
+  font-size: 28px;
+  line-height: 32px;
+  margin-bottom: 20px;
+}
+
+
+
 @media only screen and (min-width: 900px) {
   .search-results{
     height:100%;   
