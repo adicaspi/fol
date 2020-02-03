@@ -8,6 +8,7 @@ import { PostService } from '../../services/post.service';
 import { DialogService } from '../../services/dialog.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ConfigService } from '../../services/config.service';
+import { ScrollHelperService } from '../../services/scroll-helper.service';
 import { ProductPageMobileComponent } from '../product-page-mobile/product-page-mobile.component';
 import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
@@ -48,7 +49,8 @@ export class UserFeedComponent implements OnInit {
     private router: Router,
     private configService: ConfigService,
     private postService: PostService,
-    private errorsService: ErrorsService
+    private errorsService: ErrorsService,
+    private scrollHelperService: ScrollHelperService
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -67,31 +69,34 @@ export class UserFeedComponent implements OnInit {
     this.feedService.userfeedFilteringDTO = new FilteringDTO();
 
     this.activatedRoute.params
+      .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         this.id = +params['id'];
       });
 
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
-        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
-          if (this.offset != observablePosts.offset) {
-            this.posts = this.posts.concat(observablePosts.newPosts);
-            this.offset = observablePosts.offset;
+        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((posts: FeedReturnObject) => {
+          if (this.offset !== posts.offset) {
+            this.posts = this.posts.concat(posts.newPosts);
+            this.offset = posts.offset;
+            this.scrollHelperService.runDataLoaded();
           }
         })
       });
+
     this.feedService.updateUserFeed(this.id, this.offset);
 
 
-
-    this.feedSubsription = this.errorsService.getMessage().subscribe(msg => {
-      if (msg.error == 'update-userfeed') {
-        this.posts = [];
-        this.offset = 0;
-        this.feedService.updateUserFeed(this.id, this.offset);
-      }
-    });
-
+    this.errorsService.getMessage()
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(msg => {
+        if (msg.error == 'update-userfeed') {
+          this.posts = [];
+          this.offset = 0;
+          this.feedService.updateUserFeed(this.id, this.offset);
+        }
+      });
   }
 
 
@@ -112,5 +117,6 @@ export class UserFeedComponent implements OnInit {
   public ngOnDestroy(): void {
     this.WindowSizeSubscription.unsubscribe();
     this.onDestroy.next();
+    this.onDestroy.complete();
   }
 }

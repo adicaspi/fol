@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { ScrollHelperService } from '../../services/scroll-helper.service';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
@@ -55,7 +56,8 @@ export class TimelineFeedComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private errorsService: ErrorsService
+    private errorsService: ErrorsService,
+    private scrollHelperService: ScrollHelperService
   ) {
     this.id = this.userService.getCurrentUser();
     this.feedSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
@@ -75,6 +77,7 @@ export class TimelineFeedComponent implements OnInit {
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
+            this.scrollHelperService.runDataLoaded();
           }
         })
       });
