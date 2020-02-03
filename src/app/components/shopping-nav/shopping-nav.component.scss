@@ -109,8 +109,9 @@ button.nav-item {
 }
 
 .wrapper {
+  display: flex;
+  flex-direction: row;
   padding-top: 5px;
-  // position: fixed;
   left: 0;
   right: 0;
   top:0;
@@ -145,15 +146,15 @@ button.nav-item {
 .filter-buttons {
   $this: '.filter-buttons';
   overflow-x: auto;
-  padding-right: 32px;
+  padding-right: 20px;
   padding-left: 16px;
   justify-content: space-between;
   transition: width .3s;
-  font-size: 12px;
-  width: 90px;
+  font-size: 25px;
   box-sizing: border-box;
   display: flex;
   float: right;
+  height: 50px;
 
   &__btn {
     background: none;
@@ -174,11 +175,12 @@ button.nav-item {
 
     &.clear {
       visibility: hidden;
+      font-size: 12px;
     }
   }
 
   &.opened {
-    width: 280px;
+    min-width: 280px;
 
     #{$this}__btn {
       &.toggle {
