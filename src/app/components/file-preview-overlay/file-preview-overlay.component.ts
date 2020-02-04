@@ -108,7 +108,6 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   openDialog(post): void {
-    console.log(post);
     this.configService.setGeneralSession('product_id', post.postId);
     this.thumbnails = [];
     this.showSpinner = true;

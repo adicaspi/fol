@@ -110,6 +110,11 @@ export class NavbarComponent implements OnInit {
     } else {
       jquery("nav").css("top", "0px")
     }
+    let cdk = jquery(".cdk-overlay-backdrop");
+    if (cdk.length) {
+      jquery("nav").css("top", "-70px");
+    }
+
     this.prevScrollPos = currScrollPos;
   }
 
