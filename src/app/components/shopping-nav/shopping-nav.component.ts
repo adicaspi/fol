@@ -158,7 +158,18 @@ export class ShoppingNavComponent implements OnInit {
     });
     this.filteringDTO = new FilteringDTO();
     this.updateFeedFilteringDTO();
+  }
 
+  clearSideFiltersSelectionNoUpdate() {
+    this.designers.forEach(elem => {
+      elem.checked = false;
+    });
+    this.stores.forEach(elem => {
+      elem.checked = false;
+    });
+    this.clothings.forEach(elem => {
+      elem.checked = false;
+    });
   }
 
   toggleSidenav(): void {
@@ -168,8 +179,8 @@ export class ShoppingNavComponent implements OnInit {
   filterByCategory(item) {
     if (this.sidenav.opened) {
       this.toggleSidenav();
-      this.clearSideFiltersSelection()
     }
+    this.clearSideFiltersSelectionNoUpdate();
     this.filteringDTO = new FilteringDTO();
     let prevItem = this.menu[this.currCategory];
     prevItem.checked = false;
