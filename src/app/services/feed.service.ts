@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { TimelinePost } from '../models/TimelinePost';
 import { FollowItem } from '../models/FollowItem';
 import { FeedReturnObject } from '../models/FeedReturnObject';
+import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -26,9 +27,11 @@ export class FeedService {
   prevOffset: number = 0;
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
+  generalURL = this.baseApiUrl + '/general/'
   timelinefeedFilteringDTO: any = {};
   userfeedFilteringDTO: any = {};
   explorefeedFilteringDTO: any = {};
+  feedFilteringDTO: any = {};
   currentLoadedFeedComponent: string;
 
 
@@ -64,7 +67,7 @@ export class FeedService {
 
   getTimeLineFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.timelinefeedFilteringDTO, { headers: httpOptions.headers }
+      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
     ).pipe(
     )
       .map(res => {
@@ -83,7 +86,7 @@ export class FeedService {
 
   getExploreFeed(userId: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/explore-feed', this.explorefeedFilteringDTO, { headers: httpOptions.headers }
+      this.globalFeedURL + userId + '/explore-feed', this.feedFilteringDTO, { headers: httpOptions.headers }
     ).pipe(
     )
       .map(res => {
@@ -103,20 +106,40 @@ export class FeedService {
   getUserFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed?offset=' + offset, this.userfeedFilteringDTO, { headers: httpOptions.headers },
+      this.globalFeedURL + userId + '/user-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
     ).pipe(
     )
       .map(res => {
-        let posts: any = res['feedPosts'];
-        let offset: any = res['newOffset'];
-        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
-        let feedReturnObject = new FeedReturnObject();
-        feedReturnObject.newPosts = newPosts;
-        feedReturnObject.offset = offset;
-        return feedReturnObject;
+        if (res) {
+          let posts: any = res['feedPosts'];
+          let offset: any = res['newOffset'];
+          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject;
+        } else {
+          let newPosts: any = null;
+          let offset: any = null;
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject
+        }
+
 
       });;
+  }
+
+  discoverPeople(): Observable<Array<DiscoverPeopleDTO>> {
+    return this.http.get<Array<DiscoverPeopleDTO>>(this.generalURL + '/discover-people').pipe().map(res => {
+      let items: any = res;
+      let discoverPeopleArray: Array<DiscoverPeopleDTO> =
+        items.map((doc) => new DiscoverPeopleDTO(doc));
+      return discoverPeopleArray;
+    })
   }
 
   getFollowSlaves(

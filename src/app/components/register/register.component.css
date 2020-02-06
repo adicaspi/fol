@@ -114,6 +114,11 @@ img.fb-logo{
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.loading-spinner img{
+  width:15px;
 }
 
 .login{
@@ -125,6 +130,10 @@ a.login{
   color: rgb(56,81,133);
   cursor: pointer;
   margin-left: 5px;
+}
+
+.loading-spinner img{
+  width:25px;
 }
 }
 
@@ -244,6 +253,11 @@ a.login{
       display: flex;
       justify-content: center;
       margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .loading-spinner img{
+      width:25px;
     }
 
     .login{

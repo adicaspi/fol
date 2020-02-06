@@ -22,8 +22,7 @@ import * as jquery from 'jquery';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
   //  @ViewChild(MatMenuTrigger, { static: false }) menu: MatMenuTrigger;
@@ -106,11 +105,16 @@ export class NavbarComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   scrollHandler(event) {
     let currScrollPos: number = window.pageYOffset;
-    if(currScrollPos > this.prevScrollPos && currScrollPos > 25) {
+    if (currScrollPos > this.prevScrollPos && currScrollPos > 25) {
       jquery("nav").css("top", "-70px");
     } else {
       jquery("nav").css("top", "0px")
     }
+    let cdk = jquery(".cdk-overlay-backdrop");
+    if (cdk.length) {
+      jquery("nav").css("top", "-70px");
+    }
+
     this.prevScrollPos = currScrollPos;
   }
 

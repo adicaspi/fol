@@ -53,6 +53,11 @@ export class HttpErrorComponent implements HttpInterceptor {
             console.log('now caught');
           }
 
+          if (error.error.error == 'Exchange Rate Exception') {
+
+            console.log('Exchange Rate Exception');
+          }
+
           // server-side error
           console.log('in handler', error);
           errorMessage = `Error Code: ${error.status}\nMessage: ${

@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
 import { ErrorsService } from '../../services/errors.service';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '@angular/material';
+import { MessageService } from '../../services/message.service';
+import * as jquery from 'jquery';
 
 @Component({
   selector: 'app-shopping-nav',
@@ -39,15 +41,27 @@ export class ShoppingNavComponent implements OnInit {
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = true;
+  prevScrollPos = window.pageYOffset;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private feedService: FeedService,
-    private errorsService: ErrorsService,
+    private massageService: MessageService,
   ) {
   }
 
   ngOnInit() { }
+
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    let currScrollPos: number = window.pageYOffset;
+    if (currScrollPos > this.prevScrollPos) {
+      if (this.sidenav.opened) {
+        this.toggleSidenav();
+      }
+    }
+    this.prevScrollPos = currScrollPos;
+  }
 
   onChangeCheckBox(key, elem) {
     if (key === 'prices') {
@@ -139,8 +153,23 @@ export class ShoppingNavComponent implements OnInit {
     this.stores.forEach(elem => {
       elem.checked = false;
     });
+    this.clothings.forEach(elem => {
+      elem.checked = false;
+    });
     this.filteringDTO = new FilteringDTO();
     this.updateFeedFilteringDTO();
+  }
+
+  clearSideFiltersSelectionNoUpdate() {
+    this.designers.forEach(elem => {
+      elem.checked = false;
+    });
+    this.stores.forEach(elem => {
+      elem.checked = false;
+    });
+    this.clothings.forEach(elem => {
+      elem.checked = false;
+    });
   }
 
   toggleSidenav(): void {
@@ -148,7 +177,11 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   filterByCategory(item) {
-
+    if (this.sidenav.opened) {
+      this.toggleSidenav();
+    }
+    this.clearSideFiltersSelectionNoUpdate();
+    this.filteringDTO = new FilteringDTO();
     let prevItem = this.menu[this.currCategory];
     prevItem.checked = false;
     item.checked = true;
@@ -165,17 +198,8 @@ export class ShoppingNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    if (this.feedService.currentLoadedFeedComponent === 'feed') {
-      this.feedService.timelinefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.errorsService.sendMessage('update-timelinefeed');
-    }
-    if (this.feedService.currentLoadedFeedComponent === 'profile') {
-      this.feedService.userfeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.errorsService.sendMessage('update-userfeed');
-    }
-    if (this.feedService.currentLoadedFeedComponent === 'explore') {
-      this.feedService.explorefeedFilteringDTO = this.filteringDTO.getFilteringDTO();
-      this.errorsService.sendMessage('update-exlporefeed');
-    }
+    this.feedService.feedFilteringDTO = this.filteringDTO;
+    this.massageService.sendMessage('update-feed');
+    this.massageService.clearMessage();
   }
 }

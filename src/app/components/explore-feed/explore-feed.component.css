@@ -2,7 +2,13 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 900px)  {
+.spinner{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+@media (min-width: 600px)  {
 
 .center {
   margin-left: 18px;
@@ -47,15 +53,17 @@ ngxMasonryItem:nth-of-type(5n) {
 @media (max-width: 600px)  {
 
   .center {
-    margin-left: 18px;
-    margin-right: 18px;
     margin-top: 32px;
     background-color: white;
+    width:100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   ngx-masonry{
-    margin: 0 auto;
-  }
+    width:100%;
+    margin:0 auto;
+  } 
 
   .masonry-item{
     width: calc(50% - 6px);
@@ -72,6 +80,7 @@ ngxMasonryItem:nth-of-type(5n) {
   }
 
   .description {
+    width:120px;
     margin: 8px 10px;
     background-color: white;
     font-size: 12px;

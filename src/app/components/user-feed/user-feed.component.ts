@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute, Router, Routes } from '@angular/router';
+import { ActivatedRoute, Router, Routes, ParamMap } from '@angular/router';
 import { Subject, Observer, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
@@ -13,6 +13,7 @@ import { ProductPageMobileComponent } from '../product-page-mobile/product-page-
 import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
+import { MessageService } from '../../services/message.service';
 
 
 @Component({
@@ -28,6 +29,9 @@ export class UserFeedComponent implements OnInit {
   id = 0;
   prevId = 0;
   deviceInfo = null;
+  loading: boolean = true;
+  endOfFeed: boolean = false;
+  showNoPostsMessage: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubsription: Subscription
@@ -50,7 +54,8 @@ export class UserFeedComponent implements OnInit {
     private configService: ConfigService,
     private postService: PostService,
     private errorsService: ErrorsService,
-    private scrollHelperService: ScrollHelperService
+    private scrollHelperService: ScrollHelperService,
+    private massageService: MessageService
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -66,42 +71,54 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.feedService.userfeedFilteringDTO = new FilteringDTO();
+    this.feedService.feedFilteringDTO = new FilteringDTO();
+    this.feedService.getNewPosts()
+      .pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
+        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((posts: FeedReturnObject) => {
+          if (!posts.newPosts) {
+            this.showNoPostsMessage = true;
+            this.loading = false;
+          }
+          if (this.offset !== posts.offset) {
+            this.posts = this.posts.concat(posts.newPosts);
+            this.offset = posts.offset;
+            this.loading = false;
+            this.scrollHelperService.runDataLoaded();
+          }
+          this.endOfFeed = true;
+        });
+      });
+    this.getActivatedRoute();
+    this.massageService.getMessage()
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(msg => {
+      if (msg) {
+        if (msg.msg === 'update-feed') {
+          this.posts = [];
+          this.offset = 0;
+          this.getActivatedRoute();
+        }
+      }
+    });
+  }
 
+  getActivatedRoute() {
     this.activatedRoute.params
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         this.id = +params['id'];
-      });
-
-    this.updateFeed = this.feedService
-      .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
-        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((posts: FeedReturnObject) => {
-          if (this.offset !== posts.offset) {
-            this.posts = this.posts.concat(posts.newPosts);
-            this.offset = posts.offset;
-            this.scrollHelperService.runDataLoaded();
-          }
-        })
-      });
-
-    this.feedService.updateUserFeed(this.id, this.offset);
-
-
-    this.errorsService.getMessage()
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(msg => {
-        if (msg.error == 'update-userfeed') {
-          this.posts = [];
-          this.offset = 0;
-          this.feedService.updateUserFeed(this.id, this.offset);
-        }
+        this.feedService.updateUserFeed(this.id, this.offset);
       });
   }
 
 
   onScroll() {
-    this.feedService.updateUserFeed(this.id, this.offset);
+    if (!this.endOfFeed) {
+      this.feedService.updateUserFeed(this.id, this.offset);
+      this.loading = true;
+    } else {
+      this.loading = false;
+    }
   }
 
   openDialog(post): void {

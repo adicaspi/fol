@@ -17,6 +17,12 @@ const httpFormDataOptions = {
   })
 }
 
+const httpFormDataImage = {
+  headers: new HttpHeaders({
+    'Content-Type': 'image/jpeg'
+  })
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,12 +63,25 @@ export class UserService {
     );
   }
 
-  updateProfileImage(fd: FormData): Observable<any> {
-    //let params = new HttpParams().set('image', fd.toString());
+  // updateProfileImage(fd): Observable<any> {
+  //   console.log(typeof fd)
+  //   return this.http.post<any>(
+  //     this.globalInfoURL + this.userId + '/update-profile-image',
+  //     fd, {
+  //       headers: httpFormDataImage.headers
+  //     }
+
+  //   );
+  // }
+
+  updateProfileImage(fd): Observable<any> {
     return this.http.post<any>(
-      this.globalInfoURL + this.userId + '/upload-profile-image',
-      fd, {
+      this.globalInfoURL + this.userId + '/update-profile-image',
+      {
         headers: httpFormDataOptions.headers
+      },
+      {
+        params: fd
       }
 
     );
@@ -195,5 +214,25 @@ export class UserService {
     return this.http.get<any[]>(this.baseApiUrl + '/general/search', {
       params: params
     });
+  }
+
+  removePost(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.delete(
+      this.globaSoicalURL + this.userId + '/remove-post',
+      {
+        params
+      }
+    ).subscribe(res => { });
+  }
+
+  hidePost(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.delete(
+      this.globaSoicalURL + this.userId + '/hide-post',
+      {
+        params
+      }
+    ).subscribe(res => { });
   }
 }

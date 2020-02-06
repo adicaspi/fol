@@ -1,5 +1,5 @@
 :host {
-  padding-top: 75px;
+  // padding-top: 75px;
   display: block;
 
   &.with-search-space {
@@ -121,8 +121,9 @@ button.nav-item {
 }
 
 .wrapper {
+  display: flex;
+  flex-direction: row;
   padding-top: 5px;
-  position: fixed;
   left: 0;
   right: 0;
   top:0;
@@ -157,15 +158,15 @@ button.nav-item {
 .filter-buttons {
   $this: '.filter-buttons';
   overflow-x: auto;
-  padding-right: 32px;
+  padding-right: 20px;
   padding-left: 16px;
   justify-content: space-between;
   transition: width .3s;
-  font-size: 12px;
-  width: 90px;
+  font-size: 25px;
   box-sizing: border-box;
   display: flex;
   float: right;
+  height: 50px;
 
   &__btn {
     background: none;
@@ -186,11 +187,12 @@ button.nav-item {
 
     &.clear {
       visibility: hidden;
+      font-size: 12px;
     }
   }
 
   &.opened {
-    width: 280px;
+    min-width: 280px;
 
     #{$this}__btn {
       &.toggle {
@@ -338,33 +340,31 @@ i.fal.fa-times{
   font-size: 18px;
 }
 
-
-.cdk-virtual-scroll-data-source {
-  ::ng-deep {
-    .scroll-viewport {
-      height: 50px;
-    }
-
-    .scroll-viewport .cdk-virtual-scroll-content-wrapper {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-
-    .menu-item {
-      height: 100%;
-      width: 100px;
-      text-align: center;
-    }
-
-    .a-item{
-      color:black;
-      font-family: 'Maven Pro', sans-serif;
-      letter-spacing: 1px;
-    }
-
-    .a-item-checked{
-      font-weight: 500;
-    }
-  }
+.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
 }
+
+.scroll-item a {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.a-item{
+  color:black;
+  font-family: 'Maven Pro', sans-serif;
+  letter-spacing: 1px;
+}
+
+.a-item-checked{
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+

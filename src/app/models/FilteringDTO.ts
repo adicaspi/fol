@@ -10,6 +10,22 @@ export class FilteringDTO {
     this.category = category;
   }
 
+  get categoryIsFiltered() {
+    return this.category != null;
+  }
+
+  get storesIsFiltered() {
+    return this.stores.length;
+  }
+
+  get designersIsFiltered() {
+    return this.designers.length;
+  }
+
+  get priceIsFiltered() {
+    return (this.minPrice > 0 || this.maxPrice > 0 && this.maxPrice < 5000)
+  }
+
   getCategory() {
     return this.category;
   }

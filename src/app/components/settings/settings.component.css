@@ -14,6 +14,7 @@
   background: white;
   padding: 50px;
   height: 100%;
+  margin-top: 68px;
 }
 
 .column{
@@ -74,6 +75,10 @@ li.controlers:hover {
   padding: 15px;
 }
 
+.user{
+  padding-left: 15px;
+}
+
 .form-group {
   float: left;
   margin-top: 20px;
@@ -122,6 +127,7 @@ span.user {
   float: left;
   clear: both;
   line-height: initial;
+  padding: 0;
 }
 
 span.user.pass {
@@ -180,6 +186,7 @@ button {
     text-align: center;
     background: white;
     height: 100%;
+    margin-top: 30px;
   }
 
   .column{

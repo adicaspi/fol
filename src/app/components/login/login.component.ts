@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   errorSubscription: Subscription;
   error: any = {};
   loginForm: FormGroup;
-  submitted = false;
+  submitted: boolean = false;
   userId: number;
   wrongPass: boolean = false;
   wrongUser: boolean = false;
@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
       password: password
     };
 
+
     this.userService
       .login(res)
       .pipe(first())
@@ -94,9 +95,9 @@ export class LoginComponent implements OnInit {
           this.configSerivce.setSessionStorage(data.userId.toString());
           this.router.navigate(['/feed/' + data.userId]);
           this.dialogRef.close();
-          this.ngOnDestroy();
         },
         error => {
+          this.submitted = false;
 
           if (this.error.error == 'Invalid Authentication Data') {
             console.log("in login comp msg recived");

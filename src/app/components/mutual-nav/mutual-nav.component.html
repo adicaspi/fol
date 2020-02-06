@@ -1,6 +1,6 @@
 <mat-toolbar>
 
-  <button id="category" class="filter-button" [matMenuTriggerFor]="category">Category</button>
+  <button id="category" [ngClass]="filteringDTO.categoryIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="category">Category</button>
   <mat-menu #category="matMenu" xPosition="after">
     <mat-radio-group class="category-radio-group" (change)="onChange($event)" aria-label="Select an option">
       <mat-radio-button *ngFor="let category of categories" [value]="category.name" [id]="category.id" [checked]="category.checked">
@@ -24,7 +24,8 @@
     </div>
   </mat-menu>
 
-  <button id="designer" class="filter-button" [matMenuTriggerFor]="designer" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Designer</button>
+  <button id="designer" [ngClass]="filteringDTO.designersIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="designer"
+    (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Designer</button>
   <mat-menu #designer="matMenu" xPosition="after" class=checkbox-menu>
     <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (change)="onChangeCheckBox('designers',$event,designer)"
       (click)="$event.stopPropagation();"> {{designer.name}}
@@ -35,7 +36,8 @@
     </div>
   </mat-menu>
 
-  <button id="store" class="filter-button" [matMenuTriggerFor]="store" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Store</button>
+  <button id="store" [ngClass]="filteringDTO.storesIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="store"
+    (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Store</button>
   <mat-menu #store="matMenu" xPosition="after" class=checkbox-menu>
     <mat-checkbox *ngFor="let store of stores" class="example-margin" name="store" [value]="store.id" [checked]="store.checked"
       [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeCheckBox('stores',$event,store)"> {{store.name}}
@@ -50,7 +52,8 @@
 
   <!-- <button mat-button [matMenuTriggerFor]="price">Price</button> -->
 
-  <button id="price" class="filter-button" [matMenuTriggerFor]="price" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Price</button>
+  <button id="price" [ngClass]="filteringDTO.priceIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="price"
+    (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Price</button>
   <mat-menu #price="matMenu" xPosition="after">
     <div class="price-container">
       <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="5000" [(ngModel)]="priceRange" (click)="$event.stopPropagation(); ">

@@ -21,6 +21,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -41,6 +42,9 @@ export class TimelineFeedComponent implements OnInit {
   updateFeed: Subscription
   newoffset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
+  loading: boolean = true;
+  enfOfFeed: boolean = false;
+  public following: number;
 
 
   private baseApiUrl = environment.BASE_API_URL;
@@ -57,30 +61,43 @@ export class TimelineFeedComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private errorsService: ErrorsService,
-    private scrollHelperService: ScrollHelperService
+    private scrollHelperService: ScrollHelperService,
+    private massageService: MessageService
   ) {
-    this.id = this.userService.getCurrentUser();
-    this.feedSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
-      if (msg.error == 'update-timelinefeed') {
-        this.posts = [];
-        this.offset = 0;
-        this.feedService.updateTimelineFeed(this.id, this.offset);
-      }
-    });
+
   }
 
   ngOnInit() {
-    this.feedService.timelinefeedFilteringDTO = new FilteringDTO();
+    this.id = this.userService.getCurrentUser();
+    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
+            this.loading = false;
             this.scrollHelperService.runDataLoaded();
           }
+          this.endOfFeed = true;
         })
       });
+    this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
+      if (msg) {
+        if (msg.msg == 'update-feed') {
+          this.posts = [];
+          this.offset = 0;
+          this.feedService.updateTimelineFeed(this.id, this.offset);
+        }
+      }
+    });
+    this.userService.getNumberOfFollowing(this.id).subscribe(res => {
+      this.following = res;
+      if (!this.following) {
+        this.router.navigate(['feed-discover-people']);
+      }
+    });
+
     this.feedService.updateTimelineFeed(this.id, this.offset);
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
@@ -96,7 +113,12 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   onScroll() {
-    this.feedService.updateTimelineFeed(this.id, this.offset);
+    if (!this.endOfFeed) {
+      this.feedService.updateTimelineFeed(this.id, this.offset);
+      this.loading = true;
+    } else {
+      this.loading = false;
+    }
   }
 
   openDialog(post): void {

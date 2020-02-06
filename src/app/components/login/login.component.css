@@ -1,6 +1,10 @@
+
+
+
 button.mat-button{
   float: right;
   font-size: 20px;
+  outline: none;
 }
 
 .mat-dialog-content {
@@ -114,7 +118,10 @@ a.register:hover{
 }
 
 div.invalid-feedback{
-  text-align: center;
+  text-align: left;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 5px;
 }
 
 button.facebook-button{
@@ -155,6 +162,12 @@ a.register:hover{
 img.fw-logo{
   width: 280px;
   height: 51px;
+}
+
+.spin{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
 }
 @media (max-width: 600px) {
   .mat-dialog-content {
@@ -228,5 +241,15 @@ img.fw-logo{
   img.fw-logo{
     width: 280px;
     height: 51px;
+  }
+
+  .spin{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .spin img{
+    width:25px;
   }
 }

@@ -207,6 +207,12 @@ button.filter-button{
   -webkit-text-fill-color: transparent;
 }
 
+button.filter-button.checked{
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 button.filter-button:hover {
   background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
   -webkit-background-clip: text;
@@ -296,5 +302,39 @@ span.price.max{
   span.price.max{
     float: right;
   }
-  
+
+  button.filter-button{
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    outline:none;
+    padding: 0px 16px;
+    background: #404040;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@media (max-width: 600px)  {
+  button.filter-button{
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    outline:none;
+    padding: 0px 16px;
+    background: #404040;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  mat-toolbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    height: 48px;
+    padding:0;
+  }
 }
