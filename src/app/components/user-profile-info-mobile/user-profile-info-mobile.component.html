@@ -5,16 +5,7 @@
 
       <div class="header">
         <div class="username">
-          <img *ngIf=!userProfile src="../../../assets/back.png" class="go-back" (click)="goBackPage()" /> {{user.username}}</div>
-
-      </div>
-
-<!--      TODO: do we need this block?-->
-      <div class="top-row">
-          <span *ngIf="isVisibleGoBackButton()" class="top-row__back-btn" (click)="goBack()">
-            <i class="fas fa-chevron-left"></i>
-          </span>
-        <div class="top-row__title">{{ user.username }}</div>
+          <img *ngIf=!userProfile src="assets/back.png" class="go-back" (click)="goBackPage()" /> {{user.username}}</div>
       </div>
 
       <div class="user-section">

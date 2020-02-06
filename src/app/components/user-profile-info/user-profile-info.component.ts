@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Routes, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { LocationService } from '../../services/location.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { Observable, Subscription } from 'rxjs';
@@ -49,6 +50,7 @@ export class UserProfileInfoComponent implements OnInit {
     public dialogService: DialogService,
     public router: Router,
     public configService: ConfigService,
+    public location: LocationService
   ) { }
 
   ngOnInit() {
@@ -157,7 +159,7 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   goBackPage() {
-    window.history.back();
+    this.location.goBack();
   }
 
   ngOnDestroy(): void {

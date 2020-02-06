@@ -17,6 +17,7 @@ import {
 
 import { FilePreviewOverlayRef } from '../components/file-preview-overlay/file-preview-overlay-ref';
 import { FollowingListMobileComponent } from '../components/following-list-mobile/following-list-mobile.component';
+import { MessageService } from './message.service';
 
 interface FilePreviewDialogConfig {
   panelClass?: string;
@@ -49,7 +50,8 @@ export class DialogService {
     public dialog: MatDialog,
     private overlay: Overlay,
     private injector: Injector,
-    private rendererFactory: RendererFactory2
+    private rendererFactory: RendererFactory2,
+    private messageService: MessageService
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
@@ -63,7 +65,7 @@ export class DialogService {
     // Attach ComponentPortal to PortalHost
     //overlayRef.attach(filePreviewPortal);
 
-    const dialogRef = new FilePreviewOverlayRef(overlayRef);
+    const dialogRef = new FilePreviewOverlayRef(overlayRef, this.messageService);
     const overlayComponent = this.attachDialogContainer(
       overlayRef,
       dialogConfig,

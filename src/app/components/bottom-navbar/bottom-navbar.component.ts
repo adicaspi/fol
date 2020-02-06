@@ -109,7 +109,7 @@ export class BottomNavbarComponent implements OnInit {
     this.profile = true;
     this.feed = false;
     this.explore = false;
-    this.router.navigate(['profile', this.userService.userId], {queryParams: {fromBottom: true}});
+    this.router.navigate(['profile', this.userService.userId]);
   }
 
   settingsPage() {

@@ -18,16 +18,8 @@ export class UserProfileInfoMobileComponent extends UserProfileInfoComponent {
     public dialogService: DialogService,
     public router: Router,
     public configService: ConfigService,
-    private location: LocationService
+    public location: LocationService
   ) {
-    super(userService, activatedRoute, dialogService, router, configService);
-  }
-
-  goBack() {
-    this.location.goBack();
-  }
-
-  isVisibleGoBackButton() {
-    return this.activatedRoute.snapshot.queryParamMap.get('fromBottom') !== 'true';
+    super(userService, activatedRoute, dialogService, router, configService, location);
   }
 }

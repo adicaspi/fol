@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../../services/location.service';
 import { UserProfileInfoComponent } from '../user-profile-info/user-profile-info.component';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
@@ -16,8 +17,10 @@ export class UserProfileInfoDesktopComponent extends UserProfileInfoComponent {
     public activatedRoute: ActivatedRoute,
     public dialogService: DialogService,
     public router: Router,
-    public configService: ConfigService, ) {
-    super(userService, activatedRoute, dialogService, router, configService);
+    public configService: ConfigService,
+    public location: LocationService
+  ) {
+    super(userService, activatedRoute, dialogService, router, configService, location);
   }
 
 }
