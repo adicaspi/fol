@@ -43,7 +43,7 @@ div.icon-img .fa{
 }
 
 .bottom-navbar .icon-img.active{
-  background:  rgba(255,80,170,0.9);
+  color:  rgba(255,80,170,0.9);
 }
 
 img.fw-logo{
