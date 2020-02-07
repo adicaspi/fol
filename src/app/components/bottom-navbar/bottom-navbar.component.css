@@ -44,10 +44,6 @@ div.icon-img .fa{
 
 .bottom-navbar .icon-img.active{
   background:  rgba(255,80,170,0.9);
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
- -webkit-text-fill-color:transparent;
 }
 
 img.fw-logo{
