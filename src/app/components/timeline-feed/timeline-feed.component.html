@@ -34,7 +34,7 @@
           <div class="price">
             {{ post.post.price }}
           </div>
-          <a class="store text-right">
+          <a href="{{ post.storeWebsite }}" target="_blank" class="store text-right">
             {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
           </a>
         </div>
