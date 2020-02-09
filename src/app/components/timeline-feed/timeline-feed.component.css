@@ -6,7 +6,7 @@
 .spinner{
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 112px;
 }
 
 .store.text-right:hover{
@@ -385,7 +385,6 @@
     padding: 0;
     overflow-x: hidden;
     width: 100%;
-    /* height: 100vh;  */
   }
 
   .center {

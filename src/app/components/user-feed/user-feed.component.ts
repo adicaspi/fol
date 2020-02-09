@@ -14,6 +14,7 @@ import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MessageService } from '../../services/message.service';
+import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 
 
 @Component({
@@ -55,7 +56,8 @@ export class UserFeedComponent implements OnInit {
     private postService: PostService,
     private errorsService: ErrorsService,
     private scrollHelperService: ScrollHelperService,
-    private massageService: MessageService
+    private massageService: MessageService,
+    private spinner: NgxSpinnerService
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -71,20 +73,22 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.feedService.getNewPosts()
       .pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((posts: FeedReturnObject) => {
           if (!posts.newPosts) {
             this.showNoPostsMessage = true;
-            this.loading = false;
+            //this.loading = false;
           }
           if (this.offset !== posts.offset) {
             this.posts = this.posts.concat(posts.newPosts);
             this.offset = posts.offset;
-            this.loading = false;
+            //this.loading = false;
             this.scrollHelperService.runDataLoaded();
           }
+          this.spinner.hide();
           this.endOfFeed = true;
         });
       });
@@ -92,14 +96,14 @@ export class UserFeedComponent implements OnInit {
     this.massageService.getMessage()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(msg => {
-      if (msg) {
-        if (msg.msg === 'update-feed') {
-          this.posts = [];
-          this.offset = 0;
-          this.getActivatedRoute();
+        if (msg) {
+          if (msg.msg === 'update-feed') {
+            this.posts = [];
+            this.offset = 0;
+            this.getActivatedRoute();
+          }
         }
-      }
-    });
+      });
   }
 
   getActivatedRoute() {
@@ -115,9 +119,11 @@ export class UserFeedComponent implements OnInit {
   onScroll() {
     if (!this.endOfFeed) {
       this.feedService.updateUserFeed(this.id, this.offset);
-      this.loading = true;
+      //this.loading = true;
+      this.spinner.show();
     } else {
-      this.loading = false;
+      //this.loading = false;
+      this.spinner.hide();
     }
   }
 

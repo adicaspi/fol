@@ -1,19 +1,24 @@
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
 </div>
 
-<div class="center">
-  <ngx-masonry *ngIf="!loading" [options]="masonryOptions" [useImagesLoaded]="true">
-    <ngxMasonryItem class="masonry-item" *ngFor="let post of posts">
-      <img [attr.src]="post.postImgSrc" class="image-explore" (click)="openDialog(post)" />
-      <div class="description">
-        {{ post.post.description }}
-      </div>
-    </ngxMasonryItem>
-  </ngx-masonry>
+<div id="main-body">
+  <div class="center">
+    <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
+      <ngxMasonryItem [appMasonryWidth]="windowWidth" class="masonry-item" *ngFor="let post of posts">
+        <img [attr.src]="post.postImgSrc" class="image-explore" (click)="openDialog(post)" />
+        <div class="description">
+          {{ post.post.description }}
+        </div>
+      </ngxMasonryItem>
+    </ngx-masonry>
+  </div>
 </div>
 
 
 
-<div *ngIf="loading" class="spinner">
+<!-- <div *ngIf="loading" class="spinner">
   <app-loading-spinner></app-loading-spinner>
-</div>
+</div> -->
+
+<ngx-spinner bdColor="transparent" color="#ff50aa" size="medium" type="ball-beat">
+</ngx-spinner>
