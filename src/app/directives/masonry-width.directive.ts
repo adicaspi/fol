@@ -11,11 +11,14 @@ export class MasonryWidthDirective implements OnInit {
   constructor(private el: ElementRef) { }
 
   ngOnInit(): void {
-    this.setWidth(this.el.nativeElement);
+    //Change element width if device is mobile
+    if (this.appMasonryWidth < 600) {
+      this.setWidth(this.el.nativeElement);
+    }
   }
 
   setWidth(element: HTMLElement) {
-    console.log("im window width", this.appMasonryWidth);
+
     var masonryItemWidth = ((this.appMasonryWidth - 24) - 12) / 2;
     element.style.width = masonryItemWidth + "px";
 
