@@ -51,13 +51,21 @@ ngxMasonryItem:nth-of-type(5n) {
 }
 }
 @media (max-width: 600px)  {
+  
+  #main-body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
 
   .center {
-    margin-top: 32px;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    overflow-x: hidden;
     background-color: white;
-    width:100%;
-    margin-left: 0;
-    margin-right: 0;
+    padding: 0px 12px;
   }
 
   ngx-masonry{
@@ -65,9 +73,11 @@ ngxMasonryItem:nth-of-type(5n) {
     margin:0 auto;
   } 
 
+
   .masonry-item{
-    width: calc(50% - 6px);
+    padding-bottom: 12px;
   }
+  
 
   .masonry-item:hover {
     opacity: 0.5;
@@ -80,13 +90,13 @@ ngxMasonryItem:nth-of-type(5n) {
   }
 
   .description {
-    width:120px;
-    margin: 8px 10px;
+    margin: 8px 6px;
     background-color: white;
-    font-size: 12px;
     font-weight: 600;
-    font-family: Arial;
-    color: #4d4d4d;
+    color: rgb(51,51,51);
+    font-size: 12px;
+    font-family: inherit;
+    /* color: #4d4d4d; */
   }
 
 }

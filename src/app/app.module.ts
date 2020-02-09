@@ -67,6 +67,7 @@ import { ThousandSuffixesPipe } from './components/product-page-mobile/pipe-tran
 import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
+import { MasonryWidthDirective } from './directives/masonry-width.directive';
 
 
 //I keep the new line
@@ -111,7 +112,8 @@ import { DiscoverPeopleComponent } from './components/discover-people/discover-p
     ThousandSuffixesPipe,
     TermsComponent,
     TermsCookiesComponent,
-    DiscoverPeopleComponent
+    DiscoverPeopleComponent,
+    MasonryWidthDirective
   ],
   imports: [
     BrowserModule,

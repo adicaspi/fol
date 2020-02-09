@@ -31,6 +31,7 @@ export class ExploreFeedComponent implements OnInit {
   loading: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   desktop: boolean;
+  windowWidth: number;
   private feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -86,8 +87,9 @@ export class ExploreFeedComponent implements OnInit {
 
           if (value.width <= 600) {
             this.desktop = false;
-            let w = (value.width);
+            this.masonryOptions.gutter = 12;
           }
+          this.windowWidth = value.width;
         });
   }
 
