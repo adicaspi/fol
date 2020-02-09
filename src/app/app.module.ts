@@ -68,6 +68,7 @@ import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
 import { MasonryWidthDirective } from './directives/masonry-width.directive';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 //I keep the new line
@@ -140,6 +141,7 @@ import { MasonryWidthDirective } from './directives/masonry-width.directive';
     SlideshowModule,
     IgxSliderModule,
     ScrollingModule,
+    NgxSpinnerModule,
     DeviceDetectorModule.forRoot(),
     SharedModule.forRoot()
   ],

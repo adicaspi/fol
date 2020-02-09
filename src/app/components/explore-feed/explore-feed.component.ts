@@ -17,6 +17,7 @@ import { DialogService } from '../../services/dialog.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { MessageService } from '../../services/message.service';
 import * as jquery from 'jquery';
+import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 
 @Component({
   selector: 'app-explore-feed',
@@ -50,10 +51,12 @@ export class ExploreFeedComponent implements OnInit {
     private configService: ConfigService,
     private massageService: MessageService,
     private dialogService: DialogService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     jquery("mat-sidenav-container").css("top", "122px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.id = this.userService.userId;
@@ -61,7 +64,8 @@ export class ExploreFeedComponent implements OnInit {
       .getNewPosts().subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: FeedReturnObject) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
-          this.loading = false;
+          //this.loading = false;
+          this.spinner.hide();
           if (observablePosts.offset == -1) {
             this.endOfFeed = true;
           }
@@ -96,9 +100,11 @@ export class ExploreFeedComponent implements OnInit {
   onScroll() {
     if (!this.endOfFeed) {
       this.feedService.updateExploreFeed(this.id);
-      this.loading = true;
+      //this.loading = true;
+      this.spinner.show();
     } else {
-      this.loading = false;
+      //this.loading = false;
+      this.spinner.hide();
     }
   }
 

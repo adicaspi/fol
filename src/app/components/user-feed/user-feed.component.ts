@@ -13,6 +13,7 @@ import { ErrorsService } from '../../services/errors.service';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MessageService } from '../../services/message.service';
+import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 
 
 @Component({
@@ -52,7 +53,8 @@ export class UserFeedComponent implements OnInit {
     private router: Router,
     private configService: ConfigService,
     private postService: PostService,
-    private massageService: MessageService
+    private massageService: MessageService,
+    private spinner: NgxSpinnerService
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -68,19 +70,21 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
           if (!observablePosts.newPosts) {
             this.showNoPostsMessage = true;
-            this.loading = false;
+            //this.loading = false;
           }
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
-            this.loading = false;
+            //this.loading = false;
           }
+          this.spinner.hide();
           this.endOfFeed = true;
         })
       });
@@ -109,9 +113,11 @@ export class UserFeedComponent implements OnInit {
   onScroll() {
     if (!this.endOfFeed) {
       this.feedService.updateUserFeed(this.id, this.offset);
-      this.loading = true;
+      //this.loading = true;
+      this.spinner.show();
     } else {
-      this.loading = false;
+      //this.loading = false;
+      this.spinner.hide();
     }
   }
 

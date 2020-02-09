@@ -21,6 +21,7 @@ import {
   transition
 } from '@angular/animations';
 import { MessageService } from '../../services/message.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-timeline-feed',
@@ -59,12 +60,14 @@ export class TimelineFeedComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private massageService: MessageService
+    private massageService: MessageService,
+    private spinner: NgxSpinnerService
   ) {
 
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.id = this.userService.getCurrentUser();
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
@@ -73,7 +76,8 @@ export class TimelineFeedComponent implements OnInit {
           if (this.offset != observablePosts.offset) {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
-            this.loading = false;
+            //this.loading = false;
+            this.spinner.hide();
           }
           this.endOfFeed = true;
         })
@@ -111,9 +115,11 @@ export class TimelineFeedComponent implements OnInit {
   onScroll() {
     if (!this.endOfFeed) {
       this.feedService.updateTimelineFeed(this.id, this.offset);
-      this.loading = true;
+      //this.loading = true;
+      this.spinner.show();
     } else {
-      this.loading = false;
+      // this.loading = false;
+      this.spinner.hide();
     }
   }
 
