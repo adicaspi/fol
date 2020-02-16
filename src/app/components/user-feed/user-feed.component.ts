@@ -78,37 +78,6 @@ export class UserFeedComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.feedService.feedFilteringDTO = new FilteringDTO();
-<<<<<<< HEAD
-    this.feedService.getNewPosts()
-      .pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
-        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((posts: FeedReturnObject) => {
-          if (!posts.newPosts) {
-            this.showNoPostsMessage = true;
-            //this.loading = false;
-          }
-          if (this.offset !== posts.offset) {
-            this.posts = this.posts.concat(posts.newPosts);
-            this.offset = posts.offset;
-            //this.loading = false;
-            this.scrollHelperService.runDataLoaded();
-          }
-          this.spinner.hide();
-          this.endOfFeed = true;
-        });
-      });
-    this.getActivatedRoute();
-    this.massageService.getMessage()
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(msg => {
-        if (msg) {
-          if (msg.msg === 'update-feed') {
-            this.posts = [];
-            this.offset = 0;
-            this.getActivatedRoute();
-          }
-        }
-      });
-=======
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
@@ -123,6 +92,7 @@ export class UserFeedComponent implements OnInit {
             if (this.offset != observablePosts.offset) {
               this.posts = this.posts.concat(observablePosts.newPosts);
               this.offset = observablePosts.offset;
+              this.scrollHelperService.runDataLoaded();
             }
             else {
               this.endOfFeed = true;
@@ -145,7 +115,6 @@ export class UserFeedComponent implements OnInit {
         }
       }
     });
->>>>>>> adi/feature/various
   }
 
   getActivatedRoute() {

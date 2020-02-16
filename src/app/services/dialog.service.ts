@@ -65,7 +65,7 @@ export class DialogService {
     // Attach ComponentPortal to PortalHost
     //overlayRef.attach(filePreviewPortal);
 
-    const dialogRef = new FilePreviewOverlayRef(overlayRef, this.messageService);
+    const dialogRef = new FilePreviewOverlayRef(overlayRef);
     const overlayComponent = this.attachDialogContainer(
       overlayRef,
       dialogConfig,
