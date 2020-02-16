@@ -22,6 +22,7 @@ export class GenerateFollowListComponent implements OnInit {
   var: Observable<any>;
   desktop: boolean;
   id: number;
+  userId: number;
   offset: number;
   flag: number;
   dialogTitle: String;
@@ -41,6 +42,7 @@ export class GenerateFollowListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userId = this.userService.userId;
     this.desktop = this.dialogService.desktop;
     this.flag = this.dialogService.followingDialogDataObject.flag;
     this.id = this.dialogService.followingDialogDataObject.userId;
@@ -54,7 +56,6 @@ export class GenerateFollowListComponent implements OnInit {
   }
 
   private processData = followsFeed => {
-    console.log("im follows feed", followsFeed);
     this.followsFeed = this.followsFeed.concat(followsFeed);
     followsFeed.forEach(follower => {
       this.userService.checkIsFollowing(follower.id).subscribe(res => {

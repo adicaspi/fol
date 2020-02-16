@@ -16,7 +16,7 @@
           <span>{{ item['post']['username'] }}</span>
         </span>
         <span class="fill"></span>
-        <span class="follower-button">
+        <span *ngIf="item.post.id != userId" class="follower-button">
           <button type="button" class="btn-follower" (click)="follow(item)">
             {{ item['post']['follows'] ? 'Following' : 'Follow' }}
           </button>
