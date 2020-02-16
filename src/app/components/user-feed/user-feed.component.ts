@@ -14,6 +14,7 @@ import { FeedReturnObject } from '../../models/FeedReturnObject';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MessageService } from '../../services/message.service';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class UserFeedComponent implements OnInit {
   loading: boolean = true;
   endOfFeed: boolean = false;
   showNoPostsMessage: boolean = false;
+  userProfile: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubsription: Subscription
@@ -54,7 +56,8 @@ export class UserFeedComponent implements OnInit {
     private configService: ConfigService,
     private postService: PostService,
     private massageService: MessageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private userService: UserService
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -76,25 +79,35 @@ export class UserFeedComponent implements OnInit {
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
           if (!observablePosts.newPosts) {
-            this.showNoPostsMessage = true;
-            //this.loading = false;
+            this.endOfFeed = true;
+            if (this.posts.length == 0) {
+              this.showNoPostsMessage = true;
+            }
           }
-          if (this.offset != observablePosts.offset) {
-            this.posts = this.posts.concat(observablePosts.newPosts);
-            this.offset = observablePosts.offset;
-            //this.loading = false;
+          else {
+            this.showNoPostsMessage = false;
+            if (this.offset != observablePosts.offset) {
+              this.posts = this.posts.concat(observablePosts.newPosts);
+              this.offset = observablePosts.offset;
+            }
+            else {
+              this.endOfFeed = true;
+            }
           }
           this.spinner.hide();
-          this.endOfFeed = true;
         })
       });
     this.getActivatedRoute();
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
+          this.spinner.show();
           this.posts = [];
           this.offset = 0;
           this.getActivatedRoute();
+        }
+        if (msg.msg == 'no posts') {
+          this.showNoPostsMessage = true;
         }
       }
     });
@@ -104,6 +117,9 @@ export class UserFeedComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(params => {
         this.id = +params['id'];
+        if (this.userService.userId == this.id) {
+          this.userProfile = true;
+        }
         this.feedService.updateUserFeed(this.id, this.offset);
       });
 
@@ -113,10 +129,9 @@ export class UserFeedComponent implements OnInit {
   onScroll() {
     if (!this.endOfFeed) {
       this.feedService.updateUserFeed(this.id, this.offset);
-      //this.loading = true;
       this.spinner.show();
+
     } else {
-      //this.loading = false;
       this.spinner.hide();
     }
   }

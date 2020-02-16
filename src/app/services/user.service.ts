@@ -7,6 +7,7 @@ import {
 import { environment } from '../../environments/environment';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
+import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
@@ -142,14 +143,14 @@ export class UserService {
     ).subscribe(res => { });
   }
 
-  // getUserDetails(id: number): Observable<User> {
-  //   console.log("in get user details");
-  //   return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
-  //   )
-  //     .map(res => {
-  //       return new User(res.id, res.username, res.fullName, res.description, res.email, res.hashedPassword, res.birthDate, res.profileImageAddr)
-  //     });
-  // }
+  discoverPeopleUser(): Observable<Array<DiscoverPeopleDTO>> {
+    return this.http.get<Array<DiscoverPeopleDTO>>(this.globaSoicalURL + this.userId + '/discover-people').pipe().map(res => {
+      let items: any = res;
+      let discoverPeopleArray: Array<DiscoverPeopleDTO> =
+        items.map((doc) => new DiscoverPeopleDTO(doc));
+      return discoverPeopleArray;
+    })
+  }
 
   getUserDetails(id: number): Observable<User> {
     console.log("in get user details");

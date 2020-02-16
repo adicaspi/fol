@@ -10,17 +10,22 @@
 
 .no-posts{
   margin-top: 40px; 
-  max-width: 350px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  border-top: 1px solid rgba(var(--b38,219,219,219),1);
 }
 
 .share-posts{
   font-size: 28px;
   line-height: 32px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+  margin-top: 60px;
   text-align: center;
+  font-weight: 400;
+}
+
+.share-posts.subtitle{
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 5px;
 }
 
 .store.text-right:hover{
@@ -31,6 +36,10 @@
 
 
 @media only screen and (min-width: 900px) {
+  .no-posts{
+    border-top: none;
+  }
+
   .search-results{
     height:100%;   
 }
@@ -165,6 +174,10 @@
  }  
 
 @media (min-width: 600px) and (max-width: 900px) {
+  .no-posts{
+    border-top: none;
+  }
+  
   .search-results {
     height:100%;   
   }

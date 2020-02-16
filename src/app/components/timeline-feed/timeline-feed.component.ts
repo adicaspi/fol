@@ -45,6 +45,8 @@ export class TimelineFeedComponent implements OnInit {
   loading: boolean = true;
   enfOfFeed: boolean = false;
   public following: number;
+  showNoPostsMessage: boolean = false;
+  show_discover: boolean = false;
 
 
   private baseApiUrl = environment.BASE_API_URL;
@@ -73,18 +75,27 @@ export class TimelineFeedComponent implements OnInit {
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
-          if (this.offset != observablePosts.offset) {
-            this.posts = this.posts.concat(observablePosts.newPosts);
-            this.offset = observablePosts.offset;
-            //this.loading = false;
-            this.spinner.hide();
+          if (!observablePosts.newPosts) {
+            this.endOfFeed = true;
+            if (this.posts.length == 0) {
+              this.showNoPostsMessage = true;
+            }
+          } else {
+            this.showNoPostsMessage = false;
+            if (this.offset != observablePosts.offset) {
+              this.posts = this.posts.concat(observablePosts.newPosts);
+              this.offset = observablePosts.offset;
+            } else {
+              this.endOfFeed = true;
+            }
           }
-          this.endOfFeed = true;
+          this.spinner.hide();
         })
       });
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
+          this.spinner.show();
           this.posts = [];
           this.offset = 0;
           this.feedService.updateTimelineFeed(this.id, this.offset);
@@ -115,10 +126,8 @@ export class TimelineFeedComponent implements OnInit {
   onScroll() {
     if (!this.endOfFeed) {
       this.feedService.updateTimelineFeed(this.id, this.offset);
-      //this.loading = true;
       this.spinner.show();
     } else {
-      // this.loading = false;
       this.spinner.hide();
     }
   }
@@ -135,6 +144,11 @@ export class TimelineFeedComponent implements OnInit {
 
   profilePage(post) {
     this.router.navigate(['profile', post['post']['userId']]);
+  }
+
+  discoverPeople() {
+    //this.router.navigate['discover-people'];
+    //this.show_discover = true;
   }
 
   public ngOnDestroy(): void {
