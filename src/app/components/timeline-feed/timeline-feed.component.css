@@ -14,6 +14,33 @@
   cursor: pointer;
 }
 
+.no-posts{
+  margin-top: 15px; 
+  border-top: 1px solid rgba(var(--b38,219,219,219),1);
+}
+
+.share-posts{
+  font-size: 28px;
+  line-height: 32px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.share-posts.subtitle{
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+button.discover-people{
+  outline: none;
+  background: rgba(255,80,170,0.9);
+  color: black;
+}
+
+
 
 @media only screen and (min-width: 900px) {
 

@@ -25,7 +25,7 @@ export class DiscoverPeopleComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.feedService.discoverPeople().pipe(takeUntil(this.onDestroy)).subscribe(res => {
+    this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
       console.log("array", this.discoverPeopleArray);
     })

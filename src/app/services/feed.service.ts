@@ -10,6 +10,7 @@ import { TimelinePost } from '../models/TimelinePost';
 import { FollowItem } from '../models/FollowItem';
 import { FeedReturnObject } from '../models/FeedReturnObject';
 import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
+import { MessageService } from './message.service';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -54,33 +55,33 @@ export class FeedService {
     return this.postsSubject.asObservable();
   }
 
-  //returns time line feed for the user in stupid json format
-  // getTimeLineFeed(
-  //   offset: number,
-  //   userId: number
-  // ): Observable<Array<TimelinePost>> {
-  //   console.log("im timelinefeed");
-  //   return this.http.post<TimelinePost[]>(
-  //     this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.timelinefeedFilteringDTO, { headers: httpOptions.headers }
-  //   );
-  // }
-
   getTimeLineFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
       this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
     ).pipe(
     )
       .map(res => {
-        let posts: any = res['feedPosts'];
-        let offset: any = res['newOffset'];
-        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+        if (res) {
+          let posts: any = res['feedPosts'];
+          let offset: any = res['newOffset'];
+          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
-        let feedReturnObject = new FeedReturnObject();
-        feedReturnObject.newPosts = newPosts;
-        feedReturnObject.offset = offset;
-        return feedReturnObject;
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject;
+        }
 
+        else {
+          let newPosts: any = null;
+          let offset: any = null;
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject
+        }
       });
+
   }
 
 
@@ -90,14 +91,24 @@ export class FeedService {
     ).pipe(
     )
       .map(res => {
-        let posts: any = res['feedPosts'];
-        let offset: any = res['newOffset'];
-        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+        if (res) {
+          let posts: any = res['feedPosts'];
+          let offset: any = res['newOffset'];
+          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
-        let feedReturnObject = new FeedReturnObject();
-        feedReturnObject.newPosts = newPosts;
-        feedReturnObject.offset = offset;
-        return feedReturnObject;
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject;
+        }
+        else {
+          let newPosts: any = null;
+          let offset: any = null;
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject
+        }
 
       });
 
@@ -133,7 +144,7 @@ export class FeedService {
       });;
   }
 
-  discoverPeople(): Observable<Array<DiscoverPeopleDTO>> {
+  discoverPeopleGeneral(): Observable<Array<DiscoverPeopleDTO>> {
     return this.http.get<Array<DiscoverPeopleDTO>>(this.generalURL + '/discover-people').pipe().map(res => {
       let items: any = res;
       let discoverPeopleArray: Array<DiscoverPeopleDTO> =

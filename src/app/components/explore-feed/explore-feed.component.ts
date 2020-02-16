@@ -76,6 +76,7 @@ export class ExploreFeedComponent implements OnInit {
     this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
+          this.spinner.show();
           this.posts = [];
           this.feedService.updateExploreFeed(this.id);
         }

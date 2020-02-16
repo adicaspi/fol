@@ -1,5 +1,6 @@
-<app-loading-spinner class="spinner" *ngIf="showSpinner; else mainPage"></app-loading-spinner>
-<ng-template #mainPage>
+<ngx-spinner bdColor="transparent" color="#ff50aa" size="medium" type="ball-beat">
+</ngx-spinner>
+<div id=#mainPage>
   <div class="title">
     <span class="dialog-title">{{ dialogTitle }}</span>
     <i *ngIf="desktop" (click)="closeModal()" class="fal fa-times"></i>
@@ -16,7 +17,7 @@
           <span>{{ item['post']['username'] }}</span>
         </span>
         <span class="fill"></span>
-        <span class="follower-button">
+        <span *ngIf="item.post.id != userId" class="follower-button">
           <button type="button" class="btn-follower" (click)="follow(item)">
             {{ item['post']['follows'] ? 'Following' : 'Follow' }}
           </button>
@@ -24,4 +25,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</div>

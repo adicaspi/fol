@@ -1,3 +1,15 @@
+<div *ngIf="showNoPostsMessage" class="no-posts">
+  <div class="share-posts">
+    No posts available
+  </div>
+  <div class="share-posts subtitle">
+    Dicsover people to see more fashion items.
+  </div>
+  <div class="share-posts people">
+    <button (click)="discoverPeople()" class="discover-people" mat-button>Discover People</button>
+  </div>
+</div>
+
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
 
   <div id="main-body">

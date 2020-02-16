@@ -11,6 +11,7 @@ import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
 import { DialogService } from '../../services/dialog.service';
 import { ErrorsService } from '../../services/errors.service';
+import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 
 @Component({
   selector: 'app-generate-follow-list',
@@ -23,6 +24,7 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
   var: Observable<any>;
   desktop: boolean;
   id: number;
+  userId: number;
   offset: number;
   flag: number;
   dialogTitle: String;
@@ -36,12 +38,16 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private dialogService: DialogService,
     private router: Router,
-    private location: LocationService
+    private location: LocationService,
+    private errorsService: ErrorsService,
+    private spinner: NgxSpinnerService
     // private dialogRef: MatDialogRef<GenerateFollowListComponent>,
     // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
+    this.userId = this.userService.userId;
     this.desktop = this.dialogService.desktop;
     this.flag = this.dialogService.followingDialogDataObject.flag;
     this.id = this.dialogService.followingDialogDataObject.userId;
@@ -55,7 +61,6 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
   }
 
   private processData = followsFeed => {
-    console.log("im follows feed", followsFeed);
     this.followsFeed = this.followsFeed.concat(followsFeed);
     followsFeed.forEach(follower => {
       this.userService.checkIsFollowing(follower.id).subscribe(res => {
@@ -67,7 +72,8 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
         };
         this.postsToShow.push(postObject);
       });
-      this.showSpinner = false;
+      //this.showSpinner = false;
+      this.spinner.hide();
     });
   };
 
