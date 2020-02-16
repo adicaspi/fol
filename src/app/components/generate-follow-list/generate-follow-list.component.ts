@@ -10,6 +10,7 @@ import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
 import { DialogService } from '../../services/dialog.service';
 import { ErrorsService } from '../../services/errors.service';
+import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 
 @Component({
   selector: 'app-generate-follow-list',
@@ -36,12 +37,14 @@ export class GenerateFollowListComponent implements OnInit {
     private userService: UserService,
     private dialogService: DialogService,
     private router: Router,
-    private errorsService: ErrorsService
+    private errorsService: ErrorsService,
+    private spinner: NgxSpinnerService
     // private dialogRef: MatDialogRef<GenerateFollowListComponent>,
     // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.userId = this.userService.userId;
     this.desktop = this.dialogService.desktop;
     this.flag = this.dialogService.followingDialogDataObject.flag;
@@ -67,7 +70,8 @@ export class GenerateFollowListComponent implements OnInit {
         };
         this.postsToShow.push(postObject);
       });
-      this.showSpinner = false;
+      //this.showSpinner = false;
+      this.spinner.hide();
     });
   };
 
