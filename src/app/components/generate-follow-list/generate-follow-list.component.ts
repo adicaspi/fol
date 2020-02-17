@@ -46,7 +46,7 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.spinner.show();
+    //this.spinner.show();
     this.userId = this.userService.userId;
     this.desktop = this.dialogService.desktop;
     this.flag = this.dialogService.followingDialogDataObject.flag;
@@ -72,8 +72,8 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
         };
         this.postsToShow.push(postObject);
       });
-      //this.showSpinner = false;
-      this.spinner.hide();
+      this.showSpinner = false;
+      //this.spinner.hide();
     });
   };
 

@@ -1,6 +1,7 @@
-<ngx-spinner bdColor="transparent" color="#ff50aa" size="medium" type="ball-beat">
-</ngx-spinner>
-<div id=#mainPage>
+<div *ngIf="showSpinner; else mainPage" class="spin">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<ng-template #mainPage>
   <div class="title">
     <span class="dialog-title">{{ dialogTitle }}</span>
     <i *ngIf="desktop" (click)="closeModal()" class="fal fa-times"></i>
@@ -25,4 +26,4 @@
       </div>
     </div>
   </div>
-</div>
+</ng-template>
