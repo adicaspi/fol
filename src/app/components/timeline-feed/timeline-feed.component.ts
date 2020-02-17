@@ -78,20 +78,18 @@ export class TimelineFeedComponent implements OnInit {
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
-          if (this.offset != observablePosts.offset) { }
-          this.posts = this.posts.concat(observablePosts.newPosts);
-          this.offset = observablePosts.offset;
-          this.scrollHelperService.runDataLoaded();
           if (!observablePosts.newPosts) {
             this.endOfFeed = true;
             if (this.posts.length == 0) {
               this.showNoPostsMessage = true;
             }
-          } else {
+          }
+          else {
             this.showNoPostsMessage = false;
             if (this.offset != observablePosts.offset) {
               this.posts = this.posts.concat(observablePosts.newPosts);
               this.offset = observablePosts.offset;
+              this.scrollHelperService.runDataLoaded();
             } else {
               this.endOfFeed = true;
             }
