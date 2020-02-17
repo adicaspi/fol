@@ -10,6 +10,7 @@ import { FeedService } from '../../services/feed.service';
 import { ErrorsService } from '../../services/errors.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../../services/message.service';
+import { ShoppingNavService } from '../../services/shopping-nav.service';
 
 @Component({
   selector: 'app-mutual-nav',
@@ -18,7 +19,6 @@ import { MessageService } from '../../services/message.service';
 
 })
 export class MutualNavComponent implements OnInit {
-  //mainList = ['Categories', 'Designers', 'Stores', 'Price'];
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild(MatMenuTrigger, { static: false }) categoryController: MatMenuTrigger;
@@ -34,25 +34,21 @@ export class MutualNavComponent implements OnInit {
   showProduct: boolean = false;
   filteringDTO = new FilteringDTO();
   menuChanged: boolean = false;
-
-
-  keys = ['Category', 'Product type', 'Designer', 'Store', 'Price'];
-  categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
-  clothing = [
-    { id: 1, name: 'Tops', checked: false, servername: 'Tops' },
-    { id: 2, name: 'Jackets & Coats', checked: false, servername: 'JacketsOrCoats' },
-    { id: 3, name: 'Dresses & Skirts', checked: false, servername: 'DressesOrSkirts' },
-    { id: 4, name: 'Pants', checked: false, servername: 'Pants' },
-    { id: 5, name: 'Shorts', checked: false, servername: 'Shorts' },
-    { id: 6, name: 'Lingerie', checked: false, servername: 'Lingerie' }
-  ];
+  categories = [];
+  clothing = [];
+  designers = [];
+  stores = [];
   productsToShow = [];
-  designers = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }];
-  stores = [{ id: 1, name: 'ASOS', checked: false }, { id: 8, name: 'ZARA', checked: false }, { id: 3, name: 'Farfetch', checked: false }, { id: 6, name: 'Shopbop', checked: false }, { id: 5, name: 'Shein', checked: false }, { id: 7, name: 'TerminalX', checked: false }, { id: 2, name: 'Net-A-Porter', checked: false }];
 
-  constructor(private formBuilder: FormBuilder, private feedService: FeedService, private massageService: MessageService, private activatedRoute: ActivatedRoute) { }
+
+  constructor(private formBuilder: FormBuilder, private feedService: FeedService, private massageService: MessageService, private activatedRoute: ActivatedRoute, private shoppingNavService: ShoppingNavService) { }
 
   ngOnInit() {
+    this.categories = this.shoppingNavService.desktopMenu;
+    this.clothing = this.shoppingNavService.clothingDesktop;
+    this.designers = this.shoppingNavService.designers;
+    this.stores = this.shoppingNavService.stores;
+
 
     this.categoryForm = this.formBuilder.group({
       category: ['']
@@ -98,6 +94,7 @@ export class MutualNavComponent implements OnInit {
     } else {
       this.filteringDTO.setCategory(null);
       this.showProduct = false;
+      this.filteringDTO.clearProductType();
     }
     this.updateFeedFilteringDTO();
   }
@@ -144,14 +141,6 @@ export class MutualNavComponent implements OnInit {
   }
 
   selectedProduct() {
-    //this.updateFeedFilteringDTO();
-    // var elements = (<HTMLInputElement[]><any>document.getElementsByName("product"));
-    // for (let i = 0; i < elements.length; i++) {
-    //   if (elements[i].checked) {
-    //     console.log(elements[i].value);
-    //     this.filteringDTO.productTypes.push(elements[i].value);
-    //   }
-    // }
   }
 
   selectedStore() {
@@ -178,10 +167,6 @@ export class MutualNavComponent implements OnInit {
         break;
       case "stores":
         this.filteringDTO.clearStores();
-
-
-
-
     }
     this.menuChanged = true;
     this.menuClosed();

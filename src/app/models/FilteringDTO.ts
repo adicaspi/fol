@@ -14,6 +14,10 @@ export class FilteringDTO {
     return this.category != null;
   }
 
+  get productTypeIsFiltered() {
+    return this.productTypes.length;
+  }
+
   get storesIsFiltered() {
     return this.stores.length;
   }

@@ -9,8 +9,8 @@
     </mat-radio-group>
   </mat-menu>
 
-  <button id="product-type" class="filter-button" *ngIf="showProduct" [matMenuTriggerFor]="product" (menuOpened)="menuOpened()"
-    (menuClosed)="menuClosed()">Product Type</button>
+  <button id="product-type" [ngClass]="filteringDTO.productTypeIsFiltered? 'filter-button checked': 'filter-button'" *ngIf="showProduct"
+    [matMenuTriggerFor]="product" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Product Type</button>
   <mat-menu class=checkbox-menu #product="matMenu" xPosition="after">
     <mat-checkbox *ngFor="let product of productsToShow" name="product" [(indeterminate)]="indeterminate" [checked]="product.checked"
       [labelPosition]="labelPosition" [value]="product.id" [disabled]="product.disabled" (click)="$event.stopPropagation();"
