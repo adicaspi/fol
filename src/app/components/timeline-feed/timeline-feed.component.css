@@ -15,8 +15,7 @@
 }
 
 .no-posts{
-  margin-top: 15px; 
-  border-top: 1px solid rgba(var(--b38,219,219,219),1);
+  margin-top: 125px; 
 }
 
 .share-posts{
@@ -502,6 +501,11 @@ button.discover-people{
     font-size: 10px;
     font-weight: 600;
     color: rgb(120,120,120);
+  }
+
+  .no-posts{
+    margin-top: 15px; 
+    border-top: 1px solid rgba(var(--b38,219,219,219),1);
   }
 }
 

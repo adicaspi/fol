@@ -95,8 +95,12 @@ export class TimelineFeedComponent implements OnInit {
             }
           }
           this.spinner.hide();
+        }, error => {
+          console.log("in error1", error);
         })
-      });
+      },
+        error => console.log("error2", error)
+      );
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
@@ -104,6 +108,8 @@ export class TimelineFeedComponent implements OnInit {
           this.posts = [];
           this.offset = 0;
           this.feedService.updateTimelineFeed(this.id, this.offset);
+        } if (msg.msg == 'no posts') {
+          this.showNoPostsMessage = true;
         }
       }
     });

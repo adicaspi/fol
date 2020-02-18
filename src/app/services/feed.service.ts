@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, empty } from 'rxjs';
 import {
   HttpClient,
   HttpHeaders,
@@ -11,6 +11,7 @@ import { FollowItem } from '../models/FollowItem';
 import { FeedReturnObject } from '../models/FeedReturnObject';
 import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 import { MessageService } from './message.service';
+import { catchError } from '../../../node_modules/rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -58,30 +59,23 @@ export class FeedService {
   getTimeLineFeed(userId: number, offset: number): Observable<FeedReturnObject> {
     return this.http.post<TimelinePost[]>(
       this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
-    ).pipe(
-    )
-      .map(res => {
-        if (res) {
-          let posts: any = res['feedPosts'];
-          let offset: any = res['newOffset'];
-          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+    ).pipe().map(res => {
+      if (res) {
+        let posts: any = res['feedPosts'];
+        let offset: any = res['newOffset'];
+        let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
-          let feedReturnObject = new FeedReturnObject();
-          feedReturnObject.newPosts = newPosts;
-          feedReturnObject.offset = offset;
-          return feedReturnObject;
-        }
+        let feedReturnObject = new FeedReturnObject();
+        feedReturnObject.newPosts = newPosts;
+        feedReturnObject.offset = offset;
+        return feedReturnObject;
+      }
 
-        else {
-          let newPosts: any = null;
-          let offset: any = null;
-          let feedReturnObject = new FeedReturnObject();
-          feedReturnObject.newPosts = newPosts;
-          feedReturnObject.offset = offset;
-          return feedReturnObject
-        }
-      });
-
+      else {
+        let feedReturnObject = new FeedReturnObject();
+        return feedReturnObject;
+      }
+    });
   }
 
 
@@ -102,14 +96,9 @@ export class FeedService {
           return feedReturnObject;
         }
         else {
-          let newPosts: any = null;
-          let offset: any = null;
           let feedReturnObject = new FeedReturnObject();
-          feedReturnObject.newPosts = newPosts;
-          feedReturnObject.offset = offset;
           return feedReturnObject
         }
-
       });
 
   }
@@ -132,16 +121,10 @@ export class FeedService {
           feedReturnObject.offset = offset;
           return feedReturnObject;
         } else {
-          let newPosts: any = null;
-          let offset: any = null;
           let feedReturnObject = new FeedReturnObject();
-          feedReturnObject.newPosts = newPosts;
-          feedReturnObject.offset = offset;
           return feedReturnObject
         }
-
-
-      });;
+      });
   }
 
   discoverPeopleGeneral(): Observable<Array<DiscoverPeopleDTO>> {
