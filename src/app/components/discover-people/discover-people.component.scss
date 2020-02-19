@@ -4,7 +4,6 @@
 }
 
 .mat-toolbar{
-  justify-content: center;
   background-color: white;
   border-bottom: 1px solid #000;
 }
@@ -53,7 +52,7 @@ div.scrollmenu {
 .card-item {
   height: 100%;
   width: 236px;
-  height: 344px;
+  height: 360px;
   border-radius: 22px;
   text-align: center;
   padding:16px;
@@ -101,7 +100,7 @@ div.scrollmenu {
 
 .follow-button button{
   width: 100%;
-  background: green;
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
   color:white;
 }
 

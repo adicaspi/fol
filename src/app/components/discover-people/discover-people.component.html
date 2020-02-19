@@ -1,8 +1,10 @@
 <div class="main">
-  <mat-toolbar class="mat-toolbar mat-toolbar-single-row">
+  <mat-toolbar *ngIf="!desktop" class="mat-toolbar mat-toolbar-single-row">
     <img src="../../../assets/FW-Logo-pink5-fat.png" class="logo" />
   </mat-toolbar>
-
+  <div class *ngIf="desktop">
+    <app-navbar></app-navbar>
+  </div>
   <div class="welcome">
     <div class="welcome-title">Welcome to Followear</div>
     <div class="welcome-subtitle">When you follow people, you'll discvoer fashion items they post here.</div>
@@ -39,5 +41,6 @@
 
 </div>
 
-
-<app-bottom-navbar></app-bottom-navbar>
+<div *ngIf="!desktop">
+  <app-bottom-navbar></app-bottom-navbar>
+</div>

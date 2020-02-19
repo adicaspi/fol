@@ -42,6 +42,7 @@ export class NavbarComponent implements OnInit {
   explore: boolean = false;
   profile: boolean = false;
   mobile: boolean = false;
+  showMutualNavBar: boolean = true;
   prevScrollPos = window.pageYOffset;
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
@@ -83,6 +84,9 @@ export class NavbarComponent implements OnInit {
     }
     if (this.router.url.includes('explore')) {
       this.explore = true;
+    }
+    if (this.router.url.includes('discover')) {
+      this.showMutualNavBar = false;
     }
     if (this.userService.userId) {
       this.loggedin = true;
