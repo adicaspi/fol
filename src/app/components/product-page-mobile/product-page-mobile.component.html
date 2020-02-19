@@ -5,8 +5,8 @@
       <img id="back-button" src="../../../assets/back.png">
     </div>
     <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="false" [autoPlayWaitForLazyLoad]="false"
-      showDots="true">
-    </slideshow>
+      [showDots]="imageUrls?.length > 1" [disableSwiping]="imageUrls?.length < 2"></slideshow>
+
   </div>
 
   <div class="center">

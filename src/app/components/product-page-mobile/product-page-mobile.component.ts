@@ -87,9 +87,11 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
-        this.imageUrls.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
-        );
+        if (this.postInfo.thumbnailAddr) {
+          this.imageUrls.push(
+            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+          );
+        }
         this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
         this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
         this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
