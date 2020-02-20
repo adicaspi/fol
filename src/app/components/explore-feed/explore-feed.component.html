@@ -1,6 +1,3 @@
-<div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
-</div>
-
 <div id="main-body">
   <div class="center">
     <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
@@ -15,10 +12,9 @@
 </div>
 
 
+<div class="search-results" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
+</div>
 
-<!-- <div *ngIf="loading" class="spinner">
-  <app-loading-spinner></app-loading-spinner>
-</div> -->
 
 <ngx-spinner bdColor="transparent" color="#ff50aa" size="medium" type="ball-beat">
 </ngx-spinner>

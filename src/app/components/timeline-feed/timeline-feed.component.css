@@ -45,8 +45,12 @@ button.discover-people{
 
   .search-results{
       height:100%;
-      
   }
+
+  /* .spinner-container{
+    position: absolute;
+    bottom: 0;
+  } */
 
   #main-body {
     padding-right: 0px;
@@ -351,11 +355,11 @@ button.discover-people{
   }
     
   .card-text {
-    font-size: 15px;
-    height: 48px;
+    font-size: 13px;
+    height: 56px;
     width: 100%;
     margin-top: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-family: 'helvetica', arial, sans-serif;
   }
 

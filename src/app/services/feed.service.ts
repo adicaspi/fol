@@ -3,7 +3,7 @@ import { Observable, Subject, empty } from 'rxjs';
 import {
   HttpClient,
   HttpHeaders,
-  HttpParams
+  HttpParams, HttpResponse
 } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { TimelinePost } from '../models/TimelinePost';
@@ -56,13 +56,18 @@ export class FeedService {
     return this.postsSubject.asObservable();
   }
 
-  getTimeLineFeed(userId: number, offset: number): Observable<FeedReturnObject> {
-    return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/timeline-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
+  getTimeLineFeed(userId: number, offset: number): Observable<any> {
+    let params = new HttpParams().set('offset', offset.toString());
+    return this.http.post<any>(
+      this.globalFeedURL + userId + '/timeline-feed', this.feedFilteringDTO, {
+        headers: httpOptions.headers,
+        observe: "response",
+        params: params,
+      }
     ).pipe().map(res => {
-      if (res) {
-        let posts: any = res['feedPosts'];
-        let offset: any = res['newOffset'];
+      if (res.status == 200) {
+        let posts: any = res.body['feedPosts'];
+        let offset: any = res.body['newOffset'];
         let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
         let feedReturnObject = new FeedReturnObject();
@@ -70,24 +75,25 @@ export class FeedService {
         feedReturnObject.offset = offset;
         return feedReturnObject;
       }
-
-      else {
-        let feedReturnObject = new FeedReturnObject();
-        return feedReturnObject;
+      if (res.status == 204) {
+        return "endOfFeed";
       }
-    });
+    })
   }
 
 
-  getExploreFeed(userId: number): Observable<FeedReturnObject> {
-    return this.http.post<TimelinePost[]>(
-      this.globalFeedURL + userId + '/explore-feed', this.feedFilteringDTO, { headers: httpOptions.headers }
+  getExploreFeed(userId: number): Observable<any> {
+    return this.http.post<any>(
+      this.globalFeedURL + userId + '/explore-feed', this.feedFilteringDTO, {
+        headers: httpOptions.headers,
+        observe: "response"
+      }
     ).pipe(
     )
       .map(res => {
-        if (res) {
-          let posts: any = res['feedPosts'];
-          let offset: any = res['newOffset'];
+        if (res.status == 200) {
+          let posts: any = res.body['feedPosts'];
+          let offset: any = res.body['newOffset'];
           let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
           let feedReturnObject = new FeedReturnObject();
@@ -95,34 +101,37 @@ export class FeedService {
           feedReturnObject.offset = offset;
           return feedReturnObject;
         }
-        else {
-          let feedReturnObject = new FeedReturnObject();
-          return feedReturnObject
+        if (res.status == 204) {
+          return "endOfFeed";
         }
       });
 
   }
 
-  getUserFeed(userId: number, offset: number): Observable<FeedReturnObject> {
+  getUserFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed?offset=' + offset, this.feedFilteringDTO, { headers: httpOptions.headers }
+      this.globalFeedURL + userId + '/user-feed', this.feedFilteringDTO, {
+        headers: httpOptions.headers,
+        observe: "response",
+        params: params,
+      }
     ).pipe(
     )
       .map(res => {
 
-        if (res) {
-          let posts: any = res['feedPosts'];
-          let offset: any = res['newOffset'];
+        if (res.status == 200) {
+          let posts: any = res.body['feedPosts'];
+          let offset: any = res.body['newOffset'];
           let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
 
           let feedReturnObject = new FeedReturnObject();
           feedReturnObject.newPosts = newPosts;
           feedReturnObject.offset = offset;
           return feedReturnObject;
-        } else {
-          let feedReturnObject = new FeedReturnObject();
-          return feedReturnObject
+        }
+        if (res.status == 204) {
+          return "endOfFeed";
         }
       });
   }

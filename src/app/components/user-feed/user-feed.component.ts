@@ -80,8 +80,8 @@ export class UserFeedComponent implements OnInit {
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
-        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
-          if (!observablePosts.newPosts) {
+        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: any) => {
+          if (observablePosts == "endOfFeed") {
             this.endOfFeed = true;
             if (this.posts.length == 0) {
               this.showNoPostsMessage = true;
@@ -89,14 +89,9 @@ export class UserFeedComponent implements OnInit {
           }
           else {
             this.showNoPostsMessage = false;
-            if (this.offset != observablePosts.offset) {
-              this.posts = this.posts.concat(observablePosts.newPosts);
-              this.offset = observablePosts.offset;
-              this.scrollHelperService.runDataLoaded();
-            }
-            else {
-              this.endOfFeed = true;
-            }
+            this.posts = this.posts.concat(observablePosts.newPosts);
+            this.offset = observablePosts.offset;
+            this.scrollHelperService.runDataLoaded();
           }
           this.spinner.hide();
         })

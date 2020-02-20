@@ -77,8 +77,8 @@ export class TimelineFeedComponent implements OnInit {
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
-        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: FeedReturnObject) => {
-          if (!observablePosts.newPosts) {
+        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: any) => {
+          if (observablePosts == "endOfFeed") {
             this.endOfFeed = true;
             if (this.posts.length == 0) {
               this.showNoPostsMessage = true;
@@ -86,20 +86,16 @@ export class TimelineFeedComponent implements OnInit {
           }
           else {
             this.showNoPostsMessage = false;
-            if (this.offset != observablePosts.offset) {
-              this.posts = this.posts.concat(observablePosts.newPosts);
-              this.offset = observablePosts.offset;
-              this.scrollHelperService.runDataLoaded();
-            } else {
-              this.endOfFeed = true;
-            }
+            this.posts = this.posts.concat(observablePosts.newPosts);
+            this.offset = observablePosts.offset;
+            this.scrollHelperService.runDataLoaded();
           }
           this.spinner.hide();
         }, error => {
-          console.log("in error1", error);
+          console.log(error);
         })
       },
-        error => console.log("error2", error)
+        error => console.log(error)
       );
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {

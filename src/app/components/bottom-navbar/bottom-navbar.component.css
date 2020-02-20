@@ -37,7 +37,7 @@ body{
   color: rgb(118,118,118);
 }
 
-div.icon-img .fa{
+div.icon-img .fa, div.icon-img .fal {
   font-size: 24px;
   
 }

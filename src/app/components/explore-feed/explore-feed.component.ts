@@ -62,14 +62,12 @@ export class ExploreFeedComponent implements OnInit {
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
       .getNewPosts().subscribe(observablePosts => {
-        observablePosts.subscribe((observablePosts: FeedReturnObject) => {
-          this.posts = this.posts.concat(observablePosts.newPosts);
-          //this.loading = false;
-          this.spinner.hide();
+        observablePosts.subscribe((observablePosts: any) => {
           if (observablePosts.offset == -1) {
             this.endOfFeed = true;
           }
-
+          this.posts = this.posts.concat(observablePosts.newPosts);
+          this.spinner.hide();
         })
       });
     this.feedService.updateExploreFeed(this.id);
@@ -101,10 +99,9 @@ export class ExploreFeedComponent implements OnInit {
   onScroll() {
     if (!this.endOfFeed) {
       this.feedService.updateExploreFeed(this.id);
-      //this.loading = true;
       this.spinner.show();
     } else {
-      //this.loading = false;
+
       this.spinner.hide();
     }
   }
