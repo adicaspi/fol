@@ -27,7 +27,6 @@ export class DiscoverPeopleComponent implements OnInit {
   ngOnInit() {
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
-      console.log("array", this.discoverPeopleArray);
     })
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(

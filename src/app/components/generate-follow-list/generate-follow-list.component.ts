@@ -62,6 +62,7 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
 
   private processData = followsFeed => {
     this.followsFeed = this.followsFeed.concat(followsFeed);
+    this.offset = this.followsFeed.length;
     followsFeed.forEach(follower => {
       this.userService.checkIsFollowing(follower.id).subscribe(res => {
         follower.follows = res;
@@ -73,7 +74,6 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
         this.postsToShow.push(postObject);
       });
       this.showSpinner = false;
-      //this.spinner.hide();
     });
   };
 
