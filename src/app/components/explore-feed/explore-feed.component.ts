@@ -63,9 +63,6 @@ export class ExploreFeedComponent implements OnInit {
     this.updateFeed = this.feedService
       .getNewPosts().subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: any) => {
-          if (observablePosts.offset == -1) {
-            this.endOfFeed = true;
-          }
           this.posts = this.posts.concat(observablePosts.newPosts);
           this.spinner.hide();
         })
@@ -94,16 +91,6 @@ export class ExploreFeedComponent implements OnInit {
           }
           this.windowWidth = value.width;
         });
-  }
-
-  onScroll() {
-    if (!this.endOfFeed) {
-      this.feedService.updateExploreFeed(this.id);
-      this.spinner.show();
-    } else {
-
-      this.spinner.hide();
-    }
   }
 
   openDialog(post): void {
