@@ -17,7 +17,7 @@ import * as jquery from 'jquery';
 export class ShoppingNavComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
   placeholder = "search &#xF002";
-  menu = [{ id: 1, name: 'View all', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
+  menu = [{ id: 1, name: 'All', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   clothings = [
     { id: 1, name: 'All Clothing', servername: 'Default', checked: false },
     { id: 2, name: 'Tops', servername: 'Tops', checked: false },
@@ -187,7 +187,7 @@ export class ShoppingNavComponent implements OnInit {
     item.checked = true;
     this.currCategory = item.id - 1;
     this.showProductType = (item && item.name.toLowerCase() === 'clothing');
-    if (item.name == "View all") {
+    if (item.name == "All") {
       this.filteringDTO.category = "Clothing";
     }
     else {
