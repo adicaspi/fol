@@ -8,13 +8,17 @@
   </div>
 
   <div class="filter-buttons" [ngClass]="{'opened': sidenav.opened}">
-    <button (click)="toggleSidenav()" class="filter-buttons__btn toggle"></button>
-    <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear" [disabled]="!filteringChanged">Clear</button>
+    <button *ngIf="!sidenav.opened" (click)="toggleSidenav()" class="filter-buttons__btn toggle"></button>
+    <div *ngIf="sidenav.opened" class="filter-buttons__title title">Filters</div>
+    <!-- <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear" [disabled]="!filteringChanged">Clear</button> -->
   </div>
   
   <mat-sidenav-container class="sidenav-container" [ngClass]="{'opened': sidenav.opened}" [hasBackdrop]="false">
     <mat-sidenav #sidenav mode="over" autoFocus="false" class="mat-sidenav">
-      <div *ngIf="showProductType" class="filter-section">
+
+      <div class="buffer"></div>
+
+      <!-- <div *ngIf="showProductType" class="filter-section">
         <div class="filter-section__title">Product type</div>
         <div *ngFor="let product of clothings; let i = index" [hidden]="i > 2 && openCloseProducts" class="filter-section__prop"
           [ngClass]="{'selected': product.checked}" (click)="onChangeCheckBox('clothings', product)">
@@ -66,8 +70,9 @@
             <polyline fill="none" stroke="#000000" stroke-width="30" stroke-miterlimit="10" points="11.289,64.606 74.289,136.606 200.289,10.606 "></polyline>
           </svg>
         </div>
-      </div>
+      </div> -->
 
     </mat-sidenav>
   </mat-sidenav-container>
+
 </div>
