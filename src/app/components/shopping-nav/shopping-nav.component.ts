@@ -46,7 +46,7 @@ export class ShoppingNavComponent implements OnInit {
 
   ngOnInit() {
     this.menu = this.shoppingNavService.mobileMenu;
-    this.clothings = this.shoppingNavService.clothingMobile;
+    this.clothings = this.shoppingNavService.clothing;
     this.designers = this.shoppingNavService.designers;
     this.stores = this.shoppingNavService.stores;
     this.prices = this.shoppingNavService.prices;
@@ -187,7 +187,7 @@ export class ShoppingNavComponent implements OnInit {
     item.checked = true;
     this.currCategory = item.id - 1;
     this.showProductType = (item && item.name.toLowerCase() === 'clothing');
-    if (item.name == "View all") {
+    if (item.name == "All") {
       this.filteringDTO.category = "Clothing";
     }
     else {

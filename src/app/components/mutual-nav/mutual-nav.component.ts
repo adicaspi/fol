@@ -45,7 +45,7 @@ export class MutualNavComponent implements OnInit {
 
   ngOnInit() {
     this.categories = this.shoppingNavService.desktopMenu;
-    this.clothing = this.shoppingNavService.clothingDesktop;
+    this.clothing = this.shoppingNavService.clothing;
     this.designers = this.shoppingNavService.designers;
     this.stores = this.shoppingNavService.stores;
 

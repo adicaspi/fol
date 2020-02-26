@@ -16,6 +16,7 @@ import { FilteringDTO } from '../../models/FilteringDTO';
 import { MessageService } from '../../services/message.service';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { UserService } from '../../services/user.service';
+import * as jquery from 'jquery';
 
 
 @Component({
@@ -77,6 +78,7 @@ export class UserFeedComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
+    jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {

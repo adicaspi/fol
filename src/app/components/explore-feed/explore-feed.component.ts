@@ -4,7 +4,6 @@ import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
-import * as $ from 'jquery';
 
 import { PostService } from '../../services/post.service';
 

@@ -37,7 +37,6 @@
 
 .cdk-virtual-scroll-data-product-type .scroll-item {
   width: 100px;
-  font-family: FontAwesome, 'Maven Pro', sans-serif;
   font-weight: 200;
   height: 35px;
 }
@@ -46,7 +45,6 @@
   width: 100px;
   height: 35px;
   font-weight: bold;
-  font-family: FontAwesome, 'Maven Pro', sans-serif;
 }
 
 
@@ -123,20 +121,22 @@ button.nav-item {
 .wrapper {
   display: flex;
   flex-direction: row;
-  padding-top: 5px;
   left: 0;
   right: 0;
   top:0;
   z-index: 999;
   background-color: #fff;
-  height: 75px;
+  height: 48px;
+  padding: 0px 2px;
+  //border-bottom: 1px solid #d4d4d4;
+  //border-bottom: 1px solid rgb(38,38,38);
 }
 
 
 .sidenav-container {
   position: fixed;
   right: 0;
-  top: 72px;
+  top: 34px;
   bottom: 0;
   transition: transform .3s;
   transform: translateX(100%);
@@ -158,15 +158,14 @@ button.nav-item {
 .filter-buttons {
   $this: '.filter-buttons';
   overflow-x: auto;
-  padding-right: 20px;
-  padding-left: 16px;
+  padding-right: 12px;
+  padding-left: 14px;
   justify-content: space-between;
   transition: width .3s;
   font-size: 25px;
   box-sizing: border-box;
   display: flex;
   float: right;
-  height: 50px;
 
   &__btn {
     background: none;
@@ -174,6 +173,7 @@ button.nav-item {
     cursor: pointer;
     text-transform: uppercase;
     white-space: nowrap;
+    color: rgb(51,51,51);
 
     &:focus {
       outline: none;
@@ -289,9 +289,6 @@ button.nav-item {
   flex-direction: column;
 }
 
-.scroll-items{
-  height: 250px;
-}
 
 div.mat-checkbox-inner-container{
   position: absolute;
@@ -345,26 +342,26 @@ i.fal.fa-times{
   white-space: nowrap;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .scroll-item a {
   display: inline-block;
-  color: black;
   text-align: center;
-  padding: 14px;
+  padding: 0px 12px;
   text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .a-item{
-  color:black;
-  font-family: 'Maven Pro', sans-serif;
-  letter-spacing: 1px;
+  color: grey;
 }
 
 .a-item-checked{
-  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+ /* background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 600;
+  -webkit-text-fill-color: transparent; */
+  color: rgb(38,38,38);
 }
 

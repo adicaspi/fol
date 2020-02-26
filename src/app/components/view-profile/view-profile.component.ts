@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/User';
+import * as jquery from 'jquery';
 
 @Component({
   selector: 'app-view-profile',
