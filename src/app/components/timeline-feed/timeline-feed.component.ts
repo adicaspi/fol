@@ -23,6 +23,7 @@ import {
 } from '@angular/animations';
 import { MessageService } from '../../services/message.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import * as jquery from 'jquery';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -73,6 +74,7 @@ export class TimelineFeedComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
+    jquery(".wrapper.scroll-bar-container").css("position", "fixed");
     this.id = this.userService.getCurrentUser();
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
