@@ -421,6 +421,7 @@ button.discover-people{
     width: 100%;
     max-width: 450px;
     margin: auto;
+    margin-top: 48px;
     overflow-x: hidden;
     display: flex;
     flex-direction: row;
