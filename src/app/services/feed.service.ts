@@ -148,13 +148,14 @@ export class FeedService {
   getFollowSlaves(
     id: number,
     offset: number,
-  ): Observable<Array<FollowItem>> {
+  ): Observable<any> {
     //get slaves
     let params = new HttpParams().set('offset', offset.toString());
-    return this.http.get<Array<FollowItem>>(
+    return this.http.get<any>(
       this.globaSoicalURL + id + '/follow-slaves',
       {
-        params
+        observe: "response",
+        params: params
       }
     );
   }
@@ -162,12 +163,13 @@ export class FeedService {
   getFollowMasters(
     id: number,
     offset: number,
-  ): Observable<Array<FollowItem>> {
+  ): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
-    return this.http.get<Array<FollowItem>>(
+    return this.http.get<any>(
       this.globaSoicalURL + id + '/follow-masters',
       {
-        params
+        observe: "response",
+        params: params
       }
     )
   }
