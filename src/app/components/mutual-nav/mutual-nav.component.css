@@ -223,18 +223,10 @@ button.filter-button:hover {
 
 .category-radio-group {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 15px 0;
   flex-wrap: wrap;
 }
-
-/* .checkbox-menu{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 15px 0;
-  justify-content: center;
-} */
 
 label.category-label{
   margin:0;
@@ -255,12 +247,41 @@ button.mat-button:hover{
 div.mat-menu-content{
   display: flex;
   flex-direction: row;
-   justify-content: space-evenly;
-   flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+  flex-wrap: wrap;
 }
 
+div.mat-menu-content.category{
+  flex-direction: column;
+}
+
+div.mat-menu-content.product{
+  height: 120px;
+  width: 240px;
+  flex-direction: column;
+}
+
+div.mat-menu-content.designer{
+  height: 120px;
+  width: 250px;
+  flex-direction: column;
+}
+
+div.mat-menu-content.store{
+  height: 150px;
+  width: 240px;
+  flex-direction: column;
+}
+
+/* div.mat-menu-content.price{
+  height: 150px;
+  width: 240px;
+  flex-direction: column;
+} */
+
 div.submit{
-  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* input[type="radio"] {

@@ -11,6 +11,7 @@ import { ErrorsService } from '../../services/errors.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../../services/message.service';
 import { ShoppingNavService } from '../../services/shopping-nav.service';
+import { Button } from '../../../../node_modules/protractor';
 
 @Component({
   selector: 'app-mutual-nav',
@@ -23,6 +24,12 @@ export class MutualNavComponent implements OnInit {
   change: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild(MatMenuTrigger, { static: false }) categoryController: MatMenuTrigger;
   @ViewChildren(MatMenuTrigger) trigger: QueryList<MatMenuTrigger>;
+  @ViewChild('categoryButton', { static: false }) categoryButton: ElementRef;
+  @ViewChild('productButton', { static: false }) productButton: ElementRef;
+  @ViewChild('designerButton', { static: false }) designerButton: ElementRef;
+  @ViewChild('storeButton', { static: false }) storeButton: ElementRef;
+  @ViewChild('priceButton', { static: false }) priceButton: ElementRef;
+
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 5000);
   minValue: number = 0;
@@ -68,8 +75,69 @@ export class MutualNavComponent implements OnInit {
     }
   }
 
-  menuOpened() {
+  categoryMenuClosed() {
+    if (this.menuChanged) {
+      this.updateFeedFilteringDTO();
+      this.menuChanged = false;
+    } else {
+      this.categoryButton.nativeElement.className = 'filter-button';
+    }
+  }
 
+  productMenuClosed() {
+    if (this.menuChanged) {
+      this.updateFeedFilteringDTO();
+      this.menuChanged = false;
+    } else {
+      this.productButton.nativeElement.className = 'filter-button';
+    }
+  }
+
+  designerMenuClosed() {
+    if (this.menuChanged) {
+      this.updateFeedFilteringDTO();
+      this.menuChanged = false;
+    } else {
+      this.designerButton.nativeElement.className = 'filter-button';
+    }
+  }
+
+  storeMenuClosed() {
+    if (this.menuChanged) {
+      this.updateFeedFilteringDTO();
+      this.menuChanged = false;
+    } else {
+      this.storeButton.nativeElement.className = 'filter-button';
+    }
+  }
+
+  priceMenuClosed() {
+    if (this.menuChanged) {
+      this.updateFeedFilteringDTO();
+      this.menuChanged = false;
+    } else {
+      this.priceButton.nativeElement.className = 'filter-button';
+    }
+  }
+
+  categoryMenuOpened() {
+    this.categoryButton.nativeElement.className = 'filter-button checked';
+  }
+
+  productMenuOpened() {
+    this.productButton.nativeElement.className = 'filter-button checked';
+  }
+
+  designerMenuOpened() {
+    this.designerButton.nativeElement.className = 'filter-button checked';
+  }
+
+  storeMenuOpened() {
+    this.storeButton.nativeElement.className = 'filter-button checked';
+  }
+
+  priceMenuOpened() {
+    this.priceButton.nativeElement.className = 'filter-button checked';
   }
 
   categoryValue() {

@@ -1,60 +1,75 @@
 <mat-toolbar>
 
-  <button id="category" [ngClass]="filteringDTO.categoryIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="category">Category</button>
-  <mat-menu #category="matMenu" xPosition="after">
-    <mat-radio-group class="category-radio-group" (change)="onChange($event)" aria-label="Select an option">
-      <mat-radio-button *ngFor="let category of categories" [value]="category.name" [id]="category.id" [checked]="category.checked">
-        <label class="category-label"> {{category.name}}</label>
-      </mat-radio-button>
-    </mat-radio-group>
-  </mat-menu>
-
-  <button id="product-type" [ngClass]="filteringDTO.productTypeIsFiltered? 'filter-button checked': 'filter-button'" *ngIf="showProduct"
-    [matMenuTriggerFor]="product" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Product Type</button>
-  <mat-menu class=checkbox-menu #product="matMenu" xPosition="after">
-    <mat-checkbox *ngFor="let product of productsToShow" name="product" [(indeterminate)]="indeterminate" [checked]="product.checked"
-      [labelPosition]="labelPosition" [value]="product.id" [disabled]="product.disabled" (click)="$event.stopPropagation();"
-      (change)="onChangeCheckBox('products',$event,product)">
-      {{product.name}}
-    </mat-checkbox>
-
-    <div class="submit">
-      <button (click)="selectedProduct()">apply</button>
-      <button (click)="clearSelection(productsToShow,'productTypes')">clear</button>
+  <button #categoryButton [ngClass]="filteringDTO.categoryIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="category"
+    (menuOpened)="categoryMenuOpened()" (menuClosed)="categoryMenuClosed()">Category</button>
+  <mat-menu #category="matMenu" xPosition="before">
+    <div class="mat-menu-content category">
+      <mat-radio-group class="category-radio-group" (change)="onChange($event)" aria-label="Select an option">
+        <mat-radio-button *ngFor="let category of categories" [value]="category.name" [id]="category.id" [checked]="category.checked">
+          <label class="category-label"> {{category.name}}</label>
+        </mat-radio-button>
+      </mat-radio-group>
     </div>
   </mat-menu>
 
-  <button id="designer" [ngClass]="filteringDTO.designersIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="designer"
-    (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Designer</button>
-  <mat-menu #designer="matMenu" xPosition="after" class=checkbox-menu>
-    <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (change)="onChangeCheckBox('designers',$event,designer)"
-      (click)="$event.stopPropagation();"> {{designer.name}}
-    </mat-checkbox>
-    <div class="submit">
-      <button (click)="selectedDesigner()">apply</button>
-      <button (click)="clearSelection(designers,'designers')">clear</button>
+  <button #productButton [ngClass]="filteringDTO.productTypeIsFiltered? 'filter-button checked': 'filter-button'" *ngIf="showProduct"
+    [matMenuTriggerFor]="product" (menuOpened)="productMenuOpened()" (menuClosed)="productMenuClosed()">Product Type</button>
+  <mat-menu class=checkbox-menu #product="matMenu" xPosition="before">
+    <div class="menu-wrapper">
+      <div class="mat-menu-content product">
+        <mat-checkbox *ngFor="let product of productsToShow" name="product" [(indeterminate)]="indeterminate" [checked]="product.checked"
+          [labelPosition]="labelPosition" [value]="product.id" [disabled]="product.disabled" (click)="$event.stopPropagation();"
+          (change)="onChangeCheckBox('products',$event,product)">
+          {{product.name}}
+        </mat-checkbox>
+      </div>
+      <div class="submit">
+        <button (click)="selectedProduct()">apply</button>
+        <button (click)="clearSelection(productsToShow,'productTypes')">clear</button>
+      </div>
     </div>
   </mat-menu>
 
-  <button id="store" [ngClass]="filteringDTO.storesIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="store"
-    (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Store</button>
-  <mat-menu #store="matMenu" xPosition="after" class=checkbox-menu>
-    <mat-checkbox *ngFor="let store of stores" class="example-margin" name="store" [value]="store.id" [checked]="store.checked"
-      [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeCheckBox('stores',$event,store)"> {{store.name}}
-    </mat-checkbox>
-    <div class="submit">
-      <button (click)="selectedStore()">apply</button>
-      <button (click)="clearSelection(stores,'stores')">clear</button>
+  <button #designerButton [ngClass]="filteringDTO.designersIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="designer"
+    (menuOpened)="designerMenuOpened()" (menuClosed)="designerMenuClosed()">Designer</button>
+  <mat-menu #designer="matMenu" xPosition="before" class=checkbox-menu>
+    <div class="menu-wrapper">
+      <div class="mat-menu-content designer">
+        <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (change)="onChangeCheckBox('designers',$event,designer)"
+          (click)="$event.stopPropagation();"> {{designer.name}}
+        </mat-checkbox>
+      </div>
+      <div class="submit">
+        <button (click)="selectedDesigner()">apply</button>
+        <button (click)="clearSelection(designers,'designers')">clear</button>
+      </div>
     </div>
   </mat-menu>
+
+  <button #storeButton [ngClass]="filteringDTO.storesIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="store"
+    (menuOpened)="storeMenuOpened()" (menuClosed)="storeMenuClosed()">Store</button>
+  <mat-menu #store="matMenu" xPosition="before" class="checkbox-menu">
+    <div class="menu-wrapper">
+      <div class="mat-menu-content store">
+        <mat-checkbox *ngFor="let store of stores" class="example-margin" name="store" [value]="store.id" [checked]="store.checked"
+          [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeCheckBox('stores',$event,store)"> {{store.name}}
+        </mat-checkbox>
+      </div>
+      <div class="submit">
+        <button (click)="selectedStore()">apply</button>
+        <button (click)="clearSelection(stores,'stores')">clear</button>
+      </div>
+    </div>
+  </mat-menu>
+
 
 
 
   <!-- <button mat-button [matMenuTriggerFor]="price">Price</button> -->
 
-  <button id="price" [ngClass]="filteringDTO.priceIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="price"
-    (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">Price</button>
-  <mat-menu #price="matMenu" xPosition="after">
+  <button #priceButton [ngClass]="filteringDTO.priceIsFiltered? 'filter-button checked': 'filter-button'" [matMenuTriggerFor]="price"
+    (menuOpened)="priceMenuOpened()" (menuClosed)="priceMenuClosed()">Price</button>
+  <mat-menu #price="matMenu" xPosition="before">
     <div class="price-container">
       <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="5000" [(ngModel)]="priceRange" (click)="$event.stopPropagation(); ">
       </igx-slider>
