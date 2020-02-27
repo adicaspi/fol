@@ -229,6 +229,7 @@ button.filter-button:hover {
 
 label.category-label{
   margin:0;
+  margin-left: 5px;
   font-size: 12px;
   margin-right: 0px;
   font-weight: 600;
