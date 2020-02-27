@@ -232,6 +232,7 @@ label.category-label{
   margin:0;
   font-size: 12px;
   margin-right: 0px;
+  font-weight: 550;
 }
 
 button.mat-button:hover{
@@ -282,6 +283,7 @@ div.mat-menu-content.store{
 div.submit{
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid rgb(235, 235, 235);
 }
 
 /* input[type="radio"] {
