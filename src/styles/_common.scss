@@ -72,25 +72,6 @@ div.mat-slider-thumb{
   background-color: #ff4081 !important;
 }
 
-/* mat-accent mat-slider-thumb{
-  background-color: #ff4081;
-} */
-
-
-/* div.mat-radio-outer-circle{
-  width:15px;
-  height: 15px;
-
-} */
-
-/* div.mat-menu-panel{
- max-width: 400px !important;
- overflow: hidden;
-} */
-
-
-
-
 div.mat-menu-content{
   display: flex;
   flex-direction: row;
@@ -139,7 +120,7 @@ label.mat-checkbox-layout{
 }
 
 div.mat-checkbox-inner-container{
-  margin-right: 3px;
+  margin-right: 5px;
 }
 
 .mat-checkbox{
@@ -173,6 +154,10 @@ mat-toolbar{
 
 .mat-menu-panel{
   margin-top: 25px;
+  border-radius: 4px;
+  border-width: 0.5px !important;
+  border-style: solid !important;
+  border-color: rgba(118, 118, 118, 0.28) !important;
 }
 
 @media (min-width: 600px) and (max-width: 900px)  {

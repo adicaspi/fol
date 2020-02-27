@@ -254,6 +254,7 @@ div.mat-menu-content{
 
 div.mat-menu-content.category{
   flex-direction: column;
+  border:none;
 }
 
 div.mat-menu-content.product{
