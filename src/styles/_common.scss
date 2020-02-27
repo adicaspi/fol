@@ -84,14 +84,20 @@ div.mat-menu-content{
 div.mat-radio-container{
   height: 15px;
   width: 15px;
+  margin-right: 5px;
 }
+
 div.mat-radio-outer-circle{
   height: 15px;
   width: 15px;
+  border-color: black;
+  border-width: 0.5px;
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: #ff4081;
+  border-color: black;
+  border-width: 0.5px;
 }
 
 div.mat-radio-inner-circle{
@@ -129,7 +135,8 @@ div.mat-checkbox-inner-container{
 
 span.mat-checkbox-label{
   font-size: 12px;
-  font-weight: 550;
+  font-weight: 600;
+  letter-spacing: .5px;
 }
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background{
@@ -137,7 +144,9 @@ span.mat-checkbox-label{
 }
 
 div.mat-checkbox-frame{
-  border-color: #ff4081;
+  // border-color: #ff4081;
+  border-color: black;
+  border-width: 0.5px !important;
 }
 
 igx-slider{

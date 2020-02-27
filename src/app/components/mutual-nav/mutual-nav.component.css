@@ -163,7 +163,7 @@ button {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  color: rgb(255, 20, 147);
+  color:black;
 }
 
 button:hover {
@@ -224,7 +224,6 @@ button.filter-button:hover {
 .category-radio-group {
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
   flex-wrap: wrap;
 }
 
@@ -232,7 +231,8 @@ label.category-label{
   margin:0;
   font-size: 12px;
   margin-right: 0px;
-  font-weight: 550;
+  font-weight: 600;
+  letter-spacing: .5px;
 }
 
 button.mat-button:hover{
@@ -241,8 +241,8 @@ button.mat-button:hover{
 
 .checkbox-menu{
   display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 div.mat-menu-content{
@@ -254,7 +254,6 @@ div.mat-menu-content{
 
 div.mat-menu-content.category{
   flex-direction: column;
-  border:none;
 }
 
 div.mat-menu-content.product{
