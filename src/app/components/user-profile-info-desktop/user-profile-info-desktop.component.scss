@@ -70,7 +70,7 @@ span.text {
   -webkit-background-clip: text;
   color: transparent;
   margin-top: 6px;
-  margin-left: 24px;
+  // margin-left: 24px;
 
 
   &.following {
@@ -88,7 +88,7 @@ span.text {
 div.upper-description-div{
   display: flex;
   flex-direction: row;
-  // justify-content: space-between;
+  justify-content: space-between;
   margin-bottom: 22px;
   width: 275px;
   position: relative;
@@ -119,10 +119,14 @@ div.upper-description-div{
   border-radius: 50%;
 }
 
+.setting-container {
+  padding-left: 16px;
+}
+
 .settings {
-  font-size: 20px;
+  font-size: 23px;
   cursor: pointer;
-  margin-left: 32px;
+  // margin-left: 32px;
   margin-top: 3px;
 }
 
