@@ -164,6 +164,7 @@ mat-toolbar{
 .mat-menu-panel{
   margin-top: 25px;
   border-radius: 4px;
+  max-width: 380px !important;
   border-width: 0.5px !important;
   border-style: solid !important;
   border-color: rgba(118, 118, 118, 0.28) !important;
