@@ -157,7 +157,15 @@ export class FeedService {
         observe: "response",
         params: params
       }
-    );
+    ).pipe().map(res => {
+      if (res.status == 200) {
+        let followsArray: any = res.body;
+        return followsArray;
+      }
+      if (res.status == 204) {
+        return "endOfFeed";
+      }
+    });
   }
 
   getFollowMasters(
@@ -171,6 +179,14 @@ export class FeedService {
         observe: "response",
         params: params
       }
-    )
+    ).pipe().map(res => {
+      if (res.status == 200) {
+        let followsArray: any = res.body;
+        return followsArray;
+      }
+      if (res.status == 204) {
+        return "endOfFeed";
+      }
+    });
   }
 }

@@ -5,9 +5,12 @@
   <div class="share-posts subtitle">
     Dicsover people to see more fashion items.
   </div>
-  <div class="share-posts people">
+  <div *ngIf="!showDiscover" class="share-posts people">
     <button (click)="discoverPeople()" class="discover-people" mat-button>Discover People</button>
   </div>
+</div>
+<div *ngIf="showDiscover" class="discover">
+  <app-discvoer-people-user></app-discvoer-people-user>
 </div>
 
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">

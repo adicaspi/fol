@@ -1,15 +1,10 @@
 <div class="main">
-  <mat-toolbar *ngIf="!desktop" class="mat-toolbar mat-toolbar-single-row">
-    <img src="../../../assets/FW-Logo-pink5-fat.png" class="logo" />
-  </mat-toolbar>
-  <div class *ngIf="desktop">
+  <div *ngIf="!desktop" class="back-button-container" (click)="goBackPage()">
+    <img id="back-button" src="../../../assets/back.png">
+  </div>
+  <!-- <div class="navbar" *ngIf="desktop">
     <app-navbar></app-navbar>
-  </div>
-  <div class="welcome">
-    <div class="welcome-title">Welcome to Followear</div>
-    <div class="welcome-subtitle">When you follow people, you'll discvoer fashion items they post here.</div>
-  </div>
-
+  </div> -->
   <div class="main-body">
     <div class="center">
       <div *ngFor="let item of discoverPeopleArray" class="card-item-wrapeer">

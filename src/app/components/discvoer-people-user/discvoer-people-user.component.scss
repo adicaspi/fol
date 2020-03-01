@@ -2,6 +2,10 @@
   height: 100%;
 }
 
+.navbar{
+  height: 70px;
+}
+
 .mat-toolbar{
   background-color: white;
   border-bottom: 1px solid #000;
@@ -174,5 +178,23 @@ div.main-body {
     width: 40%;
     height: initial;
     object-fit: cover;
+  }
+
+  .back-button-container {
+    z-index: 1;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-color: white;
+  }
+  
+  #back-button {
+    height: 16px;
+    position: relative;
+    top: 4px;
+    left: 4px;
   }
 }

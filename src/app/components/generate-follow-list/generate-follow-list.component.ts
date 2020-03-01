@@ -32,6 +32,7 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
   postsToShow = [];
   showSpinner: boolean = true;
   followingUsersChanged: boolean = false;
+  endOfFeed: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
     private feedService: FeedService,
@@ -61,20 +62,26 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
   }
 
   private processData = followsFeed => {
-    this.followsFeed = this.followsFeed.concat(followsFeed);
-    this.offset = this.followsFeed.length;
-    followsFeed.forEach(follower => {
-      this.userService.checkIsFollowing(follower.id).subscribe(res => {
-        follower.follows = res;
-        let baseAPI = this.baseApiUrl + '/image?s3key=';
-        let postObject = {
-          post: follower,
-          imgSrc: baseAPI + follower.profileImageAddr
-        };
-        this.postsToShow.push(postObject);
+    if (followsFeed == "endOfFeed") {
+      this.endOfFeed = true;
+      console.log("end of");
+    }
+    else {
+      this.followsFeed = this.followsFeed.concat(followsFeed);
+      this.offset = this.followsFeed.length;
+      followsFeed.forEach(follower => {
+        this.userService.checkIsFollowing(follower.id).subscribe(res => {
+          follower.follows = res;
+          let baseAPI = this.baseApiUrl + '/image?s3key=';
+          let postObject = {
+            post: follower,
+            imgSrc: baseAPI + follower.profileImageAddr
+          };
+          this.postsToShow.push(postObject);
+        });
       });
-      this.showSpinner = false;
-    });
+    }
+    this.showSpinner = false;
   };
 
   generateFollowsMasters(offset: number) {
@@ -102,7 +109,20 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
       item['post']['follows'] = true;
     }
     this.followingUsersChanged = true;
+  }
 
+  onScroll() {
+    if (!this.endOfFeed) {
+      if (this.flag) {
+        this.generateFollowsMasters(this.offset);
+      }
+      else {
+        this.generateFollowsSlaves(this.offset);
+      }
+      this.showSpinner = true;
+    } else {
+      this.showSpinner = false;
+    }
   }
 
   userProfile(user) {

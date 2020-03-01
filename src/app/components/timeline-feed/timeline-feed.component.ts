@@ -48,7 +48,7 @@ export class TimelineFeedComponent implements OnInit {
   enfOfFeed: boolean = false;
   public following: number;
   showNoPostsMessage: boolean = false;
-  show_discover: boolean = false;
+  showDiscover: boolean = false;
 
 
   private baseApiUrl = environment.BASE_API_URL;
@@ -102,6 +102,7 @@ export class TimelineFeedComponent implements OnInit {
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
+          this.showDiscover = false;
           this.spinner.show();
           this.posts = [];
           this.offset = 0;
@@ -156,8 +157,9 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   discoverPeople() {
-    this.router.navigate(['discover-people-user', this.id]);
-    //this.show_discover = true;
+    //this.router.navigate(['discover-people-user', this.id]);
+    //this.showNoPostsMessage = false;
+    this.showDiscover = true;
   }
 
   public ngOnDestroy(): void {

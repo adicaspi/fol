@@ -6,6 +6,7 @@ import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { UserService } from '../../services/user.service';
+import { LocationService } from '../../services/location.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class DiscvoerPeopleUserComponent implements OnInit {
     private configService: ConfigService,
     private dialogService: DialogService,
     private router: Router,
+    private location: LocationService,
     private userService: UserService) { }
 
   ngOnInit() {
@@ -58,6 +60,10 @@ export class DiscvoerPeopleUserComponent implements OnInit {
 
   profilePage(item) {
     this.router.navigate(['profile', item.userId]);
+  }
+
+  goBackPage() {
+    this.location.goBack();
   }
 
   ngOnDestroy(): void {
