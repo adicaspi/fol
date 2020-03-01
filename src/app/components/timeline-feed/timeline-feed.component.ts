@@ -156,7 +156,7 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   discoverPeople() {
-    //this.router.navigate['discover-people'];
+    this.router.navigate(['discover-people-user', this.id]);
     //this.show_discover = true;
   }
 

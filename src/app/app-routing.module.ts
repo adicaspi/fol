@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
+import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
   { path: 'feed-discover-people', component: DiscoverPeopleComponent },
+  { path: 'discover-people-user/:id', component: DiscvoerPeopleUserComponent }
 
 ];
 

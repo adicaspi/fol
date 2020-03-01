@@ -69,6 +69,7 @@ import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
 import { MasonryWidthDirective } from './directives/masonry-width.directive';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
 
 
 //I keep the new line
@@ -114,7 +115,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TermsComponent,
     TermsCookiesComponent,
     DiscoverPeopleComponent,
-    MasonryWidthDirective
+    MasonryWidthDirective,
+    DiscvoerPeopleUserComponent
   ],
   imports: [
     BrowserModule,
