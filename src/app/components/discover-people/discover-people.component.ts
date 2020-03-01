@@ -47,7 +47,6 @@ export class DiscoverPeopleComponent implements OnInit {
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {
-      console.log("in else", postId);
       this.router.navigate(['product-page', postId]);
     }
   }

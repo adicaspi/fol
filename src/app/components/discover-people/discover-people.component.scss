@@ -1,5 +1,4 @@
 .main{
-  background-color: #F6F6F6;
   height: 100%;
 }
 
@@ -13,17 +12,17 @@
 }
 
 .welcome{
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-bottom: 24px;
-  padding-top: 24px;
   text-align: center;
-  font-family: 'Maven Pro', sans-serif;
+  margin-right: auto;
+  margin-left: auto;
   margin-bottom: 30px;
-  margin-top: 60px;
+  margin-top: 90px;
+  font-family: 'Maven Pro', sans-serif;
+  
 }
 
 .welcome-title{
@@ -38,22 +37,47 @@
   letter-spacing: 0.5px;
 }
 
-div.scrollmenu {
+div.main-body {
+ 
+}
+
+.center{
   display: flex;
   flex-direction: row;
-  overflow: auto;
-  white-space: nowrap;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 600px;
+}
+
+.upper-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user{
+  display: flex;
+  flex-direction: row;
+}
+
+.user-metrics{
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-top: auto;
+  font-size: 12px;
+  margin-bottom: auto;
 }
 
 .card-item-wrapeer{
-  width: 252px;
-  height: 388px;
+  
 }
 
 .card-item {
-  height: 100%;
   width: 236px;
-  height: 360px;
   border-radius: 22px;
   text-align: center;
   padding:16px;
@@ -63,18 +87,24 @@ div.scrollmenu {
   flex-direction: column;
 }
 
-.user-image img{
-  width:88px;
-  height: 88px;
+.user-image{
+  display: flex;
+  flex-direction: row;
+}
+
+.user img{
+  width:40px;
+  height: 40px;
   border-radius: 50%;
-  display: block;
-  margin: 0 auto;
 }
 
 .user-info{
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
+  line-height: 20px;
+  margin-left: 10px;
+  font-size: 12px;
+  align-items: baseline;
 }
 
 .username{
@@ -82,21 +112,18 @@ div.scrollmenu {
 }
 
 .user-posts{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   margin-top: 15px;
 }
 
 .user-posts img{
-  width: 76px;
+  width: 100px;
   height: 110px;
   object-fit: cover;
   margin: 1px;
 }
 
 .follow-button{
-  margin-top: 25px;
+  
 }
 
 .follow-button button{
@@ -105,82 +132,47 @@ div.scrollmenu {
   color:white;
 }
 
-
-
-.cdk-virtual-scroll-data-source {
-  ::ng-deep {
-    .scroll-viewport {
-      height: 388px;
-    }
-
-    .scroll-viewport .cdk-virtual-scroll-content-wrapper {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-
-    .card-item-wrapeer{
-      width: 252px;
-    }
-
-    .card-item {
-      height: 100%;
-      width: 236px;
-      height: 344px;
-      border-radius: 22px;
-      text-align: center;
-      padding:16px;
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .user-image img{
-      width:88px;
-      height: 88px;
-      border-radius: 50%;
-      display: block;
-      margin: 0 auto;
-    }
-
-    .user-info{
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .username{
-      font-weight: bold;
-    }
-
-    .user-posts{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      margin-top: 15px;
-    }
-
-    .user-posts img{
-      width: 76px;
-      height: 110px;
-      object-fit: cover;
-      margin: 1px;
-    }
-
-    .follow-button{
-      margin-top: 25px;
-    }
-
-    .follow-button button{
-      width: 100%;
-      background: green;
-      color:white;
-    }
-  }
-}
-
 @media (max-width: 600px)  {
+  .center{
+    width: 100%;
+  }
+
   .welcome{
-    margin-top: 0;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .card-item-wrapeer{
+    width: 100%;
+  }
+
+  .card-item {
+    height: 100%;
+    width: 100%;
+    border-radius: 22px;
+    text-align: center;
+    padding:16px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .upper-card{
+    justify-content: space-evenly;
+  }
+
+  .user-posts{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .user-posts img{
+    width: 40%;
+    height: initial;
+    object-fit: cover;
   }
 }
