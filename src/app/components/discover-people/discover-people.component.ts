@@ -7,6 +7,7 @@ import { DialogService } from '../../services/dialog.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { UserService } from '../../services/user.service';
 
+
 @Component({
   selector: 'app-discover-people',
   templateUrl: './discover-people.component.html',
