@@ -5,6 +5,8 @@ import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorsService } from '../../services/errors.service';
 import { Subscription } from 'rxjs';
+import { ConfigService } from '../../services/config.service';
+import { LocationService } from '../../services/location.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -15,17 +17,20 @@ export class ForgotPasswordComponent implements OnInit {
   error: any;
   forgotPassForm: FormGroup;
   resetPassForm: FormGroup;
-
+  private WindowSizeSubscription: Subscription;
   submitted = false;
   submittedreset = false;
   valid: boolean = false;
   userEmail: string;
   wrongPassUser: boolean = false;
+  desktop: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private errorsService: ErrorsService
+    private errorsService: ErrorsService,
+    private configService: ConfigService,
+    private location: LocationService
   ) {
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
@@ -33,6 +38,17 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
+
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+        });
     this.forgotPassForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -56,14 +72,15 @@ export class ForgotPasswordComponent implements OnInit {
     return this.resetPassForm.controls;
   }
 
+  goBackPage() {
+    this.location.goBack();
+  }
+
   onSubmitForm() {
     this.submitted = true;
 
     if (this.forgotPassForm.status == 'VALID') {
-      console.log(this.forgotPassForm.status, 'in valid');
-
       let email = this.forgotPassForm.value.email;
-      console.log('im email', email);
       this.userEmail = email;
       let res = {
         username: email
@@ -76,7 +93,6 @@ export class ForgotPasswordComponent implements OnInit {
         error => {
           if (this.error.error == 'Invalid User') {
             this.wrongPassUser = true;
-            console.log('im wrongpass', this.wrongPassUser);
           }
         }
       );
