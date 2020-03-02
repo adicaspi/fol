@@ -45,11 +45,11 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.menu = this.shoppingNavService.mobileMenu;
-    this.clothings = this.shoppingNavService.clothing;
-    this.designers = this.shoppingNavService.designers;
-    this.stores = this.shoppingNavService.stores;
-    this.prices = this.shoppingNavService.prices;
+    this.shoppingNavService.mobileMenu.map(val => this.menu.push(Object.assign({}, val)));
+    this.shoppingNavService.clothing.map(val => this.clothings.push(Object.assign({}, val)));
+    this.shoppingNavService.designers.map(val => this.designers.push(Object.assign({}, val)));
+    this.shoppingNavService.stores.map(val => this.stores.push(Object.assign({}, val)));
+    this.shoppingNavService.prices.map(val => this.prices.push(Object.assign({}, val)));
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -65,7 +65,6 @@ export class ShoppingNavComponent implements OnInit {
 
   onChangeCheckBox(key, elem) {
     if (key === 'prices') {
-
       if (!elem.checked) {
         elem.checked = true;
         if (this.priceIsSelected) {
@@ -92,7 +91,6 @@ export class ShoppingNavComponent implements OnInit {
         elem.checked = true;
         this.filteringDTO.setStores(elem);
         this.filteringChanged = true;
-
       } else {
         elem.checked = false;
         this.filteringDTO.removeStore(elem);
