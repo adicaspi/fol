@@ -32,7 +32,7 @@ export class DiscoverPeopleComponent implements OnInit {
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
-          if (value.width >= 600) {
+          if (value.width > 600) {
             this.desktop = true;
           }
 

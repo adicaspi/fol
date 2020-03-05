@@ -170,6 +170,9 @@ mat-toolbar{
   border-color: rgba(118, 118, 118, 0.28) !important;
 }
 
+.mat-checkbox-checkmark-path{
+  stroke: pink !important;
+}
 @media (min-width: 600px) and (max-width: 900px)  {
 
   mat-toolbar.mat-toolbar.mat-toolbar-single-row {

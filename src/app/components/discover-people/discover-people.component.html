@@ -2,15 +2,46 @@
   <mat-toolbar *ngIf="!desktop" class="mat-toolbar mat-toolbar-single-row">
     <img src="../../../assets/FW-Logo-pink5-fat.png" class="logo" />
   </mat-toolbar>
-  <div class *ngIf="desktop">
-    <app-navbar></app-navbar>
-  </div>
+
   <div class="welcome">
     <div class="welcome-title">Welcome to Followear</div>
     <div class="welcome-subtitle">When you follow people, you'll discvoer fashion items they post here.</div>
   </div>
+  <div class="desktop-wrapper" *ngIf="desktop">
+    <div class="nav">
+      <app-navbar></app-navbar>
+    </div>
+    <div class="main-body">
+      <div class="center">
+        <div *ngFor="let item of discoverPeopleArray" class="card-item-wrapeer">
+          <div class="card-item">
+            <div class="upper-card">
+              <div class="user">
+                <img [src]="item.userAvatar" alt="" (click)="profilePage(item)">
+                <div class="user-metrics">
+                  <div class="username">{{item.username}}</div>
+                  <div class="fullname">{{item.numFollowers}} followers</div>
+                </div>
+              </div>
+              <div (click)="profilePage(item)" class="user-info">
+              </div>
+              <div class="follow-button">
+                <button mat-button (click)="follow(item)">Follow</button>
+              </div>
+            </div>
+            <div class="user-posts">
+              <div *ngFor="let post of item.items ; let i = index">
+                <img *ngIf="i<3" [src]="post.imageAddr" alt="" (click)="openDialog(item,post.postId)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="main-body">
+
+  <div *ngIf="!desktop" class="main-body">
     <div class="center">
       <div *ngFor="let item of discoverPeopleArray" class="card-item-wrapeer">
         <div class="card-item">
@@ -42,12 +73,10 @@
     </div>
 
 
-
+    <div class="bottom-navbar">
+      <app-bottom-navbar></app-bottom-navbar>
+    </div>
 
   </div>
 
-</div>
-
-<div *ngIf="!desktop">
-  <app-bottom-navbar></app-bottom-navbar>
 </div>

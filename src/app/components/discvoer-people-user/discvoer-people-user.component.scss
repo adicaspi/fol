@@ -2,10 +2,6 @@
   height: 100%;
 }
 
-.navbar{
-  height: 70px;
-}
-
 .mat-toolbar{
   background-color: white;
   border-bottom: 1px solid #000;
@@ -15,34 +11,12 @@
   width:40px;
 }
 
-.welcome{
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 30px;
-  margin-top: 90px;
-  font-family: 'Maven Pro', sans-serif;
-  
-}
-
-.welcome-title{
-  font-size: 22px;
-  line-height: 26px;
-}
-
-.welcome-subtitle{
-  font-size: 14px;
-  line-height: 18px;
-  color: grey;
-  letter-spacing: 0.5px;
-}
-
 div.main-body {
  
+}
+
+.nav{
+  margin-top: 70px;
 }
 
 .center{
@@ -52,13 +26,68 @@ div.main-body {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  width: 600px;
+  width: 100%;
 }
+
+.card-item-wrapeer{
+  width:50%;
+  display: flex;
+  justify-content: center;
+}
+
+.user-posts img{
+  object-fit: cover;
+  margin: 1px;
+}
+
+.user img{
+  width:40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.username{
+  font-weight: bold;
+}
+
+.follow-button button{
+  width: 100%;
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  color:white;
+}
+
+
+.back-button-container {
+  z-index: 1;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+#back-button {
+  height: 16px;
+  position: relative;
+  top: 4px;
+  left: 4px;
+}
+
+
+@media (min-width: 900px)  {
+  .user-posts img{
+    width: 142px;
+    height: 200px;
+  }
+
 
 .upper-card{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 432px;
 }
 
 .user{
@@ -76,12 +105,10 @@ div.main-body {
   margin-bottom: auto;
 }
 
-.card-item-wrapeer{
-  
-}
+
 
 .card-item {
-  width: 236px;
+  // width: 236px;
   border-radius: 22px;
   text-align: center;
   padding:16px;
@@ -117,14 +144,11 @@ div.main-body {
 
 .user-posts{
   margin-top: 15px;
+  display: flex;
+  flex-direction: row;
 }
 
-.user-posts img{
-  width: 100px;
-  height: 110px;
-  object-fit: cover;
-  margin: 1px;
-}
+
 
 .follow-button{
   
@@ -134,6 +158,91 @@ div.main-body {
   width: 100%;
   background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
   color:white;
+}
+}
+
+@media (min-width: 600px) and (max-width: 900px)  {
+  .card-item-wrapeer{
+    width:45%;
+    margin-top:20px;
+  }
+
+  .card-item {
+    border-radius: 22px;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-posts img{
+    width: 90px;
+    height: 140px;
+  }
+
+  .upper-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 270px;
+  }
+
+.user{
+  display: flex;
+  flex-direction: row;
+}
+
+.user-metrics{
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-top: auto;
+  font-size: 12px;
+  margin-bottom: auto;
+}
+
+.user-image{
+  display: flex;
+  flex-direction: row;
+}
+
+.user img{
+  width:40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-info{
+  display: flex;
+  flex-direction: column;
+  line-height: 20px;
+  margin-left: 10px;
+  font-size: 12px;
+  align-items: baseline;
+}
+
+.username{
+  font-weight: bold;
+}
+
+.user-posts{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+.follow-button{
+  
+}
+
+.follow-button button{
+  width: 100%;
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+  color:white;
+}
 }
 
 @media (max-width: 600px)  {
@@ -162,8 +271,30 @@ div.main-body {
   }
 
   .upper-card{
+    display: flex;
     justify-content: space-evenly;
   }
+
+  .user{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .user img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .user-metrics {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-top: auto;
+    margin-left: 10px;
+    margin-bottom: auto;
+    font-size: 12px;
+}
 
   .user-posts{
     display: flex;
@@ -172,12 +303,12 @@ div.main-body {
     justify-content: center;
     width: 100%;
     height: 100%;
+    margin-top: 15px;
   }
 
   .user-posts img{
     width: 40%;
     height: initial;
-    object-fit: cover;
   }
 
   .back-button-container {
@@ -197,4 +328,5 @@ div.main-body {
     top: 4px;
     left: 4px;
   }
+
 }
