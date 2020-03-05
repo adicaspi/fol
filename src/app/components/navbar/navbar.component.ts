@@ -85,7 +85,7 @@ export class NavbarComponent implements OnInit {
     if (this.router.url.includes('explore')) {
       this.explore = true;
     }
-    if (this.router.url.includes('feed-discover-people')) {
+    if (this.router.url.includes('feed-discover-people') || this.router.url.includes('discover-people-user')) {
       this.showMutualNavBar = false;
     }
     if (this.userService.userId) {
