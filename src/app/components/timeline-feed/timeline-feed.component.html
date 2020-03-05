@@ -1,13 +1,10 @@
 <div *ngIf="showNoPostsMessage" class="no-posts">
-  <div class="share-posts">
-    No posts available
-  </div>
   <div class="share-posts subtitle">
-    Dicsover people to see more fashion items.
+    There are no items matching these filters :(
   </div>
-  <div *ngIf="!showDiscover" class="share-posts people">
-    <button (click)="discoverPeople()" class="discover-people" mat-button>Discover People</button>
-  </div>
+  <button (click)="discoverPeople()" class="share-posts button">
+    Discover People
+  </button>
 </div>
 <div *ngIf="showDiscover" class="discover">
   <app-discvoer-people-user></app-discvoer-people-user>
