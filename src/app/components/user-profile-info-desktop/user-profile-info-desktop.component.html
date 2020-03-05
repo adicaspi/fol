@@ -9,13 +9,14 @@
         <div class="description">
           <div class="upper-description-div">
             <div class="user-name">{{ user.username }}</div>
-            <div *ngIf="!userProfile; else settings">
-              <button type="button" class="button-follow setiings" (click)="follow()">
-                {{ follows ? 'following' : 'follow' }}
+            <div class="setting-container" *ngIf="!userProfile; else settings">
+              <button type="button" class="button-follow setiings"
+              [ngClass]="{'following': follows}" (click)="follow()">
+                {{ follows ? 'Following' : 'Follow' }}
               </button>
             </div>
             <ng-template #settings>
-              <div class="settings">
+              <div class="settings setting-container">
                 <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
                 <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
                   <div class="mat-menu-content">

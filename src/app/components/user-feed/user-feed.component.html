@@ -1,16 +1,17 @@
 <div *ngIf="showNoPostsMessage" class="no-posts">
   <div *ngIf="userProfile" class="no-posts-message">
-    <div class="share-posts">
-      Start sharing fashion items
-    </div>
     <div class="share-posts subtitle">
-      When you share items, they will appear on your profile.
+      You haven't uploaded any fashion items yet
     </div>
+    <button class="share-posts button">
+      Start Uploading
+    </button>
   </div>
-  <div *ngIf="!userProfile" class="share-posts">
-    No Posts Available
+  <div *ngIf="!userProfile" class="share-posts subtitle">
+    dandan hasn't uploaded any fashion items yet
   </div>
 </div>
+
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
   <div id="main-body">
     <div class="center">
