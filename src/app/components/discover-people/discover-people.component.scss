@@ -2,79 +2,48 @@
   height: 100%;
 }
 
-.mat-toolbar{
-  background-color: white;
-  border-bottom: 1px solid #000;
-}
-
-.mat-toolbar img{
-  width:40px;
-}
-
-.welcome{
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 30px;
-  margin-top: 90px;
-  font-family: 'Maven Pro', sans-serif;
-}
-
-.welcome-title{
-  font-size: 22px;
-  line-height: 26px;
-}
-
-.welcome-subtitle{
-  font-size: 14px;
-  line-height: 18px;
-  color: grey;
-  letter-spacing: 0.5px;
-}
-
-div.main-body {
- 
-}
-
 .center{
-  display: flex;
-  flex-direction: row;
   margin: 0 auto;
+  margin-top: 100px;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
 }
 
-.card-item-wrapeer{
-  width:50%;
-  display: flex;
-  justify-content: center;
-}
+// .card-item-wrapeer{
+//   width:50%;
+//   display: flex;
+//   justify-content: center;
+// }
 
-.user-posts img{
-  object-fit: cover;
-  margin: 1px;
-}
+// .user-posts img{
+//   object-fit: cover;
+//   margin: 1px;
+// }
 
-.user img{
-  width:40px;
-  height: 40px;
-  border-radius: 50%;
-}
+// .user img{
+//   width:40px;
+//   height: 40px;
+//   border-radius: 50%;
+// }
 
-.username{
-  font-weight: bold;
-}
+// .username{
+//   font-weight: bold;
+// }
 
 .follow-button button{
   width: 100%;
   background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
   color:white;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Roboto;
+  border-radius: 4px;
+  padding: 8px 16px;
+  letter-spacing: .4px;
 }
 
 
@@ -85,82 +54,82 @@ div.main-body {
   }
 
 
-.upper-card{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 432px;
-}
+  .upper-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 432px;
+  }
 
-.user{
-  display: flex;
-  flex-direction: row;
-}
+  .user{
+    display: flex;
+    flex-direction: row;
+  }
 
-.user-metrics{
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  margin-top: auto;
-  font-size: 12px;
-  margin-bottom: auto;
-}
-
-
-
-.card-item {
-  // width: 236px;
-  border-radius: 22px;
-  text-align: center;
-  padding:16px;
-  margin-right: 16px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.user-image{
-  display: flex;
-  flex-direction: row;
-}
-
-.user img{
-  width:40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.user-info{
-  display: flex;
-  flex-direction: column;
-  line-height: 20px;
-  margin-left: 10px;
-  font-size: 12px;
-  align-items: baseline;
-}
-
-.username{
-  font-weight: bold;
-}
-
-.user-posts{
-  margin-top: 15px;
-  display: flex;
-  flex-direction: row;
-}
+  .user-metrics{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-top: auto;
+    font-size: 12px;
+    margin-bottom: auto;
+  }
 
 
 
-.follow-button{
-  
-}
+  .card-item {
+    // width: 236px;
+    border-radius: 22px;
+    text-align: center;
+    padding:16px;
+    margin-right: 16px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
 
-.follow-button button{
-  width: 100%;
-  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
-  color:white;
-}
+  .user-image{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .user img{
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .user-info{
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+    margin-left: 10px;
+    font-size: 12px;
+    align-items: baseline;
+  }
+
+  .username{
+    font-weight: bold;
+  }
+
+  .user-posts{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+  }
+
+
+
+  .follow-button{
+    
+  }
+
+  .follow-button button{
+    width: 100%;
+    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+    color:white;
+  }
 }
 
 @media (min-width: 600px) and (max-width: 900px)  {
@@ -177,158 +146,145 @@ div.main-body {
     flex-direction: column;
   }
   
-  .user-posts img{
+  .user-posts img {
     width: 90px;
     height: 140px;
   }
 
-  .upper-card{
+  .upper-card {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 270px;
   }
 
-.user{
-  display: flex;
-  flex-direction: row;
-}
-
-.user-metrics{
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  margin-top: auto;
-  font-size: 12px;
-  margin-bottom: auto;
-}
-
-.user-image{
-  display: flex;
-  flex-direction: row;
-}
-
-.user img{
-  width:40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.user-info{
-  display: flex;
-  flex-direction: column;
-  line-height: 20px;
-  margin-left: 10px;
-  font-size: 12px;
-  align-items: baseline;
-}
-
-.username{
-  font-weight: bold;
-}
-
-.user-posts{
-  margin-top: 15px;
-  display: flex;
-  flex-direction: row;
-}
-
-
-
-.follow-button{
-  
-}
-
-.follow-button button{
-  width: 100%;
-  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
-  color:white;
-}
-}
-
-@media (max-width: 600px)  {
-  .center{
-    width: 100%;
-  }
-
-  .welcome{
-    width: 100%;
-    margin-top: 30px;
-  }
-
-  .card-item-wrapeer{
-    width: 100%;
-  }
-
-  .card-item {
-    height: 100%;
-    width: 100%;
-    border-radius: 22px;
-    text-align: center;
-    padding:16px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .upper-card{
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .user{
+  .user {
     display: flex;
     flex-direction: row;
   }
 
-  .user img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-
   .user-metrics {
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
     align-items: baseline;
     margin-top: auto;
-    margin-left: 10px;
-    margin-bottom: auto;
     font-size: 12px;
-}
+    margin-bottom: auto;
+  }
 
-  .user-posts{
+  .user-image {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    margin-top: 15px;
   }
 
-  .user-posts img{
-    width: 40%;
-    height: 200px;
-  }
-
-  .back-button-container {
-    z-index: 1;
-    position: absolute;
-    top: 12px;
-    left: 10px;
-    height: 28px;
-    width: 28px;
+  .user img {
+    width:40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: white;
   }
-  
-  #back-button {
-    height: 16px;
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+    margin-left: 10px;
+    font-size: 12px;
+    align-items: baseline;
+  }
+
+  .username {
+    font-weight: bold;
+  }
+
+  .user-posts{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .follow-button button{
+    width: 100%;
+    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+    color:white;
+  }
+}
+
+@media (max-width: 600px)  {
+
+  .center{
+    width: 100%;
+    margin: auto;
+    padding: 0 12px;
+    margin-top: 48px;
+  }
+
+  .person-wrapper {
+    margin-bottom: 80px;
+  }
+
+  .user-section {
+    display: flex;
     position: relative;
-    top: 4px;
-    left: 4px;
+    margin-bottom: 8px;
+  }
+
+  .user-section div {
+    display: inline-block;
+  }
+
+  img.profile-image {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  .user-info {
+    margin-left: 14px;
+  }
+
+  .user-info div {
+    display: block;
+    color: #363636;
+  }
+
+  .user-info .username {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+
+  .user-info .num-followers {
+    font-size: 12px;
+    color: grey
+  }
+
+  div.follow-button {
+    position: absolute;
+    right: 0;
+    margin-top: 4px;
+    margin-right: 2px;
+  }
+
+  .user-posts {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .user-post-image {
+    width: calc(50% - 6px);
+    margin-right: 12px;
+    object-fit: cover;
+    // border: 1px solid #d4d4d4;
+    margin-top: 12px;
+    border-radius: 12px;
+  }
+
+  .user-post-image:nth-of-type(2n) {
+    margin-right: 0;
   }
 
 }
