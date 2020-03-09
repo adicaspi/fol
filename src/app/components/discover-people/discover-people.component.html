@@ -8,6 +8,9 @@
     <div class="welcome-subtitle">When you follow people, you'll discvoer fashion items they post here.</div>
   </div> -->
 
+  <div *ngIf="desktop">
+    <app-navbar></app-navbar>
+  </div>
   <div class="main-body">
     <div class="center">
       <div *ngFor="let person of discoverPeopleArray" class="person-wrapper">
@@ -23,15 +26,23 @@
           </div>
         </div>
 
-        <div class="user-posts">
+        <div *ngIf="desktop" class="user-posts">
+          <div *ngFor="let post of getItemsDesktop(person.items) ; let i = index" class="user-post-image">
+            <!-- <img [src]="post.imageAddr" alt="" (click)="openDialog(person, post.postId)"> -->
+          </div>
+        </div>
+
+        <div *ngIf="!desktop" class="user-posts">
           <img heightWidthRatio="1.35" class="user-post-image"
-           *ngFor="let post of person.items" [src]="post.imageAddr" alt="" (click)="openDialog(person,post.postId)">
+           *ngFor="let post of person.items" [src]="post.imageAddr" alt="" (click)="openDialog(person, post.postId)">
         </div>
 
       </div>
     </div>
   </div>
-  <app-bottom-navbar></app-bottom-navbar>
+  <div *ngIf="!desktop">
+    <app-bottom-navbar></app-bottom-navbar>
+  </div>
 
   <!-- <div class="desktop-wrapper" *ngIf="desktop">
     <div class="nav">

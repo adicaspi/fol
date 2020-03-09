@@ -2,36 +2,6 @@
   height: 100%;
 }
 
-.center{
-  margin: 0 auto;
-  margin-top: 100px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-}
-
-// .card-item-wrapeer{
-//   width:50%;
-//   display: flex;
-//   justify-content: center;
-// }
-
-// .user-posts img{
-//   object-fit: cover;
-//   margin: 1px;
-// }
-
-// .user img{
-//   width:40px;
-//   height: 40px;
-//   border-radius: 50%;
-// }
-
-// .username{
-//   font-weight: bold;
-// }
-
 .follow-button button{
   width: 100%;
   background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
@@ -46,169 +16,141 @@
   letter-spacing: .4px;
 }
 
-
-@media (min-width: 900px)  {
-  .user-posts img{
-    width: 142px;
-    height: 200px;
-  }
-
-
-  .upper-card{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 432px;
-  }
-
-  .user{
-    display: flex;
-    flex-direction: row;
-  }
-
-  .user-metrics{
-    margin-left: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    margin-top: auto;
-    font-size: 12px;
-    margin-bottom: auto;
-  }
-
-
-
-  .card-item {
-    // width: 236px;
-    border-radius: 22px;
-    text-align: center;
-    padding:16px;
-    margin-right: 16px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .user-image{
-    display: flex;
-    flex-direction: row;
-  }
-
-  .user img{
-    width:40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-
-  .user-info{
-    display: flex;
-    flex-direction: column;
-    line-height: 20px;
-    margin-left: 10px;
-    font-size: 12px;
-    align-items: baseline;
-  }
-
-  .username{
-    font-weight: bold;
-  }
-
-  .user-posts{
-    margin-top: 15px;
-    display: flex;
-    flex-direction: row;
-  }
-
-
-
-  .follow-button{
-    
-  }
-
-  .follow-button button{
-    width: 100%;
-    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
-    color:white;
-  }
+.user-section {
+  display: flex;
+  position: relative;
+  margin-bottom: 6px;
 }
 
-@media (min-width: 600px) and (max-width: 900px)  {
-  .card-item-wrapeer{
-    width:45%;
-    margin-top:20px;
-  }
+.user-section div {
+  display: inline-block;
+}
 
-  .card-item {
-    border-radius: 22px;
-    text-align: center;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
+.user-info div {
+  display: block;
+  color: #363636;
+}
+
+.user-posts {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 600px)  {
+
+  .center{
+    margin: 0 40px;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
   }
   
-  .user-posts img {
-    width: 90px;
-    height: 140px;
+  .person-wrapper {
+    display: inline-block;
+    width: 40%;
   }
 
-  .upper-card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 270px;
-  }
-
-  .user {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .user-metrics {
-    margin-left: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    margin-top: auto;
-    font-size: 12px;
-    margin-bottom: auto;
-  }
-
-  .user-image {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .user img {
-    width:40px;
+  .profile-image {
     height: 40px;
+    width: 40px;
     border-radius: 50%;
   }
 
-  .user-info {
-    display: flex;
-    flex-direction: column;
-    line-height: 20px;
-    margin-left: 10px;
-    font-size: 12px;
-    align-items: baseline;
+  .post-image-container {
+    display: inline-block;
   }
 
-  .username {
-    font-weight: bold;
-  }
-
-  .user-posts{
-    margin-top: 15px;
-    display: flex;
-    flex-direction: row;
-  }
-
-  .follow-button button{
-    width: 100%;
-    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
-    color:white;
+  .user-post-image {
+    width: calc(33% - 12px);
+    display:inline-block;
+    background-color: rgb(90,90,90);
+    padding-top: 51%;
+    margin-right: 12px;
+    border-radius: 4px;
   }
 }
+
+// @media (min-width: 600px) and (max-width: 900px)  {
+//   .card-item-wrapeer{
+//     width:45%;
+//     margin-top:20px;
+//   }
+
+//   .card-item {
+//     border-radius: 22px;
+//     text-align: center;
+//     background-color: white;
+//     display: flex;
+//     flex-direction: column;
+//   }
+  
+//   .user-posts img {
+//     width: 90px;
+//     height: 140px;
+//   }
+
+//   .upper-card {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+//     width: 270px;
+//   }
+
+//   .user {
+//     display: flex;
+//     flex-direction: row;
+//   }
+
+//   .user-metrics {
+//     margin-left: 10px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: baseline;
+//     margin-top: auto;
+//     font-size: 12px;
+//     margin-bottom: auto;
+//   }
+
+//   .user-image {
+//     display: flex;
+//     flex-direction: row;
+//   }
+
+//   .user img {
+//     width:40px;
+//     height: 40px;
+//     border-radius: 50%;
+//   }
+
+//   .user-info {
+//     display: flex;
+//     flex-direction: column;
+//     line-height: 20px;
+//     margin-left: 10px;
+//     font-size: 12px;
+//     align-items: baseline;
+//   }
+
+//   .username {
+//     font-weight: bold;
+//   }
+
+//   .user-posts{
+//     margin-top: 15px;
+//     display: flex;
+//     flex-direction: row;
+//   }
+
+//   .follow-button button{
+//     width: 100%;
+//     background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+//     color:white;
+//   }
+// }
 
 @media (max-width: 600px)  {
 
@@ -223,16 +165,6 @@
     margin-bottom: 80px;
   }
 
-  .user-section {
-    display: flex;
-    position: relative;
-    margin-bottom: 8px;
-  }
-
-  .user-section div {
-    display: inline-block;
-  }
-
   img.profile-image {
     height: 40px;
     width: 40px;
@@ -241,11 +173,6 @@
 
   .user-info {
     margin-left: 14px;
-  }
-
-  .user-info div {
-    display: block;
-    color: #363636;
   }
 
   .user-info .username {
@@ -265,13 +192,6 @@
     right: 0;
     margin-top: 4px;
     margin-right: 2px;
-  }
-
-  .user-posts {
-    display: flex;
-    justify-content: left;
-    flex-direction: row;
-    flex-wrap: wrap;
   }
 
   .user-post-image {
