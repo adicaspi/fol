@@ -46,6 +46,23 @@ div.icon-img .fa, div.icon-img .fal {
   color:  rgba(255,80,170,0.9);
 }
 
+.bottom-navbar .icon-img-home{
+  width: 30px;
+  height: 23px;
+}
+
+.bottom-navbar .icon-img-home.active{
+  background: url("../../../assets/fw_logo_pink.png"); 
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.bottom-navbar .icon-img-home{
+  background: url("../../../assets/fw_logo_grey.png"); 
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
 img.fw-logo{
   vertical-align: baseline;
   width: 32px;
@@ -53,5 +70,9 @@ img.fw-logo{
 
 .link-text{
   font-size: 10px
+}
+
+.bottom-navbar .icon-img.active .link-text{
+  color: rgba(255,80,170,0.9);
 }
   
