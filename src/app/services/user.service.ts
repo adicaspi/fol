@@ -18,6 +18,7 @@ const httpFormDataOptions = {
   })
 }
 
+
 const httpFormDataImage = {
   headers: new HttpHeaders({
     'Content-Type': 'image/jpeg'
@@ -88,11 +89,13 @@ export class UserService {
     );
   }
 
-  updateUserDescription(description: string) {
+  updateUserDescription(description: string): Observable<any> {
+    console.log("in user service", description);
     let params = new HttpParams().set('description', description);
     return this.http.post(
       this.globalInfoURL + this.userId + '/update-description',
       {
+        headers: httpOptions.headers,
         params: params
       }
     );

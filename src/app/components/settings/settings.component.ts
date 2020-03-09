@@ -172,10 +172,11 @@ export class SettingsComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    let updatedDescription = this.settingsForm.get('description').value;
-    if (updatedDescription != this.user.description) {
-      this.userService.updateUserDescription(updatedDescription);
-    }
+    let updatedDescription = this.settingsForm.value.description;
+    // if (updatedDescription != this.user.description) {
+    console.log("desc", typeof updatedDescription);
+    this.userService.updateUserDescription(updatedDescription).subscribe(res => { console.log(res) });
+    //}
     if (this.updateImageProfile) {
       const fd = new FormData();
       console.log("in update image");
