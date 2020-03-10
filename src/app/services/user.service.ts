@@ -37,6 +37,7 @@ export class UserService {
   globalRegisterURL = this.baseApiUrl + '/registration/';
   globaSoicalURL = this.baseApiUrl + '/social/';
   globalInfoURL = this.baseApiUrl + '/user-info/';
+  globalSettingsURL = this.baseApiUrl + '/settings/';
 
   constructor(private http: HttpClient) { }
 
@@ -77,27 +78,49 @@ export class UserService {
   // }
 
   updateProfileImage(fd): Observable<any> {
+    let params = new HttpParams().set('image', fd);
+
+    let headers = new Headers();
+    const httpOptions = {
+      headers: new HttpHeaders()
+    };
+    httpOptions.headers.append('Content-Type', 'multipart/form-data');
+    httpOptions.headers.append('Accept', 'application/json');
     return this.http.post<any>(
-      this.globalInfoURL + this.userId + '/update-profile-image',
+      this.globalSettingsURL + this.userId + '/update-profile-image',
       {
-        headers: httpFormDataOptions.headers
+        headers: httpOptions.headers
       },
-      {
-        params: fd
-      }
+      { params: params }
+
 
     );
   }
 
   updateUserDescription(description: string): Observable<any> {
-    console.log("in user service", description);
     let params = new HttpParams().set('description', description);
     return this.http.post(
-      this.globalInfoURL + this.userId + '/update-description',
-      {
-        headers: httpOptions.headers,
-        params: params
-      }
+      this.globalSettingsURL + this.userId + '/update-description', { headers: httpOptions.headers }, { params: params }
+    );
+  }
+
+  updateFullname(fullName: string): Observable<any> {
+    let params = new HttpParams().set('fullName', fullName);
+    return this.http.post(
+      this.globalSettingsURL + this.userId + '/update-full-name', { headers: httpOptions.headers }, { params: params }
+    );
+  }
+
+  updateEmail(email: string): Observable<any> {
+    let params = new HttpParams().set('email', email);
+    return this.http.post(
+      this.globalSettingsURL + this.userId + '/update-email', { headers: httpOptions.headers }, { params: params }
+    );
+  }
+
+  changePassword(password: any): Observable<any> {
+    return this.http.post(
+      this.globalSettingsURL + this.userId + '/change-password', password, { headers: httpOptions.headers }
     );
   }
 

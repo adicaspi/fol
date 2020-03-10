@@ -58,9 +58,9 @@ export class SettingsComponent implements OnInit {
 
     this.changePasswordForm = this.formBuilder.group(
       {
-        oldPass: ['', Validators.minLength(6)],
-        newPass: ['', Validators.minLength(6)],
-        confirmPass: ['', Validators.required]
+        oldPass: ['', [Validators.required, Validators.minLength(6)]],
+        newPass: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPass: ['', [Validators.required, Validators.minLength(6)]]
       },
       {
         validator: this.MustMatch('newPass', 'confirmPass')
@@ -84,6 +84,10 @@ export class SettingsComponent implements OnInit {
 
   get f() {
     return this.settingsForm.controls;
+  }
+
+  get changePassForm() {
+    return this.changePasswordForm.controls;
   }
 
   updateUser() {
@@ -154,33 +158,39 @@ export class SettingsComponent implements OnInit {
 
   onSubmitChangePassword() {
     this.submittedPass = true;
-    if (this.settingsForm.invalid) {
+    if (this.changePasswordForm.invalid) {
       return;
     }
-    let oldPassForm = this.f.oldPass;
-    let newPassForm = this.f.newPass;
-    let confirmPassForm = this.settingsForm.value.oldPass;
-    if (confirmPassForm != newPassForm) {
-    }
+    let oldPassForm = this.changePasswordForm.value.oldPass;
+    let newPassForm = this.changePasswordForm.value.newPass;
+
     let res = {
-      oldPass: oldPassForm,
-      newPass: newPassForm,
-      confirmPass: confirmPassForm
+      oldPassword: oldPassForm,
+      newPassword: newPassForm,
     };
+    this.userService.changePassword(res).subscribe(res => { });;
   }
 
   onSubmit() {
     this.submitted = true;
 
     let updatedDescription = this.settingsForm.value.description;
-    // if (updatedDescription != this.user.description) {
-    console.log("desc", typeof updatedDescription);
-    this.userService.updateUserDescription(updatedDescription).subscribe(res => { console.log(res) });
-    //}
+    let updatedFullName = this.settingsForm.value.fullname;
+    let updatedEmail = this.settingsForm.value.email;
+    if (updatedDescription != this.user.description) {
+      this.userService.updateUserDescription(updatedDescription).subscribe(res => { });
+    }
+    if (updatedFullName != this.user.fullName) {
+      this.userService.updateFullname(updatedFullName).subscribe(res => { });
+    }
+    if (updatedEmail != this.user.email) {
+      this.userService.updateEmail(updatedEmail).subscribe(res => { });
+    }
+
     if (this.updateImageProfile) {
       const fd = new FormData();
-      console.log("in update image");
       fd.append('image', this.selectedFile, this.selectedFile.name);
+      console.log(this.selectedFile);
       this.userService.updateProfileImage(fd).subscribe(res => {
 
       });

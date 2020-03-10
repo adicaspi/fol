@@ -79,23 +79,23 @@
           <fieldset>
             <div class="form-group">
               <label>Old Password</label>
-              <input type="password" formControlName="oldPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && f.oldPass.errors }"
+              <input type="password" formControlName="oldPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && changePassForm.oldPass.errors }"
               />
-              <div *ngIf="submittedPass && f.oldPass.errors" class="invalid-feedback">
-                <div *ngIf="f.oldPass.errors.required">
+              <div *ngIf="submittedPass && changePassForm.oldPass.errors" class="invalid-feedback">
+                <div *ngIf="changePassForm.oldPass.errors.required">
                   Password is required
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label>New Password</label>
-              <input type="password" formControlName="newPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && f.newPass.errors }"
+              <input type="password" formControlName="newPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && changePassForm.newPass.errors }"
               />
-              <div *ngIf="submittedPass && f.newPass.errors" class="invalid-feedback">
-                <div *ngIf="f.newPass.errors.required">
+              <div *ngIf="submittedPass && changePassForm.newPass.errors" class="invalid-feedback">
+                <div *ngIf="changePassForm.newPass.errors.required">
                   Password is required
                 </div>
-                <div *ngIf="f.newPass.errors.minlength">
+                <div *ngIf="changePassForm.newPass.errors.minlength">
                   Password must be at least 6 characters
                 </div>
               </div>
@@ -104,13 +104,13 @@
             <div class="form-group">
               <label>Confirm New Password</label>
               <input type="password" formControlName="confirmPass" class="form-control" [ngClass]="{
-                  'is-invalid': submittedPass && f.confirmPass.errors
+                  'is-invalid': submittedPass && changePassForm.confirmPass.errors
                 }" />
-              <div *ngIf="submittedPass && f.confirmPass.errors" class="invalid-feedback">
-                <div *ngIf="f.confirmPass.errors.required">
+              <div *ngIf="submittedPass && changePassForm.confirmPass.errors" class="invalid-feedback">
+                <div *ngIf="changePassForm.confirmPass.errors.required">
                   Confirm Password is required
                 </div>
-                <div *ngIf="f.confirmPass.errors.mustMatch">
+                <div *ngIf="changePassForm.confirmPass.errors.mustMatch">
                   Passwords do not match
                 </div>
               </div>
