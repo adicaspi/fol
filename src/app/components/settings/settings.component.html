@@ -67,8 +67,24 @@
                 <button type="button" (click)="onSubmit()">
                   Submit
                 </button>
+                <div class="loading-spinner">
+                  <div *ngIf="loading">
+                    <app-loading-spinner></app-loading-spinner>
+                  </div>
+                </div>
+                <div class="succes-message" *ngIf="showSuccessMsg">
+                  <p class="alert alert-success">
+                    <strong>Success!</strong> your profile was updated.
+                  </p>
+                </div>
+                <div class="error-message" *ngIf="showFailMsg">
+                  <p class="alert alert-danger">
+                    <strong>Failed</strong> to update your profile.
+                  </p>
+                </div>
               </div>
             </div>
+
           </fieldset>
         </form>
       </div>

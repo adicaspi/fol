@@ -37,6 +37,10 @@ export class SettingsComponent implements OnInit {
   button_text: string;
   submittedPass: boolean = false;
   desktop: boolean = true;
+  loading: boolean = false;
+  showSuccessMsg: boolean = false;
+  showFailMsg: boolean = false;
+  timeout: any;
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
 
@@ -168,7 +172,14 @@ export class SettingsComponent implements OnInit {
       oldPassword: oldPassForm,
       newPassword: newPassForm,
     };
-    this.userService.changePassword(res).subscribe(res => { });;
+    this.userService.changePassword(res).subscribe(res => {
+      this.showSuccessMsg = true;
+      this.loading = false
+    }, error => {
+      this.loading = false;
+      this.showFailMsg = true;
+    });
+    this.hideMessage();
   }
 
   onSubmit() {
@@ -178,23 +189,57 @@ export class SettingsComponent implements OnInit {
     let updatedFullName = this.settingsForm.value.fullname;
     let updatedEmail = this.settingsForm.value.email;
     if (updatedDescription != this.user.description) {
-      this.userService.updateUserDescription(updatedDescription).subscribe(res => { });
+      this.loading = true;
+      this.userService.updateUserDescription(updatedDescription).subscribe(res => {
+        this.showSuccessMsg = true;
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        this.showFailMsg = true;
+      });
     }
     if (updatedFullName != this.user.fullName) {
-      this.userService.updateFullname(updatedFullName).subscribe(res => { });
+      this.loading = true;
+      this.userService.updateFullname(updatedFullName).subscribe(res => {
+        this.showSuccessMsg = true;
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        this.showFailMsg = true;
+      });
     }
     if (updatedEmail != this.user.email) {
-      this.userService.updateEmail(updatedEmail).subscribe(res => { });
+      this.loading = true;
+      this.userService.updateEmail(updatedEmail).subscribe(res => {
+        this.showSuccessMsg = true;
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        this.showFailMsg = true;
+      });
     }
 
     if (this.updateImageProfile) {
+      this.loading = true;
       const fd = new FormData();
       fd.append('image', this.selectedFile, this.selectedFile.name);
-      console.log(this.selectedFile);
       this.userService.updateProfileImage(fd).subscribe(res => {
-
+        this.showSuccessMsg = true;
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        //this.showFailMsg = true;
       });
     }
+    this.hideMessage();
+
+  }
+
+  hideMessage() {
+    this.timeout = setTimeout(() => {
+      this.showSuccessMsg = false;
+      this.showFailMsg = false;
+    }, 2000);
   }
 
   public ngOnDestroy(): void {
