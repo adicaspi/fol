@@ -8,7 +8,9 @@
     </button>
   </div>
   <div *ngIf="!userProfile" class="share-posts subtitle">
-    dandan hasn't uploaded any fashion items yet
+    <div *ngIf="currentUser | async ; let currentUser">
+      {{currentUser.username }} hasn't uploaded any fashion items yet
+    </div>
   </div>
 </div>
 

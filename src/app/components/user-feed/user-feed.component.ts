@@ -17,6 +17,7 @@ import { MessageService } from '../../services/message.service';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { UserService } from '../../services/user.service';
 import * as jquery from 'jquery';
+import { User } from '../../models/User';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class UserFeedComponent implements OnInit {
   endOfFeed: boolean = false;
   showNoPostsMessage: boolean = false;
   userProfile: boolean = false;
+  currentUser: Observable<User>;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubsription: Subscription
@@ -99,7 +101,7 @@ export class UserFeedComponent implements OnInit {
         })
       });
     this.getActivatedRoute();
-    this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
+    this.feedSubsription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
           this.spinner.show();
@@ -122,8 +124,11 @@ export class UserFeedComponent implements OnInit {
         if (this.userService.userId == this.id) {
           this.userProfile = true;
         }
+        else {
+          this.currentUser = this.userService.getUserDetails(this.id);
+        }
         this.feedService.updateUserFeed(this.id, this.offset);
-      });
+      })
   }
 
 
