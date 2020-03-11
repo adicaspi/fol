@@ -66,34 +66,9 @@ export class UserService {
     );
   }
 
-  // updateProfileImage(fd): Observable<any> {
-  //   console.log(typeof fd)
-  //   return this.http.post<any>(
-  //     this.globalInfoURL + this.userId + '/update-profile-image',
-  //     fd, {
-  //       headers: httpFormDataImage.headers
-  //     }
-
-  //   );
-  // }
-
   updateProfileImage(fd): Observable<any> {
-    let params = new HttpParams().set('image', fd);
-
-    let headers = new Headers();
-    const httpOptions = {
-      headers: new HttpHeaders()
-    };
-    httpOptions.headers.append('Content-Type', 'multipart/form-data');
-    httpOptions.headers.append('Accept', 'application/json');
     return this.http.post<any>(
-      this.globalSettingsURL + this.userId + '/update-profile-image',
-      {
-        headers: httpOptions.headers
-      },
-      { params: params }
-
-
+      this.globalSettingsURL + this.userId + '/update-profile-image', fd
     );
   }
 
