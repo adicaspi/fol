@@ -136,16 +136,15 @@ ngxMasonryItem:nth-of-type(5n) {
   }
 
   .share-posts.button {
-    display: flex;
+    display: inline;
     font-size: 20px;
     font-weight: bold;
     border: none;
     outline: none;
-  
     background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
-    /* background-clip: text; */
+    background-clip: text;
     -webkit-background-clip: text;
-    /* color: transparent; */
+    color: transparent;
     margin: auto;
     margin-top: 28px !important;
     transition: text-shadow 0.2s;
