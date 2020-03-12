@@ -190,16 +190,6 @@
     cursor: pointer;
   }
 
-  /* .masonry-img .img-main {
-    width: 197px;
-    height: 295px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    border-radius: 5px;
-    object-fit: cover;
-  } */
-
   .masonry-img .img-hover {
     display: none;
   }
@@ -421,6 +411,7 @@
     height:100%; 
     margin: 0;
     padding: 0;  
+    padding-bottom: 55px;
   }
   
   #main-body {
