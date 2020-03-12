@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div class="search-results" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
+<div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
   <div id="main-body">
     <div class="center">
       <div class="card masonry-item" *ngFor="let post of posts">
@@ -44,13 +44,8 @@
         </div>
       </div>
     </div>
-
   </div>
-
-
-  <!-- <div *ngIf="loading" class="spinner">
-    <app-loading-spinner></app-loading-spinner>
-  </div> -->
-
-  <ngx-spinner class="la-ball-beat la-2x user-feed" bdColor="transparent" color="#ff50aa" size="medium" type="ball-beat">
-  </ngx-spinner>
+</div>
+<ngx-spinner class="la-ball-beat la-2x user-feed" bdColor="transparent" [fullScreen]="false" color="#ff50aa" size="medium"
+  type="ball-beat">
+</ngx-spinner>

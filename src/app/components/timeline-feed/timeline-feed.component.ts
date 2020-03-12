@@ -158,8 +158,6 @@ export class TimelineFeedComponent implements OnInit {
 
   discoverPeople() {
     this.router.navigate(['discover-people-user', this.id]);
-    //this.showNoPostsMessage = false;
-    //this.showDiscover = true;
   }
 
   public ngOnDestroy(): void {

@@ -8,6 +8,12 @@ body {
   overflow-x: hidden;
 }
 
+ngx-spinner .overlay{
+  position: relative !important;
+  top: 20px !important;
+  height: 0 !important;
+}
+
 /* .following-list > .mat-dialog-container {
   overflow: hidden !important;
 } */
