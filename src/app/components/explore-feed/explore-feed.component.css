@@ -103,6 +103,7 @@ ngxMasonryItem:nth-of-type(5n) {
     width: 100%;
     max-width: 450px;
     margin: auto;
+    margin-bottom: 60px;
     overflow-x: hidden;
     background-color: white;
     padding: 0px 12px;
