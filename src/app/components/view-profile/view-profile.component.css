@@ -54,3 +54,12 @@ body {
   display: none;
 }
 }
+@media  (max-width: 600px)  {
+
+  .mobile {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+}
