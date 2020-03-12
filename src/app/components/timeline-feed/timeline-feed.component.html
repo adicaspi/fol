@@ -6,9 +6,6 @@
     Discover People
   </button>
 </div>
-<div *ngIf="showDiscover" class="discover">
-  <app-discvoer-people-user></app-discvoer-people-user>
-</div>
 
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
 

@@ -107,8 +107,6 @@ export class TimelineFeedComponent implements OnInit {
           this.posts = [];
           this.offset = 0;
           this.feedService.updateTimelineFeed(this.id, this.offset);
-        } if (msg.msg == 'no posts') {
-          this.showNoPostsMessage = true;
         }
       }
     });

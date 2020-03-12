@@ -109,9 +109,6 @@ export class UserFeedComponent implements OnInit {
           this.offset = 0;
           this.getActivatedRoute();
         }
-        if (msg.msg == 'no posts') {
-          this.showNoPostsMessage = true;
-        }
       }
     });
   }

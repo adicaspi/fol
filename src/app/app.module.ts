@@ -70,6 +70,7 @@ import { DiscoverPeopleComponent } from './components/discover-people/discover-p
 import { MasonryWidthDirective } from './directives/masonry-width.directive';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
+import { DatePipe } from '../../node_modules/@angular/common';
 
 
 //I keep the new line
@@ -174,7 +175,6 @@ import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/d
       useClass: HttpErrorComponent,
       multi: true
     },
-
     { provide: ErrorHandler, useClass: ErrorHandlerComponent },
     ConfigService,
     {

@@ -32,6 +32,7 @@ export class ExploreFeedComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   desktop: boolean;
   windowWidth: number;
+  showNoPostsMessage: boolean = false;
   private feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -56,13 +57,18 @@ export class ExploreFeedComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    jquery("mat-sidenav-container").css("top", "122px");
+    jquery("mat-sidenav-container").css("top", "80px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
       .getNewPosts().subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: any) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
+          if (this.posts.length == 0) {
+            this.showNoPostsMessage = true;
+          } else {
+            this.showNoPostsMessage = false;
+          }
           this.spinner.hide();
         })
       });
@@ -100,6 +106,10 @@ export class ExploreFeedComponent implements OnInit {
     } else {
       this.router.navigate(['product-page', post.post.postId]);
     }
+  }
+
+  discoverPeople() {
+    this.router.navigate(['discover-people-user', this.id]);
   }
 
   public ngOnDestroy(): void {

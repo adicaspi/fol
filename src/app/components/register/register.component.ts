@@ -10,11 +10,13 @@ import { ErrorsService } from '../../services/errors.service';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [DatePipe]
 })
 export class RegisterComponent implements OnInit {
   subscription: Subscription;
@@ -33,10 +35,12 @@ export class RegisterComponent implements OnInit {
   private baseApiUrl = environment.BASE_API_URL;
 
 
+
   // TODO - FIXED TOUCHED INVALID CLASS
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private datePipe: DatePipe,
     private userService: UserService,
     private errorsService: ErrorsService,
     private http: HttpClient,
@@ -56,9 +60,10 @@ export class RegisterComponent implements OnInit {
     if (this.dialogRef) {
       this.dialogRef.updateSize('550px', '580px');
     }
+
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
-      birthDate: ['', Validators.required],
+      birthDate: ['', [Validators.required, Validators.pattern('^\\d*$')]],
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]]
@@ -98,9 +103,22 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  calculateBirthdate(age: string) {
+    let today = new Date();
+    let correctDateFormat = this.datePipe.transform(today, '-MM-dd');
+    let yyyy = this.datePipe.transform(today, 'yyyy');
+    let numericYear = parseInt(yyyy, 10);
+    let numericAge = parseInt(age, 10);
+    let year = numericYear - numericAge;
+    let stringYear = year.toString();
+    let birthDate = stringYear + correctDateFormat;
+    return birthDate;
+
+  }
+
   onSubmitRegister() {
     this.submitted = true;
-    //   stop here if form is invalid
+    // stop here if form is invalid
     if (!this.registerForm.valid) {
       console.log("form not valid");
       return;
@@ -111,8 +129,9 @@ export class RegisterComponent implements OnInit {
     let email = this.registerForm.value.email;
     let username = this.registerForm.value.username;
     let password = this.registerForm.value.password;
-    let birthDate = this.registerForm.value.birthDate;
+    let age = this.registerForm.value.birthDate;
     let fullName = this.registerForm.value.fullName;
+    let birthDate = this.calculateBirthdate(age);
 
     let res = {
       email: email,

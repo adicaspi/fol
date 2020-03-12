@@ -1,3 +1,12 @@
+<div *ngIf="showNoPostsMessage" class="no-posts">
+  <div class="share-posts subtitle">
+    There are no items matching these filters :(
+  </div>
+  <button (click)="discoverPeople()" class="share-posts button">
+    Discover People
+  </button>
+</div>
+
 <div id="main-body">
   <div class="center">
     <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
