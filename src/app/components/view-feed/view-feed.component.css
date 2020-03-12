@@ -2,10 +2,10 @@
   background-color: white;
 }
 
-html,
+/* html,
 body {
   height: 100%;
-}
+} */
 
 @media (min-width: 900px)  {
   .mobile{
