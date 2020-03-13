@@ -416,9 +416,9 @@
     border: none;
     outline: none;
      /* background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%); */
-    background:  rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95);
-    -webkit-background-clip: text;
-    color: transparent;
+    /* -webkit-background-clip: text;
+    color: transparent; */
+    color:  rgba(255,80,170,0.9);
     margin: auto;
     margin-top: 28px !important;
   }
