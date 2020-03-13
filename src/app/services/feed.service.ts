@@ -162,7 +162,7 @@ export class FeedService {
         let followsArray: any = res.body;
         return followsArray;
       }
-      if (res.status == 204) {
+      else {
         return "endOfFeed";
       }
     });
@@ -184,7 +184,7 @@ export class FeedService {
         let followsArray: any = res.body;
         return followsArray;
       }
-      if (res.status == 204) {
+      else {
         return "endOfFeed";
       }
     });
