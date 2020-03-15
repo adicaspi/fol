@@ -29,7 +29,6 @@
         <div *ngIf="desktop" class="user-posts">
           <div *ngFor="let post of getItemsDesktop(person.items) ; let i = index" class="user-post-image"
           [style.background-image]="'url(' + post.imageAddr +')'" (click)="openDialog(person, post.postId)">
-            <!-- <div class="image-div"></div> -->
           </div>
         </div>
 
