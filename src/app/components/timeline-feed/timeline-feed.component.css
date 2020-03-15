@@ -541,11 +541,7 @@
   }
   
   .spinner-container{
-    bottom: 60px;
-  }
-
-  ngx-spinner .overlay{
-    top: 10px !important;
+    bottom: 55px;
   }
 }
 
