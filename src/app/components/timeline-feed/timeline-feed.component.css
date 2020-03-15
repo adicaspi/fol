@@ -541,12 +541,7 @@
   }
   
   .spinner-container{
-<<<<<<< HEAD
-    margin-top: 25px;
-=======
-    margin-top: 45px;
->>>>>>> adi/fix/various
-    bottom: 60px;
+    bottom: 30px;
   }
 }
 
