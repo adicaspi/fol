@@ -50,15 +50,11 @@ div.icon-img .fa, div.icon-img .fal {
 
 .bottom-navbar .icon-img-home.active{
   background: url("../../../assets/fw_sprites.png") -7px -10px; 
-  /* background: url("../../../assets/fw_logo_pink.png"); 
-  background-size: 100%; */
   background-repeat: no-repeat;
 }
 
 .bottom-navbar .icon-img-home{
-   background: url("../../../assets/fw_sprites.png") -57px -10px; 
-  /* background: url("../../../assets/fw_logo_grey.png"); 
-  background-size: 100%; */
+  background: url("../../../assets/fw_sprites.png") -57px -10px; 
   background-repeat: no-repeat;
 }
 

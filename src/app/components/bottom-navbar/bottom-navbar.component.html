@@ -1,7 +1,7 @@
 <div class="bottom-navbar-container">
   <div class="bottom-navbar">
-    <div class="icon-img" [ngClass]="{ active: feed }" (click)="feedPage()">
-      <div class="icon-img-home" [ngClass]="{ active: feed }"></div>
+    <div class="icon-img active" [ngClass]="{ 'icon-img': !feed }" (click)="feedPage()">
+      <div class="icon-img-home active" [ngClass]="{ 'icon-img-home': !feed }"></div>
       <div class="link-text">Home</div>
     </div>
 
