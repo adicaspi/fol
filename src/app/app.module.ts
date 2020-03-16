@@ -71,6 +71,8 @@ import { MasonryWidthDirective } from './directives/masonry-width.directive';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
 import { DatePipe } from '../../node_modules/@angular/common';
+import { ExploreFeedGeneralComponent } from './components/explore-feed-general/explore-feed-general.component';
+import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
 
 
 //I keep the new line
@@ -117,7 +119,9 @@ import { DatePipe } from '../../node_modules/@angular/common';
     TermsCookiesComponent,
     DiscoverPeopleComponent,
     MasonryWidthDirective,
-    DiscvoerPeopleUserComponent
+    DiscvoerPeopleUserComponent,
+    ExploreFeedGeneralComponent,
+    ViewExploreGeneralComponent
   ],
   imports: [
     BrowserModule,

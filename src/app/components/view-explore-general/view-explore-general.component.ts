@@ -1,0 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { ConfigService } from '../../services/config.service';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-view-explore-general',
+  templateUrl: './view-explore-general.component.html',
+  styleUrls: ['./view-explore-general.component.scss']
+})
+export class ViewExploreGeneralComponent implements OnInit {
+  desktop: Boolean = true;
+  error: any = {};
+  private subscription;
+  private anyErrors: boolean;
+  private finished: boolean;
+
+  constructor(
+    private configService: ConfigService,
+    private router: Router,
+  ) { }
+
+  ngOnInit() {
+    this.subscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+        else {
+          this.desktop = true;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+  }
+
+  landingPage() {
+    this.router.navigate(['landing']);
+  }
+
+}

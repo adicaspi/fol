@@ -2,15 +2,35 @@
   background-color: white;
 }
 
+mat-toolbar{
+  background: white;
+}
+
 @media (min-width: 900px)  {
   .mobile{
     display: none;
+  }
+  img.logo {
+    height: 23px;
+    margin-left: 13px;
+    margin-right: 13px;
+    cursor: pointer;
+    position: relative;
+    bottom: 4px;
   }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 900px) {
   .mobile{
     display: none;
+  }
+  img.logo {
+    height: 23px;
+    margin-left: 13px;
+    margin-right: 13px;
+    cursor: pointer;
+    position: relative;
+    bottom: 4px;
   }
 }
 

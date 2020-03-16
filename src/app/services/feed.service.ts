@@ -52,6 +52,10 @@ export class FeedService {
     this.postsSubject.next(this.getExploreFeed(id));
   }
 
+  updateGeneralExploreFeed() {
+    this.postsSubject.next(this.getGeneralExploreFeed());
+  }
+
   getNewPosts(): Observable<any> {
     return this.postsSubject.asObservable();
   }
@@ -105,8 +109,33 @@ export class FeedService {
           return "endOfFeed";
         }
       });
-
   }
+
+  getGeneralExploreFeed(): Observable<any> {
+    return this.http.post<any>(
+      this.generalURL + '/explore-feed', this.feedFilteringDTO, {
+        headers: httpOptions.headers,
+        observe: "response"
+      }
+    ).pipe(
+    )
+      .map(res => {
+        if (res.status == 200) {
+          let posts: any = res.body['feedPosts'];
+          let offset: any = res.body['newOffset'];
+          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject;
+        }
+        if (res.status == 204) {
+          return "endOfFeed";
+        }
+      });
+  }
+
 
   getUserFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());

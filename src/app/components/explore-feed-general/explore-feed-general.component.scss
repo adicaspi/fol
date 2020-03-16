@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  margin-top: 224px;
+}
+
+.no-posts{
+  margin-top: 125px; 
+}
+
+.share-posts{
+  line-height: 32px;
+  text-align: center;
+  margin: 60px 40px 8px;
+}
+
+.share-posts.subtitle{
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 5px;
+  color: #7a7a7a;
+  letter-spacing: -0.2px;
+}
+
+.share-posts.button {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: auto;
+  margin-top: 28px !important;
+  transition: text-shadow 0.2s;
+}
+
+  .share-posts.button:hover {
+   text-shadow: 0 0 12px rgba(33,33,33,.12);
+  }
+
+
+@media (min-width: 600px)  {
+
+.center {
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-top: 100px;
+  background-color: white;
+}
+
+ngx-masonry{
+  margin: 0 auto;
+}
+
+.masonry-item {
+  padding-bottom: 24px;
+}
+
+ngxMasonryItem:nth-of-type(5n) {
+  margin-right: 0px;
+}
+
+.masonry-item:hover {
+  opacity: 0.5;
+}
+
+.masonry-item img {
+  width: 238px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 18px;
+}
+
+.description {
+  width: 218px;
+  margin: 8px 6px;
+  background-color: white;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: Arial;
+  color: #4d4d4d;
+}
+}
+
+@media (max-width: 600px)  {
+  
+  #main-body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .center {
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    margin-bottom: 60px;
+    overflow-x: hidden;
+    background-color: white;
+    padding: 0px 12px;
+  }
+
+  ngx-masonry{
+    width:100%;
+    margin:0 auto;
+  } 
+
+
+  .masonry-item{
+    padding-bottom: 14px;
+  }
+  
+  .masonry-item img {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+  }
+
+  .description {
+    margin: 8px 6px;
+    background-color: white;
+    font-weight: 600;
+    color: #333;
+    font-size: 10px;
+    font-family: inherit;
+    /* color: #4d4d4d; */
+  }
+
+  .share-posts.button {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    /* background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%); */
+    color:  rgba(255,80,170,0.9);
+    margin: auto;
+    margin-top: 28px !important;
+    transition: text-shadow 0.2s;
+  }
+
+}

@@ -17,6 +17,8 @@ import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
 import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
+import { ExploreFeedGeneralComponent } from './components/explore-feed-general/explore-feed-general.component';
+import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
 
 
 const routes: Routes = [
@@ -45,6 +47,7 @@ const routes: Routes = [
   },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'explore/:id', component: ViewExploreComponent },
+  { path: 'explore', component: ViewExploreGeneralComponent },
   { path: 'product-page/:id', component: ProductPageMobileComponent },
   { path: 'following', component: GenerateFollowListComponent },
   { path: 'login', component: LoginComponent },
