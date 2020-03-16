@@ -92,7 +92,7 @@ export class TimelineFeedComponent implements OnInit {
             this.offset = observablePosts.offset;
             this.scrollHelperService.runDataLoaded();
           }
-          //this.spinner.hide();
+          this.spinner.hide();
         }, error => {
           console.log(error);
         })
@@ -136,7 +136,7 @@ export class TimelineFeedComponent implements OnInit {
       this.feedService.updateTimelineFeed(this.id, this.offset);
       this.spinner.show();
     } else {
-      //this.spinner.hide();
+      this.spinner.hide();
     }
   }
 
