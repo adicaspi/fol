@@ -515,7 +515,7 @@
     font-weight: bold;
     border: none;
     outline: none;
-    background-image: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
+    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
