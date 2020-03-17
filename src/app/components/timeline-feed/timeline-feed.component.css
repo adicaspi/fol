@@ -422,6 +422,7 @@
     flex-wrap: wrap;
     background-color: white;
     padding: 0px 12px;
+    min-height: 1px;
   }
   
   .feed-label {
