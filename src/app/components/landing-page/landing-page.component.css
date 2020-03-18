@@ -119,6 +119,10 @@ button.right-button {
   letter-spacing: 3px;
 }
 
+.app-store{
+  display: none;
+}
+
 @media (max-width: 600px) {
   button.right-button.sign-in {
     display: none;
@@ -131,5 +135,16 @@ button.right-button {
   .moto {
     font-family: 'Oswald', sans-serif;
     font-size: 6vw;
+  }
+
+  .app-store{
+    display: flex;
+    justify-content: center;
+    margin-top:30px;
+  }
+
+  .app-store img{
+    height: 38px;
+    width: 118px;
   }
 }
