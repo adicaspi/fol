@@ -66,8 +66,6 @@ export class LandingPageComponent implements OnInit {
     }
   }
 
-
-
   explorePage() {
     this.router.navigate(['/explore']);
   }

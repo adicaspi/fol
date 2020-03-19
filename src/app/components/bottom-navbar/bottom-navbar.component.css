@@ -35,7 +35,7 @@
 }
 
 div.icon-img .fa, div.icon-img .fal {
-  font-size: 24px;
+  font-size: 28px;
   
 }
 
@@ -48,14 +48,22 @@ div.icon-img .fa, div.icon-img .fal {
   height: 23px;
 }
 
-.bottom-navbar .icon-img-home.active{
+/* .bottom-navbar .icon-img-home.active{
   background: url("../../../assets/fw_sprites.png") -7px -10px; 
   background-repeat: no-repeat;
 }
 
 .bottom-navbar .icon-img-home{
-  background: url("../../../assets/fw_sprites.png") -57px -10px; 
+   background: url("../../../assets/fw_sprites.png") -57px -10px; 
   background-repeat: no-repeat;
+} */
+
+.icon-img.active svg{
+ fill:rgba(255,80,170,0.9);
+}
+
+.icon-img svg{
+  fill:grey;
 }
 
 img.fw-logo{
