@@ -42,6 +42,15 @@ export class DiscoverPeopleComponent implements OnInit {
         });
   }
 
+  getItemsDesktop(items) {
+    var desktopItems = []
+    for(var i=0; i<3 && i<items.length; i++) {
+      desktopItems.push(items[i]);
+    }
+    console.log(desktopItems);
+    return desktopItems;
+  } 
+
   openDialog(item, postId): void {
     this.configService.setGeneralSession('product_id', postId);
     this.configService.setGeneralSession('user_id_post_id', item.userId);

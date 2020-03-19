@@ -1,13 +1,50 @@
 <div class="main">
-  <mat-toolbar *ngIf="!desktop" class="mat-toolbar mat-toolbar-single-row">
+  <!-- <mat-toolbar *ngIf="!desktop" class="mat-toolbar mat-toolbar-single-row">
     <img src="../../../assets/FW-Logo-pink5-fat.png" class="logo" />
-  </mat-toolbar>
+  </mat-toolbar> -->
 
-  <div class="welcome">
+  <!-- <div class="welcome">
     <div class="welcome-title">Welcome to Followear</div>
     <div class="welcome-subtitle">When you follow people, you'll discvoer fashion items they post here.</div>
+  </div> -->
+
+  <div *ngIf="desktop">
+    <app-navbar></app-navbar>
   </div>
-  <div class="desktop-wrapper" *ngIf="desktop">
+  <div class="main-body">
+    <div class="center">
+      <div *ngFor="let person of discoverPeopleArray" class="person-wrapper">
+
+        <div class="user-section">
+          <img class="profile-image" [src]="person.userAvatar" alt="" (click)="profilePage(person)">
+          <div class="user-info">
+            <div class="username">{{person.username}}</div>
+            <div class="num-followers">{{person.numFollowers}} followers</div>
+          </div>
+          <div class="follow-button">
+            <button (click)="follow(person)">Follow</button>
+          </div>
+        </div>
+
+        <div *ngIf="desktop" class="user-posts">
+          <div *ngFor="let post of getItemsDesktop(person.items) ; let i = index" class="user-post-image"
+          [style.background-image]="'url(' + post.imageAddr +')'" (click)="openDialog(person, post.postId)">
+          </div>
+        </div>
+
+        <div *ngIf="!desktop" class="user-posts">
+          <img heightWidthRatio="1.35" class="user-post-image"
+           *ngFor="let post of person.items" [src]="post.imageAddr" alt="" (click)="openDialog(person, post.postId)">
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!desktop">
+    <app-bottom-navbar></app-bottom-navbar>
+  </div>
+
+  <!-- <div class="desktop-wrapper" *ngIf="desktop">
     <div class="nav">
       <app-navbar></app-navbar>
     </div>
@@ -59,15 +96,9 @@
               <button mat-button (click)="follow(item)">Follow</button>
             </div>
           </div>
-
-
-
           <div class="user-posts">
             <img *ngFor="let post of item.items" [src]="post.imageAddr" alt="" (click)="openDialog(item,post.postId)">
           </div>
-
-
-
         </div>
       </div>
     </div>
@@ -77,6 +108,6 @@
       <app-bottom-navbar></app-bottom-navbar>
     </div>
 
-  </div>
+  </div> -->
 
 </div>
