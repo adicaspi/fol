@@ -16,7 +16,6 @@ import { LoginComponent } from './components/login/login.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
-import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
 import { ExploreFeedGeneralComponent } from './components/explore-feed-general/explore-feed-general.component';
 import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
 import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-people-general/view-discover-people-general.component';
