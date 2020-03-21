@@ -19,6 +19,8 @@ import { DiscoverPeopleComponent } from './components/discover-people/discover-p
 import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
 import { ExploreFeedGeneralComponent } from './components/explore-feed-general/explore-feed-general.component';
 import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
+import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-people-general/view-discover-people-general.component';
+import { ViewDiscoverPeopleUserComponent } from './components/view-discover-people-user/view-discover-people-user.component';
 
 
 const routes: Routes = [
@@ -54,8 +56,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
-  { path: 'feed-discover-people', component: DiscoverPeopleComponent },
-  { path: 'discover-people-user/:id', component: DiscvoerPeopleUserComponent }
+  { path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent },
+  { path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent }
 
 ];
 

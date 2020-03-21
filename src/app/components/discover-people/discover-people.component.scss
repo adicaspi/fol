@@ -14,6 +14,12 @@
   border-radius: 4px;
   padding: 8px 16px;
   letter-spacing: .4px;
+
+  &.following {
+    background: #888888;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
 }
 
 .user-section {

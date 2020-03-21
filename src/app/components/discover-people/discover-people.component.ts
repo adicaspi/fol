@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from '../../../../node_modules/rxjs/operators';
 import { Subject, Subscription } from '../../../../node_modules/rxjs';
@@ -14,7 +14,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./discover-people.component.scss']
 })
 export class DiscoverPeopleComponent implements OnInit {
-  discoverPeopleArray = [];
+  @Input() discoverPeopleArray;
   desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
@@ -26,9 +26,6 @@ export class DiscoverPeopleComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
-      this.discoverPeopleArray = res;
-    })
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
@@ -44,12 +41,12 @@ export class DiscoverPeopleComponent implements OnInit {
 
   getItemsDesktop(items) {
     var desktopItems = []
-    for(var i=0; i<3 && i<items.length; i++) {
+    for (var i = 0; i < 3 && i < items.length; i++) {
       desktopItems.push(items[i]);
     }
     console.log(desktopItems);
     return desktopItems;
-  } 
+  }
 
   openDialog(item, postId): void {
     this.configService.setGeneralSession('product_id', postId);
@@ -62,7 +59,14 @@ export class DiscoverPeopleComponent implements OnInit {
   }
 
   follow(item) {
-    this.userService.follow(item.userId);
+    if (item.follows) {
+      this.userService.unFollow(item.userId);
+      item.follows = false;
+    }
+    else {
+      this.userService.follow(item.userId);
+      item.follows = true;
+    }
   }
 
   profilePage(item) {

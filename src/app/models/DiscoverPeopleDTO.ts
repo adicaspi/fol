@@ -8,6 +8,7 @@ export class DiscoverPeopleDTO {
   username: string;
   fullName: string;
   numFollowers: number;
+  follow: boolean = false;
   items = [];
 
   constructor(doc) {

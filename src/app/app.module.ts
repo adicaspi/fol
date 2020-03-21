@@ -69,10 +69,11 @@ import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
 import { MasonryWidthDirective } from './directives/masonry-width.directive';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DiscvoerPeopleUserComponent } from './components/discvoer-people-user/discvoer-people-user.component';
 import { DatePipe } from '../../node_modules/@angular/common';
 import { ExploreFeedGeneralComponent } from './components/explore-feed-general/explore-feed-general.component';
 import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
+import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-people-general/view-discover-people-general.component';
+import { ViewDiscoverPeopleUserComponent } from './components/view-discover-people-user/view-discover-people-user.component';
 
 
 //I keep the new line
@@ -119,9 +120,10 @@ import { ViewExploreGeneralComponent } from './components/view-explore-general/v
     TermsCookiesComponent,
     DiscoverPeopleComponent,
     MasonryWidthDirective,
-    DiscvoerPeopleUserComponent,
     ExploreFeedGeneralComponent,
-    ViewExploreGeneralComponent
+    ViewExploreGeneralComponent,
+    ViewDiscoverPeopleGeneralComponent,
+    ViewDiscoverPeopleUserComponent
   ],
   imports: [
     BrowserModule,
