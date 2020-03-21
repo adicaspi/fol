@@ -2,6 +2,14 @@
   height: 100%;
 }
 
+.follow-button button {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+
 .user-section {
   display: flex;
   position: relative;
@@ -31,7 +39,7 @@
     margin-top: 130px;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-direction: row;
     flex-wrap: wrap;
   }
@@ -188,4 +196,5 @@
       background: #888888;
     }
   }
+
 }
