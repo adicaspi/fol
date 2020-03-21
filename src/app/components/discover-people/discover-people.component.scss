@@ -2,26 +2,6 @@
   height: 100%;
 }
 
-.follow-button button{
-  width: 100%;
-  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
-  color:white;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  font-weight: bold;
-  font-family: Roboto;
-  border-radius: 4px;
-  padding: 8px 16px;
-  letter-spacing: .4px;
-
-  &.following {
-    background: #888888;
-    background-clip: text;
-    -webkit-background-clip: text;
-  }
-}
-
 .user-section {
   display: flex;
   position: relative;
@@ -120,13 +100,19 @@
     font-size: 16px;
     font-weight: bold;
     border: none;
-  
+    outline: none;
     background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     padding-right: 2px;
     letter-spacing: 0.5px;
+
+    &.following {
+      background: #888888;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
   }
 }
 
@@ -185,4 +171,21 @@
     margin-right: 0;
   }
 
+  .follow-button button{
+    width: 100%;
+    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+    color:white;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Roboto;
+    border-radius: 4px;
+    padding: 8px 16px;
+    letter-spacing: .4px;
+
+    &.following {
+      background: #888888;
+    }
+  }
 }
