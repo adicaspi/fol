@@ -21,7 +21,7 @@ import * as jquery from 'jquery';
 })
 export class BottomNavbarComponent implements OnInit {
   @ViewChild('bottomnavbar', { static: false }) bottomNavBar: ElementRef;
-  feed: boolean = false;
+  feed: boolean = true;
   explore: boolean = false;
   profile: boolean = false;
   bottomNavBarClass = "bottom-navbar";
