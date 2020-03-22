@@ -1,36 +1,38 @@
-<div class="main">
-  <div *ngIf="desktop">
-    <app-navbar></app-navbar>
-  </div>
-  <div class="main-body">
-    <div class="center">
-      <div *ngFor="let person of discoverPeopleArray" class="person-wrapper">
+<body>
+  <div class="main">
+    <div *ngIf="desktop">
+      <app-navbar></app-navbar>
+    </div>
+    <div class="main-body">
+      <div class="center">
+        <div *ngFor="let person of discoverPeopleArray" class="person-wrapper">
 
-        <div class="user-section">
-          <img class="profile-image" [src]="person.userAvatar" alt="" (click)="profilePage(person)">
-          <div class="user-info">
-            <div class="username">{{person.username}}</div>
-            <div class="num-followers">{{person.numFollowers}} followers</div>
+          <div class="user-section">
+            <img class="profile-image" [src]="person.userAvatar" alt="" (click)="profilePage(person)">
+            <div class="user-info">
+              <div class="username">{{person.username}}</div>
+              <div class="num-followers">{{person.numFollowers}} followers</div>
+            </div>
+            <div class="follow-button">
+              <button (click)="follow(person)" [ngClass]="{'following': person.follows}"> {{ person.follows ? 'Following' : 'Follow' }}</button>
+            </div>
           </div>
-          <div class="follow-button">
-            <button (click)="follow(person)" [ngClass]="{'following': person.follows}"> {{ person.follows ? 'Following' : 'Follow' }}</button>
+
+          <div *ngIf="desktop" class="user-posts">
+            <div *ngFor="let post of getItemsDesktop(person.items) ; let i = index" class="user-post-image" [style.background-image]="'url(' + post.imageAddr +')'"
+              (click)="openDialog(person, post.postId)">
+            </div>
           </div>
-        </div>
 
-        <div *ngIf="desktop" class="user-posts">
-          <div *ngFor="let post of getItemsDesktop(person.items) ; let i = index" class="user-post-image" [style.background-image]="'url(' + post.imageAddr +')'"
-            (click)="openDialog(person, post.postId)">
+          <div *ngIf="!desktop" class="user-posts">
+            <img heightWidthRatio="1.35" class="user-post-image" *ngFor="let post of person.items" [src]="post.imageAddr" alt="" (click)="openDialog(person, post.postId)">
           </div>
-        </div>
 
-        <div *ngIf="!desktop" class="user-posts">
-          <img heightWidthRatio="1.35" class="user-post-image" *ngFor="let post of person.items" [src]="post.imageAddr" alt="" (click)="openDialog(person, post.postId)">
         </div>
-
       </div>
     </div>
+    <div *ngIf="!desktop">
+      <app-bottom-navbar></app-bottom-navbar>
+    </div>
   </div>
-  <div *ngIf="!desktop">
-    <app-bottom-navbar></app-bottom-navbar>
-  </div>
-</div>
+</body>

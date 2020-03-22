@@ -35,31 +35,21 @@
 }
 
 div.icon-img .fa, div.icon-img .fal {
-  font-size: 28px;
-  
+  font-size: 23px;
+  margin-bottom: 2px;
 }
 
 .bottom-navbar .icon-img.active{
   color:  rgba(255,80,170,0.9);
 }
 
-.bottom-navbar .icon-img-home{
-  width: 35px;
-  height: 23px;
+.icon-img svg{
+  height: 25px;
+  margin-bottom: 3px;
 }
-
-/* .bottom-navbar .icon-img-home.active{
-  background: url("../../../assets/fw_sprites.png") -7px -10px; 
-  background-repeat: no-repeat;
-}
-
-.bottom-navbar .icon-img-home{
-   background: url("../../../assets/fw_sprites.png") -57px -10px; 
-  background-repeat: no-repeat;
-} */
 
 .icon-img.active svg{
- fill:rgba(255,80,170,0.9);
+ fill: url(#gradient);
 }
 
 .icon-img svg{
