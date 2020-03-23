@@ -165,6 +165,10 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  public async onSearchKeydown($event: KeyboardEvent) {
+    console.log($event);
+  }
+
   private _filter(value: string): Observable<any> {
     const filterValue = value.toLowerCase();
     return Observable.of(

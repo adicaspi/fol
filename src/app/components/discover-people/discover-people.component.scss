@@ -180,8 +180,10 @@
 
   .follow-button button{
     width: 100%;
-    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
-    color:white;
+    background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     border: none;
     outline: none;
     font-size: 14px;
