@@ -16,6 +16,7 @@
 
 .no-posts{
   margin-top: 125px; 
+  text-align: center;
 }
 
 .share-posts{
@@ -24,31 +25,34 @@
   margin: 60px 40px 8px;
 }
 
-.share-posts.subtitle{
+.subtitle{
   font-size: 18px;
   font-weight: 500;
   margin-top: 5px;
   color: #7a7a7a;
   letter-spacing: -0.2px;
+  line-height: 32px;
+  text-align: center;
+  margin: 60px 40px 8px;
+  
 }
 
-.share-posts.button {
-  display: flex;
+.share-posts {
+  display: inline;
   font-size: 20px;
   font-weight: bold;
   border: none;
   outline: none;
-
   background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
   background-clip: text;
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   color: transparent;
   margin: auto;
   margin-top: 28px !important;
   transition: text-shadow 0.2s;
 }
 
-.share-posts.button:hover {
+.share-posts:hover {
    text-shadow: 0 0 12px rgba(33,33,33,.12);
 }
 
@@ -510,13 +514,13 @@
     margin-top: 48px;
   }
 
-  .share-posts.button {
-    display: flex;
+  .share-posts {
+    display: inline;
     font-size: 20px;
     font-weight: bold;
     border: none;
     outline: none;
-    background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
+    background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

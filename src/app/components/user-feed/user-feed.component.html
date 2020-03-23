@@ -1,11 +1,11 @@
 <div *ngIf="showNoPostsMessage" class="no-posts">
   <div *ngIf="userProfile" class="no-posts-message">
-    <div class="share-posts subtitle">
+    <div class="subtitle">
       You haven't uploaded any fashion items yet
     </div>
-    <button class="share-posts button">
-      <a href="https://apps.apple.com/app/followear/id1476265803" class="share-posts button">Start Uploading</a>
-    </button>
+    <div class="share-posts-container">
+      <a href="https://apps.apple.com/app/followear/id1476265803" class="share-posts">Start Uploading</a>
+    </div>
   </div>
   <div *ngIf="!userProfile" class="share-posts subtitle">
     <div *ngIf="currentUser | async ; let currentUser">

@@ -1,10 +1,10 @@
 <div *ngIf="showNoPostsMessage" class="no-posts">
-  <div class="share-posts subtitle">
+  <div class="subtitle">
     There are no items matching these filters :(
   </div>
-  <button (click)="discoverPeople()" class="share-posts button">
+  <div (click)="discoverPeople()" class="share-posts">
     Discover People
-  </button>
+  </div>
 </div>
 
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
