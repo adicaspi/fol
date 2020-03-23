@@ -49,7 +49,8 @@ div.icon-img .fa, div.icon-img .fal {
 }
 
 .icon-img.active svg{
- fill: url(#gradient);
+ /* fill: url(#gradient); */
+ fill:url(../../../assets/bg_clip_2.PNG);
 }
 
 .icon-img svg{

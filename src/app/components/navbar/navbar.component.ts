@@ -166,7 +166,10 @@ export class NavbarComponent implements OnInit {
   }
 
   public async onSearchKeydown($event: KeyboardEvent) {
-    console.log($event);
+    if ($event.key == "Enter") {
+
+    }
+    console.log($event.key);
   }
 
   private _filter(value: string): Observable<any> {
