@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
 import { takeUntil } from '../../../../node_modules/rxjs/operators';
 import { Subject, Subscription } from '../../../../node_modules/rxjs';
+import * as jquery from 'jquery';
 
 @Component({
   selector: 'app-view-discover-people-general',
@@ -18,6 +19,12 @@ export class ViewDiscoverPeopleGeneralComponent implements OnInit {
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
     })
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    jquery(".button-container").css("opacity", 1);
+    jquery(".button-container").css("bottom", "40px")
   }
 
   ngOnDestroy(): void {
