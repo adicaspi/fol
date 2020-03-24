@@ -47,6 +47,7 @@
   -webkit-background-clip: text;
   color: transparent;
   margin: auto;
+  cursor: pointer;
 }
 
 .store.text-right:hover{
@@ -430,7 +431,7 @@
     background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    cursor: pointer;
     color:transparent;
     margin: auto;
     margin-top: 28px !important;

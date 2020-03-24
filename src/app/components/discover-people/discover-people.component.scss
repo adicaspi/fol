@@ -179,11 +179,9 @@
   }
 
   .follow-button {
-    // width: 100%;
     background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
     background-clip: text;
     -webkit-background-clip: text;
-    // -webkit-text-fill-color: transparent;
     color:transparent;
     border: none;
     outline: none;
@@ -195,7 +193,7 @@
     letter-spacing: .4px;
 
     &.following {
-      background: #888888;
+      color: #888888;
     }
   }
 
