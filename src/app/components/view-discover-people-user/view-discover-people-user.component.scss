@@ -1,3 +1,9 @@
 div.top {
     margin-top: 120px;
 }
+
+@media(max-width: 600px) {
+    div.top {
+        margin-top: 62px;
+    }
+}

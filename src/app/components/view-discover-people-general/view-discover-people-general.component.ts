@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FeedService } from '../../services/feed.service';
+import { ConfigService } from '../../services/config.service';
 import { takeUntil } from '../../../../node_modules/rxjs/operators';
 import { Subject, Subscription } from '../../../../node_modules/rxjs';
 import * as jquery from 'jquery';
@@ -11,15 +12,30 @@ import * as jquery from 'jquery';
 })
 export class ViewDiscoverPeopleGeneralComponent implements OnInit {
   discoverPeopleArray = [];
-  didTransform = false;
+  didTransform: boolean = false;
+  desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
+  private WindowSizeSubscription: Subscription;
 
-  constructor(private feedService: FeedService) { }
+  constructor(private feedService: FeedService,
+    private configService: ConfigService) { }
 
   ngOnInit() {
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
-    })
+    });
+
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+    .subscribe(
+      value => {
+        if (value.width > 600) {
+          this.desktop = true;
+        }
+
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+      });
   }
 
   @HostListener('window:scroll', ['$event'])
