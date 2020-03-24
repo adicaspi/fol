@@ -149,8 +149,8 @@
   .user-info .username {
     font-size: 15px;
     font-weight: 600;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 0px;
+    margin-bottom: -3px;
   }
 
   .user-info .num-followers {
@@ -187,10 +187,9 @@
     outline: none;
     font-size: 14px;
     font-weight: bold;
-    font-family: Roboto;
     border-radius: 4px;
     padding: 8px 16px;
-    letter-spacing: .4px;
+    padding-right: 2px;
 
     &.following {
       color: #888888;
