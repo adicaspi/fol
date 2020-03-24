@@ -11,6 +11,7 @@ import * as jquery from 'jquery';
 })
 export class ViewDiscoverPeopleGeneralComponent implements OnInit {
   discoverPeopleArray = [];
+  didTransform = false;
   onDestroy: Subject<void> = new Subject<void>();
 
   constructor(private feedService: FeedService) { }
@@ -23,8 +24,11 @@ export class ViewDiscoverPeopleGeneralComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   scrollHandler(event) {
-    jquery(".button-container").css("opacity", 1);
-    jquery(".button-container").css("bottom", "40px")
+    if(!this.didTransform) {
+      jquery(".button-container").css("opacity", 1);
+      jquery(".button-container").css("bottom", "40px");
+      this.didTransform = true;
+    }
   }
 
   ngOnDestroy(): void {
