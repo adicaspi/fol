@@ -151,8 +151,13 @@ export class MutualNavComponent implements OnInit {
   }
 
   onChange(mrChange: MatRadioChange) {
-    this.filteringDTO.setCategory(mrChange.value);
-    if (mrChange.source.id.toString() != '1') {
+    if (mrChange.value == "All Categories") {
+      this.filteringDTO.setCategory('Clothing');
+    }
+    else {
+      this.filteringDTO.setCategory(mrChange.value);
+    }
+    if (mrChange.value == 'Clothing') {
       this.showProduct = true;
       switch (mrChange.value) {
         case "Clothing":
@@ -160,7 +165,7 @@ export class MutualNavComponent implements OnInit {
           break;
       }
     } else {
-      this.filteringDTO.setCategory(null);
+      //this.filteringDTO.setCategory(null);
       this.showProduct = false;
       this.filteringDTO.clearProductType();
     }
