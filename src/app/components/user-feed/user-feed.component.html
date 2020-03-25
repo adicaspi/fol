@@ -7,10 +7,8 @@
       <a href="https://apps.apple.com/app/followear/id1476265803" class="share-posts">Start Uploading</a>
     </div>
   </div>
-  <div *ngIf="!userProfile" class="share-posts subtitle">
-    <div *ngIf="currentUser | async ; let currentUser">
-      {{currentUser.username }} hasn't uploaded any fashion items yet
-    </div>
+  <div *ngIf="!userProfile" class="subtitle">
+    {{user.username }} hasn't uploaded any fashion items yet
   </div>
 </div>
 

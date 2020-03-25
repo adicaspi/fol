@@ -38,6 +38,7 @@ export class UserFeedComponent implements OnInit {
   showNoPostsMessage: boolean = false;
   userProfile: boolean = false;
   currentUser: Observable<User>;
+  user: User;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubsription: Subscription
@@ -79,6 +80,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("in init");
     this.spinner.show();
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
     jquery("mat-sidenav-container").css("top", "250px");
@@ -108,7 +110,9 @@ export class UserFeedComponent implements OnInit {
           this.spinner.show();
           this.posts = [];
           this.offset = 0;
-          this.getActivatedRoute();
+          //this.getActivatedRoute();
+          this.feedService.updateUserFeed(this.id, this.offset);
+          console.log(this.user.id);
         }
       }
     });
@@ -123,7 +127,10 @@ export class UserFeedComponent implements OnInit {
           this.userProfile = true;
         }
         else {
-          this.currentUser = this.userService.getUserDetails(this.id);
+          //this.currentUser = this.userService.getUserDetails(this.id);
+          this.userService.getUserDetails(this.id).pipe(takeUntil(this.onDestroy)).subscribe(user => {
+            this.user = user;
+          });
         }
         this.feedService.updateUserFeed(this.id, this.offset);
       })
