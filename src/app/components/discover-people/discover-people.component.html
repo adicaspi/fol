@@ -13,9 +13,6 @@
               <div class="username">{{person.username}}</div>
               <div class="num-followers">{{person.numFollowers}} followers</div>
             </div>
-            <!-- <div class="follow-button">
-              <button (click)="follow(person)" [ngClass]="{'following': person.follows}"> {{ person.follows ? 'Following' : 'Follow' }}</button>
-            </div> -->
             <div class="follow-button" (click)="follow(person)" [ngClass]="{'following': person.follows}"> {{ person.follows ? 'Following' : 'Follow' }}
             </div>
           </div>
