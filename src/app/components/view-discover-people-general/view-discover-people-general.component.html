@@ -1,1 +1,22 @@
+<div class="text-container">
+    <div class="header">
+        Welcome to Followear!
+    </div>
+    <div class="sub">
+        Follow people to see their favorite fashion items
+    </div>
+</div>
+
+<div class="button-container">
+    <button *ngIf="desktop" class="done-button">
+        Continue to your feed
+        <img id="continue-arrow" src="../../../assets/continue-arrow16.png" />
+    </button>
+
+    <button *ngIf="!desktop" class="done-button">
+        continue
+        <img id="continue-arrow" src="../../../assets/continue-arrow7A.png" />
+    </button>
+</div>
+
 <app-discover-people [discoverPeopleArray]="discoverPeopleArray"></app-discover-people>

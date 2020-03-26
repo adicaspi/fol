@@ -44,7 +44,6 @@ export class DiscoverPeopleComponent implements OnInit {
     for (var i = 0; i < 3 && i < items.length; i++) {
       desktopItems.push(items[i]);
     }
-    console.log(desktopItems);
     return desktopItems;
   }
 
