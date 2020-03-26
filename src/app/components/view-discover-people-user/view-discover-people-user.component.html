@@ -1,6 +1,7 @@
-<div *ngIf="!desktop" class="back-button-container" (click)="goBackPage()">
-  <i class="fa fa-chevron-left"></i>
+
+<div *ngIf="!desktop" class="header">
+  <img src="assets/back.png" class="go-back" (click)="goBackPage()"/>
+  <span class="header-text">Discover People</span>
 </div>
-<div class="discover-people-container">
-  <app-discover-people [discoverPeopleArray]="discoverPeopleArray"></app-discover-people>
-</div>
+
+<app-discover-people [discoverPeopleArray]="discoverPeopleArray"></app-discover-people>
