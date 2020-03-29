@@ -165,4 +165,5 @@ export class UserProfileInfoComponent implements OnInit {
   ngOnDestroy(): void {
     this.WindowSizeSubscription.unsubscribe();
   }
+
 }

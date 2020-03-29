@@ -22,4 +22,5 @@ export class UserProfileInfoMobileComponent extends UserProfileInfoComponent {
   ) {
     super(userService, activatedRoute, dialogService, router, configService, location);
   }
+
 }
