@@ -17,7 +17,9 @@ import { MessageService } from '../../services/message.service';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { UserService } from '../../services/user.service';
 import * as jquery from 'jquery';
+import * as $ from 'jquery';
 import { User } from '../../models/User';
+
 
 
 @Component({
@@ -82,7 +84,6 @@ export class UserFeedComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
-    jquery("mat-sidenav-container").css("top", "310px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
