@@ -6,6 +6,7 @@ import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { UserService } from '../../services/user.service';
+import { ScrollHelperService } from '../../services/scroll-helper.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class DiscoverPeopleComponent implements OnInit {
     private configService: ConfigService,
     private dialogService: DialogService,
     private router: Router,
-    private userService: UserService) { }
+    private userService: UserService,
+    private scrollHelperService: ScrollHelperService, ) { }
 
   ngOnInit() {
     this.WindowSizeSubscription = this.configService.windowSizeChanged
@@ -35,6 +37,7 @@ export class DiscoverPeopleComponent implements OnInit {
 
           if (value.width <= 600) {
             this.desktop = false;
+            this.scrollHelperService.runDataLoaded();
           }
         });
   }
@@ -44,7 +47,6 @@ export class DiscoverPeopleComponent implements OnInit {
     for (var i = 0; i < 3 && i < items.length; i++) {
       desktopItems.push(items[i]);
     }
-    console.log(desktopItems);
     return desktopItems;
   }
 
