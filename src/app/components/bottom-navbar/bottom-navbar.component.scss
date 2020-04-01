@@ -1,3 +1,11 @@
+.fw-feed{
+  width: 75px;
+  position: fixed;
+  bottom: 0;  
+  z-index: 9999;
+}
+
+
 .bottom-navbar-container{
   display: flex;
   justify-content: center;
