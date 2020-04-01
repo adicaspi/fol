@@ -48,14 +48,18 @@ div.icon-img .fa, div.icon-img .fal {
   margin-bottom: 3px;
 }
 
+.fw-feed{
+  width: 20%;
+}
+
 .icon-img.active svg{
  /* fill: url(#gradient); */
  /* fill:url(../../../assets/bg_clip_2.PNG); */
 }
 
-.icon-img svg{
+/* .icon-img svg{
   fill:grey;
-}
+} */
 
 img.fw-logo{
   vertical-align: baseline;
