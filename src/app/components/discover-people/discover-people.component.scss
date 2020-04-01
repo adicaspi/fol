@@ -182,7 +182,7 @@
     margin-right: 0;
   }
 
-  .button-follow {
+  .follow-button {
     background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -197,6 +197,7 @@
 
     &.following {
       color: #888888;
+      font-weight: 500;
     }
   }
 

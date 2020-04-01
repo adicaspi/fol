@@ -11,13 +11,16 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import * as jquery from 'jquery';
+
 
 
 @Component({
   selector: 'app-bottom-navbar',
   templateUrl: './bottom-navbar.component.html',
-  styleUrls: ['./bottom-navbar.component.css']
+  styleUrls: ['./bottom-navbar.component.scss']
 })
 export class BottomNavbarComponent implements OnInit {
   @ViewChild('bottomnavbar', { static: false }) bottomNavBar: ElementRef;
@@ -33,6 +36,7 @@ export class BottomNavbarComponent implements OnInit {
   init: boolean = false;
   scroll: boolean = false;
   timeout: any;
+  onDestroy: Subject<void> = new Subject<void>();
 
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
@@ -42,30 +46,32 @@ export class BottomNavbarComponent implements OnInit {
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService) { }
+    private userService: UserService,
+  ) {
+  }
 
   ngOnInit() {
-    const routeParams = this.activatedRoute.snapshot.params;
-    this.masterId = parseInt(routeParams.id);
-    this.userId = this.userService.userId;
-    if (this.router.url.includes('profile')) {
-      if (this.userId == this.masterId) {
-        this.profile = true;
-      }
-      this.feed = false;
-      this.explore = false;
-
-    }
-    if (this.router.url.includes('feed')) {
-      this.feed = true;
-      this.explore = false;
-      this.profile = false;
-    }
-    if (this.router.url.includes('explore')) {
-      this.explore = true;
-      this.feed = false;
-      this.profile = false;
-    }
+    this.activatedRoute.url
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(params => {
+        if (params.length > 1) {
+          if (params[0].path == "feed") {
+            this.feed = true;
+            this.explore = false;
+            this.profile = false;
+          }
+          if (params[0].path == "profile") {
+            this.feed = false;
+            this.explore = false;
+            this.profile = true;
+          }
+          if (params[0].path == "explore") {
+            this.feed = false;
+            this.explore = true;
+            this.profile = false;
+          }
+        }
+      });
     this.prevScrollpos = window.pageYOffset;
   }
 
@@ -112,21 +118,17 @@ export class BottomNavbarComponent implements OnInit {
     this.router.navigate(['profile', this.userService.userId]);
   }
 
-  settingsPage() {
-    this.router.navigate(['settings', this.userService.userId]);
-  }
-
   feedPage() {
-    this.profile = false;
     this.feed = true;
+    this.profile = false;
     this.explore = false;
     this.router.navigate(['feed', this.userService.userId]);
   }
 
   explorePage() {
+    this.explore = true;
     this.profile = false;
     this.feed = false;
-    this.explore = true;
     this.router.navigate(['/explore', this.userService.userId]);
   }
 

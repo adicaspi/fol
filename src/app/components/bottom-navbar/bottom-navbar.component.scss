@@ -28,7 +28,7 @@
   align-items: center;
   color: grey;
   text-align: center;
-  padding: 5px 5px;
+  padding: 8px 5px;
   text-decoration: none;
   width: 20%;
   color: rgb(118,118,118);
@@ -43,27 +43,21 @@ div.icon-img .fa, div.icon-img .fal {
   color:  rgba(255,80,170,0.9);
 }
 
-.icon-img svg{
-  height: 25px;
-  margin-bottom: 3px;
-}
-
-.icon-img.active svg{
- /* fill: url(#gradient); */
- /* fill:url(../../../assets/bg_clip_2.PNG); */
-}
-
-.icon-img svg{
-  fill:grey;
-}
-
-img.fw-logo{
-  vertical-align: baseline;
-  width: 32px;
+.fw-feed{
+  width: 75px;
 }
 
 .link-text{
-  font-size: 10px
+  font-size: 10px;
+  text-align: center;
+}
+
+.link-text.home{
+  padding-top: 1px;
+
+  &.active{
+    color: rgba(255,80,170,0.9);
+  }
 }
 
 .bottom-navbar .icon-img.active .link-text{
