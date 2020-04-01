@@ -17,7 +17,7 @@ import * as jquery from 'jquery';
 @Component({
   selector: 'app-bottom-navbar',
   templateUrl: './bottom-navbar.component.html',
-  styleUrls: ['./bottom-navbar.component.css']
+  styleUrls: ['./bottom-navbar.component.scss']
 })
 export class BottomNavbarComponent implements OnInit {
   @ViewChild('bottomnavbar', { static: false }) bottomNavBar: ElementRef;

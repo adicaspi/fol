@@ -28,7 +28,7 @@
   align-items: center;
   color: grey;
   text-align: center;
-  padding: 5px 5px;
+  padding: 8px 5px;
   text-decoration: none;
   width: 20%;
   color: rgb(118,118,118);
@@ -49,7 +49,7 @@ div.icon-img .fa, div.icon-img .fal {
 }
 
 .fw-feed{
-  width: 20%;
+  width: 75px;
 }
 
 .icon-img.active svg{
@@ -67,7 +67,16 @@ img.fw-logo{
 }
 
 .link-text{
-  font-size: 10px
+  font-size: 10px;
+  text-align: center;
+}
+
+.link-text.home{
+  padding-top: 1px;
+
+  &.active{
+    color: rgba(255,80,170,0.9);
+  }
 }
 
 .bottom-navbar .icon-img.active .link-text{
