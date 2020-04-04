@@ -150,7 +150,7 @@ button.nav-item {
 }
 
 .mat-sidenav{
-  padding: 24px 24px 24px 32px;
+  padding: 28px 24px 24px 28px;
   width: 100%;
   box-shadow: none !important;
   transform: none;
@@ -231,20 +231,22 @@ button.nav-item {
   $this: '.filter-section';
 
   &:not(:first-child) {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   &__title {
     font-size: 15px;
     letter-spacing: .2px;
     font-weight: 700;
-    margin-bottom: 6px;
-    color: rgb(38,38,38);
+    margin-bottom: -2px;
+    color: #333333;
   }
 
   &__prop {
+    display: inline-block;
     margin-top: 16px;
-    font-size: 12px;
+    margin-right: 46px;
+    font-size: 13px;
     letter-spacing: .2px;
     cursor: pointer;
     font-weight: 600;
@@ -256,9 +258,9 @@ button.nav-item {
       font-weight: 600;
       color: rgb(38, 38, 38);
 
-      #{$this}__check-icon {
+      /* #{$this}__check-icon {
         display: block;
-      }
+      } */
     }
   }
 
@@ -282,15 +284,20 @@ button.nav-item {
 }
 
 .see-more-btn {
+  display: block;
   background: none;
   border: none;
   outline: none;
   padding: 0;
-  margin-top: 16px;
+  margin-top: 12px;
   font-size: 12px;
   letter-spacing: .2px;
   cursor: pointer;
   font-weight: 400;
+}
+
+.see-more-btn i {
+  color: grey;
 }
 
 .mat-sidenav-content{
