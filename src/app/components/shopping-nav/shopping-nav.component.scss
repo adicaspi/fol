@@ -167,6 +167,7 @@ button.nav-item {
   box-sizing: border-box;
   display: flex;
   float: right;
+  position: relative;
 
   &__title {
     font-size: 15px !important;
@@ -220,9 +221,16 @@ button.nav-item {
           content: 'x';
         }
       }
-      }
     }
   }
+}
+
+.close-button {
+  position: absolute;
+  left: 8px;
+  height: 48px;
+  line-height: 48px;
+}
 
 .buffer {
   width: 100%;
