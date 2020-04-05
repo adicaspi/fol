@@ -44,8 +44,10 @@
 
               <span class="price">{{postInfo.price}}</span>
             </div>
-            <div class="num-views">
-              <span id="int-num-views">{{postInfo.numViews}}</span> views
+            <div class="num-views" (click)="toggleLikeButton()">
+              <i *ngIf="!clicked" class="fal fa-heart"></i>
+              <i *ngIf="clicked" class="fas fa-heart"></i>
+              <span id="int-num-views">{{postInfo.numViews}}</span> likes
             </div>
           </div>
         </div>
