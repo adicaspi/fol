@@ -84,6 +84,7 @@ export class UserFeedComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
+    jquery(".filter-buttons").css({ "position": "fixed", "right": 0, "top": 0, "background": "white" });
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
