@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, HostListener, ElementRef } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { FeedService } from '../../services/feed.service';

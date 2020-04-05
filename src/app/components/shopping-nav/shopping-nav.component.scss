@@ -183,6 +183,7 @@ button.nav-item {
     cursor: pointer;
     white-space: nowrap;
     color: rgb(51,51,51);
+    line-height: 48px;
 
     &:focus {
       outline: none;
@@ -195,8 +196,15 @@ button.nav-item {
     }
 
     &.clear {
-      visibility: hidden;
-      font-size: 12px;
+      position: absolute;
+      right: 4px;
+      color: grey;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+
+    &.clear:hover {
+      color: rgb(38,38,38);
     }
   }
 
@@ -209,17 +217,12 @@ button.nav-item {
         font-weight: 700;
 
         &:before {
-          content: '';
+          content: 'x';
         }
       }
-
-      &.clear {
-        animation: 0.3s fadeIn;
-        animation-fill-mode: forwards;
       }
     }
   }
-}
 
 .buffer {
   width: 100%;
@@ -386,5 +389,27 @@ i.fal.fa-times{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
   color: rgb(38,38,38);
+}
+
+.buttons-container {
+  display: none;
+  position: absolute;
+  bottom: 16px;
+  left: -8px;
+  width: 100%;
+}
+
+.done-button {
+  width: 89%;
+  border: none;
+  outline: none;
+  background-color: rgb(34,34,34);
+  float: right;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 8px;
 }
 
