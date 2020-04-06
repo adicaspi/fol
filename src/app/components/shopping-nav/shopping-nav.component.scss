@@ -258,18 +258,22 @@ button.nav-item {
   &__prop {
     display: inline-block;
     margin-top: 16px;
-    margin-right: 46px;
+    margin-right: 36px;
     font-size: 13px;
     letter-spacing: .2px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 400;
     position: relative;
     color: grey;
     transition: color .1s;
+    border: 1px solid rgb(205,205,205);
+    border-radius: 3px;
+    padding: 3px 8px;
 
     &.selected {
-      font-weight: 600;
+      font-weight: 400;
       color: rgb(38, 38, 38);
+      border-color: rgb(38,38,38);
 
       /* #{$this}__check-icon {
         display: block;
@@ -310,7 +314,11 @@ button.nav-item {
 }
 
 .see-more-btn i {
-  color: grey;
+  color: rgb(148,148,148);
+  border: 1px solid rgb(205,205,205);
+  border-radius: 4px;
+  font-size: 20px;
+  padding: 2px;
 }
 
 .mat-sidenav-content{
