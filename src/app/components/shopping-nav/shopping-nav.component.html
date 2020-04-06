@@ -41,7 +41,7 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Stores</div>
-        <div *ngFor="let store of stores; let i = index" [hidden]="i > 3 && openCloseStores" class="filter-section__prop" [ngClass]="{'selected': store.checked}"
+        <div *ngFor="let store of stores; let i = index" [hidden]="i > 4 && openCloseStores" class="filter-section__prop" [ngClass]="{'selected': store.checked}"
           (click)="onChangeCheckBox('stores', store)">
           <span>{{store.name}}</span>
           <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -59,7 +59,7 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Designers</div>
-        <div *ngFor="let designer of designers; let i = index" [hidden]="i > 3 && openCloseDesigners" class="filter-section__prop"
+        <div *ngFor="let designer of designers; let i = index" [hidden]="i > 4 && openCloseDesigners" class="filter-section__prop"
           [ngClass]="{'selected': designer.checked}" (click)="onChangeCheckBox('designers', designer)">
           <span>{{designer.name}}</span>
           <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
