@@ -44,7 +44,7 @@ div.icon-img .fa, div.icon-img .fal {
 }
 
 .fw-feed{
-  width: 75px;
+  width: 70px;
 }
 
 .link-text{
@@ -54,6 +54,7 @@ div.icon-img .fa, div.icon-img .fal {
 
 .link-text.home{
   padding-top: 1px;
+  padding-right: 4px;
 
   &.active{
     color: rgba(255,80,170,0.9);
@@ -63,3 +64,12 @@ div.icon-img .fa, div.icon-img .fal {
 .bottom-navbar .icon-img.active .link-text{
   color: rgba(255,80,170,0.9);
 } 
+
+.sprites{
+  width: 63px;
+  height: 30px;
+  background: url("../../../assets/fw_sprites.png") -340px -4px;
+  &.active{
+  background: url("../../../assets/fw_sprites.png") 10px -4px;
+  }
+}
