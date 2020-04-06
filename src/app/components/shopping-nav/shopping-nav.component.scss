@@ -216,9 +216,11 @@ button.nav-item {
     #{$this}__btn {
       &.toggle {
         font-weight: 700;
+        position: absolute;
+        left: 12px;
 
         &:before {
-          content: 'x';
+          content: '- ';
         }
       }
     }

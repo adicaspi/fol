@@ -8,12 +8,12 @@
   </div>
 
   <div class="filter-buttons" [ngClass]="{'opened': sidenav.opened}">
-    <button *ngIf="!sidenav.opened" (click)="toggleSidenav()" class="filter-buttons__btn toggle"></button>
-    <button *ngIf="sidenav.opened" (click)="toggleSidenav()" class="close-button">
+    <button (click)="toggleSidenav()" class="filter-buttons__btn toggle"></button>
+    <!-- <button *ngIf="sidenav.opened" (click)="toggleSidenav()" class="close-button">
       <svg viewBox="0 0 12 12" role="presentation" aria-hidden="true" focusable="false" style="height: 13px; width: 13px; display: block; fill: rgb(34,34,34);">
         <path d="m11.5 10.5c.3.3.3.8 0 1.1s-.8.3-1.1 0l-4.4-4.5-4.5 4.5c-.3.3-.8.3-1.1 0s-.3-.8 0-1.1l4.5-4.5-4.4-4.5c-.3-.3-.3-.8 0-1.1s.8-.3 1.1 0l4.4 4.5 4.5-4.5c.3-.3.8-.3 1.1 0s .3.8 0 1.1l-4.5 4.5z" fill-rule="evenodd"></path>
       </svg>
-    </button>
+    </button> -->
     <div *ngIf="sidenav.opened" class="filter-buttons__title title">Filters</div>
     <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear" [disabled]="!filteringChanged">clear</button>
   </div>
