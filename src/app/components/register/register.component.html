@@ -43,15 +43,16 @@
     <div class="form-group">
       <label for="username"></label>
       <input type="text" formControlName="username" class="form-control" [ngClass]="{
-              'is-invalid': submitted && f.username.errors || userNameExists || submitted && userNameValidatorLength
+              'is-invalid': submitted && f.username.errors || userNameExists || f.username.errors.cannotContainSpace
             }" placeholder="Username" />
 
-      <div *ngIf="submitted && userNameValidatorLength" class="invalid-feedback">
+      <div *ngIf="submitted && f.username.errors.minlength" class="invalid-feedback">
         Username must be at least 3 characters
       </div>
       <div *ngIf="userNameExists" class="invalid-feedback">
         Username already exists
       </div>
+      <div *ngIf="f.username.errors.cannotContainSpace" class="invalid-feedback">Username can not contain space</div>
 
       <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
         <div *ngIf="f.username.errors.required">Username is required</div>
