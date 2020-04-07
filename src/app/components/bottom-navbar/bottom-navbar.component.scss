@@ -54,6 +54,7 @@ div.icon-img .fa, div.icon-img .fal {
 
 .link-text.home{
   padding-top: 1px;
+  padding-left: 3px;
 
   &.active{
     color: rgba(255,80,170,0.9);
@@ -67,7 +68,7 @@ div.icon-img .fa, div.icon-img .fal {
 .sprites{
   width: 63px;
   height: 30px;
-  background: url("../../../assets/css_sprites_copy.png") -10px -10px;
+  background: url("../../../assets//css_sprites_copy.png") -330px -10px;
   &.active{
     background: url("../../../assets/css_sprites_copy.png") -64px -10px;
   }
