@@ -6,6 +6,7 @@ import { ErrorsService } from '../../services/errors.service';
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '@angular/material';
 import { MessageService } from '../../services/message.service';
+import { SliderType } from "igniteui-angular";
 import * as jquery from 'jquery';
 
 @Component({
@@ -42,6 +43,10 @@ export class ShoppingNavComponent implements OnInit {
   filteringChanged: boolean = false;
   showProductType: boolean = true;
   prevScrollPos = window.pageYOffset;
+  public sliderType = SliderType;
+  public priceRange: PriceRange = new PriceRange(0, 5000);
+  minValue: number = 0;
+  maxValue: number = 5000;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -201,5 +206,14 @@ export class ShoppingNavComponent implements OnInit {
     this.feedService.feedFilteringDTO = this.filteringDTO;
     this.massageService.sendMessage('update-feed');
     this.massageService.clearMessage();
+  }
+
+}
+
+class PriceRange {
+  constructor(
+    public lower: number,
+    public upper: number
+  ) {
   }
 }

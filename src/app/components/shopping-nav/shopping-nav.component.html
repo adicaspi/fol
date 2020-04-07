@@ -17,7 +17,7 @@
     <div *ngIf="sidenav.opened" class="filter-buttons__title title">Filters</div>
     <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear" [disabled]="!filteringChanged">clear</button>
   </div>
-  
+
   <mat-sidenav-container class="sidenav-container" [ngClass]="{'opened': sidenav.opened}" [hasBackdrop]="false">
     <mat-sidenav #sidenav mode="over" autoFocus="false" class="mat-sidenav">
 
@@ -73,6 +73,20 @@
             more_horiz
           </i>
         </button>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-section__title">Price</div>
+        <div class="price-container">
+          <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="5000" [(ngModel)]="priceRange" (click)="$event.stopPropagation(); ">
+          </igx-slider>
+          <span class="price min">
+            {{priceRange.lower}}
+          </span>
+          <span class="price max">
+            {{priceRange.upper}}
+          </span>
+        </div>
       </div>
 
       <!-- <div class="filter-section">
