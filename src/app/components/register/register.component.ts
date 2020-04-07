@@ -82,6 +82,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onChanges(): void {
+    this.submitted = false;
     this.registerForm.get('username').valueChanges.subscribe(val => {
       if (val.length >= this.minLength) {
         this.userService.checkUserNameExists(val).subscribe(res => {
@@ -101,6 +102,7 @@ export class RegisterComponent implements OnInit {
         this.emailExists = res;
       });
     });
+
   }
 
   calculateBirthdate(age: string) {
@@ -129,12 +131,11 @@ export class RegisterComponent implements OnInit {
   onSubmitRegister() {
     this.submitted = true;
     // stop here if form is invalid
-    // if (!this.registerForm.valid) {
-    //   console.log("form not valid");
-    //   return;
-    // }
+    if (!this.registerForm.valid) {
+      return;
+    }
 
-    // this.loading = true;
+    this.loading = true;
 
     let email = this.registerForm.value.email;
     let username = this.registerForm.value.username;
