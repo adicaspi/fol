@@ -158,6 +158,10 @@ i.material-icons{
   font-size: 25px;
 }
 
+i.fas.fa-heart{
+  color:red;
+}
+
 button.btn-menu.mat-menu-item{
   outline:none;
 }

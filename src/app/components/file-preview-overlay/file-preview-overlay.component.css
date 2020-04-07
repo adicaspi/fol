@@ -16,6 +16,10 @@ button.btn-menu.mat-menu-item{
   outline:none;
 }
 
+.fa-heart{
+  margin-right: 8px;
+}
+
 
 @media (min-width: 900px) {
   .wrapper {
@@ -27,7 +31,7 @@ button.btn-menu.mat-menu-item{
     margin-bottom: 40px;
   }
 
-  .fal {
+  .fal.fa-times{
     font-size: 26px;
     position: absolute;
     font-weight: 500;
@@ -217,7 +221,7 @@ button.btn-menu.mat-menu-item{
     margin-bottom: 40px;
   }
 
-  .fal {
+  .fal.fa-times {
     font-size: 18px;
     position: absolute;
     font-weight: 500;
@@ -391,7 +395,7 @@ button.btn-menu.mat-menu-item{
     margin-bottom: 40px;
   }
 
-  .fal {
+  .fal.fa-times {
     font-size: 18px;
     position: absolute;
     font-weight: 500;

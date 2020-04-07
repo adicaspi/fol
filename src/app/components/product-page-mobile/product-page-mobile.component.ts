@@ -37,6 +37,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   postsToShow$: Observable<MorePosts[]>;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   userProfile: boolean = false;
+  clicked: boolean = false;
 
   private baseApiUrl = environment.BASE_API_URL;
 
@@ -119,6 +120,11 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
   hidePost(postId: number) {
     this.userService.hidePost(postId);
+  }
+
+  toggleLikeButton() {
+    this.clicked = !this.clicked;
+    this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
   removePost(postId: number) {

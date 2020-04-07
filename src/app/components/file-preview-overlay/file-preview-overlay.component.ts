@@ -37,6 +37,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   postId: number;
   userPostUserId: number;
   userProfile: boolean = false;
+  clicked: boolean = false;
 
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
@@ -53,7 +54,6 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
     this.getPostInfo();
     this.getMoreFromUser();
-    this.incNumViews();
     this.userProfileSrc = '../../../assets/placeholder.png';
   }
 
@@ -89,6 +89,11 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   incNumViews() {
+    this.postService.incrementPostViews(this.userService.userId, this.postId);
+  }
+
+  toggleLikeButton() {
+    this.clicked = !this.clicked;
     this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 

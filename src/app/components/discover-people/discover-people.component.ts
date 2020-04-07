@@ -72,7 +72,7 @@ export class DiscoverPeopleComponent implements OnInit {
   }
 
   profilePage(item) {
-    this.router.navigate(['profile', item.userId]);
+    this.router.navigate([]).then(result => { window.open('profile/' + item.userId, '_blank'); });;
   }
 
   ngOnDestroy(): void {

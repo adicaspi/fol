@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', [Validators.required, Validators.pattern('^\\d*$')]],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, this.cannotContainSpace, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]]
     });
@@ -116,15 +116,25 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  cannotContainSpace(control: AbstractControl): ValidationErrors | null {
+    if ((control.value as string).indexOf(' ') >= 0) {
+      console.log("in val");
+      return { cannotContainSpace: true }
+    }
+
+    return null;
+
+  }
+
   onSubmitRegister() {
     this.submitted = true;
     // stop here if form is invalid
-    if (!this.registerForm.valid) {
-      console.log("form not valid");
-      return;
-    }
+    // if (!this.registerForm.valid) {
+    //   console.log("form not valid");
+    //   return;
+    // }
 
-    this.loading = true;
+    // this.loading = true;
 
     let email = this.registerForm.value.email;
     let username = this.registerForm.value.username;
@@ -140,26 +150,26 @@ export class RegisterComponent implements OnInit {
       birthDate: birthDate,
       fullName: fullName
     };
-    this.userService
-      .register(res)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.userService.userId = data.userId;
-          this.userService.username = data.username;
-          this.userService.updateUser(data.userId);
-          this.configSerivce.setSessionStorage(data.userId.toString());
-          this.router.navigate(['feed-discover-people']);
-          this.dialogRef.close();
-          this.ngOnDestroy();
-        },
-        error => {
-          this.loading = false;
-          if (this.error.error == 'User Collision') {
-            this.emailExists = true;
-          }
-        }
-      );
+    // this.userService
+    //   .register(res)
+    //   .pipe(first())
+    //   .subscribe(
+    //     data => {
+    //       this.userService.userId = data.userId;
+    //       this.userService.username = data.username;
+    //       this.userService.updateUser(data.userId);
+    //       this.configSerivce.setSessionStorage(data.userId.toString());
+    //       this.router.navigate(['feed-discover-people']);
+    //       this.dialogRef.close();
+    //       this.ngOnDestroy();
+    //     },
+    //     error => {
+    //       this.loading = false;
+    //       if (this.error.error == 'User Collision') {
+    //         this.emailExists = true;
+    //       }
+    //     }
+    //   );
   }
 
   loginPage(): void {
