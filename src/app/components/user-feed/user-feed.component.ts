@@ -111,8 +111,8 @@ export class UserFeedComponent implements OnInit {
           this.spinner.show();
           this.posts = [];
           this.offset = 0;
-          //this.getActivatedRoute();
-          this.feedService.updateUserFeed(this.id, this.offset);
+          this.getActivatedRoute();
+          //this.feedService.updateUserFeed(this.id, this.offset);
           console.log(this.user.id);
         }
       }
