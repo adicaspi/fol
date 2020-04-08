@@ -115,7 +115,7 @@ export class UserFeedComponent implements OnInit {
           //this.getActivatedRoute();
           console.log("update feed", this.id);
           this.feedService.updateUserFeed(this.id, this.offset);
-          console.log(this.user.id);
+          console.log(this.id);
         }
       }
     });
