@@ -69,29 +69,6 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   onChangeCheckBox(key, elem) {
-    // if (key === 'prices') {
-
-    //   if (!elem.checked) {
-    //     elem.checked = true;
-    //     if (this.priceIsSelected) {
-    //       this.currSelectedPrice = elem;
-    //       this.prevSelectedPrice.checked = false;
-    //       this.prevSelectedPrice = this.currSelectedPrice;
-    //       this.filteringChanged = true;
-    //     } else {
-    //       this.currSelectedPrice = elem;
-    //       this.prevSelectedPrice = elem;
-    //       this.priceIsSelected = true;
-    //     }
-    //     this.filteringDTO.setMaxPrice(this.currSelectedPrice.value);
-    //   } else {
-    //     this.priceIsSelected = false;
-    //     elem.checked = false;
-    //     this.filteringDTO.setMaxPrice(0);
-    //     this.filteringChanged = false;
-    //   }
-    //   this.updateFeedFilteringDTO();
-    // }
     if (key === 'stores') {
       if (!elem.checked) {
         elem.checked = true;
