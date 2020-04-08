@@ -16,7 +16,6 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { FollowListComponent } from './components/follow-list/follow-list.component';
 import { ImageComponentComponent } from './components/image-component/image-component.component';
@@ -24,8 +23,6 @@ import { MatDialogModule, MatDialogRef, MatToolbarModule, MatButtonModule, MatSi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpErrorComponent } from './interceptor/http-error/http-error.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandler } from '@angular/core';
-import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
 import { ConfigService } from './services/config.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LandingNavComponent } from './components/landing-nav/landing-nav.component';
@@ -95,7 +92,6 @@ import { ViewDiscoverPeopleUserComponent } from './components/view-discover-peop
     FollowListComponent,
     ImageComponentComponent,
     HttpErrorComponent,
-    ErrorHandlerComponent,
     LandingNavComponent,
     MutualNavComponent,
     XsrfInterceptorComponent,
@@ -181,7 +177,6 @@ import { ViewDiscoverPeopleUserComponent } from './components/view-discover-peop
       useClass: HttpErrorComponent,
       multi: true
     },
-    { provide: ErrorHandler, useClass: ErrorHandlerComponent },
     ConfigService,
     {
       provide: APP_INITIALIZER,
