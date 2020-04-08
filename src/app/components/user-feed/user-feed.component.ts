@@ -105,17 +105,13 @@ export class UserFeedComponent implements OnInit {
         })
       });
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
-      console.log("in msg1", msg);
       if (msg) {
-        console.log("in msg2", msg);
         if (msg.msg == 'update-feed') {
           this.spinner.show();
           this.posts = [];
           this.offset = 0;
           //this.getActivatedRoute();
-          console.log("update feed", this.id);
           this.feedService.updateUserFeed(this.id, this.offset);
-          console.log(this.id);
         }
       }
     });
@@ -128,7 +124,6 @@ export class UserFeedComponent implements OnInit {
       .subscribe(params => {
         this.id = +params['id'];
         if (this.userService.getCurrentUser() == this.id) {
-          console.log("in if", this.userProfile);
           this.userProfile = true;
         }
         else {
