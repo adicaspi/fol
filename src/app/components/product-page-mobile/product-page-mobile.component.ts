@@ -38,7 +38,6 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   userProfile: boolean = false;
   clicked: boolean = false;
-
   private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
@@ -65,7 +64,6 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         this.getPostInfo();
         this.getMoreFromUser();
       });
-
     this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
     this.directingPage = this.dialogService.directingPage;
   }
@@ -77,7 +75,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
   getPostInfo() {
     this.postService
-      .getMobilePostInfo(this.postId, this.userPostUserId)
+      .getMobilePostInfo(this.userService.userId, this.postId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
@@ -101,7 +99,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
 
   getMoreFromUser() {
-    this.postsToShow$ = this.postService.getMorePostsFromUserMobile(this.postId, this.userPostUserId);
+    this.postsToShow$ = this.postService.getMorePostsFromUserMobile(this.userService.userId, this.postId, this.userPostUserId);
   }
 
   openMorePosts(post) {

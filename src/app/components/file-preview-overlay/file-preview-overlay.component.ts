@@ -38,7 +38,6 @@ export class FilePreviewOverlayComponent implements OnInit {
   userPostUserId: number;
   userProfile: boolean = false;
   clicked: boolean = false;
-
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
@@ -59,7 +58,7 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   getPostInfo() {
     this.postService
-      .getMobilePostInfo(this.postId, this.userPostUserId)
+      .getMobilePostInfo(this.userService.userId, this.postId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
@@ -85,7 +84,7 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   getMoreFromUser() {
     this.postsToShow = this.postService
-      .getMorePostsFromUserMobile(this.postId, this.userPostUserId);
+      .getMorePostsFromUserMobile(this.userService.userId, this.postId, this.userPostUserId);
   }
 
   incNumViews() {
