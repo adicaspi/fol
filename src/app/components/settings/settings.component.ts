@@ -165,6 +165,7 @@ export class SettingsComponent implements OnInit {
     if (this.changePasswordForm.invalid) {
       return;
     }
+    this.loading = true;
     let oldPassForm = this.changePasswordForm.value.oldPass;
     let newPassForm = this.changePasswordForm.value.newPass;
 

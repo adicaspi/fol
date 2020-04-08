@@ -93,8 +93,11 @@ export class LoginComponent implements OnInit {
           this.userService.updateUser(data.userId);
 
           this.configSerivce.setSessionStorage(data.userId.toString());
+          if (this.dialogRef) {
+            this.dialogRef.close();
+          }
           this.router.navigate(['/feed/' + data.userId]);
-          this.dialogRef.close();
+
         },
         error => {
           this.submitted = false;

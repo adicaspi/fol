@@ -19,7 +19,7 @@
   </div>
   <div class="column">
 
-    <div class="user">
+    <div *ngIf="user" class="user">
       <div class="form-group">
         <label>
           <img [src]="user.profileImageAddr" class="profile" />
@@ -135,6 +135,21 @@
                   <button type="button" (click)="onSubmitChangePassword()">
                     Change Password
                   </button>
+                  <div class="loading-spinner">
+                    <div *ngIf="loading">
+                      <app-loading-spinner></app-loading-spinner>
+                    </div>
+                  </div>
+                  <div class="succes-message" *ngIf="showSuccessMsg">
+                    <p class="alert alert-success">
+                      <strong>Success!</strong> your password was updated.
+                    </p>
+                  </div>
+                  <div class="error-message" *ngIf="showFailMsg">
+                    <p class="alert alert-danger">
+                      <strong>Failed</strong> to update your password.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
