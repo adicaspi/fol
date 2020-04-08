@@ -46,16 +46,15 @@
               'is-invalid': submitted && f.username.errors || userNameExists 
             }" placeholder="Username" />
 
-      <div *ngIf="submitted && f.username.errors.minlength" class="invalid-feedback">
-        Username must be at least 3 characters
+      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div *ngIf="f.username.errors.required">Username is required</div>
+        <div *ngIf="f.username.errors.cannotContainSpace" class="invalid-feedback">Username can not contain space</div>
+        <div *ngIf="f.username.errors.minlength">
+          Username must be at least 3 characters
+        </div>
       </div>
       <div *ngIf="userNameExists" class="invalid-feedback">
         Username already exists
-      </div>
-      <div *ngIf="submitted && f.username.errors.cannotContainSpace" class="invalid-feedback">Username can not contain space</div>
-
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Username is required</div>
       </div>
     </div>
 
@@ -114,7 +113,7 @@
       </button>
 
       <div class="loading-spinner">
-        <div *ngIf="loading">
+        <div *ngIf="submitted">
           <app-loading-spinner></app-loading-spinner>
         </div>
       </div>

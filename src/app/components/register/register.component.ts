@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', [Validators.required, Validators.pattern('^\\d*$')]],
-      username: ['', [Validators.required, this.cannotContainSpace, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3), this.cannotContainSpace]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]]
     });
@@ -151,26 +151,26 @@ export class RegisterComponent implements OnInit {
       birthDate: birthDate,
       fullName: fullName
     };
-    this.userService
-      .register(res)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.userService.userId = data.userId;
-          this.userService.username = data.username;
-          this.userService.updateUser(data.userId);
-          this.configSerivce.setSessionStorage(data.userId.toString());
-          this.router.navigate(['feed-discover-people']);
-          this.dialogRef.close();
-          this.ngOnDestroy();
-        },
-        error => {
-          this.loading = false;
-          if (this.error.error == 'User Collision') {
-            this.emailExists = true;
-          }
-        }
-      );
+    // this.userService
+    //   .register(res)
+    //   .pipe(first())
+    //   .subscribe(
+    //     data => {
+    //       this.userService.userId = data.userId;
+    //       this.userService.username = data.username;
+    //       this.userService.updateUser(data.userId);
+    //       this.configSerivce.setSessionStorage(data.userId.toString());
+    //       this.router.navigate(['feed-discover-people']);
+    //       this.dialogRef.close();
+    //       this.ngOnDestroy();
+    //     },
+    //     error => {
+    //       this.loading = false;
+    //       if (this.error.error == 'User Collision') {
+    //         this.emailExists = true;
+    //       }
+    //     }
+    //   );
   }
 
   loginPage(): void {
