@@ -44,9 +44,9 @@ export class ShoppingNavComponent implements OnInit {
   showProductType: boolean = true;
   prevScrollPos = window.pageYOffset;
   public sliderType = SliderType;
-  public priceRange: PriceRange = new PriceRange(0, 5000);
+  public priceRange: PriceRange = new PriceRange(0, 2000);
   minValue: number = 0;
-  maxValue: number = 5000;
+  maxValue: number = 2000;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -69,29 +69,29 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   onChangeCheckBox(key, elem) {
-    if (key === 'prices') {
+    // if (key === 'prices') {
 
-      if (!elem.checked) {
-        elem.checked = true;
-        if (this.priceIsSelected) {
-          this.currSelectedPrice = elem;
-          this.prevSelectedPrice.checked = false;
-          this.prevSelectedPrice = this.currSelectedPrice;
-          this.filteringChanged = true;
-        } else {
-          this.currSelectedPrice = elem;
-          this.prevSelectedPrice = elem;
-          this.priceIsSelected = true;
-        }
-        this.filteringDTO.setMaxPrice(this.currSelectedPrice.value);
-      } else {
-        this.priceIsSelected = false;
-        elem.checked = false;
-        this.filteringDTO.setMaxPrice(0);
-        this.filteringChanged = false;
-      }
-      this.updateFeedFilteringDTO();
-    }
+    //   if (!elem.checked) {
+    //     elem.checked = true;
+    //     if (this.priceIsSelected) {
+    //       this.currSelectedPrice = elem;
+    //       this.prevSelectedPrice.checked = false;
+    //       this.prevSelectedPrice = this.currSelectedPrice;
+    //       this.filteringChanged = true;
+    //     } else {
+    //       this.currSelectedPrice = elem;
+    //       this.prevSelectedPrice = elem;
+    //       this.priceIsSelected = true;
+    //     }
+    //     this.filteringDTO.setMaxPrice(this.currSelectedPrice.value);
+    //   } else {
+    //     this.priceIsSelected = false;
+    //     elem.checked = false;
+    //     this.filteringDTO.setMaxPrice(0);
+    //     this.filteringChanged = false;
+    //   }
+    //   this.updateFeedFilteringDTO();
+    // }
     if (key === 'stores') {
       if (!elem.checked) {
         elem.checked = true;
@@ -105,7 +105,7 @@ export class ShoppingNavComponent implements OnInit {
           this.filteringChanged = false;
         }
       }
-      this.updateFeedFilteringDTO();
+      //this.updateFeedFilteringDTO();
     }
     if (key === 'designers') {
       if (!elem.checked) {
@@ -119,7 +119,7 @@ export class ShoppingNavComponent implements OnInit {
           this.filteringChanged = false;
         }
       }
-      this.updateFeedFilteringDTO();
+      //this.updateFeedFilteringDTO();
     }
     if (key === 'clothings') {
       if (!elem.checked) {
@@ -133,7 +133,7 @@ export class ShoppingNavComponent implements OnInit {
           this.filteringChanged = false;
         }
       }
-      this.updateFeedFilteringDTO();
+      //this.updateFeedFilteringDTO();
     }
   }
 
@@ -177,8 +177,18 @@ export class ShoppingNavComponent implements OnInit {
     });
   }
 
+  selectedPrice() {
+    this.filteringDTO.setMinPrice(this.priceRange.lower);
+    this.filteringDTO.setMaxPrice(this.priceRange.upper);
+  }
+
   toggleSidenav(): void {
     this.sidenav.toggle();
+  }
+
+  applyFilters() {
+    this.selectedPrice();
+    this.updateFeedFilteringDTO();
   }
 
   filterByCategory(item) {

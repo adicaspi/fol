@@ -197,4 +197,9 @@ mat-toolbar{
 .igx-slider__thumb-from .dot::before, .igx-slider__thumb-to .dot::before {
   background: black !important;
 }
+
+.dot::after{
+  transform: none !important;
+}
+
 }

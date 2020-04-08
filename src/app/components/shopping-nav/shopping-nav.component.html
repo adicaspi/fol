@@ -77,9 +77,10 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Price</div>
-        <div class="price-container">
-          <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="5000" [(ngModel)]="priceRange" (click)="$event.stopPropagation(); ">
+        <div class="price-container" (mouseenter)="selectedPrice()">
+          <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="2000" [(ngModel)]="priceRange">
           </igx-slider>
+
           <span class="price min">
             {{priceRange.lower}}
           </span>
@@ -102,7 +103,7 @@
       </div> -->
 
       <div class="buttons-container">
-        <button class="done-button">Apply Filters</button>
+        <button class="done-button" (click)="applyFilters()">Apply Filters</button>
       </div>
 
     </mat-sidenav>
