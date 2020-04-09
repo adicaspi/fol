@@ -100,7 +100,6 @@ export class TimelineFeedComponent implements OnInit {
         error => console.log(error)
       );
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
-      console.log("in msg1 timelinefeed", msg);
       if (msg) {
         if (msg.msg == 'update-feed') {
           this.showDiscover = false;

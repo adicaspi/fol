@@ -55,20 +55,31 @@ export class BottomNavbarComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         if (params.length > 1) {
-          if (params[0].path == "feed") {
-            this.feed = true;
-            this.explore = false;
-            this.profile = false;
-          }
-          if (params[0].path == "profile") {
-            this.feed = false;
-            this.explore = false;
-            this.profile = true;
-          }
-          if (params[0].path == "explore") {
-            this.feed = false;
-            this.explore = true;
-            this.profile = false;
+          switch (params[0].path) {
+            case "feed":
+              this.feed = true;
+              this.explore = false;
+              this.profile = false;
+              break;
+            case "profile":
+              if (params[1].path == this.userService.getCurrentUser()) {
+                this.profile = true;
+              }
+              else {
+                this.profile = false;
+              }
+              this.feed = false;
+              this.explore = false;
+              break;
+            case "explore":
+              this.feed = false;
+              this.explore = true;
+              this.profile = false;
+              break;
+            default:
+              this.feed = false;
+              this.explore = false;
+              this.profile = false;
           }
         }
       });
