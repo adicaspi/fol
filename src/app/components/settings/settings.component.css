@@ -505,4 +505,8 @@ button {
     font-family: 'Maven Pro', sans-serif;
     font-size: 12px;
   }
+
+  .header-section{
+    margin-bottom: 35px;
+  }
 }
