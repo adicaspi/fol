@@ -191,6 +191,11 @@ button.nav-item {
 
   &.opened {
     min-width: 280px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    z-index: 9999;
+    background:white;
 
     #{$this}__btn {
       &.toggle {
