@@ -1,3 +1,9 @@
+
+<div *ngIf="!desktop" class="header">
+  <img src="assets/back.png" class="go-back" (click)="goBackPage()"/>
+  <span class="header-text">Discover People</span>
+</div>
+
 <div class="top"></div>
 
 <app-discover-people [discoverPeopleArray]="discoverPeopleArray">
