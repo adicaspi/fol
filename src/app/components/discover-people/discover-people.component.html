@@ -9,7 +9,7 @@
 
           <div class="user-section">
             <img class="profile-image" [src]="person.userAvatar" alt="" (click)="profilePage(person)">
-            <div class="user-info">
+            <div class="user-info" (click)="profilePage(person)">
               <div class="username">{{person.username}}</div>
               <div class="num-followers">{{person.numFollowers}} followers</div>
             </div>
