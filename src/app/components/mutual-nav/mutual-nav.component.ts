@@ -33,7 +33,7 @@ export class MutualNavComponent implements OnInit {
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 5000);
   minValue: number = 0;
-  maxValue: number = 5000;
+  maxValue: number = 2000;
   categoryForm: FormGroup;
   productForm: FormGroup;
   categroyRadioButton: MatRadioButton = null;
