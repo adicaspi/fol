@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, HostListener, ElementRef } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
@@ -40,7 +40,8 @@ export class ShoppingNavComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private feedService: FeedService,
     private massageService: MessageService,
-    private shoppingNavService: ShoppingNavService
+    private shoppingNavService: ShoppingNavService,
+    private eRef: ElementRef
   ) {
   }
 
@@ -61,6 +62,14 @@ export class ShoppingNavComponent implements OnInit {
       }
     }
     this.prevScrollPos = currScrollPos;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.eRef.nativeElement.contains(event.target)) {
+    } else {
+      this.toggleSidenav();
+    }
   }
 
   onChangeCheckBox(key, elem) {

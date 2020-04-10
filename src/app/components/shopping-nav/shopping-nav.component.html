@@ -11,8 +11,8 @@
     <button (click)="toggleSidenav()" class="filter-buttons__btn toggle"></button>
     <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear" [disabled]="!filteringChanged">Clear</button>
   </div>
-  
-  <mat-sidenav-container class="sidenav-container" [ngClass]="{'opened': sidenav.opened}" [hasBackdrop]="false">
+
+  <mat-sidenav-container class="sidenav-container" [ngClass]="{'opened': sidenav.opened}" [hasBackdrop]="true">
     <mat-sidenav #sidenav mode="over" autoFocus="false" class="mat-sidenav">
       <div *ngIf="showProductType" class="filter-section">
         <div class="filter-section__title">Product type</div>

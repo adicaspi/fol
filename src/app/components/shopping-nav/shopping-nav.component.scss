@@ -134,12 +134,15 @@ button.nav-item {
 .sidenav-container {
   position: fixed;
   right: 0;
-  top: 34px;
+  top: 0px;
   bottom: 0;
   transition: transform .3s;
   transform: translateX(100%);
-  width: 280px;
-  background-color: white;
+  width: 100%;
+  padding-left: 95px;
+  background: transparent;
+  // width: 280px;
+  // background-color: white;
 
   &.opened {
     transform: translateX(0);
@@ -147,7 +150,7 @@ button.nav-item {
 }
 
 .mat-sidenav{
-  padding: 24px 24px 24px 48px;
+  padding: 46px 24px 24px 48px;
   width: 100%;
   box-shadow: none !important;
   transform: none;
@@ -159,11 +162,14 @@ button.nav-item {
   padding-right: 12px;
   padding-left: 14px;
   justify-content: space-between;
-  transition: width .3s;
+  width:54px;
+  transition: width .29s;
   font-size: 25px;
   box-sizing: border-box;
   display: flex;
   float: right;
+ 
+  
 
   &__btn {
     background: none;
@@ -178,8 +184,10 @@ button.nav-item {
     }
 
     &.toggle {
+      
       &:before {
         content: '+ ';
+        
       }
     }
 
@@ -190,16 +198,18 @@ button.nav-item {
   }
 
   &.opened {
-    min-width: 280px;
+    width: 280px;
     position: fixed;
     right: 0px;
     top: 0px;
     z-index: 9999;
     background:white;
+    
 
     #{$this}__btn {
       &.toggle {
         font-weight: 700;
+        
 
         &:before {
           content: '- ';
