@@ -166,9 +166,8 @@ mat-toolbar{
   border-color: rgba(118, 118, 118, 0.28) !important;
 }
 
-.mat-checkbox-checkmark-path{
-  stroke: pink !important;
-}
+
+
 @media (min-width: 600px) and (max-width: 900px)  {
 
   mat-toolbar.mat-toolbar.mat-toolbar-single-row {
@@ -185,6 +184,33 @@ mat-toolbar{
 
   .mat-drawer-backdrop.mat-drawer-shown {
     background-color: rgba(0,0,0,.2);
+}
+
+}
+
+@media (max-width: 600px){
+.igx-slider__label-from, .igx-slider__label-to{
+  display: none !important;
+}
+
+.igx-slider__track{
+  background: lightgrey !important;
+}
+
+.igx-slider__track-fill{
+  background: grey !important;
+}
+
+.igx-slider__thumb-from .dot::after, .igx-slider__thumb-to .dot::after {
+  background: none !important;
+}
+
+.igx-slider__thumb-from .dot::before, .igx-slider__thumb-to .dot::before {
+  background: black !important;
+}
+
+.dot::after{
+  transform: none !important;
 }
 
 }
