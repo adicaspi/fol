@@ -8,7 +8,11 @@ import { MatSidenav } from '@angular/material';
 import { MessageService } from '../../services/message.service';
 import { SliderType } from "igniteui-angular";
 import * as jquery from 'jquery';
+import $ from '../../../../node_modules/jquery';
+// import 'jquery-ui-dist';
 import { ShoppingNavService } from '../../services/shopping-nav.service';
+
+import '../../../../node_modules/jquery-ui-dist/jquery-ui.js';
 
 @Component({
   selector: 'app-shopping-nav',
@@ -51,6 +55,7 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initSlider();
     this.shoppingNavService.mobileMenu.map(val => this.menu.push(Object.assign({}, val)));
     this.shoppingNavService.clothing.map(val => this.clothings.push(Object.assign({}, val)));
     this.shoppingNavService.designers.map(val => this.designers.push(Object.assign({}, val)));
@@ -151,6 +156,30 @@ export class ShoppingNavComponent implements OnInit {
     });
     this.clothings.forEach(elem => {
       elem.checked = false;
+    });
+  }
+
+  initSlider() {
+    console.log("in slider");
+    var v = [18, 55];
+    $("#slider").slider({
+      range: true,
+      min: 0,
+      max: 100,
+      values: v,
+      slide: function (event, ui) {
+        // return false;
+        // if ((ui.values[1] - ui.values[0]) < 5) {
+        //   return false;
+        // }
+        // $("#label-0").css('left', ui.values[0] + "%").text(ui.values[0]);
+        // $("#label-1").css('left', ui.values[1] + "%").text(ui.values[1]);
+      },
+      create: function (event, ui) {
+
+        // $("#label-0").css('left', v[0] + "%").text(v[0]);
+        // $("#label-1").css('left', v[1] + "%").text(v[1]);
+      }
     });
   }
 
