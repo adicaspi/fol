@@ -170,8 +170,14 @@ button.nav-item {
   display: flex;
   float: right;
  
-  
-
+  &__title {
+    font-size: 15px !important;
+    font-weight: bold !important;
+    display: inline-block;
+    text-align: center;
+    color: #333333;
+    line-height: 48px;
+  }
   &__btn {
     background: none;
     border: none;
@@ -207,6 +213,7 @@ button.nav-item {
 
   &.opened {
     width: 300px;
+    height: 48px;
     position: fixed;
     right: 0px;
     top: 0px;
