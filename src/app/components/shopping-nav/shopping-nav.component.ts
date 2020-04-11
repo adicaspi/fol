@@ -7,12 +7,12 @@ import { FilteringDTO } from '../../models/FilteringDTO';
 import { MatSidenav } from '@angular/material';
 import { MessageService } from '../../services/message.service';
 import { SliderType } from "igniteui-angular";
-import * as jquery from 'jquery';
-import $ from '../../../../node_modules/jquery';
-// import 'jquery-ui-dist';
 import { ShoppingNavService } from '../../services/shopping-nav.service';
-
-import '../../../../node_modules/jquery-ui-dist/jquery-ui.js';
+import * as jQuery from 'jquery';
+import $ from 'jquery';
+import 'jquery-ui/ui/widgets/slider';
+(window as any).jQuery = $;
+require('jquery-ui-touch-punch');
 
 @Component({
   selector: 'app-shopping-nav',
@@ -168,7 +168,6 @@ export class ShoppingNavComponent implements OnInit {
       max: 100,
       values: v,
       slide: function (event, ui) {
-        // return false;
         // if ((ui.values[1] - ui.values[0]) < 5) {
         //   return false;
         // }

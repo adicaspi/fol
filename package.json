@@ -37,6 +37,7 @@
     "jquery": "^3.5.0",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
+    "jquery-ui-touch-punch": "^0.2.3",
     "jszip": "^3.2.2",
     "masonry-layout": "^4.2.2",
     "minireset.css": "~0.0.4",
