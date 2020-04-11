@@ -12,6 +12,7 @@ export class PostInfo {
   userProfileImageAddr: string;
   website: string;
   numViews: number;
+  numLikes: number;
 
   // link: string;
   // designer: string;

@@ -153,11 +153,29 @@ export class UserService {
     })
   }
 
+  // getUserDetails(id: number): Observable<User> {
+  //   console.log("in get user details");
+  //   return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
+  //   )
+  //     .map(res => {
+  //       return new User(res);
+  //     });
+  // }
   getUserDetails(id: number): Observable<User> {
     console.log("in get user details");
-    return this.http.get<User>(this.globalInfoURL + id + '/details').pipe(
+    return this.http.get<User>(this.globalSettingsURL + id + '/current-settings').pipe(
     )
       .map(res => {
+        return new User(res);
+      });
+  }
+
+  getUserProfileInfo(id: number): Observable<User> {
+    console.log("in get user profile info");
+    return this.http.get<User>(this.globalInfoURL + id + '/profile-info').pipe(
+    )
+      .map(res => {
+        console.log(res);
         return new User(res);
       });
   }
@@ -237,4 +255,29 @@ export class UserService {
       }
     ).subscribe(res => { });
   }
+
+  didLike(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.get<boolean>(this.globaSoicalURL + this.userId + '/did-like',
+      {
+        params
+      });
+  }
+
+  like(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.post(this.globaSoicalURL + this.userId + '/like', { headers: httpOptions.headers },
+      {
+        params: params
+      }).subscribe(res => { });
+  }
+
+  unlike(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.post(this.globaSoicalURL + this.userId + '/unlike', { headers: httpOptions.headers },
+      {
+        params: params
+      }).subscribe(res => { });
+  }
 }
+

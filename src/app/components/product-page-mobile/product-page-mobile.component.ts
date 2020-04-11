@@ -10,7 +10,7 @@ import { User } from '../../models/User';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ThousandSuffixesPipe } from './pipe-transform';
+import { ThousandSuffixesPipe } from '../../models/pipe-transform';
 import { ConfigService } from '../../services/config.service';
 import { MorePosts } from '../../models/MorePosts';
 
@@ -27,6 +27,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   userPostUserId: number;
   numFollowers$: Observable<number>;
   numViews: number;
+  numLikes: number;
   directingPage: string;
   userProfileSrc: any;
   storeLogoSrc: string;
@@ -37,7 +38,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   postsToShow$: Observable<MorePosts[]>;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   userProfile: boolean = false;
-  clicked: boolean = false;
+  likeButtonClicked: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
@@ -66,6 +67,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       });
     this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
     this.directingPage = this.dialogService.directingPage;
+    this.didLike();
   }
 
   ngOnDestroy(): void {
@@ -82,7 +84,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
         }
-        this.numViews = this.pipeTransform.transform(postInfo.numViews);
+        this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
         this.imageUrls.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
@@ -120,9 +122,23 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.userService.hidePost(postId);
   }
 
+  didLike() {
+    this.userService.didLike(this.postId).subscribe(res => {
+      this.likeButtonClicked = res;
+    })
+  }
+
   toggleLikeButton() {
-    this.clicked = !this.clicked;
-    this.postService.incrementPostViews(this.userService.userId, this.postId);
+    if (this.likeButtonClicked) {
+      this.likeButtonClicked = false;
+      this.numLikes -= 1;
+      this.userService.unlike(this.postId);
+    } else {
+      this.likeButtonClicked = true;
+      this.numLikes += 1;
+      this.userService.like(this.postId);
+    }
+    //this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
   removePost(postId: number) {

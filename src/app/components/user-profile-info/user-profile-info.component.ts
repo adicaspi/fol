@@ -98,7 +98,8 @@ export class UserProfileInfoComponent implements OnInit {
   }
 
   updateUser(id) {
-    this.user = this.userService.getUserDetails(id);
+    // this.user = this.userService.getUserDetails(id);
+    this.user = this.userService.getUserProfileInfo(id);
   }
 
   follow() {

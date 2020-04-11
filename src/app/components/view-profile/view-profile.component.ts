@@ -29,23 +29,23 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     public userService: UserService,
     public activatedRoute: ActivatedRoute
   ) {
-    this.userId = this.userService.userId;
-    const routeParams = this.activatedRoute.snapshot.params;
-    this.masterId = parseInt(routeParams.id, 10);
+    // this.userId = this.userService.userId;
+    // const routeParams = this.activatedRoute.snapshot.params;
+    // this.masterId = parseInt(routeParams.id, 10);
 
-    if (this.userId === this.masterId) {
-      this.userProfile = true;
-    } else {
-      this.userService.getUserDetails(this.masterId)
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(res => {
-          this.masterUser = res;
-        });
-    }
+    // if (this.userId === this.masterId) {
+    //   this.userProfile = true;
+    // } else {
+    //   this.userService.getUserDetails(this.masterId)
+    //     .pipe(takeUntil(this.ngUnsubscribe))
+    //     .subscribe(res => {
+    //       this.masterUser = res;
+    //     });
+    // }
   }
 
   ngOnInit() {
-    this.feedService.currentLoadedFeedComponent = 'profile';
+    // this.feedService.currentLoadedFeedComponent = 'profile';
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(

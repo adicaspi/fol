@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
 import { MorePosts } from '../../models/MorePosts';
 import { ConfigService } from '../../services/config.service';
+import { ThousandSuffixesPipe } from '../../models/pipe-transform';
 
 @Component({
   selector: 'app-file-preview-overlay',
@@ -36,8 +37,10 @@ export class FilePreviewOverlayComponent implements OnInit {
   thumbnails = [];
   postId: number;
   userPostUserId: number;
+  numLikes: number;
   userProfile: boolean = false;
-  clicked: boolean = false;
+  likeButtonClicked: boolean = false;
+  pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
@@ -65,7 +68,9 @@ export class FilePreviewOverlayComponent implements OnInit {
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
         }
+        this.didLike();
         this.postImageAddr = this.postInfo.postImageAddr;
+        this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
         this.thumbnails.push(
           this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
         );
@@ -91,8 +96,22 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
+  didLike() {
+    this.userService.didLike(this.postId).subscribe(res => {
+      this.likeButtonClicked = res;
+    })
+  }
+
   toggleLikeButton() {
-    this.clicked = !this.clicked;
+    if (this.likeButtonClicked) {
+      this.likeButtonClicked = false;
+      this.numLikes -= 1;
+      this.userService.unlike(this.postId);
+    } else {
+      this.likeButtonClicked = true;
+      this.numLikes += 1;
+      this.userService.like(this.postId);
+    }
     this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 

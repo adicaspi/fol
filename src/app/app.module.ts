@@ -60,13 +60,13 @@ import { LoginMobileComponent } from './components/login-mobile/login-mobile.com
 import { SharedModule } from './shared/shared.module';
 import { UserProfileInfoMobileComponent } from './components/user-profile-info-mobile/user-profile-info-mobile.component';
 import { UserProfileInfoDesktopComponent } from './components/user-profile-info-desktop/user-profile-info-desktop.component';
-import { ThousandSuffixesPipe } from './components/product-page-mobile/pipe-transform';
+import { ThousandSuffixesPipe } from './models/pipe-transform';
 import { TermsComponent } from './components/terms/terms.component';
 import { TermsCookiesComponent } from './components/terms-cookies/terms-cookies.component';
 import { DiscoverPeopleComponent } from './components/discover-people/discover-people.component';
 import { MasonryWidthDirective } from './directives/masonry-width.directive';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DatePipe } from '../../node_modules/@angular/common';
+import { DatePipe } from '@angular/common';
 import { ExploreFeedGeneralComponent } from './components/explore-feed-general/explore-feed-general.component';
 import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
 import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-people-general/view-discover-people-general.component';

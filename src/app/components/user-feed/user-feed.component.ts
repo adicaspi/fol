@@ -127,7 +127,7 @@ export class UserFeedComponent implements OnInit {
         }
         else {
           //this.currentUser = this.userService.getUserDetails(this.id);
-          this.userService.getUserDetails(this.id).pipe(takeUntil(this.onDestroy)).subscribe(user => {
+          this.userService.getUserProfileInfo(this.id).pipe(takeUntil(this.onDestroy)).subscribe(user => {
             this.user = user;
           });
         }
