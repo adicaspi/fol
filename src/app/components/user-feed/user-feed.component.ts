@@ -28,6 +28,7 @@ import { User } from '../../models/User';
   styleUrls: ['./user-feed.component.css']
 })
 export class UserFeedComponent implements OnInit {
+  @Input() masterUser: User;
   posts = [];
   offset: number = 0;
   desktop: boolean = true;

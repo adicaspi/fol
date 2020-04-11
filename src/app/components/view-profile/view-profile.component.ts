@@ -19,6 +19,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   masterId: number;
   userProfile = false;
   masterUser: User;
+  user: User;
   private anyErrors: boolean;
   private finished: boolean;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -29,23 +30,12 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     public userService: UserService,
     public activatedRoute: ActivatedRoute
   ) {
-    // this.userId = this.userService.userId;
-    // const routeParams = this.activatedRoute.snapshot.params;
-    // this.masterId = parseInt(routeParams.id, 10);
-
-    // if (this.userId === this.masterId) {
-    //   this.userProfile = true;
-    // } else {
-    //   this.userService.getUserDetails(this.masterId)
-    //     .pipe(takeUntil(this.ngUnsubscribe))
-    //     .subscribe(res => {
-    //       this.masterUser = res;
-    //     });
-    // }
   }
 
   ngOnInit() {
-    // this.feedService.currentLoadedFeedComponent = 'profile';
+    const routeParams = this.activatedRoute.snapshot.params;
+    this.masterId = parseInt(routeParams.id);
+    this.updateUser(this.masterId);
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
@@ -53,6 +43,12 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
         () => this.anyErrors = true,
         () => this.finished = true
       );
+  }
+
+  updateUser(id) {
+    this.userService.getUserProfileInfo(id).subscribe(res => {
+      this.masterUser = res
+    });
   }
 
   ngOnDestroy(): void {

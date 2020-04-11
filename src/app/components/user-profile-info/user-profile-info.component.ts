@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Routes, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { LocationService } from '../../services/location.service';
 import { UserService } from '../../services/user.service';
@@ -19,6 +19,7 @@ import { ConfigService } from '../../services/config.service';
 })
 
 export class UserProfileInfoComponent implements OnInit {
+  @Input() masterUser: User;
   public currMasterId: number;
   public slaveId: number;
   public follows: boolean;
