@@ -1,8 +1,8 @@
 <!-- <div class="body"> -->
 <div class="center">
 
-  <div *ngIf="user | async; let user" class="main">
-
+  <!-- <div *ngIf="user | async; let user" class="main"> -->
+  <div *ngIf="user" class="main">
     <div class="header">
       <div class="username">
         <img *ngIf=!userProfile src="assets/back.png" class="go-back" (click)="goBackPage()" /> {{user.username}}</div>

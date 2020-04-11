@@ -66,7 +66,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.userService.userId;
-    this.user = this.userService.getUserDetails(this.userId);
+    this.user = this.userService.getUserProfileInfo(this.userId);
     this.searchForm = this.formBuilder.group({
       search: ['']
     })

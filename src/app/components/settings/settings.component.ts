@@ -6,6 +6,7 @@ import { User } from '../../models/User';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { ConfigService } from '../../services/config.service';
+import { UserDetails } from '../../models/UserDetails';
 
 class fieldItem {
   label: string;
@@ -21,7 +22,7 @@ class fieldItem {
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
   changePasswordForm: FormGroup;
-  user: User;
+  user: UserDetails;
   description: string;
   descriptionInputChanged: boolean = false;
   selectedFile: File = null;
@@ -105,7 +106,7 @@ export class SettingsComponent implements OnInit {
 
   }
 
-  patchValue(user: User) {
+  patchValue(user: UserDetails) {
     this.settingsForm.patchValue({
       username: user.username,
       fullname: user.fullName,

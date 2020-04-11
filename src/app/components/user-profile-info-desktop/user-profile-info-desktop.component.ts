@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LocationService } from '../../services/location.service';
 import { UserProfileInfoComponent } from '../user-profile-info/user-profile-info.component';
 import { UserService } from '../../services/user.service';
@@ -12,7 +12,7 @@ import { ConfigService } from '../../services/config.service';
   styleUrls: ['./user-profile-info-desktop.component.scss']
 })
 export class UserProfileInfoDesktopComponent extends UserProfileInfoComponent {
-
+  @Input() user;
   constructor(public userService: UserService,
     public activatedRoute: ActivatedRoute,
     public dialogService: DialogService,

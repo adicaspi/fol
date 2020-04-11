@@ -19,11 +19,11 @@ import { ConfigService } from '../../services/config.service';
 })
 
 export class UserProfileInfoComponent implements OnInit {
-  @Input() masterUser: User;
+  @Input() user;
   public currMasterId: number;
   public slaveId: number;
   public follows: boolean;
-  public user: Observable<User>;
+  //public user: Observable<User>;
   public userId: number;
   public userProfileImageSrc: string;
   public src: any;
@@ -55,6 +55,7 @@ export class UserProfileInfoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //console.log("user", this.user);
     this.userId = this.userService.userId;
     const routeParams = this.activatedRoute.snapshot.params;
     this.currMasterId = parseInt(routeParams.id);
@@ -100,7 +101,7 @@ export class UserProfileInfoComponent implements OnInit {
 
   updateUser(id) {
     // this.user = this.userService.getUserDetails(id);
-    this.user = this.userService.getUserProfileInfo(id);
+    //this.user = this.userService.getUserProfileInfo(id);
   }
 
   follow() {

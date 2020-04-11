@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
 import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
+import { UserDetails } from '../models/UserDetails';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
@@ -32,7 +33,7 @@ const httpFormDataImage = {
 export class UserService {
   userId: number;
   username: string;
-  user: Observable<User>;
+  user: Observable<UserDetails>;
   private baseApiUrl = environment.BASE_API_URL;
   globalRegisterURL = this.baseApiUrl + '/registration/';
   globaSoicalURL = this.baseApiUrl + '/social/';
@@ -161,21 +162,18 @@ export class UserService {
   //       return new User(res);
   //     });
   // }
-  getUserDetails(id: number): Observable<User> {
-    console.log("in get user details");
+  getUserDetails(id: number): Observable<UserDetails> {
     return this.http.get<User>(this.globalSettingsURL + id + '/current-settings').pipe(
     )
       .map(res => {
-        return new User(res);
+        return new UserDetails(res);
       });
   }
 
   getUserProfileInfo(id: number): Observable<User> {
-    console.log("in get user profile info");
     return this.http.get<User>(this.globalInfoURL + id + '/profile-info').pipe(
     )
       .map(res => {
-        console.log(res);
         return new User(res);
       });
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LocationService } from '../../services/location.service';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { UserProfileInfoComponent } from '../user-profile-info/user-profile-info
   styleUrls: ['./user-profile-info-mobile.component.scss']
 })
 export class UserProfileInfoMobileComponent extends UserProfileInfoComponent {
-
+  @Input() user;
   constructor(public userService: UserService,
     public activatedRoute: ActivatedRoute,
     public dialogService: DialogService,
