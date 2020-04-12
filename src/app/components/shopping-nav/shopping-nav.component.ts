@@ -55,7 +55,7 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initSlider();
+    this.initSlider(this);
     this.shoppingNavService.mobileMenu.map(val => this.menu.push(Object.assign({}, val)));
     this.shoppingNavService.clothing.map(val => this.clothings.push(Object.assign({}, val)));
     this.shoppingNavService.designers.map(val => this.designers.push(Object.assign({}, val)));
@@ -159,13 +159,13 @@ export class ShoppingNavComponent implements OnInit {
     });
   }
 
-  initSlider() {
+  initSlider(that) {
     console.log("in slider");
-    var v = [18, 55];
+    var v = [0, 2500];
     $("#slider").slider({
       range: true,
       min: 0,
-      max: 100,
+      max: 2500,
       values: v,
       slide: function (event, ui) {
         // if ((ui.values[1] - ui.values[0]) < 5) {
@@ -173,6 +173,7 @@ export class ShoppingNavComponent implements OnInit {
         // }
         // $("#label-0").css('left', ui.values[0] + "%").text(ui.values[0]);
         // $("#label-1").css('left', ui.values[1] + "%").text(ui.values[1]);
+        that.selectedPrice(ui.values[0], ui.values[1]);
       },
       create: function (event, ui) {
 
@@ -182,9 +183,13 @@ export class ShoppingNavComponent implements OnInit {
     });
   }
 
-  selectedPrice() {
-    this.filteringDTO.setMinPrice(this.priceRange.lower);
-    this.filteringDTO.setMaxPrice(this.priceRange.upper);
+  selectedPrice(minPrice, maxPrice) {
+    this.filteringDTO.setMinPrice(minPrice);
+    if (maxPrice == 2000) {
+      this.filteringDTO.setMaxPrice(0);
+    } else {
+      this.filteringDTO.setMaxPrice(maxPrice);
+    }
   }
 
   toggleSidenav(): void {
@@ -192,7 +197,6 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   applyFilters() {
-    this.selectedPrice();
     this.updateFeedFilteringDTO();
   }
 
