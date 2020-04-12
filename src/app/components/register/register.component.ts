@@ -151,26 +151,25 @@ export class RegisterComponent implements OnInit {
       birthDate: birthDate,
       fullName: fullName
     };
-    // this.userService
-    //   .register(res)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       this.userService.userId = data.userId;
-    //       this.userService.username = data.username;
-    //       this.userService.updateUser(data.userId);
-    //       this.configSerivce.setSessionStorage(data.userId.toString());
-    //       this.router.navigate(['feed-discover-people']);
-    //       this.dialogRef.close();
-    //       this.ngOnDestroy();
-    //     },
-    //     error => {
-    //       this.loading = false;
-    //       if (this.error.error == 'User Collision') {
-    //         this.emailExists = true;
-    //       }
-    //     }
-    //   );
+    this.userService
+      .register(res)
+      .subscribe(
+        data => {
+          this.userService.userId = data.userId;
+          this.userService.username = data.username;
+          this.userService.updateUser(data.userId);
+          this.configSerivce.setSessionStorage(data.userId.toString());
+          this.router.navigate(['feed-discover-people']);
+          this.dialogRef.close();
+          this.ngOnDestroy();
+        },
+        error => {
+          this.loading = false;
+          if (this.error.error == 'User Collision') {
+            this.emailExists = true;
+          }
+        }
+      );
   }
 
   loginPage(): void {
