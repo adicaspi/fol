@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/User';
 import * as jquery from 'jquery';
 
+
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -46,7 +47,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   }
 
   updateUser(id) {
-    this.userService.getUserProfileInfo(id).subscribe(res => {
+    this.userService.getUserProfileInfo(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       console.log("masterUser", res);
       this.user = res
     });
