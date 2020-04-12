@@ -181,14 +181,10 @@ mat-toolbar{
 }
 
 @media (max-width: 600px){
-
   .mat-drawer-backdrop.mat-drawer-shown {
-    background-color: rgba(0,0,0,.2);
+    background-color: transparent;
 }
 
-}
-
-@media (max-width: 600px){
 .igx-slider__label-from, .igx-slider__label-to{
   display: none !important;
 }

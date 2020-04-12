@@ -151,10 +151,12 @@ button.nav-item {
 }
 
 .mat-sidenav{
-  padding: 68px 24px 24px 28px;
-  width: 100%;
+  padding: 62px 24px 24px 28px;
+  width: 300px;
   box-shadow: none !important;
   transform: none;
+  right: 0;
+  box-shadow: -6px 0px 12px 2px rgba(0, 0, 0, 0.04) !important;
 }
 
 .filter-buttons {
@@ -200,7 +202,7 @@ button.nav-item {
 
     &.clear {
       position: absolute;
-      right: 4px;
+      right: 6px;
       color: grey;
       font-size: 14px;
       text-decoration: underline;
@@ -219,13 +221,13 @@ button.nav-item {
     top: 0px;
     z-index: 9999;
     background:white;
-    box-shadow: -6px -6px 12px 2px rgba(0, 0, 0, .04) !important;
 
     #{$this}__btn {
       &.toggle {
         font-weight: 700;
         position: absolute;
         left: 12px;
+        padding: 1px 7px 2px 7px;
 
         &:before {
           content: '- ';

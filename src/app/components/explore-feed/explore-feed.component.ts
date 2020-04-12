@@ -57,7 +57,7 @@ export class ExploreFeedComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    jquery("mat-sidenav-container").css("top", "80px");
+    //jquery("mat-sidenav-container").css("top", "80px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
