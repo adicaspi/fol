@@ -12,6 +12,7 @@ import { LocationService } from '../../services/location.service';
 })
 export class ViewDiscoverPeopleUserComponent implements OnInit {
   discoverPeopleArray = [];
+  showNoPostsMessage: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
   desktop: boolean = true;
   private WindowSizeSubscription: Subscription;
@@ -24,6 +25,10 @@ export class ViewDiscoverPeopleUserComponent implements OnInit {
   ngOnInit() {
     this.userService.discoverPeopleUser().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
+      if (!this.discoverPeopleArray.length) {
+        console.log("in no posts");
+        this.showNoPostsMessage = true;
+      }
     });
     this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
       value => {

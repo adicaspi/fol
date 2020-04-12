@@ -141,7 +141,6 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    console.log("im postid", post.post.postId);
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {

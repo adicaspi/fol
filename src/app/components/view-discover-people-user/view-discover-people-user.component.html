@@ -1,11 +1,13 @@
-
+<div *ngIf="showNoPostsMessage" class="subtitle">
+  No available recommendations for you at that moment :(
+</div>
 <div *ngIf="!desktop" class="header">
-  <img src="assets/back.png" class="go-back" (click)="goBackPage()"/>
+  <img src="assets/back.png" class="go-back" (click)="goBackPage()" />
   <span class="header-text">Discover People</span>
 </div>
 
 <div class="top"></div>
 
 <app-discover-people [discoverPeopleArray]="discoverPeopleArray">
-    
+
 </app-discover-people>
