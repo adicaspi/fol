@@ -99,11 +99,6 @@ export class NavbarComponent implements OnInit {
       }),
       error => this.anyErrors = true,
       () => this.finished = true
-
-
-    // if (this.deviceService.isMobile() || this.deviceService.isTablet()) {
-    //   this.mobile = true;
-    // }
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -136,7 +131,6 @@ export class NavbarComponent implements OnInit {
       this.firstChar = true;
       this.options = [];
       this.filteredOptions = this._filter(value);
-      // this.showSearchSubject.next(false);
 
     }
     if (this.firstChar && value != "") {
@@ -150,7 +144,7 @@ export class NavbarComponent implements OnInit {
 
   getSearchResults(value: string) {
     let baseAPI = this.baseApiUrl + '/image?s3key=';
-    this.userService.search(value).subscribe(res => {
+    this.userService.search(value).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.options = [];
       res.forEach(element => {
         let searchObject = {
@@ -160,16 +154,8 @@ export class NavbarComponent implements OnInit {
           id: element.id
         };
         this.options.push(searchObject);
-      })
-      //this.filteredOptions = this._filter(value);
-    })
-  }
-
-  public async onSearchKeydown($event: KeyboardEvent) {
-    if ($event.key == "Enter") {
-
-    }
-    console.log($event.key);
+      });
+    });
   }
 
   private _filter(value: string): Observable<any> {
@@ -181,6 +167,15 @@ export class NavbarComponent implements OnInit {
 
   searchUser(searchResult) {
     this.router.navigate(['profile', searchResult.id]);
+  }
+
+  optionSelected($event) {
+    this.options.forEach(searchObject => {
+      if (searchObject.userName == $event) {
+        this.searchUser(searchObject);
+      }
+    });
+
   }
 
   profilePage() {

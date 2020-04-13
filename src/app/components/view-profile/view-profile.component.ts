@@ -48,7 +48,6 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
   updateUser(id) {
     this.userService.getUserProfileInfo(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-      console.log("masterUser", res);
       this.user = res
     });
   }
