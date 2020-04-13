@@ -440,9 +440,43 @@ i.fal.fa-times{
 }
 
 #slider{
-  width: 170px;
+  width: 210px;
   margin: auto;
   margin-top: 40px;
+}
+
+.slider-range-container {
+  background: none;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  height: 38px;
+}
+
+.slider-range-container span {
+  line-height: 38px;
+  color: rgb(164,164,164);
+  font-weight: bold;
+}
+
+.slider-range-container input {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+  font-size: 15px;
+  color: #333;
+}
+
+.slider-input-container {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid rgb(205,205,205);
+  width: 80px;
+  height: 100%;
+  margin: 0px 12px;
+  padding-left: 8px;
+  padding-right: 6px;
 }
 
 div.white-space {
