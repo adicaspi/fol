@@ -39,6 +39,7 @@ export class ShoppingNavComponent implements OnInit {
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = true;
+  pageIsScrolled: boolean = false;
   prevScrollPos = window.pageYOffset;
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 2000);
@@ -63,16 +64,16 @@ export class ShoppingNavComponent implements OnInit {
     this.shoppingNavService.prices.map(val => this.prices.push(Object.assign({}, val)));
   }
 
-  // @HostListener('window:scroll', ['$event'])
-  // scrollHandler(event) {
-  //   let currScrollPos: number = window.pageYOffset;
-  //   if (currScrollPos > this.prevScrollPos) {
-  //     if (this.sidenav.opened) {
-  //       this.toggleSidenav();
-  //     }
-  //   }
-  //   this.prevScrollPos = currScrollPos;
-  // }
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    let currScrollPos: number = window.pageYOffset;
+    if (currScrollPos > this.prevScrollPos) {
+      this.pageIsScrolled = true;
+    } else {
+      this.pageIsScrolled = false;
+    }
+    this.prevScrollPos = currScrollPos;
+  }
 
   onChangeCheckBox(key, elem) {
     if (key === 'stores') {
