@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
@@ -19,7 +19,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   masterId: number;
   userProfile = false;
   masterUser: User;
-  user: User;
+  user: Observable<User>;
   private anyErrors: boolean;
   private finished: boolean;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -46,10 +46,11 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   }
 
   updateUser(id) {
-    this.userService.getUserProfileInfo(id).subscribe(res => {
-      console.log("masterUser", res);
-      this.user = res
-    });
+    // this.userService.getUserProfileInfo(id).subscribe(res => {
+    //   console.log("masterUser", res);
+    //   this.user = res
+    // });
+    this.user = this.userService.getUserProfileInfo(id);
   }
 
   ngOnDestroy(): void {
