@@ -418,7 +418,7 @@ i.fal.fa-times{
 }
 
 .buttons-container {
-  display: block;
+  display: none;
   position: absolute;
   bottom: 16px;
   left: -8px;
@@ -440,50 +440,13 @@ i.fal.fa-times{
 }
 
 #slider{
-  width: 200px;
-  padding-left: 10px;
+  width: 170px;
+  margin: auto;
+  margin-top: 40px;
 }
 
-.price-container{
-  width:213px;
-  margin-top: 10px;
+div.white-space {
+  background-color: white;
+  width: 100%;
+  height: 80px;
 }
-
-span.price.max{
-  float: right;
-}
-
-span.price.min{
-  margin-left: 5px;
-}
-
-// .ui-slider {
-//   margin-top: 20px;
-//   height: 7px;
-//   position: relative;
-//   border: none;
-//   background: #ff5b63;
-// }
-// .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-//   background: #ff5b63;
-//   border-radius: 25px;
-//   outline: none;
-//   border: 2px solid #fff;
-//   position: absolute;
-//   top: -10px;
-// }
-// .ui-slider-horizontal .ui-slider-range {
-//   background: #e9ecf1
-// }
-// #labelHolder {
-//   height: 7px;
-//   position: relative;
-//   border: none;
-// }
-// span {
-// position: absolute;
-// width: 1.2em;
-// height: 1.2em;
-// margin-left: -.6em;
-// text-align: center;
-// }
