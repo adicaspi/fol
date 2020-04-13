@@ -1,7 +1,7 @@
 <div class="desktop-container" *ngIf="desktop; else mobileContainer">
-  <app-user-profile-info-desktop [user]="user"></app-user-profile-info-desktop>
+  <app-user-profile-info-desktop></app-user-profile-info-desktop>
 </div>
 
 <ng-template #mobileContainer>
-  <app-user-profile-info-mobile [user]="user"></app-user-profile-info-mobile>
+  <app-user-profile-info-mobile></app-user-profile-info-mobile>
 </ng-template>

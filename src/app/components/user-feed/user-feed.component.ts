@@ -28,7 +28,7 @@ import { User } from '../../models/User';
   styleUrls: ['./user-feed.component.css']
 })
 export class UserFeedComponent implements OnInit {
-  @Input() user;
+  //@Input() currentUser;
   posts = [];
   offset: number = 0;
   desktop: boolean = true;
@@ -40,8 +40,8 @@ export class UserFeedComponent implements OnInit {
   endOfFeed: boolean = false;
   showNoPostsMessage: boolean = false;
   userProfile: boolean = false;
-  currentUser: Observable<User>;
-  //user: User;
+  //currentUser: Observable<User>;
+  user: User;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubscription: Subscription
@@ -127,10 +127,12 @@ export class UserFeedComponent implements OnInit {
           this.userProfile = true;
         }
         else {
-          //this.currentUser = this.userService.getUserDetails(this.id);
-          // this.userService.getUserProfileInfo(this.id).pipe(takeUntil(this.onDestroy)).subscribe(user => {
-          //   this.user = user;
-          // });
+          this.userService.getUserProfileInfo(this.id).pipe(takeUntil(this.onDestroy)).subscribe(user => {
+            this.user = user;
+          });
+          // this.currentUser.subscribe(res => {
+          //   this.user = res;
+          // })
         }
         this.feedService.updateUserFeed(this.id, this.offset);
       })
