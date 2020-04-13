@@ -161,18 +161,19 @@ export class ShoppingNavComponent implements OnInit {
 
   initSlider(that) {
     console.log("in slider");
-    var v = [0, 2500];
+    var v = [0, 1800];
     $("#slider").slider({
       range: true,
       min: 0,
-      max: 2500,
+      max: 1800,
       values: v,
-      slide: function (event, ui) {
+      stop: function (event, ui) {
         // if ((ui.values[1] - ui.values[0]) < 5) {
         //   return false;
         // }
         // $("#label-0").css('left', ui.values[0] + "%").text(ui.values[0]);
         // $("#label-1").css('left', ui.values[1] + "%").text(ui.values[1]);
+        console.log(ui.values)
         that.selectedPrice(ui.values[0], ui.values[1]);
       },
       create: function (event, ui) {
