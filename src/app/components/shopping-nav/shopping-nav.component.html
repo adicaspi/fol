@@ -80,17 +80,18 @@
         <div id="slider"></div>
         <div class="slider-range-container">
           <div class="slider-input-container">
-            <input type="text" id="min-price" value="0">
+            <!-- <input type="text" id="min-price" value="0"> -->
+            <input type="text" id="min-price" [value]="minValue" (input)="changeMinPriceInput()" (focusout)="minPriceUnfocus()">
           </div>
           <span>-</span>
           <div class="slider-input-container">
-            <input type="text" id="max-price" value="1800+">
+            <input type="text" id="max-price" [value]="maxValue" (input)="changeMaxPriceInput()" (focusout)="maxPriceUnfocus()">
           </div>
         </div>
       </div>
 
-      <div class="buttons-container">
-        <button class="done-button" (click)="applyFilters()">Show Results</button>
+      <div class=" buttons-container ">
+        <button class="done-button " (click)="applyFilters() ">Show Results</button>
       </div>
 
     </mat-sidenav>

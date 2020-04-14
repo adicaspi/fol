@@ -42,8 +42,8 @@ export class ShoppingNavComponent implements OnInit {
   prevScrollPos = window.pageYOffset;
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 2000);
-  minValue: number = 0;
-  maxValue: number = 2000;
+  minValue: string = "0";
+  maxValue: string = "1800+";
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -176,12 +176,64 @@ export class ShoppingNavComponent implements OnInit {
         console.log(ui.values)
         that.selectedPrice(ui.values[0], ui.values[1]);
       },
-      create: function (event, ui) {
-
-        // $("#label-0").css('left', v[0] + "%").text(v[0]);
-        // $("#label-1").css('left', v[1] + "%").text(v[1]);
+      slide: function (event, ui) {
+        //update input fields values
+        $("#min-price").val(ui.values[0]);
+        $("#max-price").val(ui.values[1]);
+        console.log("in slide event");
       }
     });
+
+
+  }
+
+  changeMinPriceInput() {
+    let stringMinValue = $("#min-price").val();
+    let minIntValue = parseInt(stringMinValue);
+    let stringMaxValue = $("#max-price").val();
+    let maxIntValue = parseInt(stringMaxValue);
+    // if (minIntValue > maxIntValue) {
+    //   maxIntValue = minIntValue + 100;
+    //   $("#slider").slider("values", 1, maxIntValue);
+    //   $("max-price").val("" + maxIntValue);
+    // }
+    $("#slider").slider("values", 0, minIntValue);
+  }
+
+  changeMaxPriceInput() {
+    let stringMinValue = $("#min-price").val();
+    let minIntValue = parseInt(stringMinValue);
+    let stringMaxValue = $("#max-price").val();
+    let maxIntValue = parseInt(stringMaxValue);
+    // if (maxIntValue < minIntValue) {
+    //   minIntValue = maxIntValue - 100;
+    //   $("#slider").slider("values", 0, minIntValue);
+    //   $("#min-price").val(minIntValue.toString());
+    // }
+    $("#slider").slider("values", 1, maxIntValue);
+    //}
+  }
+
+  maxPriceUnfocus() {
+    let stringValue = $("#max-price").val();
+    let intValue = parseInt(stringValue);
+    if (intValue >= 1800) {
+      $("#max-price").val("1800+");
+    }
+    if (!intValue) {
+      $("#max-price").val("1800+");
+    }
+  }
+
+  minPriceUnfocus() {
+    let stringValue = $("#min-price").val();
+    let intValue = parseInt(stringValue);
+    if (intValue < 0) {
+      $("#min-price").val("0");
+    }
+    if (!intValue) {
+      $("#min-price").val("0");
+    }
   }
 
   selectedPrice(minPrice, maxPrice) {
