@@ -35,7 +35,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
-    //this.updateUser(this.masterId);
+    this.updateUser(this.masterId);
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(

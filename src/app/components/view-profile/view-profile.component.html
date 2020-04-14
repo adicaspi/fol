@@ -2,14 +2,14 @@
   <div *ngIf="user | async">
     <div *ngIf="desktop; else mobileView" class="display">
       <app-navbar></app-navbar>
-      <app-user-profile-info></app-user-profile-info>
-      <app-user-feed></app-user-feed>
+      <app-user-profile-info [user]="user"></app-user-profile-info>
+      <app-user-feed [user]="user"></app-user-feed>
     </div>
     <ng-template #mobileView class="mobile">
       <app-bottom-navbar></app-bottom-navbar>
-      <app-user-profile-info></app-user-profile-info>
+      <app-user-profile-info [user]="user"></app-user-profile-info>
       <app-shopping-nav></app-shopping-nav>
-      <app-user-feed></app-user-feed>
+      <app-user-feed [user]="user"></app-user-feed>
     </ng-template>
   </div>
 </body>

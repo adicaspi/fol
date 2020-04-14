@@ -19,11 +19,11 @@ import { ConfigService } from '../../services/config.service';
 })
 
 export class UserProfileInfoComponent implements OnInit {
-  // @Input() user;
+  @Input() user;
   public currMasterId: number;
   public slaveId: number;
   public follows: boolean;
-  public user: Observable<User>;
+  //public user: Observable<User>;
   public userId: number;
   public userProfileImageSrc: string;
   public src: any;
@@ -101,7 +101,7 @@ export class UserProfileInfoComponent implements OnInit {
 
   updateUser(id) {
     // this.user = this.userService.getUserDetails(id);
-    this.user = this.userService.getUserProfileInfo(id);
+    //this.user = this.userService.getUserProfileInfo(id);
   }
 
   follow() {
