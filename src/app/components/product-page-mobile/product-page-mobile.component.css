@@ -51,7 +51,7 @@
 div.num-views {
   font-size: 14px;
   color: rgb(96,96,96);
-  margin-top: 8px;
+  margin-top: 12px;
   font-weight: bold;
   display: inline-block;
 }
@@ -156,6 +156,12 @@ div.buffer {
 
 i.material-icons{
   font-size: 25px;
+}
+
+i.fal.fa-heart{
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
 }
 
 i.fas.fa-heart{
