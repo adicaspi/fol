@@ -12,7 +12,7 @@ import { ConfigService } from '../../services/config.service';
   styleUrls: ['./user-profile-info-desktop.component.scss']
 })
 export class UserProfileInfoDesktopComponent extends UserProfileInfoComponent {
-  // @Input() user;
+  @Input() user;
   constructor(public userService: UserService,
     public activatedRoute: ActivatedRoute,
     public dialogService: DialogService,
