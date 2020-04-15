@@ -162,7 +162,6 @@ export class UserService {
   //     });
   // }
   getUserDetails(id: number): Observable<User> {
-    console.log("in get user details");
     return this.http.get<User>(this.globalSettingsURL + id + '/current-settings').pipe(
     )
       .map(res => {
@@ -171,11 +170,9 @@ export class UserService {
   }
 
   getUserProfileInfo(id: number): Observable<User> {
-    console.log("in get user profile info");
     return this.http.get<User>(this.globalInfoURL + id + '/profile-info').pipe(
     )
       .map(res => {
-        console.log(res);
         return new User(res);
       });
   }

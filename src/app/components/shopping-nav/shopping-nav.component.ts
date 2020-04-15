@@ -41,6 +41,7 @@ export class ShoppingNavComponent implements OnInit {
   priceIsSelected: boolean = false;
   filteringChanged: boolean = false;
   showProductType: boolean = true;
+  wasFilteredAndCleared: boolean = false;
   prevScrollPos = window.pageYOffset;
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 2000);
@@ -89,9 +90,10 @@ export class ShoppingNavComponent implements OnInit {
       } else {
         elem.checked = false;
         this.filteringDTO.removeStore(elem);
-        if (this.filteringDTO.getStores().length === 0) {
-          this.filteringChanged = false;
-        }
+        // if (this.filteringDTO.getStores().length === 0) {
+        //   this.filteringChanged = false;
+        // }
+        this.wasFilteredAndCleared = true;
       }
       //this.updateFeedFilteringDTO();
     }
@@ -102,10 +104,11 @@ export class ShoppingNavComponent implements OnInit {
         this.filteringChanged = true;
       } else {
         elem.checked = false;
-        const index = this.filteringDTO.removeDesigner(elem);
-        if (this.filteringDTO.designers.length === 0) {
-          this.filteringChanged = false;
-        }
+        this.filteringDTO.removeDesigner(elem);
+        // if (this.filteringDTO.designers.length === 0) {
+        //   this.filteringChanged = false;
+        // }
+        this.wasFilteredAndCleared = true;
       }
       //this.updateFeedFilteringDTO();
     }
@@ -116,10 +119,11 @@ export class ShoppingNavComponent implements OnInit {
         this.filteringChanged = true;
       } else {
         elem.checked = false;
-        const index = this.filteringDTO.removeProduct(elem);
-        if (this.filteringDTO.productTypes.length === 0) {
-          this.filteringChanged = false;
-        }
+        this.filteringDTO.removeProduct(elem);
+        // if (this.filteringDTO.productTypes.length === 0) {
+        //   this.filteringChanged = false;
+        // }
+        this.wasFilteredAndCleared = true;
       }
       //this.updateFeedFilteringDTO();
     }
@@ -140,14 +144,27 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   clearSideFiltersSelection() {
+    if (this.filteringDTO.menuIsFiltered) {
+      this.wasFilteredAndCleared = true;
+    }
     this.designers.forEach(elem => {
-      elem.checked = false;
+      if (elem.checked) {
+        this.filteringDTO.removeDesigner(elem);
+        elem.checked = false;
+      }
+
     });
     this.stores.forEach(elem => {
-      elem.checked = false;
+      if (elem.checked) {
+        this.filteringDTO.removeStore(elem);
+        elem.checked = false;
+      }
     });
     this.clothings.forEach(elem => {
-      elem.checked = false;
+      if (elem.checked) {
+        this.filteringDTO.removeProduct(elem);
+        elem.checked = false;
+      }
     });
     this.setMaxPriceAndSlider(this.priceMaxValueInt);
     this.setMinPriceAndSlider(this.priceMinValueInt);
@@ -349,7 +366,7 @@ export class ShoppingNavComponent implements OnInit {
   sidenavClosed() {
     this.filteringDTO.minPrice = this.getMinPriceValue();
     this.filteringDTO.maxPrice = this.getMaxPriceValue();
-    if (this.filteringDTO.menuIsFiltered) {
+    if (this.filteringDTO.menuIsFiltered || this.wasFilteredAndCleared) {
       this.updateFeedFilteringDTO();
     }
   }
