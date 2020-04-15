@@ -149,8 +149,9 @@ export class ShoppingNavComponent implements OnInit {
     this.clothings.forEach(elem => {
       elem.checked = false;
     });
+    this.setMaxPriceAndSlider(this.priceMaxValueInt);
+    this.setMinPriceAndSlider(this.priceMinValueInt);
     this.filteringDTO = new FilteringDTO();
-    this.updateFeedFilteringDTO();
   }
 
   clearSideFiltersSelectionNoUpdate() {
@@ -167,12 +168,12 @@ export class ShoppingNavComponent implements OnInit {
 
   initSlider(that) {
 
-    setInputFilter(document.getElementById("max-price"), function(value) {
+    setInputFilter(document.getElementById("max-price"), function (value) {
       return /^\d*$/.test(value) || value == that.priceMaxValue;
     });
 
-    setInputFilter(document.getElementById("min-price"), function(value) {
-      return /^\d*$/.test(value); 
+    setInputFilter(document.getElementById("min-price"), function (value) {
+      return /^\d*$/.test(value);
     });
 
     var v = [0, 1800];
@@ -186,7 +187,7 @@ export class ShoppingNavComponent implements OnInit {
       },
       slide: function (event, ui) {
 
-        if(ui.values[1] - ui.values[0] < that.priceMinDiff) {
+        if (ui.values[1] - ui.values[0] < that.priceMinDiff) {
           return false;
         }
 
@@ -201,7 +202,7 @@ export class ShoppingNavComponent implements OnInit {
 
   setMaxPrice(maxPrice: number) {
     let maxPriceString = maxPrice.toString();
-    if(maxPrice >= this.priceMaxValueInt) {
+    if (maxPrice >= this.priceMaxValueInt) {
       maxPriceString = this.priceMaxValue;
     }
     $("#max-price").val(maxPriceString);
@@ -209,10 +210,10 @@ export class ShoppingNavComponent implements OnInit {
 
   setMinPrice(minPrice: number) {
     let minPriceString = minPrice.toString();
-    if(minPrice < 0) {
+    if (minPrice < 0) {
       minPriceString = this.priceMinValue;
     }
-    if(minPrice >= this.priceMaxValueInt) {
+    if (minPrice >= this.priceMaxValueInt) {
       minPriceString = this.priceMaxValueInt.toString();
     }
     $("#min-price").val(minPriceString);
@@ -221,6 +222,7 @@ export class ShoppingNavComponent implements OnInit {
   setMaxPriceAndSlider(maxPrice: number) {
     this.setMaxPrice(maxPrice);
     this.setSliderMax(maxPrice);
+    this.filteringDTO.maxPrice = maxPrice;
   }
 
   setSliderMax(maxValue: number) {
@@ -230,6 +232,7 @@ export class ShoppingNavComponent implements OnInit {
   setMinPriceAndSlider(minPrice: number) {
     this.setMinPrice(minPrice);
     this.setSliderMin(minPrice);
+    this.filteringDTO.minPrice = minPrice;
   }
 
   setSliderMin(minValue: number) {
@@ -243,7 +246,7 @@ export class ShoppingNavComponent implements OnInit {
     let maxIntValue = parseInt(stringMaxValue);
 
     //if input fields empty it means input = 0
-    if(stringMaxValue == ""){
+    if (stringMaxValue == "") {
       maxIntValue = 0;
     }
 
@@ -253,7 +256,7 @@ export class ShoppingNavComponent implements OnInit {
       maxIntValue = Math.min(minIntValue + this.priceMinDiff, this.priceMaxValueInt);
     }
 
-    this.setSliderMax(maxIntValue)
+    this.setSliderMax(maxIntValue);
   }
 
   changeMinPriceInput() {
@@ -263,11 +266,11 @@ export class ShoppingNavComponent implements OnInit {
     let maxIntValue = parseInt(stringMaxValue);
 
     //if input fields empty it means input = 0
-    if(stringMinValue == ""){
+    if (stringMinValue == "") {
       minIntValue = 0;
     }
 
-    if(minIntValue > maxIntValue - this.priceMinDiff){
+    if (minIntValue > maxIntValue - this.priceMinDiff) {
       this.setMaxPriceAndSlider(minIntValue + this.priceMinDiff);
     }
 
@@ -290,7 +293,7 @@ export class ShoppingNavComponent implements OnInit {
       return;
     }
 
-    if(maxIntValue < minIntValue + this.priceMinDiff) {
+    if (maxIntValue < minIntValue + this.priceMinDiff) {
       this.setMinPriceAndSlider(maxIntValue - this.priceMinDiff);
     }
 
@@ -307,7 +310,7 @@ export class ShoppingNavComponent implements OnInit {
     let minIntValue = parseInt(stringMinValue);
     let maxIntValue = parseInt(stringMaxValue);
 
-    if(!minIntValue) {
+    if (!minIntValue) {
       this.setMinPriceAndSlider(this.priceMinValueInt);
       return;
     }
@@ -332,12 +335,18 @@ export class ShoppingNavComponent implements OnInit {
     }
   }
 
+  sidenavClosed() {
+    if (this.filteringDTO.menuIsFiltered) {
+      this.updateFeedFilteringDTO();
+    }
+  }
+
   toggleSidenav(): void {
     this.sidenav.toggle();
   }
 
   applyFilters() {
-    this.updateFeedFilteringDTO();
+    this.toggleSidenav();
   }
 
   filterByCategory(item) {
