@@ -74,7 +74,6 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("in init");
     this.spinner.show();
     jquery(".wrapper.scroll-bar-container").css("position", "fixed");
     this.id = this.userService.getCurrentUser();
