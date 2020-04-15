@@ -145,8 +145,6 @@ button.nav-item {
   width: 100%;
   padding-left: 74px;
   background: transparent;
-  // width: 280px;
-  // background-color: white;
 
   &.opened {
     transform: translateX(0);
@@ -155,10 +153,12 @@ button.nav-item {
 }
 
 .mat-sidenav{
-  padding: 68px 24px 24px 28px;
-  width: 100%;
+  padding: 62px 24px 24px 28px;
+  width: 300px;
   box-shadow: none !important;
   transform: none;
+  right: 0;
+  box-shadow: -6px 0px 12px 2px rgba(0, 0, 0, 0.04) !important;
 }
 
 .filter-buttons {
@@ -188,7 +188,7 @@ button.nav-item {
     cursor: pointer;
     white-space: nowrap;
     color: rgb(51,51,51);
-    line-height: 48px;
+    line-height: 46px;
 
     &:focus {
       outline: none;
@@ -204,7 +204,7 @@ button.nav-item {
 
     &.clear {
       position: absolute;
-      right: 4px;
+      right: 6px;
       color: grey;
       font-size: 14px;
       text-decoration: underline;
@@ -223,13 +223,13 @@ button.nav-item {
     top: 0px;
     z-index: 9999;
     background:white;
-    box-shadow: -6px -6px 12px 2px rgba(0, 0, 0, .04) !important;
 
     #{$this}__btn {
       &.toggle {
         font-weight: 700;
         position: absolute;
         left: 12px;
+        padding: 1px 7px 2px 7px;
 
         &:before {
           content: '- ';
@@ -301,6 +301,10 @@ button.nav-item {
     top: 0;
     width: 14px;
   }
+}
+
+.filter-section.price {
+  margin-bottom: 74px;
 }
 
 @keyframes fadeIn {
@@ -421,16 +425,68 @@ i.fal.fa-times{
   color: rgb(38,38,38);
 }
 
+#slider{
+  width: 210px;
+  margin: auto;
+  margin-top: 40px;
+  z-index: 0;
+}
+
+.slider-range-container {
+  background: none;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  height: 38px;
+}
+
+.slider-range-container span {
+  line-height: 38px;
+  color: rgb(164,164,164);
+  font-weight: bold;
+}
+
+.currency-symbol {
+  color: #333;
+  margin-right: 4px;
+}
+
+.slider-range-container input {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  color: #333;
+}
+
+.slider-input-container {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid rgb(205,205,205);
+  width: 80px;
+  height: 100%;
+  margin: 0px 12px;
+  padding-left: 8px;
+  padding-right: 6px;
+}
+
 .buttons-container {
-  // display: none;
+  display: flex;
   position: absolute;
-  bottom: 16px;
-  left: -8px;
-  width: 80%;
+  bottom: 12px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 10;
+  padding-top: 12px;
+  border-top: 1px solid rgb(205,205,205);
 }
 
 .done-button {
   width: 89%;
+  margin: auto;
   border: none;
   outline: none;
   background-color: rgb(34,34,34);
@@ -440,54 +496,4 @@ i.fal.fa-times{
   border-radius: 8px;
   font-weight: 600;
   font-size: 18px;
-  margin-right: 8px;
 }
-
-#slider{
-  width: 200px;
-  padding-left: 10px;
-}
-
-.price-container{
-  width:213px;
-  margin-top: 10px;
-}
-
-span.price.max{
-  float: right;
-}
-
-span.price.min{
-  margin-left: 5px;
-}
-
-// .ui-slider {
-//   margin-top: 20px;
-//   height: 7px;
-//   position: relative;
-//   border: none;
-//   background: #ff5b63;
-// }
-// .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-//   background: #ff5b63;
-//   border-radius: 25px;
-//   outline: none;
-//   border: 2px solid #fff;
-//   position: absolute;
-//   top: -10px;
-// }
-// .ui-slider-horizontal .ui-slider-range {
-//   background: #e9ecf1
-// }
-// #labelHolder {
-//   height: 7px;
-//   position: relative;
-//   border: none;
-// }
-// span {
-// position: absolute;
-// width: 1.2em;
-// height: 1.2em;
-// margin-left: -.6em;
-// text-align: center;
-// }

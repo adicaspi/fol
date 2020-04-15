@@ -27,7 +27,11 @@ export class FilteringDTO {
   }
 
   get priceIsFiltered() {
-    return (this.minPrice > 0 || this.maxPrice > 0 && this.maxPrice < 5000)
+    return (this.minPrice > 0 || this.maxPrice > 0)
+  }
+
+  get menuIsFiltered() {
+    return (this.productTypeIsFiltered || this.storesIsFiltered || this.designersIsFiltered || this.priceIsFiltered)
   }
 
   getCategory() {

@@ -41,12 +41,14 @@
               "./node_modules/jquery/dist/jquery.js",
               "./node_modules/jquery-ui-dist/jquery-ui.min.js",
               "./node_modules/jquery-ui-dist/jquery-ui.js",
+              "./node_modules/jquery-ui-touch-punch/jquery.ui.touch-punch.js",
               "./node_modules/masonry-layout/dist/masonry.pkgd.min.js",
               "./node_modules/masonry-layout/dist/masonry.pkgd.js",
               "./node_modules/imagesloaded/imagesloaded.pkgd.js",
               "./node_modules/imagesloaded/imagesloaded.pkgd.min.js",
               "./node_modules/popper.js/dist/umd/popper.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "src/app/shared/input-filter.js"
             ]
           },
           "configurations": {

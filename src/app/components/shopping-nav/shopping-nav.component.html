@@ -15,11 +15,11 @@
       </svg>
     </button> -->
     <div *ngIf="sidenav.opened" class="filter-buttons__title title">Filters</div>
-    <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear" [disabled]="!filteringChanged">clear</button>
+    <button *ngIf="sidenav.opened" (click)="clearSideFiltersSelection()" class="filter-buttons__btn clear">clear</button>
   </div>
 
   <mat-sidenav-container class="sidenav-container" [ngClass]="{'opened': sidenav.opened}" [hasBackdrop]="true">
-    <mat-sidenav #sidenav mode="over" autoFocus="false" class="mat-sidenav">
+    <mat-sidenav #sidenav mode="over" autoFocus="false" class="mat-sidenav" (closed)="sidenavClosed()">
 
       <div *ngIf="showProductType" class="filter-section">
         <div class="filter-section__title">Product Type</div>
@@ -75,24 +75,24 @@
         </button>
       </div>
 
-      <div class="filter-section">
+      <div class="filter-section price">
         <div class="filter-section__title">Price (ILS)</div>
-        <!-- <div class="price-container" (mouseenter)="selectedPrice()">
-          <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="2000" [(ngModel)]="priceRange">
-          </igx-slider>
-
-          <span class="price min">
-            {{priceRange.lower}}
-          </span>
-          <span class="price max">
-            {{priceRange.upper}} +
-          </span>
-        </div> -->
         <div id="slider"></div>
+        <div class="slider-range-container">
+          <div class="slider-input-container">
+            <span class="currency-symbol">₪</span>
+            <input type="text" id="min-price" [value]="priceMinValue" (input)="changeMinPriceInput()" (focus)="minPriceFocus()" (focusout)="minPriceUnfocus()">
+          </div>
+          <span>-</span>
+          <div class="slider-input-container">
+            <span class="currency-symbol">₪</span>
+            <input type="text" id="max-price" [value]="priceMaxValue" (input)="changeMaxPriceInput()" (focus)="maxPriceFocus()" (focusout)="maxPriceUnfocus()">
+          </div>
+        </div>
       </div>
 
-      <div class="buttons-container">
-        <button class="done-button" (click)="applyFilters()">Apply Filters</button>
+      <div class=" buttons-container ">
+        <button class="done-button " (click)="applyFilters() ">Show Results</button>
       </div>
 
     </mat-sidenav>

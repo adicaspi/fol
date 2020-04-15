@@ -181,14 +181,10 @@ mat-toolbar{
 }
 
 @media (max-width: 600px){
-
   .mat-drawer-backdrop.mat-drawer-shown {
-    background-color: rgba(0,0,0,.2);
+    background-color: transparent;
 }
 
-}
-
-@media (max-width: 600px){
 .igx-slider__label-from, .igx-slider__label-to{
   display: none !important;
 }
@@ -211,6 +207,37 @@ mat-toolbar{
 
 .dot::after{
   transform: none !important;
+}
+
+// jquery ui slider - mobile
+@media (max-width: 600px) {
+
+  .ui-slider {
+    margin-top: 20px;
+    height: 5px;
+    position: relative;
+    border: none;
+    background: rgb(232,232,232);
+  }
+
+  .ui-slider .ui-slider-handle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgb(176,176,176);
+    background: white;
+    position: absolute;
+    top: -10px;
+    outline: none;
+  }
+
+  .ui-slider .ui-slider-range {
+    background: rgb(198,198,198);
+  }
+
+  .ui-widget.ui-widget-content {
+    border: none;
+  }
 }
 
 }
