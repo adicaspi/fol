@@ -39,6 +39,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   userProfile: boolean = false;
   likeButtonClicked: boolean = false;
+  registeredUser: boolean = false;
+  showRegsterMsg: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
@@ -54,6 +56,9 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this.userService.userId) {
+      this.registeredUser = true;
+    }
     this.route.paramMap
       .pipe(takeUntil(this.onDestroy))
       .subscribe((params) => {
@@ -67,7 +72,9 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       });
     this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
     this.directingPage = this.dialogService.directingPage;
-    this.didLike();
+    if (this.registeredUser) {
+      this.didLike();
+    }
   }
 
   ngOnDestroy(): void {
@@ -129,16 +136,19 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   toggleLikeButton() {
-    if (this.likeButtonClicked) {
-      this.likeButtonClicked = false;
-      this.numLikes -= 1;
-      this.userService.unlike(this.postId);
+    if (this.registeredUser) {
+      if (this.likeButtonClicked) {
+        this.likeButtonClicked = false;
+        this.numLikes -= 1;
+        this.userService.unlike(this.postId);
+      } else {
+        this.likeButtonClicked = true;
+        this.numLikes += 1;
+        this.userService.like(this.postId);
+      }
     } else {
-      this.likeButtonClicked = true;
-      this.numLikes += 1;
-      this.userService.like(this.postId);
+      this.showRegsterMsg = true;
     }
-    //this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
   removePost(postId: number) {

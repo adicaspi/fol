@@ -40,6 +40,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   numLikes: number;
   userProfile: boolean = false;
   likeButtonClicked: boolean = false;
+  registeredUser: boolean = false;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   onDestroy: Subject<void> = new Subject<void>();
   private baseApiUrl = environment.BASE_API_URL;
@@ -52,6 +53,9 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.userService.userId) {
+      this.registeredUser = true;
+    }
     this.postId = this.configService.getGeneralSession('product_id');
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
     this.getPostInfo();
@@ -68,7 +72,9 @@ export class FilePreviewOverlayComponent implements OnInit {
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
         }
-        this.didLike();
+        if (this.registeredUser) {
+          this.didLike();
+        }
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
         this.thumbnails.push(
@@ -103,16 +109,18 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   toggleLikeButton() {
-    if (this.likeButtonClicked) {
-      this.likeButtonClicked = false;
-      this.numLikes -= 1;
-      this.userService.unlike(this.postId);
-    } else {
-      this.likeButtonClicked = true;
-      this.numLikes += 1;
-      this.userService.like(this.postId);
+    if (this.registeredUser) {
+      if (this.likeButtonClicked) {
+        this.likeButtonClicked = false;
+        this.numLikes -= 1;
+        this.userService.unlike(this.postId);
+      } else {
+        this.likeButtonClicked = true;
+        this.numLikes += 1;
+        this.userService.like(this.postId);
+      }
+      //this.postService.incrementPostViews(this.userService.userId, this.postId);
     }
-    this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
   setImage(image) {

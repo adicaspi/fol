@@ -18,7 +18,7 @@
     </div>
     <div class="num-views" (click)="toggleLikeButton()">
       <i *ngIf="!likeButtonClicked" class="fal fa-heart"></i>
-      <i *ngIf="likeButtonClicked" class="fas fa-heart"></i> {{ numLikes }} likes
+      <i *ngIf="likeButtonClicked " class="fas fa-heart"></i> {{ numLikes }} likes
     </div>
     <div class="horiz-menu">
       <button mat-button class="vertical-menu" [matMenuTriggerFor]="soldOut">
