@@ -33,6 +33,7 @@ export class ExploreFeedComponent implements OnInit {
   desktop: boolean;
   windowWidth: number;
   showNoPostsMessage: boolean = false;
+  scrollPageToTop: boolean = false;
   private feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -68,6 +69,9 @@ export class ExploreFeedComponent implements OnInit {
             this.showNoPostsMessage = true;
           } else {
             this.showNoPostsMessage = false;
+            if (this.scrollPageToTop = true) {
+              window.scrollTo(0, 0);
+            }
           }
           this.spinner.hide();
         })
@@ -78,6 +82,7 @@ export class ExploreFeedComponent implements OnInit {
         if (msg.msg == 'update-feed') {
           this.spinner.show();
           this.posts = [];
+          this.scrollPageToTop = true;
           this.feedService.updateExploreFeed(this.id);
         }
       }

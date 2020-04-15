@@ -49,6 +49,7 @@ export class TimelineFeedComponent implements OnInit {
   public following: number;
   showNoPostsMessage: boolean = false;
   showDiscover: boolean = false;
+  scrollPageToTop: boolean = false;
 
 
   private baseApiUrl = environment.BASE_API_URL;
@@ -73,6 +74,7 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("in init");
     this.spinner.show();
     jquery(".wrapper.scroll-bar-container").css("position", "fixed");
     this.id = this.userService.getCurrentUser();
@@ -91,6 +93,10 @@ export class TimelineFeedComponent implements OnInit {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
             this.scrollHelperService.runDataLoaded();
+            if (this.scrollPageToTop = true) {
+              window.scrollTo(0, 0);
+            }
+
           }
           this.spinner.hide();
         }, error => {
@@ -106,6 +112,7 @@ export class TimelineFeedComponent implements OnInit {
           this.spinner.show();
           this.posts = [];
           this.offset = 0;
+          this.scrollPageToTop = true;
           this.feedService.updateTimelineFeed(this.id, this.offset);
         }
       }

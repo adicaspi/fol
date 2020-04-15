@@ -40,6 +40,7 @@ export class UserFeedComponent implements OnInit {
   endOfFeed: boolean = false;
   showNoPostsMessage: boolean = false;
   userProfile: boolean = false;
+  scrollPageToTop: boolean = false;
   //currentUser: Observable<User>;
   //user: User;
   private baseApiUrl = environment.BASE_API_URL;
@@ -100,6 +101,9 @@ export class UserFeedComponent implements OnInit {
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
             this.scrollHelperService.runDataLoaded();
+            if (this.scrollPageToTop = true) {
+              window.scrollTo(0, 0);
+            }
           }
           this.spinner.hide();
         })
@@ -110,6 +114,7 @@ export class UserFeedComponent implements OnInit {
           this.spinner.show();
           this.posts = [];
           this.offset = 0;
+          this.scrollPageToTop = true;
           //this.getActivatedRoute();
           this.feedService.updateUserFeed(this.id, this.offset);
         }
