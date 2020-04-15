@@ -59,20 +59,17 @@ export class UserProfileInfoMobileComponent implements OnInit {
       this.userProfile = true;
     }
 
-    this.WindowSizeSubscription = this.configService.windowSizeChanged
-      .subscribe(
-        value => {
-          if (value.width >= 600) {
-            this.desktop = true;
-          }
+    // this.WindowSizeSubscription = this.configService.windowSizeChanged
+    //   .subscribe(
+    //     value => {
+    //       if (value.width >= 600) {
+    //         this.desktop = true;
+    //       }
 
-          if (value.width <= 600) {
-            this.desktop = false;
-          }
-        });
-
-
-
+    //       if (value.width <= 600) {
+    //         this.desktop = false;
+    //       }
+    //     });
 
     this.updateUser(this.currMasterId);
     this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
@@ -146,7 +143,7 @@ export class UserProfileInfoMobileComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.WindowSizeSubscription.unsubscribe();
+    // this.WindowSizeSubscription.unsubscribe();
   }
 
 

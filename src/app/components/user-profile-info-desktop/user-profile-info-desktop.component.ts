@@ -158,7 +158,7 @@ export class UserProfileInfoDesktopComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.WindowSizeSubscription.unsubscribe();
+    //this.WindowSizeSubscription.unsubscribe();
   }
 
 

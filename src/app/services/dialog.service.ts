@@ -144,7 +144,6 @@ export class DialogService {
     modalWindowConfig.closeOnNavigation = true;
 
     if (componentName == 'followersList') {
-      console.log("in compname");
       modalWindowConfig.data = data;
       modalWindowConfig.width = '400px';
       modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper-fol';
