@@ -13,6 +13,8 @@ import $ from 'jquery';
 import 'jquery-ui/ui/widgets/slider';
 (window as any).jQuery = $;
 require('jquery-ui-touch-punch');
+declare var setInputFilter: any;
+import '../../shared/input-filter.js'
 
 @Component({
   selector: 'app-shopping-nav',
@@ -42,6 +44,7 @@ export class ShoppingNavComponent implements OnInit {
   prevScrollPos = window.pageYOffset;
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 2000);
+
   priceMinValue: string = "0";
   priceMaxValue: string = "1800+";
   priceMinValueInt: number = 0;
@@ -163,6 +166,15 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   initSlider(that) {
+
+    setInputFilter(document.getElementById("max-price"), function(value) {
+      return /^\d*$/.test(value) || value == that.priceMaxValue;
+    });
+
+    setInputFilter(document.getElementById("min-price"), function(value) {
+      return /^\d*$/.test(value); 
+    });
+
     var v = [0, 1800];
     $("#slider").slider({
       range: true,
