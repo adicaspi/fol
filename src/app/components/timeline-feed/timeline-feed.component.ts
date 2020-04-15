@@ -94,12 +94,6 @@ export class TimelineFeedComponent implements OnInit {
             if (!this.scrollPageToTop) {
               this.scrollHelperService.runDataLoaded();
             }
-            // console.log(this.scrollPageToTop);
-            // if (this.scrollPageToTop) {
-            //   console.log("here");
-            //   window.scroll(0, 0);
-            // }
-
           }
           this.spinner.hide();
         }, error => {
