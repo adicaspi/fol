@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
 import { ErrorsService } from '../../services/errors.service';
 import { FilteringDTO } from '../../models/FilteringDTO';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { MessageService } from '../../services/message.service';
 import { SliderType } from "igniteui-angular";
 import { ShoppingNavService } from '../../services/shopping-nav.service';
@@ -42,8 +42,11 @@ export class ShoppingNavComponent implements OnInit {
   prevScrollPos = window.pageYOffset;
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 2000);
-  minValue: string = "0";
-  maxValue: string = "1800+";
+  priceMinValue: string = "0";
+  priceMaxValue: string = "1800+";
+  priceMinValueInt: number = 0;
+  priceMaxValueInt: number = 1800;
+  priceMinDiff: number = 100;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -160,7 +163,6 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   initSlider(that) {
-    console.log("in slider");
     var v = [0, 1800];
     $("#slider").slider({
       range: true,
@@ -168,77 +170,137 @@ export class ShoppingNavComponent implements OnInit {
       max: 1800,
       values: v,
       stop: function (event, ui) {
-        // if ((ui.values[1] - ui.values[0]) < 5) {
-        //   return false;
-        // }
-        // $("#label-0").css('left', ui.values[0] + "%").text(ui.values[0]);
-        // $("#label-1").css('left', ui.values[1] + "%").text(ui.values[1]);
-        console.log(ui.values)
         that.selectedPrice(ui.values[0], ui.values[1]);
       },
       slide: function (event, ui) {
+
         //update input fields values
-        $("#min-price").val(ui.values[0]);
-        $("#max-price").val(ui.values[1]);
-        console.log("in slide event");
+        if(ui.values[1] - ui.values[0] < that.priceMinDiff) {
+          return false;
+        }
+
+        that.setMinPrice(ui.values[0]);
+        that.setMaxPrice(ui.values[1]);
+
       }
     });
-
-
   }
 
-  changeMinPriceInput() {
-    let stringMinValue = $("#min-price").val();
-    let minIntValue = parseInt(stringMinValue);
-    let stringMaxValue = $("#max-price").val();
-    let maxIntValue = parseInt(stringMaxValue);
-    // if (minIntValue > maxIntValue) {
-    //   maxIntValue = minIntValue + 100;
-    //   $("#slider").slider("values", 1, maxIntValue);
-    //   $("max-price").val("" + maxIntValue);
-    // }
-    $("#slider").slider("values", 0, minIntValue);
+  /* set min-max helpers */
+  
+  setMaxPrice(maxPrice: number) {
+    let maxPriceString = maxPrice.toString();
+    if(maxPrice >= this.priceMaxValueInt) {
+      maxPriceString = this.priceMaxValue;
+    }
+    $("#max-price").val(maxPriceString);
+  }
+
+  setMinPrice(minPrice: number) {
+    let minPriceString = minPrice.toString();
+    if(minPrice < 0) {
+      minPriceString = this.priceMinValue;
+    }
+    if(minPrice >= this.priceMaxValueInt) {
+      minPriceString = this.priceMaxValueInt.toString();
+    }
+    $("#min-price").val(minPriceString);
+  }
+
+  setMaxPriceAndSlider(maxPrice: number) {
+    this.setMaxPrice(maxPrice);
+    this.setSliderMax(maxPrice);
+  }
+
+  setSliderMax(maxValue: number) {
+    $("#slider").slider("values", 1, maxValue);
+  }
+
+  setMinPriceAndSlider(minPrice: number) {
+    this.setMinPrice(minPrice);
+    this.setSliderMin(minPrice);
+  }
+
+  setSliderMin(minValue: number) {
+    $("#slider").slider("values", 0, minValue);
   }
 
   changeMaxPriceInput() {
     let stringMinValue = $("#min-price").val();
-    let minIntValue = parseInt(stringMinValue);
     let stringMaxValue = $("#max-price").val();
+    let minIntValue = parseInt(stringMinValue);
     let maxIntValue = parseInt(stringMaxValue);
-    // if (maxIntValue < minIntValue) {
-    //   minIntValue = maxIntValue - 100;
-    //   $("#slider").slider("values", 0, minIntValue);
-    //   $("#min-price").val(minIntValue.toString());
-    // }
-    $("#slider").slider("values", 1, maxIntValue);
-    //}
+
+    //if input fields empty it means input = 0
+    if(stringMaxValue == ""){
+      maxIntValue = 0;
+    }
+
+    // if max input field < min input field
+    // make sure the max slider remains to the right of the left slider
+    if (maxIntValue < minIntValue + this.priceMinDiff) {
+      maxIntValue = Math.min(minIntValue + this.priceMinDiff, this.priceMaxValueInt);
+    }
+
+    this.setSliderMax(maxIntValue)
+  }
+
+  changeMinPriceInput() {
+    let stringMinValue = $("#min-price").val();
+    let stringMaxValue = $("#max-price").val();
+    let minIntValue = parseInt(stringMinValue);
+    let maxIntValue = parseInt(stringMaxValue);
+
+    //if input fields empty it means input = 0
+    if(stringMinValue == ""){
+      minIntValue = 0;
+    }
+
+    if(minIntValue > maxIntValue - this.priceMinDiff){
+      this.setMaxPriceAndSlider(minIntValue + this.priceMinDiff);
+    }
+
+    this.setSliderMin(minIntValue);
   }
 
   maxPriceUnfocus() {
-    let stringValue = $("#max-price").val();
-    let intValue = parseInt(stringValue);
-    if (intValue >= 1800) {
-      $("#max-price").val("1800+");
+    let stringMinValue = $("#min-price").val();
+    let stringMaxValue = $("#max-price").val();
+    let minIntValue = parseInt(stringMinValue);
+    let maxIntValue = parseInt(stringMaxValue);
+
+    console.log("max unfocus: ", maxIntValue);
+
+    // if user left input field empty set input field and slider to max value
+    if (!maxIntValue) {
+      this.setMaxPriceAndSlider(this.priceMaxValueInt);
+      return;
     }
-    if (!intValue) {
-      $("#max-price").val("1800+");
+
+    if(maxIntValue < minIntValue + this.priceMinDiff) {
+      this.setMinPriceAndSlider(maxIntValue - this.priceMinDiff);
     }
+
+    this.setMaxPriceAndSlider(maxIntValue);
   }
 
   minPriceUnfocus() {
-    let stringValue = $("#min-price").val();
-    let intValue = parseInt(stringValue);
-    if (intValue < 0) {
-      $("#min-price").val("0");
+    let stringMinValue = $("#min-price").val();
+    let stringMaxValue = $("#max-price").val();
+    let minIntValue = parseInt(stringMinValue);
+    let maxIntValue = parseInt(stringMaxValue);
+
+    if(!minIntValue) {
+      this.setMinPriceAndSlider(this.priceMinValueInt);
+      return;
     }
-    if (!intValue) {
-      $("#min-price").val("0");
-    }
+
+    this.setMinPriceAndSlider(minIntValue);
   }
 
   selectedPrice(minPrice, maxPrice) {
     this.filteringDTO.setMinPrice(minPrice);
-    if (maxPrice == 2000) {
+    if (maxPrice == this.priceMaxValueInt) {
       this.filteringDTO.setMaxPrice(0);
     } else {
       this.filteringDTO.setMaxPrice(maxPrice);
