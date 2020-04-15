@@ -162,11 +162,8 @@ export class UserService {
   //       return new User(res);
   //     });
   // }
-<<<<<<< HEAD
+
   getUserDetails(id: number): Observable<UserDetails> {
-=======
-  getUserDetails(id: number): Observable<User> {
->>>>>>> adi/slider
     return this.http.get<User>(this.globalSettingsURL + id + '/current-settings').pipe(
     )
       .map(res => {
