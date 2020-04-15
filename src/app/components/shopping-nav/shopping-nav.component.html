@@ -80,12 +80,15 @@
         <div id="slider"></div>
         <div class="slider-range-container">
           <div class="slider-input-container">
-            <!-- <input type="text" id="min-price" value="0"> -->
-            <input type="text" id="min-price" [value]="priceMinValue" (input)="changeMinPriceInput()" (focusout)="minPriceUnfocus()">
+            <span class="currency-symbol">₪</span>
+            <input type="text" id="min-price" [value]="priceMinValue"
+             (input)="changeMinPriceInput()" (focus)="minPriceFocus()" (focusout)="minPriceUnfocus()">
           </div>
           <span>-</span>
           <div class="slider-input-container">
-            <input type="text" id="max-price" [value]="priceMaxValue" (input)="changeMaxPriceInput()" (focusout)="maxPriceUnfocus()">
+            <span class="currency-symbol">₪</span>
+            <input type="text" id="max-price" [value]="priceMaxValue"
+             (input)="changeMaxPriceInput()" (focus)="maxPriceFocus()" (focusout)="maxPriceUnfocus()" >
           </div>
         </div>
       </div>

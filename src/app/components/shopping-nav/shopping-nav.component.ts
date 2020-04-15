@@ -174,7 +174,6 @@ export class ShoppingNavComponent implements OnInit {
       },
       slide: function (event, ui) {
 
-        //update input fields values
         if(ui.values[1] - ui.values[0] < that.priceMinDiff) {
           return false;
         }
@@ -187,7 +186,7 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   /* set min-max helpers */
-  
+
   setMaxPrice(maxPrice: number) {
     let maxPriceString = maxPrice.toString();
     if(maxPrice >= this.priceMaxValueInt) {
@@ -264,12 +263,14 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   maxPriceUnfocus() {
+
+    //set border color
+    $("#max-price").parent().css("border-color", "rgb(205,205,205)");
+
     let stringMinValue = $("#min-price").val();
     let stringMaxValue = $("#max-price").val();
     let minIntValue = parseInt(stringMinValue);
     let maxIntValue = parseInt(stringMaxValue);
-
-    console.log("max unfocus: ", maxIntValue);
 
     // if user left input field empty set input field and slider to max value
     if (!maxIntValue) {
@@ -285,6 +286,10 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   minPriceUnfocus() {
+
+    //set border color
+    $("#min-price").parent().css("border-color", "rgb(205,205,205)");
+
     let stringMinValue = $("#min-price").val();
     let stringMaxValue = $("#max-price").val();
     let minIntValue = parseInt(stringMinValue);
@@ -296,6 +301,14 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setMinPriceAndSlider(minIntValue);
+  }
+
+  maxPriceFocus() {
+    $("#max-price").parent().css("border-color", "#333");
+  }
+
+  minPriceFocus() {
+    $("#min-price").parent().css("border-color", "#333");
   }
 
   selectedPrice(minPrice, maxPrice) {
