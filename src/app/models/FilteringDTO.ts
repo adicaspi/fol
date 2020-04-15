@@ -27,7 +27,7 @@ export class FilteringDTO {
   }
 
   get priceIsFiltered() {
-    return (this.minPrice > 0 || this.maxPrice > 0 && this.maxPrice < 1800)
+    return (this.minPrice > 0 || this.maxPrice > 0)
   }
 
   get menuIsFiltered() {

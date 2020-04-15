@@ -222,7 +222,6 @@ export class ShoppingNavComponent implements OnInit {
   setMaxPriceAndSlider(maxPrice: number) {
     this.setMaxPrice(maxPrice);
     this.setSliderMax(maxPrice);
-    this.filteringDTO.maxPrice = maxPrice;
   }
 
   setSliderMax(maxValue: number) {
@@ -232,11 +231,23 @@ export class ShoppingNavComponent implements OnInit {
   setMinPriceAndSlider(minPrice: number) {
     this.setMinPrice(minPrice);
     this.setSliderMin(minPrice);
-    this.filteringDTO.minPrice = minPrice;
   }
 
   setSliderMin(minValue: number) {
     $("#slider").slider("values", 0, minValue);
+  }
+
+  getMinPriceValue() {
+    return $("#slider").slider("values", 0);
+  }
+
+  getMaxPriceValue() {
+    let sliderValue = $("#slider").slider("values", 1);
+    let inputValue = $("#max-price").val();
+    if (inputValue == this.priceMaxValue) {
+      return 0;
+    }
+    return sliderValue;
   }
 
   changeMaxPriceInput() {
@@ -336,6 +347,8 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   sidenavClosed() {
+    this.filteringDTO.minPrice = this.getMinPriceValue();
+    this.filteringDTO.maxPrice = this.getMaxPriceValue();
     if (this.filteringDTO.menuIsFiltered) {
       this.updateFeedFilteringDTO();
     }
