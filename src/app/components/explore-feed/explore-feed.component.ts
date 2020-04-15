@@ -69,9 +69,9 @@ export class ExploreFeedComponent implements OnInit {
             this.showNoPostsMessage = true;
           } else {
             this.showNoPostsMessage = false;
-            if (this.scrollPageToTop = true) {
-              window.scrollTo(0, 0);
-            }
+            // if (this.scrollPageToTop) {
+            //   window.scrollTo(0, 0);
+            // }
           }
           this.spinner.hide();
         })

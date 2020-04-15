@@ -100,9 +100,8 @@ export class UserFeedComponent implements OnInit {
             this.showNoPostsMessage = false;
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
-            this.scrollHelperService.runDataLoaded();
-            if (this.scrollPageToTop = true) {
-              window.scrollTo(0, 0);
+            if (!this.scrollPageToTop) {
+              this.scrollHelperService.runDataLoaded();
             }
           }
           this.spinner.hide();

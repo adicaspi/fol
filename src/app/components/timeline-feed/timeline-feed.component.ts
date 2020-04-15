@@ -91,10 +91,14 @@ export class TimelineFeedComponent implements OnInit {
             this.showNoPostsMessage = false;
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
-            this.scrollHelperService.runDataLoaded();
-            if (this.scrollPageToTop = true) {
-              window.scrollTo(0, 0);
+            if (!this.scrollPageToTop) {
+              this.scrollHelperService.runDataLoaded();
             }
+            // console.log(this.scrollPageToTop);
+            // if (this.scrollPageToTop) {
+            //   console.log("here");
+            //   window.scroll(0, 0);
+            // }
 
           }
           this.spinner.hide();
