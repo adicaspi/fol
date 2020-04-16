@@ -4,6 +4,8 @@ import { ConfigService } from '../../services/config.service';
 import { takeUntil } from '../../../../node_modules/rxjs/operators';
 import { Subject, Subscription } from '../../../../node_modules/rxjs';
 import * as jquery from 'jquery';
+import { Router } from '../../../../node_modules/@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-view-discover-people-general',
@@ -18,7 +20,9 @@ export class ViewDiscoverPeopleGeneralComponent implements OnInit {
   private WindowSizeSubscription: Subscription;
 
   constructor(private feedService: FeedService,
-    private configService: ConfigService) { }
+    private configService: ConfigService,
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
@@ -26,25 +30,29 @@ export class ViewDiscoverPeopleGeneralComponent implements OnInit {
     });
 
     this.WindowSizeSubscription = this.configService.windowSizeChanged
-    .subscribe(
-      value => {
-        if (value.width > 600) {
-          this.desktop = true;
-        }
+      .subscribe(
+        value => {
+          if (value.width > 600) {
+            this.desktop = true;
+          }
 
-        if (value.width <= 600) {
-          this.desktop = false;
-        }
-      });
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+        });
   }
 
   @HostListener('window:scroll', ['$event'])
   scrollHandler(event) {
-    if(!this.didTransform) {
+    if (!this.didTransform) {
       jquery(".button-container").css("opacity", 1);
       jquery(".button-container").css("bottom", "40px");
       this.didTransform = true;
     }
+  }
+
+  continue() {
+    this.router.navigate(['feed', this.userService.userId]);
   }
 
   ngOnDestroy(): void {

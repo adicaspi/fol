@@ -17,6 +17,7 @@ import { Router } from '../../../../node_modules/@angular/router';
 import { MessageService } from '../../services/message.service';
 import * as jquery from 'jquery';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
+import { ScrollHelperService } from '../../services/scroll-helper.service';
 
 @Component({
   selector: 'app-explore-feed',
@@ -53,7 +54,8 @@ export class ExploreFeedComponent implements OnInit {
     private massageService: MessageService,
     private dialogService: DialogService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private scrollHelperService: ScrollHelperService,
   ) { }
 
   ngOnInit() {
@@ -69,9 +71,9 @@ export class ExploreFeedComponent implements OnInit {
             this.showNoPostsMessage = true;
           } else {
             this.showNoPostsMessage = false;
-            // if (this.scrollPageToTop) {
-            //   window.scrollTo(0, 0);
-            // }
+            if (!this.scrollPageToTop) {
+              this.scrollHelperService.runDataLoaded();
+            }
           }
           this.spinner.hide();
         })

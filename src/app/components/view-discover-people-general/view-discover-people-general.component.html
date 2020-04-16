@@ -8,12 +8,12 @@
 </div>
 
 <div class="button-container">
-    <button *ngIf="desktop" class="done-button">
+    <button *ngIf="desktop" class="done-button" (click)="continue()">
         Continue to your feed
         <img id="continue-arrow" src="../../../assets/continue-arrow16.png" />
     </button>
 
-    <button *ngIf="!desktop" class="done-button">
+    <button *ngIf="!desktop" class="done-button" (click)="continue()">
         continue
         <img id="continue-arrow" src="../../../assets/continue-arrow7A.png" />
     </button>
