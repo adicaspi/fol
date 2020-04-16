@@ -70,16 +70,23 @@ export class ShoppingNavComponent implements OnInit {
     this.shoppingNavService.prices.map(val => this.prices.push(Object.assign({}, val)));
   }
 
-  @HostListener('window:scroll', ['$event'])
-  scrollHandler(event) {
-    let currScrollPos: number = window.pageYOffset;
-    if (currScrollPos > this.prevScrollPos) {
-      //this.pageIsScrolled = true;
-    } else {
-      //this.pageIsScrolled = false;
-    }
-    this.prevScrollPos = currScrollPos;
-  }
+  //@HostListener('window:scroll', ['$event'])
+  //onWindowScroll($event) {
+
+  //if (this.sidenav.opened) {
+  //console.log("scrolling");
+  // $event.stopPropagation();
+
+
+  // let currScrollPos: number = window.pageYOffset;
+  // if (currScrollPos > this.prevScrollPos) {
+  //   if (this.sidenav.open()) {
+  //     this.sidenav.close();
+  //   }
+  // }
+  // this.prevScrollPos = currScrollPos;
+  // }
+  //}
 
   onChangeCheckBox(key, elem) {
     if (key === 'stores') {

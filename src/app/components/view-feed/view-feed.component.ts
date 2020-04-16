@@ -70,11 +70,7 @@ export class ViewFeedComponent implements OnInit {
       .pipe(
         map(data => {
           this.userId = true;
-          console.log(
-            'IM IN DATA CONFIG SERVICE, USER CRED ARE',
-            data.body.userId,
-            data.body.userName
-          );
+
           this.userService.userId = data.body.userId;
           this.userService.username = data.body.userName;
           this.userService.updateUser(data.body.userId);

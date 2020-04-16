@@ -131,11 +131,7 @@ export class LoginComponent implements OnInit {
       .get<any>(this.autoLogin, { observe: 'response' })
       .pipe(
         map(data => {
-          console.log(
-            'IM IN DATA CONFIG SERVICE, USER CRED ARE',
-            data.body.userId,
-            data.body.userName
-          );
+
           this.userService.userId = data.body.userId;
           this.userService.username = data.body.userName;
           this.userService.updateUser(data.body.userId);
