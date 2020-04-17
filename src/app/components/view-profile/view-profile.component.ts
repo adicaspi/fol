@@ -20,7 +20,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   masterId: number;
   userProfile = false;
   masterUser: User;
-  user: Observable<User>;
+  user: User;
   private anyErrors: boolean;
   private finished: boolean;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -47,7 +47,9 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   }
 
   updateUser(id) {
-    this.user = this.userService.getUserProfileInfo(id);
+    this.userService.getUserProfileInfo(id).subscribe(res => {
+      this.user = res
+    });
   }
 
   ngOnDestroy(): void {

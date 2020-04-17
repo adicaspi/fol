@@ -1,5 +1,5 @@
 <body>
-  <div *ngIf="user | async">
+  <div *ngIf="user">
     <div *ngIf="desktop; else mobileView" class="display">
       <app-navbar></app-navbar>
       <app-user-profile-info-desktop [user]="user"></app-user-profile-info-desktop>

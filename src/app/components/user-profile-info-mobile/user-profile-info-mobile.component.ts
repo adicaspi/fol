@@ -22,9 +22,12 @@ export class UserProfileInfoMobileComponent implements OnInit {
   public userId: number;
   public userProfileImageSrc: string;
   public src: any;
-  public following: Observable<number>;
-  public followers: Observable<number>;
-  public numberOfPosts: Observable<number>;
+  // public following: Observable<number>;
+  // public followers: Observable<number>;
+  // public numberOfPosts: Observable<number>;
+  public following: number;
+  public followers: number;
+  public numberOfPosts: number;
   public userLoaded: Promise<boolean>;
   public flag: number = 1;
   public clicked: boolean = false;
@@ -81,15 +84,17 @@ export class UserProfileInfoMobileComponent implements OnInit {
   }
 
   getNumFollowing() {
-    this.following = this.userService.getNumberOfFollowing(this.currMasterId);
+    this.userService.getNumberOfFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.following = res });
   }
 
   getNumFollowers() {
-    this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
+    //this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
+    this.userService.getNumberOfFollowers(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.followers = res });
   }
 
   getNumPosts() {
-    this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
+    //this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
+    this.userService.getNumberOfPosts(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.numberOfPosts = res });
   }
 
   updateUser(id) {

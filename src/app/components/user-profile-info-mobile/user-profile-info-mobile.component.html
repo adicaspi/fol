@@ -1,8 +1,8 @@
 <!-- <div class="body"> -->
 <div class="center">
 
-  <div *ngIf="user | async; let user" class="main">
-    <!-- <div *ngIf="user" class="main"> -->
+  <!-- <div *ngIf="user | async; let user" class="main"> -->
+  <div *ngIf="user" class="main">
     <div class="header">
       <div class="username">
         <img *ngIf=!userProfile src="assets/back.png" class="go-back" (click)="goBackPage()" /> {{user.username}}</div>
@@ -15,24 +15,24 @@
       </div>
 
       <div class="btn-group">
-        <button type="button" *ngIf="numberOfPosts | async ; else noPosts" class="simple-button-metrics first">
-          <span class="metrics">{{ numberOfPosts | async }} </span>
+        <button type="button" *ngIf="numberOfPosts ; else noPosts" class="simple-button-metrics first">
+          <span class="metrics">{{ numberOfPosts }} </span>
           <span class="text"> Posts</span>
         </button>
 
-        <button type="button" *ngIf="following | async; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(1)">
-          <span class="metrics">{{ following | async }}</span>
+        <button type="button" *ngIf="following ; else unclickableFollowing" class="simple-button-metrics second" (click)="openDialog(1)">
+          <span class="metrics">{{ following }}</span>
           <span class="text"> Following</span>
         </button>
 
-        <button *ngIf="followers | async; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(0)">
-          <span class="metrics">{{ followers | async }}</span>
+        <button *ngIf="followers ; else unclickableFollowers" type="button" class="simple-button-metrics third" (click)="openDialog(0)">
+          <span class="metrics">{{ followers }}</span>
           <span class="text"> Followers </span>
         </button>
 
         <ng-template #noPosts>
           <button type="button" class="simple-button-metrics first">
-            <span class="metrics">{{ numberOfPosts | async }} </span>
+            <span class="metrics">0</span>
             <span class="text"> Posts</span>
           </button>
         </ng-template>
