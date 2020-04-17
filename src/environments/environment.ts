@@ -6,7 +6,7 @@
 import 'zone.js/dist/zone-error';
 export const environment = {
   production: false,
-  BASE_API_URL: 'http://followear-dev.zpgietiqcn.eu-west-1.elasticbeanstalk.com'
+  BASE_API_URL: 'followear-dev.zpgietiqcn.eu-west-1.elasticbeanstalk.com/api'
 };
 
 /*
