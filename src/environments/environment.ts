@@ -2,9 +2,11 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
+import 'zone.js/dist/zone-error';
 export const environment = {
   production: false,
-  BASE_API_URL: 'https://www.followear.com/api'
+  BASE_API_URL: 'http://followear-dev.zpgietiqcn.eu-west-1.elasticbeanstalk.com'
 };
 
 /*

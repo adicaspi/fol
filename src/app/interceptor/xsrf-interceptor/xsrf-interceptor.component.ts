@@ -13,7 +13,7 @@ import { Observable, throwError } from 'rxjs';
   styleUrls: ['./xsrf-interceptor.component.css']
 })
 export class XsrfInterceptorComponent implements HttpInterceptor {
-  constructor(private tokenExtractor: HttpXsrfTokenExtractor) {}
+  constructor(private tokenExtractor: HttpXsrfTokenExtractor) { }
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler

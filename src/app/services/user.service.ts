@@ -104,7 +104,7 @@ export class UserService {
   checkUserNameExists(val: any): Observable<any> {
     let params = new HttpParams().set('username', val);
     return this.http.get<any>(
-      this.globalRegisterURL + '/check-username-exists',
+      this.globalRegisterURL + 'check-username-exists',
       {
         params: params
       }
@@ -113,7 +113,7 @@ export class UserService {
 
   checkEmailExists(val: any): Observable<any> {
     let params = new HttpParams().set('email', val);
-    return this.http.get<any>(this.globalRegisterURL + '/check-email-exists', {
+    return this.http.get<any>(this.globalRegisterURL + 'check-email-exists', {
       params: params
     });
   }
