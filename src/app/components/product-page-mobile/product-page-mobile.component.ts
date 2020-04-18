@@ -75,11 +75,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     if (this.registeredUser) {
       this.didLike();
     }
-  }
 
-  ngOnDestroy(): void {
-    this.onDestroy.next();
-    this.onDestroy.complete();
+    this.incNumViews();
   }
 
   getPostInfo() {
@@ -129,6 +126,10 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.userService.hidePost(postId);
   }
 
+  incNumViews() {
+    this.postService.incrementPostViews(this.userService.userId, this.postId);
+  }
+
   didLike() {
     this.userService.didLike(this.postId).subscribe(res => {
       this.likeButtonClicked = res;
@@ -155,7 +156,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.userService.removePost(postId);
   }
 
-  OnDestroy(): void {
+  ngOnDestroy(): void {
     this.onDestroy.next();
+    this.onDestroy.complete();
   }
 }
