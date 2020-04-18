@@ -99,8 +99,11 @@
         placeholder="Password" />
       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
         <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">
+          Password must be at least 8 characters
+        </div>
         <div *ngIf="f.password.errors.pattern">
-          Password must be at least 8 characters and contain one number and one uppercase character
+          Password must contain at least one number and one uppercase character
         </div>
       </div>
     </div>
