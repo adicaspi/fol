@@ -8,7 +8,7 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
     <div class="form-group">
       <label for="email"></label>
-      <input type="text" formControlName="emailLogin" class="form-control" placeholder="E-mail, username" [ngClass]="{
+      <input type="email" formControlName="emailLogin" class="form-control" placeholder="E-mail, username" [ngClass]="{
         'is-invalid': submitted && l.emailLogin.errors || wrongUser
       }" />
       <div *ngIf="wrongUser" class="invalid-feedback">
