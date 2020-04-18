@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
       fullName: ['', Validators.required],
       birthDate: ['', [Validators.required, Validators.pattern('^\\d*$')]],
       username: ['', [Validators.required, Validators.minLength(3), this.cannotContainSpace]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.[A-Z])(?=.*\d)')]],
       email: ['', [Validators.required, Validators.email]]
     });
 
@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onChanges(): void {
-    this.submitted = false;
+
     this.registerForm.get('username').valueChanges.subscribe(val => {
       if (val.length >= this.minLength) {
         this.userService.checkUserNameExists(val).subscribe(res => {
@@ -102,6 +102,9 @@ export class RegisterComponent implements OnInit {
         this.emailExists = res;
       });
     });
+    this.registerForm.get('password').valueChanges.subscribe(val => {
+      this.submitted = false;
+    })
 
   }
 
@@ -120,7 +123,6 @@ export class RegisterComponent implements OnInit {
 
   cannotContainSpace(control: AbstractControl): ValidationErrors | null {
     if ((control.value as string).indexOf(' ') >= 0) {
-      console.log("in val");
       return { cannotContainSpace: true }
     }
 
@@ -132,6 +134,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (!this.registerForm.valid) {
+
       return;
     }
 

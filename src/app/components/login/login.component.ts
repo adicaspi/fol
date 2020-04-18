@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
           this.submitted = false;
 
           if (this.error.error == 'Invalid Authentication Data') {
-            console.log("in login comp msg recived");
+
             this.wrongPass = true;
             this.msgToShow = 'Password or username is incorrect.'
           }
