@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, pipe } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
@@ -47,7 +47,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   }
 
   updateUser(id) {
-    this.userService.getUserProfileInfo(id).subscribe(res => {
+    this.userService.getUserProfileInfo(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.user = res
     });
   }

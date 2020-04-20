@@ -10,6 +10,28 @@ button.settings-menu-button{
   text-align: left;
 }
 
+button.button-follow {
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-top: 6px;
+  // margin-left: 24px;
+
+
+  &.following {
+    background-image: none;
+    background: #888888;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
 @media only screen and (min-width: 900px) {
 .center{
   width:900px;
@@ -57,28 +79,6 @@ span.metrics {
 
 span.text {
   font-weight: 300
-}
-
-button.button-follow {
-  display: flex;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-
-  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  margin-top: 6px;
-  // margin-left: 24px;
-
-
-  &.following {
-    background-image: none;
-    background: #888888;
-    background-clip: text;
-    -webkit-background-clip: text;
-  }
 }
 
 .description {
