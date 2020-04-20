@@ -11,7 +11,7 @@
         <div class="upper-description-div">
           <div class="user-name">{{ user.username }}</div>
           <div class="setting-container" *ngIf="!userProfile; else settings">
-            <button type="button" class="button-follow setiings" [ngClass]="{'following': follows}" (click)="follow()">
+            <button type="button" class="button-follow" [ngClass]="{'following': follows}" (click)="follow()">
               {{ follows ? 'Following' : 'Follow' }}
             </button>
           </div>
