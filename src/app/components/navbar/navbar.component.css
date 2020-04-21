@@ -187,6 +187,7 @@ img.logo {
     cursor: pointer;
     margin-right: 20px;
     background-color: transparent;
+    object-fit: cover;
   }
 
   .profile:hover {
@@ -424,6 +425,7 @@ span.search-fullname{
     border-radius: 50%;
     border: 2px solid rgba(128,128,128,0.25);
     cursor: pointer;
+    object-fit: cover;
   }
   
   .profile:hover {
@@ -633,6 +635,7 @@ span.search-fullname{
       height: 38px;
       border-radius: 50%;
       display: inline;
+      object-fit: cover;
     }
   
  }  

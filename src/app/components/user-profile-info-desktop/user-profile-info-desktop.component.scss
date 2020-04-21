@@ -25,10 +25,12 @@ button.button-follow {
 
 
   &.following {
+    color: #888888;
     background-image: none;
-    background: #888888;
-    background-clip: text;
-    -webkit-background-clip: text;
+    // background-image: none;
+    // background: #888888;
+    // background-clip: text;
+    // -webkit-background-clip: text;
   }
 }
 
@@ -116,10 +118,6 @@ div.upper-description-div{
   margin: 0;
 }
 
-.img-comp img {
-  border-radius: 50%;
-}
-
 .setting-container {
   padding-left: 16px;
 }
@@ -143,6 +141,7 @@ div.upper-description-div{
   border-radius: 50%;
   width: 200px;
   height: 200px;
+  object-fit: cover;
 }
 
 .btn-group {
@@ -263,11 +262,6 @@ div.user-name{
     font-size: 12px;
   }
   
-  .img-comp img {
-    border-radius: 50%;
-    border: 2px solid rgba(128,128,128,0.25);
-  }
-  
   .settings {
     font-size: 15px;
     cursor: pointer;
@@ -287,6 +281,8 @@ div.user-name{
     border-radius: 50%;
     width: 133px;
     height: 133px;
+    border: 2px solid rgba(128,128,128,0.25);
+    object-fit: cover;
   }
   
   .btn-group {
