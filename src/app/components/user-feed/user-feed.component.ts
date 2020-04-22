@@ -28,7 +28,7 @@ import { User } from '../../models/User';
   styleUrls: ['./user-feed.component.css']
 })
 export class UserFeedComponent implements OnInit {
-  @Input() user: User;
+  //@Input() user: User;
   posts = [];
   offset: number = 0;
   desktop: boolean = true;
@@ -42,7 +42,7 @@ export class UserFeedComponent implements OnInit {
   userProfile: boolean = false;
   scrollPageToTop: boolean = false;
   //currentUser: Observable<User>;
-  //user: User;
+  user: User;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubscription: Subscription
@@ -131,6 +131,9 @@ export class UserFeedComponent implements OnInit {
           this.userProfile = true;
         }
         else {
+          this.userService.getUserProfileInfo(this.id).subscribe(res => {
+            this.user = res
+          });
         }
         this.feedService.updateUserFeed(this.id, this.offset);
       })

@@ -9,6 +9,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GenerateFollowListComponent } from '../generate-follow-list/generate-follow-list.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-user-profile-info-desktop',
@@ -16,11 +17,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./user-profile-info-desktop.component.scss']
 })
 export class UserProfileInfoDesktopComponent implements OnInit {
-  @Input() user;
+  //@Input() user;
   public currMasterId: number;
   public slaveId: number;
   public follows: boolean;
-  //public user: Observable<User>;
+  public user: Observable<User>;
   public userId: number;
   public userProfileImageSrc: string;
   public src: any;
@@ -63,21 +64,6 @@ export class UserProfileInfoDesktopComponent implements OnInit {
       this.userProfile = true;
     }
 
-    // this.WindowSizeSubscription = this.configService.windowSizeChanged
-    //   .subscribe(
-    //     value => {
-    //       if (value.width >= 600) {
-    //         this.desktop = true;
-    //       }
-
-    //       if (value.width <= 600) {
-    //         this.desktop = false;
-    //       }
-    //     });
-
-
-
-
     this.updateUser(this.currMasterId);
     this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.follows = res;
@@ -116,7 +102,7 @@ export class UserProfileInfoDesktopComponent implements OnInit {
 
   updateUser(id) {
     // this.user = this.userService.getUserDetails(id);
-    //this.user = this.userService.getUserProfileInfo(id);
+    this.user = this.userService.getUserProfileInfo(id);
   }
 
   follow() {
