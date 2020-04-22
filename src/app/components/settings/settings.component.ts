@@ -115,6 +115,7 @@ export class SettingsComponent implements OnInit {
     });
   }
   onFileSelected(event) {
+    console.log("target", <File>event.target.files[0]);
     this.selectedFile = <File>event.target.files[0];
     // checking the file isn't null
     if (this.selectedFile) {
