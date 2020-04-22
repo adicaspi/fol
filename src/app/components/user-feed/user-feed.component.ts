@@ -41,8 +41,7 @@ export class UserFeedComponent implements OnInit {
   showNoPostsMessage: boolean = false;
   userProfile: boolean = false;
   scrollPageToTop: boolean = false;
-  //currentUser: Observable<User>;
-  user: User;
+  user: Observable<User>;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubscription: Subscription
@@ -131,9 +130,7 @@ export class UserFeedComponent implements OnInit {
           this.userProfile = true;
         }
         else {
-          this.userService.getUserProfileInfo(this.id).subscribe(res => {
-            this.user = res
-          });
+          this.user = this.userService.getUserProfileInfo(this.id);
         }
         this.feedService.updateUserFeed(this.id, this.offset);
       })

@@ -8,45 +8,45 @@
     </div>
   </div>
   <div *ngIf="!userProfile" class="subtitle">
-    <div *ngIf="user"></div>
-    {{user.username }} hasn't uploaded any fashion items yet
+    <div *ngIf="user | async ; let user">
+      {{user.username }} hasn't uploaded any fashion items yet
+    </div>
   </div>
-</div>
 
-<div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
-  <div id="main-body">
-    <div class="center">
-      <div class="card masonry-item" *ngFor="let post of posts">
-        <div *ngIf="desktop">
-          <div [ngClass]="post.thumbnail ? 'masonry-img thumb' : 'masonry-img' ">
-            <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
-            <div *ngIf="post.thumbnail" class="overlay">
-              <img [src]="post.thumbnail" class="img-main hover" (click)="openDialog(post)" />
+  <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
+    <div id="main-body">
+      <div class="center">
+        <div class="card masonry-item" *ngFor="let post of posts">
+          <div *ngIf="desktop">
+            <div [ngClass]="post.thumbnail ? 'masonry-img thumb' : 'masonry-img' ">
+              <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
+              <div *ngIf="post.thumbnail" class="overlay">
+                <img [src]="post.thumbnail" class="img-main hover" (click)="openDialog(post)" />
+              </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="!desktop">
-          <div class="masonry-img">
-            <img heightWidthRatio="1.35" (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" />
+          <div *ngIf="!desktop">
+            <div class="masonry-img">
+              <img heightWidthRatio="1.35" (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" />
+            </div>
           </div>
-        </div>
-        <div class="card-text">
-          <div class="description">
-            {{ post['post']['description'] }}
+          <div class="card-text">
+            <div class="description">
+              {{ post['post']['description'] }}
+            </div>
+            <div class="price">
+              {{ post['post']['price'] }}
+            </div>
+            <a class="store text-right" href="{{ post.post.link }}" target=" _blank ">
+              {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
+            </a>
           </div>
-          <div class="price">
-            {{ post['post']['price'] }}
-          </div>
-          <a class="store text-right" href="{{ post.post.link }}" target=" _blank ">
-            {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
-          </a>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="spinner-container">
-  <ngx-spinner class="la-ball-beat la-2x user-feed" bdColor="transparent" [fullScreen]="false" color="#ff50aa" size="medium"
-    type="ball-beat">
-  </ngx-spinner>
-</div>
+  <div class="spinner-container">
+    <ngx-spinner class="la-ball-beat la-2x user-feed" bdColor="transparent" [fullScreen]="false" color="#ff50aa" size="medium"
+      type="ball-beat">
+    </ngx-spinner>
+  </div>
