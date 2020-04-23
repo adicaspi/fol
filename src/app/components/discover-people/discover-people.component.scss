@@ -105,7 +105,7 @@
     padding-right: 2px;
   }
 
-  button.follow-button{
+  .follow-button{
     display: flex;
     font-size: 16px;
     font-weight: bold;
@@ -120,7 +120,7 @@
 
     &.following {
       color: #888888;
-    background-image: none;
+      background-image: none;
     }
   }
 }
