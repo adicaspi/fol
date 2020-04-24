@@ -73,7 +73,7 @@ export class UserFeedComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
       value => {
-        if (value.width <= 900) {
+        if (value.width > 600) {
           this.desktop = true;
         }
         if (value.width <= 600) {
@@ -83,6 +83,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("user");
     this.spinner.show();
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
@@ -96,8 +97,10 @@ export class UserFeedComponent implements OnInit {
             }
           }
           else {
+
             this.showNoPostsMessage = false;
             this.posts = this.posts.concat(observablePosts.newPosts);
+            console.log("user", this.posts, this.desktop);
             this.offset = observablePosts.offset;
             if (!this.scrollPageToTop) {
               this.scrollHelperService.runDataLoaded();
