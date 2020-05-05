@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { DatePipe } from '@angular/common';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -34,7 +35,7 @@ export class RegisterComponent implements OnInit {
   wrongPassUser: boolean = false;
   containSpace: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
-
+  title = 'Register to Followear';
 
 
   // TODO - FIXED TOUCHED INVALID CLASS
@@ -47,6 +48,8 @@ export class RegisterComponent implements OnInit {
     private http: HttpClient,
     private configSerivce: ConfigService,
     private dialogService: DialogService,
+    private titleService: Title,
+    private meta: Meta,
     @Optional() private dialogRef?: MatDialogRef<RegisterComponent>
   ) {
     if (dialogRef) {
@@ -58,6 +61,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle(this.title);
+    this.meta.addTag({ name: 'description', content: "Join Followear! Sign up to see fashion items from your favorite stores" });
     if (this.dialogRef) {
       this.dialogRef.updateSize('550px', '580px');
     }

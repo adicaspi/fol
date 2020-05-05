@@ -26,11 +26,14 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    // children: [{ path: 'product-page/:id', component: ProductPageMobileComponent }]
+    data: {
+      title: 'Followear Profile Page',
+      description: "When you share posts they'll show up here"
+    }
   },
   {
     path: 'feed/:id', component: ViewFeedComponent,
-    // children: [{ path: 'product-page/:id', component: ProductPageMobileComponent }]
+
   },
 
 
@@ -48,7 +51,12 @@ const routes: Routes = [
   },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'explore/:id', component: ViewExploreComponent },
-  { path: 'explore', component: ViewExploreGeneralComponent },
+  {
+    path: 'explore', component: ViewExploreGeneralComponent, data: {
+      title: 'Explore Followear',
+      descriptoin: 'Explore fashion items from your favorite stores'
+    }
+  },
   { path: 'product-page/:id', component: ProductPageMobileComponent },
   { path: 'following', component: GenerateFollowListComponent },
   { path: 'login', component: LoginComponent },

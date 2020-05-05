@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators';
 import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { RegisterComponent } from '../register/register.component';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
   modal: boolean = false;
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
+  title = 'Login';
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
@@ -41,6 +43,8 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private configSerivce: ConfigService,
     private dialogService: DialogService,
+    private titleService: Title,
+    private meta: Meta,
     @Optional() private dialogRef: MatDialogRef<LoginComponent>
   ) {
     if (dialogRef) {
@@ -52,6 +56,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle(this.title);
+    this.meta.addTag({ name: 'description', content: 'Welcome back to Followear. Sign in to check out the latest fashion items posted by your network' });
     this.loginForm = this.formBuilder.group({
       emailLogin: ['', Validators.required],
       passwordLogin: ['', Validators.required]

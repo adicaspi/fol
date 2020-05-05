@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Routes, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { RegisterComponent } from '../register/register.component';
@@ -19,6 +20,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 export class LandingPageComponent implements OnInit {
   routes: Routes = [{ path: 'register', component: RegisterComponent }];
   desktop: boolean;
+  title = 'Welcome to Followear';
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private WindowSizeSubscription: Subscription;
@@ -29,7 +31,8 @@ export class LandingPageComponent implements OnInit {
     private http: HttpClient,
     private userService: UserService,
     private dialogService: DialogService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private titleService: Title
   ) {
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
@@ -46,7 +49,7 @@ export class LandingPageComponent implements OnInit {
   // 'use strict';
 
   ngOnInit() {
-
+    this.titleService.setTitle(this.title);
   }
 
   // registerPage() {

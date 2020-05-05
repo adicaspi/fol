@@ -17,6 +17,7 @@ import { Router } from '../../../../node_modules/@angular/router';
 import { MessageService } from '../../services/message.service';
 import * as jquery from 'jquery';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-explore-feed-general',
@@ -51,10 +52,14 @@ export class ExploreFeedGeneralComponent implements OnInit {
     private massageService: MessageService,
     private dialogService: DialogService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private titleService: Title,
+    private meta: Meta
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Explore');
+    this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.spinner.show();
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
