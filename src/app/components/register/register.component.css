@@ -135,6 +135,11 @@ a.login{
 .loading-spinner img{
   width:25px;
 }
+
+.error-msg{
+  margin-top: 5px;
+  line-height: 18px;
+}
 }
 
   @media (max-width: 600px) {

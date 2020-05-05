@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
   modal: boolean = false;
   minLength = 3;
   wrongPassUser: boolean = false;
+  containSpace: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
 
 
@@ -64,7 +65,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', [Validators.required, Validators.pattern('^\\d*$')]],
-      username: ['', [Validators.required, Validators.minLength(3), this.cannotContainSpace]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z0-9_.]+$')]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z]).+$')]]
       ,
       email: ['', [Validators.required, Validators.email]]
@@ -86,6 +87,13 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm.get('username').valueChanges.subscribe(val => {
       if (val.length >= this.minLength) {
+        if (val.indexOf(' ') > 0) {
+          this.containSpace = true;
+          console.log(this.containSpace);
+        } else {
+          this.containSpace = false;
+          console.log(this.containSpace);
+        }
         this.userService.checkUserNameExists(val).subscribe(res => {
           this.userNameExists = res;
           this.userNameValidatorLength = false;
@@ -99,13 +107,18 @@ export class RegisterComponent implements OnInit {
     if (this.f.email.errors) {
     }
     this.registerForm.get('email').valueChanges.subscribe(val => {
+      this.submitted = false;
       this.userService.checkEmailExists(val).subscribe(res => {
         this.emailExists = res;
       });
     });
-    this.registerForm.get('password').valueChanges.subscribe(val => {
+    this.registerForm.get('username').valueChanges.subscribe(val => {
       this.submitted = false;
     })
+    this.registerForm.get('password').valueChanges.subscribe(val => {
+      this.submitted = false;
+    });
+
 
   }
 
@@ -124,6 +137,7 @@ export class RegisterComponent implements OnInit {
 
   cannotContainSpace(control: AbstractControl): ValidationErrors | null {
     if ((control.value as string).indexOf(' ') >= 0) {
+      console.log("here");
       return { cannotContainSpace: true }
     }
 

@@ -26,41 +26,13 @@
 
 
   <form [formGroup]="registerForm">
-    <div class="form-group">
-      <label for="fullName"></label>
-      <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
-        placeholder="Full Name" />
-      <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
-        <div *ngIf="f.fullName.errors.required">
-          Full Name is required
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="username"></label>
-      <input type="text" formControlName="username" class="form-control" [ngClass]="{
-              'is-invalid': submitted && f.username.errors || userNameExists 
-            }" placeholder="Username" />
-
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Username is required</div>
-        <div *ngIf="f.username.errors.cannotContainSpace" class="invalid-feedback">Username can not contain space</div>
-        <div *ngIf="f.username.errors.minlength">
-          Username must be at least 3 characters
-        </div>
-      </div>
-      <div *ngIf="userNameExists" class="invalid-feedback">
-        Username already exists
-      </div>
-    </div>
 
 
     <div class="form-group">
       <label for="email"></label>
       <input type="text" formControlName="email" class="form-control" [ngClass]="{
-            'is-invalid': (submitted && f.email.errors) || emailExists
-      }" placeholder="E-mail" />
+                  'is-invalid': (submitted && f.email.errors) || emailExists
+            }" placeholder="E-mail" />
       <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
         <div *ngIf="f.email.errors.required">E-mail is required</div>
       </div>
@@ -74,8 +46,38 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="username"></label>
+      <input type="text" formControlName="username" class="form-control" [ngClass]="{
+                      'is-invalid': submitted && f.username.errors || userNameExists 
+                    }" placeholder="Username" />
 
+      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div *ngIf="f.username.errors.required">Username is required</div>
+        <div *ngIf="f.username.errors.pattern" class="error-msg">
+          Username can contain only English letters and numbers without spaces
+        </div>
+        <div *ngIf="!f.username.errors.pattern">
+          <div *ngIf="f.username.errors.minlength">
+            Username must be at least 3 characters
+          </div>
+        </div>
+      </div>
+      <div *ngIf="userNameExists" class="invalid-feedback">
+        Username already exists
+      </div>
+    </div>
 
+    <div class="form-group">
+      <label for="fullName"></label>
+      <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
+        placeholder="Full Name" />
+      <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+        <div *ngIf="f.fullName.errors.required">
+          Full Name is required
+        </div>
+      </div>
+    </div>
 
 
     <div class="form-group">
@@ -102,18 +104,18 @@
         <div *ngIf="f.password.errors.minlength">
           Password must be at least 8 characters
         </div>
-        <div *ngIf="f.password.errors.pattern">
+        <div *ngIf="!f.password.errors.minlength && f.password.errors.pattern" class="error-msg">
           Password must contain at least one number and one uppercase character
         </div>
       </div>
     </div>
-    <div class="submit-form">
-      <button class="btn btn-default register" (click)="onSubmitRegister()">
+    <div class=" submit-form ">
+      <button class="btn btn-default register " (click)="onSubmitRegister() ">
         Register
       </button>
 
-      <div class="loading-spinner">
-        <div *ngIf="submitted">
+      <div class="loading-spinner ">
+        <div *ngIf="loading ">
           <app-loading-spinner></app-loading-spinner>
         </div>
       </div>
@@ -125,4 +127,3 @@
       Log in
     </a>
   </div>
-</div>
