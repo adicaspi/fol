@@ -83,7 +83,6 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("user");
     this.spinner.show();
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
     this.feedService.feedFilteringDTO = new FilteringDTO();
@@ -100,7 +99,6 @@ export class UserFeedComponent implements OnInit {
 
             this.showNoPostsMessage = false;
             this.posts = this.posts.concat(observablePosts.newPosts);
-            console.log("user", this.posts, this.desktop);
             this.offset = observablePosts.offset;
             if (!this.scrollPageToTop) {
               this.scrollHelperService.runDataLoaded();

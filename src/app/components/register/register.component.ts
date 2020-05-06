@@ -61,8 +61,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle(this.title);
+    this.titleService.setTitle('Register to Followear');
     this.meta.addTag({ name: 'description', content: "Join Followear! Sign up to see fashion items from your favorite stores" });
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     if (this.dialogRef) {
       this.dialogRef.updateSize('550px', '580px');
     }

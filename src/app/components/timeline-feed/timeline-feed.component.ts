@@ -24,6 +24,7 @@ import {
 import { MessageService } from '../../services/message.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import * as jquery from 'jquery';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -68,13 +69,17 @@ export class TimelineFeedComponent implements OnInit {
     private errorsService: ErrorsService,
     private scrollHelperService: ScrollHelperService,
     private massageService: MessageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private titleService: Title,
+    private meta: Meta,
   ) {
 
   }
 
   ngOnInit() {
     this.spinner.show();
+    this.titleService.setTitle('Followear');
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     jquery(".wrapper.scroll-bar-container").css("position", "fixed");
     this.id = this.userService.getCurrentUser();
     this.feedService.feedFilteringDTO = new FilteringDTO();

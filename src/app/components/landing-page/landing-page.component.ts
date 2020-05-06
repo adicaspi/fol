@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { Routes, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { RegisterComponent } from '../register/register.component';
@@ -32,7 +32,8 @@ export class LandingPageComponent implements OnInit {
     private userService: UserService,
     private dialogService: DialogService,
     private configService: ConfigService,
-    private titleService: Title
+    private titleService: Title,
+    private meta: Meta
   ) {
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
@@ -50,12 +51,9 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
+    this.meta.addTag({ name: 'description', content: 'Create an account or log in to Followear - A simple & easy way to share fashion items from your favorite stores.' });
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' })
   }
-
-  // registerPage() {
-  //   this.dialogService.openModalWindow(LoginComponent);
-  // }
-
 
   registerPage(): void {
     if (this.desktop) {
