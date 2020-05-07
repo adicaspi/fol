@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Login • Followear');
     this.meta.addTag({ name: 'description', content: 'Welcome back to Followear. Create an account or log in to Followear - see the latest fashion items posted by your network' });
-    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' })
+    this.meta.addTag({ name: 'robots', content: 'index' })
     this.loginForm = this.formBuilder.group({
       emailLogin: ['', Validators.required],
       passwordLogin: ['', Validators.required]

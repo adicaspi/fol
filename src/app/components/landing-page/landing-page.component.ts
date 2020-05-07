@@ -52,7 +52,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(this.title);
     this.meta.addTag({ name: 'description', content: 'Create an account or log in to Followear - A simple & easy way to share fashion items from your favorite stores.' });
-    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' })
+    this.meta.addTag({ name: 'robots', content: 'index' })
   }
 
   registerPage(): void {

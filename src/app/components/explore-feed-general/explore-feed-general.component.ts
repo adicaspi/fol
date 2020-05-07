@@ -60,7 +60,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Explore');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
-    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
+    this.meta.addTag({ name: 'robots', content: 'index, follow' });
     this.spinner.show();
     this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
