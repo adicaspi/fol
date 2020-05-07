@@ -60,6 +60,7 @@ button.btn-menu.mat-menu-item{
     width: 50px;
     height: 50px;
     display: inline-block;
+    cursor: pointer;
   }
 
   .card-text.img-profile {
@@ -250,6 +251,7 @@ button.btn-menu.mat-menu-item{
     width: 50px;
     height: 50px;
     display: inline-block;
+    cursor: pointer;
   }
 
   .card-text.img-profile {
@@ -424,6 +426,7 @@ button.btn-menu.mat-menu-item{
     width: 50px;
     height: 50px;
     display: inline-block;
+    cursor: pointer;
   }
 
   .card-text.img-profile {

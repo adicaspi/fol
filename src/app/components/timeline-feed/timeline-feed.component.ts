@@ -93,7 +93,6 @@ export class TimelineFeedComponent implements OnInit {
             }
           }
           else {
-            console.log(observablePosts);
             this.showNoPostsMessage = false;
             this.posts = this.posts.concat(observablePosts.newPosts);
             this.offset = observablePosts.offset;
