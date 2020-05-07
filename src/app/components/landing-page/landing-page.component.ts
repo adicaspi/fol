@@ -20,7 +20,6 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 export class LandingPageComponent implements OnInit {
   routes: Routes = [{ path: 'register', component: RegisterComponent }];
   desktop: boolean;
-  title = 'Welcome to Followear';
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private WindowSizeSubscription: Subscription;
@@ -50,7 +49,7 @@ export class LandingPageComponent implements OnInit {
   // 'use strict';
 
   ngOnInit() {
-    this.titleService.setTitle(this.title);
+    this.titleService.setTitle('Followear');
     this.meta.addTag({ name: 'description', content: 'Create an account or log in to Followear - A simple & easy way to share fashion items from your favorite stores.' });
     this.meta.addTag({ name: 'robots', content: 'index' })
   }
