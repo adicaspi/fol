@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { ConfigService } from '../../services/config.service';
 import { UserDetails } from '../../models/UserDetails';
+import * as EXIF from 'exif-js';
 
 class fieldItem {
   label: string;
@@ -44,6 +45,7 @@ export class SettingsComponent implements OnInit {
   timeout: any;
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
+
 
   constructor(
     private userService: UserService,
@@ -114,12 +116,21 @@ export class SettingsComponent implements OnInit {
       email: user.email
     });
   }
-  onFileSelected(event) {
-    console.log("target", <File>event.target.files[0]);
+
+  toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(this.setImgOrientation(this.selectedFile, reader.result));
+    reader.onerror = error => reject(error);
+  });
+
+  async onFileSelected(event) {
+
     this.selectedFile = <File>event.target.files[0];
     // checking the file isn't null
     if (this.selectedFile) {
       this.updateImageProfile = true;
+      await this.toBase64(this.selectedFile);
     }
   }
 
@@ -243,6 +254,63 @@ export class SettingsComponent implements OnInit {
       this.showSuccessMsg = false;
       this.showFailMsg = false;
     }, 2000);
+  }
+
+  setImgOrientation(file, inputBase64String) {
+    return new Promise((resolve, reject) => {
+      const that = this;
+      EXIF.getData(file, function () {
+        if (this && this.exifdata && this.exifdata.Orientation) {
+          that.resetOrientation(inputBase64String, this.exifdata.Orientation, function
+            (resetBase64Image) {
+            inputBase64String = resetBase64Image;
+            resolve(inputBase64String);
+          });
+        } else {
+          resolve(inputBase64String);
+        }
+      });
+    });
+  }
+
+  resetOrientation(srcBase64, srcOrientation, callback) {
+    const img = new Image();
+
+    img.onload = function () {
+      const width = img.width,
+        height = img.height,
+        canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d');
+
+      // set proper canvas dimensions before transform & export
+      if (4 < srcOrientation && srcOrientation < 9) {
+        canvas.width = height;
+        canvas.height = width;
+      } else {
+        canvas.width = width;
+        canvas.height = height;
+      }
+
+      // transform context before drawing image
+      switch (srcOrientation) {
+        case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+        case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+        case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+        case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+        case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+        case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+        case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+        default: break;
+      }
+
+      // draw image
+      ctx.drawImage(img, 0, 0);
+
+      // export base64
+      callback(canvas.toDataURL());
+    };
+
+    this.user.profileImageAddr = srcBase64;
   }
 
   public ngOnDestroy(): void {
