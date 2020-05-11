@@ -120,7 +120,7 @@ export class SettingsComponent implements OnInit {
   toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(this.setImgOrientation(this.selectedFile, reader.result));
+    reader.onload = () => resolve(this.user.profileImageAddr = reader.result);
     reader.onerror = error => reject(error);
   });
 
