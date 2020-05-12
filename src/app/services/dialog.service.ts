@@ -137,8 +137,6 @@ export class DialogService {
 
   openModalWindow(component, componentName?, data?) {
     const modalWindowConfig = new MatDialogConfig<any>();
-
-    //dialogConfig.scrollStrategy = scrollStrategy;
     modalWindowConfig.autoFocus = false;
     modalWindowConfig.data = data;
     modalWindowConfig.closeOnNavigation = true;
@@ -149,18 +147,9 @@ export class DialogService {
       modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper-fol';
       modalWindowConfig.panelClass = 'overlay-fol-list';
     }
-    // if (data) {
-    //   modalWindowConfig.panelClass = 'overlay-product';
-    //   modalWindowConfig.backdropClass = 'cdk-global-overlay-wrapper';
-    // }
 
     const followingDialogRef = this.dialog.open(component, modalWindowConfig);
     this.followingDialogRef = followingDialogRef;
-
-
-    // followingDialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed', result);
-    // });
   }
 
   closeFollowingDialog(followingFlag) {

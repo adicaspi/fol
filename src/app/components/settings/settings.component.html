@@ -20,7 +20,7 @@
 
     <div *ngIf="user" class="user">
       <div class="form-group">
-        <label>
+        <label class="user-name">
           <img [src]="user.profileImageAddr" class="profile" />
         </label>
         <div [class]="userInfoClass">
@@ -58,7 +58,13 @@
 
             <div class="form-group">
               <label>E-mail</label>
-              <input type="email" formControlName="email" class="form-control" />
+              <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+              />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required" class="error-msg">
+                  E-mail is required
+                </div>
+              </div>
             </div>
 
             <div class="form-group submit-button">
@@ -97,7 +103,7 @@
               <input type="password" formControlName="oldPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && changePassForm.oldPass.errors }"
               />
               <div *ngIf="submittedPass && changePassForm.oldPass.errors" class="invalid-feedback">
-                <div *ngIf="changePassForm.oldPass.errors.required">
+                <div *ngIf="changePassForm.oldPass.errors.required" class="error-msg">
                   Password is required
                 </div>
               </div>
@@ -107,11 +113,14 @@
               <input type="password" formControlName="newPass" class="form-control" [ngClass]="{ 'is-invalid': submittedPass && changePassForm.newPass.errors }"
               />
               <div *ngIf="submittedPass && changePassForm.newPass.errors" class="invalid-feedback">
-                <div *ngIf="changePassForm.newPass.errors.required">
+                <div *ngIf="changePassForm.newPass.errors.required" class="error-msg">
                   Password is required
                 </div>
-                <div *ngIf="changePassForm.newPass.errors.minlength">
-                  Password must be at least 6 characters
+                <div *ngIf="changePassForm.newPass.errors.minlength" class="error-msg">
+                  Password must be at least 8 characters
+                </div>
+                <div *ngIf="!changePassForm.newPass.errors.minlength && changePassForm.newPass.errors.pattern" class="error-msg">
+                  Password must contain at least one number and one uppercase character
                 </div>
               </div>
             </div>
@@ -122,10 +131,10 @@
                   'is-invalid': submittedPass && changePassForm.confirmPass.errors
                 }" />
               <div *ngIf="submittedPass && changePassForm.confirmPass.errors" class="invalid-feedback">
-                <div *ngIf="changePassForm.confirmPass.errors.required">
+                <div *ngIf="changePassForm.confirmPass.errors.required" class="error-msg">
                   Confirm Password is required
                 </div>
-                <div *ngIf="changePassForm.confirmPass.errors.mustMatch">
+                <div *ngIf="changePassForm.confirmPass.errors.mustMatch" class="error-msg">
                   Passwords do not match
                 </div>
               </div>

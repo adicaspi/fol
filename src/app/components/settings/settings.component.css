@@ -71,7 +71,7 @@ li.controlers:hover {
   margin-right: auto;
   margin-left: auto;
   border-radius: 0px 3px 3px 0px;
-  text-align: center;
+  text-align: center; 
   padding: 15px;
 }
 
@@ -168,6 +168,11 @@ button {
   clear: both;
   font-family: 'Maven Pro', sans-serif;
   font-size: 12px;
+}
+
+.error-msg{
+  margin-left: 165px;
+  text-align: start;
 }
 }
 
@@ -335,6 +340,11 @@ button {
     font-family: 'Maven Pro', sans-serif;
     font-size: 12px;
   }
+
+  .error-msg{
+    margin-left: 165px;
+    text-align: start;
+  }
 }
 
 @media (max-width: 600px){
@@ -429,11 +439,16 @@ button {
     font-size: 12px;
     color: #333;
     height: 20px;
-    width: 65px;
+    width: 82px; 
     text-align: right;
     text-align: start;
     line-height: 32px;
   }
+
+  label.user-name{
+    width: 65px;
+  }
+
   input {
     height: 32px;
     width: 160px;

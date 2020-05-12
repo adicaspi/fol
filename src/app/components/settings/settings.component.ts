@@ -59,15 +59,15 @@ export class SettingsComponent implements OnInit {
         username: [{ value: '', disabled: true }],
         fullname: [''],
         description: [''],
-        email: [''],
+        email: ['', [Validators.required, Validators.email]],
       }
     );
 
     this.changePasswordForm = this.formBuilder.group(
       {
-        oldPass: ['', [Validators.required, Validators.minLength(6)]],
-        newPass: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPass: ['', [Validators.required, Validators.minLength(6)]]
+        oldPass: ['', [Validators.required]],
+        newPass: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z]).+$')]],
+        confirmPass: ['']
       },
       {
         validator: this.MustMatch('newPass', 'confirmPass')

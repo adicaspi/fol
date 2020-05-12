@@ -51,7 +51,8 @@ export class UserProfileInfoDesktopComponent implements OnInit {
     public dialogService: DialogService,
     public router: Router,
     public configService: ConfigService,
-    public location: LocationService
+    public location: LocationService,
+    public dialog: MatDialog
   ) {
 
   }
@@ -73,24 +74,11 @@ export class UserProfileInfoDesktopComponent implements OnInit {
     this.getNumPosts();
   }
 
-  // getNumFollowing() {
-  //   this.following = this.userService.getNumberOfFollowing(this.currMasterId);
-  // }
-
-  // getNumFollowers() {
-  //   this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
-  // }
-
-  // getNumPosts() {
-  //   this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
-  // }
-
   getNumFollowing() {
     this.userService.getNumberOfFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.following = res });
   }
 
   getNumFollowers() {
-    //this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
     this.userService.getNumberOfFollowers(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.followers = res });
   }
 
@@ -143,6 +131,17 @@ export class UserProfileInfoDesktopComponent implements OnInit {
         this.getNumFollowing();
       }
     });
+    // const dialogRef = this.dialog.open(GenerateFollowListComponent, {
+    //   width: '250px',
+    //   data: { title: title, id: this.currMasterId }
+    // });
+
+    // dialogRef.afterClosed().pipe(takeUntil(this.onDestroy)).subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   if (result) {
+    //     this.getNumFollowing();
+    //   }
+    // });
 
 
   }

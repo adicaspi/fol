@@ -1,7 +1,12 @@
-<div *ngIf="showSpinner; else mainPage" class="spin">
+<!-- <div *ngIf="showSpinner" class="spin">
   <app-loading-spinner></app-loading-spinner>
-</div>
-<ng-template #mainPage>
+</div> -->
+<!-- <ng-template #mainPage> -->
+<mat-dialog-content class="mat-content">
+  <div *ngIf="showSpinner" class="spin">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
   <div class="title">
     <span class="dialog-title">{{ dialogTitle }}</span>
     <i *ngIf="desktop" (click)="closeModal()" class="fal fa-times"></i>
@@ -27,5 +32,9 @@
     </div>
   </div>
 
-  <!-- <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"></div> -->
-</ng-template>
+</mat-dialog-content>
+
+
+
+
+<!-- </ng-template> -->
