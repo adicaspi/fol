@@ -49,7 +49,7 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.initScroll(this);
+
     this.userId = this.userService.userId;
     this.desktop = this.dialogService.desktop;
     this.flag = this.dialogService.followingDialogDataObject.flag;
@@ -62,17 +62,6 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
     else {
       this.generateFollowsSlaves(this.offset);
     }
-  }
-
-  async initScroll(that) {
-
-
-    const content = document.querySelector('.mat-content');
-    const scroll$ = fromEvent(content, 'scroll').pipe(map(() => content));
-    scroll$.subscribe(element => {
-      console.log(window.pageYOffset);
-      //that.onScroll();
-    });
   }
 
   // private processData = followsFeed => {
@@ -117,8 +106,6 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
     if (followsFeed.length > 0) {
       this.generateFollowsSlaves(this.offset);
     }
-
-
   };
 
 
