@@ -104,7 +104,12 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
     });
     this.showSpinner = false;
     if (followsFeed.length > 0) {
-      this.generateFollowsSlaves(this.offset);
+      if (this.flag) {
+        this.generateFollowsMasters(this.offset);
+      }
+      else {
+        this.generateFollowsSlaves(this.offset);
+      }
     }
   };
 
