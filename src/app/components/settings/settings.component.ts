@@ -45,6 +45,7 @@ export class SettingsComponent implements OnInit {
   timeout: any;
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
+  postImage: any;
 
 
   constructor(
@@ -100,6 +101,7 @@ export class SettingsComponent implements OnInit {
   updateUser() {
     this.userService.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
       this.user = user;
+      this.postImage = this.user.profileImageAddr;
       this.patchValue(this.user);
     });
   }
@@ -120,7 +122,7 @@ export class SettingsComponent implements OnInit {
   toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(this.user.profileImageAddr = reader.result);
+    reader.onload = () => resolve(this.postImage = reader.result);
     reader.onerror = error => reject(error);
   });
 
