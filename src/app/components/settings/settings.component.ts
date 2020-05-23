@@ -46,6 +46,7 @@ export class SettingsComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
   postImage: any;
+  emailError = false;
 
 
   constructor(
@@ -124,15 +125,19 @@ export class SettingsComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => resolve(this.postImage = reader.result);
     reader.onerror = error => reject(error);
-  });
+  })
+
 
   async onFileSelected(event) {
-
+    this.loading = false;
     this.selectedFile = <File>event.target.files[0];
     // checking the file isn't null
     if (this.selectedFile) {
       this.updateImageProfile = true;
-      await this.toBase64(this.selectedFile);
+      await this.toBase64(this.selectedFile).then((value) => {
+        console.log(value);
+        // expected output: "Success!"
+      });
     }
   }
 
@@ -226,12 +231,14 @@ export class SettingsComponent implements OnInit {
     }
     if (updatedEmail != this.user.email) {
       this.loading = true;
+      this.emailError = false;
       this.userService.updateEmail(updatedEmail).subscribe(res => {
         this.showSuccessMsg = true;
         this.loading = false;
       }, error => {
         this.loading = false;
         this.showFailMsg = true;
+        this.emailError = true;
       });
     }
 
@@ -244,7 +251,7 @@ export class SettingsComponent implements OnInit {
         this.loading = false;
       }, error => {
         this.loading = false;
-        //this.showFailMsg = true;
+        console.log(error);
       });
     }
     this.hideMessage();

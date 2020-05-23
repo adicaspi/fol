@@ -28,6 +28,9 @@ export class HttpErrorComponent implements HttpInterceptor {
       retry(1),
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
+        // if (error instanceof Observable){
+        //   
+        // }
         if (error.error instanceof ErrorEvent) {
           // client-side error
           errorMessage = `Error: ${error.error.message}`;
@@ -42,15 +45,19 @@ export class HttpErrorComponent implements HttpInterceptor {
           }
           if (error.error.error == 'Invalid Authentication Data') {
             this.errorsService.sendMessage('Invalid Authentication Data');
-            console.log("hi adi in error comp invalid authen");
+
           }
           if (error.error.error == 'Invalid User') {
             this.errorsService.sendMessage('Invalid User');
-            console.log("hi adi in error comp");
+
+          }
+          if (error.error.error == 'Invalid Email') {
+            this.errorsService.sendMessage('Invalid Email');
+
           }
           if (error.error.error == 'Cognito Exception') {
-            //this.router.navigate(['/forgotpassword']);
-            console.log('now caught');
+
+
           }
 
           if (error.error.error == 'Exchange Rate Exception') {
@@ -65,7 +72,7 @@ export class HttpErrorComponent implements HttpInterceptor {
             }`;
         }
         // window.alert(errorMessage);
-        console.log('im before throweeror');
+        //console.log('im before throweeror');
         return throwError(errorMessage);
       })
     );

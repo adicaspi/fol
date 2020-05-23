@@ -40,12 +40,20 @@ export class FeedService {
   constructor(private http: HttpClient) {
   }
 
+  clearPostsSubject() {
+    this.postsSubject.next();
+  }
+
   updateTimelineFeed(id, offset) {
     this.postsSubject.next(this.getTimeLineFeed(id, offset));
   }
 
   updateUserFeed(id, offset) {
     this.postsSubject.next(this.getUserFeed(id, offset));
+  }
+
+  updateSavedFeed(id, offset) {
+    this.postsSubject.next(this.getUserSavedFeed(id, offset));
   }
 
   updateExploreFeed(id) {
@@ -164,6 +172,35 @@ export class FeedService {
         }
       });
   }
+
+  getUserSavedFeed(userId: number, offset: number): Observable<any> {
+    let params = new HttpParams().set('offset', offset.toString());
+    return this.http.post<Array<any>>(
+      this.globalFeedURL + userId + '/saved-feed', this.feedFilteringDTO, {
+        headers: httpOptions.headers,
+        observe: "response",
+        params: params,
+      }
+    ).pipe(
+    )
+      .map(res => {
+        console.log(res, "im res");
+        if (res.status == 200) {
+          let posts: any = res.body['feedPosts'];
+          let offset: any = res.body['newOffset'];
+          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject;
+        }
+        if (res.status == 204) {
+          return "endOfFeed";
+        }
+      });
+  }
+
 
   discoverPeopleGeneral(): Observable<Array<DiscoverPeopleDTO>> {
     return this.http.get<Array<DiscoverPeopleDTO>>(this.generalURL + '/discover-people').pipe().map(res => {
