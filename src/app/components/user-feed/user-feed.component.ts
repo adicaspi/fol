@@ -25,7 +25,7 @@ import { User } from '../../models/User';
 @Component({
   selector: 'app-user-feed',
   templateUrl: './user-feed.component.html',
-  styleUrls: ['./user-feed.component.css']
+  styleUrls: ['./user-feed.component.scss']
 })
 export class UserFeedComponent implements OnInit {
   //@Input() user: User;
@@ -41,6 +41,8 @@ export class UserFeedComponent implements OnInit {
   showNoPostsMessage: boolean = false;
   userProfile: boolean = false;
   scrollPageToTop: boolean = false;
+  savedTab: boolean = false;
+  userFeedTab: boolean = true;
   user: Observable<User>;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
@@ -48,6 +50,8 @@ export class UserFeedComponent implements OnInit {
   private updateFeed: Subscription
   private anyErrors: boolean;
   private finished: boolean;
+
+
   routes: Routes = [
     { path: 'product-page', component: ProductPageMobileComponent }
   ];
@@ -137,14 +141,42 @@ export class UserFeedComponent implements OnInit {
       })
   }
 
+  getSavedFeed() {
+    this.savedTab = true;
+    this.userFeedTab = false;
+    this.posts = [];
+    this.offset = 0;
+    this.scrollPageToTop = true;
+    console.log(this.id);
+    this.feedService.updateSavedFeed(this.id, this.offset);
+  }
+
+  getUserFeed() {
+    this.savedTab = false;
+    this.userFeedTab = true;
+    this.posts = [];
+    this.offset = 0;
+    this.scrollPageToTop = true;
+    this.feedService.updateUserFeed(this.id, this.offset);
+  }
 
   onScroll() {
-    if (!this.endOfFeed) {
-      this.feedService.updateUserFeed(this.id, this.offset);
-      this.spinner.show();
+    if (this.userFeedTab) {
+      if (!this.endOfFeed) {
+        this.feedService.updateUserFeed(this.id, this.offset);
+        this.spinner.show();
 
+      } else {
+        this.spinner.hide();
+      }
     } else {
-      this.spinner.hide();
+      if (!this.endOfFeed) {
+        this.feedService.getUserSavedFeed(this.id, this.offset);
+        this.spinner.show();
+
+      } else {
+        this.spinner.hide();
+      }
     }
   }
 
