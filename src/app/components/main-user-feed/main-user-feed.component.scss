@@ -101,6 +101,10 @@ span.icon-tab{
   flex-wrap: wrap;
 }
 
+.masonry-img{
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 900px) {
   .no-posts{
     border-top: none;
