@@ -20,9 +20,14 @@ import { ExploreFeedGeneralComponent } from './components/explore-feed-general/e
 import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
 import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-people-general/view-discover-people-general.component';
 import { ViewDiscoverPeopleUserComponent } from './components/view-discover-people-user/view-discover-people-user.component';
+import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
 
 
 const routes: Routes = [
+  {
+    path: 'profile', component: ViewMainProfileComponent,
+
+  },
   {
     path: 'profile/:id',
     component: ViewProfileComponent,

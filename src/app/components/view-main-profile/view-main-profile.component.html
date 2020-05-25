@@ -1,0 +1,13 @@
+<body>
+  <div *ngIf="desktop; else mobileView" class="display">
+    <app-navbar></app-navbar>
+    <app-user-profile-info-desktop [uid]="masterId"></app-user-profile-info-desktop>
+    <app-main-user-feed></app-main-user-feed>
+  </div>
+  <ng-template #mobileView class="mobile">
+    <app-bottom-navbar></app-bottom-navbar>
+    <app-user-profile-info-mobile [uid]="masterId"></app-user-profile-info-mobile>
+    <app-shopping-nav></app-shopping-nav>
+    <app-main-user-feed></app-main-user-feed>
+  </ng-template>
+</body>

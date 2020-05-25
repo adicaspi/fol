@@ -71,6 +71,8 @@ import { ExploreFeedGeneralComponent } from './components/explore-feed-general/e
 import { ViewExploreGeneralComponent } from './components/view-explore-general/view-explore-general.component';
 import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-people-general/view-discover-people-general.component';
 import { ViewDiscoverPeopleUserComponent } from './components/view-discover-people-user/view-discover-people-user.component';
+import { MainUserFeedComponent } from './components/main-user-feed/main-user-feed.component';
+import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
 
 
 //I keep the new line
@@ -119,7 +121,9 @@ import { ViewDiscoverPeopleUserComponent } from './components/view-discover-peop
     ExploreFeedGeneralComponent,
     ViewExploreGeneralComponent,
     ViewDiscoverPeopleGeneralComponent,
-    ViewDiscoverPeopleUserComponent
+    ViewDiscoverPeopleUserComponent,
+    MainUserFeedComponent,
+    ViewMainProfileComponent
   ],
   imports: [
     BrowserModule,

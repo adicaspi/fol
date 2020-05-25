@@ -22,13 +22,14 @@ import { User } from '../../models/User';
 
 
 
+
 @Component({
-  selector: 'app-user-feed',
-  templateUrl: './user-feed.component.html',
-  styleUrls: ['./user-feed.component.scss']
+  selector: 'app-main-user-feed',
+  templateUrl: './main-user-feed.component.html',
+  styleUrls: ['./main-user-feed.component.scss']
 })
-export class UserFeedComponent implements OnInit {
-  //@Input() user: User;
+export class MainUserFeedComponent implements OnInit {
+
   posts = [];
   offset: number = 0;
   desktop: boolean = true;
@@ -48,8 +49,8 @@ export class UserFeedComponent implements OnInit {
   private updateFeed: Subscription
   private anyErrors: boolean;
   private finished: boolean;
-
-
+  savedTab: boolean = false;
+  userFeedTab: boolean = true;
   routes: Routes = [
     { path: 'product-page', component: ProductPageMobileComponent }
   ];
@@ -72,6 +73,7 @@ export class UserFeedComponent implements OnInit {
     private userService: UserService
 
   ) {
+    this.id = this.userService.userId;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
       value => {
@@ -121,34 +123,45 @@ export class UserFeedComponent implements OnInit {
         }
       }
     });
-    this.getActivatedRoute();
+    //this.getActivatedRoute();
+    this.getUserFeed();
   }
 
-  getActivatedRoute() {
-    this.activatedRoute.params
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(params => {
-        this.id = +params['id'];
-        if (this.userService.getCurrentUser() == this.id) {
-          this.userProfile = true;
-        }
-        else {
-          this.user = this.userService.getUserProfileInfo(this.id);
-        }
-        this.feedService.updateUserFeed(this.id, this.offset);
-      })
+  getSavedFeed() {
+    this.savedTab = true;
+    this.userFeedTab = false;
+    this.posts = [];
+    this.offset = 0;
+    this.scrollPageToTop = true;
+    console.log(this.id);
+    this.feedService.updateSavedFeed(this.id, this.offset);
   }
 
-
-
+  getUserFeed() {
+    this.savedTab = false;
+    this.userFeedTab = true;
+    this.posts = [];
+    this.offset = 0;
+    this.scrollPageToTop = true;
+    this.feedService.updateUserFeed(this.id, this.offset);
+  }
 
   onScroll() {
-    if (!this.endOfFeed) {
-      this.feedService.getUserSavedFeed(this.id, this.offset);
-      this.spinner.show();
+    if (this.userFeedTab) {
+      if (!this.endOfFeed) {
+        this.feedService.updateUserFeed(this.id, this.offset);
+        this.spinner.show();
 
+      } else {
+        this.spinner.hide();
+      }
     } else {
-      this.spinner.hide();
+      if (!this.endOfFeed) {
+        this.feedService.updateSavedFeed(this.id, this.offset);
+        this.spinner.show();
+      } else {
+        this.spinner.hide();
+      }
     }
   }
 
@@ -171,4 +184,5 @@ export class UserFeedComponent implements OnInit {
     this.feedSubscription.unsubscribe();
     this.updateFeed.unsubscribe();
   }
+
 }

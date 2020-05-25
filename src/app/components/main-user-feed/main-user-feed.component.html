@@ -1,7 +1,10 @@
 <div *ngIf="showNoPostsMessage" class="no-posts">
-  <div class="subtitle">
-    <div *ngIf="user | async ; let user">
-      {{user.username }} hasn't uploaded any fashion items yet
+  <div class="no-posts-message">
+    <div class="subtitle">
+      You haven't uploaded any fashion items yet
+    </div>
+    <div class="share-posts-container">
+      <a href="https://apps.apple.com/app/followear/id1476265803" class="share-posts" target="_blank">Start Uploading</a>
     </div>
   </div>
 </div>
@@ -9,6 +12,20 @@
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
   <div id="main-body">
     <div class="center">
+      <div class="tabs">
+        <a class="feed-tab">
+          <span class="icon-tab" [ngClass]="{'border-tab': userFeedTab}" (click)="getUserFeed()">
+            <i class="fal fa-border-all"></i>
+            <span>POSTS</span>
+          </span>
+        </a>
+        <a class="feed-tab">
+          <span class="icon-tab" [ngClass]="{'border-tab': savedTab}" (click)="getSavedFeed()">
+            <i class="fas fa-star"></i>
+            <span>SAVED</span>
+          </span>
+        </a>
+      </div>
       <div class="items">
         <div class="card masonry-item" *ngFor="let post of posts">
           <div *ngIf="desktop">

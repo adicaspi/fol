@@ -17,7 +17,7 @@ import { User } from '../../models/User';
   styleUrls: ['./user-profile-info-desktop.component.scss']
 })
 export class UserProfileInfoDesktopComponent implements OnInit {
-  //@Input() user;
+  @Input() uid?: number;
   public currMasterId: number;
   public slaveId: number;
   public follows: boolean;
@@ -57,10 +57,13 @@ export class UserProfileInfoDesktopComponent implements OnInit {
 
   }
   ngOnInit() {
-    //console.log("user", this.user);
     this.userId = this.userService.userId;
-    const routeParams = this.activatedRoute.snapshot.params;
-    this.currMasterId = parseInt(routeParams.id);
+    if (this.uid == null) {
+      const routeParams = this.activatedRoute.snapshot.params;
+      this.currMasterId = parseInt(routeParams.id);
+    } else {
+      this.currMasterId = this.uid;
+    }
     if (this.userId == this.currMasterId) {
       this.userProfile = true;
     }

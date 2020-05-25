@@ -1,0 +1,486 @@
+.price {
+  display: inline-block;
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.no-posts{
+  margin-top: 120px; 
+}
+
+.share-posts{
+  font-size: 28px;
+  line-height: 32px;
+  text-align: center;
+  margin: 60px 40px 8px;
+}
+
+.subtitle{
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 5px;
+  color: #7a7a7a;
+  letter-spacing: -0.2px;
+  line-height: 32px;
+  text-align: center;
+  margin: 60px 40px 8px;
+}
+
+.share-posts-container{
+  line-height: 32px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.share-posts {
+  display: inline;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  background: -webkit-linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: auto;
+  cursor: pointer;
+}
+
+.store.text-right:hover{
+  color: black;
+  cursor: pointer;
+}
+
+.spinner-container{
+  position: relative;
+  height: 40px;
+  width: 100%;
+  bottom: 0px;
+}
+
+.tabs{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 53px;
+}
+
+a.feed-tab{
+  line-height: 53px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+span.icon-tab span{
+  margin-left: 6px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #262626;
+  font-size: 13px;
+}
+
+span.icon-tab{  
+  border-top: none;
+
+  &.border-tab{
+  border-top: 1px solid;
+  }
+}
+
+.feed-tab{
+  margin-right:60px;
+}
+
+.items{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (min-width: 900px) {
+  .no-posts{
+    border-top: none;
+  }
+
+  .search-results{
+    height:100%;   
+}
+  
+  #main-body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .center{
+    margin: auto;
+    width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 60px;
+  }
+
+  .masonry-img{
+    margin-top:20px;
+  }
+
+  .masonry-img .img-main {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+    transition: .6s ease;
+  }
+
+  .masonry-img.thumb{
+    position: relative;
+  }
+
+  .masonry-img.thumb:hover .overlay {
+    opacity: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+  }
+
+  .overlay .img-main.hover {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+    opacity: 1;
+  }
+
+  .masonry-img.thumb:hover .img-main {
+      opacity: 0;
+  } 
+
+  .masonry-img.thumb:hover .img-main.hover {
+    opacity: 1;
+  }
+
+  .masonry-img .img-hover {
+    display: none;
+  }
+
+  .card {
+    width: 274px;
+    margin-right: 39px;
+    margin-top: 39px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
+
+  .card:nth-of-type(3n){
+    margin-right: 0px;
+  }
+
+  .card-text {
+    font-size: 15px;
+    height: 70px;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
+
+  .description {
+    text-align: center;
+    font-weight: 400;
+    color: black;
+    width: 90%;
+    margin: auto;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .store.text-right {
+    position: absolute;
+    right: 12px;
+    margin-top: 8px;
+    text-decoration: underline;
+    line-height: 1;
+    color: grey;
+  }
+
+  .price {
+    position: absolute;
+    left: 12px;
+    margin-top: 8px;
+    color: #2f2e2e;
+    font-weight: 200;
+    font-size: 14px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
+  }
+ }  
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .no-posts{
+    border-top: none;
+  }
+  
+  .search-results {
+    height:100%;   
+  }
+  
+  #main-body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .center {
+    margin: auto;
+    width: 600px;
+    display: flex;
+    /* flex-direction: row; */
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  .masonry-img{
+    margin-top:20px;
+  }
+
+  .masonry-img .img-main {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+    transition: .6s ease;
+  }
+  
+  .masonry-img.thumb{
+    position: relative;
+  }
+  
+  .masonry-img.thumb:hover .overlay {
+    opacity: 1;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+  }
+  
+  .overlay .img-main.hover {
+    width: 197px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    object-fit: cover;
+    opacity: 1;
+  }
+  
+  .masonry-img.thumb:hover .img-main {
+      opacity: 0;
+  } 
+  
+  .masonry-img.thumb:hover .img-main.hover {
+    opacity: 1;
+  }
+   
+
+  .card {
+    width: 274px;
+    margin-top: 39px;
+    margin-right: 52px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgb(235,235,235);
+  }
+
+  .card:nth-of-type(2n){
+    margin-right: 0px;
+  }
+
+  .card-text {
+    font-size: 15px;
+    height: 48px;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-family: 'helvetica', arial, sans-serif;
+  }
+
+  .description {
+    text-align: center;
+    font-weight: 400;
+    color: black;
+  }
+
+  .store.text-right {
+    position: absolute;
+    right: 12px;
+    margin-top: 8px;
+    text-decoration: underline;
+    line-height: 1;
+    color: grey;
+  }
+
+  .price {
+    position: absolute;
+    left: 12px;
+    margin-top: 8px;
+    color: #2f2e2e;
+    font-weight: 200;
+    font-size: 14px;
+    font-family: open sans, sans-serif;
+    line-height: 1;
+  }
+ }
+
+@media (max-width: 600px) {
+  * {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -msbox-sizing: border-box;
+  }
+  
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .search-results {
+    /* height:100%;  */
+    margin: 0;
+    padding: 0;  
+  }
+  
+  #main-body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .center {
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    overflow-x: hidden;
+    display: flex;
+    /* flex-direction: row; */
+    flex-direction: column;
+    justify-content: left;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 0px 12px;
+    margin-bottom: 60px;
+  }
+
+  .card {
+    width: calc(50% - 6px);
+    margin-top: 20px;
+    border: none;
+    display: inline-block;
+    margin-right: 12px;
+  }
+
+  .card:nth-of-type(2n) {
+    margin-right: 0px;
+  }
+  
+  .masonry-img .img-main {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgb(212,212,212);
+  }
+  
+  .masonry-img .img-hover {
+    display: none;
+  }
+
+  .card-text {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-family: inherit;
+  }
+
+  .card-text .description {
+    text-align: left;
+    font-weight: 600;
+    color: rgb(51,51,51);
+    font-size: 12px;
+    margin-bottom: -4px;
+  }
+
+  .price {
+    margin-top: 6px;
+    font-size: 10px;
+    color: rgb(120,120, 120);
+    font-weight: 600;
+  }
+
+  .store.text-right {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgb(120,120,120);
+  }
+
+  .share-posts {
+    display: inline;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    cursor: pointer;
+    color:transparent;
+    margin: auto;
+    margin-top: 28px !important;
+  }
+
+  .spinner-container{
+    bottom: 60px;
+  }
+}
+
