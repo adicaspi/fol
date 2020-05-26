@@ -278,5 +278,30 @@ export class UserService {
         params: params
       }).subscribe(res => { });
   }
+
+  didSave(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.get<boolean>(this.globaSoicalURL + this.userId + '/did-save-item',
+      {
+        params
+      });
+  }
+
+  save(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.post(this.globaSoicalURL + this.userId + '/save-item', { headers: httpOptions.headers },
+      {
+        params: params
+      }).subscribe(res => { });
+  }
+
+  unsave(postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.post(this.globaSoicalURL + this.userId + '/unsave-item', { headers: httpOptions.headers },
+      {
+        params: params
+      }).subscribe(res => { });
+  }
+
 }
 

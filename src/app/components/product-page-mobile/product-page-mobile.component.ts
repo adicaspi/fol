@@ -39,6 +39,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   userProfile: boolean = false;
   likeButtonClicked: boolean = false;
+  saveButtonClicked: boolean = false;
   registeredUser: boolean = false;
   showRegsterMsg: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
@@ -113,7 +114,6 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.router.navigate(['/product-page', post.postId]);
   }
 
-
   goBackPage() {
     this.location.goBack();
   }
@@ -149,6 +149,18 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       }
     } else {
       this.showRegsterMsg = true;
+    }
+  }
+
+  toggleSaveButton() {
+    if (this.registeredUser) {
+      if (this.saveButtonClicked) {
+        this.saveButtonClicked = false;
+        this.userService.unsave(this.postId);
+      } else {
+        this.saveButtonClicked = true;
+        this.userService.save(this.postId);
+      }
     }
   }
 

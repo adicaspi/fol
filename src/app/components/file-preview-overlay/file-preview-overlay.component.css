@@ -23,6 +23,17 @@ button.btn-menu.mat-menu-item{
   margin-right: 10px;
 }
 
+i.save-item{
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+i.like-item{
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 
 @media (min-width: 900px) {
   .wrapper {
