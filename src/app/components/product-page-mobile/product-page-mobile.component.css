@@ -159,7 +159,7 @@ i.material-icons{
 }
 
 i.fal.fa-heart{
-  font-size: 20px;
+  font-size: 18px;
   vertical-align: middle;
   margin-right: 5px;
 }
@@ -171,9 +171,13 @@ i.fas.fa-heart{
   margin-right: 5px;
 }
 
-
 button.btn-menu.mat-menu-item{
   outline:none;
+}
+
+.save-item{
+  margin-right: 4px;
+  font-size:17px;
 }
 
 

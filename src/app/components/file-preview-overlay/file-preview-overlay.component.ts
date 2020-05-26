@@ -40,6 +40,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   numLikes: number;
   userProfile: boolean = false;
   likeButtonClicked: boolean = false;
+  saveButtonClicked: boolean = false;
   registeredUser: boolean = false;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   onDestroy: Subject<void> = new Subject<void>();
@@ -109,6 +110,12 @@ export class FilePreviewOverlayComponent implements OnInit {
     })
   }
 
+  didSave() {
+    this.userService.didLike(this.postId).subscribe(res => {
+      this.saveButtonClicked = res;
+    })
+  }
+
   toggleLikeButton() {
     if (this.registeredUser) {
       if (this.likeButtonClicked) {
@@ -121,6 +128,18 @@ export class FilePreviewOverlayComponent implements OnInit {
         this.userService.like(this.postId);
       }
       //this.postService.incrementPostViews(this.userService.userId, this.postId);
+    }
+  }
+
+  toggleSaveButton() {
+    if (this.registeredUser) {
+      if (this.saveButtonClicked) {
+        this.saveButtonClicked = false;
+        this.userService.unsave(this.postId);
+      } else {
+        this.saveButtonClicked = true;
+        this.userService.save(this.postId);
+      }
     }
   }
 

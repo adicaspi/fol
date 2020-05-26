@@ -44,9 +44,11 @@
 
               <span class="price">{{postInfo.price}}</span>
             </div>
-            <div class="num-views" (click)="toggleLikeButton()">
-              <i *ngIf="!likeButtonClicked" class="fal fa-heart"></i>
-              <i *ngIf="likeButtonClicked" class="fas fa-heart"></i>
+            <div class="num-views">
+              <i *ngIf="saveButtonClicked" class="fas fa-star save-item" (click)="toggleSaveButton()"></i>
+              <i *ngIf="!saveButtonClicked" class="far fa-star save-item" (click)="toggleSaveButton()"></i>
+              <i *ngIf="!likeButtonClicked" class="fal fa-heart like-item" (click)="toggleLikeButton()"></i>
+              <i *ngIf="likeButtonClicked" class="fas fa-heart like-item" (click)="toggleLikeButton()"></i>
               <span id="int-num-views">{{numLikes}}</span> likes
             </div>
           </div>
