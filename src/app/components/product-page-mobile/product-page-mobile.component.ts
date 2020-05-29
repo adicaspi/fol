@@ -75,6 +75,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.directingPage = this.dialogService.directingPage;
     if (this.registeredUser) {
       this.didLike();
+      this.didSave();
     }
 
     this.incNumViews();
@@ -133,6 +134,12 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   didLike() {
     this.userService.didLike(this.postId).subscribe(res => {
       this.likeButtonClicked = res;
+    })
+  }
+
+  didSave() {
+    this.userService.didSave(this.postId).subscribe(res => {
+      this.saveButtonClicked = res;
     })
   }
 

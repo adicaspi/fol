@@ -76,6 +76,7 @@ export class FilePreviewOverlayComponent implements OnInit {
         }
         if (this.registeredUser) {
           this.didLike();
+          this.didSave();
         }
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
@@ -111,8 +112,9 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   didSave() {
-    this.userService.didLike(this.postId).subscribe(res => {
+    this.userService.didSave(this.postId).subscribe(res => {
       this.saveButtonClicked = res;
+      console.log(this.saveButtonClicked);
     })
   }
 

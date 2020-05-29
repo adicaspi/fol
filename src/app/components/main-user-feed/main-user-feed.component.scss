@@ -74,6 +74,7 @@ a.feed-tab{
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 span.icon-tab span{
@@ -485,6 +486,21 @@ span.icon-tab{
 
   .spinner-container{
     bottom: 60px;
+  }
+
+  .tabs{
+    height: 20px;
+    border-top: 1px solid rgba(var(--b38,219,219,219),1);
+  }
+
+  .feed-tab{
+    width: 160px;
+    margin-right: 0;
+    margin-top: 12px;
+  }
+
+  .feed-tab i{
+    font-size: 16px;
   }
 }
 
