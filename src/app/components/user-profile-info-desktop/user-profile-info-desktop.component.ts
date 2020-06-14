@@ -10,12 +10,14 @@ import { takeUntil } from 'rxjs/operators';
 import { GenerateFollowListComponent } from '../generate-follow-list/generate-follow-list.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../models/User';
+import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.component';
 
 @Component({
   selector: 'app-user-profile-info-desktop',
   templateUrl: './user-profile-info-desktop.component.html',
   styleUrls: ['./user-profile-info-desktop.component.scss']
 })
+
 export class UserProfileInfoDesktopComponent implements OnInit {
   @Input() uid?: number;
   public currMasterId: number;
@@ -113,38 +115,22 @@ export class UserProfileInfoDesktopComponent implements OnInit {
   }
 
   openDialog(flag) {
-    var title;
-    if (flag) {
-      title = 'Following';
-    } else {
-      title = 'Followers';
-    }
-    this.dialogService.followingDialogDataObject.flag = flag;
-    this.dialogService.followingDialogDataObject.userId = this.currMasterId;
-    this.dialogService.followingDialogDataObject.title = title;
-    var componentName = 'followersList';
-    this.dialogService.openModalWindow(
-      GenerateFollowListComponent,
-      componentName
-    );
+    this.configService.setGeneralSession('id', this.currMasterId);
+    this.configService.setGeneralSession('list', 0);
+    this.configService.setGeneralSession('desktop', 1);
+    this.configService.setGeneralSession('flag', flag);
+
     this.dialogService.desktop = true;
-    this.followingDialogRef = this.dialogService.followingDialogRef;
-    this.followingDialogRef.afterClosed().pipe(takeUntil(this.onDestroy)).subscribe(result => {
+    const dialogRef = this.dialog.open(ViewFollowListComponent, {
+      width: '440px'
+    });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.onDestroy)).subscribe(result => {
+      console.log('The dialog was closed');
       if (result) {
         this.getNumFollowing();
       }
     });
-    // const dialogRef = this.dialog.open(GenerateFollowListComponent, {
-    //   width: '250px',
-    //   data: { title: title, id: this.currMasterId }
-    // });
-
-    // dialogRef.afterClosed().pipe(takeUntil(this.onDestroy)).subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   if (result) {
-    //     this.getNumFollowing();
-    //   }
-    // });
 
 
   }

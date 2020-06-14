@@ -34,6 +34,10 @@ i.like-item{
   cursor: pointer;
 }
 
+span.like-list{
+  cursor: pointer;
+}
+
 
 @media (min-width: 900px) {
   .wrapper {

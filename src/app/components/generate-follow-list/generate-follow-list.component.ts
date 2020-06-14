@@ -13,6 +13,7 @@ import { DialogService } from '../../services/dialog.service';
 import { ErrorsService } from '../../services/errors.service';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import * as jquery from 'jquery';
+import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.component';
 
 @Component({
   selector: 'app-generate-follow-list',
@@ -20,117 +21,24 @@ import * as jquery from 'jquery';
   styleUrls: ['./generate-follow-list.component.css']
 })
 export class GenerateFollowListComponent implements OnInit, OnDestroy {
-  // followsFeed: Observable<Array<FollowItem>>;
-  followsFeed: Array<any> = [];
-  var: Observable<any>;
-  desktop: boolean;
-  id: number;
-  userId: number;
-  offset: number = 0;
-  flag: number;
-  dialogTitle: String;
-  onDestroy: Subject<void> = new Subject<void>();
-  postsToShow = [];
+  @Input() postsToShow = [];
+  @Input() dialogTitle: string;
+  @Input() matDialogRef: MatDialogRef<ViewFollowListComponent>;
+  @Input() userId: number;
   showSpinner: boolean = true;
+  desktop: boolean;
+  onDestroy: Subject<void> = new Subject<void>();
   followingUsersChanged: boolean = false;
-  endOfFeed: boolean = false;
-  private baseApiUrl = environment.BASE_API_URL;
   constructor(
-    private feedService: FeedService,
     private userService: UserService,
     private dialogService: DialogService,
     private router: Router,
-    private location: LocationService,
-
-    private errorsService: ErrorsService,
-    private spinner: NgxSpinnerService,
-    @Optional() private dialogRef: MatDialogRef<GenerateFollowListComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+    private location: LocationService
+  ) {
+  }
 
   ngOnInit() {
-
-    this.userId = this.userService.userId;
     this.desktop = this.dialogService.desktop;
-    this.flag = this.dialogService.followingDialogDataObject.flag;
-    this.id = this.dialogService.followingDialogDataObject.userId;
-    this.dialogTitle = this.dialogService.followingDialogDataObject.title;
-
-    if (this.flag) {
-      this.generateFollowsMasters(this.offset);
-    }
-    else {
-      this.generateFollowsSlaves(this.offset);
-    }
-  }
-
-  // private processData = followsFeed => {
-  //   if (followsFeed.length == 0) {
-  //     this.endOfFeed = true;
-  //     console.log("end of");
-  //   }
-  //   else {
-  //     console.log(followsFeed);
-  //     this.followsFeed = this.followsFeed.concat(followsFeed);
-  //     this.offset = this.followsFeed.length;
-  //     followsFeed.forEach(follower => {
-  //       this.userService.checkIsFollowing(follower.id).subscribe(res => {
-  //         follower.follows = res;
-  //         let baseAPI = this.baseApiUrl + '/image?s3key=';
-  //         let postObject = {
-  //           post: follower,
-  //           imgSrc: baseAPI + follower.profileImageAddr
-  //         };
-  //         this.postsToShow.push(postObject);
-  //       });
-  //     });
-  //   }
-  //   this.showSpinner = false;
-  // };
-
-  private processData = followsFeed => {
-    this.followsFeed = this.followsFeed.concat(followsFeed);
-    this.offset = this.followsFeed.length;
-    followsFeed.forEach(follower => {
-      this.userService.checkIsFollowing(follower.id).subscribe(res => {
-        follower.follows = res;
-        let baseAPI = this.baseApiUrl + '/image?s3key=';
-        let postObject = {
-          post: follower,
-          imgSrc: baseAPI + follower.profileImageAddr
-        };
-        this.postsToShow.push(postObject);
-      });
-    });
-    this.showSpinner = false;
-    if (followsFeed.length > 0) {
-      if (this.flag) {
-        this.generateFollowsMasters(this.offset);
-      }
-      else {
-        this.generateFollowsSlaves(this.offset);
-      }
-    }
-  };
-
-
-
-  generateFollowsMasters(offset: number) {
-
-    this.feedService
-      .getFollowMasters(this.id, this.offset)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(this.processData);
-
-  }
-
-  generateFollowsSlaves(offset: number) {
-
-    this.feedService
-      .getFollowSlaves(this.id, offset)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(this.processData);
-
   }
 
   follow(item) {
@@ -146,28 +54,15 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
     this.followingUsersChanged = true;
   }
 
-  onScroll() {
-    console.log("on scroll");
-    if (!this.endOfFeed) {
-      if (this.flag) {
-        this.generateFollowsMasters(this.offset);
-      }
-      else {
-        this.generateFollowsSlaves(this.offset);
-      }
-      this.showSpinner = true;
-    } else {
-      this.showSpinner = false;
+  userProfile(user) {
+    this.router.navigate(['profile', user['post']['id']]);
+    if (this.matDialogRef) {
+      this.matDialogRef.close();
     }
   }
 
-  userProfile(user) {
-    this.router.navigate(['profile', user['post']['id']]);
-    this.closeModal();
-  }
-
   closeModal() {
-    this.dialogService.closeFollowingDialog(this.followingUsersChanged)
+    this.matDialogRef.close();
   }
 
   goBackPage() {

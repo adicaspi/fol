@@ -71,7 +71,7 @@ export class TimelineFeedComponent implements OnInit {
     private massageService: MessageService,
     private spinner: NgxSpinnerService,
     private titleService: Title,
-    private meta: Meta,
+    private meta: Meta
   ) {
 
   }

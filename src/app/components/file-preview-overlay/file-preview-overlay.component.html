@@ -49,7 +49,18 @@
               <i *ngIf="!saveButtonClicked" class="far fa-star save-item" (click)="toggleSaveButton()"></i>
               <i *ngIf="!likeButtonClicked" class="fal fa-heart like-item" (click)="toggleLikeButton()"></i>
               <i *ngIf="likeButtonClicked" class="fas fa-heart like-item" (click)="toggleLikeButton()"></i>
-              <span id="int-num-views">{{numLikes}}</span> likes
+              <span *ngIf="likeList.length == 0 && (!likeButtonClicked)" id="int-num-views">{{numLikes}} likes
+              </span>
+              <span *ngIf="likeList.length == 0 && (likeButtonClicked); else showLikeList" id="int-num-views">{{numLikes}} likes</span>
+              <div class="like-list">
+                <ng-template #showLikeList id="int-num-views">
+                  <span *ngIf="likeList.length == 1; else showExtendedLikeList" class="like-list" (click)="goToLikeList()">liked by {{likeList[0].username}} </span>
+                </ng-template>
+                <ng-template #showExtendedLikeList id="int-num-views">
+                  <span *ngIf="likeList.length >= 2" class="like-list" (click)="goToLikeList()">
+                    liked by {{likeList[0].username}}, {{likeList[1].username}} and {{numLikes -2 }} others</span>
+                </ng-template>
+              </div>
             </div>
           </div>
         </div>

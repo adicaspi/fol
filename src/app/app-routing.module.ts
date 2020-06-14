@@ -21,6 +21,7 @@ import { ViewExploreGeneralComponent } from './components/view-explore-general/v
 import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-people-general/view-discover-people-general.component';
 import { ViewDiscoverPeopleUserComponent } from './components/view-discover-people-user/view-discover-people-user.component';
 import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
+import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
 
 
 const routes: Routes = [
@@ -69,7 +70,8 @@ const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
   { path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent },
-  { path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent }
+  { path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent },
+  { path: 'follow-list/:id', component: ViewFollowListComponent }
 
 ];
 

@@ -113,17 +113,11 @@ export class UserProfileInfoMobileComponent implements OnInit {
   }
 
   openDialog(flag) {
-    var title;
-    if (flag) {
-      title = 'Following';
-    } else {
-      title = 'Followers';
-    }
-    this.dialogService.followingDialogDataObject.flag = flag;
-    this.dialogService.followingDialogDataObject.userId = this.currMasterId;
-    this.dialogService.followingDialogDataObject.title = title;
-    this.dialogService.desktop = false;
-    this.router.navigate(['following']);
+    this.configService.setGeneralSession('id', this.currMasterId);
+    this.configService.setGeneralSession('list', 0);
+    this.configService.setGeneralSession('desktop', 0);
+    this.configService.setGeneralSession('flag', flag);
+    this.router.navigate(['follow-list', this.currMasterId]);
 
   }
 

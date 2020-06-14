@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
-import { DialogService } from '../../services/dialog.service';
 import { UserPost } from '../../models/UserPost';
 import { PostInfo } from '../../models/PostInfo';
 import { UserService } from '../../services/user.service';
@@ -17,6 +16,7 @@ import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
 import { MorePosts } from '../../models/MorePosts';
 import { ConfigService } from '../../services/config.service';
 import { ThousandSuffixesPipe } from '../../models/pipe-transform';
+import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.component';
 
 @Component({
   selector: 'app-file-preview-overlay',
@@ -35,6 +35,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   postImageAddr: any;
   userProfileSrc: any;
   thumbnails = [];
+  likeList = [];
   postId: number;
   userPostUserId: number;
   numLikes: number;
@@ -49,7 +50,9 @@ export class FilePreviewOverlayComponent implements OnInit {
     private configService: ConfigService,
     private userService: UserService,
     private postService: PostService,
-    private dialogRef: FilePreviewOverlayRef
+    private dialogRef: FilePreviewOverlayRef,
+    private feedService: FeedService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -77,6 +80,7 @@ export class FilePreviewOverlayComponent implements OnInit {
         if (this.registeredUser) {
           this.didLike();
           this.didSave();
+
         }
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
@@ -105,16 +109,40 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
-  didLike() {
-    this.userService.didLike(this.postId).subscribe(res => {
+  async didLike() {
+    await this.userService.didLike(this.postId).subscribe(res => {
       this.likeButtonClicked = res;
     })
+    await this.getLikeList(this.postId);
+  }
+
+  async getLikeList(postId) {
+    this.feedService.likeList(postId).pipe(takeUntil(this.onDestroy))
+      .subscribe(res => {
+        if (this.likeButtonClicked) {
+          res.forEach(like => {
+            if (like.username != this.postInfo.userName) {
+              this.likeList.push(like);
+            }
+          })
+        } else {
+          this.likeList = res
+        }
+      });
+  }
+
+  goToLikeList() {
+    this.configService.setGeneralSession('postId', this.postId);
+    this.configService.setGeneralSession('list', 1);
+    this.configService.setGeneralSession('desktop', 1);
+    const dialogRef = this.dialog.open(ViewFollowListComponent, {
+      width: '440px'
+    });
   }
 
   didSave() {
     this.userService.didSave(this.postId).subscribe(res => {
       this.saveButtonClicked = res;
-      console.log(this.saveButtonClicked);
     })
   }
 

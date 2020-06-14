@@ -36,6 +36,8 @@ const DEFAULT_CONFIG: FilePreviewDialogConfig = {
 })
 export class DialogService {
   userPost: UserPost;
+  postId: number;
+  list: string;
   directingPage: string;
   followingDialogRef: MatDialogRef<{}, any>;
   desktop: boolean;
@@ -141,6 +143,7 @@ export class DialogService {
     modalWindowConfig.data = data;
     modalWindowConfig.closeOnNavigation = true;
 
+
     if (componentName == 'followersList') {
       modalWindowConfig.data = data;
       modalWindowConfig.width = '400px';
@@ -150,10 +153,11 @@ export class DialogService {
 
     const followingDialogRef = this.dialog.open(component, modalWindowConfig);
     this.followingDialogRef = followingDialogRef;
+
   }
 
   closeFollowingDialog(followingFlag) {
-    this.followingDialogRef.close(followingFlag);
+    //  this.followingDialogRef.close(followingFlag);
   }
 
   postData(post, directingPage) {

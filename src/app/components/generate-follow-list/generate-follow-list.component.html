@@ -1,16 +1,16 @@
-<!-- <div *ngIf="showSpinner" class="spin">
-  <app-loading-spinner></app-loading-spinner>
-</div> -->
-<!-- <ng-template #mainPage> -->
-<mat-dialog-content class="mat-content">
-  <div *ngIf="showSpinner" class="spin">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-
-  <div class="title">
-    <span class="dialog-title">{{ dialogTitle }}</span>
-    <i *ngIf="desktop" (click)="closeModal()" class="fal fa-times"></i>
+<div class="dialog-header">
+  <div class="WaOAr">
     <i *ngIf="!desktop" (click)="goBackPage()" class="fa fa-chevron-left"></i>
+  </div>
+  <div class="title" mat-dialog-title>{{ dialogTitle }}</div>
+  <div class="WaOAr">
+    <button *ngIf="desktop" mat-dialog-close color="white" class="dialog-button">
+      <i class="fal fa-times"></i>
+    </button>
+  </div>
+</div>
+<mat-dialog-content class="mat-content">
+  <div class="title">
   </div>
   <div class="wrapper">
     <div class="content">

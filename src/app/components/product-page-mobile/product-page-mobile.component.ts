@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ThousandSuffixesPipe } from '../../models/pipe-transform';
 import { ConfigService } from '../../services/config.service';
 import { MorePosts } from '../../models/MorePosts';
+import { FeedService } from '../../services/feed.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   storeLogoSrc: string;
   postInfo: PostInfo;
   postImageAddr: string;
+  likeList = [];
   imageUrls: string[] = [];
   onDestroy: Subject<void> = new Subject<void>();
   postsToShow$: Observable<MorePosts[]>;
@@ -51,7 +53,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     private router: Router,
     private configService: ConfigService,
     private location: LocationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private feedService: FeedService
   ) {
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
   }
@@ -131,10 +134,26 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.postService.incrementPostViews(this.userService.userId, this.postId);
   }
 
-  didLike() {
-    this.userService.didLike(this.postId).subscribe(res => {
+  async didLike() {
+    await this.userService.didLike(this.postId).subscribe(res => {
       this.likeButtonClicked = res;
     })
+    await this.getLikeList(this.postId);
+  }
+
+  async getLikeList(postId) {
+    this.feedService.likeList(postId).pipe(takeUntil(this.onDestroy))
+      .subscribe(res => {
+        if (this.likeButtonClicked) {
+          res.forEach(like => {
+            if (like.username != this.postInfo.userName) {
+              this.likeList.push(like);
+            }
+          })
+        } else {
+          this.likeList = res
+        }
+      });
   }
 
   didSave() {
@@ -169,6 +188,13 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         this.userService.save(this.postId);
       }
     }
+  }
+
+  goToLikeList() {
+    this.configService.setGeneralSession('postId', this.postId);
+    this.configService.setGeneralSession('list', 1);
+    this.configService.setGeneralSession('desktop', 1);
+    this.router.navigate(['follow-list', this.postInfo.userId]);
   }
 
   removePost(postId: number) {

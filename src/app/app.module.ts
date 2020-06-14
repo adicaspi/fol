@@ -73,6 +73,7 @@ import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-p
 import { ViewDiscoverPeopleUserComponent } from './components/view-discover-people-user/view-discover-people-user.component';
 import { MainUserFeedComponent } from './components/main-user-feed/main-user-feed.component';
 import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
+import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
 
 
 //I keep the new line
@@ -123,7 +124,8 @@ import { ViewMainProfileComponent } from './components/view-main-profile/view-ma
     ViewDiscoverPeopleGeneralComponent,
     ViewDiscoverPeopleUserComponent,
     MainUserFeedComponent,
-    ViewMainProfileComponent
+    ViewMainProfileComponent,
+    ViewFollowListComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { FeedReturnObject } from '../models/FeedReturnObject';
 import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 import { MessageService } from './message.service';
 import { catchError } from '../../../node_modules/rxjs/operators';
+import { post } from '../../../node_modules/@types/selenium-webdriver/http';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -208,6 +209,15 @@ export class FeedService {
       let discoverPeopleArray: Array<DiscoverPeopleDTO> =
         items.map((doc) => new DiscoverPeopleDTO(doc));
       return discoverPeopleArray;
+    })
+  }
+
+  likeList(postId): Observable<Array<any>> {
+    let params = new HttpParams().set('postId', postId);
+    return this.http.get<Array<any>>(this.generalURL + '/like-list', {
+      params: params
+    }).pipe().map(res => {
+      return res;
     })
   }
 

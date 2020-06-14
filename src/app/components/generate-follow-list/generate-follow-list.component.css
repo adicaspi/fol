@@ -2,14 +2,38 @@
   height: 100%;
 }
 
-@media (min-width: 600px)  {
+button.dialog-button{
+  background-color: white;
+  outline-color: none;
+}
+
+button.dialog-button:hover{
+  background-color: white;
+  outline-color: none;
+}
+
+
+
+.dialog-header{
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: row;
+}
+
+.WaOAr{
+  flex: 0 0 48px;
+}
 
 .title {
   text-align: center;
-  height: 43px;
-  border-bottom: 1px solid #efefef;
   margin-bottom: 10px;
+  flex-grow: 1;
+  line-height: 48px;
 }
+
+@media (min-width: 600px)  {
+
+
 
 .user-result{
   display: flex;
@@ -21,7 +45,6 @@ i.fal.fa-times {
   float: right;
   line-height: 30px;
   font-size: 20px;
-  margin-right: 5px;
   cursor: pointer;
 }
 
@@ -57,14 +80,6 @@ span.fill{
 }
 
 @media (max-width: 600px)  {
-
-  .title {
-    text-align: center;
-    border-bottom: 1px solid #efefef;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-size: 20px;
-  }
   
   .user-result{
     display: flex;
@@ -72,18 +87,12 @@ span.fill{
     margin-left: 5px;
     margin-bottom: 5px;
   }
-  
-  /* i.fal.fa-times {
-    float: right;
-    line-height: 30px;
-    font-size: 20px;
-    margin-right: 5px;
-    cursor: pointer;
-  } */
 
   i.fa.fa-chevron-left{
     float: left;
     cursor: pointer;
+    line-height: 48px;
+    margin-left: 3px;
   }
   
   img {
