@@ -79,9 +79,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     if (this.registeredUser) {
       this.didLike();
       this.didSave();
+      this.incNumViews();
     }
-
-    this.incNumViews();
   }
 
   getPostInfo() {
@@ -123,7 +122,15 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   profilePage() {
-    this.router.navigate(['profile', this.postInfo.userId]);
+    if (this.registeredUser) {
+      this.router.navigate(['profile', this.postInfo.userId]);
+    } else {
+      this.registerPage();
+    }
+  }
+
+  registerPage(): void {
+    this.router.navigate(['/login']);
   }
 
   hidePost(postId: number) {

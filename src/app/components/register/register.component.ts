@@ -9,7 +9,6 @@ import { UserService } from '../../services/user.service';
 import { ErrorsService } from '../../services/errors.service';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../../services/config.service';
-import { DialogService } from '../../services/dialog.service';
 import { DatePipe } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 
@@ -47,7 +46,7 @@ export class RegisterComponent implements OnInit {
     private errorsService: ErrorsService,
     private http: HttpClient,
     private configSerivce: ConfigService,
-    private dialogService: DialogService,
+    private dialog: MatDialog,
     private titleService: Title,
     private meta: Meta,
     @Optional() private dialogRef?: MatDialogRef<RegisterComponent>
@@ -199,7 +198,10 @@ export class RegisterComponent implements OnInit {
   loginPage(): void {
     if (this.dialogRef) {
       this.dialogRef.close();
-      this.dialogService.openModalWindow(RegisterComponent);
+      //this.dialogService.openModalWindow(RegisterComponent);
+      const dialogRef = this.dialog.open(RegisterComponent, {
+        width: "400px"
+      })
     }
     else {
       this.router.navigate(['/login']);

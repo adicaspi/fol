@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
@@ -18,6 +18,8 @@ import { MessageService } from '../../services/message.service';
 import * as jquery from 'jquery';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { Title, Meta } from '@angular/platform-browser';
+import { MatDialog } from '../../../../node_modules/@angular/material';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-explore-feed-general',
@@ -33,6 +35,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
   desktop: boolean;
   windowWidth: number;
   showNoPostsMessage: boolean = false;
+  prevScrollPos = window.pageYOffset;
   private feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -54,6 +57,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private titleService: Title,
+    private dialog: MatDialog,
     private meta: Meta
   ) { }
 
@@ -99,6 +103,27 @@ export class ExploreFeedGeneralComponent implements OnInit {
           }
           this.windowWidth = value.width;
         });
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    let currScrollPos: number = window.pageYOffset;
+    if (currScrollPos >= 1000) {
+      this.registerPage();
+    }
+  }
+
+  registerPage(): void {
+    window.scroll(0, 0);
+    if (this.desktop) {
+      const dialogRef = this.dialog.open(LoginComponent, {
+        width: '400px',
+        height: '580px',
+      });
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
 
   openDialog(post): void {

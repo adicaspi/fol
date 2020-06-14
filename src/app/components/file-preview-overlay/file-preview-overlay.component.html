@@ -5,7 +5,7 @@
   <ng-template #product>
     <div *ngIf="postInfo" class="wrapper">
       <i (click)="closeModal()" class="fal fa-times"></i>
-      <div class="profile-img-comp">
+      <div class="profile-img-comp" (click)="profilePage()">
 
         <img id="profileImage" [attr.src]="userProfileSrc" />
         <div class="card-text img-profile">{{ postInfo.userName }}</div>
@@ -44,7 +44,7 @@
 
               <span class="price">{{postInfo.price}}</span>
             </div>
-            <div class="num-views">
+            <div *ngIf="registeredUser" class="num-views">
               <i *ngIf="saveButtonClicked" class="fas fa-star save-item" (click)="toggleSaveButton()"></i>
               <i *ngIf="!saveButtonClicked" class="far fa-star save-item" (click)="toggleSaveButton()"></i>
               <i *ngIf="!likeButtonClicked" class="fal fa-heart like-item" (click)="toggleLikeButton()"></i>

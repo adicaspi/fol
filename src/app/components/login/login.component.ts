@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
     private errorsService: ErrorsService,
     private http: HttpClient,
     private configSerivce: ConfigService,
-    private dialogService: DialogService,
+    //private dialogService: DialogService,
+    private dialog: MatDialog,
     private titleService: Title,
     private meta: Meta,
     @Optional() private dialogRef: MatDialogRef<LoginComponent>
@@ -126,7 +127,10 @@ export class LoginComponent implements OnInit {
   regsiterPage() {
     if (this.dialogRef) {
       this.dialogRef.close();
-      this.dialogService.openModalWindow(RegisterComponent);
+      const dialogRef = this.dialog.open(RegisterComponent, {
+        width: "400px"
+      })
+      //this.dialogService.openModalWindow(RegisterComponent);
     }
     else {
       this.router.navigate(['/register']);

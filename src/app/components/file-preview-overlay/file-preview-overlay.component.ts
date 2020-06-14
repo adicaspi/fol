@@ -17,6 +17,8 @@ import { MorePosts } from '../../models/MorePosts';
 import { ConfigService } from '../../services/config.service';
 import { ThousandSuffixesPipe } from '../../models/pipe-transform';
 import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.component';
+import { LoginComponent } from '../login/login.component';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-file-preview-overlay',
@@ -52,6 +54,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     private postService: PostService,
     private dialogRef: FilePreviewOverlayRef,
     private feedService: FeedService,
+    private router: Router,
     public dialog: MatDialog
   ) {
   }
@@ -64,7 +67,6 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
     this.getPostInfo();
     this.getMoreFromUser();
-    this.incNumViews();
     this.userProfileSrc = '../../../assets/placeholder.png';
   }
 
@@ -80,6 +82,7 @@ export class FilePreviewOverlayComponent implements OnInit {
         if (this.registeredUser) {
           this.didLike();
           this.didSave();
+          this.incNumViews();
 
         }
         this.postImageAddr = this.postInfo.postImageAddr;
@@ -144,6 +147,21 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.userService.didSave(this.postId).subscribe(res => {
       this.saveButtonClicked = res;
     })
+  }
+
+  profilePage() {
+    if (this.registeredUser) {
+      this.router.navigate(['profile', this.postInfo.userId]);
+    } else {
+      this.registerPage();
+    }
+  }
+
+  registerPage(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '400px',
+      height: '580px',
+    });
   }
 
   toggleLikeButton() {
