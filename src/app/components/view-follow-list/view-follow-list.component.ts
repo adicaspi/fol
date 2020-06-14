@@ -41,9 +41,7 @@ export class ViewFollowListComponent implements OnInit {
 
   constructor(private feedService: FeedService,
     private userService: UserService,
-    private configService: ConfigService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    @Optional() public dialogRef: MatDialogRef<ViewFollowListComponent>
+    private configService: ConfigService
   ) { }
 
   ngOnInit() {
