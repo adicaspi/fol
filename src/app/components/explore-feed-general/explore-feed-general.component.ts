@@ -21,6 +21,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 
+
 @Component({
   selector: 'app-explore-feed-general',
   templateUrl: './explore-feed-general.component.html',
@@ -36,6 +37,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
   windowWidth: number;
   showNoPostsMessage: boolean = false;
   prevScrollPos = window.pageYOffset;
+  showPopup: boolean = true;
   private feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -109,17 +111,22 @@ export class ExploreFeedGeneralComponent implements OnInit {
   scrollHandler(event) {
     let currScrollPos: number = window.pageYOffset;
     if (currScrollPos >= 1000) {
-      this.registerPage();
+      if (this.showPopup) {
+        this.registerPage();
+      }
     }
   }
 
   registerPage(): void {
-    window.scroll(0, 0);
+    //window.scroll(0, 0);
     if (this.desktop) {
+      this.showPopup = false;
       const dialogRef = this.dialog.open(LoginComponent, {
         width: '400px',
         height: '580px',
+        data: { close: false }
       });
+      dialogRef.disableClose = true;
     }
     else {
       this.router.navigate(['/login']);

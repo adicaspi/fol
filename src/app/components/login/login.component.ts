@@ -1,5 +1,5 @@
-import { Component, OnInit, Optional } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription, Subject } from 'rxjs';
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
   title = 'Login';
+  previousUrl: string;
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
@@ -46,14 +47,24 @@ export class LoginComponent implements OnInit {
     private dialog: MatDialog,
     private titleService: Title,
     private meta: Meta,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     @Optional() private dialogRef: MatDialogRef<LoginComponent>
+
   ) {
     if (dialogRef) {
-      this.modal = true;
+
+      if (this.data.close) {
+        this.modal = true;
+      }
     }
     this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
     });
+    router.events
+      .filter(event => event instanceof NavigationEnd).subscribe(e => {
+        console.log('prev:');
+        //this.previousUrl = e.url
+      });
   }
 
   ngOnInit() {
@@ -128,9 +139,13 @@ export class LoginComponent implements OnInit {
     if (this.dialogRef) {
       this.dialogRef.close();
       const dialogRef = this.dialog.open(RegisterComponent, {
-        width: "400px"
+        width: "400px",
+        data: { close: this.data.close }
       })
-      //this.dialogService.openModalWindow(RegisterComponent);
+
+      if (!this.data.close) {
+        dialogRef.disableClose = false;
+      }
     }
     else {
       this.router.navigate(['/register']);

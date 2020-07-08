@@ -66,7 +66,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.userService.userId;
-    this.user = this.userService.getUserProfileInfo(this.userId);
+    if (this.userId) {
+      this.user = this.userService.getUserProfileInfo(this.userId);
+    }
     this.searchForm = this.formBuilder.group({
       search: ['']
     })
@@ -188,7 +190,11 @@ export class NavbarComponent implements OnInit {
   }
 
   feedPage() {
-    this.router.navigate(['feed', this.userService.userId]);
+    if (this.userService.userId) {
+      this.router.navigate(['feed', this.userService.userId]);
+    } else {
+      this.router.navigate(['landing']);
+    }
   }
 
   explorePage() {

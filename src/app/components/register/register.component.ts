@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../../services/config.service';
 import { DatePipe } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-register',
@@ -49,10 +50,14 @@ export class RegisterComponent implements OnInit {
     private dialog: MatDialog,
     private titleService: Title,
     private meta: Meta,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     @Optional() private dialogRef?: MatDialogRef<RegisterComponent>
   ) {
     if (dialogRef) {
-      this.modal = true;
+
+      if (this.data.close) {
+        this.modal = true;
+      }
     }
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
@@ -142,7 +147,6 @@ export class RegisterComponent implements OnInit {
 
   cannotContainSpace(control: AbstractControl): ValidationErrors | null {
     if ((control.value as string).indexOf(' ') >= 0) {
-      console.log("here");
       return { cannotContainSpace: true }
     }
 
@@ -198,9 +202,9 @@ export class RegisterComponent implements OnInit {
   loginPage(): void {
     if (this.dialogRef) {
       this.dialogRef.close();
-      //this.dialogService.openModalWindow(RegisterComponent);
-      const dialogRef = this.dialog.open(RegisterComponent, {
-        width: "400px"
+      this.dialog.open(LoginComponent, {
+        width: "400px",
+        data: { close: this.data.close }
       })
     }
     else {

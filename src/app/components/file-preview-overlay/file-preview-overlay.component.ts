@@ -158,9 +158,10 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   registerPage(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
+    this.dialog.open(LoginComponent, {
       width: '400px',
       height: '580px',
+      data: { close: false }
     });
   }
 

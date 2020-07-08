@@ -47,11 +47,21 @@
       </mat-menu>
     </div>
 
-    <a href="{{ postInfo.link }}" target="_blank">
+
+    <button type="button" class="shop-btn">
+      <a *ngIf="registeredUser ;else redirectToLogin" href="{{ postInfo.link }}" target="_blank">
+        View on Website
+      </a>
+      <a *ngIf="!registeredUser" (click)=registerPage()>
+        View on Website
+      </a>
+    </button>
+
+    <!-- <ng-template #redirectToLogin>
       <button type="button" class="shop-btn">
         View on Website
       </button>
-    </a>
+    </ng-template> -->
   </div>
 
   <div class="buffer">

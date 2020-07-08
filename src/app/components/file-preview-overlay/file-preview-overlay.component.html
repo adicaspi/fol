@@ -24,11 +24,19 @@
 
           <div class="footer">
             <div class="upper-footer">
-              <a href="{{ postInfo.link }}" target="_blank">
-                <button mat-button class="shop_btn">
+
+              <button mat-button class="shop_btn">
+                <a *ngIf="registeredUser" href="{{ postInfo.link }}" target="_blank">
                   Shop
-                </button>
-              </a>
+                </a>
+                <a *ngIf="!registeredUser" (click)="registerPage()">
+                  Shop
+                </a>
+              </button>
+
+
+
+
 
               <button mat-button class="vertical-menu" [matMenuTriggerFor]="soldOut">
                 <i class="material-icons">more_horiz</i>
