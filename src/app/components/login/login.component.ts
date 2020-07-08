@@ -60,11 +60,6 @@ export class LoginComponent implements OnInit {
     this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
     });
-    router.events
-      .filter(event => event instanceof NavigationEnd).subscribe(e => {
-        console.log('prev:');
-        //this.previousUrl = e.url
-      });
   }
 
   ngOnInit() {
@@ -138,13 +133,15 @@ export class LoginComponent implements OnInit {
   regsiterPage() {
     if (this.dialogRef) {
       this.dialogRef.close();
-      const dialogRef = this.dialog.open(RegisterComponent, {
+      this.dialog.open(RegisterComponent, {
         width: "400px",
         data: { close: this.data.close }
       })
 
       if (!this.data.close) {
-        dialogRef.disableClose = false;
+        //dialogRef.disableClose = false;
+        this.dialogRef.disableClose = false;
+
       }
     }
     else {
