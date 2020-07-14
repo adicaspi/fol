@@ -23,6 +23,9 @@ export class LandingPageComponent implements OnInit {
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private WindowSizeSubscription: Subscription;
+  facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
+  facebookLoginEndpointTemp = "https://www.followear.com/?code=f2280771-f736-4856-9011-236522ee6b7e#_=_"
+  facebookLoginCode: string;
 
   constructor(
     private dialog: MatDialog,
@@ -45,6 +48,12 @@ export class LandingPageComponent implements OnInit {
             this.desktop = false;
           }
         });
+    console.log(this.router.url);
+    var index = this.facebookLoginEndpointTemp.indexOf("code");
+    if (index != -1) {
+      this.facebookLoginCode = this.facebookLoginEndpointTemp.substring(index + 5);
+      console.log(this.facebookLoginCode);
+    }
   }
   // 'use strict';
 
