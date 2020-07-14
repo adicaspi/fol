@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
   title = 'Login';
+  facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
   previousUrl: string;
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
