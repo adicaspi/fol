@@ -48,10 +48,12 @@ export class LandingPageComponent implements OnInit {
             this.desktop = false;
           }
         });
-    console.log(this.router.url);
-    var index = this.facebookLoginEndpointTemp.indexOf("code");
+    console.log();
+    //var index = this.facebookLoginEndpointTemp.indexOf("code");
+    var index = this.router.url.indexOf("code");
     if (index != -1) {
-      this.facebookLoginCode = this.facebookLoginEndpointTemp.substring(index + 5);
+      // this.facebookLoginCode = this.facebookLoginEndpointTemp.substring(index + 5);
+      this.facebookLoginCode = this.router.url.substring(index + 5);
       console.log(this.facebookLoginCode);
     }
   }
