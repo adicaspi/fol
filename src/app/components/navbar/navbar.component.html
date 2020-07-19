@@ -49,7 +49,7 @@
     <li class="seperating-line">
     </li>
 
-    <li class="explore" (click)="explorePage()">
+    <li *ngIf="!explore" class="explore" (click)="explorePage()">
       <div class="explore">
         Explore
       </div>

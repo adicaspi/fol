@@ -127,6 +127,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
         data: { close: false }
       });
       dialogRef.disableClose = true;
+
     }
     else {
       this.router.navigate(['/login']);

@@ -1,11 +1,10 @@
-<div *ngIf="desktop; else mobileView" class="display">
-  <mat-toolbar>
+<body>
+  <div *ngIf="desktop; else mobileView" class="display">
     <app-navbar></app-navbar>
-  </mat-toolbar>
-
-  <app-explore-feed-general></app-explore-feed-general>
-</div>
-<ng-template #mobileView class="mobile">
-  <app-shopping-nav> </app-shopping-nav>
-  <app-explore-feed-general></app-explore-feed-general>
-</ng-template>
+    <app-explore-feed-general></app-explore-feed-general>
+  </div>
+  <ng-template #mobileView class="mobile">
+    <app-shopping-nav> </app-shopping-nav>
+    <app-explore-feed-general></app-explore-feed-general>
+  </ng-template>
+</body>
