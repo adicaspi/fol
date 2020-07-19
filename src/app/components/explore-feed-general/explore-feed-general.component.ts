@@ -20,6 +20,7 @@ import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { Title, Meta } from '@angular/platform-browser';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
+import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 
 
 @Component({
@@ -58,6 +59,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
     private dialogService: DialogService,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private overlay: Overlay,
     private titleService: Title,
     private dialog: MatDialog,
     private meta: Meta
@@ -109,9 +111,11 @@ export class ExploreFeedGeneralComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   scrollHandler(event) {
+    console.log("scrolling");
     let currScrollPos: number = window.pageYOffset;
     if (currScrollPos >= 1000) {
       if (this.showPopup) {
+
         this.registerPage();
       }
     }
@@ -121,11 +125,17 @@ export class ExploreFeedGeneralComponent implements OnInit {
     //window.scroll(0, 0);
     if (this.desktop) {
       this.showPopup = false;
-      const dialogRef = this.dialog.open(LoginComponent, {
+      const scrollStrategy = this.overlay.scrollStrategies.reposition();
+
+      const config = {
+        scrollStrategy: scrollStrategy,
         width: '400px',
         height: '580px',
-        data: { close: false }
-      });
+        data: {
+          close: false
+        }
+      }
+      const dialogRef = this.dialog.open(LoginComponent, config);
       dialogRef.disableClose = true;
 
     }
