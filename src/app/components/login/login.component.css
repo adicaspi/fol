@@ -1,6 +1,3 @@
-
-
-
 button.mat-button{
   float: right;
   font-size: 20px;
@@ -31,9 +28,9 @@ h2 {
   width: 75%;
 }
 
-/* .form-group {
-  margin: 0;
-} */
+img.fw-logo{
+  max-width: 204px;
+}
 
 .form-group{
   display:flex;
@@ -159,11 +156,6 @@ a.register:hover{
   margin-top: 40px;
   margin-bottom: 40px;
 }
-
-/* img.fw-logo{
-  width: 280px;
-  height: 51px;
-} */
 
 .spin{
   margin: 20px;
