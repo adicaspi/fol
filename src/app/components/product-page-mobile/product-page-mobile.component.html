@@ -17,8 +17,8 @@
       {{ postInfo.price }} {{'('+ (postInfo.storeName | lowercase)+')'}}
     </div>
     <div *ngIf="registeredUser" class="num-views">
-      <i *ngIf="saveButtonClicked" class="fas fa-star save-item" (click)="toggleSaveButton()"></i>
-      <i *ngIf="!saveButtonClicked" class="far fa-star save-item" (click)="toggleSaveButton()"></i>
+      <i *ngIf="saveButtonClicked" class="fas fa-bookmark save-item" (click)="toggleSaveButton()"></i>
+      <i *ngIf="!saveButtonClicked" class="fal fa-bookmark save-item" (click)="toggleSaveButton()"></i>
       <i *ngIf="!likeButtonClicked" class="fal fa-heart" (click)="toggleLikeButton()"></i>
       <i *ngIf="likeButtonClicked " class="fas fa-heart" (click)="toggleLikeButton()"></i>
       <span *ngIf="likeList.length == 0 && (!likeButtonClicked)" id="int-num-views">{{numLikes}} likes
