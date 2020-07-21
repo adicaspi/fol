@@ -33,9 +33,11 @@ export class SettingsComponent implements OnInit {
   profileClass = 'controlers edit-profile';
   passClass = 'controlers password';
   spanClass = 'user';
+  termsClass = 'controlers terms'
   userInfoClass = 'user-info';
   profile: boolean = true;
   password: boolean = false;
+  terms: boolean = false;
   button_text: string;
   submittedPass: boolean = false;
   desktop: boolean = true;
@@ -43,6 +45,8 @@ export class SettingsComponent implements OnInit {
   showSuccessMsg: boolean = false;
   showFailMsg: boolean = false;
   timeout: any;
+  termsLink: string = "https://www.followear.com/terms"
+  cookiesLink: string = "https://www.followear.com/cookies-policy"
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
   postImage: any;
@@ -144,9 +148,11 @@ export class SettingsComponent implements OnInit {
   editProfile() {
     this.profile = true;
     this.password = false;
+    this.terms = false;
     this.button_text = 'Submit';
     this.profileClass = 'controlers profile-clicked';
     this.passClass = 'controlers password';
+    this.termsClass = 'controlers terms';
     this.spanClass = 'user';
     this.userInfoClass = 'user-info';
   }
@@ -154,11 +160,24 @@ export class SettingsComponent implements OnInit {
   changePassword() {
     this.password = true;
     this.profile = false;
+    this.terms = false;
     this.button_text = 'Change Password';
     this.passClass = 'controlers password-clicked';
     this.profileClass = 'controlers edit-profile';
+    this.termsClass = 'controlers terms';
     this.spanClass = 'user pass';
-    this.userInfoClass = 'user-info-pass';
+    this.userInfoClass = 'user-info';
+  }
+
+  seeTerms() {
+    this.password = false;
+    this.profile = false;
+    this.terms = true;
+    this.passClass = 'controlers password';
+    this.profileClass = 'controlers edit-profile';
+    this.termsClass = 'controlers terms-clicked';
+    this.spanClass = 'user pass';
+    this.userInfoClass = 'user-info';
   }
 
   MustMatch(controlName: string, matchingControlName: string) {

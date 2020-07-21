@@ -1,3 +1,35 @@
+.password-clicked {
+  color: black;
+  border-left-color: black;
+  font-weight: 600;
+}
+
+.profile-clicked {
+  color: black;
+  border-left-color: black;
+  font-weight: 600;
+}
+
+.terms-clicked {
+  color: black;
+  border-left-color: black;
+  font-weight: 600;
+}
+
+.controlers {
+  list-style: none;
+  border-left: 2px solid transparent;
+  display: block;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 16px 80px 16px 15px;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 14px;
+  color: #262626;
+  text-align: left;
+}
+
+
 @media (min-width: 900px) {
 .wrapper {
   /* background: #fafafa;
@@ -35,7 +67,7 @@ ul.form-sections {
   padding-left: 0px;
 }
 
-.controlers {
+/* .controlers {
   list-style: none;
   border-left: 2px solid transparent;
   display: block;
@@ -45,19 +77,7 @@ ul.form-sections {
   font-family: 'Maven Pro', sans-serif;
   font-size: 14px;
   color: #262626;
-}
-
-.password-clicked {
-  color: black;
-  border-left-color: black;
-  font-weight: 600;
-}
-
-.profile-clicked {
-  color: black;
-  border-left-color: black;
-  font-weight: 600;
-}
+} */
 
 li.controlers:hover {
   background-color: #fafafa;
@@ -174,6 +194,11 @@ button {
   margin-left: 165px;
   text-align: start;
 }
+
+ul.terms-conditions{
+  margin-left: 120px;
+  text-align: left;
+}
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
@@ -212,7 +237,8 @@ button {
     padding-left: 0px;
   }
   
-  .controlers {
+  /* .controlers {
+    text-align: left;
     list-style: none;
     border-left: 2px solid transparent;
     display: block;
@@ -222,19 +248,7 @@ button {
     font-family: 'Maven Pro', sans-serif;
     font-size: 14px;
     color: #262626;
-  }
-  
-  .password-clicked {
-    color: black;
-    border-left-color: black;
-    font-weight: 600;
-  }
-  
-  .profile-clicked {
-    color: black;
-    border-left-color: black;
-    font-weight: 600;
-  }
+  } */
   
   li.controlers:hover {
     background-color: #fafafa;
@@ -345,6 +359,11 @@ button {
     margin-left: 165px;
     text-align: start;
   }
+
+  ul.terms-conditions{
+    margin-left: 120px;
+    text-align: left;
+  }
 }
 
 @media (max-width: 600px){
@@ -381,7 +400,7 @@ button {
     padding-left: 0px;
   }
   
-  .controlers {
+  /* .controlers {
     list-style: none;
     border-left: 2px solid transparent;
     display: block;
@@ -391,19 +410,7 @@ button {
     font-family: 'Maven Pro', sans-serif;
     font-size: 14px;
     color: #262626;
-  }
-  
-  .password-clicked {
-    color: black;
-    border-left-color: black;
-    font-weight: 600;
-  }
-  
-  .profile-clicked {
-    color: black;
-    border-left-color: black;
-    font-weight: 600;
-  }
+  } */
   
   li.controlers:hover {
     background-color: #fafafa;
@@ -523,5 +530,10 @@ button {
 
   .header-section{
     margin-bottom: 35px;
+  }
+
+  ul.terms-conditions{
+    margin-left: 0;
+    text-align: left;
   }
 }

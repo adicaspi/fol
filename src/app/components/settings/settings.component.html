@@ -12,7 +12,10 @@
         Edit Profile
       </li>
       <li [class]="passClass" (click)="changePassword()">
-        password
+        Password
+      </li>
+      <li [class]="termsClass" (click)="seeTerms()">
+        Terms
       </li>
     </ul>
   </div>
@@ -166,6 +169,18 @@
       </div>
 
 
+    </div>
+    <div *ngIf="terms">
+      <div class="form">
+        <ul class="terms-conditions">
+          <p class="privacy">
+            <a class="termslink" target="_blank" href="{{termsLink}}">Terms and conditions</a>
+          </p>
+          <p class="privacy">
+            <a class="termslink" target="_blank" href="{{cookiesLink}}">Cookies policy</a>
+          </p>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
