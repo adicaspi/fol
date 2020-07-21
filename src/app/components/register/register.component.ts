@@ -34,6 +34,8 @@ export class RegisterComponent implements OnInit {
   minLength = 3;
   wrongPassUser: boolean = false;
   containSpace: boolean = false;
+  termsLink: string = "https://www.followear.com/terms"
+  cookiesLink: string = "https://www.followear.com/cookies-policy"
   private baseApiUrl = environment.BASE_API_URL;
   title = 'Register to Followear';
 
@@ -68,9 +70,9 @@ export class RegisterComponent implements OnInit {
     this.titleService.setTitle('Register to Followear');
     this.meta.addTag({ name: 'description', content: "Join Followear! Sign up to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index' });
-    if (this.dialogRef) {
-      this.dialogRef.updateSize('550px', '580px');
-    }
+    // if (this.dialogRef) {
+    //   this.dialogRef.updateSize('550px', '580px');
+    // }
 
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
@@ -202,10 +204,10 @@ export class RegisterComponent implements OnInit {
   loginPage(): void {
     if (this.dialogRef) {
       this.dialogRef.close();
-      this.dialog.open(LoginComponent, {
-        width: "400px",
-        data: { close: this.data.close }
-      })
+      // this.dialog.open(LoginComponent, {
+      //   width: "400px",
+      //   data: { close: this.data.close }
+      // })
     }
     else {
       this.router.navigate(['/login']);

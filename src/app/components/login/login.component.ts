@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
   title = 'Login';
+  desktop: boolean;
   previousUrl: string;
+  private WindowSizeSubscription: Subscription;
   facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private configSerivce: ConfigService,
     //private dialogService: DialogService,
+    private configService: ConfigService,
     private dialog: MatDialog,
     private titleService: Title,
     private meta: Meta,
@@ -61,6 +64,17 @@ export class LoginComponent implements OnInit {
     this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       this.error = msg;
     });
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+
+        });
 
   }
 
@@ -134,16 +148,25 @@ export class LoginComponent implements OnInit {
 
   regsiterPage() {
     if (this.dialogRef) {
-      this.dialogRef.close();
-      this.dialog.open(RegisterComponent, {
-        width: "400px",
-        data: { close: this.data.close }
-      })
+      if (this.desktop) {
+        // this.dialogRef.close();
+        this.dialog.open(RegisterComponent, {
+          width: "400px",
+          height: "580px",
+          data: { close: this.data.close }
+        })
 
-      if (!this.data.close) {
-        //dialogRef.disableClose = false;
-        this.dialogRef.disableClose = false;
+        if (!this.data.close) {
+          //dialogRef.disableClose = false;
+          // this.dialogRef.disableClose = false;
 
+        }
+      } else {
+        this.dialog.open(RegisterComponent, {
+          width: "100vh",
+          height: "580px",
+          data: { close: this.data.close }
+        })
       }
     }
     else {

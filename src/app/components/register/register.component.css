@@ -1,3 +1,21 @@
+.mat-dialog-content {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  max-height: 100vh;
+}
+
+.terms{
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.termslink{
+  font-weight: 600;
+}
+
+
 @media (min-width: 600px)  {
 button.mat-button{
   float: right;
@@ -19,11 +37,11 @@ h2 {
   margin: 0 auto;
   text-align: center;
 }
-
+/* 
 .form-control {
   margin: 0 auto;
   width: 50%;
-}
+} */
 
 .form-group {
   margin: 0;
@@ -81,7 +99,7 @@ div.invalid-feedback{
 
 img.fw-logo{
   height: 40px;
-  width: 240px;
+  max-width: 240px;
   margin:0 auto;
   margin-bottom: 20px;
 }
@@ -164,11 +182,11 @@ a.login{
       text-align: center;
     }
     
-    .form-control {
+    /* .form-control {
       margin: 0 auto;
       width: 50%;
     }
-    
+     */
     .form-group {
       margin: 0;
     }
@@ -217,8 +235,7 @@ a.login{
     }
     
     img.fw-logo{
-      height: 40px;
-      width: 240px;
+      max-width: 204px;
       margin:0 auto;
       margin-bottom: 10px;
     }
@@ -276,5 +293,13 @@ a.login{
       cursor: pointer;
       margin-left: 5px;
     }
+  }
+
+  @media (max-width: 600px){
+    /* .terms{
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    } */
   }
   
