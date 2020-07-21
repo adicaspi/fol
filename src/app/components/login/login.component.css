@@ -45,7 +45,8 @@ button {
 }
 
 input.form-control{
-  width:300px;
+  /* width:300px; */
+  width:100%; 
   margin: 0 auto;
 }
 
@@ -159,10 +160,10 @@ a.register:hover{
   margin-bottom: 40px;
 }
 
-img.fw-logo{
+/* img.fw-logo{
   width: 280px;
   height: 51px;
-}
+} */
 
 .spin{
   margin: 20px;
@@ -177,7 +178,7 @@ img.fw-logo{
   }
 
   button{
-    width: 300px;
+    /* width: 300px; */
     margin: 0 auto;
     border: none;
     height: 38px;
@@ -205,9 +206,9 @@ img.fw-logo{
   }
 
   .sign-up{
-    display: flex;
-    justify-content: center;
-    
+    /* display: flex;
+    justify-content: center; */
+    font-size: 13px;
   }
   
   a.register{
@@ -226,10 +227,11 @@ img.fw-logo{
     flex-direction: column;
   }
 
-  input.form-control{
-    width:300px;
+  /* input.form-control{
+    width:300px; 
+    width:100%; 
     margin: 0 auto;
-  }
+  } */
 
   .img-logo{
     display: flex;
@@ -238,10 +240,10 @@ img.fw-logo{
     margin-bottom: 40px;
   }
   
-  img.fw-logo{
+  /* img.fw-logo{
     width: 280px;
     height: 51px;
-  }
+  } */
 
   .spin{
     margin: 20px;

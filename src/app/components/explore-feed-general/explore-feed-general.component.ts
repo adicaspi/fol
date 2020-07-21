@@ -122,11 +122,11 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   registerPage(): void {
+
     //window.scroll(0, 0);
     if (this.desktop) {
       this.showPopup = false;
       const scrollStrategy = this.overlay.scrollStrategies.reposition();
-
       const config = {
         scrollStrategy: scrollStrategy,
         width: '400px',
@@ -139,8 +139,20 @@ export class ExploreFeedGeneralComponent implements OnInit {
       dialogRef.disableClose = true;
 
     }
+    // else {
+    //   this.router.navigate(['/login']);
+    // }
     else {
-      this.router.navigate(['/login']);
+      const config = {
+        width: "100vh",
+        height: '580px',
+        data: {
+          close: false
+        }
+      }
+      const dialogRef = this.dialog.open(LoginComponent, config);
+      dialogRef.disableClose = true;
+
     }
   }
 

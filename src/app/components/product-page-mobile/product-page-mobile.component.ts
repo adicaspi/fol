@@ -14,6 +14,8 @@ import { ThousandSuffixesPipe } from '../../models/pipe-transform';
 import { ConfigService } from '../../services/config.service';
 import { MorePosts } from '../../models/MorePosts';
 import { FeedService } from '../../services/feed.service';
+import { MatDialog } from '../../../../node_modules/@angular/material';
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -54,7 +56,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private location: LocationService,
     private route: ActivatedRoute,
-    private feedService: FeedService
+    private feedService: FeedService,
+    private dialog: MatDialog
   ) {
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
   }
@@ -130,7 +133,16 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   registerPage(): void {
-    this.router.navigate(['/login']);
+    //this.router.navigate(['/login']);
+    const config = {
+      width: "100vh",
+      height: '580px',
+      data: {
+        close: true
+      }
+    }
+    const dialogRef = this.dialog.open(LoginComponent, config);
+    dialogRef.disableClose = true;
   }
 
   hidePost(postId: number) {

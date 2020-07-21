@@ -33,7 +33,7 @@
       </ng-template>
 
     </div>
-    <div class="horiz-menu">
+    <div *ngIf="registeredUser" class="horiz-menu">
       <button mat-button class="vertical-menu" [matMenuTriggerFor]="soldOut">
         <i class="material-icons">more_horiz</i>
       </button>
