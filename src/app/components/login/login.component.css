@@ -30,6 +30,7 @@ h2 {
 
 img.fw-logo{
   max-width: 204px;
+  max-height: 38px;
   margin:0 auto;
 }
 
@@ -153,9 +154,7 @@ a.register:hover{
 
 .img-logo{
   display: flex;
-  justify-content: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .spin{
@@ -224,14 +223,6 @@ a.register:hover{
     width:300px; 
     width:100%; 
     margin: 0 auto;
-  } */
-
-  /* .img-logo{
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    max-width: 205px;
   } */
 
   .spin{
