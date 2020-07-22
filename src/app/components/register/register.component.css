@@ -94,6 +94,7 @@ div.invalid-feedback{
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  margin-top: 30px;
   text-align: center;
 }
 
@@ -226,14 +227,13 @@ a.login{
       margin: 0 auto;
     }
 
-    .img-logo{
+    /* .img-logo{
       display: flex;
       flex-direction: column;
-      /* margin-top: 55px; */
       margin-bottom: 20px;
       text-align: center;
     }
-    
+     */
     img.fw-logo{  
       max-width: 204px;
       margin:0 auto;
