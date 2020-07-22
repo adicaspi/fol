@@ -229,7 +229,7 @@ a.login{
     .img-logo{
       display: flex;
       flex-direction: column;
-      margin-top: 55px;
+      /* margin-top: 55px; */
       margin-bottom: 20px;
       text-align: center;
     }

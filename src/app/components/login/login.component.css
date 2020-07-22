@@ -30,6 +30,7 @@ h2 {
 
 img.fw-logo{
   max-width: 204px;
+  margin:0 auto;
 }
 
 .form-group{
@@ -225,17 +226,12 @@ a.register:hover{
     margin: 0 auto;
   } */
 
-  .img-logo{
+  /* .img-logo{
     display: flex;
     justify-content: center;
     margin-top: 40px;
     margin-bottom: 40px;
     max-width: 205px;
-  }
-  
-  /* img.fw-logo{
-    width: 280px;
-    height: 51px;
   } */
 
   .spin{
