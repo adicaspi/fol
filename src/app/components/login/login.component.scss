@@ -9,6 +9,10 @@ button.mat-button{
   overflow: hidden;
   margin: 0 auto;
   max-height: 100vh;
+
+  &.padding{
+    padding:24px;
+  }
 }
 a {
   color: black;
@@ -164,11 +168,13 @@ a.register:hover{
   justify-content: center;
 }
 @media (max-width: 600px) {
-  .mat-dialog-content {
-    width: 100%;
-    overflow: hidden;
-    margin: 0 auto;
-  }
+  // .mat-dialog-content {
+  //   width: 100%;
+  //   overflow: hidden;
+  //   margin: 0 auto;
+
+   
+  // }
 
   button{
     /* width: 300px; */

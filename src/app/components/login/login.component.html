@@ -1,7 +1,7 @@
 <button *ngIf="modal" mat-button [mat-dialog-close]="true">
   <i class="fal fa-times"></i>
 </button>
-<div mat-dialog-content>
+<div mat-dialog-content [ngClass]="{ padding : !modal }">
   <div class="img-logo">
     <img src="../../../assets/fw_logo_2A.png" class="fw-logo" />
   </div>

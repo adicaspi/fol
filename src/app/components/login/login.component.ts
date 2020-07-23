@@ -18,7 +18,7 @@ import { Title, Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   errorSubscription: Subscription;
@@ -73,9 +73,7 @@ export class LoginComponent implements OnInit {
           if (value.width <= 600) {
             this.desktop = false;
           }
-
         });
-
   }
 
   ngOnInit() {

@@ -16,7 +16,7 @@ import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.scss'],
   providers: [DatePipe]
 })
 export class RegisterComponent implements OnInit {

@@ -3,6 +3,11 @@
   overflow: hidden;
   margin: 0 auto;
   max-height: 100vh;
+
+  &.padding{
+    padding:24px;
+  }
+
 }
 
 .terms{
@@ -13,6 +18,15 @@
 
 .termslink{
   font-weight: 600;
+}
+
+.img-logo{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  text-align: center;
+  align-items: center;
 }
 
 
@@ -90,13 +104,7 @@ div.invalid-feedback{
   margin: 0 auto;
 }
 
-.img-logo{
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  margin-top: 30px;
-  text-align: center;
-}
+
 
 img.fw-logo{
   height: 40px;
