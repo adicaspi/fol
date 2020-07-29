@@ -5,9 +5,15 @@
   max-height: 100vh;
 
   &.padding{
-    padding:24px;
+    padding:40px;
   }
 
+}
+
+a.login{
+  color: #0095f6;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 .terms{
@@ -29,6 +35,20 @@
   align-items: center;
 }
 
+button.facebook-button{
+  color: white;
+  font-weight: 600;
+  padding: 5px 9px;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #0095f6;
+  width: 100%;
+}
+
+a.facebook-login{
+  color:white;
+}
 
 @media (min-width: 600px)  {
 button.mat-button{
@@ -122,11 +142,11 @@ img.fw-logo{
   color: #999;
 }
 
-button.facebook-button{
-  background-color: white;
-  color: rgb(56,81,133);
-  border:none;
-}
+// button.facebook-button{
+//   background-color: white;
+//   color: rgb(56,81,133);
+//   border:none;
+// }
 
 img.fb-logo{
   height: 30px;
@@ -153,11 +173,11 @@ img.fb-logo{
   justify-content: center;
 }
 
-a.login{
-  color: rgb(56,81,133);
-  cursor: pointer;
-  margin-left: 5px;
-}
+// a.login{
+//   color: rgb(56,81,133);
+//   cursor: pointer;
+//   margin-left: 5px;
+// }
 
 .loading-spinner img{
   width:25px;
@@ -257,12 +277,12 @@ a.login{
       color: #999;
     }
 
-    button.facebook-button{
-      background-color: white;
-      color: rgb(56,81,133);
-      border:none;
-      margin: 0 auto;
-    }
+    // button.facebook-button{
+    //   background-color: white;
+    //   color: rgb(56,81,133);
+    //   border:none;
+    //   margin: 0 auto;
+    // }
     
     img.fb-logo{
       height: 30px;
@@ -296,11 +316,11 @@ a.login{
       
     }
 
-    a.login{
-      color: rgb(56,81,133);
-      cursor: pointer;
-      margin-left: 5px;
-    }
+    // a.login{
+    //   color: rgb(56,81,133);
+    //   cursor: pointer;
+    //   margin-left: 5px;
+    // }
   }
 
   @media (max-width: 600px){
