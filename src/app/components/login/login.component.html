@@ -7,6 +7,16 @@
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
     <div class="form-group">
+      <button class="facebook-button">
+        <a class="facebook-login" href="{{facebookLoginEndpoint}}">
+          <span class="facebook-icon">
+            <img src="../../../assets/facebook_logo.PNG" class="fb-logo" />
+          </span>
+          Log in with Facebook
+        </a>
+      </button>
+    </div>
+    <div class="form-group">
       <label for="email"></label>
       <input type="email" formControlName="emailLogin" class="form-control" placeholder="E-mail, username" [ngClass]="{
         'is-invalid': submitted && l.emailLogin.errors || wrongUser
@@ -49,16 +59,7 @@
       <span>OR</span>
     </div>
 
-    <div class="form-group">
-      <button class="facebook-button">
-        <a href="{{facebookLoginEndpoint}}">
-          <span class="facebook-icon">
-            <img src="../../../assets/fb_logo.png" class="fb-logo" />
-          </span>
-          Log in with Facebook
-        </a>
-      </button>
-    </div>
+
   </form>
 
 

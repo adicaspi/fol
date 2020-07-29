@@ -74,6 +74,7 @@ import { ViewDiscoverPeopleUserComponent } from './components/view-discover-peop
 import { MainUserFeedComponent } from './components/main-user-feed/main-user-feed.component';
 import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
 import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
+import { ExternalWebsiteComponent } from './components/external-website/external-website.component';
 
 
 //I keep the new line
@@ -125,7 +126,8 @@ import { ViewFollowListComponent } from './components/view-follow-list/view-foll
     ViewDiscoverPeopleUserComponent,
     MainUserFeedComponent,
     ViewMainProfileComponent,
-    ViewFollowListComponent
+    ViewFollowListComponent,
+    ExternalWebsiteComponent
   ],
   imports: [
     BrowserModule,

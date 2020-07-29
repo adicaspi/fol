@@ -11,7 +11,7 @@ button.mat-button{
   max-height: 100vh;
 
   &.padding{
-    padding:24px;
+    padding:40px;
   }
 }
 a {
@@ -60,7 +60,7 @@ button.login-button:disabled{
 button.login-button{
   display: block;
   margin: 0 auto;
-  width: 50%;
+  width: 100%;
   background-color: grey;
   color:white;
   cursor: pointer;
@@ -101,10 +101,10 @@ p.forgot-password {
   padding: 0 10px;
 }
 
-button.btn.btn-default.login.facebook {
-  background-color: #6d84b4;
-  width: 50%;
-}
+// button.btn.btn-default.login.facebook {
+//   background-color: #6d84b4;
+//   width: 50%;
+// }
 
 button.btn.btn-default.register {
   display: block;
@@ -129,10 +129,30 @@ div.invalid-feedback{
 }
 
 button.facebook-button{
-  background-color: white;
-  color: rgb(56,81,133);
-  border:none;
+  color: white;
+  font-weight: 600;
+  padding: 5px 9px;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #0095f6;
+  width: 100%;
 }
+
+a.facebook-login{
+  color:white;
+}
+
+button.login-button:disabled{
+  background-color:lightgray;
+ //background-color: #0095f6;
+}
+
+// button.facebook-button{
+//   background-color: white;
+//   color: rgb(56,81,133);
+//   border:none;
+// }
 
 img.fb-logo{
   height: 30px;
@@ -146,7 +166,7 @@ img.fb-logo{
 }
 
 a.register{
-  color: rgb(0,53,105);
+  color: #0095f6;
   margin-left: 3px;
   cursor: pointer;
 }
@@ -185,13 +205,14 @@ a.register:hover{
     cursor: pointer;
   } 
 
-  button.btn.btn-default.login.facebook {
-    width: 100%;
-  }
+  // button.btn.btn-default.login.facebook {
+  //   width: 100%;
+  // }
 
-  button.login-button:disabled{
-    background-color:lightgray;
-  }
+  //button.login-button:disabled{
+    //background-color:lightgray;
+  // background-color: #0095f6;
+  //}
 
   button.btn.btn-default.register{
     width:100%;
@@ -199,19 +220,27 @@ a.register:hover{
     outline: none;
   }
 
-  button.facebook-button{
-    background-color: white;
-    color: rgb(56,81,133);
-  }
+  // button.facebook-button{
+  //   color: white;
+  //   font-weight: 600;
+  //   padding: 5px 9px;
+  //   text-align: center;
+  //   border: 1px solid transparent;
+  //   background-color: #0095f6;
+  //   width: 100%;
+  // }
+
+  // a.facebook-login{
+  //   color:white;
+  // }
 
   .sign-up{
     /* display: flex;
     justify-content: center; */
-    font-size: 13px;
+    font-size: 15px;
   }
   
   a.register{
-    color: rgb(0,53,105);
     margin-left: 3px;
     cursor: pointer;
   }

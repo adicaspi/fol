@@ -22,6 +22,7 @@ import { ViewDiscoverPeopleGeneralComponent } from './components/view-discover-p
 import { ViewDiscoverPeopleUserComponent } from './components/view-discover-people-user/view-discover-people-user.component';
 import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
 import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
+import { ExternalWebsiteComponent } from './components/external-website/external-website.component';
 
 
 const routes: Routes = [
@@ -71,7 +72,8 @@ const routes: Routes = [
   { path: 'cookies-policy', component: TermsCookiesComponent },
   { path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent },
   { path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent },
-  { path: 'follow-list/:id', component: ViewFollowListComponent }
+  { path: 'follow-list/:id', component: ViewFollowListComponent },
+  { path: 'external', component: ExternalWebsiteComponent }
 
 ];
 
