@@ -60,6 +60,10 @@ body{
   min-height: 100vh;
 }
 
+.light-backdrop {
+  opacity: 0 !important;
+}
+
 mat-slider{
   position: 0;
 }

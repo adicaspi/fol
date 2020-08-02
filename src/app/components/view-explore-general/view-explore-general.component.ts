@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class ViewExploreGeneralComponent implements OnInit {
   desktop: Boolean = true;
   error: any = {};
+  ios: boolean = false;
   private subscription;
   private anyErrors: boolean;
   private finished: boolean;
@@ -24,6 +25,7 @@ export class ViewExploreGeneralComponent implements OnInit {
       value => {
         if (value.width <= 600) {
           this.desktop = false;
+          this.ios = this.configService.iOS();
         }
         else {
           this.desktop = true;

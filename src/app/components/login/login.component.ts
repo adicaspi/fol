@@ -14,6 +14,7 @@ import { ConfigService } from '../../services/config.service';
 import { DialogService } from '../../services/dialog.service';
 import { RegisterComponent } from '../register/register.component';
 import { Title, Meta } from '@angular/platform-browser';
+import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 
 @Component({
   selector: 'app-login',
@@ -28,12 +29,13 @@ export class LoginComponent implements OnInit {
   userId: number;
   wrongPass: boolean = false;
   wrongUser: boolean = false;
-  modal: boolean = false;
+  modal: boolean;
   msgToShow: string;
   onDestroy: Subject<void> = new Subject<void>();
   title = 'Login';
   desktop: boolean;
   previousUrl: string;
+  close: boolean = true;
   private WindowSizeSubscription: Subscription;
   facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
   private baseApiUrl = environment.BASE_API_URL;
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
     //private dialogService: DialogService,
     private configService: ConfigService,
     private dialog: MatDialog,
+    private overlay: Overlay,
     private titleService: Title,
     private meta: Meta,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -56,9 +59,9 @@ export class LoginComponent implements OnInit {
 
   ) {
     if (dialogRef) {
-
+      this.modal = true;
       if (this.data.close) {
-        this.modal = true;
+        this.close = false;
       }
     }
     this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
@@ -145,28 +148,24 @@ export class LoginComponent implements OnInit {
   }
 
   regsiterPage() {
+
     if (this.dialogRef) {
-      if (this.desktop) {
-        // this.dialogRef.close();
-        this.dialog.open(RegisterComponent, {
-          width: "400px",
-          height: "580px",
-          data: { close: this.data.close }
-        })
-
-        if (!this.data.close) {
-          //dialogRef.disableClose = false;
-          // this.dialogRef.disableClose = false;
-
+      // const dialogRef = this.dialog.getDialogById("mat-dialog-0");
+      // dialogRef.close();
+      // this.dialog.closeAll();
+      //this.dialogRef.close();
+      const scrollStrategy = this.overlay.scrollStrategies.reposition();
+      const config = {
+        scrollStrategy: scrollStrategy,
+        width: '400px',
+        height: '580px',
+        data: {
+          close: false
         }
-      } else {
-        this.dialog.open(RegisterComponent, {
-          width: "100vh",
-          height: "580px",
-          data: { close: this.data.close }
-        })
       }
+      this.dialog.open(RegisterComponent, config);
     }
+
     else {
       this.router.navigate(['/register']);
     }

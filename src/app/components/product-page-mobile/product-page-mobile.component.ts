@@ -38,6 +38,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   postImageAddr: string;
   likeList = [];
   imageUrls: string[] = [];
+  ios: boolean = false;
   onDestroy: Subject<void> = new Subject<void>();
   postsToShow$: Observable<MorePosts[]>;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
@@ -60,11 +61,14 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     private dialog: MatDialog
   ) {
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
+
   }
 
   ngOnInit() {
     if (this.userService.userId) {
       this.registeredUser = true;
+    } else {
+      this.ios = this.configService.iOS();
     }
     this.route.paramMap
       .pipe(takeUntil(this.onDestroy))

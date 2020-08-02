@@ -12,6 +12,9 @@ import { ConfigService } from '../../services/config.service';
 import { DatePipe } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { LoginComponent } from '../login/login.component';
+import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
+import * as jquery from 'jquery';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-register',
@@ -50,20 +53,25 @@ export class RegisterComponent implements OnInit {
     private http: HttpClient,
     private configSerivce: ConfigService,
     private dialog: MatDialog,
+    private overlay: Overlay,
     private titleService: Title,
     private meta: Meta,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     @Optional() private dialogRef?: MatDialogRef<RegisterComponent>
   ) {
     if (dialogRef) {
-
-      if (this.data.close) {
-        this.modal = true;
-      }
+      this.modal = true;
+      // if (this.data.close) {
+      //   this.modal = true;
+      // }
     }
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
     });
+
+    console.log($(".mat-dialog-content").position());
+    //var rect = matDialog.target.getBoundingClientRect();
+    //console.log(rect.top, rect.right, rect.bottom, rect.left);
   }
 
   ngOnInit() {
@@ -101,10 +109,8 @@ export class RegisterComponent implements OnInit {
       if (val.length >= this.minLength) {
         if (val.indexOf(' ') > 0) {
           this.containSpace = true;
-          console.log(this.containSpace);
         } else {
           this.containSpace = false;
-          console.log(this.containSpace);
         }
         this.userService.checkUserNameExists(val).subscribe(res => {
           this.userNameExists = res;
@@ -204,10 +210,6 @@ export class RegisterComponent implements OnInit {
   loginPage(): void {
     if (this.dialogRef) {
       this.dialogRef.close();
-      // this.dialog.open(LoginComponent, {
-      //   width: "400px",
-      //   data: { close: this.data.close }
-      // })
     }
     else {
       this.router.navigate(['/login']);

@@ -4,7 +4,8 @@
     <app-explore-feed-general></app-explore-feed-general>
   </div>
   <ng-template #mobileView class="mobile">
-    <app-shopping-nav> </app-shopping-nav>
+    <app-app-banner *ngIf="ios"></app-app-banner>
+    <app-shopping-nav [ngClass]="{'shopping-nav': ios}"> </app-shopping-nav>
     <app-explore-feed-general></app-explore-feed-general>
   </ng-template>
 </body>

@@ -111,49 +111,58 @@ export class ExploreFeedGeneralComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   scrollHandler(event) {
-    console.log("scrolling");
     let currScrollPos: number = window.pageYOffset;
-    if (currScrollPos >= 1000) {
+    if (currScrollPos > 1000) {
       if (this.showPopup) {
-
         this.registerPage();
       }
+    }
+    else {
+      if (this.desktop) {
+        this.dialog.closeAll();
+        this.showPopup = true;
+      }
+
     }
   }
 
   registerPage(): void {
 
     //window.scroll(0, 0);
-    if (this.desktop) {
-      this.showPopup = false;
-      const scrollStrategy = this.overlay.scrollStrategies.reposition();
-      const config = {
-        scrollStrategy: scrollStrategy,
-        width: '400px',
-        height: '580px',
-        data: {
-          close: false
-        }
+    // if (this.desktop) {
+    this.showPopup = false;
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const config = {
+      scrollStrategy: scrollStrategy,
+      width: '400px',
+      height: "calc(100% - 40px)",
+      data: {
+        close: false
       }
-      const dialogRef = this.dialog.open(LoginComponent, config);
-      dialogRef.disableClose = true;
-
     }
+
+    const dialogRef = this.dialog.open(LoginComponent, config);
+    dialogRef.disableClose = true;
+
+
+
+    // }
     // else {
     //   this.router.navigate(['/login']);
     // }
-    else {
-      const config = {
-        width: "100vh",
-        height: '580px',
-        data: {
-          close: false
-        }
-      }
-      const dialogRef = this.dialog.open(LoginComponent, config);
-      dialogRef.disableClose = true;
+    // else {
+    //   const config = {
+    //     width: "400px",
+    //     height: "calc(100% - 40px)",
+    //     data: {
+    //       close: false
+    //     }
+    //   }
+    //   const dialogRef = this.dialog.open(LoginComponent, config);
 
-    }
+    //   dialogRef.disableClose = true;
+
+    // }
   }
 
   openDialog(post): void {

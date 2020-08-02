@@ -75,6 +75,7 @@ import { MainUserFeedComponent } from './components/main-user-feed/main-user-fee
 import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
 import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
 import { ExternalWebsiteComponent } from './components/external-website/external-website.component';
+import { AppBannerComponent } from './components/app-banner/app-banner.component';
 
 
 //I keep the new line
@@ -127,7 +128,8 @@ import { ExternalWebsiteComponent } from './components/external-website/external
     MainUserFeedComponent,
     ViewMainProfileComponent,
     ViewFollowListComponent,
-    ExternalWebsiteComponent
+    ExternalWebsiteComponent,
+    AppBannerComponent
   ],
   imports: [
     BrowserModule,
