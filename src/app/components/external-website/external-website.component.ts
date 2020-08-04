@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-(window as any).jQuery = $;
+declare var $: any;
 
 @Component({
   selector: 'app-external-website',
