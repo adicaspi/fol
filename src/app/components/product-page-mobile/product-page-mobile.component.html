@@ -3,7 +3,7 @@
 
   <div *ngIf="imageUrls" class="slider">
     <div class="back-button-container" (click)="goBackPage()">
-      <img id="back-button" src="../../../assets/back.png">
+      <img id="back-button" src="../../../assets/back.png" [ngClass]="{'margin': ios}">
     </div>
     <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="false" [autoPlayWaitForLazyLoad]="false"
       [showDots]="imageUrls?.length > 1" [disableSwiping]="imageUrls?.length < 2"></slideshow>

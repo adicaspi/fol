@@ -21,7 +21,7 @@ import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-product-page-mobile',
   templateUrl: './product-page-mobile.component.html',
-  styleUrls: ['./product-page-mobile.component.css']
+  styleUrls: ['./product-page-mobile.component.scss']
 })
 export class ProductPageMobileComponent implements OnInit, OnDestroy {
   userPost: UserPost;
