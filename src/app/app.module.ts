@@ -76,6 +76,7 @@ import { ViewMainProfileComponent } from './components/view-main-profile/view-ma
 import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
 import { ExternalWebsiteComponent } from './components/external-website/external-website.component';
 import { AppBannerComponent } from './components/app-banner/app-banner.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 //I keep the new line
@@ -158,7 +159,9 @@ import { AppBannerComponent } from './components/app-banner/app-banner.component
     ScrollingModule,
     NgxSpinnerModule,
     DeviceDetectorModule.forRoot(),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    CarouselModule.forRoot()
+
   ],
 
   entryComponents: [

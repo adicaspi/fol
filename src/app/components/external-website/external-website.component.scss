@@ -80,6 +80,7 @@ span.btn.signup.lower{
   flex-direction: column;
   align-items: center;
   margin-top: 70px;
+  margin-bottom: 15px;
 }
 
 .already-title{
@@ -130,4 +131,17 @@ span.btn.signup.lower{
 transform: translateX(0);
 }
 
-  
+.card.card-body{
+  display: flex;
+  flex-direction: row;
+}
+
+.card-item{
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+img.img-fluid{
+  width:124px;
+}
+

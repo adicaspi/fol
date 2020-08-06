@@ -27,14 +27,15 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/minireset.css/minireset.css",
+              "./node_modules/minireset.css/minireset.css",
               "./node_modules/jquery-ui-dist/jquery-ui.css",
               "./node_modules/jquery-ui-dist/jquery-ui.min.css",
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "./node_modules/font-awesome/css/font-awesome.css",
               "./node_modules/nouislider/distribute/nouislider.min.css",
-              "src/styles/styles.scss",
-              "node_modules/igniteui-angular/styles/igniteui-angular.css"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/igniteui-angular/styles/igniteui-angular.css",
+              "src/styles/styles.scss"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",

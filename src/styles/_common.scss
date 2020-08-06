@@ -19,6 +19,34 @@ body{
   height: 625px !important;
 }
 
+@keyframes fadeIn{
+  0% {
+    opacity: 0;
+   }
+  100% {
+    opacity: 1;
+  }
+  }
+
+@-webkit-keyframes fadeIn{
+  0% {
+    opacity: 0;
+   }
+  100% {
+    opacity: 1;
+  }
+  }
+  
+  .cdk-overlay-pane{
+    opacity: 1;
+    animation: fadeIn 0.3s forwards 0.1s ease-in;
+    -webkit-animation: fadeIn 0.3s forwards 0.1s ease-in;
+  }
+  .cdk-overlay-container > * {
+    transition: none;
+    -webkit-transition: none;
+  }
+
 .cdk-overlay-container > .backdrop-product {
   background-color: transparent;
   position: fixed;
@@ -185,37 +213,44 @@ mat-toolbar{
 }
 
 @media (max-width: 600px){
+
+  .cdk-overlay-pane {
+    max-width: 90vh !important;
+  }
+
+  .cdk-overlay-pane .mat-dialog-container{
+      border-radius: 16px !important;
+  }
+
   .mat-drawer-backdrop.mat-drawer-shown {
-    background-color: transparent;
-}
+      background-color: transparent;
+  }
 
-.igx-slider__label-from, .igx-slider__label-to{
-  display: none !important;
-}
+  .igx-slider__label-from, .igx-slider__label-to{
+    display: none !important;
+  }
 
-.igx-slider__track{
-  background: lightgrey !important;
-}
+  .igx-slider__track{
+    background: lightgrey !important;
+  }
 
-.igx-slider__track-fill{
-  background: grey !important;
-}
+  .igx-slider__track-fill{
+    background: grey !important;
+  }
 
-.igx-slider__thumb-from .dot::after, .igx-slider__thumb-to .dot::after {
-  background: none !important;
-}
+  .igx-slider__thumb-from .dot::after, .igx-slider__thumb-to .dot::after {
+    background: none !important;
+  }
 
-.igx-slider__thumb-from .dot::before, .igx-slider__thumb-to .dot::before {
-  background: black !important;
-}
+  .igx-slider__thumb-from .dot::before, .igx-slider__thumb-to .dot::before {
+    background: black !important;
+  }
 
-.dot::after{
-  transform: none !important;
-}
+  .dot::after{
+    transform: none !important;
+  }
 
 // jquery ui slider - mobile
-@media (max-width: 600px) {
-
   .ui-slider {
     margin-top: 20px;
     height: 5px;
@@ -242,6 +277,4 @@ mat-toolbar{
   .ui-widget.ui-widget-content {
     border: none;
   }
-}
-
 }

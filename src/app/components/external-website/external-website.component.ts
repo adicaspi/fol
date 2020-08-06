@@ -7,11 +7,12 @@ declare var $: any;
   styleUrls: ['./external-website.component.scss']
 })
 export class ExternalWebsiteComponent implements OnInit {
-
+  users = [];
   constructor() { }
 
   ngOnInit() {
     this.initCarousel(this);
+    this.users = ["1", "2", "3", "4", "5", "6"];
   }
 
   initCarousel(that) {

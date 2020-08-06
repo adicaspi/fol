@@ -41,6 +41,7 @@ img.fw-logo{
 .form-group{
   display:flex;
   flex-direction: column;
+  margin-bottom: 9px;
 }
 
 button {
@@ -66,6 +67,9 @@ button.login-button{
   cursor: pointer;
   border:none;
   border-radius: 0.25rem;
+  height: 40px;
+  margin-top: -12px;
+  outline: none;
 }
 
 button.btn.btn-default.login:focus {
@@ -136,7 +140,8 @@ button.facebook-button{
   border: 1px solid transparent;
   outline: none;
   border-radius: 4px;
-  background-color: #0095f6;
+  background-color: #4267b2;
+
   width: 100%;
 }
 
@@ -188,14 +193,11 @@ a.register:hover{
   display: flex;
   justify-content: center;
 }
-@media (max-width: 600px) {
-  // .mat-dialog-content {
-  //   width: 100%;
-  //   overflow: hidden;
-  //   margin: 0 auto;
 
-   
-  // }
+@media (max-width: 600px) {
+  .mat-dialog-content {
+   padding: 0;
+   }
 
   button{
     /* width: 300px; */
@@ -270,5 +272,10 @@ a.register:hover{
 
   .spin img{
     width:25px;
+  }
+
+  .img-logo {
+    margin-bottom: 50px;
+    margin-top: 11px;
   }
 }

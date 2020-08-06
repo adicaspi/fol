@@ -130,12 +130,14 @@ export class ExploreFeedGeneralComponent implements OnInit {
 
     //window.scroll(0, 0);
     // if (this.desktop) {
+    var pageWidth = this.desktop ? "400px" : window.innerWidth - 48;
+    console.log(pageWidth);
     this.showPopup = false;
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
     const config = {
       scrollStrategy: scrollStrategy,
-      width: '400px',
-      height: "calc(100% - 40px)",
+      width: pageWidth + "px",
+      height: "100% - 40px",
       data: {
         close: false
       }
