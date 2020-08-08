@@ -1,4 +1,4 @@
-<button *ngIf="model" mat-button [mat-dialog-close]="close">
+<button *ngIf="showCloseButton" mat-button>
   <i class="fal fa-times"></i>
 </button>
 <div mat-dialog-content [ngClass]="{ padding : !modal }">
@@ -12,7 +12,9 @@
           <span class="facebook-icon">
             <img src="../../../assets/facebook_logo.PNG" class="fb-logo" />
           </span>
-          Log in with Facebook
+          <span class="login-with-facebook">
+            Log in with Facebook
+          </span>
         </a>
       </button>
     </div>
@@ -68,9 +70,15 @@
 
 
   <div class="sign-up">
-    <span>Don't have an account?</span>
-    <a class="register" (click)="regsiterPage()">
-      Sign up
-    </a>
+    <div class="account">
+      <span>Don't have an account?</span>
+    </div>
+    <div>
+      <button mat-button [mat-dialog-close]="register" class="register-button" (click)="regsiterPage()">
+        <!-- <a class="register" (click)="regsiterPage()"> -->
+        Sign up
+        <!-- </a> -->
+      </button>
+    </div>
   </div>
 </div>

@@ -35,6 +35,8 @@ export class RegisterComponent implements OnInit {
   emailExists = false;
   modal: boolean = false;
   minLength = 3;
+  showCloseButton: boolean = true;
+  login = "login";
   wrongPassUser: boolean = false;
   containSpace: boolean = false;
   termsLink: string = "https://www.followear.com/terms"
@@ -61,15 +63,15 @@ export class RegisterComponent implements OnInit {
   ) {
     if (dialogRef) {
       this.modal = true;
-      // if (this.data.close) {
-      //   this.modal = true;
-      // }
+      if (!this.data.showCloseButton) {
+        this.showCloseButton = false;
+      }
     }
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
     });
 
-    console.log($(".mat-dialog-content").position());
+
     //var rect = matDialog.target.getBoundingClientRect();
     //console.log(rect.top, rect.right, rect.bottom, rect.left);
   }
@@ -208,10 +210,7 @@ export class RegisterComponent implements OnInit {
   }
 
   loginPage(): void {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-    else {
+    if (!this.dialogRef) {
       this.router.navigate(['/login']);
     }
   }

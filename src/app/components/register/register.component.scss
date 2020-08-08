@@ -10,6 +10,27 @@
   }
 }
 
+button.mat-button{
+  float: right;
+  font-size: 20px;
+}
+
+button.register-button{
+  padding:0;
+  font-size: 16px;
+  color: #0095f6;
+  text-decoration: none;
+}
+
+button.register-button:hover{
+  text-decoration: underline;
+}
+
+.account{
+  display: flex;
+  align-items:center;
+}
+
 // .login-continue{
 //   width: 352px;
 //   padding: 24px;
@@ -59,12 +80,21 @@ button.facebook-button{
   border: 1px solid transparent;
   outline: none;
   border-radius: 4px;
-  background-color: #0095f6;
+  //background-color: #0095f6;
+  background-color: #3c579e;
   width: 100%;
 }
 
 a.facebook-login{
   color:white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+span.login-with-facebook{
+  margin-left: 3px;
+  margin-top: 3px;
 }
 
 .form-group{
@@ -87,10 +117,7 @@ button.btn.btn-default.register {
 }
 
 @media (min-width: 600px)  {
-button.mat-button{
-  float: right;
-  font-size: 20px;
-}
+
 
 .wrapper {
   width: 100%;

@@ -1,6 +1,6 @@
 <!-- <app-landing-nav></app-landing-nav> -->
 
-<button *ngIf="close" mat-button [mat-dialog-close]="true">
+<button *ngIf="showCloseButton" mat-button>
   <i class="fal fa-times"></i>
 </button>
 
@@ -35,7 +35,9 @@
         <span class="facebook-icon">
           <img src="../../../assets/facebook_logo.PNG" class="fb-logo" />
         </span>
-        Log in with Facebook
+        <span class="login-with-facebook">
+          Log in with Facebook
+        </span>
       </a>
     </button>
   </div>
@@ -147,9 +149,16 @@
     </p>
   </form>
   <div class="login">
-    <span>Have an account?</span>
-    <a class="login" (click)="loginPage()">
-      Log in
-    </a>
+    <div class="account">
+      <span>Have an account?</span>
+    </div>
+    <div>
+      <button mat-button [mat-dialog-close]="login" (click)="loginPage()" class="register-button">
+        <!-- <a class="login" (click)="loginPage()">
+        Log in
+      </a> -->
+        Log in
+      </button>
+    </div>
   </div>
 </div>

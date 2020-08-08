@@ -20,6 +20,7 @@ import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { Title, Meta } from '@angular/platform-browser';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 
 
@@ -127,44 +128,54 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   registerPage(): void {
-
-    //window.scroll(0, 0);
-    // if (this.desktop) {
-    var pageWidth = this.desktop ? "400px" : window.innerWidth - 48;
-    console.log(pageWidth);
     this.showPopup = false;
+    this.openLoginDialog();
+  }
+
+  openLoginDialog() {
+    var pageWidth = this.desktop ? "400px" : window.innerWidth - 48;
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
     const config = {
       scrollStrategy: scrollStrategy,
       width: pageWidth + "px",
       height: "100% - 40px",
       data: {
-        close: false
+        showCloseButton: false
       }
     }
 
     const dialogRef = this.dialog.open(LoginComponent, config);
     dialogRef.disableClose = true;
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      if (res == "register") {
+        this.openRegisterDialog();
+      }
 
+    })
+  }
 
+  openRegisterDialog() {
+    var pageWidth = this.desktop ? "400px" : window.innerWidth - 48;
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const config = {
+      scrollStrategy: scrollStrategy,
+      width: pageWidth + "px",
+      height: "100% - 40px",
+      data: {
+        showCloseButton: false
+      }
+    }
 
-    // }
-    // else {
-    //   this.router.navigate(['/login']);
-    // }
-    // else {
-    //   const config = {
-    //     width: "400px",
-    //     height: "calc(100% - 40px)",
-    //     data: {
-    //       close: false
-    //     }
-    //   }
-    //   const dialogRef = this.dialog.open(LoginComponent, config);
+    const registerDialogRef = this.dialog.open(RegisterComponent, config);
+    registerDialogRef.disableClose = true;
 
-    //   dialogRef.disableClose = true;
-
-    // }
+    registerDialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      if (res == "login") {
+        this.openLoginDialog();
+      }
+    })
   }
 
   openDialog(post): void {

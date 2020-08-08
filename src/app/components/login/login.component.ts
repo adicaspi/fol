@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
   title = 'Login';
   desktop: boolean;
   previousUrl: string;
-  close: boolean = true;
+  showCloseButton: boolean = true;
+  register: string = "register";
   private WindowSizeSubscription: Subscription;
   facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
   private baseApiUrl = environment.BASE_API_URL;
@@ -60,8 +61,8 @@ export class LoginComponent implements OnInit {
   ) {
     if (dialogRef) {
       this.modal = true;
-      if (this.data.close) {
-        this.close = false;
+      if (!this.data.showCloseButton) {
+        this.showCloseButton = false;
       }
     }
     this.errorSubscription = this.errorsService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
@@ -149,25 +150,24 @@ export class LoginComponent implements OnInit {
 
   regsiterPage() {
 
-    if (this.dialogRef) {
-      // const dialogRef = this.dialog.getDialogById("mat-dialog-0");
-      // dialogRef.close();
-      // this.dialog.closeAll();
-      //this.dialogRef.close();
-      const scrollStrategy = this.overlay.scrollStrategies.reposition();
-      const config = {
-        scrollStrategy: scrollStrategy,
-        width: '400px',
-        height: '580px',
-        data: {
-          close: false
-        }
-      }
-      this.dialog.open(RegisterComponent, config);
-    }
+    if (!this.dialogRef) {
+      // const scrollStrategy = this.overlay.scrollStrategies.reposition();
+      // const config = {
+      //   scrollStrategy: scrollStrategy,
+      //   width: '400px',
+      //   height: '580px',
+      //   data: {
+      //     close: false
+      //   }
+      // }
+      //   this.dialogRef.close();
+      // this.dialog.open(RegisterComponent, config);
 
-    else {
+      // }
+
+      // else {
       this.router.navigate(['/register']);
+      //}
     }
   }
 
