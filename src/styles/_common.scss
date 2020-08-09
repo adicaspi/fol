@@ -38,7 +38,7 @@ body{
   }
   
   .cdk-overlay-pane{
-    opacity: 0;
+    opacity: 1;
     animation: fadeIn 0.3s forwards 0.1s ease-in;
     -webkit-animation: fadeIn 0.3s forwards 0.1s ease-in;
   }

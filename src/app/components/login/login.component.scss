@@ -7,7 +7,10 @@ button.mat-button{
 button.register-button{
   padding:0;
   font-size: 16px;
-  color: #0095f6;
+  color: transparent;
+  background: -webkit-linear-gradient(60deg,rgba(255,80,170,.9) 20%,rgba(244,129,255,.95) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
   text-decoration: none;
 }
 
@@ -25,11 +28,14 @@ button.register-button:hover{
   overflow: hidden;
   margin: 0 auto;
   max-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue' Helvetica, Arial, sans-serif;
 
   &.padding{
     padding:40px;
   }
 }
+
 a {
   color: black;
 }
@@ -39,7 +45,6 @@ h2 {
   margin: 0 auto;
   margin-top: 5px;
   text-align: center;
-  font-family: 'Maven Pro', sans-serif;
   font-size: 30px;
 }
 
@@ -49,7 +54,7 @@ h2 {
 }
 
 img.fw-logo{
-  max-width: 204px;
+  max-width: 244px;
   max-height: 38px;
   margin:0 auto;
 }
@@ -98,27 +103,32 @@ p.forgot-password {
   width: 300px;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 25px;
-  margin-top: 0;
+  margin-bottom: 23px;
+  margin-top: 6px;
   font-size: 12px;
 }
 
+p.forgot-password a {
+  color: #111;
+}
+
 .login-method {
-  width: 50%;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 20px;
-  margin-top: 15px;
+  margin-bottom: 28px;
+  margin-top: 28px;
   font-size: 12px;
   font-weight: 700;
   text-align: center;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #ddd;
   line-height: 0.1em;
 }
 
 .login-method span {
   background: #fff;
-  padding: 0 10px;
+  padding: 0 20px;
+  color: #969696;
 }
 
 // button.btn.btn-default.login.facebook {
@@ -221,7 +231,7 @@ a.register:hover{
 
 @media (max-width: 600px) {
   .mat-dialog-content {
-   padding: 0;
+    padding: 0;
    }
 
   button{
@@ -232,6 +242,12 @@ a.register:hover{
     border-radius: 0.25rem;
     cursor: pointer;
   } 
+
+  button.login-button {
+    height: 32px;
+    background: -webkit-linear-gradient(60deg,rgba(255,80,170,.9) 20%,rgba(244,129,255,.95) 100%);
+    margin-top: -10px;
+  }
 
   // button.btn.btn-default.login.facebook {
   //   width: 100%;
@@ -266,6 +282,7 @@ a.register:hover{
     /* display: flex;
     justify-content: center; */
     font-size: 14px;
+    margin-top: 28px;
   }
   
   a.register{
@@ -273,9 +290,26 @@ a.register:hover{
     cursor: pointer;
   }
 
+  button.facebook-button {
+    background-color: transparent;
+  }
+
+  a.facebook-login {
+    color: #1877f2;
+  }
+
+  span.login-with-facebook{
+    margin-left: 12px;
+    margin-top: 3px;
+  }
+
   img.fb-logo{
     height: 30px;
     width: 30px;
+  }
+
+  #form-group-email {
+    margin-bottom: 0;
   }
 
   .form-group{
@@ -283,11 +317,14 @@ a.register:hover{
     flex-direction: column;
   }
 
-  /* input.form-control{
-    width:300px; 
-    width:100%; 
-    margin: 0 auto;
-  } */
+  input.form-control{
+    font-size: 14px;
+    padding: 20px 14px;
+  }
+  
+  input.form-control:focus {
+    outline: none;
+  }
 
   .spin{
     margin: 20px;
@@ -300,7 +337,7 @@ a.register:hover{
   }
 
   .img-logo {
-    margin-bottom: 50px;
-    margin-top: 11px;
+    margin-bottom: 44px;
+    margin-top: 14px;
   }
 }

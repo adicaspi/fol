@@ -7,7 +7,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { ConfigService } from '../../services/config.service';
 import { UserDetails } from '../../models/UserDetails';
-import * as EXIF from 'exif-js';
 
 class fieldItem {
   label: string;
@@ -284,22 +283,22 @@ export class SettingsComponent implements OnInit {
     }, 2000);
   }
 
-  setImgOrientation(file, inputBase64String) {
-    return new Promise((resolve, reject) => {
-      const that = this;
-      EXIF.getData(file, function () {
-        if (this && this.exifdata && this.exifdata.Orientation) {
-          that.resetOrientation(inputBase64String, this.exifdata.Orientation, function
-            (resetBase64Image) {
-            inputBase64String = resetBase64Image;
-            resolve(inputBase64String);
-          });
-        } else {
-          resolve(inputBase64String);
-        }
-      });
-    });
-  }
+  // setImgOrientation(file, inputBase64String) {
+  //   return new Promise((resolve, reject) => {
+  //     const that = this;
+  //     EXIF.getData(file, function () {
+  //       if (this && this.exifdata && this.exifdata.Orientation) {
+  //         that.resetOrientation(inputBase64String, this.exifdata.Orientation, function
+  //           (resetBase64Image) {
+  //           inputBase64String = resetBase64Image;
+  //           resolve(inputBase64String);
+  //         });
+  //       } else {
+  //         resolve(inputBase64String);
+  //       }
+  //     });
+  //   });
+  // }
 
   resetOrientation(srcBase64, srcOrientation, callback) {
     const img = new Image();
