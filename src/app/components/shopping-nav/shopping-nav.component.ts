@@ -70,24 +70,6 @@ export class ShoppingNavComponent implements OnInit {
     this.shoppingNavService.prices.map(val => this.prices.push(Object.assign({}, val)));
   }
 
-  //@HostListener('window:scroll', ['$event'])
-  //onWindowScroll($event) {
-
-  //if (this.sidenav.opened) {
-  //console.log("scrolling");
-  // $event.stopPropagation();
-
-
-  // let currScrollPos: number = window.pageYOffset;
-  // if (currScrollPos > this.prevScrollPos) {
-  //   if (this.sidenav.open()) {
-  //     this.sidenav.close();
-  //   }
-  // }
-  // this.prevScrollPos = currScrollPos;
-  // }
-  //}
-
   onChangeCheckBox(key, elem) {
     if (key === 'stores') {
       if (!elem.checked) {
@@ -97,12 +79,8 @@ export class ShoppingNavComponent implements OnInit {
       } else {
         elem.checked = false;
         this.filteringDTO.removeStore(elem);
-        // if (this.filteringDTO.getStores().length === 0) {
-        //   this.filteringChanged = false;
-        // }
         this.wasFilteredAndCleared = true;
       }
-      //this.updateFeedFilteringDTO();
     }
     if (key === 'designers') {
       if (!elem.checked) {
@@ -112,12 +90,8 @@ export class ShoppingNavComponent implements OnInit {
       } else {
         elem.checked = false;
         this.filteringDTO.removeDesigner(elem);
-        // if (this.filteringDTO.designers.length === 0) {
-        //   this.filteringChanged = false;
-        // }
         this.wasFilteredAndCleared = true;
       }
-      //this.updateFeedFilteringDTO();
     }
     if (key === 'clothings') {
       if (!elem.checked) {
@@ -127,12 +101,8 @@ export class ShoppingNavComponent implements OnInit {
       } else {
         elem.checked = false;
         this.filteringDTO.removeProduct(elem);
-        // if (this.filteringDTO.productTypes.length === 0) {
-        //   this.filteringChanged = false;
-        // }
         this.wasFilteredAndCleared = true;
       }
-      //this.updateFeedFilteringDTO();
     }
   }
 

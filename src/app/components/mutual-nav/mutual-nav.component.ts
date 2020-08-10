@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import * as $ from 'jquery';
 import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '@angular/material';
 import { Options, LabelType } from 'ng5-slider';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -12,6 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../../services/message.service';
 import { ShoppingNavService } from '../../services/shopping-nav.service';
 import { Button } from '../../../../node_modules/protractor';
+import * as jQuery from 'jquery';
+import $ from 'jquery';
+
 
 @Component({
   selector: 'app-mutual-nav',
@@ -32,8 +34,8 @@ export class MutualNavComponent implements OnInit {
 
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 5000);
-  minValue: number = 0;
-  maxValue: number = 2000;
+  minValue: number;
+  maxValue: number;
   categoryForm: FormGroup;
   productForm: FormGroup;
   categroyRadioButton: MatRadioButton = null;
@@ -51,6 +53,8 @@ export class MutualNavComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private feedService: FeedService, private massageService: MessageService, private activatedRoute: ActivatedRoute, private shoppingNavService: ShoppingNavService) { }
 
   ngOnInit() {
+    this.minValue = 0;
+    this.maxValue = 1800;
     this.categories = this.shoppingNavService.desktopMenu;
     this.clothing = this.shoppingNavService.clothing;
     this.designers = this.shoppingNavService.designers;
@@ -80,7 +84,11 @@ export class MutualNavComponent implements OnInit {
       this.updateFeedFilteringDTO();
       this.menuChanged = false;
     } else {
-      this.categoryButton.nativeElement.className = 'filter-button';
+      if (this.filteringDTO.categoryIsFiltered) {
+        this.categoryMenuOpened();
+      } else {
+        this.categoryButton.nativeElement.className = 'filter-button';
+      }
     }
   }
 
@@ -89,7 +97,11 @@ export class MutualNavComponent implements OnInit {
       this.updateFeedFilteringDTO();
       this.menuChanged = false;
     } else {
-      this.productButton.nativeElement.className = 'filter-button';
+      if (this.filteringDTO.productTypeIsFiltered) {
+        this.productMenuOpened();
+      } else {
+        this.productButton.nativeElement.className = 'filter-button';
+      }
     }
   }
 
@@ -98,7 +110,11 @@ export class MutualNavComponent implements OnInit {
       this.updateFeedFilteringDTO();
       this.menuChanged = false;
     } else {
-      this.designerButton.nativeElement.className = 'filter-button';
+      if (this.filteringDTO.designersIsFiltered) {
+        this.designerMenuOpened();
+      } else {
+        this.designerButton.nativeElement.className = 'filter-button';
+      }
     }
   }
 
@@ -107,18 +123,28 @@ export class MutualNavComponent implements OnInit {
       this.updateFeedFilteringDTO();
       this.menuChanged = false;
     } else {
-      this.storeButton.nativeElement.className = 'filter-button';
+      if (this.filteringDTO.storesIsFiltered) {
+        this.storeMenuOpened();
+      } else {
+        this.storeButton.nativeElement.className = 'filter-button';
+      }
     }
   }
 
   priceMenuClosed() {
     if (this.menuChanged) {
+      this.filteringDTO.minPrice = this.priceRange.lower;
+      this.filteringDTO.maxPrice = this.priceRange.upper;
       this.updateFeedFilteringDTO();
       this.menuChanged = false;
+    }
+    if ((this.priceRange.lower > 0) || (this.priceRange.upper < 1800)) {
+      this.priceMenuOpened();
     } else {
       this.priceButton.nativeElement.className = 'filter-button';
     }
   }
+
 
   categoryMenuOpened() {
     this.categoryButton.nativeElement.className = 'filter-button checked';
@@ -152,10 +178,12 @@ export class MutualNavComponent implements OnInit {
 
   onChange(mrChange: MatRadioChange) {
     if (mrChange.value == "All Categories") {
-      this.filteringDTO.setCategory('Clothing');
+      this.filteringDTO.setCategory("Clothing");
+      this.filteringDTO.allCategoriesSelected = 1;
     }
     else {
       this.filteringDTO.setCategory(mrChange.value);
+      this.filteringDTO.allCategoriesSelected = 0;
     }
     if (mrChange.value == 'Clothing') {
       this.showProduct = true;
@@ -165,7 +193,6 @@ export class MutualNavComponent implements OnInit {
           break;
       }
     } else {
-      //this.filteringDTO.setCategory(null);
       this.showProduct = false;
       this.filteringDTO.clearProductType();
     }
@@ -223,8 +250,13 @@ export class MutualNavComponent implements OnInit {
   }
 
   selectedPrice() {
-    this.filteringDTO.setMinPrice(this.priceRange.lower);
-    this.filteringDTO.setMaxPrice(this.priceRange.upper);
+    this.priceMenuClosed();
+  }
+
+  changePrice($event) {
+    this.menuChanged = true;
+    this.filteringDTO.setMinPrice($event.value.lower);
+    this.filteringDTO.setMaxPrice($event.value.upper);
   }
 
   clearSelection(arrayToIterrate, filteringDTOarray) {

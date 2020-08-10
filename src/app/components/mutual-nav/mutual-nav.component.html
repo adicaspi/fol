@@ -71,17 +71,23 @@
     (menuOpened)="priceMenuOpened()" (menuClosed)="priceMenuClosed()">Price</button>
   <mat-menu #price="matMenu" xPosition="before">
     <div class="price-container">
-      <igx-slider id="slider" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="2000" [(ngModel)]="priceRange" (click)="$event.stopPropagation(); ">
+      <igx-slider id="slider" (onValueChange)="changePrice($event)" [type]="sliderType.RANGE" [minValue]="0" [maxValue]="1800"
+        [(ngModel)]="priceRange" (click)="$event.stopPropagation(); ">
       </igx-slider>
       <span class="price min">
         {{priceRange.lower}}
       </span>
       <span class="price max">
-        {{priceRange.upper}} +
+        {{priceRange.upper == 1800 ? '1800+': priceRange.upper}}
       </span>
+
     </div>
     <button (click)="selectedPrice() " class="submit-price">apply</button>
   </mat-menu>
+
+
+
+
 
   <span class="filler "></span>
 

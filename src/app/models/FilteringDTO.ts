@@ -1,5 +1,6 @@
 export class FilteringDTO {
   category: string = null;
+  allCategoriesSelected: number = 1;
   productTypes: string[] = [];
   designers: string[] = [];
   stores: number[] = [];
@@ -11,7 +12,7 @@ export class FilteringDTO {
   }
 
   get categoryIsFiltered() {
-    return this.category != null;
+    return (!this.allCategoriesSelected);
   }
 
   get productTypeIsFiltered() {
