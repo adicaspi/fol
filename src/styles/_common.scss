@@ -36,15 +36,28 @@ body{
     opacity: 1;
   }
   }
+
+  .cdk-global-overlay-wrapper {
+
+  }
   
-  .cdk-overlay-pane{
+  .cdk-overlay-pane {
     opacity: 1;
     animation: fadeIn 0.3s forwards 0.1s ease-in;
     -webkit-animation: fadeIn 0.3s forwards 0.1s ease-in;
   }
+
   .cdk-overlay-container > * {
     transition: none;
     -webkit-transition: none;
+  }
+
+  .mat-dialog {
+    transition: none;
+  }
+
+  .mat-dialog-container {
+    transition: none;
   }
 
 .cdk-overlay-container > .backdrop-product {
@@ -82,9 +95,10 @@ body{
   overflow-y: auto;
   pointer-events: auto;
 }
+
 .cdk-global-overlay-wrapper{
   height: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.48);
   min-height: 100vh;
 }
 
@@ -122,7 +136,7 @@ div.mat-radio-container{
 div.mat-radio-outer-circle{
   height: 15px;
   width: 15px;
-  border-color: black;
+  border-color: rgb(156, 146, 146);
   border-width: 0.5px;
 }
 
@@ -215,7 +229,7 @@ mat-toolbar{
 @media (max-width: 600px){
 
   .cdk-overlay-pane {
-    max-width: 90vh !important;
+    max-width: 346px !important;
   }
 
   .cdk-overlay-pane .mat-dialog-container{
