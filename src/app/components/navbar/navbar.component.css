@@ -15,8 +15,17 @@ img.logo {
   flex: 1 1 auto;
 }
 
+.search-full-width{
+  display: flex;
+}
 
-
+i.fas.fa-times-circle{
+  float: right;
+  line-height: 44px;
+  margin-right: 7px;
+  color: grey;
+  cursor: pointer;
+}
 @media only screen and (min-width: 900px) {
 
 

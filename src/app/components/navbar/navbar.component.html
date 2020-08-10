@@ -7,8 +7,10 @@
     <li class="search">
       <form [formGroup]="searchForm" class="search-form">
         <div class="search-full-width">
-          <input type="search" placeholder="Search" spellcheck="false" formControlName="search" id="navBar" [matAutocomplete]="auto"
+
+          <input type="text" placeholder="Search" spellcheck="false" formControlName="search" id="navBar" [matAutocomplete]="auto"
           />
+          <i *ngIf="showClearButton" class="fas fa-times-circle" (click)="clearSearchField()"></i>
           <mat-autocomplete #auto="matAutocomplete" class="search-autocomplete-panel" (optionSelected)="optionSelected($event.option.value)">
             <mat-option *ngFor="let option of options" [value]="option.userName">
               <!-- <div class="search-result" (click)="searchUser(option)"> -->

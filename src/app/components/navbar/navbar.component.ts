@@ -42,6 +42,7 @@ export class NavbarComponent implements OnInit {
   explore: boolean = false;
   profile: boolean = false;
   mobile: boolean = false;
+  showClearButton: boolean = false;
   showMutualNavBar: boolean = true;
   prevScrollPos = window.pageYOffset;
   routes: Routes = [
@@ -120,12 +121,17 @@ export class NavbarComponent implements OnInit {
   }
 
   onChanges(): void {
-
     this.searchForm.controls['search'].valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(value => {
       if (value != "") {
+        this.showClearButton = true;
         this.getSearchResults(value);
       }
     })
+  }
+
+  clearSearchField() {
+    this.searchForm.reset();
+    this.showClearButton = false;
   }
 
   setSearchInput(value: string) {
