@@ -12,6 +12,11 @@ button.register-button{
   background-clip: text;
   -webkit-background-clip: text;
   text-decoration: none;
+  height: 36px;
+  width: 64px;
+  border: none;
+  font-weight: 500;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
 button.register-button:hover{
@@ -23,10 +28,12 @@ button.register-button:hover{
   align-items:center;
 }
 
+
 .mat-dialog-content {
   width: 100%;
   overflow: hidden;
   margin: 0 auto;
+  padding: 0 38px;
   max-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       'Helvetica Neue' Helvetica, Arial, sans-serif;
@@ -54,9 +61,13 @@ h2 {
 }
 
 img.fw-logo{
-  max-width: 244px;
+  max-width: 222px;
   max-height: 38px;
   margin:0 auto;
+}
+
+#form-group-email {
+  margin-bottom: 0;
 }
 
 .form-group{
@@ -73,6 +84,8 @@ input.form-control{
   /* width:300px; */
   width:100%; 
   margin: 0 auto;
+  font-size: 14px;
+  padding: 20px 14px;
 }
 
 button.login-button:disabled{
@@ -83,14 +96,15 @@ button.login-button{
   display: block;
   margin: 0 auto;
   width: 100%;
-  background-color: grey;
+  background: -webkit-linear-gradient(60deg,rgba(255,80,170,.9) 20%,rgba(244,129,255,.95) 100%);
   color:white;
   cursor: pointer;
   border:none;
   border-radius: 0.25rem;
-  height: 40px;
+  height: 36px;
   margin-top: -12px;
   outline: none;
+  font-weight: 600;
 }
 
 button.btn.btn-default.login:focus {
@@ -166,21 +180,20 @@ button.facebook-button{
   border: 1px solid transparent;
   outline: none;
   border-radius: 4px;
-  //background-color: #4267b2;
-  background-color: #3c579e;
-
   width: 100%;
+  background-color: white;
 }
 
 a.facebook-login{
-  color:white;
+  color:#1877f2;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-decoration: none;
 }
 
 span.login-with-facebook{
-  margin-left: 3px;
+  margin-left: 12px;
   margin-top: 3px;
 }
 
@@ -196,14 +209,14 @@ button.login-button:disabled{
 // }
 
 img.fb-logo{
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
 }
 
 .sign-up{
   display: flex;
   justify-content: center;
-  
+  margin-top: 26px;
 }
 
 a.register{
@@ -219,8 +232,8 @@ a.register:hover{
 
 .img-logo{
   display: flex;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin-bottom: 48px;
+  margin-top: 16px;
 }
 
 .spin{
@@ -242,6 +255,12 @@ a.register:hover{
     border-radius: 0.25rem;
     cursor: pointer;
   } 
+
+  input.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #929292;
+  }
 
   button.login-button {
     height: 32px;
@@ -298,34 +317,14 @@ a.register:hover{
     color: #1877f2;
   }
 
-  span.login-with-facebook{
-    margin-left: 12px;
-    margin-top: 3px;
-  }
-
   img.fb-logo{
     height: 30px;
     width: 30px;
   }
 
-  #form-group-email {
-    margin-bottom: 0;
-  }
-
   .form-group{
     display:flex;
     flex-direction: column;
-  }
-
-  input.form-control{
-    font-size: 14px;
-    padding: 20px 14px;
-  }
-  
-  input.form-control:focus {
-    outline: none;
-    box-shadow: none;
-    border-color: #929292;
   }
 
   .spin{

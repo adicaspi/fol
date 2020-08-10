@@ -68,8 +68,8 @@ export class LandingPageComponent implements OnInit {
   registerPage(): void {
     if (this.desktop) {
       const dialogRef = this.dialog.open(LoginComponent, {
-        width: '400px',
-        height: '580px',
+        width: '420px',
+        height: 'unset',
         data: { close: true }
       });
     }

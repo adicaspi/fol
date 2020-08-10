@@ -133,12 +133,12 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   openLoginDialog() {
-    var pageWidth = this.desktop ? "400px" : "92vw";
+    var pageWidth = this.desktop ? "420px" : "92vw";
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
     const config = {
       scrollStrategy: scrollStrategy,
       width: pageWidth,
-      height: "100% - 40px",
+      height: "unset",
       data: {
         showCloseButton: false
       }
@@ -156,12 +156,12 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   openRegisterDialog() {
-    var pageWidth = this.desktop ? "400px" : "92vw";
+    var pageWidth = this.desktop ? "420px" : "92vw";
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
     const config = {
       scrollStrategy: scrollStrategy,
       width: pageWidth,
-      height: "100% - 40px",
+      height: "unset",
       data: {
         showCloseButton: false
       }
