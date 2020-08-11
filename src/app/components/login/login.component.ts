@@ -151,6 +151,7 @@ export class LoginComponent implements OnInit {
 
   regsiterPage() {
 
+
     if (!this.dialogRef) {
       // const scrollStrategy = this.overlay.scrollStrategies.reposition();
       // const config = {
