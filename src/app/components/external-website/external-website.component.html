@@ -52,17 +52,16 @@
   <div class="carousel-wrapper">
     <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
       <div class="carousel-inner w-100" role="listbox">
-        <div class="carousel-item active" *ngFor="let user of users">
+        <div *ngFor="let user of users ; let i = index" [ngClass]=" i==0? 'carousel carousel-item active': 'carousel carousel-item'">
           <div class="card-item">
             <div class="card card-body">
               <div class="user">
-                <!-- <img class="user-profile"> -->
                 <div class="user-info">
                   <div class="user-name">
-                    Adi Caspi
+                    {{user.username}}
                   </div>
                   <div class="user-followers">
-                    3500 followers
+                    {{user.followers}}
                   </div>
                 </div>
                 <div class="user-posts">
@@ -85,5 +84,4 @@
       </a>
     </div>
   </div>
-
 </div>

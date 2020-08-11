@@ -23,7 +23,7 @@ i.fas.fa-times-circle{
   float: right;
   line-height: 44px;
   margin-right: 7px;
-  color: grey;
+  color: rgb(152,152,152);
   cursor: pointer;
 }
 @media only screen and (min-width: 900px) {

@@ -37,7 +37,7 @@ body{
   }
   }
   
-  .cdk-overlay-pane{
+  .cdk-overlay-pane.login-panel-class{
     opacity: 0;
     animation: fadeIn 0.3s forwards 0.1s ease-in;
     -webkit-animation: fadeIn 0.3s forwards 0.1s ease-in;
@@ -45,6 +45,11 @@ body{
   .cdk-overlay-container > * {
     transition: none;
     -webkit-transition: none;
+  }
+
+  .cdk-overlay-pane.panel-product{
+    opacity:1;
+    animation: none;
   }
 
 .cdk-overlay-container > .backdrop-product {
@@ -81,6 +86,7 @@ body{
 .cdk-overlay-container.product-overlay-container  {
   overflow-y: auto;
   pointer-events: auto;
+  
 }
 .cdk-global-overlay-wrapper{
   height: auto;

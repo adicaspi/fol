@@ -38,6 +38,10 @@ span.like-list{
   cursor: pointer;
 }
 
+.product-description{
+  margin-top: 12px;
+}
+
 
 @media (min-width: 900px) {
   .wrapper {

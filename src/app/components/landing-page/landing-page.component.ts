@@ -72,10 +72,32 @@ export class LandingPageComponent implements OnInit {
         height: '580px',
         data: { close: true }
       });
+      dialogRef.afterClosed().subscribe(res => {
+        if (res == "register") {
+          this.openRegisterDialog();
+        }
+
+      })
     }
     else {
       this.router.navigate(['/login']);
     }
+  }
+
+  openRegisterDialog() {
+    const registerDialogRef = this.dialog.open(RegisterComponent, {
+      width: '400px',
+      height: '580px',
+      data: { close: true }
+    });
+    registerDialogRef.disableClose = true;
+
+    registerDialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      if (res == "login") {
+        this.registerPage();
+      }
+    })
   }
 
   explorePage() {
