@@ -17,6 +17,7 @@ button.register-button{
   border: none;
   font-weight: 500;
   font-family: Roboto,"Helvetica Neue",sans-serif;
+  outline: none;
 }
 
 button.register-button:hover{
@@ -86,6 +87,12 @@ input.form-control{
   margin: 0 auto;
   font-size: 14px;
   padding: 20px 14px;
+}
+
+input.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #929292;
 }
 
 button.login-button:disabled{
