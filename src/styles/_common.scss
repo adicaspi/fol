@@ -12,6 +12,10 @@ body{
   overflow-x: hidden;
 }
 
+.cdk-overlay-pane .mat-dialog-container{
+  border-radius: 16px !important;
+}
+
 .overlay-product .mat-dialog-container {
   border-radius: 4px !important;
   padding: 0px !important;
@@ -36,20 +40,39 @@ body{
     opacity: 1;
   }
   }
+
+  .cdk-global-overlay-wrapper {
+
+  }
   
+<<<<<<< HEAD
   .cdk-overlay-pane.login-panel-class{
     opacity: 0;
+=======
+  .cdk-overlay-pane {
+    opacity: 1;
+>>>>>>> tamir/design/login
     animation: fadeIn 0.3s forwards 0.1s ease-in;
     -webkit-animation: fadeIn 0.3s forwards 0.1s ease-in;
   }
+
   .cdk-overlay-container > * {
     transition: none;
     -webkit-transition: none;
   }
 
+<<<<<<< HEAD
   .cdk-overlay-pane.panel-product{
     opacity:1;
     animation: none;
+=======
+  .mat-dialog {
+    transition: none;
+  }
+
+  .mat-dialog-container {
+    transition: none;
+>>>>>>> tamir/design/login
   }
 
 .cdk-overlay-container > .backdrop-product {
@@ -88,9 +111,10 @@ body{
   pointer-events: auto;
   
 }
+
 .cdk-global-overlay-wrapper{
   height: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.48);
   min-height: 100vh;
 }
 
@@ -128,7 +152,7 @@ div.mat-radio-container{
 div.mat-radio-outer-circle{
   height: 15px;
   width: 15px;
-  border-color: black;
+  border-color: rgb(156, 146, 146);
   border-width: 0.5px;
 }
 
@@ -221,7 +245,7 @@ mat-toolbar{
 @media (max-width: 600px){
 
   .cdk-overlay-pane {
-    max-width: 90vh !important;
+    max-width: 346px !important;
   }
 
   .cdk-overlay-pane .mat-dialog-container{

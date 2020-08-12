@@ -6,22 +6,7 @@
     <img src="../../../assets/fw_logo_2A.png" class="fw-logo" />
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
-    <div class="form-group">
-      <button class="facebook-button">
-        <a class="facebook-login" href="{{facebookLoginEndpoint}}">
-          <span class="facebook-icon">
-            <img src="../../../assets/facebook_logo.PNG" class="fb-logo" />
-          </span>
-          <span class="login-with-facebook">
-            Log in with Facebook
-          </span>
-        </a>
-      </button>
-    </div>
-    <div class="login-method">
-      <span>OR</span>
-    </div>
-    <div class="form-group">
+    <div class="form-group" id="form-group-email">
       <label for="email"></label>
       <input type="email" formControlName="emailLogin" class="form-control" placeholder="E-mail, username" [ngClass]="{
         'is-invalid': submitted && l.emailLogin.errors || wrongUser
@@ -53,10 +38,27 @@
       </p>
     </div>
     <div class="form-group">
-      <button class="login-button">Login</button>
+      <button class="login-button">Log In</button>
       <div *ngIf="submitted" class="spin">
         <app-loading-spinner></app-loading-spinner>
       </div>
+    </div>
+
+    <div class="login-method">
+      <span>OR</span>
+    </div>
+
+    <div class="form-group">
+      <button class="facebook-button">
+        <a class="facebook-login" href="{{facebookLoginEndpoint}}">
+          <span class="facebook-icon">
+            <img src="https://cdn.freebiesupply.com/logos/large/2x/facebook-logo-2019.png" class="fb-logo" />
+          </span>
+          <span class="login-with-facebook">
+            Log in with Facebook
+          </span>
+        </a>
+      </button>
     </div>
 
 
@@ -74,7 +76,7 @@
       <span>Don't have an account?</span>
     </div>
     <div>
-      <button mat-button [mat-dialog-close]="register" class="register-button" (click)="regsiterPage()">
+      <button [mat-dialog-close]="register" class="register-button" (click)="regsiterPage()">
         <!-- <a class="register" (click)="regsiterPage()"> -->
         Sign up
         <!-- </a> -->

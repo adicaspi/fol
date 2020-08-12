@@ -7,8 +7,17 @@ button.mat-button{
 button.register-button{
   padding:0;
   font-size: 16px;
-  color: #0095f6;
+  color: transparent;
+  background: -webkit-linear-gradient(60deg,rgba(255,80,170,.9) 20%,rgba(244,129,255,.95) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
   text-decoration: none;
+  height: 36px;
+  width: 64px;
+  border: none;
+  font-weight: 500;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  outline: none;
 }
 
 button.register-button:hover{
@@ -20,16 +29,21 @@ button.register-button:hover{
   align-items:center;
 }
 
+
 .mat-dialog-content {
   width: 100%;
   overflow: hidden;
   margin: 0 auto;
+  padding: 0 38px;
   max-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue' Helvetica, Arial, sans-serif;
 
   &.padding{
     padding:40px;
   }
 }
+
 a {
   color: black;
 }
@@ -39,7 +53,6 @@ h2 {
   margin: 0 auto;
   margin-top: 5px;
   text-align: center;
-  font-family: 'Maven Pro', sans-serif;
   font-size: 30px;
 }
 
@@ -49,9 +62,13 @@ h2 {
 }
 
 img.fw-logo{
-  max-width: 204px;
+  max-width: 222px;
   max-height: 38px;
   margin:0 auto;
+}
+
+#form-group-email {
+  margin-bottom: 0;
 }
 
 .form-group{
@@ -68,6 +85,14 @@ input.form-control{
   /* width:300px; */
   width:100%; 
   margin: 0 auto;
+  font-size: 14px;
+  padding: 20px 14px;
+}
+
+input.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #929292;
 }
 
 button.login-button:disabled{
@@ -78,14 +103,15 @@ button.login-button{
   display: block;
   margin: 0 auto;
   width: 100%;
-  background-color: grey;
+  background: -webkit-linear-gradient(60deg,rgba(255,80,170,.9) 20%,rgba(244,129,255,.95) 100%);
   color:white;
   cursor: pointer;
   border:none;
   border-radius: 0.25rem;
-  height: 40px;
+  height: 36px;
   margin-top: -12px;
   outline: none;
+  font-weight: 600;
 }
 
 button.btn.btn-default.login:focus {
@@ -98,27 +124,32 @@ p.forgot-password {
   width: 300px;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 25px;
-  margin-top: 0;
+  margin-bottom: 23px;
+  margin-top: 6px;
   font-size: 12px;
 }
 
+p.forgot-password a {
+  color: #111;
+}
+
 .login-method {
-  width: 50%;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 20px;
-  margin-top: 15px;
+  margin-bottom: 28px;
+  margin-top: 28px;
   font-size: 12px;
   font-weight: 700;
   text-align: center;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #ddd;
   line-height: 0.1em;
 }
 
 .login-method span {
   background: #fff;
-  padding: 0 10px;
+  padding: 0 20px;
+  color: #969696;
 }
 
 // button.btn.btn-default.login.facebook {
@@ -156,21 +187,20 @@ button.facebook-button{
   border: 1px solid transparent;
   outline: none;
   border-radius: 4px;
-  //background-color: #4267b2;
-  background-color: #3c579e;
-
   width: 100%;
+  background-color: white;
 }
 
 a.facebook-login{
-  color:white;
+  color:#1877f2;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-decoration: none;
 }
 
 span.login-with-facebook{
-  margin-left: 3px;
+  margin-left: 12px;
   margin-top: 3px;
 }
 
@@ -186,14 +216,14 @@ button.login-button:disabled{
 // }
 
 img.fb-logo{
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
 }
 
 .sign-up{
   display: flex;
   justify-content: center;
-  
+  margin-top: 26px;
 }
 
 a.register{
@@ -209,8 +239,8 @@ a.register:hover{
 
 .img-logo{
   display: flex;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin-bottom: 48px;
+  margin-top: 16px;
 }
 
 .spin{
@@ -221,7 +251,7 @@ a.register:hover{
 
 @media (max-width: 600px) {
   .mat-dialog-content {
-   padding: 0;
+    padding: 0;
    }
 
   button{
@@ -232,6 +262,18 @@ a.register:hover{
     border-radius: 0.25rem;
     cursor: pointer;
   } 
+
+  input.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #929292;
+  }
+
+  button.login-button {
+    height: 32px;
+    background: -webkit-linear-gradient(60deg,rgba(255,80,170,.9) 20%,rgba(244,129,255,.95) 100%);
+    margin-top: -10px;
+  }
 
   // button.btn.btn-default.login.facebook {
   //   width: 100%;
@@ -266,11 +308,20 @@ a.register:hover{
     /* display: flex;
     justify-content: center; */
     font-size: 14px;
+    margin-top: 28px;
   }
   
   a.register{
     margin-left: 3px;
     cursor: pointer;
+  }
+
+  button.facebook-button {
+    background-color: transparent;
+  }
+
+  a.facebook-login {
+    color: #1877f2;
   }
 
   img.fb-logo{
@@ -283,12 +334,6 @@ a.register:hover{
     flex-direction: column;
   }
 
-  /* input.form-control{
-    width:300px; 
-    width:100%; 
-    margin: 0 auto;
-  } */
-
   .spin{
     margin: 20px;
     display: flex;
@@ -300,7 +345,7 @@ a.register:hover{
   }
 
   .img-logo {
-    margin-bottom: 50px;
-    margin-top: 11px;
+    margin-bottom: 44px;
+    margin-top: 14px;
   }
 }
