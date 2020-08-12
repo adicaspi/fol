@@ -161,9 +161,15 @@ export class LoginComponent implements OnInit {
   }
 
   regsiterPage() {
-    if (!this.dialogRef) {
+    if (this.desktop) {
+      if (!this.dialogRef) {
+        this.router.navigate(['/register']);
+      }
+
+    } else {
       this.router.navigate(['/register']);
     }
+
   }
 
   loadConfigurationData() {

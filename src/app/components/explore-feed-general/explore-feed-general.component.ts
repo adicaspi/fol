@@ -156,26 +156,30 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   openRegisterDialog() {
-    var pageWidth = this.desktop ? "420px" : "92vw";
-    const scrollStrategy = this.overlay.scrollStrategies.reposition();
-    const config = {
-      scrollStrategy: scrollStrategy,
-      width: pageWidth,
-      height: "unset",
-      data: {
-        showCloseButton: false
+    if (this.desktop) {
+      var pageWidth = this.desktop ? "420px" : "92vw";
+      const scrollStrategy = this.overlay.scrollStrategies.reposition();
+      const config = {
+        scrollStrategy: scrollStrategy,
+        width: pageWidth,
+        height: "unset",
+        data: {
+          showCloseButton: false
+        }
       }
+
+      const registerDialogRef = this.dialog.open(RegisterComponent, config);
+      registerDialogRef.disableClose = true;
+
+      registerDialogRef.afterClosed().subscribe(res => {
+        console.log(res);
+        if (res == "login") {
+          this.openLoginDialog();
+        }
+      })
+    } else {
+      this.router.navigate(['register']);
     }
-
-    const registerDialogRef = this.dialog.open(RegisterComponent, config);
-    registerDialogRef.disableClose = true;
-
-    registerDialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-      if (res == "login") {
-        this.openLoginDialog();
-      }
-    })
   }
 
   openDialog(post): void {
