@@ -109,11 +109,11 @@ span.login-with-facebook{
 }
 
 .form-group{
-  // height: 43px;
-  display:flex;
+  //height: 43px;
+  display: flex;
   flex-direction: column;
   margin: 0;
-  // margin-bottom: 4px;
+  margin-bottom: -3px;
 }
 
 input.form-control {
@@ -130,15 +130,18 @@ input.form-control:focus {
 }
 
 .submit-form{
-  margin-top: 25px;
+  // margin-top: 40px;
+  margin-top:18px;
 }
 
 .login-method {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 5px;
-  margin-top: 25px;
+  // margin-bottom: 5px;
+  margin-bottom: 21px;
+  margin-top: 32px;
+  // margin-top: 25px;
   font-size: 12px;
   font-weight: 700;
   text-align: center;
@@ -168,8 +171,7 @@ button.btn.btn-default.register {
 }
 
 .invalid-feedback{
-  margin-top: 0;
-  margin-left: 3px;
+  margin-left:2px;
 }
 
 @media (min-width: 600px)  {
@@ -194,10 +196,11 @@ button.btn.btn-default.register {
     width: 50%;
   } */
 
-  // .form-group {
-  //   margin: 0;
-  //   margin-bottom: 4px;
-  // }
+  //.form-group {
+   // margin: 0;
+    // margin-bottom: 4px;
+    //margin-bottom: -3px;
+  //}
 
   button.btn.btn-default.register {
     display: block;
@@ -229,13 +232,6 @@ button.btn.btn-default.register {
   button.btn.facebook {
     background-color: #6d84b4;
   }
-
-  // div.invalid-feedback{
-  //   width: 50%;
-  //   margin: 0 auto;
-  // }
-
-
 
   img.fw-logo{
     height: 38px;
@@ -371,11 +367,6 @@ button.btn.btn-default.register {
     background-color: #6d84b4;
   }
   
-  // div.invalid-feedback{
-  //   width: 50%;
-  //   margin: 0 auto;
-  // }
-
   button.btn.btn-default.register {
     height: 34px;
     padding: 2px;

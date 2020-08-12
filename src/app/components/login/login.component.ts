@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   previousUrl: string;
   showCloseButton: boolean = true;
   register: string = "register";
+  loading = false;
   private WindowSizeSubscription: Subscription;
   facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
   private baseApiUrl = environment.BASE_API_URL;
@@ -110,6 +111,11 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin() {
     this.submitted = true;
+    if (!this.loginForm.valid) {
+
+      return;
+    }
+    this.loading = true;
     this.wrongPass = false;
     this.wrongUser = false;
     let email = this.loginForm.value.emailLogin;
@@ -138,6 +144,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.submitted = false;
+          this.loading = false;
 
           if (this.error.error == 'Invalid Authentication Data') {
 

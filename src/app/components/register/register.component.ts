@@ -217,6 +217,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  landingPage() {
+    this.router.navigate(['landing']);
+  }
+
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
