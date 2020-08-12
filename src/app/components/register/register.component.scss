@@ -63,7 +63,7 @@ a.login{
 .terms{
   font-size: 12px;
   text-align: center;
-  margin-top: -20px;
+  margin-top: -4px;
   margin-bottom: 10px;
   color: rgb(142,142,142);
 }
@@ -113,7 +113,7 @@ span.login-with-facebook{
   display:flex;
   flex-direction: column;
   margin: 0;
-  margin-bottom: 4px;
+  // margin-bottom: 4px;
 }
 
 input.form-control {
@@ -167,9 +167,10 @@ button.btn.btn-default.register {
   font-size: 14px;
 }
 
-
-
-
+.invalid-feedback{
+  margin-top: 0;
+  margin-left: 3px;
+}
 
 @media (min-width: 600px)  {
   .wrapper {
@@ -229,10 +230,10 @@ button.btn.btn-default.register {
     background-color: #6d84b4;
   }
 
-  div.invalid-feedback{
-    width: 50%;
-    margin: 0 auto;
-  }
+  // div.invalid-feedback{
+  //   width: 50%;
+  //   margin: 0 auto;
+  // }
 
 
 
@@ -370,10 +371,10 @@ button.btn.btn-default.register {
     background-color: #6d84b4;
   }
   
-  div.invalid-feedback{
-    width: 50%;
-    margin: 0 auto;
-  }
+  // div.invalid-feedback{
+  //   width: 50%;
+  //   margin: 0 auto;
+  // }
 
   button.btn.btn-default.register {
     height: 34px;

@@ -96,7 +96,6 @@ export class RegisterComponent implements OnInit {
     });
 
     this.onChanges();
-    console.log(this.f);
   }
 
   // convenience getter for easy access to form fields

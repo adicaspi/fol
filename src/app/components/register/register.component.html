@@ -153,10 +153,10 @@
       <span>Have an account?</span>
     </div>
     <div>
-      <button [mat-dialog-close]="login" (click)="loginPage()" class="register-button">
-        <!-- <a class="login" (click)="loginPage()">
+      <button *ngIf="modal" [mat-dialog-close]="login" (click)="loginPage()" class="register-button">
         Log in
-      </a> -->
+      </button>
+      <button *ngIf="!modal" (click)="loginPage()" class="register-button">
         Log in
       </button>
     </div>

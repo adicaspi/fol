@@ -90,10 +90,9 @@ export class LandingPageComponent implements OnInit {
       height: '580px',
       data: { close: true }
     });
-    registerDialogRef.disableClose = true;
+    // registerDialogRef.disableClose = true;
 
     registerDialogRef.afterClosed().subscribe(res => {
-      console.log(res);
       if (res == "login") {
         this.registerPage();
       }

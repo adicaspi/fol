@@ -104,6 +104,10 @@ export class LoginComponent implements OnInit {
     return this.loginForm.valid;
   }
 
+  landingPage() {
+    this.router.navigate(['landing']);
+  }
+
   onSubmitLogin() {
     this.submitted = true;
     this.wrongPass = false;
@@ -150,8 +154,6 @@ export class LoginComponent implements OnInit {
   }
 
   regsiterPage() {
-
-
     if (!this.dialogRef) {
       this.router.navigate(['/register']);
     }
