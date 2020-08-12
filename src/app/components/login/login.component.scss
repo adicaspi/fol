@@ -249,6 +249,16 @@ a.register:hover{
   justify-content: center;
 }
 
+.app-store{
+  display: flex;
+  justify-content: center;
+}
+
+.app-store img{
+  height: 38px;
+  width: 118px;
+}
+
 @media (max-width: 600px) {
   .mat-dialog-content {
     padding: 0;
