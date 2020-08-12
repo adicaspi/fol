@@ -50,9 +50,9 @@
   <form [formGroup]="registerForm">
 
 
-    <div class="form-group">
+    <div class="form-group" id="form-group-email">
       <label for="email"></label>
-      <input type="text" formControlName="email" class="form-control" [ngClass]="{
+      <input type="email" formControlName="email" class="form-control" [ngClass]="{
                   'is-invalid': (submitted && f.email.errors) || emailExists
             }" placeholder="E-mail" />
       <div *ngIf="submitted && f.email.errors" class="invalid-feedback">

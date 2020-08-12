@@ -153,23 +153,7 @@ export class LoginComponent implements OnInit {
 
 
     if (!this.dialogRef) {
-      // const scrollStrategy = this.overlay.scrollStrategies.reposition();
-      // const config = {
-      //   scrollStrategy: scrollStrategy,
-      //   width: '400px',
-      //   height: '580px',
-      //   data: {
-      //     close: false
-      //   }
-      // }
-      //   this.dialogRef.close();
-      // this.dialog.open(RegisterComponent, config);
-
-      // }
-
-      // else {
       this.router.navigate(['/register']);
-      //}
     }
   }
 
