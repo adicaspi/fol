@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
   termsLink: string = "https://www.followear.com/terms"
   cookiesLink: string = "https://www.followear.com/cookies-policy"
   private baseApiUrl = environment.BASE_API_URL;
-  facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://localhost:4200&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid%20aws.cognito.signin.user.admin%20profile";
+  facebookLoginEndpoint: string = environment.loginWithFbUrl;
   title = 'Register to Followear';
 
 
@@ -72,20 +72,12 @@ export class RegisterComponent implements OnInit {
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
     });
-
-
-    //var rect = matDialog.target.getBoundingClientRect();
-    //console.log(rect.top, rect.right, rect.bottom, rect.left);
   }
 
   ngOnInit() {
     this.titleService.setTitle('Register to Followear');
     this.meta.addTag({ name: 'description', content: "Join Followear! Sign up to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index' });
-    // if (this.dialogRef) {
-    //   this.dialogRef.updateSize('550px', '580px');
-    // }
-
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', [Validators.required, Validators.pattern('^\\d*$')]],

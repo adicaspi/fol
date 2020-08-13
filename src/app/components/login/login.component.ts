@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   register: string = "register";
   loading = false;
   private WindowSizeSubscription: Subscription;
-  facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
+  facebookLoginEndpoint: string = environment.loginWithFbUrl;
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
     private errorsService: ErrorsService,
     private http: HttpClient,
     private configSerivce: ConfigService,
-    //private dialogService: DialogService,
     private configService: ConfigService,
     private dialog: MatDialog,
     private overlay: Overlay,
@@ -90,9 +89,6 @@ export class LoginComponent implements OnInit {
       emailLogin: ['', Validators.required],
       passwordLogin: ['', Validators.required]
     });
-
-    //Check if user can auto-login
-    //this.loadConfigurationData();
   }
 
   // convenience getter for easy access to form fields
@@ -165,27 +161,9 @@ export class LoginComponent implements OnInit {
       if (!this.dialogRef) {
         this.router.navigate(['/register']);
       }
-
     } else {
       this.router.navigate(['/register']);
     }
-
-  }
-
-  loadConfigurationData() {
-    this.http
-      .get<any>(this.autoLogin, { observe: 'response' })
-      .pipe(
-        map(data => {
-
-          this.userService.userId = data.body.userId;
-          this.userService.username = data.body.userName;
-          this.userService.updateUser(data.body.userId);
-          this.router.navigate(['/feed/' + data.body.userId]);
-          this.configSerivce.setSessionStorage(data.body.userId.toString());
-        })
-      )
-      .toPromise();
   }
 
   ngOnDestroy() {

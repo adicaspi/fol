@@ -19,7 +19,6 @@ export class ViewFeedComponent implements OnInit {
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   userId: boolean = false;
   desktop: Boolean = true;
-  facebookLoginCode: string;
   filteredOptions: Observable<string[]>;
   searchedTouched: Observable<boolean>;
   error: any = {};
@@ -48,9 +47,9 @@ export class ViewFeedComponent implements OnInit {
     } else {
       var index = this.router.url.indexOf("code");
       if (index != -1) {
-        // this.facebookLoginCode = this.facebookLoginEndpointTemp.substring(index + 5);
-        this.facebookLoginCode = this.router.url.substring(index + 5);
-        console.log(this.facebookLoginCode);
+        var facebookLoginCode = this.router.url.substring(index + 5);
+        this.loginWithFacebook(facebookLoginCode);
+        console.log(facebookLoginCode);
       } else {
         this.loadConfigurationData();
       }
@@ -68,6 +67,16 @@ export class ViewFeedComponent implements OnInit {
       error => this.anyErrors = true,
       () => this.finished = true
 
+  }
+
+  loginWithFacebook(code) {
+    this.userService.loginWithFacebook(code).subscribe(res => {
+      this.userId = true;
+      this.userService.userId = res.userId;
+      this.userService.username = res.username;
+      this.userService.updateUser(res.userId);
+      this.configService.setSessionStorage(res.userId.toString());
+    })
   }
 
   loadConfigurationData() {
