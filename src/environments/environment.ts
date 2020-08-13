@@ -6,7 +6,8 @@
 import 'zone.js/dist/zone-error';
 export const environment = {
   production: false,
-  BASE_API_URL: 'http://followear-dev.zpgietiqcn.eu-west-1.elasticbeanstalk.com/api'
+  BASE_API_URL: 'http://followear-dev.zpgietiqcn.eu-west-1.elasticbeanstalk.com/api',
+  loginWithFbUrl: 'https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://localhost:4200&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid%20aws.cognito.signin.user.admin'
 };
 
 /*

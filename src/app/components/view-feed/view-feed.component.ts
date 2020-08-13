@@ -19,6 +19,7 @@ export class ViewFeedComponent implements OnInit {
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   userId: boolean = false;
   desktop: Boolean = true;
+  facebookLoginCode: string;
   filteredOptions: Observable<string[]>;
   searchedTouched: Observable<boolean>;
   error: any = {};
@@ -38,16 +39,21 @@ export class ViewFeedComponent implements OnInit {
     private router: Router,
     private errorsService: ErrorsService
   ) {
-    this.autoLoginSubscription = this.errorsService.getMessage().subscribe(msg => {
-      this.error = msg;
-    });
+
   }
 
   ngOnInit() {
     if (this.userService.userId) {
       this.userId = true;
     } else {
-      this.loadConfigurationData();
+      var index = this.router.url.indexOf("code");
+      if (index != -1) {
+        // this.facebookLoginCode = this.facebookLoginEndpointTemp.substring(index + 5);
+        this.facebookLoginCode = this.router.url.substring(index + 5);
+        console.log(this.facebookLoginCode);
+      } else {
+        this.loadConfigurationData();
+      }
     }
     this.feedService.currentLoadedFeedComponent = "feed";
     this.subscription = this.configService.windowSizeChanged.subscribe(

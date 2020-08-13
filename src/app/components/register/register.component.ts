@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
   termsLink: string = "https://www.followear.com/terms"
   cookiesLink: string = "https://www.followear.com/cookies-policy"
   private baseApiUrl = environment.BASE_API_URL;
-  facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://www.followear.com&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid";
+  facebookLoginEndpoint: string = "https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://localhost:4200&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid%20aws.cognito.signin.user.admin%20profile";
   title = 'Register to Followear';
 
 

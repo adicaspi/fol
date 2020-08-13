@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, UrlSegment, UrlMatchResult } from '@angular/router';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { ViewFeedComponent } from './components/view-feed/view-feed.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -27,6 +27,15 @@ import { ExternalWebsiteComponent } from './components/external-website/external
 
 const routes: Routes = [
   {
+    path: '',
+    component: ViewFeedComponent
+  },
+
+  {
+    path: 'landing',
+    component: LandingPageComponent
+  },
+  {
     path: 'profile', component: ViewMainProfileComponent,
 
   },
@@ -48,14 +57,8 @@ const routes: Routes = [
     path: 'settings/:id',
     component: SettingsComponent
   },
-  {
-    path: '',
-    component: ViewFeedComponent
-  },
-  {
-    path: 'landing',
-    component: LandingPageComponent
-  },
+
+
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'explore/:id', component: ViewExploreComponent },
   {
