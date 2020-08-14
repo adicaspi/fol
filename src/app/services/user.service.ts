@@ -83,6 +83,13 @@ export class UserService {
     );
   }
 
+  updateUsername(username: string): Observable<any> {
+    let params = new HttpParams().set('username', username);
+    return this.http.post(
+      this.globalSettingsURL + this.userId + '/update-username', { headers: httpOptions.headers }, { params: params }
+    );
+  }
+
   updateUserDescription(description: string): Observable<any> {
     let params = new HttpParams().set('description', description);
     return this.http.post(

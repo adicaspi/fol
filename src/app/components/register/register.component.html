@@ -73,7 +73,7 @@
     <div class="form-group">
       <label for="username"></label>
       <input type="text" formControlName="username" class="form-control" [ngClass]="{
-                      'is-invalid': submitted && f.username.errors || userNameExists 
+                      'is-invalid': submitted && f.username.errors || f.value.username.touched && userNameExists 
                     }" placeholder="Username" />
 
       <div *ngIf="submitted && f.username.errors" class="invalid-feedback">

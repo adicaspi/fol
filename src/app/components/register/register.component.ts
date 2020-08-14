@@ -128,7 +128,7 @@ export class RegisterComponent implements OnInit {
     });
     this.registerForm.get('username').valueChanges.subscribe(val => {
       this.submitted = false;
-    })
+    });
     this.registerForm.get('password').valueChanges.subscribe(val => {
       this.submitted = false;
     });

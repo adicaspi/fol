@@ -8,13 +8,13 @@
 <div class="row">
   <div class="column controlers">
     <ul class="form-sections">
-      <li [class]="profileClass" (click)="editProfile()">
+      <li [class]="profile?'controlers profile-clicked':'controlers edit-profile'" (click)="editProfile()">
         Edit Profile
       </li>
-      <li [class]="passClass" (click)="changePassword()">
+      <li [class]="password?'controlers password-clicked':'controlers password'" (click)="changePassword()">
         Password
       </li>
-      <li [class]="termsClass" (click)="seeTerms()">
+      <li [class]="terms?'controlers terms-clicked':'controlers terms'" (click)="seeTerms()">
         Terms
       </li>
     </ul>
@@ -26,8 +26,8 @@
         <label class="user-name">
           <img [src]="postImage" class="profile" />
         </label>
-        <div [class]="userInfoClass">
-          <span [class]="spanClass">{{user.username}}</span>
+        <div class="user-info">
+          <span [class]="profile?'user':'user pass'">{{user.username}}</span>
           <div *ngIf="profile" class="upload-image">
             <input style="display:none" type="file" class="profile-image" (change)="onFileSelected($event)" #fileInput />
             <div class="change-profile-image">
@@ -46,7 +46,23 @@
 
             <div class="form-group">
               <label>User Name</label>
-              <input type="text" formControlName="username" class="form-control" />
+              <input type="text" formControlName="username" class="form-control" [ngClass]="{
+                'is-invalid': submitted && f.username.errors ||  userNameExists 
+              }" />
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Username is required</div>
+                <div *ngIf="f.username.errors.pattern" class="error-msg">
+                  Username can contain only English letters and numbers without spaces
+                </div>
+                <div *ngIf="!f.username.errors.pattern">
+                  <div *ngIf="f.username.errors.minlength">
+                    Username must be at least 3 characters
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="userNameExists" class="invalid-feedback">
+                Username already exists
+              </div>
             </div>
 
             <div class="form-group">
@@ -72,25 +88,26 @@
 
             <div class="form-group submit-button">
               <div class="submit-button">
-                <button type="button" (click)="onSubmit()">
+                <button type="button" (click)="onSubmit()" class="submit-button">
                   Submit
                 </button>
-                <div class="loading-spinner">
-                  <div *ngIf="loading">
-                    <app-loading-spinner></app-loading-spinner>
-                  </div>
-                </div>
-                <div class="succes-message" *ngIf="showSuccessMsg">
-                  <p class="alert alert-success">
-                    <strong>Success!</strong> your profile was updated.
-                  </p>
-                </div>
-                <div class="error-message" *ngIf="showFailMsg">
-                  <p class="alert alert-danger">
-                    <strong>Failed</strong> to update your profile.
-                  </p>
+              </div>
+              <div class="loading-spinner">
+                <div *ngIf="loading">
+                  <app-loading-spinner></app-loading-spinner>
                 </div>
               </div>
+              <div class="succes-message" *ngIf="showSuccessMsg">
+                <p class="alert alert-success">
+                  <strong>Success!</strong> your profile was updated.
+                </p>
+              </div>
+              <div class="error-message" *ngIf="showFailMsg">
+                <p class="alert alert-danger">
+                  <strong>Failed</strong> to update your profile.
+                </p>
+              </div>
+
             </div>
 
           </fieldset>
@@ -143,20 +160,20 @@
               </div>
               <div class="form-group submit-button">
                 <div class="submit-button">
-                  <button type="button" (click)="onSubmitChangePassword()">
-                    Change Password
+                  <button type="button" (click)="onSubmitChangePassword()" class="submit-button">
+                    Submit
                   </button>
                   <div class="loading-spinner">
                     <div *ngIf="loading">
                       <app-loading-spinner></app-loading-spinner>
                     </div>
                   </div>
-                  <div class="succes-message" *ngIf="showSuccessMsg">
+                  <div class="message succes-message" *ngIf="showSuccessMsg">
                     <p class="alert alert-success">
                       <strong>Success!</strong> your password was updated.
                     </p>
                   </div>
-                  <div class="error-message" *ngIf="showFailMsg">
+                  <div class="message error-message" *ngIf="showFailMsg">
                     <p class="alert alert-danger">
                       <strong>Failed</strong> to update your password.
                     </p>

@@ -29,6 +29,29 @@
   text-align: left;
 }
 
+button.submit-button{
+  background: -webkit-linear-gradient(60deg, rgba(255, 80, 170, 0.9) 20%, rgba(244, 129, 255, 0.95) 100%);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  height: 36px;
+  width: 75px;
+  margin-left: 165px;
+  float: left;
+}
+
+.form-group.submit-button{
+  display: flex;
+  flex-direction: column;
+}
+
+.message{
+  margin-top: 10px;
+}
 
 @media (min-width: 900px) {
 .wrapper {
@@ -173,9 +196,10 @@ span.user.pass {
   margin-top: 50px;
 }
 
-.submit-button {
+/* button.submit-button {
   display: block;
-}
+  margin-left: 165px;
+} */
 
 button {
   font-family: 'Maven Pro', sans-serif;
@@ -511,8 +535,9 @@ ul.terms-conditions{
     margin-top: 50px;
   }
   
-  .submit-button {
+  button.submit-button {
     display: block;
+    margin-left: 0;
   }
   
   button {

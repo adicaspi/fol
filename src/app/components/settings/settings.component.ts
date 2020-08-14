@@ -33,7 +33,6 @@ export class SettingsComponent implements OnInit {
   passClass = 'controlers password';
   spanClass = 'user';
   termsClass = 'controlers terms'
-  userInfoClass = 'user-info';
   profile: boolean = true;
   password: boolean = false;
   terms: boolean = false;
@@ -50,7 +49,10 @@ export class SettingsComponent implements OnInit {
   private WindowSizeSubscription: Subscription;
   postImage: any;
   emailError = false;
-
+  minLength = 3;
+  containSpace: boolean = false;
+  userNameExists = false;
+  userNameValidatorLength = false;
 
   constructor(
     private userService: UserService,
@@ -61,7 +63,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.settingsForm = this.formBuilder.group(
       {
-        username: [{ value: '', disabled: true }],
+        username: [''],
         fullname: [''],
         description: [''],
         email: ['', [Validators.required, Validators.email]],
@@ -81,6 +83,7 @@ export class SettingsComponent implements OnInit {
     )
     this.updateUser();
     this.editProfile();
+    this.onChanges();
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
@@ -92,6 +95,28 @@ export class SettingsComponent implements OnInit {
             this.desktop = false;
           }
         });
+  }
+
+  onChanges(): void {
+
+    this.settingsForm.get('username').valueChanges.subscribe(val => {
+      if (val.length >= this.minLength) {
+        if (val.indexOf(' ') > 0) {
+          this.containSpace = true;
+        } else {
+          this.containSpace = false;
+        }
+        this.userService.checkUserNameExists(val).subscribe(res => {
+          this.userNameValidatorLength = false;
+        });
+      } else {
+        this.userNameValidatorLength = true;
+        this.userNameExists = false;
+      }
+    });
+    this.settingsForm.get('username').valueChanges.subscribe(val => {
+      this.submitted = false;
+    })
   }
 
   get f() {
@@ -149,11 +174,6 @@ export class SettingsComponent implements OnInit {
     this.password = false;
     this.terms = false;
     this.button_text = 'Submit';
-    this.profileClass = 'controlers profile-clicked';
-    this.passClass = 'controlers password';
-    this.termsClass = 'controlers terms';
-    this.spanClass = 'user';
-    this.userInfoClass = 'user-info';
   }
 
   changePassword() {
@@ -161,22 +181,12 @@ export class SettingsComponent implements OnInit {
     this.profile = false;
     this.terms = false;
     this.button_text = 'Change Password';
-    this.passClass = 'controlers password-clicked';
-    this.profileClass = 'controlers edit-profile';
-    this.termsClass = 'controlers terms';
-    this.spanClass = 'user pass';
-    this.userInfoClass = 'user-info';
   }
 
   seeTerms() {
     this.password = false;
     this.profile = false;
     this.terms = true;
-    this.passClass = 'controlers password';
-    this.profileClass = 'controlers edit-profile';
-    this.termsClass = 'controlers terms-clicked';
-    this.spanClass = 'user pass';
-    this.userInfoClass = 'user-info';
   }
 
   MustMatch(controlName: string, matchingControlName: string) {
@@ -223,10 +233,24 @@ export class SettingsComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+    let updatedUserName = this.settingsForm.value.username;
     let updatedDescription = this.settingsForm.value.description;
     let updatedFullName = this.settingsForm.value.fullname;
     let updatedEmail = this.settingsForm.value.email;
+    if (updatedUserName != this.user.username) {
+      this.loading = true;
+      this.userService.updateUsername(updatedDescription).subscribe(res => {
+        this.showSuccessMsg = true;
+        this.loading = false;
+      }, error => {
+        console.log(error);
+        if (error == 'User Collision') {
+          this.userNameExists = true;
+        }
+        this.loading = false;
+        this.showFailMsg = true;
+      });
+    }
     if (updatedDescription != this.user.description) {
       this.loading = true;
       this.userService.updateUserDescription(updatedDescription).subscribe(res => {
