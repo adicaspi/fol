@@ -159,8 +159,8 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   registerPage(): void {
     this.dialog.open(LoginComponent, {
-      width: '400px',
-      height: '580px',
+      width: '420px',
+      height: 'unset',
       data: { close: false }
     });
   }
