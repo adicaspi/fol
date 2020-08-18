@@ -4,4 +4,14 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
 @import "common";
 @import "mobile-search-autocomplete.scss";
+@import '~@angular/material/theming';
+@import "~igniteui-angular/lib/core/styles/themes/index";
+
+@include igx-core();
+@include igx-theme($default-palette);
+
+//Include after igx-core
+@include igx-typography(
+    $font-family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+);
 

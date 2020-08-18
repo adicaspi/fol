@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
     "@auth0/angular-jwt": "^2.1.2",
+    "@material/typography": "^0.35.0",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@trademe/ng-defer-load": "^3.1.0",
     "@types/angular": "^1.6.57",
