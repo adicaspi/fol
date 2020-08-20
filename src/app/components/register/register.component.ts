@@ -44,6 +44,8 @@ export class RegisterComponent implements OnInit {
   private baseApiUrl = environment.BASE_API_URL;
   facebookLoginEndpoint: string = environment.loginWithFbUrl;
   title = 'Register to Followear';
+  private WindowSizeSubscription: Subscription;
+  desktop: boolean;
 
 
   // TODO - FIXED TOUCHED INVALID CLASS
@@ -53,10 +55,8 @@ export class RegisterComponent implements OnInit {
     private datePipe: DatePipe,
     private userService: UserService,
     private errorsService: ErrorsService,
-    private http: HttpClient,
+    private configService: ConfigService,
     private configSerivce: ConfigService,
-    private dialog: MatDialog,
-    private overlay: Overlay,
     private titleService: Title,
     private meta: Meta,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
   ) {
     if (dialogRef) {
       this.modal = true;
+      console.log(this.modal);
       dialogRef.addPanelClass("login-panel-class");
       if (!this.data.showCloseButton) {
         this.showCloseButton = false;
@@ -72,6 +73,17 @@ export class RegisterComponent implements OnInit {
     this.subscription = this.errorsService.getMessage().subscribe(msg => {
       this.error = msg;
     });
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
+
+          if (value.width <= 600) {
+            this.desktop = false;
+          }
+        });
   }
 
   ngOnInit() {

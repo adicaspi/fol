@@ -73,7 +73,7 @@
     <div class="form-group">
       <label for="username"></label>
       <input type="text" formControlName="username" class="form-control" [ngClass]="{
-                      'is-invalid': submitted && f.username.errors || f.value.username.touched && userNameExists 
+                      'is-invalid': submitted && f.username.errors || f.username.touched && userNameExists 
                     }" placeholder="Username" />
 
       <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -163,9 +163,10 @@
       </button>
     </div>
   </div>
-  <div class="app-store">
-    <a href="https://apps.apple.com/app/followear/id1476265803">
-      <img src="../../../assets/app_store_white.png" />
-    </a>
-  </div>
+
+</div>
+<div *ngIf="!desktop" class="app-store">
+  <a href="https://apps.apple.com/app/followear/id1476265803">
+    <img src="../../../assets/app_store.png" />
+  </a>
 </div>

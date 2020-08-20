@@ -78,7 +78,7 @@ export class LandingPageComponent implements OnInit {
     if (this.desktop) {
       const registerDialogRef = this.dialog.open(RegisterComponent, {
         width: '400px',
-        height: '580px',
+        height: 'unset',
         data: { close: true }
       });
       // registerDialogRef.disableClose = true;
