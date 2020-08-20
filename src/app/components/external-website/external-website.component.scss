@@ -12,7 +12,7 @@ nav {
 }
 
 .fw-navbar{
-  width: 80%;
+  width: 70%;
   margin-top: 20px;
   display: flex;
   flex-direction: row;
@@ -39,7 +39,9 @@ span.btn.signup{
 .wrapper{
   margin-top: 200px;
   display: flex;
-  justify-content: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .content{
@@ -47,7 +49,7 @@ span.btn.signup{
 }
 
 .main-sentence{
-  font-size: 57px;
+  font-size: 45px;
 }
 
 .main-sentence.sub-header{
@@ -59,7 +61,7 @@ span.btn.signup{
   flex-wrap: wrap;
   max-width: 421px;
   margin-top: 43px;
-  font-size: 30px;
+  font-size: 24px;
   font-family: 'Maven Pro', sans-serif;
   color: #8e8e8e;
 }
@@ -85,6 +87,7 @@ span.btn.signup.lower{
 
 .already-title{
   font-size: 50px;
+  font-weight: bold;
 }
 
 .already-text{
@@ -95,6 +98,55 @@ span.btn.signup.lower{
   text-align: center;
   font-family: 'Maven Pro', sans-serif;
   color: #8e8e8e;
+}
+
+.column{
+  flex: 33.3333%;
+  max-width: 33.3333%;
+  padding: 0 8px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  max-height: 287px;
+}
+
+.column.first{
+  display: flex;
+  align-items: center;
+}
+
+.column.second{
+  padding-top: 50px;
+}
+
+.card-wrapper.second{
+  margin-top: 10px;
+}
+
+.card-upper{
+  display:flex;
+}
+
+.user-name{
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222222;
+  margin-left: 5px;
+}
+
+.user-profile-image{
+  margin-left: 8px;
+}
+
+.user-profile-image img{
+  width: 32px;
+  border-radius: 50%;
+  margin:0; 
+  margin-left: 10px;
 }
 
 @media (max-width: 768px) {
@@ -131,9 +183,25 @@ span.btn.signup.lower{
 transform: translateX(0);
 }
 
+.carousel-container{
+  margin-top: 43px;
+}
+
+.carousel-item{
+  height: auto;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
 .card.card-body{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0px 3px 19px #0000001A;
+  border-radius: 29px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: none;
+  align-items: center;
 }
 
 .card-item{
@@ -141,7 +209,152 @@ transform: translateX(0);
   max-width: 33.333333%;
 }
 
-img.img-fluid{
-  width:124px;
+.content-wrapper{
+  padding-right: 30px;
+  padding-left: 30px;
 }
+
+.user-posts{
+  display:flex;
+  flex-direction: row;  
+  margin-top: 20px;
+}
+
+.user{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.user-section{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+}
+
+.user-info{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width:100%;
+  margin-left: 12px;
+}
+
+.user-followers{
+  color: #222222;
+  font-size: 12px;
+}
+
+img.profile-image{
+  border-radius: 50%;
+  width: 62px;
+}
+
+img.img-fluid{
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.user-posts :nth-last-child(1){
+  margin-right: 0;
+}
+
+.follow{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.image-container{
+  margin-right: 16px;
+}
+
+button.follow-button{
+  font-size: 16px;
+  width: 89px;
+  height: 37px; 
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: transparent linear-gradient(57deg, #FE52AE 0%, #F481FE 100%) 0% 0% no-repeat padding-box;
+  color: white;
+  padding-right: 2px;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.explore-section{
+  display: flex;
+  justify-content: center;
+  color: #7F7EFF;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+i.far.fa-angle-right{
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  margin-left: 10px;
+}
+
+.third-slide{
+  margin-top: 80px;
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content.third-slide{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
+
+.main-sentence.third-slide-sentence{
+  margin-top: 90px;
+}
+
+.content.forth-slide{
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.content-right.forth-slide{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 40px;
+}
+
+.main-sentence.forth-slide{
+  font-size: 40px;
+}
+
+img.save{
+  width:250px;
+}
+
+.wrapper.forth-slide{
+  margin-top: 100px;
+  width:70%;
+  justify-content: center;
+}
+
+.app-store-button{
+  margin-top: 49px;
+  cursor: pointer;
+}
+
+
+
+
+
 
