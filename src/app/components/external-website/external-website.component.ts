@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { takeUntil } from '../../../../node_modules/rxjs/operators';
+import { Subject } from '../../../../node_modules/rxjs';
+import { FeedService } from '../../services/feed.service';
 declare var $: any;
 
 @Component({
@@ -9,11 +12,18 @@ declare var $: any;
 export class ExternalWebsiteComponent implements OnInit {
   usersCarousel = [];
   usersCarouselTry = [];
+  onDestroy: Subject<void> = new Subject<void>();
+  discoverPeopleArray = [];
   users = [{ username: "adi caspi", profileImg: "http://placehold.it/380?text=1", followers: "10", images: ["http://placehold.it/380?text=1", "http://placehold.it/380?text=2", "http://placehold.it/380?text=3"] }, { username: "tamir", profileImg: "http://placehold.it/380?text=1", followers: "12", images: ["http://placehold.it/380?text=4", "http://placehold.it/380?text=5", "http://placehold.it/380?text=6"] }, { username: "rani ophir", profileImg: "http://placehold.it/380?text=1", followers: "14", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "eli ophir", profileImg: "http://placehold.it/380?text=1", followers: "156", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "dan caspi", profileImg: "http://placehold.it/380?text=1", followers: "134", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "nir zep", profileImg: "http://placehold.it/380?text=1", followers: "122", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }];
-  constructor() { this.generateCarousel(); }
+
+  constructor(private feedService: FeedService) { }
 
   ngOnInit() {
     //this.initCarousel();
+    this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
+      this.discoverPeopleArray = res;
+      this.generateCarousel();
+    });
 
 
   }
@@ -22,13 +32,21 @@ export class ExternalWebsiteComponent implements OnInit {
     let i;
     let j;
     let newUsersArray;
-    for (i = 0; i < this.users.length; i++) {
+    for (i = 0; i < this.discoverPeopleArray.length; i++) {
       newUsersArray = [];
-      for (j = 0; j < this.users.length; j++) {
-        newUsersArray.push(this.users[(j + i) % this.users.length]);
+      for (j = 0; j < this.discoverPeopleArray.length; j++) {
+        newUsersArray.push(this.discoverPeopleArray[(j + i) % this.discoverPeopleArray.length]);
       }
       this.usersCarousel.push(newUsersArray);
     }
+  }
+
+  getItemsDesktop(items) {
+    var desktopItems = []
+    for (var i = 0; i < 3 && i < items.length; i++) {
+      desktopItems.push(items[i]);
+    }
+    return desktopItems;
   }
 
   initCarousel() {
@@ -87,6 +105,10 @@ export class ExternalWebsiteComponent implements OnInit {
       });
     });
 
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy.next();
   }
 
 }

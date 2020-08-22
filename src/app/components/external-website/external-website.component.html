@@ -127,7 +127,7 @@
               <div class="content-wrapper">
                 <div class="user">
                   <div class="profile-img">
-                    <img [src]="item.profileImg" class="profile-image">
+                    <img [src]="item.userAvatar" class="profile-image">
                   </div>
                   <div class="user-section">
                     <div class="user-info">
@@ -135,7 +135,7 @@
                         {{item.username}}
                       </div>
                       <div class="user-followers">
-                        {{item.followers}}
+                        {{item.numFollowers}}
                         <span class="text"> followers </span>
                       </div>
                     </div>
@@ -147,8 +147,8 @@
                   </div>
                 </div>
                 <div class="user-posts">
-                  <div *ngFor="let img of item.images ; let i = index" class="image-container">
-                    <img [src]="img" class="img-fluid">
+                  <div *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="image-container">
+                    <img [src]="post.imageAddr" class="img-fluid">
                   </div>
                 </div>
               </div>
