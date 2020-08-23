@@ -34,11 +34,78 @@
       </span>
     </div>
   </div>
-  <div class="posts-layout">
 
+  <div class="row">
+
+    <div class="column first">
+      <div class="card-wrapper">
+        <div class="card-upper">
+          <div class="user-profile-image">
+            <img src="http://placehold.it/380?text=7">
+          </div>
+          <div class="user-name">Dana Cohen</div>
+        </div>
+        <div class="user-post">
+          <img src="../../../assets/external_website_post.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="column second">
+
+      <div class="card-wrapper">
+        <div class="card-upper">
+          <div class="user-profile-image">
+            <img src="http://placehold.it/380?text=7">
+          </div>
+          <div class="user-name">Dana Cohen</div>
+        </div>
+        <div class="user-post">
+          <img src="../../../assets/external_website_post.png">
+        </div>
+      </div>
+      <div class="card-wrapper second">
+        <div class="card-upper">
+          <div class="user-profile-image">
+            <img src="http://placehold.it/380?text=7">
+          </div>
+          <div class="user-name">Dana Cohen</div>
+        </div>
+        <div class="user-post">
+          <img src="../../../assets/external_website_post.png">
+        </div>
+      </div>
+
+    </div>
+    <div class="column third">
+
+      <div class="card-wrapper">
+        <div class="card-upper">
+          <div class="user-profile-image">
+            <img src="http://placehold.it/380?text=7">
+          </div>
+          <div class="user-name">Dana Cohen</div>
+        </div>
+        <div class="user-post">
+          <img src="../../../assets/external_website_post.png">
+        </div>
+      </div>
+      <div class="card-wrapper second">
+        <div class="card-upper">
+          <div class="user-profile-image">
+            <img src="http://placehold.it/380?text=7">
+          </div>
+          <div class="user-name">Dana Cohen</div>
+        </div>
+        <div class="user-post">
+          <img src="../../../assets/external_website_post.png">
+        </div>
+      </div>
+    </div>
   </div>
-
 </div>
+
+
 <div class="already-on-followear">
   <div class="already-title">
     Already on Followear
@@ -52,22 +119,37 @@
   <div class="carousel-wrapper">
     <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
       <div class="carousel-inner w-100" role="listbox">
-        <div *ngFor="let user of users ; let i = index" [ngClass]=" i==0? 'carousel carousel-item active': 'carousel carousel-item'">
-          <div class="card-item">
+        <div *ngFor="let user of usersCarousel ; let i = index" class="carousel-item" [ngClass]="{'active': i==0}">
+
+          <div *ngFor="let item of user" class="col-md-4">
+
             <div class="card card-body">
-              <div class="user">
-                <div class="user-info">
-                  <div class="user-name">
-                    {{user.username}}
+              <div class="content-wrapper">
+                <div class="user">
+                  <div class="profile-img">
+                    <img [src]="item.userAvatar" class="profile-image">
                   </div>
-                  <div class="user-followers">
-                    {{user.followers}}
+                  <div class="user-section">
+                    <div class="user-info">
+                      <div class="user-name">
+                        {{item.username}}
+                      </div>
+                      <div class="user-followers">
+                        {{item.numFollowers}}
+                        <span class="text"> followers </span>
+                      </div>
+                    </div>
+                    <div class="follow">
+                      <button class="follow-button">
+                        Follow
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div class="user-posts">
-                  <img class="img-fluid" src="http://placehold.it/380?text=1">
-                  <img class="img-fluid" src="http://placehold.it/380?text=6">
-                  <img class="img-fluid" src="http://placehold.it/380?text=6">
+                  <div *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="image-container">
+                    <img [src]="post.imageAddr" class="img-fluid">
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,5 +165,58 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+  </div>
+</div>
+<div class="explore-section">
+  <span class="text-explore">
+    Explore
+  </span>
+  <i class="far fa-angle-right"></i>
+</div>
+
+<div class="third-slide">
+  <div class="content third-slide">
+    <div class="content-left">
+      <div class="main-sentence third-slide-sentence">
+        Shopping Was
+      </div>
+      <div class="main-sentence sub-header">
+        Never That Easy
+      </div>
+      <div class="extra-content">
+        when you follow people you love, you see items you like. It's that simple.
+      </div>
+      <div class="sign-up-button">
+        <span class="btn signup lower">
+          Let me in
+        </span>
+      </div>
+    </div>
+    <div class="content-right">
+      <img src="../../../assets/shopping_easy.png">
+    </div>
+  </div>
+</div>
+
+<div class="wrapper forth-slide">
+  <div class="content forth-slide">
+    <div class="content-left">
+      <img src="../../../assets/save_from_web.png" class="save">
+    </div>
+    <div class="content-right forth-slide">
+      <div class="main-sentence forth-slide">
+        Save From Anywhere
+      </div>
+      <div class="main-sentence forth-slide sub-header">
+        Filter Everything
+      </div>
+      <div class="extra-content">
+        save items from your favortie stores and filter to your needs
+      </div>
+      <div class="app-store-button">
+        <img src="../../../assets/app_store_black.png">
+      </div>
+    </div>
+
   </div>
 </div>
