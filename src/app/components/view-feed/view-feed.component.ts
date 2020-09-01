@@ -42,18 +42,19 @@ export class ViewFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.userService.userId) {
-      this.userId = true;
-    } else {
-      var index = this.router.url.indexOf("code");
-      if (index != -1) {
-        var facebookLoginCode = this.router.url.substring(index + 5);
-        this.loginWithFacebook(facebookLoginCode);
-        console.log(facebookLoginCode);
-      } else {
-        this.loadConfigurationData();
-      }
-    }
+    this.userId = true;
+    // if (this.userService.userId) {
+    //   this.userId = true;
+    // } else {
+    //   var index = this.router.url.indexOf("code");
+    //   if (index != -1) {
+    //     var facebookLoginCode = this.router.url.substring(index + 5);
+    //     this.loginWithFacebook(facebookLoginCode);
+    //     console.log(facebookLoginCode);
+    //   } else {
+    //     this.loadConfigurationData();
+    //   }
+    // }
     this.feedService.currentLoadedFeedComponent = "feed";
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
