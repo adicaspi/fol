@@ -42,7 +42,7 @@ export class ViewFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = true;
+    //this.userId = true;
     // if (this.userService.userId) {
     //   this.userId = true;
     // } else {
