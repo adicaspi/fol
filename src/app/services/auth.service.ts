@@ -17,24 +17,28 @@ export class AuthService {
 
   isAuthenticated() {
     const promise = new Promise((resolve, reject) => {
-      return this.http.get<any>(this.autoLogin, { observe: 'response' }).pipe(
-        map(data => {
-          this.userService.userId = data.body.userId;
-          this.userService.username = data.body.userName;
-          this.userService.updateUser(data.body.userId);
-          this.configService.setSessionStorage(data.body.userId.toString());
-        })
-      ).toPromise().then((res: any) => {
-        // Success
-        res.map((res: any) => {
-        });
-        resolve();
-      },
-        err => {
-          // Error
-          reject(err);
-        }
-      );
+      return this.http.get<any>(this.autoLogin, { observe: 'response' })
+        //.pipe(
+        //   map(data => {
+        //     this.userService.userId = data.body.userId;
+        //     this.userService.username = data.body.userName;
+        //     this.userService.updateUser(data.body.userId);
+        //     this.configService.setSessionStorage(data.body.userId.toString());
+        //   })
+        // ).
+        .toPromise().then((res: any) => {
+          console.log(res);
+          this.userService.userId = res.body.userId;
+          this.userService.username = res.body.userName;
+          this.userService.updateUser(res.body.userId);
+          this.configService.setSessionStorage(res.body.userId.toString());
+          resolve();
+        },
+          err => {
+            // Error
+            reject(err);
+          }
+        );
     });
     return promise;
   }
