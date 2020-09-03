@@ -23,16 +23,16 @@ import { ViewDiscoverPeopleUserComponent } from './components/view-discover-peop
 import { ViewMainProfileComponent } from './components/view-main-profile/view-main-profile.component';
 import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
 import { ExternalWebsiteComponent } from './components/external-website/external-website.component';
-// import {
-//   AuthGuardService as AuthGuard
-// } from './services/auth-guard.service';
+import {
+  AuthGuardService as AuthGuard
+} from './services/auth-guard.service';
 
 
 const routes: Routes = [
   {
     path: '',
     component: ViewFeedComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 
   {
@@ -46,7 +46,7 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       title: 'Followear Profile Page',
       description: "When you share posts they'll show up here"
@@ -54,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'feed/:id', component: ViewFeedComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 
   },
 
@@ -62,13 +62,12 @@ const routes: Routes = [
   {
     path: 'settings/:id',
     component: SettingsComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 
 
   { path: 'forgotpassword', component: ForgotPasswordComponent },
-  { path: 'explore/:id', component: ViewExploreComponent },
-  //canActivate: [AuthGuard] },
+  { path: 'explore/:id', component: ViewExploreComponent, canActivate: [AuthGuard] },
   {
     path: 'explore', component: ViewExploreGeneralComponent, data: {
       title: 'Explore Followear',
@@ -82,10 +81,10 @@ const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
   { path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent },
-  { path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent }, //canActivate: [AuthGuard] }
+  { path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent, canActivate: [AuthGuard] },
   {
     path: 'follow-list/:id', component: ViewFollowListComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   { path: 'external', component: ExternalWebsiteComponent }
 

@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { ReplaySubject, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { map } from 'rxjs/operators';
+import { UserService } from './user.service';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +12,29 @@ const httpOptions = {
 export class AuthService {
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
-  private logIns: Subject<boolean> = new ReplaySubject(1);
-  constructor(private router: Router, private http: HttpClient) { }
+  private authenticated: boolean = false;
+  constructor(private http: HttpClient, private userService: UserService, private configService: ConfigService) { }
 
-  // get isLoggedIn() {
-  //   return this.loggedIn.asObservable();
-  // }
-  //https://bee372fd-54b0-4b13-a364-7d038c089968.mock.pstmn.io/loggedin
-  //'http://sample-env.umnxh3ie2h.us-east-1.elasticbeanstalk.com/user-info/305555/details'
-  isAuthenticated(): Observable<any> {
-    return this.http.get<any>(this.autoLogin, { observe: 'response' });
+
+  isAuthenticated(): Observable<boolean> {
+    return this.http.get<any>(this.autoLogin, { observe: 'response' })
+      .pipe(
+        map(data => {
+          this.userService.userId = data.body.userId;
+          this.userService.username = data.body.userName;
+          this.userService.updateUser(data.body.userId);
+          this.configService.setSessionStorage(data.body.userId.toString());
+          return true;
+        })
+      )
   }
+
+
+  // get getUserAuthentication() {
+  //   return this.authenticated;
+  // }
+
+  // set setUserAuthentication(auth) {
+  //   this.authenticated = auth;
+  // }
 }
