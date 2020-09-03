@@ -12,35 +12,29 @@ import { ConfigService } from './config.service';
 export class AuthService {
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
+  private authenticated: boolean = false;
   constructor(private http: HttpClient, private userService: UserService, private configService: ConfigService) { }
 
 
-  isAuthenticated() {
-    const promise = new Promise((resolve, reject) => {
-      return this.http.get<any>(this.autoLogin, { observe: 'response' })
-        //.pipe(
-        //   map(data => {
-        //     this.userService.userId = data.body.userId;
-        //     this.userService.username = data.body.userName;
-        //     this.userService.updateUser(data.body.userId);
-        //     this.configService.setSessionStorage(data.body.userId.toString());
-        //   })
-        // ).
-        .toPromise().then((res: any) => {
-          console.log(res);
-          this.userService.userId = res.body.userId;
-          this.userService.username = res.body.userName;
-          this.userService.updateUser(res.body.userId);
-          this.configService.setSessionStorage(res.body.userId.toString());
-          resolve();
-        },
-          err => {
-            // Error
-            reject(err);
-          }
-        );
-    });
-    return promise;
+  isAuthenticated(): Observable<boolean> {
+    return this.http.get<any>(this.autoLogin, { observe: 'response' })
+      .pipe(
+        map(data => {
+          this.userService.userId = data.body.userId;
+          this.userService.username = data.body.userName;
+          this.userService.updateUser(data.body.userId);
+          this.configService.setSessionStorage(data.body.userId.toString());
+          return true;
+        })
+      )
   }
 
+
+  // get getUserAuthentication() {
+  //   return this.authenticated;
+  // }
+
+  // set setUserAuthentication(auth) {
+  //   this.authenticated = auth;
+  // }
 }
