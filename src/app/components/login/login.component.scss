@@ -13,6 +13,7 @@ button.register-button{
   background-clip: text;
   -webkit-background-clip: text;
   text-decoration: none;
+  color:transparent;
   height: 36px;
   width: 64px;
   border: none;
@@ -203,6 +204,8 @@ a.facebook-login{
 span.login-with-facebook{
   margin-left: 12px;
   margin-top: 1px;
+  display: flex;
+  align-items: center;
 }
 
 button.login-button:disabled{
