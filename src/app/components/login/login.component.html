@@ -73,16 +73,17 @@
 
   <div class="sign-up">
     <div class="account">
-      <span>Don't have an account?</span>
-    </div>
-    <div>
-      <button *ngIf="modal" [mat-dialog-close]="register" class="register-button" (click)="regsiterPage()">
+      <div>Don't have an account?</div>
+
+      <!-- <div> -->
+      <div *ngIf="modal" [mat-dialog-close]="register" class="register-button" (click)="regsiterPage()">
         Sign up
-      </button>
-      <button *ngIf="!modal" class="register-button" (click)="regsiterPage()">
+      </div>
+      <div *ngIf="!modal" class="register-button" (click)="regsiterPage()">
         Sign up
-      </button>
+      </div>
     </div>
+    <!-- </div> -->
   </div>
 </div>
 <div *ngIf="!desktop && !modal" class="app-store">
