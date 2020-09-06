@@ -19,6 +19,9 @@ button.mat-button{
   font-weight: 500;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   outline: none;
+  display: flex;
+  align-items: center;
+  margin-left: 2px;
 }
 
 button.register-button:hover{
@@ -28,6 +31,8 @@ button.register-button:hover{
 .account{
   display: flex;
   align-items:center;
+  font-size: 16px;
+  height: 36px;
 }
 
 
