@@ -51,7 +51,7 @@ export class UserService {
   loginWithFacebook(code: string): Observable<any> {
     let params = new HttpParams().set('code', code);
     return this.http.get<any>(
-      this.globalRegisterURL + '/code-login',
+      this.globalRegisterURL + 'code-login',
       {
         params: params
       }
