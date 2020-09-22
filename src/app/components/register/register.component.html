@@ -152,15 +152,15 @@
   </form>
   <div class="login">
     <div class="account">
-      <span>Have an account?</span>
-    </div>
-    <div>
-      <button *ngIf="modal" [mat-dialog-close]="login" (click)="loginPage()" class="register-button">
+      <div class="have-an-account">Have an account?</div>
+
+
+      <div *ngIf="modal" [mat-dialog-close]="login" (click)="loginPage()" class="register-button">
         Log in
-      </button>
-      <button *ngIf="!modal" (click)="loginPage()" class="register-button">
+      </div>
+      <div *ngIf="!modal" (click)="loginPage()" class="register-button">
         Log in
-      </button>
+      </div>
     </div>
   </div>
 

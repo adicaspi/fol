@@ -15,20 +15,21 @@ button.mat-button{
   font-size: 20px;
 }
 
-button.register-button{
+.register-button{
   padding:0;
   font-size: 16px;
-  color: transparent;
-  background: -webkit-linear-gradient(60deg,rgba(255,80,170,.9) 20%,rgba(244,129,255,.95) 100%);
+  background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 20%, rgba(244,129,255,0.95) 100%);
   background-clip: text;
   -webkit-background-clip: text;
-  text-decoration: none;
+  // text-decoration: none;
+  color:transparent;
   height: 36px;
   width: 64px;
   border: none;
-  font-weight: 500;
-  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-weight: bold;
+  // font-family: Roboto,"Helvetica Neue",sans-serif;
   outline: none;
+  margin-left: 2px;
 }
 
 button.register-button:hover{
@@ -37,7 +38,8 @@ button.register-button:hover{
 
 .account{
   display: flex;
-  align-items:center;
+  font-size: 16px;
+  height: 36px;
 }
 
 // .login-continue{
