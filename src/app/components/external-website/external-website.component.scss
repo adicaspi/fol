@@ -3,8 +3,7 @@ nav {
   justify-content: center;
   background-color: white;
   width: 100%;
-  height: 85px;
-  box-shadow: 0 1px 6px 2px rgba(0,0,0,.05);
+  height: 70px;
   transition: top 0.4s;
   position: fixed;
   top: 0;
@@ -12,44 +11,78 @@ nav {
 }
 
 .fw-navbar{
-  width: 70%;
-  margin-top: 20px;
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
+div.logo {
+  display: flex;
+  align-items: center;
+}
+
 img.logo{
-  width:193px;
-  height: 40px;
+  height: 32px;
 }
 
-span.btn{
+.action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.action-buttons span{
   width: 84px;
-  font-size: 18;
+  font-size: 19px;
   color: #7F7EFF;
+  cursor: pointer;
+  margin-left: 20px;
+  font-family: 'Open Sans';
 }
 
-span.btn.signup{
+.action-buttons span.signup{
   color: #FFFFFF;
   background: #7F7EFF 0% 0% no-repeat padding-box;
   border-radius: 21px;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 16px;
+  width: 106px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+}
+
+.content-container {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .wrapper{
-  margin-top: 200px;
+  margin-top: 100px;
   display: flex;
-  width: 70%;
+  width: 80%;
+  height: 100%;
+  min-height: 750px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .content{
-  width:80%;
+  width:50%;
+  margin-top: 160px;
+  font-family: 'Open Sans';
+  color: #333;
+  padding-right: 42px;
+}
+
+.slots-container {
+  width: 50%;
+  position: relative;
 }
 
 .main-sentence{
-  font-size: 45px;
+  font-size: 52px;
 }
 
 .main-sentence.sub-header{
@@ -62,26 +95,95 @@ span.btn.signup{
   max-width: 421px;
   margin-top: 43px;
   font-size: 24px;
-  font-family: 'Maven Pro', sans-serif;
-  color: #8e8e8e;
 }
 
 .sign-up-button{
   margin-top: 49px;
 }
 
-span.btn.signup.lower{
+span.btn.signup.lower {
   color: #FFFFFF;
   background: transparent linear-gradient(59deg, #FE52AE 0%, #F481FE 100%) 0% 0% no-repeat padding-box; 
   border-radius: 43px;
-  width:119px;
+  padding: 9px 36px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.already-on-followear{
+.card-wrapper {
+  overflow: hidden;
+  width: 230px;
+}
+
+.card-wrapper:nth-child(1) {
+  position: absolute;
+  left: 0px;
+  top: 256px;
+} 
+
+.card-wrapper:nth-child(2) {
+  position: absolute;
+  left: 250px;
+  top: 66px;
+}
+
+.card-wrapper:nth-child(3) {
+  position: absolute;
+  left: 250px;
+  top: 420px;
+}
+
+.card-wrapper:nth-child(4) {
+  position: absolute;
+  left: 500px;
+  top: 20px;
+}
+
+.card-wrapper:nth-child(5) {
+  position: absolute;
+  left: 500px;
+  top: 374px;
+}
+
+.card-upper{
+  display:flex;
+  margin-bottom: 10px;
+}
+
+.user-name{
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #212529;
+  margin-left: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.user-profile-image{
+  margin-left: 4px;
+  margin-right: 8px;
+}
+
+.user-profile-image img{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin:0;
+  object-fit: cover;
+}
+
+.user-post img {
+  vertical-align: middle;
+  width: 230px;
+  border-radius: 12px;
+}
+
+.already-on-followear {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 70px;
+  margin-top: 150px;
   margin-bottom: 15px;
 }
 
@@ -98,55 +200,6 @@ span.btn.signup.lower{
   text-align: center;
   font-family: 'Maven Pro', sans-serif;
   color: #8e8e8e;
-}
-
-.column{
-  flex: 33.3333%;
-  max-width: 33.3333%;
-  padding: 0 8px;
-}
-
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  max-height: 287px;
-}
-
-.column.first{
-  display: flex;
-  align-items: center;
-}
-
-.column.second{
-  padding-top: 50px;
-}
-
-.card-wrapper.second{
-  margin-top: 10px;
-}
-
-.card-upper{
-  display:flex;
-}
-
-.user-name{
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  font-weight: 600;
-  color: #222222;
-  margin-left: 5px;
-}
-
-.user-profile-image{
-  margin-left: 8px;
-}
-
-.user-profile-image img{
-  width: 32px;
-  border-radius: 50%;
-  margin:0; 
-  margin-left: 10px;
 }
 
 @media (max-width: 768px) {
@@ -167,15 +220,15 @@ span.btn.signup.lower{
 /* display 3 */
 
   
-  .carousel-inner .carousel-item-right.active,
-  .carousel-inner .carousel-item-next {
-    transform: translateX(33.333%);
-  }
-  
-  .carousel-inner .carousel-item-left.active, 
-  .carousel-inner .carousel-item-prev {
-    transform: translateX(-33.333%);
-  }
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(33.333%);
+}
+
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-33.333%);
+}
 
 
 .carousel-inner .carousel-item-right,
