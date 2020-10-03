@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { takeUntil } from '../../../../node_modules/rxjs/operators';
 import { Subject } from '../../../../node_modules/rxjs';
 import { FeedService } from '../../services/feed.service';
-declare var $: any;
+import * as angular from 'angular';
+import $ from 'jquery';
+(window as any).jQuery = $;
+
 
 @Component({
   selector: 'app-external-website',
@@ -25,7 +28,19 @@ export class ExternalWebsiteComponent implements OnInit {
       this.generateCarousel();
     });
 
+    //set slots top position
+    this.initSlots();
+  }
 
+  initSlots() {
+    var slot2 = $(".card-wrapper:nth-child(2) .user-post img");
+    var slot3 = $(".card-wrapper:nth-child(3)");
+    var slot4 = $(".card-wrapper:nth-child(4)");
+    var slot5 = $(".card-wrapper:nth-child(5)");
+
+    console.log(slot2.outerHeight());
+
+    // console.log(slots.join());
   }
 
   generateCarousel() {
