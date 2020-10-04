@@ -56,6 +56,7 @@ img.logo{
 .content-container {
   width: 100%;
   overflow-x: hidden;
+  color: #202125;
 }
 
 .wrapper{
@@ -72,7 +73,6 @@ img.logo{
   width:50%;
   margin-top: 160px;
   font-family: 'Open Sans';
-  color: #333;
   padding-right: 42px;
 }
 
@@ -83,11 +83,12 @@ img.logo{
 
 .main-sentence{
   font-size: 52px;
-}
-
-.main-sentence.sub-header{
   font-weight: bold;
 }
+
+// .main-sentence.sub-header{
+//   font-weight: bold;
+// }
 
 .extra-content{
   display: flex;
@@ -185,12 +186,11 @@ span.btn.signup.lower {
   align-items: center;
   margin-top: 120px;
   margin-bottom: 15px;
-  color: #333;
 }
 
 .already-title{
   font-size: 50px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .already-text{
@@ -199,7 +199,6 @@ span.btn.signup.lower {
   max-width: 700px;
   flex-wrap: wrap;
   text-align: center;
-  color: #333;
 }
 
 @media (max-width: 768px) {
@@ -410,12 +409,20 @@ i.far.fa-angle-right{
 }
 
 .third-slide{
-  margin-top: 140px;
+  margin-top: 70px;
+  padding-top: 70px;
+  margin-bottom: 70px;
+  padding-bottom: 70px;
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to bottom, #fff, #fff),linear-gradient(to bottom, #f8f8f8, #f8f8f8);
+  background-position: 0 0, 0 50%;
+  background-size: 100% 50%, 100%, 50%;
 }
 
 .content-third-slide{
@@ -423,12 +430,37 @@ i.far.fa-angle-right{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: #222;
-  width: 100%;
+  width: 80%;
+  box-shadow: 0px 0px 54px 0px rgba(32,33,37,0.06);
+  background-color: white;
+  min-height: 460px;
+}
+
+.content-right {
+  height: 100%;
+  width: 50%;
+}
+
+.content-left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
 }
 
 .third-slide .content-right img {
-  height: 480px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.third-slide .main-sentence {
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 56px;
+}
+
+.third-slide .extra-content {
+  font-size: 20px;
 }
 
 .content.forth-slide{
