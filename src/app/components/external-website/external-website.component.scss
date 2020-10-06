@@ -450,6 +450,8 @@ i.far.fa-angle-right{
   width: 50%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 0px 32px;
 }
 
 .third-slide .content-right img {
@@ -468,11 +470,25 @@ i.far.fa-angle-right{
   font-size: 20px;
 }
 
-.content.forth-slide{
+.wrapper.forth-slide{
+  margin-top: 60px;
+  margin-bottom: 60px;
   width: 70%;
+  min-width: 680px;
+  justify-content: center;
+  height: auto;
+  min-height: fit-content;
+
+  margin-bottom: 108px !important;
+}
+
+.content.forth-slide{
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 60px;
+  padding-right: 72px;
 }
 
 .content-right.forth-slide{
@@ -487,13 +503,7 @@ i.far.fa-angle-right{
 }
 
 img.save{
-  width:250px;
-}
-
-.wrapper.forth-slide{
-  margin-top: 100px;
-  width:70%;
-  justify-content: center;
+  height: 560px;
 }
 
 .app-store-button{
@@ -501,7 +511,88 @@ img.save{
   cursor: pointer;
 }
 
+// .fifth-slide {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+//   width: 100%;
+//   margin-top: 64px;
+//   margin-bottom: 64px;
 
+//   display: none;
+// }
+
+// .fifth-slide .content {
+//   display: flex;
+//   justify-content: center;
+//   width: 80%;
+//   margin-left: auto;
+//   margin-right: auto;
+//   padding-right: 0;
+//   padding-top: 80px;
+//   padding-bottom: 80px;
+//   background-color: hsl(240, 100%, 94%);
+//   border-radius: 28px;
+// }
+
+// .fifth-slide .main-sentence {
+//   font-size: 46px;
+// }
+
+// .buttons-container {
+//   margin-top: 92px;
+// }
+
+// .fifth-slide span.btn.signup.lower {
+//   padding: 16px 42px;
+// }
+
+
+.footer {
+  width: 100%;
+  border-top: 1px solid #f8f8f8;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+}
+
+.footer .content {
+  width: 80%;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 40px;
+}
+
+.row.first {
+  margin-bottom: 60px;
+}
+
+.row.first .logo {
+  height: 36px;
+}
+
+.row.second div {
+  display: inline;
+}
+
+.footer span.btn.signup.lower {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 92px;
+}
+
+.footer span.btn.signup.lower.sign-in {
+  background-clip: text;
+  -webkit-background-clip: text;
+  border: 2px solid #fe6fd8;
+  color: transparent;
+}
 
 
 
