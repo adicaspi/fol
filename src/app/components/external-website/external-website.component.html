@@ -1,222 +1,441 @@
-<nav>
-  <div class="fw-navbar">
-    <div class="logo">
-      <img src="../../../assets/landing-logo.png" class="logo" />
+<!-- desktop -->
+<div *ngIf="desktop">
+  <nav>
+    <div class="fw-navbar">
+      <div class="logo">
+        <img src="../../../assets/landing-logo.png" class="logo" />
+      </div>
+      <div class="action-buttons">
+        <span class="btn explore" (click)="explorePage()">
+          Explore
+        </span>
+        <span class="btn login" (click)="loginPage()">
+          Sign In
+        </span>
+        <span class="btn signup" (click)="regsiterPage()">
+          Sign up
+        </span>
+      </div>
     </div>
-    <div class="action-buttons">
-      <span class="btn explore">
-        Explore
-      </span>
-      <span class="btn login">
-        Sign In
-      </span>
-      <span class="btn signup">
-        Sign up
-      </span>
+  </nav>
+
+  <div class="wrapper">
+    <div class="content">
+      <div class="main-sentence">
+        Follow People,
+      </div>
+      <div class="main-sentence sub-header">
+        Shop Their Taste.
+      </div>
+      <div class="extra-content">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+      </div>
+      <div class="sign-up-button">
+        <span class="btn signup lower">
+          Sign up
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="column first">
+        <div class="card-wrapper">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+      </div>
+
+      <div class="column second">
+
+        <div class="card-wrapper">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+        <div class="card-wrapper second">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+
+      </div>
+      <div class="column third">
+
+        <div class="card-wrapper">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+        <div class="card-wrapper second">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
 
-<div class="wrapper">
-  <div class="content">
-    <div class="main-sentence">
-      Follow People,
+
+  <div class="already-on-followear">
+    <div class="already-title">
+      Already on Followear
     </div>
-    <div class="main-sentence sub-header">
-      Shop Their Taste.
-    </div>
-    <div class="extra-content">
+    <div class="already-text">
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
     </div>
-    <div class="sign-up-button">
-      <span class="btn signup lower">
-        Sign up
-      </span>
-    </div>
   </div>
 
-  <div class="row">
+  <div class="carousel-container">
+    <div class="carousel-wrapper">
+      <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+        <div class="carousel-inner w-100" role="listbox">
+          <div *ngFor="let user of usersCarousel ; let i = index" class="carousel-item" [ngClass]="{'active': i==0}">
 
-    <div class="column first">
-      <div class="card-wrapper">
-        <div class="card-upper">
-          <div class="user-profile-image">
-            <img src="http://placehold.it/380?text=7">
-          </div>
-          <div class="user-name">Dana Cohen</div>
-        </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
-        </div>
-      </div>
-    </div>
+            <div *ngFor="let item of user" class="col-md-4">
 
-    <div class="column second">
-
-      <div class="card-wrapper">
-        <div class="card-upper">
-          <div class="user-profile-image">
-            <img src="http://placehold.it/380?text=7">
-          </div>
-          <div class="user-name">Dana Cohen</div>
-        </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
-        </div>
-      </div>
-      <div class="card-wrapper second">
-        <div class="card-upper">
-          <div class="user-profile-image">
-            <img src="http://placehold.it/380?text=7">
-          </div>
-          <div class="user-name">Dana Cohen</div>
-        </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
-        </div>
-      </div>
-
-    </div>
-    <div class="column third">
-
-      <div class="card-wrapper">
-        <div class="card-upper">
-          <div class="user-profile-image">
-            <img src="http://placehold.it/380?text=7">
-          </div>
-          <div class="user-name">Dana Cohen</div>
-        </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
-        </div>
-      </div>
-      <div class="card-wrapper second">
-        <div class="card-upper">
-          <div class="user-profile-image">
-            <img src="http://placehold.it/380?text=7">
-          </div>
-          <div class="user-name">Dana Cohen</div>
-        </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="already-on-followear">
-  <div class="already-title">
-    Already on Followear
-  </div>
-  <div class="already-text">
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-  </div>
-</div>
-
-<div class="carousel-container">
-  <div class="carousel-wrapper">
-    <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-      <div class="carousel-inner w-100" role="listbox">
-        <div *ngFor="let user of usersCarousel ; let i = index" class="carousel-item" [ngClass]="{'active': i==0}">
-
-          <div *ngFor="let item of user" class="col-md-4">
-
-            <div class="card card-body">
-              <div class="content-wrapper">
-                <div class="user">
-                  <div class="profile-img">
-                    <img [src]="item.userAvatar" class="profile-image">
-                  </div>
-                  <div class="user-section">
-                    <div class="user-info">
-                      <div class="user-name">
-                        {{item.username}}
+              <div class="card card-body">
+                <div class="content-wrapper">
+                  <div class="user">
+                    <div class="profile-img">
+                      <img [src]="item.userAvatar" class="profile-image">
+                    </div>
+                    <div class="user-section">
+                      <div class="user-info">
+                        <div class="user-name">
+                          {{item.username}}
+                        </div>
+                        <div class="user-followers">
+                          {{item.numFollowers}}
+                          <span class="text"> followers </span>
+                        </div>
                       </div>
-                      <div class="user-followers">
-                        {{item.numFollowers}}
-                        <span class="text"> followers </span>
+                      <div class="follow">
+                        <button class="follow-button">
+                          Follow
+                        </button>
                       </div>
                     </div>
-                    <div class="follow">
-                      <button class="follow-button">
-                        Follow
-                      </button>
-                    </div>
                   </div>
-                </div>
-                <div class="user-posts">
-                  <div *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="image-container">
-                    <img [src]="post.imageAddr" class="img-fluid">
+                  <div class="user-posts">
+                    <!-- <div *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="image-container">
+                      <img [src]="post.imageAddr" class="img-fluid">
+                    </div> -->
+                    <img *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="img-fluid" [src]="post.imageAddr">
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-      <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+    </div>
+  </div>
+  <div class="explore-section" (click)="explorePage()">
+    <span class="text-explore">
+      Explore
+    </span>
+    <i class="far fa-angle-right"></i>
+  </div>
+
+  <div class="third-slide">
+    <div class="content third-slide">
+      <div class="content-left">
+        <div class="main-sentence third-slide-sentence">
+          Shopping Was
+        </div>
+        <div class="main-sentence sub-header">
+          Never That Easy
+        </div>
+        <div class="extra-content">
+          when you follow people you love, you see items you like. It's that simple.
+        </div>
+        <div class="sign-up-button" (click)="loginPage()">
+          <span class="btn signup lower">
+            Let me in
+          </span>
+        </div>
+      </div>
+      <div class="content-right">
+        <img src="../../../assets/shopping_easy.png">
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper forth-slide">
+    <div class="content forth-slide">
+      <div class="content-left">
+        <img src="../../../assets/save_from_web.png" class="save">
+      </div>
+      <div class="content-right forth-slide">
+        <div class="main-sentence forth-slide">
+          Save From Anywhere
+        </div>
+        <div class="main-sentence forth-slide sub-header">
+          Filter Everything
+        </div>
+        <div class="extra-content">
+          save items from your favortie stores and filter to your needs
+        </div>
+        <div class="app-store-button">
+          <img src="../../../assets/app_store_black.png">
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-<div class="explore-section">
-  <span class="text-explore">
-    Explore
-  </span>
-  <i class="far fa-angle-right"></i>
-</div>
 
-<div class="third-slide">
-  <div class="content third-slide">
-    <div class="content-left">
-      <div class="main-sentence third-slide-sentence">
-        Shopping Was
+
+
+<!--end of desktop template-->
+
+<!-- mobile -->
+
+<div class="mobile-wrapper" *ngIf="!desktop">
+  <nav>
+    <div class="fw-navbar">
+      <div class="logo">
+        <img src="../../../assets/fw_logo_pink.png" class="logo" />
       </div>
-      <div class="main-sentence sub-header">
-        Never That Easy
-      </div>
-      <div class="extra-content">
-        when you follow people you love, you see items you like. It's that simple.
-      </div>
-      <div class="sign-up-button">
-        <span class="btn signup lower">
-          Let me in
+      <div class="action-buttons">
+        <span class="btn explore" (click)="explorePage()">
+          Explore
+        </span>
+        <span class="btn login" (click)="loginPage()">
+          Sign In
+        </span>
+        <span class="btn signup" (click)="regsiterPage()">
+          Sign up
         </span>
       </div>
     </div>
-    <div class="content-right">
-      <img src="../../../assets/shopping_easy.png">
-    </div>
-  </div>
-</div>
+  </nav>
 
-<div class="wrapper forth-slide">
-  <div class="content forth-slide">
-    <div class="content-left">
-      <img src="../../../assets/save_from_web.png" class="save">
-    </div>
-    <div class="content-right forth-slide">
-      <div class="main-sentence forth-slide">
-        Save From Anywhere
+  <div class="wrapper">
+    <div class="content">
+      <div class="main-sentence">
+        Follow People,
       </div>
-      <div class="main-sentence forth-slide sub-header">
-        Filter Everything
+      <div class="main-sentence sub-header">
+        Shop Their Taste.
       </div>
       <div class="extra-content">
-        save items from your favortie stores and filter to your needs
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
       </div>
-      <div class="app-store-button">
-        <img src="../../../assets/app_store_black.png">
+      <div class="sign-up-button" (click)="registerPage()">
+        <span class="btn signup lower">
+          Sign up
+        </span>
       </div>
     </div>
 
+    <div class="row">
+
+      <div class="column first">
+        <div class="card-wrapper">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+      </div>
+
+      <div class="column second">
+        <div class="card-wrapper second">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+
+      </div>
+      <div class="column third">
+
+        <div class="card-wrapper">
+          <div class="card-upper">
+            <div class="user-profile-image">
+              <img src="http://placehold.it/380?text=7">
+            </div>
+            <div class="user-name">Dana Cohen</div>
+          </div>
+          <div class="user-post">
+            <img src="../../../assets/external_website_post.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="already-on-followear">
+    <div class="already-title">
+      Already on Followear
+    </div>
+    <div class="already-text">
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+    </div>
+  </div>
+
+  <div class="carousel-container">
+    <div class="carousel-wrapper">
+      <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+        <div class="carousel-inner w-100" role="listbox">
+          <div *ngFor="let user of usersCarousel ; let i = index" class="carousel-item" [ngClass]="{'active': i==0}">
+
+            <div *ngFor="let item of user" class="col-md-4">
+
+              <div class="card card-body">
+                <div class="content-wrapper">
+                  <div class="user">
+                    <div class="profile-img">
+                      <img [src]="item.userAvatar" class="profile-image">
+                    </div>
+                    <div class="user-section">
+                      <div class="user-info">
+                        <div class="user-name">
+                          {{item.username}}
+                        </div>
+                        <div class="user-followers">
+                          {{item.numFollowers}}
+                          <span class="text"> followers </span>
+                        </div>
+                      </div>
+                      <div class="follow">
+                        <button class="follow-button">
+                          Follow
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user-posts">
+                    <!-- <div *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="image-container">
+                      <img [src]="post.imageAddr" class="img-fluid">
+                    </div> -->
+                    <img *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="img-fluid" [src]="post.imageAddr">
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="explore-section" (click)="explorePage()">
+    <span class="text-explore">
+      Explore
+    </span>
+    <i class="far fa-angle-right"></i>
+  </div>
+
+  <div class="third-slide">
+    <div class="content third-slide">
+      <div class="content-left">
+        <img src="../../../assets/shopping_easy.png">
+        <div class="text-third-slide">
+          <div class="main-sentence third-slide-sentence">
+            Shopping Was
+          </div>
+          <div class="main-sentence sub-header">
+            Never That Easy
+          </div>
+          <div class="extra-content">
+            when you follow people you love, you see items you like. It's that simple.
+          </div>
+          <div class="sign-up-button" (click)="loginPage()">
+            <span class="btn signup lower">
+              Let me in
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper forth-slide">
+    <div class="content forth-slide">
+      <div class="content-left">
+        <img src="../../../assets/save_from_web.png" class="save">
+      </div>
+      <div class="content-right forth-slide">
+        <div class="main-sentence forth-slide">
+          Save From
+          <br>
+          <strong>Anywhere</strong>
+        </div>
+        <div class="main-sentence forth-slide sub-header">
+          Filter
+          <br>
+          <strong>everything</strong>
+        </div>
+        <div class="extra-content">
+          save items from your favortie stores and filter to your needs
+        </div>
+        <div class="app-store-button">
+          <img src="../../../assets/app_store_black.png">
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
