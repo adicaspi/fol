@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { ConfigService } from './config.service';
+import { Router } from '../../../node_modules/@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,29 +14,33 @@ export class AuthService {
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private authenticated: boolean = false;
-  constructor(private http: HttpClient, private userService: UserService, private configService: ConfigService) { }
+  constructor(private http: HttpClient, private userService: UserService, private configService: ConfigService, private router: Router) { }
 
 
-  isAuthenticated(): Observable<boolean> {
-    return this.http.get<any>(this.autoLogin, { observe: 'response' })
-      .pipe(
-        map(data => {
-          this.userService.userId = data.body.userId;
-          this.userService.username = data.body.userName;
-          this.userService.updateUser(data.body.userId);
-          this.configService.setSessionStorage(data.body.userId.toString());
-          return true;
-        })
-      )
-    //return Observable.of(true);
+  isAuthenticated(): boolean {
+    if (this.userService.userId) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 
-  // get getUserAuthentication() {
-  //   return this.authenticated;
-  // }
-
-  // set setUserAuthentication(auth) {
-  //   this.authenticated = auth;
-  // }
+  isAuthenticaedFacebook(): Observable<boolean> {
+    console.log("in facebook2");
+    var index = this.router.url.indexOf("code");
+    if (index != -1) {
+      console.log("in facebook3");
+      var facebookLoginCode = this.router.url.substring(index + 5);
+      this.userService.loginWithFacebook(facebookLoginCode).pipe(map(res => {
+        console.log("in facebook4");
+        this.userService.userId = res.userId;
+        this.userService.username = res.username;
+        this.userService.updateUser(res.userId);
+        this.configService.setSessionStorage(res.userId.toString());
+        return true;
+      }))
+    }
+    return Observable.of(false);
+  }
 }

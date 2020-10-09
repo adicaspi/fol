@@ -115,6 +115,7 @@ export class TimelineFeedComponent implements OnInit {
           this.posts = [];
           this.offset = 0;
           this.scrollPageToTop = true;
+          console.log("here");
           this.feedService.updateTimelineFeed(this.id, this.offset);
         }
       }

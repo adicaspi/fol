@@ -46,10 +46,12 @@ export class FeedService {
   }
 
   updateTimelineFeed(id, offset) {
+    console.log("here in update timeline feed");
     this.postsSubject.next(this.getTimeLineFeed(id, offset));
   }
 
   updateUserFeed(id, offset) {
+    console.log("here in update user feed");
     this.postsSubject.next(this.getUserFeed(id, offset));
   }
 

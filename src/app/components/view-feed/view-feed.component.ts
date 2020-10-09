@@ -42,20 +42,26 @@ export class ViewFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.userId = true;
-    // if (this.userService.userId) {
-    //   this.userId = true;
-    // } else {
-    //   var index = this.router.url.indexOf("code");
-    //   if (index != -1) {
-    //     var facebookLoginCode = this.router.url.substring(index + 5);
-    //     this.loginWithFacebook(facebookLoginCode);
-    //     console.log(facebookLoginCode);
-    //   } else {
-    //     this.loadConfigurationData();
-    //   }
-    // }
-    this.feedService.currentLoadedFeedComponent = "feed";
+    if (this.userService.userId) {
+      this.userId = true;
+    } else {
+      var index = this.router.url.indexOf("code");
+      if (index != -1) {
+        var facebookLoginCode = this.router.url.substring(index + 5);
+        var hashTagIndex = this.router.url.indexOf("#");
+        if (hashTagIndex != -1) {
+          facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
+          this.loginWithFacebook(facebookLoginCode);
+        } else {
+          this.loginWithFacebook(facebookLoginCode);
+        }
+
+      } else {
+        this.loadConfigurationData();
+      }
+    }
+    //}
+    //this.feedService.currentLoadedFeedComponent = "feed";
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 600) {
@@ -77,6 +83,7 @@ export class ViewFeedComponent implements OnInit {
       this.userService.username = res.username;
       this.userService.updateUser(res.userId);
       this.configService.setSessionStorage(res.userId.toString());
+      this.userId = true;
     })
   }
 
@@ -86,13 +93,11 @@ export class ViewFeedComponent implements OnInit {
       .pipe(
         map(data => {
           this.userId = true;
-
           this.userService.userId = data.body.userId;
           this.userService.username = data.body.userName;
           this.userService.updateUser(data.body.userId);
           this.configService.setSessionStorage(data.body.userId.toString());
         })
       ).toPromise();
-
   }
 }

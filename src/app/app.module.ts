@@ -78,6 +78,7 @@ import { ExternalWebsiteComponent } from './components/external-website/external
 import { AppBannerComponent } from './components/app-banner/app-banner.component';
 
 
+
 //I keep the new line
 @NgModule({
   declarations: [
@@ -196,7 +197,7 @@ import { AppBannerComponent } from './components/app-banner/app-banner.component
       multi: true
     },
     { provide: 'windowObject', useValue: window },
-    ConfigService
+
   ],
   bootstrap: [AppComponent]
 })

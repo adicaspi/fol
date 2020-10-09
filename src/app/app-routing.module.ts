@@ -28,11 +28,12 @@ import {
 } from './services/auth-guard.service';
 
 
+
 const routes: Routes = [
   {
     path: '',
     component: ViewFeedComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuardFB]
   },
 
   {
@@ -54,7 +55,7 @@ const routes: Routes = [
   },
   {
     path: 'feed/:id', component: ViewFeedComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
 
   },
 
