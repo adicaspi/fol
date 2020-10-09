@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from '../../../../node_modules/rxjs/operators';
-import { Subject } from '../../../../node_modules/rxjs';
+import { Subject, Subscription } from '../../../../node_modules/rxjs';
 import { FeedService } from '../../services/feed.service';
-declare var $: any;
+import * as angular from 'angular';
+import $ from 'jquery';
+import { ConfigService } from '../../services/config.service';
+(window as any).jQuery = $;
+
 
 @Component({
   selector: 'app-external-website',
@@ -12,11 +16,14 @@ declare var $: any;
 export class ExternalWebsiteComponent implements OnInit {
   usersCarousel = [];
   usersCarouselTry = [];
+  desktop: boolean;
   onDestroy: Subject<void> = new Subject<void>();
   discoverPeopleArray = [];
+  private WindowSizeSubscription: Subscription;
   users = [{ username: "adi caspi", profileImg: "http://placehold.it/380?text=1", followers: "10", images: ["http://placehold.it/380?text=1", "http://placehold.it/380?text=2", "http://placehold.it/380?text=3"] }, { username: "tamir", profileImg: "http://placehold.it/380?text=1", followers: "12", images: ["http://placehold.it/380?text=4", "http://placehold.it/380?text=5", "http://placehold.it/380?text=6"] }, { username: "rani ophir", profileImg: "http://placehold.it/380?text=1", followers: "14", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "eli ophir", profileImg: "http://placehold.it/380?text=1", followers: "156", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "dan caspi", profileImg: "http://placehold.it/380?text=1", followers: "134", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "nir zep", profileImg: "http://placehold.it/380?text=1", followers: "122", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }];
 
-  constructor(private feedService: FeedService) { }
+  constructor(private feedService: FeedService,
+    private configService: ConfigService, ) { }
 
   ngOnInit() {
     //this.initCarousel();
@@ -25,7 +32,32 @@ export class ExternalWebsiteComponent implements OnInit {
       this.generateCarousel();
     });
 
+    //set slots top position
+    this.initSlots();
+    this.WindowSizeSubscription = this.configService.windowSizeChanged
+      .subscribe(
+        value => {
+          if (value.width >= 600) {
+            this.desktop = true;
+          }
 
+          if (value.width <= 600) {
+            this.desktop = false;
+
+          }
+
+        });
+  }
+
+  initSlots() {
+    var slot2 = $(".card-wrapper:nth-child(2) .user-post img");
+    var slot3 = $(".card-wrapper:nth-child(3)");
+    var slot4 = $(".card-wrapper:nth-child(4)");
+    var slot5 = $(".card-wrapper:nth-child(5)");
+
+    console.log(slot2.outerHeight());
+
+    // console.log(slots.join());
   }
 
   generateCarousel() {
