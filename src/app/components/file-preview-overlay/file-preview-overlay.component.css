@@ -90,6 +90,7 @@ span.like-list{
     padding-left: 16px;
     vertical-align: middle;
     line-height: 50px;
+    cursor: pointer;
   }
 
   #mainImage {
@@ -281,6 +282,7 @@ span.like-list{
     padding-left: 16px;
     vertical-align: middle;
     line-height: 50px;
+    cursor: pointer;
   }
 
   #mainImage {
@@ -456,6 +458,7 @@ span.like-list{
     padding-left: 16px;
     vertical-align: middle;
     line-height: 50px;
+    cursor: pointer;
   }
 
   #mainImage {
