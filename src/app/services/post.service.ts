@@ -60,8 +60,14 @@ export class PostService {
     let params = new HttpParams().set('postId', postId.toString());
     return this.http.get<PostInfo>(postInfoURL, {
       params: params
-    });
+    }).pipe(
+    )
+      .map(res => {
+        let postInfo = new PostInfo(res.description, res.postId, res.postImageAddr, res.price, res.storeId, res.storeLogoAddr, res.storeName, res.thumbnailAddr, res.userId, res.userName, res.userProfileImageAddr, res.website, res.numViews, res.numLikes);
+        return postInfo;
+      })
   }
+
 
   getMorePostsFromUserMobile(userId, postId, userPostUserId): Observable<MorePosts[]> {
     let postInfoURL = this.socialUrl + '/' + userId + '/more-from';

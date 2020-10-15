@@ -36,10 +36,10 @@ const routes: Routes = [
     //canActivate: [AuthGuardFB]
   },
 
-  {
-    path: 'landing',
-    component: LandingPageComponent
-  },
+  // {
+  //   path: 'landing',
+  //   component: LandingPageComponent
+  // },
   {
     path: 'profile', component: ViewMainProfileComponent,
 
@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: {
       title: 'Followear Profile Page',
       description: "When you share posts they'll show up here"
@@ -87,7 +87,7 @@ const routes: Routes = [
     path: 'follow-list/:id', component: ViewFollowListComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'external', component: ExternalWebsiteComponent }
+  { path: 'landing', component: ExternalWebsiteComponent }
 
 ];
 

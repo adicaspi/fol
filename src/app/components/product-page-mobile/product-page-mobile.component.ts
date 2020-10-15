@@ -95,22 +95,28 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       .getMobilePostInfo(this.userService.userId, this.postId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
+        console.log("im opst", postInfo);
         this.postInfo = postInfo;
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
         }
         this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
         this.imageUrls.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+          // this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+          this.postInfo.postImageAddr
         );
         if (this.postInfo.thumbnailAddr) {
           this.imageUrls.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+            // this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+            this.postInfo.thumbnailAddr
           );
         }
-        this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
-        this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
-        this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
+        // this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
+        // this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
+        // this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
+        this.userProfileSrc = this.postInfo.userProfileImageAddr;
+        this.storeLogoSrc = this.postInfo.storeLogoAddr;
+        this.postImageAddr = this.postInfo.postImageAddr;
       });
   }
 

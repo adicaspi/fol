@@ -10,7 +10,7 @@
       <span class="login" (click)="loginPage()">
         Sign In
       </span>
-      <span class="signup" (click)="regsiterPage()">
+      <span class="signup" (click)="registerPage()">
         Sign up
       </span>
     </div>
@@ -29,7 +29,7 @@
       <div class="extra-content">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
       </div>
-      <div class="sign-up-button">
+      <div class="sign-up-button" (click)="registerPage()">
         <span class="btn signup lower">
           Sign up
         </span>
@@ -38,63 +38,63 @@
 
     <div class="slots-container">
 
-      <div class="card-wrapper">
-        <div class="card-upper">
+      <div *ngIf="firstSlot | async ; let firstSlot" class="card-wrapper">
+        <div class="card-upper" (click)="profilePage(firstSlot)">
           <div class="user-profile-image">
-            <img src="../../../assets/kloss_profile.jpg">
+            <img [src]="firstSlot.userProfileImageAddr">
           </div>
-          <div class="user-name">Dana Cohen</div>
+          <div class="user-name">{{firstSlot.userName}}</div>
         </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
+        <div class="user-post" (click)="openProductPage(firstSlot)">
+          <img [src]="firstSlot.postImageAddr">
         </div>
       </div>
 
-      <div class="card-wrapper">
-        <div class="card-upper">
+      <div *ngIf="secondSlot | async ; let secondSlot" class="card-wrapper">
+        <div class="card-upper" (click)="profilePage(secondSlot)">
           <div class="user-profile-image">
-            <img src="../../../assets/kloss_profile.jpg">
+            <img [src]="secondSlot.userProfileImageAddr">
           </div>
-          <div class="user-name">Dana Cohen</div>
+          <div class="user-name">{{secondSlot.userName}}</div>
         </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
+        <div class="user-post" (click)="openProductPage(secondSlot)">
+          <img [src]="secondSlot.postImageAddr">
         </div>
       </div>
 
-      <div class="card-wrapper">
-        <div class="card-upper">
+      <div *ngIf="thirdSlot | async ; let thirdSlot" class="card-wrapper">
+        <div class="card-upper" (click)="profilePage(thirdSlot)">
           <div class="user-profile-image">
-            <img src="../../../assets/kloss_profile.jpg">
+            <img [src]="thirdSlot.userProfileImageAddr">
           </div>
-          <div class="user-name">Dana Cohen</div>
+          <div class="user-name">{{thirdSlot.userName}}</div>
         </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
+        <div class="user-post" (click)="openProductPage(thirdSlot)">
+          <img [src]="thirdSlot.postImageAddr">
         </div>
       </div>
 
-      <div class="card-wrapper">
-        <div class="card-upper">
+      <div *ngIf="fourthSlot | async ; let fourthSlot" class="card-wrapper">
+        <div class="card-upper" (click)="profilePage(fourthSlot)">
           <div class="user-profile-image">
-            <img src="../../../assets/kloss_profile.jpg">
+            <img [src]="fourthSlot.userProfileImageAddr">
           </div>
-          <div class="user-name">Dana Cohen</div>
+          <div class="user-name">{{fourthSlot.userName}}</div>
         </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
+        <div class="user-post" (click)="openProductPage(fourthSlot)">
+          <img [src]="fourthSlot.postImageAddr">
         </div>
       </div>
 
-      <div class="card-wrapper">
-        <div class="card-upper">
+      <div *ngIf="fifthSlot | async ; let fifthSlot" class="card-wrapper">
+        <div class="card-upper" (click)="profilePage(fifthSlot)">
           <div class="user-profile-image">
-            <img src="../../../assets/kloss_profile.jpg">
+            <img [src]="fifthSlot.userProfileImageAddr">
           </div>
-          <div class="user-name">Dana Cohen</div>
+          <div class="user-name">{{fifthSlot.userName}}</div>
         </div>
-        <div class="user-post">
-          <img src="../../../assets/external_website_post.png">
+        <div class="user-post" (click)="openProductPage(fifthSlot)">
+          <img [src]="fifthSlot.postImageAddr">
         </div>
       </div>
 
@@ -123,11 +123,11 @@
               <div class="card card-body">
                 <div class="content-wrapper">
                   <div class="user">
-                    <div class="profile-img">
+                    <div class="profile-img" (click)="loginPage()">
                       <img [src]="item.userAvatar" class="profile-image">
                     </div>
                     <div class="user-section">
-                      <div class="user-info">
+                      <div class="user-info" (click)="loginPage()">
                         <div class="user-name">
                           {{item.username}}
                         </div>
@@ -136,7 +136,7 @@
                           <span class="text"> followers </span>
                         </div>
                       </div>
-                      <div class="follow">
+                      <div class="follow" (click)="loginPage()">
                         <button class="follow-button">
                           Follow
                         </button>
@@ -144,7 +144,8 @@
                     </div>
                   </div>
                   <div class="user-posts">
-                    <div *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="image-container" [style.background-image]="'url(' + post.imageAddr +')'">
+                    <div *ngFor="let post of getItemsDesktop(item.items) ; let i = index" class="image-container" [style.background-image]="'url(' + post.imageAddr +')'"
+                      (click)="loginPage()">
                     </div>
                   </div>
                 </div>
@@ -183,7 +184,7 @@
           <div class="extra-content">
             when you follow people you love, you see items you like. It's that simple.
           </div>
-          <div class="sign-up-button">
+          <div class="sign-up-button" (click)="loginPage()">
             <span class="btn signup lower">
               Let me in
             </span>
@@ -236,7 +237,9 @@
           save items from your favortie stores and filter to your needs
         </div>
         <div class="app-store-button">
-          <img src="../../../assets/app_store_black.png">
+          <a href="https://apps.apple.com/app/followear/id1476265803">
+            <img src="../../../assets/app_store_black.png">
+          </a>
         </div>
       </div>
 
@@ -264,12 +267,14 @@
       <div class="row second">
         <div class="apps-column">
           <!-- <h3 class="column-title">Download the app</h3> -->
-          <img src="../../../assets/app_store_black.png">
+          <a href="https://apps.apple.com/app/followear/id1476265803">
+            <img src="../../../assets/app_store_black.png">
+          </a>
         </div>
-        <span class="btn signup lower">
+        <span class="btn signup lower" (click)="loginPage()">
           Sign Up
         </span>
-        <span class="btn signup lower sign-in">
+        <span class="btn signup lower sign-in" (click)="registerPage()">
           Sign In
         </span>
       </div>

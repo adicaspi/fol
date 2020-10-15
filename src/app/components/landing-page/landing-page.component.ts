@@ -55,7 +55,7 @@ export class LandingPageComponent implements OnInit {
     this.meta.addTag({ name: 'robots', content: 'index' })
   }
 
-  registerPage(): void {
+  loginPage(): void {
     if (this.desktop) {
       const dialogRef = this.dialog.open(LoginComponent, {
         width: '420px',
@@ -85,7 +85,7 @@ export class LandingPageComponent implements OnInit {
 
       registerDialogRef.afterClosed().subscribe(res => {
         if (res == "login") {
-          this.registerPage();
+          this.loginPage();
         }
       })
     } else {

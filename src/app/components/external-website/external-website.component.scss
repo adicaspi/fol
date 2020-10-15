@@ -156,6 +156,7 @@ span.btn.signup.lower {
 .card-upper{
   display:flex;
   margin-bottom: 10px;
+  cursor:pointer; 
 }
 
 .user-name{
@@ -185,6 +186,7 @@ span.btn.signup.lower {
   vertical-align: middle;
   width: 230px;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .already-on-followear {
@@ -329,6 +331,7 @@ transform: translateX(0);
   background-position: center;
   padding-top: 48%;
   border-radius: 7px;
+  cursor: pointer;
 }
 
 .image-container:nth-child(3) {
@@ -353,6 +356,7 @@ transform: translateX(0);
   justify-content: center;
   width:100%;
   margin-left: 16px;
+  cursor: pointer;
 }
 
 .user-info .user-name {
@@ -372,6 +376,7 @@ img.profile-image{
   height: 48px;
   object-fit: cover;
   max-width: none;
+  cursor: pointer;
 }
 
 img.img-fluid{

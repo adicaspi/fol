@@ -46,12 +46,10 @@ export class FeedService {
   }
 
   updateTimelineFeed(id, offset) {
-    console.log("here in update timeline feed");
     this.postsSubject.next(this.getTimeLineFeed(id, offset));
   }
 
   updateUserFeed(id, offset) {
-    console.log("here in update user feed");
     this.postsSubject.next(this.getUserFeed(id, offset));
   }
 
@@ -187,7 +185,6 @@ export class FeedService {
     ).pipe(
     )
       .map(res => {
-        console.log(res, "im res");
         if (res.status == 200) {
           let posts: any = res.body['feedPosts'];
           let offset: any = res.body['newOffset'];

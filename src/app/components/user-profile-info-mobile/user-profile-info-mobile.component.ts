@@ -8,6 +8,9 @@ import { UserProfileInfoComponent } from '../user-profile-info/user-profile-info
 import { Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from '../../models/User';
+import { MatDialog } from '../../../../node_modules/@angular/material';
+import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-user-profile-info-mobile',
@@ -50,7 +53,8 @@ export class UserProfileInfoMobileComponent implements OnInit {
     public dialogService: DialogService,
     public router: Router,
     public configService: ConfigService,
-    public location: LocationService
+    public location: LocationService,
+    public dialog: MatDialog
   ) {
 
   }
@@ -69,9 +73,11 @@ export class UserProfileInfoMobileComponent implements OnInit {
     }
 
     this.updateUser(this.currMasterId);
-    this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
-      this.follows = res;
-    })
+    if (this.userId) {
+      this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
+        this.follows = res;
+      })
+    }
     this.getNumFollowers();
     this.getNumFollowing();
     this.getNumPosts();
@@ -96,14 +102,48 @@ export class UserProfileInfoMobileComponent implements OnInit {
     this.user = this.userService.getUserProfileInfo(id);
   }
 
+  loginPage(): void {
+    var pageWidth = this.desktop ? "420px" : "92vw";
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: pageWidth,
+      height: 'unset',
+      data: { close: true }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == "register") {
+        this.registerPage();
+      }
+
+    })
+  }
+
+  registerPage() {
+    var pageWidth = this.desktop ? "420px" : "92vw";
+    const registerDialogRef = this.dialog.open(RegisterComponent, {
+      width: pageWidth,
+      height: 'unset',
+      data: { close: true }
+    });
+    registerDialogRef.afterClosed().subscribe(res => {
+      if (res == "login") {
+        this.loginPage();
+      }
+    })
+  }
+
+
   follow() {
-    //if user is already following then unfollow
-    if (this.follows) {
-      this.userService.unFollow(this.currMasterId);
-      this.follows = false;
+    if (!this.userId) {
+      this.loginPage();
     } else {
-      this.userService.follow(this.currMasterId);
-      this.follows = true;
+      //if user is already following then unfollow
+      if (this.follows) {
+        this.userService.unFollow(this.currMasterId);
+        this.follows = false;
+      } else {
+        this.userService.follow(this.currMasterId);
+        this.follows = true;
+      }
     }
   }
 

@@ -75,6 +75,7 @@ export class FilePreviewOverlayComponent implements OnInit {
       .getMobilePostInfo(this.userService.userId, this.postId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
+        console.log(postInfo, "im post info");
         this.postInfo = postInfo;
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
@@ -87,17 +88,28 @@ export class FilePreviewOverlayComponent implements OnInit {
         }
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
+        // this.thumbnails.push(
+        //   this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+        // );
+        // if (this.postInfo.thumbnailAddr) {
+        //   this.thumbnails.push(
+        //     this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+        //   );
+        // }
         this.thumbnails.push(
-          this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr
+          this.postInfo.postImageAddr
         );
         if (this.postInfo.thumbnailAddr) {
           this.thumbnails.push(
-            this.baseApiUrl + '/image?s3key=' + this.postInfo.thumbnailAddr
+            this.postInfo.thumbnailAddr
           );
         }
-        this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
-        this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
-        this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
+        // this.storeLogoSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.storeLogoAddr;
+        // this.userProfileSrc = this.baseApiUrl + '/image?s3key=' + this.postInfo.userProfileImageAddr;
+        // this.postImageAddr = this.baseApiUrl + '/image?s3key=' + this.postInfo.postImageAddr;
+        this.storeLogoSrc = this.postInfo.storeLogoAddr;
+        this.userProfileSrc = this.postInfo.userProfileImageAddr;
+        this.postImageAddr = this.postInfo.postImageAddr;
         this.showSpinner = false;
       });
 

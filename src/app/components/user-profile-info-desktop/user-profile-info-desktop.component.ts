@@ -11,6 +11,8 @@ import { GenerateFollowListComponent } from '../generate-follow-list/generate-fo
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../models/User';
 import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.component';
+import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-user-profile-info-desktop',
@@ -71,9 +73,11 @@ export class UserProfileInfoDesktopComponent implements OnInit {
     }
 
     this.updateUser(this.currMasterId);
-    this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
-      this.follows = res;
-    })
+    if (this.userId) {
+      this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
+        this.follows = res;
+      })
+    }
     this.getNumFollowers();
     this.getNumFollowing();
     this.getNumPosts();
@@ -98,14 +102,44 @@ export class UserProfileInfoDesktopComponent implements OnInit {
     this.user = this.userService.getUserProfileInfo(id);
   }
 
+  loginPage(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '420px',
+      height: 'unset',
+      data: { close: true }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == "register") {
+        this.registerPage();
+      }
+    })
+  }
+
+  registerPage() {
+    const registerDialogRef = this.dialog.open(RegisterComponent, {
+      width: '400px',
+      height: 'unset',
+      data: { close: true }
+    });
+    registerDialogRef.afterClosed().subscribe(res => {
+      if (res == "login") {
+        this.loginPage();
+      }
+    })
+  }
+
   follow() {
-    //if user is already following then unfollow
-    if (this.follows) {
-      this.userService.unFollow(this.currMasterId);
-      this.follows = false;
+    if (!this.userId) {
+      this.loginPage();
     } else {
-      this.userService.follow(this.currMasterId);
-      this.follows = true;
+      //if user is already following then unfollow
+      if (this.follows) {
+        this.userService.unFollow(this.currMasterId);
+        this.follows = false;
+      } else {
+        this.userService.follow(this.currMasterId);
+        this.follows = true;
+      }
     }
   }
 

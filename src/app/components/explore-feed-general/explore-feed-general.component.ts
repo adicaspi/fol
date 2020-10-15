@@ -171,7 +171,6 @@ export class ExploreFeedGeneralComponent implements OnInit {
       registerDialogRef.disableClose = true;
 
       registerDialogRef.afterClosed().subscribe(res => {
-        console.log(res);
         if (res == "login") {
           this.openLoginDialog();
         }

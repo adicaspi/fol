@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from '../../../../node_modules/rxjs/operators';
-import { Subject, Subscription } from '../../../../node_modules/rxjs';
+import { Subject, Subscription, Observable } from '../../../../node_modules/rxjs';
 import { FeedService } from '../../services/feed.service';
 import * as angular from 'angular';
 import $ from 'jquery';
 import { ConfigService } from '../../services/config.service';
+import { Router } from '../../../../node_modules/@angular/router';
+import { DialogService } from '../../services/dialog.service';
+import { MatDialog } from '../../../../node_modules/@angular/material';
+import { RegisterComponent } from '../register/register.component';
+import { LoginComponent } from '../login/login.component';
+import { UserService } from '../../services/user.service';
+import { PostService } from '../../services/post.service';
+import { PostInfo } from '../../models/PostInfo';
 (window as any).jQuery = $;
 
 
@@ -20,13 +28,26 @@ export class ExternalWebsiteComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   discoverPeopleArray = [];
   private WindowSizeSubscription: Subscription;
-  users = [{ username: "adi caspi", profileImg: "http://placehold.it/380?text=1", followers: "10", images: ["http://placehold.it/380?text=1", "http://placehold.it/380?text=2", "http://placehold.it/380?text=3"] }, { username: "tamir", profileImg: "http://placehold.it/380?text=1", followers: "12", images: ["http://placehold.it/380?text=4", "http://placehold.it/380?text=5", "http://placehold.it/380?text=6"] }, { username: "rani ophir", profileImg: "http://placehold.it/380?text=1", followers: "14", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "eli ophir", profileImg: "http://placehold.it/380?text=1", followers: "156", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "dan caspi", profileImg: "http://placehold.it/380?text=1", followers: "134", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }, { username: "nir zep", profileImg: "http://placehold.it/380?text=1", followers: "122", images: ["http://placehold.it/380?text=7", "http://placehold.it/380?text=8", "http://placehold.it/380?text=9"] }];
-
+  // firstSlot = { username: "", fullName: "", userId: 173, postId: 10, profileImg: "", postImg: "../../../assets/external_website_post.png" };
+  // secondSlot = { username: "", fullName: "", userId: 157, postId: 10, profileImg: "", postImg: "../../../assets/external_website_post.png" };
+  // thirdSlot = { username: "", fullName: "", userId: 155, postId: 840, profileImg: "", postImg: "" };
+  // fourthSlot = { username: "", fullName: "", userId: 104, postId: 553, profileImg: "", postImg: "" };
+  // fifthSlot = { username: "", fullName: "", userId: 168, postId: 1216, profileImg: "", postImg: "" };
+  // firstSlot = { username: "", fullName: "", userId: 65, postId: 341, profileImg: "", postImg: "" };
+  // secondSlot = { username: "", fullName: "", userId: 2, postId: 482, profileImg: "", postImg: "" };
+  // thirdSlot = { username: "", fullName: "", userId: 7, postId: 301, profileImg: "", postImg: "" };
+  // fourthSlot = { username: "", fullName: "", userId: 92, postId: 262, profileImg: "", postImg: "" };
+  // fifthSlot = { username: "", fullName: "", userId: 89, postId: 254, profileImg: "", postImg: "" };
+  firstSlot: Observable<PostInfo>;
+  secondSlot: Observable<PostInfo>;
+  thirdSlot: Observable<PostInfo>;
+  fourthSlot: Observable<PostInfo>;
+  fifthSlot: Observable<PostInfo>;
+  slots = [this.firstSlot, this.secondSlot, this.thirdSlot, this.fourthSlot, this.fifthSlot];
   constructor(private feedService: FeedService,
-    private configService: ConfigService, ) { }
+    private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService) { }
 
   ngOnInit() {
-    //this.initCarousel();
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
       this.generateCarousel();
@@ -34,6 +55,7 @@ export class ExternalWebsiteComponent implements OnInit {
 
     //set slots top position
     this.initSlots();
+
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
@@ -45,19 +67,20 @@ export class ExternalWebsiteComponent implements OnInit {
             this.desktop = false;
 
           }
-
         });
   }
 
   initSlots() {
-    var slot2 = $(".card-wrapper:nth-child(2) .user-post img");
-    var slot3 = $(".card-wrapper:nth-child(3)");
-    var slot4 = $(".card-wrapper:nth-child(4)");
-    var slot5 = $(".card-wrapper:nth-child(5)");
 
-    console.log(slot2.outerHeight());
-
-    // console.log(slots.join());
+    this.firstSlot = this.postService.getMobilePostInfo(65, 341);
+    this.secondSlot = this.postService.getMobilePostInfo(2, 482);
+    this.thirdSlot = this.postService.getMobilePostInfo(7, 301);
+    this.fourthSlot = this.postService.getMobilePostInfo(92, 262);
+    this.fifthSlot = this.postService.getMobilePostInfo(89, 254);
+    // var slot2 = $(".card-wrapper:nth-child(2) .user-post img");
+    // var slot3 = $(".card-wrapper:nth-child(3)");
+    // var slot4 = $(".card-wrapper:nth-child(4)");
+    // var slot5 = $(".card-wrapper:nth-child(5)");
   }
 
   generateCarousel() {
@@ -81,62 +104,58 @@ export class ExternalWebsiteComponent implements OnInit {
     return desktopItems;
   }
 
-  initCarousel() {
-
-    $('#recipeCarousel').carousel({
-      interval: 10000
-    })
-
-    $('.carousel .carousel-item').each(function () {
-      console.log("here", $(this));
-
-      var minPerSlide = 3;
-      var next = ($(this)).next();
-      if (!next.length) {
-        next = ($(this)).siblings(':first');
-      }
-      next.children(':first-child').clone().appendTo($(this));
-
-      for (var i = 0; i < minPerSlide; i++) {
-        next = next.next();
-        if (!next.length) {
-          next = ($(this)).siblings(':first');
+  loginPage(): void {
+    if (this.desktop) {
+      const dialogRef = this.dialog.open(LoginComponent, {
+        width: '420px',
+        height: 'unset',
+        data: { close: true }
+      });
+      dialogRef.afterClosed().subscribe(res => {
+        if (res == "register") {
+          this.registerPage();
         }
 
-        next.children(':first-child').clone().appendTo($(this));
-      }
-    });
-
-
+      })
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
 
-
-  initSlideShow(that) {
-    $(document).ready(function () {
-      $("#myCarousel").on("slide.bs.carousel", function (e) {
-        var $e = $(e.relatedTarget);
-        var idx = $e.index();
-        var itemsPerSlide = 3;
-        var totalItems = $(".carousel-item").length;
-
-        if (idx >= totalItems - (itemsPerSlide - 1)) {
-          var it = itemsPerSlide - (totalItems - idx);
-          for (var i = 0; i < it; i++) {
-            // append slides to end
-            if (e.direction == "left") {
-              $(".carousel-item")
-                .eq(i)
-                .appendTo(".carousel-inner");
-            } else {
-              $(".carousel-item")
-                .eq(0)
-                .appendTo($(this).find(".carousel-inner"));
-            }
-          }
-        }
+  registerPage() {
+    if (this.desktop) {
+      const registerDialogRef = this.dialog.open(RegisterComponent, {
+        width: '400px',
+        height: 'unset',
+        data: { close: true }
       });
-    });
+      registerDialogRef.afterClosed().subscribe(res => {
+        if (res == "login") {
+          this.loginPage();
+        }
+      })
+    } else {
+      this.router.navigate(['register']);
+    }
+  }
 
+  explorePage() {
+    this.router.navigate(['/explore']);
+  }
+
+  profilePage(slotNumber) {
+    this.router.navigate(['profile', slotNumber.userId]);
+  }
+
+  openProductPage(slotNumber): void {
+    this.configService.setGeneralSession('product_id', slotNumber.postId);
+    this.configService.setGeneralSession('user_id_post_id', slotNumber.userId);
+    if (this.desktop) {
+      this.dialogService.openDialog();
+    } else {
+      this.router.navigate(['product-page', slotNumber.postId]);
+    }
   }
 
   ngOnDestroy(): void {
