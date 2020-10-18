@@ -67,6 +67,7 @@
   flex-direction: row;
   justify-content: center;
   height: 53px;
+  margin-bottom: unset;
 }
 
 a.feed-tab{
@@ -490,7 +491,14 @@ span.icon-tab{
 
   .tabs{
     height: unset;
+    margin-bottom: -9px;
     border-top: 1px solid rgba(var(--b38,219,219,219),1);
+  }
+
+  .feed-tab{
+    width: 160px;
+    margin-right: 0;
+    margin-top: 4px;
   }
 
   span.icon-tab{  
@@ -501,18 +509,14 @@ span.icon-tab{
     }
   }
 
-  .feed-tab{
-    width: 160px;
-    margin-right: 0;
-    margin-top: 12px;
-  }
-
   a.feed-tab{
     line-height: unset;
   }
 
   .feed-tab i{
     font-size: 16px;
+    font-weight: 400;
+
     &.clicked{
       font-weight: bold;
     }

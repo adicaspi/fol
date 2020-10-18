@@ -9,10 +9,25 @@
   </div>
 </div>
 
+<div class="tabs">
+  <a class="feed-tab">
+    <span class="icon-tab" [ngClass]="{'border-tab': userFeedTab}" (click)="getUserFeed()">
+      <i class="fal fa-border-all" [ngClass]="{'clicked': userFeedTab}"></i>
+      <span *ngIf="desktop">POSTS</span>
+    </span>
+  </a>
+  <a class="feed-tab">
+    <span class="icon-tab" [ngClass]="{'border-tab': savedTab}" (click)="getSavedFeed()">
+      <i class="far fa-bookmark" [ngClass]="{'clicked': savedTab}"></i>
+      <span *ngIf="desktop">SAVED</span>
+    </span>
+  </a>
+</div>
+
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
   <div id="main-body">
     <div class="center">
-      <div class="tabs">
+      <!-- <div class="tabs">
         <a class="feed-tab">
           <span class="icon-tab" [ngClass]="{'border-tab': userFeedTab}" (click)="getUserFeed()">
             <i class="fal fa-border-all" [ngClass]="{'clicked': userFeedTab}"></i>
@@ -25,10 +40,6 @@
             <span *ngIf="desktop">SAVED</span>
           </span>
         </a>
-      </div>
-      <!-- <div *ngIf="!desktop" class="tabs">
-        <i class="fal fa-border-all"></i>
-        <i class="fas fa-star"></i>
       </div> -->
       <div class="items">
         <div class="card masonry-item" *ngFor="let post of posts">
