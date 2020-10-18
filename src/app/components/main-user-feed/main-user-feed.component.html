@@ -15,13 +15,13 @@
       <div class="tabs">
         <a class="feed-tab">
           <span class="icon-tab" [ngClass]="{'border-tab': userFeedTab}" (click)="getUserFeed()">
-            <i class="fal fa-border-all"></i>
+            <i class="fal fa-border-all" [ngClass]="{'clicked': userFeedTab}"></i>
             <span *ngIf="desktop">POSTS</span>
           </span>
         </a>
         <a class="feed-tab">
           <span class="icon-tab" [ngClass]="{'border-tab': savedTab}" (click)="getSavedFeed()">
-            <i class="fas fa-bookmark"></i>
+            <i class="far fa-bookmark" [ngClass]="{'clicked': savedTab}"></i>
             <span *ngIf="desktop">SAVED</span>
           </span>
         </a>

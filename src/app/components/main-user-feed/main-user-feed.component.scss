@@ -489,8 +489,16 @@ span.icon-tab{
   }
 
   .tabs{
-    height: 20px;
+    height: unset;
     border-top: 1px solid rgba(var(--b38,219,219,219),1);
+  }
+
+  span.icon-tab{  
+    border-top: none;
+  
+    &.border-tab{
+    border-top: none;
+    }
   }
 
   .feed-tab{
@@ -499,8 +507,15 @@ span.icon-tab{
     margin-top: 12px;
   }
 
+  a.feed-tab{
+    line-height: unset;
+  }
+
   .feed-tab i{
     font-size: 16px;
+    &.clicked{
+      font-weight: bold;
+    }
   }
 }
 

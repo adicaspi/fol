@@ -133,7 +133,6 @@ export class MainUserFeedComponent implements OnInit {
     this.posts = [];
     this.offset = 0;
     this.scrollPageToTop = true;
-    console.log(this.id);
     this.feedService.updateSavedFeed(this.id, this.offset);
   }
 
