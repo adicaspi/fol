@@ -215,8 +215,9 @@ export class UserService {
   }
 
   logout(): Observable<any> {
-    return this.http.get<any>(this.globalRegisterURL + 'logout');
     this.userId = null;
+    return this.http.get<any>(this.globalRegisterURL + 'logout');
+
   }
 
   //redirect user to home page
