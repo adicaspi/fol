@@ -216,6 +216,10 @@ export class UserService {
 
   logout(): Observable<any> {
     this.userId = null;
+    const user_id = sessionStorage.getItem('user_id');
+    if (user_id) {
+      sessionStorage.removeItem('user_id');
+    }
     return this.http.get<any>(this.globalRegisterURL + 'logout');
 
   }
