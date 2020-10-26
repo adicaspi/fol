@@ -144,7 +144,7 @@ export class UserFeedComponent implements OnInit {
 
   onScroll() {
     if (!this.endOfFeed) {
-      this.feedService.getUserSavedFeed(this.id, this.offset);
+      this.feedService.updateUserFeed(this.id, this.offset);
       this.spinner.show();
 
     } else {
