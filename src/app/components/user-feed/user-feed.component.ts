@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute, Router, Routes, ParamMap } from '@angular/router';
@@ -19,6 +19,10 @@ import { UserService } from '../../services/user.service';
 import * as jquery from 'jquery';
 import * as $ from 'jquery';
 import { User } from '../../models/User';
+import { RegisterComponent } from '../register/register.component';
+import { MatDialog } from '../../../../node_modules/@angular/material';
+import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
+import { LoginComponent } from '../login/login.component';
 
 
 
@@ -42,6 +46,7 @@ export class UserFeedComponent implements OnInit {
   userProfile: boolean = false;
   scrollPageToTop: boolean = false;
   user: Observable<User>;
+  showPopup: boolean = true;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubscription: Subscription
@@ -69,7 +74,9 @@ export class UserFeedComponent implements OnInit {
     private scrollHelperService: ScrollHelperService,
     private massageService: MessageService,
     private spinner: NgxSpinnerService,
-    private userService: UserService
+    private userService: UserService,
+    private dialog: MatDialog,
+    private overlay: Overlay
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -137,6 +144,78 @@ export class UserFeedComponent implements OnInit {
         }
         this.feedService.updateUserFeed(this.id, this.offset);
       })
+  }
+
+  registerPage(): void {
+    this.showPopup = false;
+    this.openLoginDialog();
+  }
+
+  openLoginDialog() {
+    var pageWidth = this.desktop ? "420px" : "92vw";
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const config = {
+      scrollStrategy: scrollStrategy,
+      width: pageWidth,
+      height: "unset",
+      data: {
+        showCloseButton: false
+      }
+    }
+
+    const dialogRef = this.dialog.open(LoginComponent, config);
+    dialogRef.disableClose = true;
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == "register") {
+        this.openRegisterDialog();
+      }
+
+    })
+  }
+
+  openRegisterDialog() {
+    if (this.desktop) {
+      var pageWidth = this.desktop ? "420px" : "92vw";
+      const scrollStrategy = this.overlay.scrollStrategies.reposition();
+      const config = {
+        scrollStrategy: scrollStrategy,
+        width: pageWidth,
+        height: "unset",
+        data: {
+          showCloseButton: false
+        }
+      }
+
+      const registerDialogRef = this.dialog.open(RegisterComponent, config);
+      registerDialogRef.disableClose = true;
+
+      registerDialogRef.afterClosed().subscribe(res => {
+        if (res == "login") {
+          this.openLoginDialog();
+        }
+      })
+    } else {
+      this.router.navigate(['register']);
+    }
+  }
+
+
+  @HostListener('window:scroll', ['$event'])
+  scrollHandler(event) {
+    if (!this.userService.userId) {
+      let currScrollPos: number = window.pageYOffset;
+      if (currScrollPos > 1000) {
+        if (this.showPopup) {
+          this.registerPage();
+        }
+      }
+      else {
+        if (this.desktop) {
+          this.dialog.closeAll();
+          this.showPopup = true;
+        }
+      }
+    }
   }
 
 
