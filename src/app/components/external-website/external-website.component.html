@@ -45,7 +45,7 @@
           </div>
           <div class="user-name">{{firstSlot.userName}}</div>
         </div>
-        <div class="user-post" (click)="openProductPage(firstSlot)">
+        <div class="user-post" (click)="profilePage(firstSlot)">
           <img [src]="firstSlot.postImageAddr">
         </div>
       </div>
@@ -57,7 +57,7 @@
           </div>
           <div class="user-name">{{secondSlot.userName}}</div>
         </div>
-        <div class="user-post" (click)="openProductPage(secondSlot)">
+        <div class="user-post" (click)="profilePage(secondSlot)">
           <img [src]="secondSlot.postImageAddr">
         </div>
       </div>
@@ -69,7 +69,7 @@
           </div>
           <div class="user-name">{{thirdSlot.userName}}</div>
         </div>
-        <div class="user-post" (click)="openProductPage(thirdSlot)">
+        <div class="user-post" (click)="profilePage(thirdSlot)">
           <img [src]="thirdSlot.postImageAddr">
         </div>
       </div>
@@ -81,7 +81,7 @@
           </div>
           <div class="user-name">{{fourthSlot.userName}}</div>
         </div>
-        <div class="user-post" (click)="openProductPage(fourthSlot)">
+        <div class="user-post" (click)="profilePage(fourthSlot)">
           <img [src]="fourthSlot.postImageAddr">
         </div>
       </div>
@@ -93,7 +93,7 @@
           </div>
           <div class="user-name">{{fifthSlot.userName}}</div>
         </div>
-        <div class="user-post" (click)="openProductPage(fifthSlot)">
+        <div class="user-post" (click)="profilePage(fifthSlot)">
           <img [src]="fifthSlot.postImageAddr">
         </div>
       </div>
@@ -123,11 +123,11 @@
               <div class="card card-body">
                 <div class="content-wrapper">
                   <div class="user">
-                    <div class="profile-img" (click)="loginPage()">
+                    <div class="profile-img" (click)="profilePage(item)()">
                       <img [src]="item.userAvatar" class="profile-image">
                     </div>
                     <div class="user-section">
-                      <div class="user-info" (click)="loginPage()">
+                      <div class="user-info" (click)="profilePage(item)()">
                         <div class="user-name">
                           {{item.username}}
                         </div>
