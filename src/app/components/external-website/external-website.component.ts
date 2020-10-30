@@ -17,6 +17,7 @@ export class ExternalWebsiteComponent implements OnInit {
   usersCarousel = [];
   usersCarouselTry = [];
   desktop: boolean;
+  logoSrc: string;
   onDestroy: Subject<void> = new Subject<void>();
   discoverPeopleArray = [];
   private WindowSizeSubscription: Subscription;
@@ -39,11 +40,12 @@ export class ExternalWebsiteComponent implements OnInit {
         value => {
           if (value.width >= 600) {
             this.desktop = true;
+            this.logoSrc = "../../../assets/landing-logo.png";
           }
 
           if (value.width <= 600) {
             this.desktop = false;
-
+            this.logoSrc = "../../../assets/fw_logo_pink.png"
           }
 
         });

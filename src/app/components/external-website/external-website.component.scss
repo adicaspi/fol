@@ -183,7 +183,7 @@ span.btn.signup.lower {
 
 .user-post img {
   vertical-align: middle;
-  width: 230px;
+  width: 100%;
   border-radius: 12px;
 }
 
@@ -606,6 +606,87 @@ img.save{
   -webkit-background-clip: text;
   border: 2px solid #fe6fd8;
   color: transparent;
+}
+
+@media  (max-width: 600px)  {
+  
+  * {
+    min-width: unset !important;
+  }
+
+  .content-container {
+    min-width: unset;
+  }
+
+  .fw-navbar {
+    min-width: unset;
+  }
+
+  .action-buttons {
+    display: none;
+  }
+
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .content {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .slots-container {
+    width: 100%;
+    position: relative;
+    margin-top: 52px;
+  }
+
+  .mobile-card-wrapper-container {
+    position: absolute;
+    min-width: 450px !important;
+    right: 50%;
+    transform: translateX(51%);
+  }
+
+  .card-wrapper {
+    width: 132px;
+    position: relative !important;
+    display: inline-block;
+    margin-right: 24px;
+  }
+
+  .user-name {
+    font-size: 11px;
+  }
+
+  .user-profile-image {
+    margin-right: 4px;
+  }
+
+  .user-profile-image img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-wrapper:nth-child(1) {
+    left: 0px;
+    top: 0px;
+  }
+
+  .card-wrapper:nth-child(2) {
+    left: 0px;
+    top: 68px;
+  }
+
+  .card-wrapper:nth-child(3) {
+    left: 0px;
+    top: 0px;
+    margin-right: 0;
+  }
+
+  .card-wrapper:nth-child(4), .card-wrapper:nth-child(5) {
+    display: none;
+  }
 }
 
 
