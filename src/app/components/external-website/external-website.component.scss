@@ -628,17 +628,41 @@ img.save{
 
   .wrapper {
     flex-direction: column;
+    width: 90%;
+    min-height: unset;
+    margin-top: 142px;
   }
 
   .content {
     width: 100%;
     margin-top: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .main-sentence {
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+  .main-sentence.sub-header{
+    font-weight: 600;
+  }
+
+  .extra-content {
+    font-size: 18px;
+    margin-top: 28px;
+  }
+
+  .sign-up-button {
+    margin-top: 36px;
   }
 
   .slots-container {
     width: 100%;
     position: relative;
-    margin-top: 52px;
+    margin-top: 42px;
+    min-height: 320px;
   }
 
   .mobile-card-wrapper-container {
@@ -686,6 +710,18 @@ img.save{
 
   .card-wrapper:nth-child(4), .card-wrapper:nth-child(5) {
     display: none;
+  }
+
+  .already-on-followear {
+    margin-top: 48px;
+  }
+
+  .already-title {
+    font-size: 32px;
+  }
+
+  .carousel-container {
+    margin-top: 24px;
   }
 }
 
