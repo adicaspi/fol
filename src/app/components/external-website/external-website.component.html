@@ -218,7 +218,7 @@
     </div>
   </div>
 
-  <div class="wrapper forth-slide max-width-container">
+  <div class="wrapper forth-slide max-width-container" *ngIf="desktop">
     <div class="content forth-slide">
       <div class="content-left">
         <img src="../../../assets/external_iphone.png" class="save">
@@ -231,11 +231,39 @@
           Filter Everything
         </div>
         <div class="extra-content">
-          save items from your favortie stores and filter to your needs
+          save items from your favorite stores and filter to your needs
         </div>
         <div class="app-store-button">
           <img src="../../../assets/app_store_black.png">
         </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOURTH SLIDE MOBILE VERSION-->
+  <div class="wrapper forth-slide max-width-container" *ngIf="!desktop">
+    <div class="content forth-slide">
+
+      <div class="text-fourth-slide forth-slide">
+        <div class="main-sentence forth-slide">
+          Save From Anywhere
+        </div>
+        <div class="main-sentence forth-slide sub-header">
+          Filter Everything
+        </div>
+      </div>
+
+      <div class="iphone-container">
+        <img src="../../../assets/external_iphone.png" class="save">
+      </div>
+
+      <div class="extra-content">
+        save items from your favorite stores and filter to your needs
+      </div>
+
+      <div class="app-store-button">
+        <img src="../../../assets/app_store_black.png">
       </div>
 
     </div>
@@ -277,118 +305,3 @@
 </div>
 
 <!-- end of desktop template -->
-
-<!-- mobile -->
-
-<!-- <div class="mobile-wrapper" *ngIf="!desktop">
-  <nav>
-    <div class="fw-navbar">
-      <div class="logo">
-        <img src="../../../assets/fw_logo_pink.png" class="logo" />
-      </div>
-      <div class="action-buttons">
-        <span class="btn explore" (click)="explorePage()">
-          Explore
-        </span>
-        <span class="btn login" (click)="loginPage()">
-          Sign In
-        </span>
-        <span class="btn signup" (click)="regsiterPage()">
-          Sign up
-        </span>
-      </div>
-    </div>
-  </nav>
-
-  <div class="wrapper">
-    <div class="content">
-      <div class="main-sentence">
-        Follow People,
-      </div>
-      <div class="main-sentence sub-header">
-        Shop Their Taste.
-      </div>
-      <div class="extra-content">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-      </div>
-      <div class="sign-up-button" (click)="registerPage()">
-        <span class="btn signup lower">
-          Sign up
-        </span>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div class="column first">
-        <div class="card-wrapper">
-          <div class="card-upper">
-            <div class="user-profile-image">
-              <img src="http://placehold.it/380?text=7">
-            </div>
-            <div class="user-name">Dana Cohen</div>
-          </div>
-          <div class="user-post">
-            <img src="../../../assets/external_website_post.png">
-          </div>
-        </div>
-      </div>
-
-      <div class="column second">
-        <div class="card-wrapper second">
-          <div class="card-upper">
-            <div class="user-profile-image">
-              <img src="http://placehold.it/380?text=7">
-            </div>
-            <div class="user-name">Dana Cohen</div>
-          </div>
-          <div class="user-post">
-            <img src="../../../assets/external_website_post.png">
-          </div>
-        </div>
-
-      </div>
-      <div class="column third">
-
-        <div class="card-wrapper">
-          <div class="card-upper">
-            <div class="user-profile-image">
-              <img src="http://placehold.it/380?text=7">
-            </div>
-            <div class="user-name">Dana Cohen</div>
-          </div>
-          <div class="user-post">
-            <img src="../../../assets/external_website_post.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="third-slide">
-    <div class="content third-slide">
-      <div class="content-left">
-        <img src="../../../assets/shopping_easy.png">
-        <div class="text-third-slide">
-          <div class="main-sentence third-slide-sentence">
-            Shopping Was
-          </div>
-          <div class="main-sentence sub-header">
-            Never That Easy
-          </div>
-          <div class="extra-content">
-            when you follow people you love, you see items you like. It's that simple.
-          </div>
-          <div class="sign-up-button" (click)="loginPage()">
-            <span class="btn signup lower">
-              Let me in
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div> -->

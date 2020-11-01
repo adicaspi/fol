@@ -655,7 +655,7 @@ img.save{
   }
 
   .sign-up-button {
-    margin-top: 36px;
+    margin-top: 34px;
   }
 
   .slots-container {
@@ -750,6 +750,37 @@ img.save{
 
   .third-slide .sign-up-button {
     margin-top: 122px;
+  }
+
+  .wrapper.forth-slide {
+    width: 90%;
+  }
+
+  .forth-slide.content {
+    flex-direction: column;
+    margin-top: 14px;
+  }
+
+  .main-sentence.forth-slide {
+    font-size: 34px;
+  }
+
+  .iphone-container {
+    margin-top: 32px;
+  }
+
+  img.save {
+    width: 245px;
+    height: unset;
+  }
+
+  .forth-slide .extra-content {
+    font-size: 21px;
+    margin-top: 32px;
+  }
+
+  div.app-store-button {
+    margin-top: 40px;
   }
 }
 
