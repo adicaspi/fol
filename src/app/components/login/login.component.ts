@@ -108,7 +108,6 @@ export class LoginComponent implements OnInit {
   onSubmitLogin() {
     this.submitted = true;
     if (!this.loginForm.valid) {
-
       return;
     }
     this.loading = true;

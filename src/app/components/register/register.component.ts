@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       birthDate: ['', [Validators.required, Validators.pattern('^\\d*$')]],
-      username: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z0-9_.]+$')]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z0-9_.]+$')], this.validateUserNameNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*?[0-9])(?=.*?[A-Z]).+$')]]
       ,
       email: ['', [Validators.required, Validators.email]]
@@ -120,10 +120,10 @@ export class RegisterComponent implements OnInit {
         } else {
           this.containSpace = false;
         }
-        this.userService.checkUserNameExists(val).subscribe(res => {
-          this.userNameExists = res;
-          this.userNameValidatorLength = false;
-        });
+        // this.userService.checkUserNameExists(val).subscribe(res => {
+        //   this.userNameExists = res;
+        //   this.userNameValidatorLength = false;
+        // });
       } else {
         this.userNameValidatorLength = true;
         this.userNameExists = false;
@@ -146,6 +146,12 @@ export class RegisterComponent implements OnInit {
     });
 
 
+  }
+
+  validateUserNameNotTaken(control: AbstractControl) {
+    return this.userService.checkUserNameExists(control.value).map(res => {
+      return res ? { usernameTaken: true } : null;
+    });
   }
 
   calculateBirthdate(age: string) {
@@ -179,7 +185,6 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loading = true;
-
     let email = this.registerForm.value.email;
     let username = this.registerForm.value.username;
     let password = this.registerForm.value.password;

@@ -47,7 +47,7 @@
             <div class="form-group">
               <label>User Name</label>
               <input type="text" formControlName="username" class="form-control" [ngClass]="{
-                'is-invalid': submitted && f.username.errors ||  userNameExists 
+                'is-invalid': submitted && f.username.errors || f.username.errors && f.username.errors.usernameTaken
               }" />
               <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Username is required</div>
@@ -60,7 +60,7 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="userNameExists" class="invalid-feedback">
+              <div *ngIf="f.username.errors && f.username.errors.usernameTaken" class="invalid-feedback">
                 Username already exists
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import * as $ from 'jquery';
 import { User } from '../../models/User';
@@ -54,6 +54,7 @@ export class SettingsComponent implements OnInit {
   userNameExists = false;
   userNameValidatorLength = false;
 
+
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -63,11 +64,14 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.settingsForm = this.formBuilder.group(
       {
-        username: [''],
+        username: ['', [Validators.pattern('^[a-zA-Z0-9_.]+$'), Validators.required],
+          this.validateUserNameNotTaken.bind(this)
+        ],
         fullname: [''],
         description: [''],
         email: ['', [Validators.required, Validators.email]],
-      }
+      },
+
     );
 
     this.changePasswordForm = this.formBuilder.group(
@@ -98,7 +102,6 @@ export class SettingsComponent implements OnInit {
   }
 
   onChanges(): void {
-
     this.settingsForm.get('username').valueChanges.subscribe(val => {
       if (val.length >= this.minLength) {
         if (val.indexOf(' ') > 0) {
@@ -106,9 +109,6 @@ export class SettingsComponent implements OnInit {
         } else {
           this.containSpace = false;
         }
-        this.userService.checkUserNameExists(val).subscribe(res => {
-          this.userNameValidatorLength = false;
-        });
       } else {
         this.userNameValidatorLength = true;
         this.userNameExists = false;
@@ -146,6 +146,7 @@ export class SettingsComponent implements OnInit {
       description: user.description,
       email: user.email
     });
+
   }
 
   toBase64 = file => new Promise((resolve, reject) => {
@@ -208,6 +209,16 @@ export class SettingsComponent implements OnInit {
     };
   }
 
+  validateUserNameNotTaken(control: AbstractControl) {
+    return this.userService.checkUserNameExists(control.value).map(res => {
+      if (this.user.username == control.value) {
+        return { usernameTaken: false }
+      } else {
+        return res ? { usernameTaken: true } : null;
+      }
+    });
+  }
+
   onSubmitChangePassword() {
     this.submittedPass = true;
     if (this.changePasswordForm.invalid) {
@@ -232,6 +243,9 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.settingsForm.valid) {
+      return;
+    }
     this.submitted = true;
     let updatedUserName = this.settingsForm.value.username;
     let updatedDescription = this.settingsForm.value.description;
@@ -239,7 +253,7 @@ export class SettingsComponent implements OnInit {
     let updatedEmail = this.settingsForm.value.email;
     if (updatedUserName != this.user.username) {
       this.loading = true;
-      this.userService.updateUsername(updatedDescription).subscribe(res => {
+      this.userService.updateUsername(updatedUserName).subscribe(res => {
         this.showSuccessMsg = true;
         this.loading = false;
       }, error => {

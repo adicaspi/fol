@@ -73,7 +73,7 @@
     <div class="form-group">
       <label for="username"></label>
       <input type="text" formControlName="username" class="form-control" [ngClass]="{
-                      'is-invalid': submitted && f.username.errors || f.username.touched && userNameExists 
+                      'is-invalid': submitted && f.username.errors || f.username.touched && f.username.errors && f.username.errors.usernameTaken 
                     }" placeholder="Username" />
 
       <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -87,7 +87,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="userNameExists" class="invalid-feedback">
+      <div *ngIf="f.username.errors && f.username.errors.usernameTaken" class="invalid-feedback">
         Username already exists
       </div>
     </div>
