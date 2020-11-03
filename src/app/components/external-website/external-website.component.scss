@@ -618,19 +618,31 @@ img.save{
     min-width: unset;
   }
 
+  nav {
+    height: 62px;
+    border-bottom: 1px solid #efefef;
+  }
+
   .fw-navbar {
+    width: 87%;
     min-width: unset;
   }
 
-  .action-buttons {
-    display: none;
+  img.logo {
+    height: 30px;
+  }
+
+  .action-buttons span {
+    width: unset;
+    font-size: 18px;
+    font-weight: 600;
   }
 
   .wrapper {
     flex-direction: column;
     width: 90%;
     min-height: unset;
-    margin-top: 142px;
+    margin-top: 108px;
   }
 
   .content {
@@ -713,7 +725,7 @@ img.save{
   }
 
   .already-on-followear {
-    margin-top: 48px;
+    margin-top: 32px;
   }
 
   .already-title {
@@ -741,6 +753,7 @@ img.save{
     padding-top: 32px;
     padding-bottom: 60px;
     margin-top: 76px;
+    margin-bottom: 64px;
   }
 
   .third-slide .main-sentence {
@@ -781,6 +794,43 @@ img.save{
 
   div.app-store-button {
     margin-top: 40px;
+  }
+
+  .footer .content {
+    width: 100%;
+    margin-top: 34px;
+    padding: 0 18px;
+  }
+
+  .footer .logo {
+    height: 34px;
+  }
+
+  .row.first {
+    margin-bottom: 42px;
+  }
+
+  .apps-column img {
+    width: 10rem;
+  }
+
+  .row.third {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer span.btn.signup.lower {
+    margin-left: 0;
+    width: 9rem;
+    height: 3.5rem;
+    line-height: 3.25rem;
+    padding: 0;
+    vertical-align: middle;
+    flex: 1;
+  }
+
+  .row.third > span:nth-child(1) {
+    margin-right: 24px;
   }
 }
 

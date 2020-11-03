@@ -3,7 +3,7 @@
     <div class="logo">
       <img src="{{logoSrc}}" class="logo" />
     </div>
-    <div class="action-buttons">
+    <div class="action-buttons" *ngIf="desktop">
       <span class="explore" (click)="explorePage()">
         Explore
       </span>
@@ -12,6 +12,12 @@
       </span>
       <span class="signup" (click)="regsiterPage()">
         Sign up
+      </span>
+    </div>
+
+    <div class="action-buttons" *ngIf="!desktop">
+      <span class="login" (click)="loginPage()">
+        Sign In
       </span>
     </div>
   </div>
@@ -282,7 +288,7 @@
     </div>
   </div> -->
 
-  <div class="footer">
+  <div class="footer" *ngIf="desktop">
     <div class="content max-width-container">
       <div class="row first">
         <img src="../../../assets/landing-logo.png" class="logo" />
@@ -292,6 +298,29 @@
           <!-- <h3 class="column-title">Download the app</h3> -->
           <img src="../../../assets/app_store_black.png">
         </div>
+        <span class="btn signup lower">
+          Sign Up
+        </span>
+        <span class="btn signup lower sign-in">
+          Sign In
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER MOBILE VERSION-->
+  <div class="footer" *ngIf="!desktop">
+    <div class="content max-width-container">
+      <div class="row first">
+        <img src="../../../assets/landing-logo.png" class="logo" />
+      </div>
+      <div class="row second">
+        <div class="apps-column">
+          <!-- <h3 class="column-title">Download the app</h3> -->
+          <img src="../../../assets/app_store_black.png">
+        </div>
+      </div>
+      <div class="row third">
         <span class="btn signup lower">
           Sign Up
         </span>
