@@ -184,7 +184,7 @@ span.btn.signup.lower {
 
 .user-post img {
   vertical-align: middle;
-  width: 230px;
+  width: 100%;
   border-radius: 12px;
   cursor: pointer;
 }
@@ -611,6 +611,242 @@ img.save{
   -webkit-background-clip: text;
   border: 2px solid #fe6fd8;
   color: transparent;
+}
+
+.row.three {
+  margin-bottom: 10px;
+}
+
+.row.three span {
+  color: #b5b6ba;
+}
+
+@media  (max-width: 600px)  {
+  
+  * {
+    min-width: unset !important;
+  }
+
+  .content-container {
+    min-width: unset;
+  }
+
+  nav {
+    height: 62px;
+    border-bottom: 1px solid #efefef;
+  }
+
+  .fw-navbar {
+    width: 87%;
+    min-width: unset;
+  }
+
+  img.logo {
+    height: 30px;
+  }
+
+  .action-buttons span {
+    width: unset;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    width: 90%;
+    min-height: unset;
+    margin-top: 108px;
+  }
+
+  .content {
+    width: 100%;
+    margin-top: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .main-sentence {
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+  .main-sentence.sub-header{
+    font-weight: 600;
+  }
+
+  .extra-content {
+    font-size: 18px;
+    margin-top: 28px;
+  }
+
+  .sign-up-button {
+    margin-top: 34px;
+  }
+
+  .slots-container {
+    width: 100%;
+    position: relative;
+    margin-top: 42px;
+    min-height: 320px;
+  }
+
+  .mobile-card-wrapper-container {
+    position: absolute;
+    min-width: 450px !important;
+    right: 50%;
+    transform: translateX(51%);
+  }
+
+  .card-wrapper {
+    width: 132px;
+    position: relative !important;
+    display: inline-block;
+    margin-right: 24px;
+  }
+
+  .user-name {
+    font-size: 11px;
+  }
+
+  .user-profile-image {
+    margin-right: 4px;
+  }
+
+  .user-profile-image img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-wrapper:nth-child(1) {
+    left: 0px;
+    top: 0px;
+  }
+
+  .card-wrapper:nth-child(2) {
+    left: 0px;
+    top: 68px;
+  }
+
+  .card-wrapper:nth-child(3) {
+    left: 0px;
+    top: 0px;
+    margin-right: 0;
+  }
+
+  .card-wrapper:nth-child(4), .card-wrapper:nth-child(5) {
+    display: none;
+  }
+
+  .already-on-followear {
+    margin-top: 32px;
+  }
+
+  .already-title {
+    font-size: 32px;
+  }
+
+  .carousel-container {
+    margin-top: 24px;
+  }
+
+  .explore-section {
+    margin-top: 28px;
+  }
+
+  .third-slide {
+    background-image: url("../../../assets/look-at-this-dress.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+
+    color: white;
+    text-align: left;
+    justify-content: left;
+    padding-left: 16px;
+    padding-top: 32px;
+    padding-bottom: 60px;
+    margin-top: 76px;
+    margin-bottom: 64px;
+  }
+
+  .third-slide .main-sentence {
+    font-size: 38px;
+    line-height: 48px;
+  }
+
+  .third-slide .sign-up-button {
+    margin-top: 122px;
+  }
+
+  .wrapper.forth-slide {
+    width: 90%;
+  }
+
+  .forth-slide.content {
+    flex-direction: column;
+    margin-top: 14px;
+  }
+
+  .main-sentence.forth-slide {
+    font-size: 34px;
+  }
+
+  .iphone-container {
+    margin-top: 32px;
+  }
+
+  img.save {
+    width: 245px;
+    height: unset;
+  }
+
+  .forth-slide .extra-content {
+    font-size: 21px;
+    margin-top: 32px;
+  }
+
+  div.app-store-button {
+    margin-top: 40px;
+  }
+
+  .footer .content {
+    width: 100%;
+    margin-top: 34px;
+    padding: 0 18px;
+  }
+
+  .footer .logo {
+    height: 34px;
+  }
+
+  .row.first {
+    margin-bottom: 42px;
+  }
+
+  .apps-column img {
+    width: 10rem;
+  }
+
+  .row.second {
+    display: flex;
+  }
+
+  .row.three {
+    margin-bottom: 0;
+  }
+
+  .footer span.btn.signup.lower {
+    margin-left: 0;
+    width: 8rem;
+    height: 3rem;
+    line-height: 2.75rem;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  .row.second > span:nth-child(1) {
+    margin-right: 24px;
+  }
 }
 
 

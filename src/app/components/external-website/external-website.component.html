@@ -1,9 +1,9 @@
 <nav>
   <div class="fw-navbar max-width-container">
     <div class="logo">
-      <img src="../../../assets/landing-logo.png" class="logo" />
+      <img src="{{logoSrc}}" class="logo" />
     </div>
-    <div class="action-buttons">
+    <div class="action-buttons" *ngIf="desktop">
       <span class="explore" (click)="explorePage()">
         Explore
       </span>
@@ -12,6 +12,12 @@
       </span>
       <span class="signup" (click)="registerPage()">
         Sign up
+      </span>
+    </div>
+
+    <div class="action-buttons" *ngIf="!desktop">
+      <span class="login" (click)="loginPage()">
+        Sign In
       </span>
     </div>
   </div>
@@ -37,75 +43,77 @@
     </div>
 
     <div class="slots-container">
+      <div class="mobile-card-wrapper-container">
 
-      <div *ngIf="firstSlot | async ; let firstSlot" class="card-wrapper">
-        <div class="card-upper" (click)="profilePage(firstSlot)">
-          <div class="user-profile-image">
-            <img [src]="firstSlot.userProfileImageAddr">
+        <div *ngIf="firstSlot | async ; let firstSlot" class="card-wrapper">
+          <div class="card-upper" (click)="profilePage(firstSlot)">
+            <div class="user-profile-image">
+              <img [src]="firstSlot.userProfileImageAddr">
+            </div>
+            <div class="user-name">{{firstSlot.userName}}</div>
           </div>
-          <div class="user-name">{{firstSlot.userName}}</div>
+          <div class="user-post" (click)="profilePage(firstSlot)">
+            <img [src]="firstSlot.postImageAddr">
+          </div>
         </div>
-        <div class="user-post" (click)="profilePage(firstSlot)">
-          <img [src]="firstSlot.postImageAddr">
-        </div>
-      </div>
 
-      <div *ngIf="secondSlot | async ; let secondSlot" class="card-wrapper">
-        <div class="card-upper" (click)="profilePage(secondSlot)">
-          <div class="user-profile-image">
-            <img [src]="secondSlot.userProfileImageAddr">
+        <div *ngIf="secondSlot | async ; let secondSlot" class="card-wrapper">
+          <div class="card-upper" (click)="profilePage(secondSlot)">
+            <div class="user-profile-image">
+              <img [src]="secondSlot.userProfileImageAddr">
+            </div>
+            <div class="user-name">{{secondSlot.userName}}</div>
           </div>
-          <div class="user-name">{{secondSlot.userName}}</div>
+          <div class="user-post" (click)="profilePage(secondSlot)">
+            <img [src]="secondSlot.postImageAddr">
+          </div>
         </div>
-        <div class="user-post" (click)="profilePage(secondSlot)">
-          <img [src]="secondSlot.postImageAddr">
-        </div>
-      </div>
 
-      <div *ngIf="thirdSlot | async ; let thirdSlot" class="card-wrapper">
-        <div class="card-upper" (click)="profilePage(thirdSlot)">
-          <div class="user-profile-image">
-            <img [src]="thirdSlot.userProfileImageAddr">
+        <div *ngIf="thirdSlot | async ; let thirdSlot" class="card-wrapper">
+          <div class="card-upper" (click)="profilePage(thirdSlot)">
+            <div class="user-profile-image">
+              <img [src]="thirdSlot.userProfileImageAddr">
+            </div>
+            <div class="user-name">{{thirdSlot.userName}}</div>
           </div>
-          <div class="user-name">{{thirdSlot.userName}}</div>
+          <div class="user-post" (click)="profilePage(thirdSlot)">
+            <img [src]="thirdSlot.postImageAddr">
+          </div>
         </div>
-        <div class="user-post" (click)="profilePage(thirdSlot)">
-          <img [src]="thirdSlot.postImageAddr">
-        </div>
-      </div>
 
-      <div *ngIf="fourthSlot | async ; let fourthSlot" class="card-wrapper">
-        <div class="card-upper" (click)="profilePage(fourthSlot)">
-          <div class="user-profile-image">
-            <img [src]="fourthSlot.userProfileImageAddr">
+        <div *ngIf="fourthSlot | async ; let fourthSlot" class="card-wrapper">
+          <div class="card-upper" (click)="profilePage(fourthSlot)">
+            <div class="user-profile-image">
+              <img [src]="fourthSlot.userProfileImageAddr">
+            </div>
+            <div class="user-name">{{fourthSlot.userName}}</div>
           </div>
-          <div class="user-name">{{fourthSlot.userName}}</div>
+          <div class="user-post" (click)="profilePage(fourthSlot)">
+            <img [src]="fourthSlot.postImageAddr">
+          </div>
         </div>
-        <div class="user-post" (click)="profilePage(fourthSlot)">
-          <img [src]="fourthSlot.postImageAddr">
-        </div>
-      </div>
 
-      <div *ngIf="fifthSlot | async ; let fifthSlot" class="card-wrapper">
-        <div class="card-upper" (click)="profilePage(fifthSlot)">
-          <div class="user-profile-image">
-            <img [src]="fifthSlot.userProfileImageAddr">
+        <div *ngIf="fifthSlot | async ; let fifthSlot" class="card-wrapper">
+          <div class="card-upper" (click)="profilePage(fifthSlot)">
+            <div class="user-profile-image">
+              <img [src]="fifthSlot.userProfileImageAddr">
+            </div>
+            <div class="user-name">{{fifthSlot.userName}}</div>
           </div>
-          <div class="user-name">{{fifthSlot.userName}}</div>
+          <div class="user-post" (click)="profilePage(fifthSlot)">
+            <img [src]="fifthSlot.postImageAddr">
+          </div>
         </div>
-        <div class="user-post" (click)="profilePage(fifthSlot)">
-          <img [src]="fifthSlot.postImageAddr">
-        </div>
+
       </div>
 
     </div>
-
   </div>
 
 
   <div class="already-on-followear max-width-container">
     <div class="already-title">
-      Already on Followear
+      Already on followear
     </div>
     <div class="already-text">
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
@@ -197,31 +205,27 @@
     </div>
   </div>
 
+  <!-- THIRD SLIDE MOBILE VERSION-->
   <div class="third-slide" *ngIf="!desktop">
-    <div class="content third-slide">
-      <div class="content-left">
-        <img src="../../../assets/shopping_easy.png">
-        <div class="text-third-slide">
-          <div class="main-sentence third-slide-sentence">
-            Shopping Was
-          </div>
-          <div class="main-sentence sub-header">
-            Never That Easy
-          </div>
-          <div class="extra-content">
-            when you follow people you love, you see items you like. It's that simple.
-          </div>
-          <div class="sign-up-button" (click)="loginPage()">
-            <span class="btn signup lower">
-              Let me in
-            </span>
-          </div>
-        </div>
+    <div class="text-third-slide">
+      <div class="main-sentence third-slide-sentence">
+        Shopping Was
+      </div>
+      <div class="main-sentence sub-header">
+        Never That Easy
+      </div>
+      <!-- <div class="extra-content">
+        when you follow people you love, you see items you like. It's that simple.
+      </div> -->
+      <div class="sign-up-button" (click)="loginPage()">
+        <span class="btn signup lower">
+          Let me in
+        </span>
       </div>
     </div>
   </div>
 
-  <div class="wrapper forth-slide max-width-container">
+  <div class="wrapper forth-slide max-width-container" *ngIf="desktop">
     <div class="content forth-slide">
       <div class="content-left">
         <img src="../../../assets/external_iphone.png" class="save">
@@ -234,13 +238,41 @@
           Filter Everything
         </div>
         <div class="extra-content">
-          save items from your favortie stores and filter to your needs
+          save items from your favorite stores and filter to your needs
         </div>
         <div class="app-store-button">
           <a href="https://apps.apple.com/app/followear/id1476265803">
             <img src="../../../assets/app_store_black.png">
           </a>
         </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOURTH SLIDE MOBILE VERSION-->
+  <div class="wrapper forth-slide max-width-container" *ngIf="!desktop">
+    <div class="content forth-slide">
+
+      <div class="text-fourth-slide forth-slide">
+        <div class="main-sentence forth-slide">
+          Save From Anywhere
+        </div>
+        <div class="main-sentence forth-slide sub-header">
+          Filter Everything
+        </div>
+      </div>
+
+      <div class="iphone-container">
+        <img src="../../../assets/external_iphone.png" class="save">
+      </div>
+
+      <div class="extra-content">
+        save items from your favorite stores and filter to your needs
+      </div>
+
+      <div class="app-store-button">
+        <img src="../../../assets/app_store_black.png">
       </div>
 
     </div>
@@ -259,7 +291,7 @@
     </div>
   </div> -->
 
-  <div class="footer">
+  <div class="footer" *ngIf="desktop">
     <div class="content max-width-container">
       <div class="row first">
         <img src="../../../assets/landing-logo.png" class="logo" />
@@ -278,124 +310,30 @@
           Sign In
         </span>
       </div>
+      <div class="row three">
+        <span>©️ Followear 2020</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER MOBILE VERSION-->
+  <div class="footer" *ngIf="!desktop">
+    <div class="content max-width-container">
+      <div class="row first">
+        <img src="../../../assets/landing-logo.png" class="logo" />
+      </div>
+      <div class="row second">
+        <span class="btn signup lower">
+          Sign Up
+        </span>
+        <span class="btn signup lower sign-in">
+          Sign In
+        </span>
+      </div>
+      <div class="row three">
+        <span>©️ Followear 2020</span>
+      </div>
     </div>
   </div>
 
 </div>
-
-<!-- end of desktop template -->
-
-<!-- mobile -->
-
-<!-- <div class="mobile-wrapper" *ngIf="!desktop">
-  <nav>
-    <div class="fw-navbar">
-      <div class="logo">
-        <img src="../../../assets/fw_logo_pink.png" class="logo" />
-      </div>
-      <div class="action-buttons">
-        <span class="btn explore" (click)="explorePage()">
-          Explore
-        </span>
-        <span class="btn login" (click)="loginPage()">
-          Sign In
-        </span>
-        <span class="btn signup" (click)="regsiterPage()">
-          Sign up
-        </span>
-      </div>
-    </div>
-  </nav>
-
-  <div class="wrapper">
-    <div class="content">
-      <div class="main-sentence">
-        Follow People,
-      </div>
-      <div class="main-sentence sub-header">
-        Shop Their Taste.
-      </div>
-      <div class="extra-content">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-      </div>
-      <div class="sign-up-button" (click)="registerPage()">
-        <span class="btn signup lower">
-          Sign up
-        </span>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div class="column first">
-        <div class="card-wrapper">
-          <div class="card-upper">
-            <div class="user-profile-image">
-              <img src="http://placehold.it/380?text=7">
-            </div>
-            <div class="user-name">Dana Cohen</div>
-          </div>
-          <div class="user-post">
-            <img src="../../../assets/external_website_post.png">
-          </div>
-        </div>
-      </div>
-
-      <div class="column second">
-        <div class="card-wrapper second">
-          <div class="card-upper">
-            <div class="user-profile-image">
-              <img src="http://placehold.it/380?text=7">
-            </div>
-            <div class="user-name">Dana Cohen</div>
-          </div>
-          <div class="user-post">
-            <img src="../../../assets/external_website_post.png">
-          </div>
-        </div>
-
-      </div>
-      <div class="column third">
-
-        <div class="card-wrapper">
-          <div class="card-upper">
-            <div class="user-profile-image">
-              <img src="http://placehold.it/380?text=7">
-            </div>
-            <div class="user-name">Dana Cohen</div>
-          </div>
-          <div class="user-post">
-            <img src="../../../assets/external_website_post.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="third-slide">
-    <div class="content third-slide">
-      <div class="content-left">
-        <img src="../../../assets/shopping_easy.png">
-        <div class="text-third-slide">
-          <div class="main-sentence third-slide-sentence">
-            Shopping Was
-          </div>
-          <div class="main-sentence sub-header">
-            Never That Easy
-          </div>
-          <div class="extra-content">
-            when you follow people you love, you see items you like. It's that simple.
-          </div>
-          <div class="sign-up-button" (click)="loginPage()">
-            <span class="btn signup lower">
-              Let me in
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div> -->
