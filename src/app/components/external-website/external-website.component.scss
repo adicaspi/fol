@@ -608,6 +608,14 @@ img.save{
   color: transparent;
 }
 
+.row.three {
+  margin-bottom: 10px;
+}
+
+.row.three span {
+  color: #b5b6ba;
+}
+
 @media  (max-width: 600px)  {
   
   * {
@@ -814,22 +822,24 @@ img.save{
     width: 10rem;
   }
 
-  .row.third {
+  .row.second {
     display: flex;
-    justify-content: space-between;
+  }
+
+  .row.three {
+    margin-bottom: 0;
   }
 
   .footer span.btn.signup.lower {
     margin-left: 0;
-    width: 9rem;
-    height: 3.5rem;
-    line-height: 3.25rem;
+    width: 8rem;
+    height: 3rem;
+    line-height: 2.75rem;
     padding: 0;
     vertical-align: middle;
-    flex: 1;
   }
 
-  .row.third > span:nth-child(1) {
+  .row.second > span:nth-child(1) {
     margin-right: 24px;
   }
 }
