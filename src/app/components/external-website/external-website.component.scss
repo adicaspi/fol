@@ -1,3 +1,4 @@
+
 nav {
   display: flex;
   justify-content: center;
@@ -216,6 +217,47 @@ span.btn.signup.lower {
   display: none;
 }
 
+
+//   .carousel-cards {
+//       flex: 0 0 33.333333%;
+//       max-width: 33.333333%;
+//       position: relative;
+//       width: 100%;
+//       padding-right: 15px;
+//       padding-left: 15px;
+//   }
+//   .carousel-inner .carousel-item-right.active,
+// .carousel-inner .carousel-item-next {
+//   transform: translateX(33.333%);
+// }
+
+// .carousel-inner .carousel-item-left.active, 
+// .carousel-inner .carousel-item-prev {
+//   transform: translateX(-33.333%);
+// }
+  
+  
+//   @media screen and (max-width: 940px){
+//   .carousel-cards {
+//       flex: 0 0 50%;
+//       max-width: 50%;
+//       position: relative;
+//       width: 100%;
+//       padding-right: 15px;
+//       padding-left: 15px;
+//   }
+//   .carousel-inner .carousel-item-right.active,
+// .carousel-inner .carousel-item-next {
+//   transform: translateX(50.00%);
+// }
+
+// .carousel-inner .carousel-item-left.active, 
+// .carousel-inner .carousel-item-prev {
+//   transform: translateX(-50.00%);
+// }
+//   }
+
+
 @media (max-width: 768px) {
   .carousel-inner .carousel-item > div {
       display: none;
@@ -233,7 +275,7 @@ span.btn.signup.lower {
 
 /* display 3 */
 
-  
+
 .carousel-inner .carousel-item-right.active,
 .carousel-inner .carousel-item-next {
   transform: translateX(33.333%);
