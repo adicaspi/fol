@@ -107,7 +107,7 @@ export class NavbarComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   scrollHandler(event) {
     let currScrollPos: number = window.pageYOffset;
-    if (currScrollPos > this.prevScrollPos && currScrollPos > 25) {
+    if (currScrollPos >= this.prevScrollPos && currScrollPos > 25) {
       jquery("nav").css("top", "-70px");
     } else {
       jquery("nav").css("top", "0px")
@@ -204,7 +204,11 @@ export class NavbarComponent implements OnInit {
   }
 
   explorePage() {
-    this.router.navigate(['/explore', this.userService.userId]);
+    if (this.userService.userId) {
+      this.router.navigate(['/explore', this.userService.userId]);
+    } else {
+      this.router.navigate(['/explore']);
+    }
   }
 
 
