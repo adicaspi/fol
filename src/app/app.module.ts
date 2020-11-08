@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GenerateFollowListComponent } from './components/generate-follow-list/generate-follow-list.component';
 import { FollowListComponent } from './components/follow-list/follow-list.component';
 import { ImageComponentComponent } from './components/image-component/image-component.component';
-import { MatDialogModule, MatDialogRef, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule } from '@angular/material';
+import { MatDialogModule, MatDialogRef, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpErrorComponent } from './interceptor/http-error/http-error.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -196,7 +196,7 @@ import { AppBannerComponent } from './components/app-banner/app-banner.component
       deps: [ConfigService, UserService],
       multi: true
     },
-    { provide: 'windowObject', useValue: window },
+    { provide: 'windowObject', useValue: window }
 
   ],
   bootstrap: [AppComponent]

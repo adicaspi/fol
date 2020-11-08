@@ -64,7 +64,6 @@ export class RegisterComponent implements OnInit {
   ) {
     if (dialogRef) {
       this.modal = true;
-      console.log(this.modal);
       dialogRef.addPanelClass("login-panel-class");
       if (!this.data.showCloseButton) {
         this.showCloseButton = false;

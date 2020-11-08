@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
   ) {
     if (dialogRef) {
       this.modal = true;
+      this.dialogRef
       dialogRef.addPanelClass("login-panel-class");
       if (!this.data.showCloseButton) {
         this.showCloseButton = false;
@@ -103,6 +104,11 @@ export class LoginComponent implements OnInit {
 
   landingPage() {
     this.router.navigate(['landing']);
+  }
+
+  forgotPassword() {
+    this.dialogRef.close();
+    this.router.navigate(['forgotpassword']);
   }
 
   onSubmitLogin() {

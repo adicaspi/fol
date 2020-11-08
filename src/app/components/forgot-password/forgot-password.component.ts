@@ -102,8 +102,6 @@ export class ForgotPasswordComponent implements OnInit {
   checkPasswords(form: FormGroup) {
     let pass = form.controls.password.value;
     let confirmPass = form.controls.confirmPassword.value;
-    console.log(' in check pass', confirmPass);
-
     return pass === confirmPass ? null : { passwordsNotEqual: true };
   }
 
