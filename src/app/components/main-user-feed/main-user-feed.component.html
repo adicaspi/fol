@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="tabs">
+<div class="tabs" [ngClass]="{'empty': showNoPostsMessage}">
   <a class="feed-tab">
     <span class="icon-tab" [ngClass]="{'border-tab': userFeedTab}" (click)="getUserFeed()">
       <i class="fal fa-border-all" [ngClass]="{'clicked': userFeedTab}"></i>
