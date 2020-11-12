@@ -231,10 +231,10 @@ span.btn.signup.lower {
 //   transform: translateX(33.333%);
 // }
 
-// .carousel-inner .carousel-item-left.active, 
-// .carousel-inner .carousel-item-prev {
-//   transform: translateX(-33.333%);
-// }
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-33.333%);
+}
   
   
 //   @media screen and (max-width: 940px){
@@ -265,6 +265,9 @@ span.btn.signup.lower {
   .carousel-inner .carousel-item > div:first-child {
       display: block;
   }
+  * {
+    min-width: unset !important;
+  }
 }
 
 .carousel-inner .carousel-item.active,
@@ -276,15 +279,15 @@ span.btn.signup.lower {
 /* display 3 */
 
 
-// .carousel-inner .carousel-item-right.active,
-// .carousel-inner .carousel-item-next {
-//   transform: translateX(33.333%);
-// }
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(33.333%);
+}
 
-// .carousel-inner .carousel-item-left.active, 
-// .carousel-inner .carousel-item-prev {
-//   transform: translateX(-33.333%);
-// }
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-33.333%);
+}
 
 
 .carousel-inner .carousel-item-right,
