@@ -139,6 +139,7 @@ div.upper-description-div{
 
 .img-comp img {
   border-radius: 50%;
+  max-width: 200px;
   width: 200px;
   height: 200px;
   object-fit: cover;
@@ -279,6 +280,7 @@ div.user-name{
   
   .img-comp img {
     border-radius: 50%;
+    max-width: 133px;
     width: 133px;
     height: 133px;
     border: 2px solid rgba(128,128,128,0.25);

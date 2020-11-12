@@ -1,15 +1,4 @@
-<div *ngIf="showNoPostsMessage" class="no-posts">
-  <div class="no-posts-message">
-    <div class="subtitle">
-      You haven't uploaded any fashion items yet
-    </div>
-    <div class="share-posts-container">
-      <a href="https://apps.apple.com/app/followear/id1476265803" class="share-posts" target="_blank">Start Uploading</a>
-    </div>
-  </div>
-</div>
-
-<div class="tabs" [ngClass]="{'empty': showNoPostsMessage}">
+<div class="tabs">
   <a class="feed-tab">
     <span class="icon-tab" [ngClass]="{'border-tab': userFeedTab}" (click)="getUserFeed()">
       <i class="fal fa-border-all" [ngClass]="{'clicked': userFeedTab}"></i>
@@ -22,6 +11,18 @@
       <span *ngIf="desktop">SAVED</span>
     </span>
   </a>
+</div>
+
+
+<div *ngIf="showNoPostsMessage" class="no-posts">
+  <div class="no-posts-message">
+    <div class="subtitle">
+      You haven't uploaded any fashion items yet
+    </div>
+    <div class="share-posts-container">
+      <a href="https://apps.apple.com/app/followear/id1476265803" class="share-posts" target="_blank">Start Uploading</a>
+    </div>
+  </div>
 </div>
 
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
