@@ -63,7 +63,7 @@ export class PostService {
     }).pipe(
     )
       .map(res => {
-        let postInfo = new PostInfo(res.description, res.postId, res.postImageAddr, res.price, res.storeId, res.storeLogoAddr, res.storeName, res.thumbnailAddr, res.userId, res.userName, res.userProfileImageAddr, res.website, res.numViews, res.numLikes);
+        let postInfo = new PostInfo(res.postId, res.userId, res.storeId, res.userProfileImageAddr, res.userName, res.postImageAddr, res.description, res.price, res.salePrice, res.storeLogoAddr, res.storeName, res.website, res.thumbnailAddr, res.selfThumbAddr, res.link, res.numViews, res.numLikes, res.createDate);
         return postInfo;
       })
   }

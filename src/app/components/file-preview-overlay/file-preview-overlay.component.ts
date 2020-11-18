@@ -95,6 +95,11 @@ export class FilePreviewOverlayComponent implements OnInit {
             this.postInfo.thumbnailAddr
           );
         }
+        if (this.postInfo.selfThumbAddr) {
+          this.thumbnails.push(
+            this.postInfo.selfThumbAddr
+          );
+        }
 
         this.storeLogoSrc = this.postInfo.storeLogoAddr;
         this.userProfileSrc = this.postInfo.userProfileImageAddr;
