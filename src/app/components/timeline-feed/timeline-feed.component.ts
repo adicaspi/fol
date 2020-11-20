@@ -160,6 +160,10 @@ export class TimelineFeedComponent implements OnInit {
     }
   }
 
+  postSalePrice(post) {
+    return post.post.salePrice;
+  }
+
   profilePage(post) {
     this.router.navigate(['profile', post['post']['userId']]);
   }

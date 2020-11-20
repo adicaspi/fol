@@ -50,7 +50,15 @@
                 </div>
               </mat-menu>
 
-              <span class="price">{{postInfo.price}}</span>
+              <!-- <span class="price">{{postInfo.price}}</span> -->
+              <span *ngIf="postSalePrice(postInfo) ;else noDiscount" class="price discount">
+                <span class="strike-original-price"> {{ postInfo.price }}</span> {{postInfo.salePrice}}
+              </span>
+              <ng-template #noDiscount>
+                <span class="price">
+                  {{ postInfo.price }}
+                </span>
+              </ng-template>
             </div>
             <div *ngIf="registeredUser" class="num-views">
               <i *ngIf="saveButtonClicked" class="fas fa-star save-item" (click)="toggleSaveButton()"></i>

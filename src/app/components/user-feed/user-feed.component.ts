@@ -218,8 +218,9 @@ export class UserFeedComponent implements OnInit {
     }
   }
 
-
-
+  postSalePrice(post) {
+    return post.post.salePrice;
+  }
 
   onScroll() {
     if (!this.endOfFeed) {

@@ -61,9 +61,15 @@
             <div class="description">
               {{ post['post']['description'] }}
             </div>
-            <div class="price">
-              {{ post['post']['price'] }}
+
+            <div *ngIf="postSalePrice(post) ;else noDiscount" class="price discount">
+              <span class="strike-original-price"> {{ post[ 'post'][ 'price'] }}</span> {{post['post']['salePrice']}}
             </div>
+            <ng-template #noDiscount>
+              <div class="price">
+                {{ post[ 'post'][ 'price'] }}
+              </div>
+            </ng-template>
             <a class="store text-right" href="{{ post.post.link }}" target=" _blank ">
               {{desktop ? post.post.website : '(' + post.storeNameMobile + ')'}}
             </a>

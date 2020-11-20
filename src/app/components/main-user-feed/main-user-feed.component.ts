@@ -127,6 +127,10 @@ export class MainUserFeedComponent implements OnInit {
     this.getUserFeed();
   }
 
+  postSalePrice(post) {
+    return post.post.salePrice;
+  }
+
   getSavedFeed() {
     this.savedTab = true;
     this.userFeedTab = false;

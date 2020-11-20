@@ -52,6 +52,20 @@
   font-size: 16px;
 }
 
+.price.discount{
+  color:red;
+}
+
+span.strike-original-price{
+  text-decoration: line-through;
+  color:black;
+  margin-right: 2px; 
+}
+
+span.store-name{
+  color: rgb(96,96,96);
+}
+
 div.num-views {
   font-size: 14px;
   color: rgb(96,96,96);

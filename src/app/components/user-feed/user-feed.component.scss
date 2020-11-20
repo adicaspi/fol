@@ -102,6 +102,16 @@ span.icon-tab{
   cursor: pointer;
 }
 
+.price.discount{
+  color:red;
+}
+
+span.strike-original-price{
+  text-decoration: line-through;
+  color:black;
+  margin-right: 2px; 
+}
+
 @media only screen and (min-width: 900px) {
   .no-posts{
     border-top: none;

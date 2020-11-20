@@ -14,9 +14,18 @@
     <div class="product-description">
       {{ postInfo.description }}
     </div>
-    <div class="price">
+    <!-- <div class="price">
       {{ postInfo.price }} {{'('+ (postInfo.storeName | lowercase)+')'}}
+    </div> -->
+    <div *ngIf="postSalePrice(postInfo) ;else noDiscount" class="price discount">
+      <span class="strike-original-price"> {{ postInfo.price }}</span> {{postInfo.salePrice}}
+      <span class="store-name"> {{'('+ (postInfo.storeName | lowercase)+')'}}</span>
     </div>
+    <ng-template #noDiscount>
+      <div class="price">
+        {{ postInfo.price }} {{'('+ (postInfo.storeName | lowercase)+')'}}
+      </div>
+    </ng-template>
     <div *ngIf="registeredUser" class="num-views">
       <i *ngIf="saveButtonClicked" class="fas fa-bookmark save-item" (click)="toggleSaveButton()"></i>
       <i *ngIf="!saveButtonClicked" class="fal fa-bookmark save-item" (click)="toggleSaveButton()"></i>

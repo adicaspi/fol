@@ -140,6 +140,10 @@ export class FilePreviewOverlayComponent implements OnInit {
       });
   }
 
+  postSalePrice(post) {
+    return post.salePrice;
+  }
+
   goToLikeList() {
     this.configService.setGeneralSession('postId', this.postId);
     this.configService.setGeneralSession('list', 1);

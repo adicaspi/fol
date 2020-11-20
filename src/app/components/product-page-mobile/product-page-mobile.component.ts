@@ -119,6 +119,9 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       });
   }
 
+  postSalePrice(post) {
+    return post.salePrice;
+  }
 
   getMoreFromUser() {
     this.postsToShow$ = this.postService.getMorePostsFromUserMobile(this.userService.userId, this.postId, this.userPostUserId);
