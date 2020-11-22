@@ -57,7 +57,9 @@ export class PostInfo {
     this.numViews = numViews;
     this.numLikes = numLikes;
     this.createDate = createDate;
-    this.selfThumbAddr = this.baseApiUrl + '/image?s3key=' + selfThumbAddr;
+    if (selfThumbAddr) {
+      this.selfThumbAddr = this.baseApiUrl + '/image?s3key=' + selfThumbAddr;
+    }
     this.link = link;
     this.salePrice = salePrice;
   }

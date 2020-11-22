@@ -213,6 +213,10 @@ button.nav-item {
     &.clear:hover {
       color: rgb(38,38,38);
     }
+
+    &.red{
+      color: red;
+    }
   }
 
   &.opened {
