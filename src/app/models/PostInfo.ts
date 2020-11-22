@@ -49,7 +49,9 @@ export class PostInfo {
     this.storeId = storeId;
     this.storeLogoAddr = this.baseApiUrl + '/image?s3key=' + storeLogoAddr;
     this.storeName = storeName;
-    this.thumbnailAddr = this.baseApiUrl + '/image?s3key=' + thumbnailAddr;
+    if (thumbnailAddr) {
+      this.thumbnailAddr = this.baseApiUrl + '/image?s3key=' + thumbnailAddr;
+    }
     this.userId = userId;
     this.userName = userName;
     this.userProfileImageAddr = this.baseApiUrl + '/image?s3key=' + userProfileImageAddr;
