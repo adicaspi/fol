@@ -26,7 +26,11 @@ export class TimelinePost {
 
   get storeNameMobile() {
     var website = this.post.website;
-    var str = website.substring(0, website.length - 4); //remove .com from store name
+    if (website.includes(".com")) {
+      var str = website.substring(0, website.length - 4); //remove .com from store name
+    } else {
+      var str = website.substring(0, website.length - 6); //remove .com from store name
+    }
     return str;
   }
 
