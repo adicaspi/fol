@@ -17,7 +17,7 @@
   <mat-menu class=checkbox-menu #product="matMenu" xPosition="before">
     <div class="menu-wrapper">
       <div class="mat-menu-content product">
-        <mat-checkbox *ngFor="let product of productsToShow" name="product" [(indeterminate)]="indeterminate" [checked]="product.checked"
+        <mat-checkbox *ngFor="let product of filteringDTO.clothingProductType" name="product" [(indeterminate)]="indeterminate" [checked]="product.checked"
           [labelPosition]="labelPosition" [value]="product.id" [disabled]="product.disabled" (click)="$event.stopPropagation();"
           (change)="onChangeCheckBox('products',$event,product)">
           {{product.name}}
@@ -25,7 +25,7 @@
       </div>
       <div class="submit">
         <button (click)="selectedProduct()">apply</button>
-        <button (click)="clearSelection(productsToShow,'productTypes')">clear</button>
+        <button (click)="clearSelection('productTypes')">clear</button>
       </div>
     </div>
   </mat-menu>
@@ -35,13 +35,13 @@
   <mat-menu #designer="matMenu" xPosition="before" class=checkbox-menu>
     <div class="menu-wrapper">
       <div class="mat-menu-content designer">
-        <mat-checkbox *ngFor="let designer of designers" name="designer" [value]="designer.id" [checked]="designer.checked" (change)="onChangeCheckBox('designers',$event,designer)"
-          (click)="$event.stopPropagation();"> {{designer.name}}
+        <mat-checkbox *ngFor="let designer of filteringDTO.getDesignersObjects" name="designer" [value]="designer.id" [checked]="designer.checked"
+          (change)="onChangeCheckBox('designers',$event,designer)" (click)="$event.stopPropagation();"> {{designer.name}}
         </mat-checkbox>
       </div>
       <div class="submit">
         <button (click)="selectedDesigner()">apply</button>
-        <button (click)="clearSelection(designers,'designers')">clear</button>
+        <button (click)="clearSelection('designers')">clear</button>
       </div>
     </div>
   </mat-menu>
@@ -51,13 +51,14 @@
   <mat-menu #store="matMenu" xPosition="before" class="checkbox-menu">
     <div class="menu-wrapper">
       <div class="mat-menu-content store">
-        <mat-checkbox *ngFor="let store of stores" class="example-margin" name="store" [value]="store.id" [checked]="store.checked"
-          [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeCheckBox('stores',$event,store)"> {{store.name}}
+        <mat-checkbox *ngFor="let store of filteringDTO.getStoresObjects" class="example-margin" name="store" [value]="store.id"
+          [checked]="store.checked" [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeCheckBox('stores',$event,store)">
+          {{store.name}}
         </mat-checkbox>
       </div>
       <div class="submit">
         <button (click)="selectedStore()">apply</button>
-        <button (click)="clearSelection(stores,'stores')">clear</button>
+        <button (click)="clearSelection('stores')">clear</button>
       </div>
     </div>
   </mat-menu>

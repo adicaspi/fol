@@ -152,7 +152,7 @@ export class FeedService {
       this.globalFeedURL + userId + '/user-feed', this.feedFilteringDTO, {
         headers: httpOptions.headers,
         observe: "response",
-        params: params,
+        params: params
       }
     ).pipe(
     )

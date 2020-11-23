@@ -23,7 +23,7 @@
 
       <div *ngIf="showProductType" class="filter-section">
         <div class="filter-section__title">Product Type</div>
-        <div *ngFor="let product of clothings; let i = index" [hidden]="i > 3 && openCloseProducts" class="filter-section__prop"
+        <div *ngFor="let product of filteringDTO.clothingProductType; let i = index" [hidden]="i > 3 && openCloseProducts" class="filter-section__prop"
           [ngClass]="{'selected': product.checked}" (click)="onChangeCheckBox('clothings', product)">
           <span>{{product.name}}</span>
           <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -41,8 +41,8 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Stores</div>
-        <div *ngFor="let store of stores; let i = index" [hidden]="i > 3 && openCloseStores" class="filter-section__prop" [ngClass]="{'selected': store.checked}"
-          (click)="onChangeCheckBox('stores', store)">
+        <div *ngFor="let store of filteringDTO.getStoresObjects; let i = index" [hidden]="i > 3 && openCloseStores" class="filter-section__prop"
+          [ngClass]="{'selected': store.checked}" (click)="onChangeCheckBox('stores', store)">
           <span>{{store.name}}</span>
           <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="212px" height="159px" viewBox="-0.711 -0.394 212 159"
@@ -59,7 +59,7 @@
 
       <div class="filter-section">
         <div class="filter-section__title">Designers</div>
-        <div *ngFor="let designer of designers; let i = index" [hidden]="i > 3 && openCloseDesigners" class="filter-section__prop"
+        <div *ngFor="let designer of filteringDTO.getDesignersObjects; let i = index" [hidden]="i > 3 && openCloseDesigners" class="filter-section__prop"
           [ngClass]="{'selected': designer.checked}" (click)="onChangeCheckBox('designers', designer)">
           <span>{{designer.name}}</span>
           <svg class="filter-section__check-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

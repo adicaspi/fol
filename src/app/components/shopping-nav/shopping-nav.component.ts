@@ -26,10 +26,6 @@ export class ShoppingNavComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
   placeholder = "search &#xF002";
   menu = [];
-  clothings = [];
-  designers = [];
-  stores = [];
-  prices = [];
   onDestroy: Subject<void> = new Subject<void>();
   filteringDTO = new FilteringDTO();
   openCloseStores = true;
@@ -63,11 +59,7 @@ export class ShoppingNavComponent implements OnInit {
 
   ngOnInit() {
     this.initSlider(this);
-    this.shoppingNavService.mobileMenu.map(val => this.menu.push(Object.assign({}, val)));
-    this.shoppingNavService.clothing.map(val => this.clothings.push(Object.assign({}, val)));
-    this.shoppingNavService.designers.map(val => this.designers.push(Object.assign({}, val)));
-    this.shoppingNavService.stores.map(val => this.stores.push(Object.assign({}, val)));
-    this.shoppingNavService.prices.map(val => this.prices.push(Object.assign({}, val)));
+    this.menu = [{ id: 1, name: 'All', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   }
 
   onChangeCheckBox(key, elem) {
@@ -124,40 +116,17 @@ export class ShoppingNavComponent implements OnInit {
     if (this.filteringDTO.menuIsFiltered) {
       this.wasFilteredAndCleared = true;
     }
-    this.designers.forEach(elem => {
-      if (elem.checked) {
-        this.filteringDTO.removeDesigner(elem);
-        elem.checked = false;
-      }
-
-    });
-    this.stores.forEach(elem => {
-      if (elem.checked) {
-        this.filteringDTO.removeStore(elem);
-        elem.checked = false;
-      }
-    });
-    this.clothings.forEach(elem => {
-      if (elem.checked) {
-        this.filteringDTO.removeProduct(elem);
-        elem.checked = false;
-      }
-    });
+    this.filteringDTO.clearProductType();
+    this.filteringDTO.clearDesigners();
+    this.filteringDTO.clearStores();
     this.setMaxPriceAndSlider(this.priceMaxValueInt);
     this.setMinPriceAndSlider(this.priceMinValueInt);
-    this.filteringDTO = new FilteringDTO();
   }
 
   clearSideFiltersSelectionNoUpdate() {
-    this.designers.forEach(elem => {
-      elem.checked = false;
-    });
-    this.stores.forEach(elem => {
-      elem.checked = false;
-    });
-    this.clothings.forEach(elem => {
-      elem.checked = false;
-    });
+    this.filteringDTO.clearProductType();
+    this.filteringDTO.clearDesigners();
+    this.filteringDTO.clearStores();
   }
 
   initSlider(that) {
@@ -364,13 +333,11 @@ export class ShoppingNavComponent implements OnInit {
     if (this.sidenav.opened) {
       this.toggleSidenav();
     }
-    this.clearSideFiltersSelectionNoUpdate();
-    this.filteringDTO = new FilteringDTO();
     let prevItem = this.menu[this.currCategory];
     prevItem.checked = false;
     item.checked = true;
     this.currCategory = item.id - 1;
-    this.showProductType = (item && item.name.toLowerCase() === 'clothing');
+    this.showProductType = (item && item.name.toLowerCase() === 'all');
     if (item.name == "All") {
       this.filteringDTO.category = "Clothing";
     }
@@ -382,7 +349,7 @@ export class ShoppingNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    this.feedService.feedFilteringDTO = this.filteringDTO;
+    Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
     this.massageService.sendMessage('update-feed');
     this.massageService.clearMessage();
   }

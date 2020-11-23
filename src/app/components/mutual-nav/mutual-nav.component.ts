@@ -46,7 +46,7 @@ export class MutualNavComponent implements OnInit {
   categories = [];
   clothing = [];
   designers = [];
-  stores = [];
+  stores;
   productsToShow = [];
 
 
@@ -55,10 +55,8 @@ export class MutualNavComponent implements OnInit {
   ngOnInit() {
     this.minValue = 0;
     this.maxValue = 1800;
-    this.categories = this.shoppingNavService.desktopMenu;
-    this.clothing = this.shoppingNavService.clothing;
-    this.designers = this.shoppingNavService.designers;
-    this.stores = this.shoppingNavService.stores;
+    this.categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
+
 
 
     this.categoryForm = this.formBuilder.group({
@@ -259,10 +257,8 @@ export class MutualNavComponent implements OnInit {
     this.filteringDTO.setMaxPrice($event.value.upper);
   }
 
-  clearSelection(arrayToIterrate, filteringDTOarray) {
-    arrayToIterrate.forEach(elem => {
-      elem.checked = false;
-    })
+  clearSelection(filteringDTOarray) {
+
     switch (filteringDTOarray) {
       case "productTypes":
         this.filteringDTO.clearProductType();
@@ -279,7 +275,7 @@ export class MutualNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    this.feedService.feedFilteringDTO = this.filteringDTO;
+    Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
     this.massageService.sendMessage('update-feed');
     this.massageService.clearMessage();
   }
