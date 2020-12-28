@@ -15,6 +15,7 @@ import 'jquery-ui/ui/widgets/slider';
 require('jquery-ui-touch-punch');
 declare var setInputFilter: any;
 import '../../shared/input-filter.js'
+import { first } from '../../../../node_modules/rxjs-compat/operator/first';
 
 @Component({
   selector: 'app-shopping-nav',
@@ -73,6 +74,7 @@ export class ShoppingNavComponent implements OnInit {
         this.filteringDTO.removeStore(elem);
         this.wasFilteredAndCleared = true;
       }
+
     }
     if (key === 'designers') {
       if (!elem.checked) {
@@ -127,6 +129,57 @@ export class ShoppingNavComponent implements OnInit {
     this.filteringDTO.clearProductType();
     this.filteringDTO.clearDesigners();
     this.filteringDTO.clearStores();
+  }
+
+  sidenavOpened() {
+    this.filteringChanged = false;
+  }
+
+  sidenavClosed() {
+    this.filteringDTO.minPrice = this.getMinPriceValue();
+    this.filteringDTO.maxPrice = this.getMaxPriceValue();
+    if (this.filteringDTO.menuIsFiltered) {
+      if (this.filteringChanged) {
+        this.updateFeedFilteringDTO();
+      }
+    }
+    if (this.wasFilteredAndCleared) {
+      this.wasFilteredAndCleared = false;
+      this.updateFeedFilteringDTO();
+    }
+  }
+
+  toggleSidenav(): void {
+    this.sidenav.toggle();
+  }
+
+  applyFilters() {
+    this.toggleSidenav();
+  }
+
+  filterByCategory(item) {
+    if (this.sidenav.opened) {
+      this.toggleSidenav();
+    }
+    let prevItem = this.menu[this.currCategory];
+    prevItem.checked = false;
+    item.checked = true;
+    this.currCategory = item.id - 1;
+    this.showProductType = (item && item.name.toLowerCase() === 'all');
+    if (item.name == "All") {
+      this.filteringDTO.category = "Clothing";
+    }
+    else {
+      this.filteringDTO.category = item.name;
+    }
+    this.updateFeedFilteringDTO();
+  }
+
+  updateFeedFilteringDTO() {
+    this.feedService.offset = 0;
+    Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
+    this.massageService.sendMessage('update-feed');
+    this.massageService.clearMessage();
   }
 
   initSlider(that) {
@@ -308,52 +361,6 @@ export class ShoppingNavComponent implements OnInit {
       this.filteringDTO.setMaxPrice(maxPrice);
     }
   }
-
-  sidenavClosed() {
-    this.filteringDTO.minPrice = this.getMinPriceValue();
-    this.filteringDTO.maxPrice = this.getMaxPriceValue();
-    if (this.filteringDTO.menuIsFiltered) {
-      this.updateFeedFilteringDTO();
-    }
-    if (this.wasFilteredAndCleared) {
-      this.wasFilteredAndCleared = false;
-      this.updateFeedFilteringDTO();
-    }
-  }
-
-  toggleSidenav(): void {
-    this.sidenav.toggle();
-  }
-
-  applyFilters() {
-    this.toggleSidenav();
-  }
-
-  filterByCategory(item) {
-    if (this.sidenav.opened) {
-      this.toggleSidenav();
-    }
-    let prevItem = this.menu[this.currCategory];
-    prevItem.checked = false;
-    item.checked = true;
-    this.currCategory = item.id - 1;
-    this.showProductType = (item && item.name.toLowerCase() === 'all');
-    if (item.name == "All") {
-      this.filteringDTO.category = "Clothing";
-    }
-    else {
-      this.filteringDTO.category = item.name;
-    }
-    this.updateFeedFilteringDTO();
-  }
-
-  updateFeedFilteringDTO() {
-    this.feedService.offset = 0;
-    Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
-    this.massageService.sendMessage('update-feed');
-    this.massageService.clearMessage();
-  }
-
 }
 
 class PriceRange {
