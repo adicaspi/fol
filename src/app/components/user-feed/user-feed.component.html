@@ -14,14 +14,17 @@
           <div *ngIf="desktop">
             <div [ngClass]="post.thumbnail ? 'masonry-img thumb' : 'masonry-img' ">
               <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
+              <i *ngIf="post.selfThumbAddr " class="fa fa-camera"></i>
               <div *ngIf="post.thumbnail" class="overlay">
                 <img [src]="post.thumbnail" class="img-main hover" (click)="openDialog(post)" />
+                <i *ngIf="post.selfThumbAddr " class="fa fa-camera"></i>
               </div>
             </div>
           </div>
           <div *ngIf="!desktop">
             <div class="masonry-img">
               <img heightWidthRatio="1.35" (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" />
+              <i *ngIf="post.selfThumbAddr " class="fa fa-camera"></i>
             </div>
           </div>
           <div class="card-text">

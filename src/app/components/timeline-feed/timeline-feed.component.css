@@ -65,6 +65,7 @@
 
 .masonry-img{
   cursor: pointer;
+  position: relative;
 }
 
 .price.discount{
@@ -220,6 +221,12 @@ span.strike-original-price{
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  i.fa.fa-camera{
+    position: absolute;
+    top: 7px;
+    left: 45px;
   }
 
   .store.text-right {
@@ -379,6 +386,12 @@ span.strike-original-price{
     color: black;
   }
 
+  i.fa.fa-camera{
+    position: absolute;
+    top: 7px;
+    left: 45px;
+  }
+
   .store.text-right {
     position: absolute;
     right: 12px;
@@ -506,6 +519,12 @@ span.strike-original-price{
     color: rgb(51,51,51);
     font-size: 12px;
     margin-bottom: -4px;
+  }
+
+  i.fa.fa-camera{
+    position: absolute;
+    top: 7px;
+    left: 10px;
   }
 
   .price {

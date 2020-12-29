@@ -139,6 +139,7 @@ span.strike-original-price{
 
   .masonry-img{
     margin-top:20px;
+    position: relative;
   }
 
   .masonry-img .img-main {
@@ -230,6 +231,12 @@ span.strike-original-price{
     align-items: center;
   }
 
+  i.fa.fa-camera{
+    position: absolute;
+    top: 7px;
+    left: 45px;
+  }
+
   .store.text-right {
     position: absolute;
     right: 12px;
@@ -278,6 +285,7 @@ span.strike-original-price{
 
   .masonry-img{
     margin-top:20px;
+    position: relative;
   }
 
   .masonry-img .img-main {
@@ -358,6 +366,12 @@ span.strike-original-price{
     text-align: center;
     font-weight: 400;
     color: black;
+  }
+
+  i.fa.fa-camera{
+    position: absolute;
+    top: 7px;
+    left: 45px;
   }
 
   .store.text-right {
@@ -460,6 +474,12 @@ span.strike-original-price{
     color: rgb(51,51,51);
     font-size: 12px;
     margin-bottom: -4px;
+  }
+
+  i.fa.fa-camera{
+    position: absolute;
+    top: 7px;
+    left: 10px;
   }
 
   .price {

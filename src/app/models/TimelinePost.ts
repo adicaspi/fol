@@ -5,13 +5,15 @@ export class TimelinePost {
   post: any;
   postImgSrc: string;
   thumbnail: string;
+  selfThumb: string
   private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
     post: any,
     postImgSrc: string,
     profileImgSrc: string,
-    thumbnail?: string
+    thumbnail?: string,
+    selfThumb?: string
   ) {
     this.post = post;
     this.postImgSrc = this.baseApiUrl + '/image?s3key=' + postImgSrc;
@@ -38,5 +40,10 @@ export class TimelinePost {
     var websiteSuffix = this.post.website;
     var fullWebsite = 'https://www.' + websiteSuffix;
     return fullWebsite;
+  }
+
+  get selfThumbAddr() {
+    //  this.selfThumb = "adi";
+    return this.selfThumb;
   }
 }
