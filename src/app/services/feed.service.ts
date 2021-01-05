@@ -70,6 +70,7 @@ export class FeedService {
   }
 
   getTimeLineFeed(userId: number, offset: number): Observable<any> {
+    console.log("feed", this.feedFilteringDTO);
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<any>(
       this.globalFeedURL + userId + '/timeline-feed', this.feedFilteringDTO, {
@@ -96,6 +97,7 @@ export class FeedService {
 
 
   getExploreFeed(userId: number): Observable<any> {
+    console.log("here in explore");
     return this.http.post<any>(
       this.globalFeedURL + userId + '/explore-feed', this.feedFilteringDTO, {
         headers: httpOptions.headers,

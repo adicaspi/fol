@@ -1,5 +1,5 @@
 export class FilteringDTO {
-  category: string = "Clothing";
+  category: string = null;
   allCategoriesSelected: number = 1;
   productTypes: string[] = [];
   designers: string[] = [];
@@ -150,7 +150,7 @@ export class FilteringDTO {
     })
   }
 
-  get getFilteringDTO() {
+  getFilteringDTO() {
     return ({
       category: this.category,
       productTypes: this.productTypes,

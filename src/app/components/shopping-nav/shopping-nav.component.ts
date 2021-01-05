@@ -167,7 +167,7 @@ export class ShoppingNavComponent implements OnInit {
     this.currCategory = item.id - 1;
     this.showProductType = (item && item.name.toLowerCase() === 'all');
     if (item.name == "All") {
-      this.filteringDTO.category = "Clothing";
+      this.filteringDTO.category = null;
     }
     else {
       this.filteringDTO.category = item.name;
@@ -177,7 +177,9 @@ export class ShoppingNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
+    console.log("hellloo", this.filteringDTO.getFilteringDTO());
+    this.feedService.feedFilteringDTO = this.filteringDTO.getFilteringDTO();
+    //Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
     this.massageService.sendMessage('update-feed');
     this.massageService.clearMessage();
   }

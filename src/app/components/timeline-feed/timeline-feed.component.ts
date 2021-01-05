@@ -82,7 +82,6 @@ export class TimelineFeedComponent implements OnInit {
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     jquery(".wrapper.scroll-bar-container").css("position", "fixed");
     this.id = this.userService.getCurrentUser();
-    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: any) => {

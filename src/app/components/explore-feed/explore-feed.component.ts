@@ -66,10 +66,9 @@ export class ExploreFeedComponent implements OnInit {
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.spinner.show();
     //jquery("mat-sidenav-container").css("top", "80px");
-    this.feedService.feedFilteringDTO = new FilteringDTO();
     this.id = this.userService.userId;
     this.updateFeed = this.feedService
-      .getNewPosts().subscribe(observablePosts => {
+      .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: any) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
           if (this.posts.length == 0) {
@@ -83,8 +82,8 @@ export class ExploreFeedComponent implements OnInit {
           this.spinner.hide();
         })
       });
-    this.feedService.updateExploreFeed(this.id);
-    this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
+
+    this.feedSubsription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
           this.spinner.show();
@@ -94,6 +93,7 @@ export class ExploreFeedComponent implements OnInit {
         }
       }
     });
+    this.feedService.updateExploreFeed(this.id);
 
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(

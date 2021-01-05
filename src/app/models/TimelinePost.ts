@@ -43,7 +43,7 @@ export class TimelinePost {
   }
 
   get selfThumbAddr() {
-    //  this.selfThumb = "adi";
+    //this.selfThumb = "adi";
     return this.selfThumb;
   }
 }

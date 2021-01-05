@@ -176,7 +176,7 @@ export class MutualNavComponent implements OnInit {
 
   onChange(mrChange: MatRadioChange) {
     if (mrChange.value == "All Categories") {
-      this.filteringDTO.setCategory("Clothing");
+      this.filteringDTO.setCategory(null);
       this.filteringDTO.allCategoriesSelected = 1;
     }
     else {
@@ -275,7 +275,7 @@ export class MutualNavComponent implements OnInit {
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
+    this.feedService.feedFilteringDTO = this.filteringDTO.getFilteringDTO();
     this.massageService.sendMessage('update-feed');
     this.massageService.clearMessage();
   }
