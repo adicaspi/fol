@@ -10,26 +10,26 @@
       <div class="description">
         <div class="upper-description-div">
           <div class="user-name">{{ user.username }}</div>
-          <div class="setting-container" *ngIf="!userProfile; else settings">
+          <div class="setting-container" *ngIf="!userProfile && userId">
             <button type="button" class="button-follow" [ngClass]="{'following': follows}" (click)="follow()">
               {{ follows ? 'Following' : 'Follow' }}
             </button>
           </div>
-          <ng-template #settings>
-            <div class="settings setting-container">
-              <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
-              <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
-                <div class="mat-menu-content">
-                  <button mat-button class="settings-menu-button" (click)="settingsPage()">
-                    Edit profile
-                  </button>
-                  <button mat-button class="settings-menu-button" (click)="logout()">
-                    Log Out
-                  </button>
-                </div>
-              </mat-menu>
-            </div>
-          </ng-template>
+          <!-- <ng-template #settings> -->
+          <div *ngIf="userId" class="settings setting-container">
+            <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
+            <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
+              <div class="mat-menu-content">
+                <button mat-button class="settings-menu-button" (click)="settingsPage()">
+                  Edit profile
+                </button>
+                <button mat-button class="settings-menu-button" (click)="logout()">
+                  Log Out
+                </button>
+              </div>
+            </mat-menu>
+          </div>
+          <!-- </ng-template> -->
         </div>
 
         <div class="btn-group">

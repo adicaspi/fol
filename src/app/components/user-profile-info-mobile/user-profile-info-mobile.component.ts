@@ -61,14 +61,16 @@ export class UserProfileInfoMobileComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.userService.userId;
-    const routeParams = this.activatedRoute.snapshot.params;
-    if (isNaN(parseInt(routeParams.id))) {
-      this.userProfile = true;
-      this.updateUser(this.userId);
-    } else {
+    if (this.uid == null) {
+      const routeParams = this.activatedRoute.snapshot.params;
       this.currMasterId = parseInt(routeParams.id);
-      this.updateUser(this.currMasterId);
+    } else {
+      this.currMasterId = this.uid;
     }
+    if (this.userId == this.currMasterId) {
+      this.userProfile = true;
+    }
+    this.updateUser(this.currMasterId);
     if (this.userId) {
       this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
         this.follows = res;

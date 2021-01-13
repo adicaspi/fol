@@ -73,7 +73,7 @@
       </mat-menu>
     </div>
 
-    <div *ngIf="!userProfile" class="following-button-container">
+    <div *ngIf="!userProfile && userId" class="following-button-container">
       <div class="button-follow" [ngClass]="{'following': follows}" (click)="follow()">
         {{ follows ? 'Following' : 'Follow' }}
       </div>
