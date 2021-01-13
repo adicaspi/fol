@@ -21,6 +21,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   userProfile = false;
   masterUser: User;
   user: User;
+  registeredUser: boolean = false;
   private anyErrors: boolean;
   private finished: boolean;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -36,6 +37,9 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
+    if (this.userService.userId) {
+      this.registeredUser = true;
+    }
     //this.updateUser(this.masterId);
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.ngUnsubscribe))

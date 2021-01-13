@@ -6,7 +6,9 @@
     <app-user-feed></app-user-feed>
   </div>
   <ng-template #mobileView class="mobile">
-    <app-bottom-navbar></app-bottom-navbar>
+    <div *ngIf="registeredUser">
+      <app-bottom-navbar></app-bottom-navbar>
+    </div>
     <app-user-profile-info-mobile></app-user-profile-info-mobile>
     <app-shopping-nav></app-shopping-nav>
     <app-user-feed></app-user-feed>

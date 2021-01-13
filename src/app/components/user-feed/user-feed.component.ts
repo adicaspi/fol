@@ -47,6 +47,7 @@ export class UserFeedComponent implements OnInit {
   scrollPageToTop: boolean = false;
   user: Observable<User>;
   showPopup: boolean = true;
+  registeredUser: boolean = false;;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubscription: Subscription
@@ -92,6 +93,9 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.userService.userId) {
+      this.registeredUser = true;
+    }
     this.spinner.show();
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
     this.updateFeed = this.feedService
@@ -148,6 +152,15 @@ export class UserFeedComponent implements OnInit {
   registerPage(): void {
     this.showPopup = false;
     this.openLoginDialog();
+  }
+
+  openPostOrLogin(post) {
+    if (this.registeredUser) {
+      this.openDialog(post)
+    } else {
+      this.openLoginDialog();
+    }
+
   }
 
   openLoginDialog() {

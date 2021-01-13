@@ -26,10 +26,7 @@
             <div class="upper-footer">
 
               <button mat-button class="shop_btn">
-                <a *ngIf="registeredUser" href="{{ postInfo.link }}" target="_blank">
-                  Shop
-                </a>
-                <a *ngIf="!registeredUser" (click)="registerPage()">
+                <a href="{{ postInfo.link }}" target="_blank">
                   Shop
                 </a>
               </button>
@@ -87,7 +84,7 @@
             <img *ngFor="let image of thumbnails" class="thumbnail" [attr.src]="image" (click)="setImage(image)" />
           </div>
 
-          <div class="more-from-user">
+          <div *ngIf="registeredUser" class="more-from-user">
             <div class="more-text">more from {{ postInfo.userName }}</div>
             <div class="more-from-container">
               <img *ngFor="let post of postsToShow | async" class="more-from" [attr.src]="post.postImageAddr" (click)="openDialog(post)"

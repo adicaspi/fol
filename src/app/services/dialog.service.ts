@@ -58,7 +58,7 @@ export class DialogService {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
 
-  openDialog(config: FilePreviewDialogConfig = {}) {
+  openDialog(config: FilePreviewDialogConfig = {}, genrelExplore?) {
     config.backdropClass = "backdrop-product";
     config.panelClass = "panel-product";
     const dialogConfig = { ...DEFAULT_CONFIG, ...config };
@@ -67,7 +67,7 @@ export class DialogService {
     // Attach ComponentPortal to PortalHost
     //overlayRef.attach(filePreviewPortal);
 
-    const dialogRef = new FilePreviewOverlayRef(overlayRef);
+    const dialogRef = new FilePreviewOverlayRef(overlayRef, genrelExplore);
     const overlayComponent = this.attachDialogContainer(
       overlayRef,
       dialogConfig,

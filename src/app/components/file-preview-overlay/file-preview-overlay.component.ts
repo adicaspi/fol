@@ -47,6 +47,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   registeredUser: boolean = false;
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   onDestroy: Subject<void> = new Subject<void>();
+  userID: number;
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
     private configService: ConfigService,
@@ -62,17 +63,25 @@ export class FilePreviewOverlayComponent implements OnInit {
   ngOnInit() {
     if (this.userService.userId) {
       this.registeredUser = true;
+      this.userID = this.userService.userId;
+
+    } else {
+      if (this.dialogRef.refferingComponent) {
+        this.userID = 7;
+      }
     }
     this.postId = this.configService.getGeneralSession('product_id');
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
-    this.getPostInfo();
-    this.getMoreFromUser();
+    this.getPostInfo(this.userID);
+    if (this.registeredUser) {
+      this.getMoreFromUser();
+    }
     this.userProfileSrc = '../../../assets/placeholder.png';
   }
 
-  getPostInfo() {
+  getPostInfo(userID) {
     this.postService
-      .getMobilePostInfo(this.userService.userId, this.postId)
+      .getMobilePostInfo(userID, this.postId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
@@ -161,11 +170,11 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   profilePage() {
     this.closeModal();
-    if (this.registeredUser) {
-      this.router.navigate(['profile', this.postInfo.userId]);
-    } else {
-      this.registerPage();
-    }
+    // if (this.registeredUser) {
+    this.router.navigate(['profile', this.postInfo.userId]);
+    // } else {
+    //   this.registerPage();
+    // }
   }
 
   registerPage(): void {

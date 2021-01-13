@@ -47,6 +47,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   saveButtonClicked: boolean = false;
   registeredUser: boolean = false;
   showRegsterMsg: boolean = false;
+  userID: number;
   private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
@@ -67,7 +68,12 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.userService.userId) {
       this.registeredUser = true;
+      this.userID = this.userService.userId;
     } else {
+      var refferingUrl = document.referrer;
+      if (refferingUrl.includes('explore')) {
+        this.userID = 7;
+      }
       this.ios = this.configService.iOS();
     }
     this.route.paramMap
@@ -78,8 +84,10 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
           return;
         }
         this.imageUrls = [];
-        this.getPostInfo();
-        this.getMoreFromUser();
+        this.getPostInfo(this.userID);
+        if (this.registeredUser) {
+          this.getMoreFromUser();
+        }
       });
     this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
     this.directingPage = this.dialogService.directingPage;
@@ -90,9 +98,9 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     }
   }
 
-  getPostInfo() {
+  getPostInfo(userID: number) {
     this.postService
-      .getMobilePostInfo(this.userService.userId, this.postId)
+      .getMobilePostInfo(userID, this.postId)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
@@ -137,11 +145,11 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   profilePage() {
-    if (this.registeredUser) {
-      this.router.navigate(['profile', this.postInfo.userId]);
-    } else {
-      this.registerPage();
-    }
+    //  if (this.registeredUser) {
+    this.router.navigate(['profile', this.postInfo.userId]);
+    // } else {
+    //   this.registerPage();
+    // }
   }
 
   registerPage(): void {

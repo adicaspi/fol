@@ -183,7 +183,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {
-      this.dialogService.openDialog();
+      this.dialogService.openDialog({}, 1);
     } else {
       this.router.navigate(['product-page', post.post.postId]);
     }

@@ -60,19 +60,15 @@ export class UserProfileInfoMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log("user", this.user);
     this.userId = this.userService.userId;
-    if (this.uid == null) {
-      const routeParams = this.activatedRoute.snapshot.params;
-      this.currMasterId = parseInt(routeParams.id);
-    } else {
-      this.currMasterId = this.uid;
-    }
-    if (this.userId == this.currMasterId) {
+    const routeParams = this.activatedRoute.snapshot.params;
+    if (isNaN(parseInt(routeParams.id))) {
       this.userProfile = true;
+      this.updateUser(this.userId);
+    } else {
+      this.currMasterId = parseInt(routeParams.id);
+      this.updateUser(this.currMasterId);
     }
-
-    this.updateUser(this.currMasterId);
     if (this.userId) {
       this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
         this.follows = res;
@@ -113,7 +109,6 @@ export class UserProfileInfoMobileComponent implements OnInit {
       if (res == "register") {
         this.registerPage();
       }
-
     })
   }
 
