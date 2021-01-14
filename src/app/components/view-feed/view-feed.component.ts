@@ -96,6 +96,9 @@ export class ViewFeedComponent implements OnInit {
           this.userService.updateUser(data.body.userId);
           this.configService.setSessionStorage(data.body.userId.toString());
         })
-      ).toPromise();
+      ).catch(() => {
+        this.router.navigate(['landing']);
+        return Observable.of(false);
+      });
   }
 }

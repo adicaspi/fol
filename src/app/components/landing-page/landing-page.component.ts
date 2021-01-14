@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 
 @Component({
@@ -109,7 +109,10 @@ export class LandingPageComponent implements OnInit {
           this.router.navigate(['/feed/' + data.body.userId]);
           this.configService.setSessionStorage(data.body.userId.toString());
         })
-      )
+      ).catch(() => {
+        this.router.navigate(['landing']);
+        return Observable.of(false);
+      });
   }
 
   ngOnDestroy(): void {
