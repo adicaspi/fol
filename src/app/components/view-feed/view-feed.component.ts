@@ -85,20 +85,35 @@ export class ViewFeedComponent implements OnInit {
     })
   }
 
+  // loadConfigurationData() {
+  //   return this.http
+  //     .get<any>(this.autoLogin, { observe: 'response' })
+  //     .pipe(
+  //       map(data => {
+  //         this.userId = true;
+  //         this.userService.userId = data.body.userId;
+  //         this.userService.username = data.body.userName;
+  //         this.userService.updateUser(data.body.userId);
+  //         this.configService.setSessionStorage(data.body.userId.toString());
+  //       })
+  //     ).catch(() => {
+  //       this.router.navigate(['landing']);
+  //       return Observable.of(false);
+  //     });
+  // }
+
   loadConfigurationData() {
     this.http
-      .get<any>(this.autoLogin, { observe: 'response' })
-      .pipe(
-        map(data => {
-          this.userId = true;
-          this.userService.userId = data.body.userId;
-          this.userService.username = data.body.userName;
-          this.userService.updateUser(data.body.userId);
-          this.configService.setSessionStorage(data.body.userId.toString());
-        })
-      ).catch(() => {
-        this.router.navigate(['landing']);
-        return Observable.of(false);
-      });
+      .get<any>(this.autoLogin)
+      .subscribe(data => {
+        this.userId = true;
+        this.userService.userId = data.body.userId;
+        this.userService.username = data.body.userName;
+        this.userService.updateUser(data.body.userId);
+        this.configService.setSessionStorage(data.body.userId.toString());
+      }),
+      err => {
+
+      }
   }
 }

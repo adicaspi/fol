@@ -39,6 +39,7 @@ export class HttpErrorComponent implements HttpInterceptor {
             // TODO - add msg something went wrong
             console.log('status 401 unauth');
             this.router.navigate(['landing']);
+
           }
           if (error.error.error == 'User Collision') {
             this.errorsService.sendMessage('User Collision');

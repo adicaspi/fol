@@ -94,7 +94,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     if (this.registeredUser) {
       this.didLike();
       this.didSave();
-      this.incNumViews();
+      //this.incNumViews();
     }
   }
 
@@ -170,7 +170,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   incNumViews() {
-    this.postService.incrementPostViews(this.userService.userId, this.postId);
+    this.postService.incrementPostViews(this.userID, this.postId);
   }
 
   async didLike() {

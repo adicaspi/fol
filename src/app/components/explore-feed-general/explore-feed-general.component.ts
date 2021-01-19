@@ -72,7 +72,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
     this.meta.addTag({ name: 'robots', content: 'index, follow' });
     this.spinner.show();
     this.updateFeed = this.feedService
-      .getNewPosts().subscribe(observablePosts => {
+      .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: any) => {
           this.posts = this.posts.concat(observablePosts.newPosts);
           if (this.posts.length == 0) {
@@ -84,7 +84,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
         })
       });
     this.feedService.updateGeneralExploreFeed();
-    this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
+    this.feedSubsription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
           this.spinner.show();
@@ -94,7 +94,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
       }
     });
 
-    this.WindowSizeSubscription = this.configService.windowSizeChanged
+    this.WindowSizeSubscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
           if (value.width >= 600) {
@@ -195,8 +195,6 @@ export class ExploreFeedGeneralComponent implements OnInit {
 
   public ngOnDestroy(): void {
     this.onDestroy.next();
-    this.feedSubsription.unsubscribe();
-    this.WindowSizeSubscription.unsubscribe();
   }
 
 }

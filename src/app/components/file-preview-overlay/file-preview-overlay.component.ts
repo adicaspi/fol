@@ -91,7 +91,7 @@ export class FilePreviewOverlayComponent implements OnInit {
         if (this.registeredUser) {
           this.didLike();
           this.didSave();
-          this.incNumViews();
+          //this.incNumViews();
 
         }
         this.postImageAddr = this.postInfo.postImageAddr;
@@ -124,7 +124,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   incNumViews() {
-    this.postService.incrementPostViews(this.userService.userId, this.postId);
+    this.postService.incrementPostViews(this.userID, this.postId);
   }
 
   async didLike() {

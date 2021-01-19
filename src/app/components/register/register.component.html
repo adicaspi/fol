@@ -106,7 +106,7 @@
 
     <div class="form-group">
       <label for="birthDate"></label>
-      <input type="text" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
+      <input type="number" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
         placeholder="Age" />
       <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
         <div *ngIf="f.birthDate.errors.required">
