@@ -8,7 +8,7 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError, Subject } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorsService } from '../../services/errors.service';
 
@@ -24,58 +24,75 @@ export class HttpErrorComponent implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(
-      retry(1),
-      catchError((error: HttpErrorResponse) => {
-        let errorMessage = '';
-        // if (error instanceof Observable){
-        //   
-        // }
-        if (error.error instanceof ErrorEvent) {
-          // client-side error
-          errorMessage = `Error: ${error.error.message}`;
-        } else {
-          if (error.status == 401) {
-            // TODO - add msg something went wrong
-            console.log('status 401 unauth');
-            this.router.navigate(['landing']);
+    return next.handle(request)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = '';
+          if (error instanceof Observable) {
 
           }
-          if (error.error.error == 'User Collision') {
-            this.errorsService.sendMessage('User Collision');
+          if (error.error instanceof ErrorEvent) {
+            // client-side error
+            errorMessage = `Error: ${error.error.message}`;
+          } else {
+            if (error.status == 401) {
+              // TODO - add msg something went wrong
+              //console.log('status 401 unauth');
+              this.router.navigate(['landing']);
+            }
+            if (error.error.error == 'User Collision') {
+              this.errorsService.sendMessage('User Collision');
+            }
+            if (error.error.error == 'Invalid Authentication Data') {
+              this.errorsService.sendMessage('Invalid Authentication Data');
+
+            }
+            if (error.error.error == 'Invalid User') {
+              this.errorsService.sendMessage('Invalid User');
+
+            }
+            if (error.error.error == 'Invalid Email') {
+              this.errorsService.sendMessage('Invalid Email');
+
+            }
+            if (error.error.error == 'Cognito Exception') {
+
+
+            }
+
+            if (error.error.error == 'Exchange Rate Exception') {
+
+              console.log('Exchange Rate Exception');
+            }
+            // server-side error
+            errorMessage = `Error Code: ${error.status}\nMessage: ${
+              error.message
+              }`;
           }
-          if (error.error.error == 'Invalid Authentication Data') {
-            this.errorsService.sendMessage('Invalid Authentication Data');
-
-          }
-          if (error.error.error == 'Invalid User') {
-            this.errorsService.sendMessage('Invalid User');
-
-          }
-          if (error.error.error == 'Invalid Email') {
-            this.errorsService.sendMessage('Invalid Email');
-
-          }
-          if (error.error.error == 'Cognito Exception') {
-
-
-          }
-
-          if (error.error.error == 'Exchange Rate Exception') {
-
-            console.log('Exchange Rate Exception');
-          }
-
-          // server-side error
-          console.log('in handler', error);
-          errorMessage = `Error Code: ${error.status}\nMessage: ${
-            error.message
-            }`;
-        }
-        // window.alert(errorMessage);
-        //console.log('im before throweeror');
-        return throwError(errorMessage);
-      })
-    );
+          return throwError(errorMessage);
+        }))
   }
 }
+  // intercept(
+  //   request: HttpRequest<any>,
+  //   next: HttpHandler
+  // ): Observable<HttpEvent<any>> {
+  //   return next.handle(request)
+  //     .pipe(
+  //       catchError((error: HttpErrorResponse) => {
+  //         let errorMsg = '';
+  //         if (error.error instanceof ErrorEvent) {
+  //           console.log('this is client side error');
+  //           errorMsg = `Error: ${error.error.message}`;
+  //         }
+  //         else {
+  //           console.log('this is server side error');
+  //           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+  //         }
+  //         console.log(errorMsg);
+  //         return throwError(errorMsg);
+  //       })
+  //     )
+  // }
+
+

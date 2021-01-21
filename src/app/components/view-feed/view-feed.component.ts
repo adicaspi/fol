@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 import { FeedService } from '../../services/feed.service';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-view-feed',
   templateUrl: './view-feed.component.html',
@@ -26,6 +27,7 @@ export class ViewFeedComponent implements OnInit {
   private autoLoginSubscription: Subscription;
   private anyErrors: boolean;
   private finished: boolean;
+  onDestroy: Subject<void> = new Subject<void>();
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
@@ -58,9 +60,7 @@ export class ViewFeedComponent implements OnInit {
       }
     }
 
-    //}
-    //this.feedService.currentLoadedFeedComponent = "feed";
-    this.subscription = this.configService.windowSizeChanged.subscribe(
+    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
         if (value.width <= 600) {
           this.desktop = false;
@@ -75,45 +75,24 @@ export class ViewFeedComponent implements OnInit {
   }
 
   loginWithFacebook(code) {
-    this.userService.loginWithFacebook(code).subscribe(res => {
-      this.userId = true;
-      this.userService.userId = res.userId;
-      this.userService.username = res.username;
-      this.userService.updateUser(res.userId);
-      this.configService.setSessionStorage(res.userId.toString());
-      this.userId = true;
+    this.userService.loginWithFacebook(code).pipe(takeUntil(this.onDestroy)).subscribe(data => {
+      this.setUserDetails(data);
     })
   }
 
-  // loadConfigurationData() {
-  //   return this.http
-  //     .get<any>(this.autoLogin, { observe: 'response' })
-  //     .pipe(
-  //       map(data => {
-  //         this.userId = true;
-  //         this.userService.userId = data.body.userId;
-  //         this.userService.username = data.body.userName;
-  //         this.userService.updateUser(data.body.userId);
-  //         this.configService.setSessionStorage(data.body.userId.toString());
-  //       })
-  //     ).catch(() => {
-  //       this.router.navigate(['landing']);
-  //       return Observable.of(false);
-  //     });
-  // }
-
   loadConfigurationData() {
     this.http
-      .get<any>(this.autoLogin)
+      .get<any>(this.autoLogin).pipe(takeUntil(this.onDestroy))
       .subscribe(data => {
-        this.userId = true;
-        this.userService.userId = data.body.userId;
-        this.userService.username = data.body.userName;
-        this.userService.updateUser(data.body.userId);
-        this.configService.setSessionStorage(data.body.userId.toString());
-      }),
-      err => {
+        this.setUserDetails(data);
+      })
+  }
 
-      }
+  setUserDetails(data) {
+    this.userId = true;
+    this.userService.userId = data.userId;
+    this.userService.username = data.userName;
+    this.userService.updateUser(data.userId);
+    this.configService.setSessionStorage(data.userId.toString());
   }
 }
