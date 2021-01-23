@@ -7,6 +7,10 @@ import { DialogService } from '../../services/dialog.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { UserService } from '../../services/user.service';
 import { ScrollHelperService } from '../../services/scroll-helper.service';
+import { MatDialog } from '../../../../node_modules/@angular/material';
+import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
+import { RegisterComponent } from '../register/register.component';
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -19,15 +23,23 @@ export class DiscoverPeopleComponent implements OnInit {
   desktop: boolean = true;
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
+  registeredUser: boolean = false;
+
+
 
   constructor(private feedService: FeedService,
     private configService: ConfigService,
     private dialogService: DialogService,
     private router: Router,
     private userService: UserService,
+    private overlay: Overlay,
+    private dialog: MatDialog,
     private scrollHelperService: ScrollHelperService, ) { }
 
   ngOnInit() {
+    if (this.userService.userId) {
+      this.registeredUser = true;
+    }
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
@@ -61,15 +73,68 @@ export class DiscoverPeopleComponent implements OnInit {
   }
 
   follow(item) {
-    if (item.follows) {
-      this.userService.unFollow(item.userId);
-      item.follows = false;
+    if (this.registeredUser) {
+      if (item.follows) {
+        this.userService.unFollow(item.userId);
+        item.follows = false;
+      }
+      else {
+        this.userService.follow(item.userId);
+        item.follows = true;
+      }
     }
     else {
-      this.userService.follow(item.userId);
-      item.follows = true;
+      this.openLoginDialog();
     }
   }
+
+  openRegisterDialog() {
+    if (this.desktop) {
+      var pageWidth = this.desktop ? "420px" : "88vw";
+      const scrollStrategy = this.overlay.scrollStrategies.reposition();
+      const config = {
+        scrollStrategy: scrollStrategy,
+        width: pageWidth,
+        height: "unset",
+        data: {
+          showCloseButton: false
+        }
+      }
+
+      const registerDialogRef = this.dialog.open(RegisterComponent, config);
+      registerDialogRef.disableClose = true;
+
+      registerDialogRef.afterClosed().subscribe(res => {
+        if (res == "login") {
+          this.openLoginDialog();
+        }
+      })
+    } else {
+      this.router.navigate(['register']);
+    }
+  }
+
+  openLoginDialog() {
+    var pageWidth = this.desktop ? "420px" : "88vw";
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const config = {
+      scrollStrategy: scrollStrategy,
+      width: pageWidth,
+      height: "unset",
+      data: {
+        showCloseButton: false
+      }
+    }
+
+    const dialogRef = this.dialog.open(LoginComponent, config);
+    dialogRef.disableClose = true;
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == "register") {
+        this.openRegisterDialog();
+      }
+    })
+  }
+
 
   profilePage(item) {
     if (this.desktop) {

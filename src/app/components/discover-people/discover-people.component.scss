@@ -32,6 +32,11 @@
   flex-wrap: wrap;
 }
 
+.user-info, img.profile-image, .user-post-image{
+  cursor: pointer;
+}
+
+
 @media (min-width: 600px)  {
 
   .center{
