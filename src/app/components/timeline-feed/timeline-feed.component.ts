@@ -13,7 +13,7 @@ import { ErrorsService } from '../../services/errors.service';
 import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { BehaviorSubject } from 'rxjs';
 import { FeedReturnObject } from '../../models/FeedReturnObject';
-import { FilteringDTO } from '../../models/FilteringDTO';
+
 import {
   trigger,
   state,
@@ -61,12 +61,9 @@ export class TimelineFeedComponent implements OnInit {
   constructor(
     private userService: UserService,
     private feedService: FeedService,
-    private postService: PostService,
     private dialogService: DialogService,
     private configService: ConfigService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private errorsService: ErrorsService,
     private scrollHelperService: ScrollHelperService,
     private massageService: MessageService,
     private spinner: NgxSpinnerService,
@@ -118,7 +115,8 @@ export class TimelineFeedComponent implements OnInit {
         }
       }
     });
-    this.userService.getNumberOfFollowing(this.id).subscribe(res => {
+
+    this.userService.getNumberOfFollowing(this.id).pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.following = res;
       if (!this.following) {
         this.router.navigate(['feed-discover-people']);
@@ -133,6 +131,7 @@ export class TimelineFeedComponent implements OnInit {
 
           if (value.width <= 600) {
             this.desktop = false;
+            this.feedService.updateTimelineFeed(this.id, this.offset);
           }
         });
   }

@@ -34,6 +34,7 @@ export class FeedService {
   globaSoicalURL = this.baseApiUrl + '/social/';
   generalURL = this.baseApiUrl + '/general/'
   profileFilteringDTO = new FilteringDTO();
+  mainProfileFilteringDTO = new FilteringDTO();
   exploreFilteringDTO = new FilteringDTO();
   feedFilteringDTO = new FilteringDTO();
   exploreGeneralFilteringDTO = new FilteringDTO();
@@ -53,6 +54,10 @@ export class FeedService {
 
   updateUserFeed(id, offset) {
     this.postsSubject.next(this.getUserFeed(id, offset));
+  }
+
+  updateProfileFeed(id, offset) {
+    this.postsSubject.next(this.getUserProfileFeed(id, offset));
   }
 
   updateSavedFeed(id, offset) {
@@ -155,11 +160,39 @@ export class FeedService {
       });
   }
 
+  getUserProfileFeed(userId: number, offset: number): Observable<any> {
+    let params = new HttpParams().set('offset', offset.toString());
+    return this.http.post<Array<any>>(
+      this.globalFeedURL + userId + '/user-feed', this.profileFilteringDTO.getFilteringDTO(), {
+        headers: httpOptions.headers,
+        observe: "response",
+        params: params
+      }
+    ).pipe(
+    )
+      .map(res => {
+
+        if (res.status == 200) {
+          let posts: any = res.body['feedPosts'];
+          let offset: any = res.body['newOffset'];
+          let newPosts: Array<TimelinePost> = posts.map((post) => new TimelinePost(post, post.postImageAddr, post.userProfileImageAddr, post.thumbnail));
+
+          let feedReturnObject = new FeedReturnObject();
+          feedReturnObject.newPosts = newPosts;
+          feedReturnObject.offset = offset;
+          return feedReturnObject;
+        }
+        if (res.status == 204) {
+          return "endOfFeed";
+        }
+      });
+  }
+
 
   getUserFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed', this.profileFilteringDTO, {
+      this.globalFeedURL + userId + '/user-feed', this.mainProfileFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
         observe: "response",
         params: params
@@ -187,7 +220,7 @@ export class FeedService {
   getUserSavedFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/saved-feed', this.feedFilteringDTO.getFilteringDTO(), {
+      this.globalFeedURL + userId + '/saved-feed', this.mainProfileFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
         observe: "response",
         params: params,

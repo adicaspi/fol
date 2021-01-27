@@ -1,8 +1,8 @@
 <div class="wrapper scroll-bar-container">
 
   <div class="scrollmenu">
-    <div class="scroll-item" *ngFor="let item of menu">
-      <a (click)="filterByCategory(item)" [ngClass]="item.checked?'a-item-checked':'a-item'">{{item.name}}
+    <div class="scroll-item" *ngFor="let item of filteringDTO.getCategoriesObjects">
+      <a (click)="filterByCategory(item)" [ngClass]="item.checked?'a-item-checked':'a-item'">{{item.displayName}}
       </a>
     </div>
   </div>

@@ -81,15 +81,6 @@ export class UserFeedComponent implements OnInit {
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
-      value => {
-        if (value.width > 600) {
-          this.desktop = true;
-        }
-        if (value.width <= 600) {
-          this.desktop = false;
-        }
-      });
   }
 
   ngOnInit() {
@@ -127,10 +118,19 @@ export class UserFeedComponent implements OnInit {
           this.offset = 0;
           this.scrollPageToTop = true;
           //this.getActivatedRoute();
-          this.feedService.updateUserFeed(this.id, this.offset);
+          this.feedService.updateProfileFeed(this.id, this.offset);
         }
       }
     });
+    this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width > 600) {
+          this.desktop = true;
+        }
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+      });
     this.getActivatedRoute();
   }
 
@@ -145,7 +145,9 @@ export class UserFeedComponent implements OnInit {
         else {
           this.user = this.userService.getUserProfileInfo(this.id);
         }
-        this.feedService.updateUserFeed(this.id, this.offset);
+        if (!this.desktop) {
+          this.feedService.updateProfileFeed(this.id, this.offset);
+        }
       })
   }
 
@@ -236,7 +238,7 @@ export class UserFeedComponent implements OnInit {
 
   onScroll() {
     if (!this.endOfFeed) {
-      this.feedService.updateUserFeed(this.id, this.offset);
+      this.feedService.updateProfileFeed(this.id, this.offset);
       this.spinner.show();
 
     } else {

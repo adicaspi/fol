@@ -8,7 +8,7 @@ export class FilteringDTO {
   maxPrice: number = 0;
   filteringDTOPayLoad = {};
 
-  categoriesObjects = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
+  categoriesObjects = [{ id: 1, name: 'All Categories', displayName: 'All', checked: true }, { id: 2, name: 'Clothing', displayName: 'Clothing', checked: false }, { id: 3, name: 'Shoes', displayName: 'Shoes', checked: false }, { id: 4, name: 'Bags', displayName: 'Bags', checked: false }, { id: 5, name: 'Accessories', displayName: 'Accessories', checked: false }];
 
   clothing = [
     { id: 1, name: 'Tops', checked: false, servername: 'Tops' },
@@ -19,12 +19,28 @@ export class FilteringDTO {
     { id: 6, name: 'Lingerie', checked: false, servername: 'Lingerie' }
   ];
   designersObjects = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 3, name: 'D&G', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 9, name: 'Fendi', checked: false }, { id: 10, name: 'Miu Miu', checked: false }, { id: 11, name: 'Valentino', checked: false }];
-  storesObjects = [{ id: 1, name: 'Asos', checked: false, show: true }, { id: 2, name: 'Net-A-Porter', checked: false, show: true }, { id: 3, name: 'Farfetch', checked: false, show: true }, { checked: false, show: false }, { id: 5, name: 'Shein', checked: false, show: true }, { id: 6, name: 'Shopbop', checked: false, show: true }, { id: 7, name: 'TerminalX', checked: false, show: true }, { id: 8, name: 'Zara', checked: false, show: true }, { id: 9, name: 'Revolve', checked: false, show: true }, { id: 10, name: 'Factory54', checked: false, show: true }, { id: 11, name: 'Topshop', checked: false, show: true }, { id: 12, name: 'Mytheresa', checked: false, show: true }, { id: 13, name: 'The Outnet', checked: false, show: true }];
+  storesObjects = [{ id: 1, name: 'Asos', checked: false, show: true }, { id: 2, name: 'Net-A-Porter', checked: false, show: true }, { id: 3, name: 'Farfetch', checked: false, show: true }, { id: 5, name: 'Shein', checked: false, show: true }, { id: 6, name: 'Shopbop', checked: false, show: true }, { id: 7, name: 'TerminalX', checked: false, show: true }, { id: 8, name: 'Zara', checked: false, show: true }, { id: 9, name: 'Revolve', checked: false, show: true }, { id: 10, name: 'Factory54', checked: false, show: true }, { id: 11, name: 'Topshop', checked: false, show: true }, { id: 12, name: 'Mytheresa', checked: false, show: true }, { id: 13, name: 'The Outnet', checked: false, show: true }];
   //prices = [{ value: 100, checked: false }, { value: 200, checked: false }, { value: 300, checked: false }, { value: 400, checked: false }, { value: 500, checked: false }];
 
 
   setCategory(category) {
     this.category = category;
+    this.changeStatusCategorisObjects();
+  }
+
+  changeStatusCategorisObjects() {
+    let categoryObject;
+    if (this.getCategory == null) {
+      this.getCategoriesObjects[0].checked = true;
+      return;
+    }
+    for (categoryObject of this.getCategoriesObjects) {
+      if (this.getCategory() == categoryObject.name) {
+        categoryObject.checked = true;
+      } else {
+        categoryObject.checked = false;
+      }
+    }
   }
 
   get categoryIsFiltered() {
@@ -91,9 +107,22 @@ export class FilteringDTO {
   }
 
   setCheckedStores() {
-    let storeID;
-    for (storeID of this.getStores()) {
-      this.storesObjects[storeID - 1].checked = true;
+    let storeName;
+    // for (storeID of this.getStores()) {
+    //   this.storesObjects[storeID - 1].checked = true;
+    // }
+
+    let filteredStored;
+    let i = 0;
+    for (storeName of this.getStores()) {
+      for (filteredStored of this.storesObjects) {
+        if (storeName == filteredStored.id) {
+          this.storesObjects[i].checked = true;
+          i = 0;
+          break;
+        }
+        i++;
+      }
     }
   }
 
@@ -136,9 +165,10 @@ export class FilteringDTO {
     let i = 0;
     for (category of this.getCategoriesObjects) {
       if (category.name == this.getCategory()) {
-        this.categoriesObjects[0].checked = false;
-        this.categoriesObjects[i].checked = true;
+        category.checked = true;
         this.allCategoriesSelected = 0;
+      } else {
+        category.checked = false;
       }
       i++;
     } if (i == 0) {

@@ -16,6 +16,7 @@ require('jquery-ui-touch-punch');
 declare var setInputFilter: any;
 import '../../shared/input-filter.js'
 import { first } from '../../../../node_modules/rxjs-compat/operator/first';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-shopping-nav',
@@ -42,6 +43,7 @@ export class ShoppingNavComponent implements OnInit {
   prevScrollPos = window.pageYOffset;
   public sliderType = SliderType;
   public priceRange: PriceRange = new PriceRange(0, 2000);
+  componentName: ComponentName;
 
   priceMinValue: string = "0";
   priceMaxValue: string = "1800+";
@@ -50,15 +52,41 @@ export class ShoppingNavComponent implements OnInit {
   priceMinDiff: number = 100;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
     private feedService: FeedService,
     private massageService: MessageService,
-    private shoppingNavService: ShoppingNavService,
-    private eRef: ElementRef
+    private router: Router
+
   ) {
   }
 
   ngOnInit() {
+    if (this.router.url.includes("feed")) {
+      this.componentName = ComponentName.Feed;
+      this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
+    } if (this.router.url.includes("profile")) {
+      if (this.router.url.includes("profile/")) {
+        this.componentName = ComponentName.Profile;
+        this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
+      } else {
+        this.componentName = ComponentName.MainProfile;
+        this.filteringDTO.setFilteringDTO(this.feedService.mainProfileFilteringDTO.getFilteringDTO());
+      }
+    } if (this.router.url.includes("explore")) {
+      this.componentName = ComponentName.Explore;
+      this.filteringDTO.setFilteringDTO(this.feedService.exploreFilteringDTO.getFilteringDTO());
+    }
+    if (this.router.url.includes("general")) {
+      this.componentName = ComponentName.GeneralExplore;
+      this.filteringDTO.setFilteringDTO(this.feedService.exploreGeneralFilteringDTO.getFilteringDTO());
+    }
+    this.filteringDTO.setAllCheckedButtons();
+    this.priceMinValueInt = this.filteringDTO.minPrice;
+    this.priceMaxValueInt = this.filteringDTO.maxPrice;
+
+    if (this.filteringDTO.categoryIsFiltered) {
+      this.showProductType = true;
+    }
+    this.updateFeedFilteringDTO();
     this.initSlider(this);
     this.menu = [{ id: 1, name: 'All', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   }
@@ -165,21 +193,30 @@ export class ShoppingNavComponent implements OnInit {
     prevItem.checked = false;
     item.checked = true;
     this.currCategory = item.id - 1;
-    this.showProductType = (item && item.name.toLowerCase() === 'all');
-    if (item.name == "All") {
-      this.filteringDTO.category = null;
+    this.showProductType = (item && item.name.toLowerCase() === 'all categories');
+    if (item.name == "All Categories") {
+      this.filteringDTO.setCategory(null);
     }
     else {
-      this.filteringDTO.category = item.name;
+      this.filteringDTO.setCategory(item.name);
     }
     this.updateFeedFilteringDTO();
   }
 
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
-    console.log("hellloo", this.filteringDTO.getFilteringDTO());
-    this.feedService.feedFilteringDTO = this.filteringDTO.getFilteringDTO();
-    //Object.assign(this.feedService.feedFilteringDTO, this.filteringDTO.getFilteringDTO);
+    if (this.componentName == ComponentName.Feed) {
+      this.feedService.feedFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+    }
+    if (this.componentName == ComponentName.Profile) {
+      this.feedService.profileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+    }
+    if (this.componentName == ComponentName.Explore) {
+      this.feedService.exploreFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+    }
+    if (this.componentName == ComponentName.MainProfile) {
+      this.feedService.mainProfileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+    }
     this.massageService.sendMessage('update-feed');
     this.massageService.clearMessage();
   }
@@ -371,4 +408,12 @@ class PriceRange {
     public upper: number
   ) {
   }
+}
+
+enum ComponentName {
+  Feed,
+  Profile,
+  MainProfile,
+  Explore,
+  GeneralExplore
 }

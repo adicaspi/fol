@@ -75,15 +75,7 @@ export class MainUserFeedComponent implements OnInit {
   ) {
     this.id = this.userService.userId;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
-      value => {
-        if (value.width > 600) {
-          this.desktop = true;
-        }
-        if (value.width <= 600) {
-          this.desktop = false;
-        }
-      });
+
   }
 
   ngOnInit() {
@@ -114,6 +106,7 @@ export class MainUserFeedComponent implements OnInit {
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
+          console.log("in main user feed feed msg");
           this.spinner.show();
           this.posts = [];
           this.offset = 0;
@@ -124,6 +117,15 @@ export class MainUserFeedComponent implements OnInit {
       }
     });
     //this.getActivatedRoute();
+    this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
+      value => {
+        if (value.width > 600) {
+          this.desktop = true;
+        }
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+      });
     this.getUserFeed();
   }
 
@@ -146,7 +148,9 @@ export class MainUserFeedComponent implements OnInit {
     this.posts = [];
     this.offset = 0;
     this.scrollPageToTop = true;
-    this.feedService.updateUserFeed(this.id, this.offset);
+    if (!this.desktop) {
+      this.feedService.updateUserFeed(this.id, this.offset);
+    }
   }
 
   onScroll() {

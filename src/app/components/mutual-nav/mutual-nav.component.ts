@@ -56,13 +56,20 @@ export class MutualNavComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private feedService: FeedService, private massageService: MessageService, private router: Router, private shoppingNavService: ShoppingNavService) { }
 
   ngOnInit() {
-    console.log(this.router.url);
+    this.minValue = 0;
+    this.maxValue = 1800;
     if (this.router.url.includes("feed")) {
       this.componentName = ComponentName.Feed;
-      this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
+      this.filteringDTO.setFilteringDTO
+        (this.feedService.feedFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("profile")) {
-      this.componentName = ComponentName.Profile;
-      this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
+      if (this.router.url.includes("profile/")) {
+        this.componentName = ComponentName.Profile;
+        this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
+      } else {
+        this.componentName = ComponentName.MainProfile;
+        this.filteringDTO.setFilteringDTO(this.feedService.mainProfileFilteringDTO.getFilteringDTO());
+      }
     } if (this.router.url.includes("explore")) {
       this.componentName = ComponentName.Explore;
       this.filteringDTO.setFilteringDTO(this.feedService.exploreFilteringDTO.getFilteringDTO());
@@ -74,8 +81,7 @@ export class MutualNavComponent implements OnInit {
     this.filteringDTO.setAllCheckedButtons();
     this.priceRange.lower = this.filteringDTO.minPrice;
     this.priceRange.upper = this.filteringDTO.maxPrice;
-    this.minValue = 0;
-    this.maxValue = 1800;
+
     if (this.filteringDTO.categoryIsFiltered) {
       this.showProduct = true;
     }
@@ -300,13 +306,17 @@ export class MutualNavComponent implements OnInit {
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
     if (this.componentName == ComponentName.Feed) {
-      this.feedService.feedFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+      this.feedService.feedFilteringDTO.setFilteringDTO
+        (this.filteringDTO.getFilteringDTO());
     }
     if (this.componentName == ComponentName.Profile) {
       this.feedService.profileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
     if (this.componentName == ComponentName.Explore) {
       this.feedService.exploreFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+    }
+    if (this.componentName == ComponentName.MainProfile) {
+      this.feedService.mainProfileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
     this.massageService.sendMessage('update-feed');
     this.massageService.clearMessage();
@@ -325,6 +335,7 @@ class PriceRange {
 enum ComponentName {
   Feed,
   Profile,
+  MainProfile,
   Explore,
   GeneralExplore
 }

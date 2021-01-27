@@ -84,7 +84,6 @@ export class ExploreFeedGeneralComponent implements OnInit {
           this.spinner.hide();
         })
       });
-    this.feedService.updateGeneralExploreFeed();
     this.feedSubsription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {

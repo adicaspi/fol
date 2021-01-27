@@ -51,12 +51,10 @@
   <mat-menu #store="matMenu" xPosition="before" class="checkbox-menu">
     <div class="menu-wrapper">
       <div class="mat-menu-content store">
-        <div *ngFor="let store of filteringDTO.getStoresObjects">
-          <mat-checkbox *ngIf="store.show" class="example-margin" name="store" [value]="store.id" [checked]="store.checked" [disabled]="disabled"
-            (click)="$event.stopPropagation();" (change)="onChangeCheckBox('stores',$event,store)">
-            {{store.name}}
-          </mat-checkbox>
-        </div>
+        <mat-checkbox *ngFor="let store of filteringDTO.getStoresObjects" class="example-margin" name="store" [value]="store.id"
+          [checked]="store.checked" [disabled]="disabled" (click)="$event.stopPropagation();" (change)="onChangeCheckBox('stores',$event,store)">
+          {{store.name}}
+        </mat-checkbox>
       </div>
       <div class="submit">
         <button (click)="selectedStore()">apply</button>
