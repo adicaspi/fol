@@ -13,6 +13,7 @@ import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 import { MessageService } from './message.service';
 import { catchError } from '../../../node_modules/rxjs/operators';
 import { post } from '../../../node_modules/@types/selenium-webdriver/http';
+import { FilteringDTO } from '../models/FilteringDTO';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -23,6 +24,7 @@ const httpOptions = {
 })
 export class FeedService {
   private postsSubject = new Subject<any>();
+  private timelineFeedPostsSubject = new Subject<any>();
   private offsetSubject = new Subject<any>();
   private scrollingSubjebt = new Subject<any>();
   private baseApiUrl = environment.BASE_API_URL;
@@ -31,10 +33,10 @@ export class FeedService {
   globalFeedURL = this.baseApiUrl + '/social/';
   globaSoicalURL = this.baseApiUrl + '/social/';
   generalURL = this.baseApiUrl + '/general/'
-  timelinefeedFilteringDTO: any = {};
-  userfeedFilteringDTO: any = {};
-  explorefeedFilteringDTO: any = {};
-  feedFilteringDTO: any = {};
+  profileFilteringDTO = new FilteringDTO();
+  exploreFilteringDTO = new FilteringDTO();
+  feedFilteringDTO = new FilteringDTO();
+  exploreGeneralFilteringDTO = new FilteringDTO();
   currentLoadedFeedComponent: string;
 
 
@@ -69,10 +71,18 @@ export class FeedService {
     return this.postsSubject.asObservable();
   }
 
+  clearPosts() {
+    this.postsSubject.next();
+  }
+
+  getNewTimelineFeedPosts(): Observable<any> {
+    return this.timelineFeedPostsSubject.asObservable();
+  }
+
   getTimeLineFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<any>(
-      this.globalFeedURL + userId + '/timeline-feed', this.feedFilteringDTO, {
+      this.globalFeedURL + userId + '/timeline-feed', this.feedFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
         observe: "response",
         params: params,
@@ -97,7 +107,7 @@ export class FeedService {
 
   getExploreFeed(userId: number): Observable<any> {
     return this.http.post<any>(
-      this.globalFeedURL + userId + '/explore-feed', this.feedFilteringDTO, {
+      this.globalFeedURL + userId + '/explore-feed', this.exploreFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
         observe: "response"
       }
@@ -122,7 +132,7 @@ export class FeedService {
 
   getGeneralExploreFeed(): Observable<any> {
     return this.http.post<any>(
-      this.generalURL + '/explore-feed', this.feedFilteringDTO, {
+      this.generalURL + '/explore-feed', this.exploreGeneralFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
         observe: "response"
       }
@@ -149,7 +159,7 @@ export class FeedService {
   getUserFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed', this.feedFilteringDTO, {
+      this.globalFeedURL + userId + '/user-feed', this.profileFilteringDTO, {
         headers: httpOptions.headers,
         observe: "response",
         params: params
@@ -177,7 +187,7 @@ export class FeedService {
   getUserSavedFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/saved-feed', this.feedFilteringDTO, {
+      this.globalFeedURL + userId + '/saved-feed', this.feedFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
         observe: "response",
         params: params,

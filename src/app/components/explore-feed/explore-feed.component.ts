@@ -62,6 +62,7 @@ export class ExploreFeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("on init");
     this.titleService.setTitle('Explore');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.spinner.show();
@@ -93,7 +94,7 @@ export class ExploreFeedComponent implements OnInit {
         }
       }
     });
-    this.feedService.updateExploreFeed(this.id);
+    //this.feedService.updateExploreFeed(this.id);
 
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(

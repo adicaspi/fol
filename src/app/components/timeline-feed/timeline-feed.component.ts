@@ -124,8 +124,6 @@ export class TimelineFeedComponent implements OnInit {
         this.router.navigate(['feed-discover-people']);
       }
     });
-
-    this.feedService.updateTimelineFeed(this.id, this.offset);
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
