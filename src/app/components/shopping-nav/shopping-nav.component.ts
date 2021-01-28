@@ -323,6 +323,7 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setSliderMax(maxIntValue);
+    this.filteringChanged = true;
   }
 
   changeMinPriceInput() {
@@ -341,6 +342,7 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setSliderMin(minIntValue);
+    this.filteringChanged = true;
   }
 
   maxPriceUnfocus() {
