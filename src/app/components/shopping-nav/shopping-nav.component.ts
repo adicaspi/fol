@@ -238,13 +238,16 @@ export class ShoppingNavComponent implements OnInit {
       max: 1800,
       values: v,
       stop: function (event, ui) {
+
         that.selectedPrice(ui.values[0], ui.values[1]);
+
       },
       slide: function (event, ui) {
 
         if (ui.values[1] - ui.values[0] < that.priceMinDiff) {
           return false;
         }
+
 
         that.setMinPrice(ui.values[0]);
         that.setMaxPrice(ui.values[1]);
