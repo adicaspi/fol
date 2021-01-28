@@ -80,14 +80,15 @@ export class ShoppingNavComponent implements OnInit {
       this.filteringDTO.setFilteringDTO(this.feedService.exploreGeneralFilteringDTO.getFilteringDTO());
     }
     this.filteringDTO.setAllCheckedButtons();
-    this.priceMinValueInt = this.filteringDTO.minPrice;
-    this.priceMaxValueInt = this.filteringDTO.maxPrice;
+
 
     if (this.filteringDTO.categoryIsFiltered) {
       this.showProductType = true;
     }
-    this.updateFeedFilteringDTO();
     this.initSlider(this);
+    this.setMaxPriceAndSlider(this.filteringDTO.getMaxPrice());
+    this.setMinPriceAndSlider(this.filteringDTO.getMinPrice());
+    this.updateFeedFilteringDTO();
     this.menu = [{ id: 1, name: 'All', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   }
 
@@ -238,16 +239,13 @@ export class ShoppingNavComponent implements OnInit {
       max: 1800,
       values: v,
       stop: function (event, ui) {
-
         that.selectedPrice(ui.values[0], ui.values[1]);
-
       },
       slide: function (event, ui) {
 
         if (ui.values[1] - ui.values[0] < that.priceMinDiff) {
           return false;
         }
-
 
         that.setMinPrice(ui.values[0]);
         that.setMaxPrice(ui.values[1]);
@@ -326,7 +324,6 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setSliderMax(maxIntValue);
-    this.filteringChanged = true;
   }
 
   changeMinPriceInput() {
@@ -345,7 +342,6 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setSliderMin(minIntValue);
-    this.filteringChanged = true;
   }
 
   maxPriceUnfocus() {
