@@ -1,18 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatRadioChange, MatRadioButton, MatMenuTrigger, MatCheckboxChange } from '@angular/material';
-import { Options, LabelType } from 'ng5-slider';
-import { Ng5SliderModule } from 'ng5-slider';
 import { SliderType } from "igniteui-angular";
 import { FilteringDTO } from '../../models/FilteringDTO';
 import { FeedService } from '../../services/feed.service';
-import { ErrorsService } from '../../services/errors.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from '../../services/message.service';
 import { ShoppingNavService } from '../../services/shopping-nav.service';
-import { Button } from '../../../../node_modules/protractor';
-import * as jQuery from 'jquery';
-import $ from 'jquery';
+
 
 
 @Component({
@@ -51,8 +46,6 @@ export class MutualNavComponent implements OnInit {
   productsToShow = [];
   componentName: ComponentName;
 
-
-
   constructor(private formBuilder: FormBuilder, private feedService: FeedService, private massageService: MessageService, private router: Router, private shoppingNavService: ShoppingNavService) { }
 
   ngOnInit() {
@@ -60,8 +53,7 @@ export class MutualNavComponent implements OnInit {
     this.maxValue = 1800;
     if (this.router.url.includes("feed")) {
       this.componentName = ComponentName.Feed;
-      this.filteringDTO.setFilteringDTO
-        (this.feedService.feedFilteringDTO.getFilteringDTO());
+      this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("profile")) {
       if (this.router.url.includes("profile/")) {
         this.componentName = ComponentName.Profile;
@@ -85,7 +77,7 @@ export class MutualNavComponent implements OnInit {
     if (this.filteringDTO.categoryIsFiltered) {
       this.showProduct = true;
     }
-    this.categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
+    // this.categories = [{ id: 1, name: 'All Categories', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
     this.updateFeedFilteringDTO();
 
 
@@ -306,6 +298,8 @@ export class MutualNavComponent implements OnInit {
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
     if (this.componentName == ComponentName.Feed) {
+      console.log(this.filteringDTO.getFilteringDTO());
+      console.log(this.feedService.feedFilteringDTO.getFilteringDTO());
       this.feedService.feedFilteringDTO.setFilteringDTO
         (this.filteringDTO.getFilteringDTO());
     }

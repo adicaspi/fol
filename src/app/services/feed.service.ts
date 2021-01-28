@@ -24,9 +24,6 @@ const httpOptions = {
 })
 export class FeedService {
   private postsSubject = new Subject<any>();
-  private timelineFeedPostsSubject = new Subject<any>();
-  private offsetSubject = new Subject<any>();
-  private scrollingSubjebt = new Subject<any>();
   private baseApiUrl = environment.BASE_API_URL;
   offset: number = 0;
   prevOffset: number = 0;
@@ -38,8 +35,6 @@ export class FeedService {
   exploreFilteringDTO = new FilteringDTO();
   feedFilteringDTO = new FilteringDTO();
   exploreGeneralFilteringDTO = new FilteringDTO();
-  currentLoadedFeedComponent: string;
-
 
   constructor(private http: HttpClient) {
   }
@@ -80,11 +75,8 @@ export class FeedService {
     this.postsSubject.next();
   }
 
-  getNewTimelineFeedPosts(): Observable<any> {
-    return this.timelineFeedPostsSubject.asObservable();
-  }
-
   getTimeLineFeed(userId: number, offset: number): Observable<any> {
+    console.log("in feedService", this.feedFilteringDTO.getFilteringDTO());
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<any>(
       this.globalFeedURL + userId + '/timeline-feed', this.feedFilteringDTO.getFilteringDTO(), {

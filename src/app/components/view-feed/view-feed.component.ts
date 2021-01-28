@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
-import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-view-feed',
@@ -36,7 +35,6 @@ export class ViewFeedComponent implements OnInit {
     private userService: UserService,
     private http: HttpClient,
     private configService: ConfigService,
-    private feedService: FeedService,
     private router: Router,
     private errorsService: ErrorsService
   ) {

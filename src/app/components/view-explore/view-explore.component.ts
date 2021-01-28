@@ -20,7 +20,6 @@ export class ViewExploreComponent implements OnInit {
   constructor(private feedService: FeedService, private configService: ConfigService) { }
 
   ngOnInit() {
-    this.feedService.currentLoadedFeedComponent = "explore";
     this.subscription = this.configService.windowSizeChanged.subscribe(
       value => {
         if (value.width <= 600) {
