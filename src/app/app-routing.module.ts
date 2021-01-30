@@ -42,12 +42,13 @@ const routes: Routes = [
   // },
   {
     path: 'profile', component: ViewMainProfileComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       title: 'Followear Profile Page',
       description: "When you share posts they'll show up here"

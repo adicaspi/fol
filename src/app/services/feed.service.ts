@@ -76,7 +76,6 @@ export class FeedService {
   }
 
   getTimeLineFeed(userId: number, offset: number): Observable<any> {
-    console.log("in feedService", this.feedFilteringDTO.getFilteringDTO());
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<any>(
       this.globalFeedURL + userId + '/timeline-feed', this.feedFilteringDTO.getFilteringDTO(), {

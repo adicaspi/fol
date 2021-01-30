@@ -106,7 +106,6 @@ export class MainUserFeedComponent implements OnInit {
     this.feedSubscription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
-          console.log("in main user feed feed msg");
           this.spinner.show();
           this.posts = [];
           this.offset = 0;

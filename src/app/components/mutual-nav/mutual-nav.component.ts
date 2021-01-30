@@ -298,8 +298,6 @@ export class MutualNavComponent implements OnInit {
   updateFeedFilteringDTO() {
     this.feedService.offset = 0;
     if (this.componentName == ComponentName.Feed) {
-      console.log(this.filteringDTO.getFilteringDTO());
-      console.log(this.feedService.feedFilteringDTO.getFilteringDTO());
       this.feedService.feedFilteringDTO.setFilteringDTO
         (this.filteringDTO.getFilteringDTO());
     }

@@ -67,7 +67,6 @@ export class ExploreFeedGeneralComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("on init");
     this.titleService.setTitle('Explore Followear');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index, follow' });

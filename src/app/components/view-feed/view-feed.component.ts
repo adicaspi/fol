@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ViewFeedComponent implements OnInit {
   private baseApiUrl = environment.BASE_API_URL;
+  private facebookLogin = environment.loginWithFbUrl;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   userId: boolean = false;
   desktop: Boolean = true;
@@ -42,20 +43,22 @@ export class ViewFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.userService.userId) {
-      this.userId = true;
-    } else {
-      var index = this.router.url.indexOf("code");
-      if (index != -1) {
-        var facebookLoginCode = this.router.url.substring(index + 5);
-        var hashTagIndex = this.router.url.indexOf("#");
-        if (hashTagIndex != -1) {
-          facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
-        }
-        this.loginWithFacebook(facebookLoginCode);
-      } else {
-        this.loadConfigurationData();
+    var index = this.router.url.indexOf("code");
+    var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
+    if (index != -1) {
+      var facebookLoginCode = this.router.url.substring(index + 5);
+      var hashTagIndex = this.router.url.indexOf("#");
+      if (hashTagIndex != -1) {
+        facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
       }
+      this.loginWithFacebook(facebookLoginCode);
+    }
+    else if (alreadyFoundOnFBError) {
+      console.log("in facebook error");
+      this.redirectToFacebook();
+    }
+    else {
+      this.loadConfigurationData();
     }
 
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
@@ -76,6 +79,10 @@ export class ViewFeedComponent implements OnInit {
     this.userService.loginWithFacebook(code).pipe(takeUntil(this.onDestroy)).subscribe(data => {
       this.setUserDetails(data);
     })
+  }
+
+  redirectToFacebook() {
+    window.location.href = this.facebookLogin;
   }
 
   loadConfigurationData() {
