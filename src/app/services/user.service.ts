@@ -214,14 +214,13 @@ export class UserService {
     );
   }
 
-  logout(): Observable<any> {
+  logout() {
     this.userId = null;
     const user_id = sessionStorage.getItem('user_id');
     if (user_id) {
       sessionStorage.removeItem('user_id');
     }
-    return this.http.get<any>(this.globalRegisterURL + 'logout');
-
+    this.http.get<any>(this.globalRegisterURL + 'logout').subscribe(res => { });
   }
 
   //redirect user to home page

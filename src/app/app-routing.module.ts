@@ -56,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: 'feed/:id', component: ViewFeedComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 
   },
 
