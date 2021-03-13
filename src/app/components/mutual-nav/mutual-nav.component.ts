@@ -311,7 +311,7 @@ export class MutualNavComponent implements OnInit {
       this.feedService.mainProfileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
     this.massageService.sendMessage('update-feed');
-    this.massageService.clearMessage();
+    //this.massageService.clearMessage();
   }
 
 }
