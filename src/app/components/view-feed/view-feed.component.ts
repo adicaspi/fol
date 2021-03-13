@@ -43,6 +43,7 @@ export class ViewFeedComponent implements OnInit {
   }
 
   ngOnInit() {
+
     var index = this.router.url.indexOf("code");
     var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
     if (index != -1) {
@@ -53,7 +54,7 @@ export class ViewFeedComponent implements OnInit {
       }
       this.loginWithFacebook(facebookLoginCode);
     }
-    else if (alreadyFoundOnFBError) {
+    if (alreadyFoundOnFBError) {
       console.log("in facebook error");
       this.redirectToFacebook();
     }

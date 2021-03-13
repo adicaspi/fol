@@ -69,7 +69,10 @@ const routes: Routes = [
 
 
   { path: 'forgotpassword', component: ForgotPasswordComponent },
-  { path: 'explore/:id', component: ViewExploreComponent, canActivate: [AuthGuard] },
+  {
+    path: 'explore/:id', component: ViewExploreComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'explore', component: ViewExploreGeneralComponent, data: {
       title: 'Explore Followear',
