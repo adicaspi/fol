@@ -24,6 +24,10 @@ export class TimelinePost {
     else {
       this.thumbnail = null;
     }
+
+    if (selfThumb) {
+      this.selfThumb= this.baseApiUrl + '/image?s3key=' + selfThumb;
+    }
   }
 
   get storeNameMobile() {
@@ -43,7 +47,7 @@ export class TimelinePost {
   }
 
   get selfThumbAddr() {
-    //this.selfThumb = "adi";
+    this.selfThumb = "adi";
     return this.selfThumb;
   }
 }
