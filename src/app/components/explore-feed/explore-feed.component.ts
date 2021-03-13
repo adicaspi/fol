@@ -36,7 +36,7 @@ export class ExploreFeedComponent implements OnInit {
   windowWidth: number;
   showNoPostsMessage: boolean = false;
   scrollPageToTop: boolean = false;
-  private feedSubsription: Subscription
+  feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
 
@@ -62,6 +62,7 @@ export class ExploreFeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("in explore feed");
     this.titleService.setTitle('Explore');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.spinner.show();
@@ -83,7 +84,7 @@ export class ExploreFeedComponent implements OnInit {
         })
       });
 
-    this.feedSubsription = this.massageService.getMessage().pipe(takeUntil(this.onDestroy)).subscribe(msg => {
+    this.feedSubsription = this.massageService.getMessage().subscribe(msg => {
       if (msg) {
         if (msg.msg == 'update-feed') {
           this.spinner.show();
@@ -93,12 +94,12 @@ export class ExploreFeedComponent implements OnInit {
         }
       }
     });
-    //this.feedService.updateExploreFeed(this.id);
+    this.feedService.updateExploreFeed(this.id);
 
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
-          if (value.width >= 600) {
+          if (value.width > 600) {
             this.desktop = true;
           }
 

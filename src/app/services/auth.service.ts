@@ -21,7 +21,11 @@ export class AuthService {
 
 
   isAuthenticated(): Observable<boolean> {
-    return this.loadConfigurationData();
+    if (this.userService.userId) {
+      return Observable.of(true);
+    } else {
+      return this.loadConfigurationData();
+    }
   }
 
 

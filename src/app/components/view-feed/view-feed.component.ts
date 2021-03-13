@@ -58,6 +58,10 @@ export class ViewFeedComponent implements OnInit {
       console.log("in facebook error");
       this.redirectToFacebook();
     }
+
+    if (this.userService.userId) {
+      this.userId = true;
+    }
     else {
       this.loadConfigurationData();
     }
