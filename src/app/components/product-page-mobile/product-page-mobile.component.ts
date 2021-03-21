@@ -173,6 +173,10 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.postService.incrementPostViews(this.userID, this.postId);
   }
 
+  incPostRedirects() {
+    this.postService.incrementPostRedirects(this.userID, this.postId);
+  }
+
   async didLike() {
     await this.userService.didLike(this.postId).subscribe(res => {
       this.likeButtonClicked = res;

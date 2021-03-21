@@ -83,7 +83,12 @@ export class PostService {
       });
   }
 
-
+  incrementPostRedirects(userId: number, postId: number) {
+    let params = new HttpParams().set('postId', postId.toString());
+    return this.http.post<any>(
+      this.socialUrl + '/' + userId + '/inc-post-redirects?postId=' + postId, { headers: httpOptions.headers }
+    ).subscribe(res => { });
+  }
 
 
   incrementPostViews(userId: number, postId: number) {
