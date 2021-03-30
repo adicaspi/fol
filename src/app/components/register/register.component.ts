@@ -206,7 +206,13 @@ export class RegisterComponent implements OnInit {
           this.userService.username = data.username;
           this.userService.updateUser(data.userId);
           this.configSerivce.setSessionStorage(data.userId.toString());
-          this.router.navigate(['feed-discover-people']);
+          if (localStorage.getItem('profile')) {
+            this.router.navigate(['profile', localStorage.getItem('profile')]);
+            localStorage.removeItem('profile')
+          } else {
+            this.router.navigate(['feed-discover-people']);
+          }
+
           this.dialogRef.close();
           this.ngOnDestroy();
         },

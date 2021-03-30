@@ -140,8 +140,11 @@ export class LoginComponent implements OnInit {
           if (this.dialogRef) {
             this.dialogRef.close();
           }
-          this.router.navigate(['/feed/' + data.userId]);
-
+          if (localStorage.getItem('profile')) {
+            this.router.navigate(['profile', localStorage.getItem('profile')]);
+          } else {
+            this.router.navigate(['/feed/' + data.userId]);
+          }
         },
         error => {
           this.submitted = false;
