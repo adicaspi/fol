@@ -110,6 +110,7 @@ span.icon-tab{
 
 .masonry-img{
   cursor: pointer;
+  position: relative;
 }
 
 .price.discount{
@@ -238,6 +239,24 @@ span.strike-original-price{
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  div.self-thumb-icon-container {
+    position: absolute;
+    top: 6px;
+    right: 45px;
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0.5);
+    height: 26px;
+    width: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img.self-thumb-icon{
+    width: 12px;
+    height: 12px;
   }
 
   .store.text-right {
@@ -370,6 +389,24 @@ span.strike-original-price{
     color: black;
   }
 
+  div.self-thumb-icon-container {
+    position: absolute;
+    top: 6px;
+    right: 45px;
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0.5);
+    height: 26px;
+    width: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img.self-thumb-icon{
+    width: 12px;
+    height: 12px;
+  }
+
   .store.text-right {
     position: absolute;
     right: 12px;
@@ -470,6 +507,24 @@ span.strike-original-price{
     color: rgb(51,51,51);
     font-size: 12px;
     margin-bottom: -4px;
+  }
+
+  div.self-thumb-icon-container {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0.5);
+    height: 23px;
+    width: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img.self-thumb-icon{
+    width: 11px;
+    height: 11px;
   }
 
   .price {
