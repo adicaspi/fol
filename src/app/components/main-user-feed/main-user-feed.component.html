@@ -47,13 +47,13 @@
           <div *ngIf="desktop">
             <div [ngClass]="post.thumbnail ? 'masonry-img thumb' : 'masonry-img' ">
               <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
-              <div class="self-thumb-icon-container">
-                <img src="../../../assets/frame2.svg" *ngIf="post.selfThumbAddr " class="self-thumb-icon" />
+              <div class="self-thumb-icon-container" *ngIf="post.selfThumbAddr ">
+                <img src="../../../assets/frame2.svg" class="self-thumb-icon" />
               </div>
               <div *ngIf="post.thumbnail" class="overlay">
                 <img [src]="post.thumbnail" class="img-main hover" (click)="openDialog(post)" />
-                <div class="self-thumb-icon-container">
-                  <img src="../../../assets/frame2.svg" *ngIf="post.selfThumbAddr " class="self-thumb-icon" />
+                <div class="self-thumb-icon-container" *ngIf="post.selfThumbAddr ">
+                  <img src="../../../assets/frame2.svg" class="self-thumb-icon" />
                 </div>
               </div>
             </div>
@@ -61,8 +61,8 @@
           <div *ngIf="!desktop">
             <div class="masonry-img">
               <img heightWidthRatio="1.35" (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" />
-              <div class="self-thumb-icon-container">
-                <img src="../../../assets/frame2.svg" *ngIf="post.selfThumbAddr " class="self-thumb-icon" />
+              <div class="self-thumb-icon-container" *ngIf="post.selfThumbAddr ">
+                <img src="../../../assets/frame2.svg" class="self-thumb-icon" />
               </div>
             </div>
           </div>

@@ -25,8 +25,8 @@ export class TimelinePost {
       this.thumbnail = null;
     }
 
-    if (selfThumb) {
-      this.selfThumb= this.baseApiUrl + '/image?s3key=' + selfThumb;
+    if (post.selfThumb) {
+      this.selfThumb = this.baseApiUrl + '/image?s3key=' + selfThumb;
     }
   }
 
@@ -47,7 +47,6 @@ export class TimelinePost {
   }
 
   get selfThumbAddr() {
-    this.selfThumb = "adi";
     return this.selfThumb;
   }
 }
