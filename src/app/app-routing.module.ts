@@ -40,15 +40,10 @@ const routes: Routes = [
   //   path: 'landing',
   //   component: LandingPageComponent
   // },
-  {
-    path: 'profile', component: ViewMainProfileComponent,
-    //canActivate: [AuthGuard]
-
-  },
+  //  { path: 'profile/:id/:username', component: ViewMainProfileComponent },
   {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    //canActivate: [AuthGuard],
     data: {
       title: 'Followear Profile Page',
       description: "When you share posts they'll show up here"

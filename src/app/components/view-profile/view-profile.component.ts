@@ -48,10 +48,6 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
         () => this.anyErrors = true,
         () => this.finished = true
       );
-
-    if (localStorage.getItem('profile')) {
-      localStorage.clear();
-    }
   }
 
   updateUser(id) {

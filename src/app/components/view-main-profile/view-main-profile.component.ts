@@ -36,6 +36,7 @@ export class ViewMainProfileComponent implements OnInit {
 
   ngOnInit() {
     this.masterId = this.userService.userId;
+    console.log(this.masterId, "im master id");
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
@@ -43,10 +44,6 @@ export class ViewMainProfileComponent implements OnInit {
         () => this.anyErrors = true,
         () => this.finished = true
       );
-
-    if (localStorage.getItem('profile')) {
-      localStorage.clear();
-    }
   }
 
   ngOnDestroy(): void {

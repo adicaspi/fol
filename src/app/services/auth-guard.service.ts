@@ -15,11 +15,6 @@ export class AuthGuardService implements CanActivate {
   constructor(public auth: AuthService, public router: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if (next.routeConfig.path == "profile/:id") {
-      if (next.params.id) {
-        localStorage.setItem('profile', next.params.id);
-      }
-    }
     return this.auth.isAuthenticated().pipe(map(res => {
       if (res) {
         return true;

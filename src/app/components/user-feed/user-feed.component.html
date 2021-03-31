@@ -1,7 +1,34 @@
+<div *ngIf="userProfile" class="tabs">
+  <a class="feed-tab">
+    <span class="icon-tab" [ngClass]="{'border-tab': userFeedTab}" (click)="getUserFeed()">
+      <i class="fal fa-border-all" [ngClass]="{'clicked': userFeedTab}"></i>
+      <span *ngIf="desktop">POSTS</span>
+    </span>
+  </a>
+  <a class="feed-tab">
+    <span class="icon-tab" [ngClass]="{'border-tab': savedTab}" (click)="getSavedFeed()">
+      <i class="far fa-bookmark" [ngClass]="{'clicked': savedTab}"></i>
+      <span *ngIf="desktop">SAVED</span>
+    </span>
+  </a>
+</div>
+
 <div *ngIf="showNoPostsMessage" class="no-posts">
-  <div class="subtitle">
-    <div *ngIf="user | async ; let user">
-      {{user.username }} hasn't uploaded any fashion items yet
+  <div *ngIf="userProfile">
+    <div class="no-posts-message">
+      <div class="subtitle">
+        You haven't uploaded any fashion items yet
+      </div>
+      <div class="share-posts-container">
+        <a href="https://apps.apple.com/app/followear/id1476265803" class="share-posts" target="_blank">Start Uploading</a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!userProfile">
+    <div class="subtitle">
+      <div *ngIf="user | async ; let user">
+        {{user.username }} hasn't uploaded any fashion items yet
+      </div>
     </div>
   </div>
 </div>

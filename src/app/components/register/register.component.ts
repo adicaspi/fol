@@ -1,5 +1,5 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe,
     private userService: UserService,
     private errorsService: ErrorsService,
@@ -86,6 +87,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.titleService.setTitle('Register to Followear');
     this.meta.addTag({ name: 'description', content: "Join Followear! Sign up to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index' });
@@ -207,8 +209,9 @@ export class RegisterComponent implements OnInit {
           this.userService.updateUser(data.userId);
           this.configSerivce.setSessionStorage(data.userId.toString());
           if (localStorage.getItem('profile')) {
+            let id = localStorage.getItem('profile');
+            localStorage.removeItem('profile');
             this.router.navigate(['profile', localStorage.getItem('profile')]);
-            localStorage.removeItem('profile')
           } else {
             this.router.navigate(['feed-discover-people']);
           }

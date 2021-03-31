@@ -141,7 +141,9 @@ export class LoginComponent implements OnInit {
             this.dialogRef.close();
           }
           if (localStorage.getItem('profile')) {
-            this.router.navigate(['profile', localStorage.getItem('profile')]);
+            let id = localStorage.getItem('profile');
+            localStorage.clear();
+            this.router.navigate(['profile', id]);
           } else {
             this.router.navigate(['/feed/' + data.userId]);
           }

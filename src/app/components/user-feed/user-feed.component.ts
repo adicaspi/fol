@@ -54,6 +54,9 @@ export class UserFeedComponent implements OnInit {
   private updateFeed: Subscription
   private anyErrors: boolean;
   private finished: boolean;
+  savedTab: boolean = false;
+  userFeedTab: boolean = true;
+
 
 
   routes: Routes = [
@@ -166,6 +169,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   openLoginDialog() {
+    localStorage.setItem('profile', this.id.toString());
     var pageWidth = this.desktop ? "420px" : "92vw";
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
     const config = {
@@ -188,6 +192,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   openRegisterDialog() {
+    localStorage.setItem('profile', this.id.toString());
     if (this.desktop) {
       var pageWidth = this.desktop ? "420px" : "92vw";
       const scrollStrategy = this.overlay.scrollStrategies.reposition();
@@ -235,6 +240,27 @@ export class UserFeedComponent implements OnInit {
   postSalePrice(post) {
     return post.post.salePrice;
   }
+
+  getSavedFeed() {
+    this.savedTab = true;
+    this.userFeedTab = false;
+    this.posts = [];
+    this.offset = 0;
+    this.scrollPageToTop = true;
+    this.feedService.updateSavedFeed(this.id, this.offset);
+  }
+
+  getUserFeed() {
+    this.savedTab = false;
+    this.userFeedTab = true;
+    this.posts = [];
+    this.offset = 0;
+    this.scrollPageToTop = true;
+    if (!this.desktop) {
+      this.feedService.updateUserFeed(this.id, this.offset);
+    }
+  }
+
 
   onScroll() {
     if (!this.endOfFeed) {
