@@ -187,7 +187,7 @@ export class NavbarComponent implements OnInit {
   }
 
   profilePage() {
-    this.router.navigate(['profile']);
+    this.router.navigate(['profile', this.userService.userId]);
   }
 
   settingsPage() {

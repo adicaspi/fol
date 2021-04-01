@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
-import { Routes, Router, ActivatedRoute } from '@angular/router';
+import { Routes, Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { RegisterComponent } from '../register/register.component';
 import { SettingsComponent } from '../settings/settings.component';
@@ -12,8 +12,9 @@ import {
   transition
 } from '@angular/animations';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import * as jquery from 'jquery';
+import { User } from '../../models/User';
 
 
 
@@ -36,6 +37,7 @@ export class BottomNavbarComponent implements OnInit {
   init: boolean = false;
   scroll: boolean = false;
   timeout: any;
+  user: Observable<User>;
   onDestroy: Subject<void> = new Subject<void>();
 
   routes: Routes = [
@@ -51,10 +53,15 @@ export class BottomNavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userId = this.userService.userId;
+    if (this.userId) {
+      this.user = this.userService.getUserProfileInfo(this.userId);
+    }
 
     this.activatedRoute.url
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
+
         if (params.length > 0) {
           switch (params[0].path) {
             case "feed":
@@ -64,10 +71,11 @@ export class BottomNavbarComponent implements OnInit {
               break;
             case "profile":
               if (params.length > 1) {
-                this.profile = false;
-              }
-              else {
-                this.profile = true;
+                if ((params[1].path) == this.userId.toString()) {
+                  this.profile = true;
+                } else {
+                  this.profile = false;
+                }
               }
               this.feed = false;
               this.explore = false;
@@ -128,7 +136,7 @@ export class BottomNavbarComponent implements OnInit {
     this.profile = true;
     this.feed = false;
     this.explore = false;
-    this.router.navigate(['profile']);
+    this.router.navigate(['profile', this.userService.userId]);
   }
 
   feedPage() {

@@ -67,18 +67,28 @@
   flex-direction: row;
   justify-content: center;
   height: 53px;
+  margin-bottom: unset;
+  padding-top: 0px;
+
+  &.empty{
+    padding-top: 50px;
+  }
 }
 
 a.feed-tab{
   line-height: 53px;
-  font-size: 15px;
- 
+  cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 span.icon-tab span{
   margin-left: 6px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #262626;
+  font-size: 13px;
 }
 
 span.icon-tab{  
@@ -458,6 +468,31 @@ span.strike-original-price{
     background-color: white;
     padding: 0px 12px;
     margin-bottom: 60px;
+  }
+
+  .tabs{
+    height: unset;
+    margin-bottom: -9px;
+    border-top: 1px solid rgba(var(--b38,219,219,219),1);
+    padding-top: opx;
+
+    &.empty{
+      padding-top: 0px;
+    }
+  }
+
+  .feed-tab{
+    width: 160px;
+    margin-right: 0;
+    margin-top: 4px;
+  }
+
+  span.icon-tab{  
+    border-top: none;
+  
+    &.border-tab{
+    border-top: none;
+    }
   }
 
   .card {

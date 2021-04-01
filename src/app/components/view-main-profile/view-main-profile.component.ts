@@ -36,6 +36,7 @@ export class ViewMainProfileComponent implements OnInit {
 
   ngOnInit() {
     this.masterId = this.userService.userId;
+    console.log(this.masterId, "im master id");
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(

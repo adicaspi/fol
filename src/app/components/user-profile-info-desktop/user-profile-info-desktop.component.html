@@ -16,7 +16,7 @@
             </button>
           </div>
           <!-- <ng-template #settings> -->
-          <div *ngIf="userId" class="settings setting-container">
+          <div *ngIf="userId && userProfile" class="settings setting-container">
             <i class="fal fa-cog" [matMenuTriggerFor]="settingsMenu"></i>
             <mat-menu #settingsMenu="matMenu" yPosition="below" class="settings-menu">
               <div class="mat-menu-content">
