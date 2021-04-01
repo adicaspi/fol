@@ -121,7 +121,8 @@ export class UserFeedComponent implements OnInit {
           this.offset = 0;
           this.scrollPageToTop = true;
           //this.getActivatedRoute();
-          this.feedService.updateProfileFeed(this.id, this.offset);
+          //this.feedService.updateProfileFeed(this.id, this.offset);
+          this.feedService.updateUserFeed(this.id, this.offset);
         }
       }
     });
@@ -256,17 +257,21 @@ export class UserFeedComponent implements OnInit {
     this.posts = [];
     this.offset = 0;
     this.scrollPageToTop = true;
-    if (!this.desktop) {
-      this.feedService.updateUserFeed(this.id, this.offset);
-    }
+    //  if (!this.desktop) {
+    this.feedService.updateUserFeed(this.id, this.offset);
+    // }
   }
 
 
   onScroll() {
     if (!this.endOfFeed) {
-      this.feedService.updateProfileFeed(this.id, this.offset);
-      this.spinner.show();
-
+      // this.feedService.updateProfileFeed(this.id, this.offset);
+      if (this.userFeedTab) {
+        this.feedService.updateUserFeed(this.id, this.offset);
+        this.spinner.show();
+      } else {
+        this.feedService.updateSavedFeed(this.id, this.offset);
+      }
     } else {
       this.spinner.hide();
     }

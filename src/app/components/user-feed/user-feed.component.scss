@@ -495,6 +495,19 @@ span.strike-original-price{
     }
   }
 
+  a.feed-tab{
+    line-height: unset;
+  }
+
+  .feed-tab i{
+    font-size: 16px;
+    font-weight: 400;
+
+    &.clicked{
+      font-weight: bold;
+    }
+  }
+
   .card {
     width: calc(50% - 6px);
     margin-top: 20px;

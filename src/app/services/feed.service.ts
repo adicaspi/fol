@@ -183,7 +183,7 @@ export class FeedService {
   getUserFeed(userId: number, offset: number): Observable<any> {
     let params = new HttpParams().set('offset', offset.toString());
     return this.http.post<Array<any>>(
-      this.globalFeedURL + userId + '/user-feed', this.mainProfileFilteringDTO.getFilteringDTO(), {
+      this.globalFeedURL + userId + '/user-feed', this.profileFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
         observe: "response",
         params: params
