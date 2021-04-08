@@ -26,7 +26,10 @@
             <div class="upper-footer">
 
               <button mat-button class="shop_btn" (click)="incPostRedirects()">
-                <a href="{{ postInfo.link }}" target="_blank">
+                <a *ngIf="registeredUser" href="{{ postInfo.link }}" target="_blank">
+                  Shop
+                </a>
+                <a *ngIf="!registeredUser" (click)="openLoginDialog()">
                   Shop
                 </a>
               </button>

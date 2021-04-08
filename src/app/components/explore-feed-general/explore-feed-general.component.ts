@@ -103,6 +103,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
           if (value.width <= 600) {
             this.desktop = false;
             this.masonryOptions.gutter = 12;
+            this.feedService.updateGeneralExploreFeed();
           }
           this.windowWidth = value.width;
         });

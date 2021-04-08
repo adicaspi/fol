@@ -19,6 +19,8 @@ import { ThousandSuffixesPipe } from '../../models/pipe-transform';
 import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.component';
 import { LoginComponent } from '../login/login.component';
 import { Router } from '../../../../node_modules/@angular/router';
+import { RegisterComponent } from '../register/register.component';
+import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 
 @Component({
   selector: 'app-file-preview-overlay',
@@ -56,7 +58,8 @@ export class FilePreviewOverlayComponent implements OnInit {
     private dialogRef: FilePreviewOverlayRef,
     private feedService: FeedService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private overlay: Overlay
   ) {
   }
 
@@ -188,6 +191,53 @@ export class FilePreviewOverlayComponent implements OnInit {
       data: { close: false }
     });
   }
+
+  openLoginDialog() {
+    var pageWidth = "420px";
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const config = {
+      scrollStrategy: scrollStrategy,
+      width: pageWidth,
+      height: "unset",
+      data: {
+        showCloseButton: false
+      }
+    }
+
+    const dialogRef = this.dialog.open(LoginComponent, config);
+    dialogRef.disableClose = true;
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == "register") {
+        this.openRegisterDialog();
+      }
+
+    })
+  }
+
+  openRegisterDialog() {
+    var pageWidth = "420px";
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const config = {
+      scrollStrategy: scrollStrategy,
+      width: pageWidth,
+      height: "unset",
+      data: {
+        showCloseButton: false
+      }
+    }
+
+    const registerDialogRef = this.dialog.open(RegisterComponent, config);
+    registerDialogRef.disableClose = true;
+
+    registerDialogRef.afterClosed().subscribe(res => {
+      if (res == "login") {
+        this.openLoginDialog();
+      }
+    })
+  }
+
+
+
 
   toggleLikeButton() {
     if (this.registeredUser) {
