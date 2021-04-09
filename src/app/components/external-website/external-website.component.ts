@@ -13,6 +13,7 @@ import { LoginComponent } from '../login/login.component';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
+import { environment } from '../../../environments/environment';
 (window as any).jQuery = $;
 
 
@@ -29,21 +30,12 @@ export class ExternalWebsiteComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   discoverPeopleArray = [];
   private WindowSizeSubscription: Subscription;
-  // firstSlot = { username: "", fullName: "", userId: 173, postId: 10, profileImg: "", postImg: "../../../assets/external_website_post.png" };
-  // secondSlot = { username: "", fullName: "", userId: 157, postId: 10, profileImg: "", postImg: "../../../assets/external_website_post.png" };
-  // thirdSlot = { username: "", fullName: "", userId: 155, postId: 840, profileImg: "", postImg: "" };
-  // fourthSlot = { username: "", fullName: "", userId: 104, postId: 553, profileImg: "", postImg: "" };
-  // fifthSlot = { username: "", fullName: "", userId: 168, postId: 1216, profileImg: "", postImg: "" };
-  // firstSlot = { username: "", fullName: "", userId: 65, postId: 341, profileImg: "", postImg: "" };
-  // secondSlot = { username: "", fullName: "", userId: 2, postId: 482, profileImg: "", postImg: "" };
-  // thirdSlot = { username: "", fullName: "", userId: 7, postId: 301, profileImg: "", postImg: "" };
-  // fourthSlot = { username: "", fullName: "", userId: 92, postId: 262, profileImg: "", postImg: "" };
-  // fifthSlot = { username: "", fullName: "", userId: 89, postId: 254, profileImg: "", postImg: "" };
   firstSlot: Observable<PostInfo>;
   secondSlot: Observable<PostInfo>;
   thirdSlot: Observable<PostInfo>;
   fourthSlot: Observable<PostInfo>;
   fifthSlot: Observable<PostInfo>;
+  private bloggersPostsArray = environment.bloggersPosts;
   slots = [this.firstSlot, this.secondSlot, this.thirdSlot, this.fourthSlot, this.fifthSlot];
   constructor(private feedService: FeedService,
     private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService) { }
@@ -74,15 +66,11 @@ export class ExternalWebsiteComponent implements OnInit {
 
   initSlots() {
 
-    //this.firstSlot = this.postService.getMobilePostInfo(65, 341);
-    this.secondSlot = this.postService.getMobilePostInfo(2, 482);
-    this.thirdSlot = this.postService.getMobilePostInfo(7, 301);
-    this.fourthSlot = this.postService.getMobilePostInfo(92, 262);
-    this.fifthSlot = this.postService.getMobilePostInfo(89, 254);
-    // var slot2 = $(".card-wrapper:nth-child(2) .user-post img");
-    // var slot3 = $(".card-wrapper:nth-child(3)");
-    // var slot4 = $(".card-wrapper:nth-child(4)");
-    // var slot5 = $(".card-wrapper:nth-child(5)");
+    this.fifthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[0].userId, this.bloggersPostsArray[0].postId);
+    this.secondSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[1].userId, this.bloggersPostsArray[1].postId);
+    this.thirdSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[2].userId, this.bloggersPostsArray[2].postId);
+    this.fourthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[3].userId, this.bloggersPostsArray[3].postId);
+    this.fifthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[4].userId, this.bloggersPostsArray[4].postId);
   }
 
   generateCarousel() {

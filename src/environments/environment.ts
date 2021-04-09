@@ -9,7 +9,12 @@ export const environment = {
   //BASE_API_URL: 'http://followear-dev.zpgietiqcn.eu-west-1.elasticbeanstalk.com/api',
   BASE_API_URL: 'https://devenv.followear.com/api',
   //BASE_API_URL: 'http://localhost:8080/api',
-  loginWithFbUrl: 'https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://localhost:4200&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid%20aws.cognito.signin.user.admin%20profile'
+  loginWithFbUrl: 'https://localauth.followear.com/oauth2/authorize?identity_provider=Facebook&redirect_uri=https://localhost:4200&response_type=CODE&client_id=k60gq4qju60fgadkps8obq59h&scope=email%20openid%20aws.cognito.signin.user.admin%20profile',
+  bloggersPosts: [{ userId: 65, postId: 341 },
+  { userId: 2, postId: 482 },
+  { userId: 7, postId: 301 },
+  { userId: 92, postId: 262 },
+  { userId: 89, postId: 254 }]
 };
 
 /*

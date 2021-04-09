@@ -161,11 +161,11 @@ export class UserFeedComponent implements OnInit {
   }
 
   openPostOrLogin(post) {
-    if (this.registeredUser) {
-      this.openDialog(post)
-    } else {
-      this.openLoginDialog();
-    }
+    // // if (this.registeredUser) {
+    this.openDialog(post)
+    // // } else {
+    // this.openLoginDialog();
+    // //  }
 
   }
 
