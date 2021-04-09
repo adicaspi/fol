@@ -66,7 +66,7 @@ export class ExternalWebsiteComponent implements OnInit {
 
   initSlots() {
 
-    this.fifthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[0].userId, this.bloggersPostsArray[0].postId);
+    this.firstSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[0].userId, this.bloggersPostsArray[0].postId);
     this.secondSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[1].userId, this.bloggersPostsArray[1].postId);
     this.thirdSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[2].userId, this.bloggersPostsArray[2].postId);
     this.fourthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[3].userId, this.bloggersPostsArray[3].postId);
