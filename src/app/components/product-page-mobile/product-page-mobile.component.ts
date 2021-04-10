@@ -156,7 +156,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     //this.router.navigate(['/login']);
     const config = {
       width: "100vh",
-      height: '580px',
+      height: 'unset',
       data: {
         close: true
       }
