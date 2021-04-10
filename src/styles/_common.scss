@@ -67,6 +67,7 @@ body{
   opacity: 0;
   animation: fadeInMobile 0.3s forwards 0.1s ease-in;
   -webkit-animation: fadeInMobile 0.3s forwards 0.1s ease-in;
+  height: 525px !important;
 }
 
 .cdk-overlay-container > * {

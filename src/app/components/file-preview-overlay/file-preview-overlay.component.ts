@@ -131,7 +131,9 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   incPostRedirects() {
-    this.postService.incrementPostRedirects(this.userID, this.postId);
+    if (this.registeredUser) {
+      this.postService.incrementPostRedirects(this.userID, this.postId);
+    }
   }
 
   async didLike() {
