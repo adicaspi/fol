@@ -69,7 +69,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'explore', component: ViewExploreGeneralComponent, data: {
+    path: 'general-explore', component: ViewExploreGeneralComponent, data: {
       title: 'Explore Followear',
       descriptoin: 'Explore fashion items from your favorite stores'
     }

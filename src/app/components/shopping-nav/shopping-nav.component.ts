@@ -64,13 +64,13 @@ export class ShoppingNavComponent implements OnInit {
       this.componentName = ComponentName.Feed;
       this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("profile")) {
-      if (this.router.url.includes("profile/")) {
-        this.componentName = ComponentName.Profile;
-        this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
-      } else {
-        this.componentName = ComponentName.MainProfile;
-        this.filteringDTO.setFilteringDTO(this.feedService.mainProfileFilteringDTO.getFilteringDTO());
-      }
+      // if (this.router.url.includes("profile/")) {
+      this.componentName = ComponentName.Profile;
+      this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
+      // } else {
+      //   this.componentName = ComponentName.MainProfile;
+      //   this.filteringDTO.setFilteringDTO(this.feedService.mainProfileFilteringDTO.getFilteringDTO());
+      // }
     } if (this.router.url.includes("explore")) {
       this.componentName = ComponentName.Explore;
       this.filteringDTO.setFilteringDTO(this.feedService.exploreFilteringDTO.getFilteringDTO());
@@ -215,8 +215,11 @@ export class ShoppingNavComponent implements OnInit {
     if (this.componentName == ComponentName.Explore) {
       this.feedService.exploreFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
-    if (this.componentName == ComponentName.MainProfile) {
-      this.feedService.mainProfileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+    // if (this.componentName == ComponentName.MainProfile) {
+    //   this.feedService.mainProfileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
+    // }
+    if (this.componentName == ComponentName.GeneralExplore) {
+      this.feedService.exploreGeneralFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
     this.massageService.sendMessage('update-feed');
     //this.massageService.clearMessage();

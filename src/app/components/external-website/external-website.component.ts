@@ -131,7 +131,7 @@ export class ExternalWebsiteComponent implements OnInit {
   }
 
   explorePage() {
-    this.router.navigate(['/explore']);
+    this.router.navigate(['/general-explore']);
   }
 
   profilePage(slotNumber) {
