@@ -57,7 +57,6 @@ export class MutualNavComponent implements OnInit {
       this.componentName = ComponentName.Feed;
       this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("profile")) {
-      // if (this.router.url.includes("profile/")) {
       this.componentName = ComponentName.Profile;
       this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("explore")) {
@@ -147,21 +146,6 @@ export class MutualNavComponent implements OnInit {
       }
     }
   }
-
-  priceMenuClosed() {
-    if (this.menuChanged) {
-      this.filteringDTO.minPrice = this.priceRange.lower;
-      this.filteringDTO.maxPrice = this.priceRange.upper;
-      this.updateFeedFilteringDTO();
-      this.menuChanged = false;
-    }
-    if ((this.priceRange.lower > 0) || (this.priceRange.upper < 1800)) {
-      this.priceMenuOpened();
-    } else {
-      this.priceButton.nativeElement.className = 'filter-button';
-    }
-  }
-
 
   categoryMenuOpened() {
     this.categoryButton.nativeElement.className = 'filter-button checked';
@@ -270,6 +254,20 @@ export class MutualNavComponent implements OnInit {
     this.priceMenuClosed();
   }
 
+  priceMenuClosed() {
+    if (this.menuChanged) {
+      this.filteringDTO.minPrice = this.priceRange.lower;
+      this.filteringDTO.maxPrice = this.priceRange.upper;
+      this.updateFeedFilteringDTO();
+      this.menuChanged = false;
+    }
+    if ((this.priceRange.lower > 0) || (this.priceRange.upper < 1800)) {
+      this.priceMenuOpened();
+    } else {
+      this.priceButton.nativeElement.className = 'filter-button';
+    }
+  }
+
   changePrice($event) {
     this.menuChanged = true;
     this.filteringDTO.setMinPrice($event.value.lower);
@@ -304,14 +302,10 @@ export class MutualNavComponent implements OnInit {
     if (this.componentName == ComponentName.Explore) {
       this.feedService.exploreFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
-    // if (this.componentName == ComponentName.MainProfile) {
-    //   this.feedService.mainProfileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
-    // }
     if (this.componentName == ComponentName.GeneralExplore) {
       this.feedService.exploreGeneralFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
     this.massageService.sendMessage('update-feed');
-    //this.massageService.clearMessage();
   }
 
 }

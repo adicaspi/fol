@@ -167,7 +167,7 @@ export class ShoppingNavComponent implements OnInit {
   sidenavClosed() {
     this.filteringDTO.minPrice = this.getMinPriceValue();
     this.filteringDTO.maxPrice = this.getMaxPriceValue();
-    if ((this.filteringDTO.menuIsFiltered) || (this.filteringChanged)) {
+    if ((this.filteringDTO.menuIsFiltered) && (this.filteringChanged)) {
       // if (this.filteringChanged) {
       this.updateFeedFilteringDTO();
       //}
