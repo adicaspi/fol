@@ -68,10 +68,16 @@
               <div class="like-list">
                 <ng-template #showLikeList id="int-num-views">
                   <span *ngIf="likeList.length == 1; else showExtendedLikeList" class="like-list" (click)="goToLikeList()">liked by {{likeList[0].username}} </span>
+                  <span *ngIf="likeList.length == 2" class="like-list" (click)="goToLikeList()">
+                    liked by {{likeList[0].username}} and {{likeList[1].username}} </span>
+                  <span *ngIf="likeList.length == 3" class="like-list" (click)="goToLikeList()">
+                    liked by {{likeList[0].username}} and {{likeList[1].username}} and 1 other</span>
+                  <span *ngIf="likeList.length > 3" class="like-list" (click)="goToLikeList()">
+                    liked by {{likeList[0].username}}, {{likeList[1].username}} and {{numLikes -2 }} others</span>
                 </ng-template>
                 <ng-template #showExtendedLikeList id="int-num-views">
-                  <span *ngIf="likeList.length >= 2" class="like-list" (click)="goToLikeList()">
-                    liked by {{likeList[0].username}}, {{likeList[1].username}} and {{numLikes -2 }} others</span>
+                  <!-- <span *ngIf="likeList.length >= 2" class="like-list" (click)="goToLikeList()">
+                    liked by {{likeList[0].username}}, {{likeList[1].username}} and {{numLikes -2 }} others</span> -->
                 </ng-template>
               </div>
             </div>
