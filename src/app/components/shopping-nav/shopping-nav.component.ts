@@ -86,8 +86,8 @@ export class ShoppingNavComponent implements OnInit {
       this.showProductType = true;
     }
     this.initSlider(this);
-    this.setMaxPriceAndSlider(this.filteringDTO.getMaxPrice());
-    this.setMinPriceAndSlider(this.filteringDTO.getMinPrice());
+    // this.setMaxPriceAndSlider(this.filteringDTO.getMaxPrice());
+    // this.setMinPriceAndSlider(this.filteringDTO.getMinPrice());
     this.updateFeedFilteringDTO();
     this.menu = [{ id: 1, name: 'All', checked: true }, { id: 2, name: 'Clothing', checked: false }, { id: 3, name: 'Shoes', checked: false }, { id: 4, name: 'Bags', checked: false }, { id: 5, name: 'Accessories', checked: false }];
   }
@@ -167,10 +167,10 @@ export class ShoppingNavComponent implements OnInit {
   sidenavClosed() {
     this.filteringDTO.minPrice = this.getMinPriceValue();
     this.filteringDTO.maxPrice = this.getMaxPriceValue();
-    if (this.filteringDTO.menuIsFiltered) {
-      if (this.filteringChanged) {
-        this.updateFeedFilteringDTO();
-      }
+    if ((this.filteringDTO.menuIsFiltered) || (this.filteringChanged)) {
+      // if (this.filteringChanged) {
+      this.updateFeedFilteringDTO();
+      //}
     }
     if (this.wasFilteredAndCleared) {
       this.wasFilteredAndCleared = false;
@@ -343,6 +343,7 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setSliderMin(minIntValue);
+    this.setSliderMax(maxIntValue);
     this.selectedPrice(minIntValue, maxIntValue);
   }
 
@@ -396,7 +397,10 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   selectedPrice(minPrice, maxPrice) {
+    this.filteringChanged = true;
+    //if (minPrice > 0) {
     this.filteringDTO.setMinPrice(minPrice);
+    //}
     if (maxPrice == this.priceMaxValueInt) {
       this.filteringDTO.setMaxPrice(0);
     } else {

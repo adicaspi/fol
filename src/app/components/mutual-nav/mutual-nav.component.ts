@@ -51,6 +51,8 @@ export class MutualNavComponent implements OnInit {
   ngOnInit() {
     this.minValue = 0;
     this.maxValue = 1800;
+    this.priceRange.lower = 0;
+    this.priceRange.upper = 1800;
     if (this.router.url.includes("feed")) {
       this.componentName = ComponentName.Feed;
       this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
@@ -58,10 +60,6 @@ export class MutualNavComponent implements OnInit {
       // if (this.router.url.includes("profile/")) {
       this.componentName = ComponentName.Profile;
       this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
-      // } else {
-      // this.componentName = ComponentName.MainProfile;
-      // this.filteringDTO.setFilteringDTO(this.feedService.mainProfileFilteringDTO.getFilteringDTO());
-      //}
     } if (this.router.url.includes("explore")) {
       this.componentName = ComponentName.Explore;
       this.filteringDTO.setFilteringDTO(this.feedService.exploreFilteringDTO.getFilteringDTO());
@@ -71,8 +69,7 @@ export class MutualNavComponent implements OnInit {
       this.filteringDTO.setFilteringDTO(this.feedService.exploreGeneralFilteringDTO.getFilteringDTO());
     }
     this.filteringDTO.setAllCheckedButtons();
-    this.priceRange.lower = this.filteringDTO.minPrice;
-    this.priceRange.upper = this.filteringDTO.maxPrice;
+
 
     if (this.filteringDTO.categoryIsFiltered) {
       this.showProduct = true;
