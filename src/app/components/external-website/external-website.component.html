@@ -274,7 +274,9 @@
       </div>
 
       <div class="app-store-button">
-        <img src="../../../assets/app_store_black.png">
+        <a href="https://apps.apple.com/app/followear/id1476265803">
+          <img src="../../../assets/app_store_black.png">
+        </a>
       </div>
 
     </div>
@@ -325,10 +327,10 @@
         <img src="../../../assets/landing-logo.png" class="logo" />
       </div>
       <div class="row second">
-        <span class="btn signup lower">
+        <span class="btn signup lower" (click)="registerPage()">
           Sign Up
         </span>
-        <span class="btn signup lower sign-in">
+        <span class="btn signup lower sign-in" (click)="loginPage()">
           Sign In
         </span>
       </div>

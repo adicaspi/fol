@@ -215,14 +215,10 @@ export class ShoppingNavComponent implements OnInit {
     if (this.componentName == ComponentName.Explore) {
       this.feedService.exploreFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
-    // if (this.componentName == ComponentName.MainProfile) {
-    //   this.feedService.mainProfileFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
-    // }
     if (this.componentName == ComponentName.GeneralExplore) {
       this.feedService.exploreGeneralFilteringDTO.setFilteringDTO(this.filteringDTO.getFilteringDTO());
     }
     this.massageService.sendMessage('update-feed');
-    //this.massageService.clearMessage();
   }
 
   initSlider(that) {
@@ -327,6 +323,8 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setSliderMax(maxIntValue);
+    this.setSliderMin(minIntValue);
+    this.selectedPrice(minIntValue, maxIntValue);
   }
 
   changeMinPriceInput() {
@@ -345,6 +343,7 @@ export class ShoppingNavComponent implements OnInit {
     }
 
     this.setSliderMin(minIntValue);
+    this.selectedPrice(minIntValue, maxIntValue);
   }
 
   maxPriceUnfocus() {
