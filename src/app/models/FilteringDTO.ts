@@ -6,6 +6,7 @@ export class FilteringDTO {
   stores: number[] = [];
   minPrice: number = 0;
   maxPrice: number = 0;
+  priceIsFiltered: boolean = false;
   filteringDTOPayLoad = {};
 
   categoriesObjects = [{ id: 1, name: 'All Categories', displayName: 'All', checked: true }, { id: 2, name: 'Clothing', displayName: 'Clothing', checked: false }, { id: 3, name: 'Shoes', displayName: 'Shoes', checked: false }, { id: 4, name: 'Bags', displayName: 'Bags', checked: false }, { id: 5, name: 'Accessories', displayName: 'Accessories', checked: false }];
@@ -63,9 +64,9 @@ export class FilteringDTO {
     return this.designers.length;
   }
 
-  get priceIsFiltered() {
-    return (this.minPrice > 0 || (this.maxPrice > 0 && this.maxPrice < 1800))
-  }
+  // get priceIsFiltered() {
+  //   return (this.minPrice > 0 || (this.maxPrice > 0 && this.maxPrice < 1800))
+  // }
 
   get menuIsFiltered() {
     return (this.productTypeIsFiltered || this.storesIsFiltered || this.designersIsFiltered || this.priceIsFiltered)

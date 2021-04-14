@@ -170,7 +170,8 @@ export class ShoppingNavComponent implements OnInit {
     if ((this.filteringDTO.menuIsFiltered) && (this.filteringChanged)) {
       // if (this.filteringChanged) {
       this.updateFeedFilteringDTO();
-      //}
+      this.filteringDTO.priceIsFiltered = false;
+      // }
     }
     if (this.wasFilteredAndCleared) {
       this.wasFilteredAndCleared = false;
@@ -398,6 +399,7 @@ export class ShoppingNavComponent implements OnInit {
 
   selectedPrice(minPrice, maxPrice) {
     this.filteringChanged = true;
+    this.filteringDTO.priceIsFiltered = true;
     //if (minPrice > 0) {
     this.filteringDTO.setMinPrice(minPrice);
     //}
