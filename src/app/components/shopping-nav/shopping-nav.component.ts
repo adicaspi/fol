@@ -64,13 +64,8 @@ export class ShoppingNavComponent implements OnInit {
       this.componentName = ComponentName.Feed;
       this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("profile")) {
-      // if (this.router.url.includes("profile/")) {
       this.componentName = ComponentName.Profile;
       this.filteringDTO.setFilteringDTO(this.feedService.profileFilteringDTO.getFilteringDTO());
-      // } else {
-      //   this.componentName = ComponentName.MainProfile;
-      //   this.filteringDTO.setFilteringDTO(this.feedService.mainProfileFilteringDTO.getFilteringDTO());
-      // }
     } if (this.router.url.includes("explore")) {
       this.componentName = ComponentName.Explore;
       this.filteringDTO.setFilteringDTO(this.feedService.exploreFilteringDTO.getFilteringDTO());
@@ -162,17 +157,18 @@ export class ShoppingNavComponent implements OnInit {
 
   sidenavOpened() {
     this.filteringChanged = false;
+
   }
 
   sidenavClosed() {
     this.filteringDTO.minPrice = this.getMinPriceValue();
     this.filteringDTO.maxPrice = this.getMaxPriceValue();
-    if ((this.filteringDTO.menuIsFiltered) && (this.filteringChanged)) {
-      // if (this.filteringChanged) {
+    // if ((this.filteringDTO.menuIsFiltered) && (this.filteringChanged)) {
+    if (this.filteringChanged) {
       this.updateFeedFilteringDTO();
-      this.filteringDTO.priceIsFiltered = false;
-      // }
+
     }
+    //}
     if (this.wasFilteredAndCleared) {
       this.wasFilteredAndCleared = false;
       this.updateFeedFilteringDTO();
@@ -400,6 +396,10 @@ export class ShoppingNavComponent implements OnInit {
   selectedPrice(minPrice, maxPrice) {
     this.filteringChanged = true;
     this.filteringDTO.priceIsFiltered = true;
+    if (minPrice == 0 && maxPrice >= 1800) {
+      this.wasFilteredAndCleared = true;
+      this.filteringDTO.priceIsFiltered = false;
+    }
     //if (minPrice > 0) {
     this.filteringDTO.setMinPrice(minPrice);
     //}
