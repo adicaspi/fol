@@ -211,7 +211,7 @@ export class RegisterComponent implements OnInit {
           if (localStorage.getItem('profile')) {
             let id = localStorage.getItem('profile');
             localStorage.removeItem('profile');
-            this.router.navigate(['profile', localStorage.getItem('profile')]);
+            this.router.navigate(['profile', id]);
           } else {
             this.router.navigate(['feed-discover-people']);
           }
