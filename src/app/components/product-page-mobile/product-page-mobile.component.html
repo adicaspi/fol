@@ -8,6 +8,7 @@
     <slideshow [autoPlay]="false" [showArrows]="false" [imageUrls]="imageUrls" [lazyLoad]="false" [autoPlayWaitForLazyLoad]="false"
       [showDots]="imageUrls?.length > 1" [disableSwiping]="imageUrls?.length < 2"></slideshow>
 
+
   </div>
 
   <div class="center">
@@ -43,11 +44,11 @@
         <span *ngIf="likeList.length > 3" class="like-list" (click)="goToLikeList()">
           liked by {{likeList[0].username}}, {{likeList[1].username}} and {{numLikes -2 }} others</span>
       </ng-template>
-      <ng-template #showExtendedLikeList id="int-num-views">
-        <!-- <span *ngIf="likeList.length > 2" class="like-list" (click)="goToLikeList()">
-          liked by {{likeList[0].username}}, {{likeList[1].username}} and {{numLikes -2 }} others</span> -->
+      <!-- <div *ngIf="hoursDiffrence" class="show-num-views">
+        <span>{{hoursDiffrence}} hours ago</span>
 
-      </ng-template>
+      </div> -->
+      <!-- <div class="views" *ngIf="'userProfile' && numViews>0">{{numViews}} views</div> -->
 
     </div>
     <div *ngIf="registeredUser" class="horiz-menu">

@@ -48,6 +48,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   registeredUser: boolean = false;
   showRegsterMsg: boolean = false;
   userID: number;
+  createDate: Date;
+  hoursDiffrence = 0;
   private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
@@ -124,12 +126,35 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         this.userProfileSrc = this.postInfo.userProfileImageAddr;
         this.storeLogoSrc = this.postInfo.storeLogoAddr;
         this.postImageAddr = this.postInfo.postImageAddr;
+        this.numViews = this.postInfo.numViews;
+        this.numViews = 8;
+        this.getHoursDifference();
+
       });
+  }
+
+  getHoursDifference() {
+    var currentDateStringFormat = new Date();
+    var createDate = new Date(this.postInfo.createDate);
+    var hoursFullDiffrence = Math.abs(currentDateStringFormat.getTime() - createDate.getTime()) / 36e5;
+    this.hoursDiffrence = Math.abs(Math.round(hoursFullDiffrence));
+  }
+
+  getDateStringFormat(date: any) {
+    var today = date;
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    let currentDate = (mm + '/' + dd + '/' + yyyy);
+    return currentDate;
+
   }
 
   postSalePrice(post) {
     return post.salePrice;
   }
+
+
 
   getMoreFromUser() {
     this.postsToShow$ = this.postService.getMorePostsFromUserMobile(this.userService.userId, this.postId, this.userPostUserId);

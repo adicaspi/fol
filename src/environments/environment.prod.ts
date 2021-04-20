@@ -5,7 +5,7 @@ export const environment = {
   bloggersPosts: [{ userId: 155, postId: 1598 },
   { userId: 300, postId: 1652 },
   { userId: 320, postId: 1840 },
-  { userId: 104, postId: 553 },
+  { userId: 323, postId: 1877 },
   { userId: 320, postId: 1839 }]
 };
 
