@@ -112,7 +112,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   scrollHandler(event) {
     let currScrollPos: number = window.pageYOffset;
-    if (currScrollPos > 1000) {
+    if (currScrollPos > 3000) {
       if (this.showPopup) {
         this.registerPage();
       }
