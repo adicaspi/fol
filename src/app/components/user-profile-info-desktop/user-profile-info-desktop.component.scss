@@ -306,5 +306,139 @@ div.user-name{
     font-size: 16px;
     font-family: 'Maven Pro', sans-serif;
   }
- 
 }
+
+
+@media  (max-width: 600px){
+
+  .body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    color: rgb(38,38,38);
+    //padding-top:119px;
+  }
+
+  .center{
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    overflow-x: hidden;
+    background-color: white;
+    padding: 0px 12px;
+  }
+  
+  .header {
+    width: 100%;
+  }
+
+  .user-section{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .username {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 16px 0px;
+  }
+
+  .img-comp img {
+    border-radius: 50%;
+    min-width: 86px;
+    height: 86px;
+    object-fit: cover;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+    width: 100%;
+    margin-left: 18px;
+  }
+
+  .simple-button-metrics {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: inherit;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .simple-button-metrics:first {
+    cursor: auto;
+  }
+
+  span.metrics {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: -4px;
+  }
+
+  .user-description {
+    font-size: 14px;
+    margin: 16px 0px 8px;
+    // width: 150px;
+    // height: 90px;
+    float: left;
+    color: inherit;
+  }
+
+  .full-name {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .button-follow {
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    display: inline;
+    float: right;
+    border: none;
+    background-image: linear-gradient(60deg, rgba(255,80,170,0.9) 30%, rgba(244,129,255,0.95) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-top: 16px;
+
+    &.following {
+      color: #888888;
+      background-image: none;
+    }
+  }
+
+  .following-button{
+    display: block;
+    padding-left: 16px;
+  }
+
+  .settings {
+    font-size: 23px;
+    float: right;
+    margin-top: 24px;
+    cursor: pointer;
+  }
+
+  .mat-menu-contet{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  div.mat-menu-content{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

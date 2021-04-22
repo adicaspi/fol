@@ -207,7 +207,7 @@ export class NavbarComponent implements OnInit {
     if (this.userService.userId) {
       this.router.navigate(['/explore', this.userService.userId]);
     } else {
-      this.router.navigate(['/explore']);
+      this.router.navigate(['/general-explore']);
     }
   }
 

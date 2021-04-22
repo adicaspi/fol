@@ -1,3 +1,14 @@
+.img-comp img {
+  border-radius: 50%;
+  min-width: 86px;
+  height: 86px;
+  object-fit: cover;
+}
+
+img.go-back{
+  float: left;
+  height: 14px;
+}
 
 @media  (max-width: 600px){
 
@@ -131,7 +142,7 @@
     align-items: flex-start;
   }
 
-  .go-back{
+  img.go-back{
     float: left;
     height: 14px;
   }
