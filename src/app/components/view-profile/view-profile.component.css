@@ -54,6 +54,9 @@ body {
 }
 }
 @media  (max-width: 600px)  {
+  .display{
+    display: none;
+  }
 
   .mobile {
     width: 100%;
