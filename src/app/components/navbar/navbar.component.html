@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="(desktop | async)?.width > 600">
   <ul class="fw-navbar">
     <li>
       <img src="../../../assets/FW-Logo-pink5-fat.png" class="logo" (click)="feedPage()" />

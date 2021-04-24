@@ -39,7 +39,7 @@
     <div class="center">
       <div class="items">
         <div class="card masonry-item" *ngFor="let post of posts">
-          <div *ngIf="desktop">
+          <div *ngIf="desktop; else mobileView">
             <div [ngClass]="post.thumbnail ? 'masonry-img thumb' : 'masonry-img' ">
               <img (click)="openDialog(post)" [src]="post.postImgSrc" class=" img-main " />
               <div class="self-thumb-icon-container" *ngIf="post.selfThumbAddr ">
@@ -53,14 +53,16 @@
               </div>
             </div>
           </div>
-          <div *ngIf="!desktop">
+          <!-- <div *ngIf="!desktop"> -->
+          <ng-template #mobileView>
             <div class="masonry-img">
               <img heightWidthRatio="1.35" (click)="openPostOrLogin(post)" [src]="post.postImgSrc" class="img-main" />
               <div class="self-thumb-icon-container" *ngIf="post.selfThumbAddr ">
                 <img src="../../../assets/frame2.svg" class="self-thumb-icon" />
               </div>
             </div>
-          </div>
+          </ng-template>
+          <!-- </div> -->
           <div class="card-text">
             <div class="description">
               {{ post['post']['description'] }}

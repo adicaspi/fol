@@ -647,6 +647,12 @@ span.search-fullname{
       object-fit: cover;
     }
   
- }  
+ } 
+ 
+ @media (max-width: 600px) {
+   nav{
+     display: none;
+   }
+ }
   
   

@@ -15,7 +15,8 @@ import * as jquery from 'jquery';
   styleUrls: ['./view-profile.component.css']
 })
 export class ViewProfileComponent implements OnInit, OnDestroy {
-  desktop = true;
+  // desktop = true;
+  desktop: Observable<any>;
   userId: number;
   masterId: number;
   userProfile = false;
@@ -24,6 +25,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
   registeredUser: boolean = false;
   private anyErrors: boolean;
   private finished: boolean;
+  onDestroy: Subject<void> = new Subject<void>();
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
@@ -40,14 +42,17 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     if (this.userService.userId) {
       this.registeredUser = true;
     }
-    //this.updateUser(this.masterId);
-    this.configService.windowSizeChanged
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        value => this.desktop = value.width > 600,
-        () => this.anyErrors = true,
-        () => this.finished = true
-      );
+
+    // this.updateUser(this.masterId);
+    // this.configService.windowSizeChanged
+    //   .pipe(takeUntil(this.onDestroy))
+    //   .subscribe(
+    //     value => {
+    //       this.desktop = value.width > 600
+    //     }
+    //   );
+
+    this.desktop = this.configService.windowSizeChanged;
   }
 
   updateUser(id) {

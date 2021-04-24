@@ -45,6 +45,7 @@ export class NavbarComponent implements OnInit {
   showClearButton: boolean = false;
   showMutualNavBar: boolean = true;
   prevScrollPos = window.pageYOffset;
+  desktop: Observable<any>;
   routes: Routes = [
     { path: 'profile/:id', component: ViewProfileComponent },
     { path: '', component: RegisterComponent },
@@ -94,14 +95,15 @@ export class NavbarComponent implements OnInit {
     if (this.userService.userId) {
       this.loggedin = true;
     }
-    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
-      value => {
-        if (value.width <= 600) {
-          this.mobile = true;
-        }
-      }),
-      error => this.anyErrors = true,
-      () => this.finished = true
+    this.desktop = this.configService.windowSizeChanged;
+    // this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
+    //   value => {
+    //     if (value.width <= 600) {
+    //       this.mobile = true;
+    //     }
+    //   }),
+    //   error => this.anyErrors = true,
+    //   () => this.finished = true
   }
 
   @HostListener('window:scroll', ['$event'])
