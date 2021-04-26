@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/User';
 import * as jquery from 'jquery';
 
@@ -15,8 +15,8 @@ import * as jquery from 'jquery';
   styleUrls: ['./view-profile.component.css']
 })
 export class ViewProfileComponent implements OnInit, OnDestroy {
-  // desktop = true;
-  desktop: Observable<any>;
+  desktop = true;
+  //desktop: Observable<any>;
   userId: number;
   masterId: number;
   userProfile = false;
@@ -32,27 +32,35 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private feedService: FeedService,
     public userService: UserService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
+
     const routeParams = this.activatedRoute.snapshot.params;
     this.masterId = parseInt(routeParams.id);
     if (this.userService.userId) {
       this.registeredUser = true;
     }
 
-    // this.updateUser(this.masterId);
-    // this.configService.windowSizeChanged
-    //   .pipe(takeUntil(this.onDestroy))
-    //   .subscribe(
-    //     value => {
-    //       this.desktop = value.width > 600
-    //     }
-    //   );
+    //this.updateUser(this.masterId);
+    this.configService.windowSizeChanged
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(
+        value => {
+          if (value.width > 600) {
+            this.desktop = true;
+            this.router.navigate(['desktop-profile', this.masterId]);
+          } else {
+            this.desktop = false;
+          }
+        }
+      );
 
-    this.desktop = this.configService.windowSizeChanged;
+    //this.desktop = this.configService.windowSizeChanged;
+
   }
 
   updateUser(id) {

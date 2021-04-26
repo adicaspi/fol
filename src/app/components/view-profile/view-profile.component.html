@@ -1,6 +1,4 @@
-<body>
-  <!-- <div *ngIf="user"> -->
-  <!-- <div *ngIf="desktop; else mobileView" class="display"> -->
+<!-- <body>
   <div *ngIf="(desktop | async)?.width > 600 ; else mobileView" class="display">
     <app-navbar></app-navbar>
     <app-user-profile-info-desktop></app-user-profile-info-desktop>
@@ -14,5 +12,13 @@
     <app-shopping-nav></app-shopping-nav>
     <app-user-feed></app-user-feed>
   </ng-template>
-  <!-- </div> -->
+</body> -->
+
+<body>
+  <div *ngIf="registeredUser">
+    <app-bottom-navbar></app-bottom-navbar>
+  </div>
+  <app-user-profile-info-mobile></app-user-profile-info-mobile>
+  <app-shopping-nav></app-shopping-nav>
+  <app-user-feed></app-user-feed>
 </body>

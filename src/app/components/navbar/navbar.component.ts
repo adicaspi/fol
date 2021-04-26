@@ -224,4 +224,8 @@ export class NavbarComponent implements OnInit {
     }
 
   }
+
+  ngOnDestroy(): void {
+    this.onDestroy.next();
+  }
 }

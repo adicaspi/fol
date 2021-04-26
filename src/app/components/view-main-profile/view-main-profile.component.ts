@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/User';
 import * as jquery from 'jquery';
 
@@ -30,19 +30,25 @@ export class ViewMainProfileComponent implements OnInit {
     private configService: ConfigService,
     private feedService: FeedService,
     public userService: UserService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
-    this.masterId = this.userService.userId;
-    console.log(this.masterId, "im master id");
+    const routeParams = this.activatedRoute.snapshot.params;
+    this.masterId = parseInt(routeParams.id);
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
-        value => this.desktop = value.width > 600,
-        () => this.anyErrors = true,
-        () => this.finished = true
+        value => {
+          if (value.width > 600) {
+            this.desktop = true;
+          } else {
+            this.router.navigate(['profile', this.masterId]);
+            this.desktop = false;
+          }
+        }
       );
   }
 

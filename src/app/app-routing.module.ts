@@ -40,7 +40,7 @@ const routes: Routes = [
   //   path: 'landing',
   //   component: LandingPageComponent
   // },
-  //  { path: 'profile/:id/:username', component: ViewMainProfileComponent },
+  { path: 'desktop-profile/:id', component: ViewMainProfileComponent },
   {
     path: 'profile/:id',
     component: ViewProfileComponent,
