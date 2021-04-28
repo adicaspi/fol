@@ -36,11 +36,19 @@ const routes: Routes = [
     //canActivate: [AuthGuardFB]
   },
 
+<<<<<<< HEAD
   // {
   //   path: 'landing',
   //   component: LandingPageComponent
   // },
   { path: 'desktop-profile/:id', component: ViewMainProfileComponent },
+=======
+  {
+    path: 'instagram',
+    component: ExternalWebsiteComponent
+  },
+  //  { path: 'profile/:id/:username', component: ViewMainProfileComponent },
+>>>>>>> adi/front_end_general
   {
     path: 'profile/:id',
     component: ViewProfileComponent,

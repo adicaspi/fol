@@ -50,69 +50,17 @@ export class LandingPageComponent implements OnInit {
   // 'use strict';
 
   ngOnInit() {
+
     this.titleService.setTitle('Followear: Outsmart Shopping Together');
     this.meta.addTag({ name: 'description', content: 'Create an account or log in to Followear - A simple & easy way to share fashion items from your favorite stores.' });
     this.meta.addTag({ name: 'robots', content: 'index' })
-  }
 
-  loginPage(): void {
-    if (this.desktop) {
-      const dialogRef = this.dialog.open(LoginComponent, {
-        width: '420px',
-        height: 'unset',
-        data: { close: true }
-      });
-      dialogRef.afterClosed().subscribe(res => {
-        if (res == "register") {
-          this.openRegisterDialog();
-        }
+    // if (this.configService.iOS) {
+    //   window.location.href = "https://apps.apple.com/app/followear/id1476265803";
+    // } else {
+    //   this.router.navigate(['landing']);
+    // }
 
-      })
-    }
-    else {
-      this.router.navigate(['/login']);
-    }
-  }
-
-  openRegisterDialog() {
-    if (this.desktop) {
-      const registerDialogRef = this.dialog.open(RegisterComponent, {
-        width: '400px',
-        height: 'unset',
-        data: { close: true }
-      });
-      // registerDialogRef.disableClose = true;
-
-      registerDialogRef.afterClosed().subscribe(res => {
-        if (res == "login") {
-          this.loginPage();
-        }
-      })
-    } else {
-      this.router.navigate(['register']);
-    }
-  }
-
-  explorePage() {
-    this.router.navigate(['/explore']);
-  }
-
-  loadConfigurationData() {
-    this.http
-      .get<any>(this.autoLogin, { observe: 'response' })
-      .pipe(
-        map(data => {
-
-          this.userService.userId = data.body.userId;
-          this.userService.username = data.body.userName;
-          this.userService.updateUser(data.body.userId);
-          this.router.navigate(['/feed/' + data.body.userId]);
-          this.configService.setSessionStorage(data.body.userId.toString());
-        })
-      ).catch(() => {
-        this.router.navigate(['landing']);
-        return Observable.of(false);
-      });
   }
 
   ngOnDestroy(): void {
