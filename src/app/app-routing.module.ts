@@ -36,10 +36,10 @@ const routes: Routes = [
     //canActivate: [AuthGuardFB]
   },
 
-  // {
-  //   path: 'landing',
-  //   component: LandingPageComponent
-  // },
+  {
+    path: 'instagram',
+    component: ExternalWebsiteComponent
+  },
   //  { path: 'profile/:id/:username', component: ViewMainProfileComponent },
   {
     path: 'profile/:id',

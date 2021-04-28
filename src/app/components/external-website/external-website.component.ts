@@ -41,6 +41,14 @@ export class ExternalWebsiteComponent implements OnInit {
     private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService) { }
 
   ngOnInit() {
+    let href = this.router.url;
+    if (href.includes('/instagram')) {
+      if (this.configService.iOS) {
+        window.location.href = "https://apps.apple.com/app/followear/id1476265803";
+      } else {
+        this.router.navigate(['landing']);
+      }
+    }
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
       this.generateCarousel();
