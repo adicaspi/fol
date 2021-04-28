@@ -118,11 +118,8 @@ export class ExploreFeedGeneralComponent implements OnInit {
       }
     }
     else {
-      if (this.desktop) {
-        this.dialog.closeAll();
-        this.showPopup = true;
-      }
-
+      this.dialog.closeAll();
+      this.showPopup = true;
     }
   }
 
