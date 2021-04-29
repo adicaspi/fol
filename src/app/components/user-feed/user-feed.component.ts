@@ -224,7 +224,7 @@ export class UserFeedComponent implements OnInit {
   scrollHandler(event) {
     if (!this.userService.userId) {
       let currScrollPos: number = window.pageYOffset;
-      if (currScrollPos > 1000) {
+      if (currScrollPos > 2000) {
         if (this.showPopup) {
           this.registerPage();
         }
