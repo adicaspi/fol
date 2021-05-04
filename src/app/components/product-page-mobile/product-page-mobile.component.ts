@@ -72,12 +72,9 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       this.registeredUser = true;
       this.userID = this.userService.userId;
     } else {
-      var refferingUrl = document.referrer;
-      if (refferingUrl.includes('explore')) {
-        this.userID = 7;
-      }
-      this.ios = this.configService.iOS();
+      this.userID = 7;
     }
+    this.ios = this.configService.iOS();
     this.route.paramMap
       .pipe(takeUntil(this.onDestroy))
       .subscribe((params) => {
@@ -96,8 +93,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     if (this.registeredUser) {
       this.didLike();
       this.didSave();
-      //this.incNumViews();
     }
+    this.incNumViews();
   }
 
   getPostInfo(userID: number) {

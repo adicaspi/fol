@@ -69,13 +69,12 @@ export class FilePreviewOverlayComponent implements OnInit {
       this.userID = this.userService.userId;
 
     } else {
-      if (this.dialogRef.refferingComponent) {
-        this.userID = 7;
-      }
+      this.userID = 7;
     }
     this.postId = this.configService.getGeneralSession('product_id');
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
     this.getPostInfo(this.userID);
+    this.incNumViews();
     if (this.registeredUser) {
       this.getMoreFromUser();
     }
@@ -94,8 +93,6 @@ export class FilePreviewOverlayComponent implements OnInit {
         if (this.registeredUser) {
           this.didLike();
           this.didSave();
-          //this.incNumViews();
-
         }
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numLikes = this.pipeTransform.transform(postInfo.numLikes);
