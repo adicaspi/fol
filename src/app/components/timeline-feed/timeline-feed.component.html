@@ -40,7 +40,7 @@
 
         <div *ngIf="!desktop">
           <div class="masonry-img">
-            <img heightWidthRatio="1.35" (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" />
+            <img (click)="openDialog(post)" [src]="post.postImgSrc" class="img-main" />
             <div class="self-thumb-icon-container" *ngIf="post.selfThumbAddr ">
               <img src="../../../assets/frame2.svg" class="self-thumb-icon" />
             </div>

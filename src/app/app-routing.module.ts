@@ -87,7 +87,12 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
-  { path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent },
+  {
+    path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent, data: {
+      title: 'General Discover People',
+      descriptoin: 'Discover new people to follow after'
+    }
+  },
   {
     path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent, data: {
       title: 'Discover People for User',

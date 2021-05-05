@@ -29,7 +29,7 @@ import { Title, Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-timeline-feed',
   templateUrl: './timeline-feed.component.html',
-  styleUrls: ['./timeline-feed.component.css'],
+  styleUrls: ['./timeline-feed.component.scss'],
 
 })
 export class TimelineFeedComponent implements OnInit {

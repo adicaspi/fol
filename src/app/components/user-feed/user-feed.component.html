@@ -56,7 +56,7 @@
           <!-- <div *ngIf="!desktop"> -->
           <ng-template #mobileView>
             <div class="masonry-img">
-              <img heightWidthRatio="1.35" (click)="openPostOrLogin(post)" [src]="post.postImgSrc" class="img-main" />
+              <img (click)="openPostOrLogin(post)" [src]="post.postImgSrc" class="img-main" />
               <div class="self-thumb-icon-container" *ngIf="post.selfThumbAddr ">
                 <img src="../../../assets/frame2.svg" class="self-thumb-icon" />
               </div>
