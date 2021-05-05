@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-app-banner',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-banner.component.scss']
 })
 export class AppBannerComponent implements OnInit {
+  registeredUser: boolean = false;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    if (this.userService.userId) {
+      this.registeredUser = true;
+    }
   }
 
 }

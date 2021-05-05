@@ -4,7 +4,7 @@
       <a class="fw-logo" href="https://www.followear.com">
         <img src="../../../assets/fw_logo_pink.png"> </a>
       <div class="app-banner-buttons">
-        <a class="login" href="https://www.followear.com/login">
+        <a *ngIf="!registeredUser" class="login" href="https://www.followear.com/login">
           Log in
         </a>
         <button class="app-button">
