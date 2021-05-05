@@ -74,9 +74,10 @@ export class FilePreviewOverlayComponent implements OnInit {
     this.postId = this.configService.getGeneralSession('product_id');
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
     this.getPostInfo(this.userID);
-    this.incNumViews();
+
     if (this.registeredUser) {
       this.getMoreFromUser();
+      this.incNumViews();
     }
     this.userProfileSrc = '../../../assets/placeholder.png';
   }

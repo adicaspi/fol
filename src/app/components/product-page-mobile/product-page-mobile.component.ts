@@ -93,8 +93,9 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     if (this.registeredUser) {
       this.didLike();
       this.didSave();
+      this.incNumViews();
     }
-    this.incNumViews();
+
   }
 
   getPostInfo(userID: number) {
