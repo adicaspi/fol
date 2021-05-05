@@ -65,7 +65,10 @@ const routes: Routes = [
 
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   {
-    path: 'explore/:id', component: ViewExploreComponent,
+    path: 'explore/:id', component: ViewExploreComponent, data: {
+      title: 'User Explore Followear',
+      descriptoin: 'Explore fashion items from your favorite stores'
+    },
     canActivate: [AuthGuard]
   },
   {
@@ -74,14 +77,24 @@ const routes: Routes = [
       descriptoin: 'Explore fashion items from your favorite stores'
     }
   },
-  { path: 'product-page/:id', component: ProductPageMobileComponent },
+  {
+    path: 'product-page/:id', component: ProductPageMobileComponent, data: {
+      title: 'Product Page Mobile'
+    }
+  },
   { path: 'following', component: GenerateFollowListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
   { path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent },
-  { path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent, canActivate: [AuthGuard] },
+  {
+    path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent, data: {
+      title: 'Discover People for User',
+      descriptoin: 'Discover new people to follow after'
+    },
+    canActivate: [AuthGuard]
+  },
   {
     path: 'follow-list/:id', component: ViewFollowListComponent,
     canActivate: [AuthGuard]

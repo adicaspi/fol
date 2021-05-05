@@ -23,6 +23,7 @@ import { RegisterComponent } from '../register/register.component';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import { LoginComponent } from '../login/login.component';
+import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
 
 
 
@@ -80,7 +81,9 @@ export class UserFeedComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private userService: UserService,
     private dialog: MatDialog,
-    private overlay: Overlay
+    private overlay: Overlay,
+    private titleService: Title,
+    private meta: Meta
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -91,6 +94,8 @@ export class UserFeedComponent implements OnInit {
       this.registeredUser = true;
     }
     this.spinner.show();
+    this.titleService.setTitle('User Profile');
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
