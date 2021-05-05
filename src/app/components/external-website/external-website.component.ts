@@ -67,7 +67,7 @@ export class ExternalWebsiteComponent implements OnInit {
 
           if (value.width <= 600) {
             this.desktop = false;
-            this.logoSrc = "../../../assets/fw_logo_pink.png"
+            this.logoSrc = "../../../assets/fw_logo_pink.ico"
           }
         });
   }
