@@ -75,7 +75,7 @@ export class TimelineFeedComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.titleService.setTitle('Followear');
+    this.titleService.setTitle('Followear Timeline Feed');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     jquery(".wrapper.scroll-bar-container").css("position", "fixed");
     this.id = this.userService.getCurrentUser();

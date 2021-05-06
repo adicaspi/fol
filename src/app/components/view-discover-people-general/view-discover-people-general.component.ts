@@ -6,6 +6,7 @@ import { Subject, Subscription } from '../../../../node_modules/rxjs';
 import * as jquery from 'jquery';
 import { Router } from '../../../../node_modules/@angular/router';
 import { UserService } from '../../services/user.service';
+import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-view-discover-people-general',
@@ -22,9 +23,13 @@ export class ViewDiscoverPeopleGeneralComponent implements OnInit {
   constructor(private feedService: FeedService,
     private configService: ConfigService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private titleService: Title,
+    private meta: Meta) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Discover People General');
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
     });

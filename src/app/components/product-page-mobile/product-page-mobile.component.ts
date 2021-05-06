@@ -16,6 +16,7 @@ import { MorePosts } from '../../models/MorePosts';
 import { FeedService } from '../../services/feed.service';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
+import { Meta, Title } from '../../../../node_modules/@angular/platform-browser';
 
 
 @Component({
@@ -61,13 +62,17 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     private location: LocationService,
     private route: ActivatedRoute,
     private feedService: FeedService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private titleService: Title,
+    private meta: Meta
   ) {
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
 
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Product Page');
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     if (this.userService.userId) {
       this.registeredUser = true;
       this.userID = this.userService.userId;

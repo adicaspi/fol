@@ -43,11 +43,7 @@ const routes: Routes = [
   { path: 'desktop-profile/:id', component: ViewMainProfileComponent },
   {
     path: 'profile/:id',
-    component: ViewProfileComponent,
-    data: {
-      title: 'Followear Profile Page',
-      description: "When you share posts they'll show up here"
-    }
+    component: ViewProfileComponent
   },
   {
     path: 'feed/:id', component: ViewFeedComponent,
@@ -65,22 +61,14 @@ const routes: Routes = [
 
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   {
-    path: 'explore/:id', component: ViewExploreComponent, data: {
-      title: 'User Explore Followear',
-      descriptoin: 'Explore fashion items from your favorite stores'
-    },
+    path: 'explore/:id', component: ViewExploreComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'general-explore', component: ViewExploreGeneralComponent, data: {
-      title: 'Explore Followear',
-      descriptoin: 'Explore fashion items from your favorite stores'
-    }
+    path: 'general-explore', component: ViewExploreGeneralComponent
   },
   {
-    path: 'product-page/:id', component: ProductPageMobileComponent, data: {
-      title: 'Product Page Mobile'
-    }
+    path: 'product-page/:id', component: ProductPageMobileComponent
   },
   { path: 'following', component: GenerateFollowListComponent },
   { path: 'login', component: LoginComponent },
@@ -88,16 +76,10 @@ const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
   {
-    path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent, data: {
-      title: 'General Discover People',
-      descriptoin: 'Discover new people to follow after'
-    }
+    path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent
   },
   {
-    path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent, data: {
-      title: 'Discover People for User',
-      descriptoin: 'Discover new people to follow after'
-    },
+    path: 'discover-people-user/:id', component: ViewDiscoverPeopleUserComponent,
     canActivate: [AuthGuard]
   },
   {

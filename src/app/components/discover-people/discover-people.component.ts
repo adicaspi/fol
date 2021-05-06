@@ -11,6 +11,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
+import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
 
 
 @Component({
@@ -34,9 +35,13 @@ export class DiscoverPeopleComponent implements OnInit {
     private userService: UserService,
     private overlay: Overlay,
     private dialog: MatDialog,
-    private scrollHelperService: ScrollHelperService, ) { }
+    private scrollHelperService: ScrollHelperService,
+    private titleService: Title,
+    private meta: Meta) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Discover People');
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     if (this.userService.userId) {
       this.registeredUser = true;
     }

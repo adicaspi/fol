@@ -62,7 +62,7 @@ export class ExploreFeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Explore');
+    this.titleService.setTitle('Explore User');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.spinner.show();
     //jquery("mat-sidenav-container").css("top", "80px");

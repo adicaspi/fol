@@ -94,7 +94,7 @@ export class UserFeedComponent implements OnInit {
       this.registeredUser = true;
     }
     this.spinner.show();
-    this.titleService.setTitle('User Profile');
+    this.titleService.setTitle('User Profile Feed');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
     this.updateFeed = this.feedService

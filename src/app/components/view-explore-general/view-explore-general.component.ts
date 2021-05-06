@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
+import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-view-explore-general',
@@ -18,6 +19,7 @@ export class ViewExploreGeneralComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private router: Router,
+
   ) { }
 
   ngOnInit() {

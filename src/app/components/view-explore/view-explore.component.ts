@@ -3,6 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ErrorsService } from '../../services/errors.service';
 import { ConfigService } from '../../services/config.service';
 import { FeedService } from '../../services/feed.service';
+import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-view-explore',
@@ -17,7 +18,9 @@ export class ViewExploreComponent implements OnInit {
   private finished: boolean;
   desktop: Boolean = true;
 
-  constructor(private feedService: FeedService, private configService: ConfigService) { }
+  constructor(private feedService: FeedService, private configService: ConfigService,
+    private titleService: Title,
+    private meta: Meta) { }
 
   ngOnInit() {
     this.subscription = this.configService.windowSizeChanged.subscribe(
