@@ -50,14 +50,16 @@ export class ConfigService {
 
   setSessionStorage(userId) {
     if (typeof Storage !== 'undefined') {
-      sessionStorage.setItem('user_id', userId);
+      //sessionStorage.setItem('user_id', userId);
+      localStorage.setItem('user_id', userId);
     } else {
       alert('no session storgae');
     }
   }
 
   getSessionStorgae() {
-    const user_id = sessionStorage.getItem('user_id');
+    // const user_id = sessionStorage.getItem('user_id');
+    const user_id = localStorage.getItem('user_id');
     if (user_id) {
       var userId = parseInt(user_id);
       this.userService.userId = userId;
@@ -69,14 +71,16 @@ export class ConfigService {
 
   setGeneralSession(key, val) {
     if (typeof Storage !== 'undefined') {
-      sessionStorage.setItem(key, val);
+      //sessionStorage.setItem(key, val);
+      localStorage.setItem(key, val);
     } else {
       alert('no session storgae');
     }
   }
 
   getGeneralSession(key) {
-    const res = sessionStorage.getItem(key);
+    //const res = sessionStorage.getItem(key);
+    const res = localStorage.getItem(key);
     if (res) {
       var val = parseInt(res);
       return val;
