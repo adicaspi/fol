@@ -1,5 +1,5 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Subscription, Subject } from 'rxjs';
@@ -15,6 +15,7 @@ import { DialogService } from '../../services/dialog.service';
 import { RegisterComponent } from '../register/register.component';
 import { Title, Meta } from '@angular/platform-browser';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-login',
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
     private overlay: Overlay,
     private titleService: Title,
     private meta: Meta,
+    private route: ActivatedRoute,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     @Optional() private dialogRef: MatDialogRef<LoginComponent>
 
@@ -83,6 +85,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (location.href.includes("product-page")) {
+      this.route.paramMap
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe((params) => {
+          let postId = +params.get('id');
+          if (postId > 0) {
+            this.configService.setGeneralSession('product_id', postId);
+          }
+        })
+    }
     this.titleService.setTitle('Login to Followear');
     this.meta.addTag({ name: 'description', content: 'Welcome back to Followear. Create an account or log in to Followear - see the latest fashion items posted by your network' });
     this.meta.addTag({ name: 'robots', content: 'index' })
@@ -144,7 +156,12 @@ export class LoginComponent implements OnInit {
             let id = localStorage.getItem('profile');
             localStorage.clear();
             this.router.navigate(['profile', id]);
-          } else {
+          }
+          else if (this.configService.getGeneralSession('product_id')) {
+            let productId = this.configService.getGeneralSession('product_id');
+            this.router.navigate(['product-page', productId]);
+          }
+          else {
             this.router.navigate(['/feed/' + data.userId]);
           }
         },

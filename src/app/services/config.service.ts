@@ -78,6 +78,10 @@ export class ConfigService {
     }
   }
 
+  removeItem(key) {
+    localStorage.removeItem(key);
+  }
+
   getGeneralSession(key) {
     //const res = sessionStorage.getItem(key);
     const res = localStorage.getItem(key);

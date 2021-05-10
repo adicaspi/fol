@@ -87,6 +87,7 @@ export class FilteringDTO {
   }
 
   setDesigners(designer) {
+    this.designers.push(designer.name.toUpperCase());
     this.designers.push(designer.name);
   }
 
@@ -212,10 +213,18 @@ export class FilteringDTO {
     return this.maxPrice;
   }
 
+  removeDesignerByIndex(index) {
+    this.getDesigners().splice(index, 1);
+  }
+
   removeDesigner(designer) {
     const index = this.designers.indexOf(designer.name, 0);
     if (index > -1) {
-      this.getDesigners().splice(index, 1);
+      this.removeDesignerByIndex(index);
+    }
+    const upperCaseIndex = this.designers.indexOf(designer.name.toUpperCase(), 0);
+    if (upperCaseIndex > -1) {
+      this.removeDesignerByIndex(upperCaseIndex);
     }
   }
 

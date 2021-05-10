@@ -273,6 +273,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.configService.removeItem('product_id');
+    this.configService.removeItem('user_id_post_id');
     this.onDestroy.next();
     this.onDestroy.complete();
   }

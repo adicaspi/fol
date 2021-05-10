@@ -218,10 +218,20 @@ export class UserService {
     this.userId = null;
     //const user_id = sessionStorage.getItem('user_id');
     const user_id = localStorage.getItem('user_id');
+    const product_id = localStorage.getItem('product_id');
+    const user_id_post_id = localStorage.getItem('user_id_post_id');
 
     if (user_id) {
       //sessionStorage.removeItem('user_id');
       localStorage.removeItem('user_id');
+    }
+    if (product_id) {
+      //sessionStorage.removeItem('user_id');
+      localStorage.removeItem('product_id');
+    }
+    if (user_id_post_id) {
+      //sessionStorage.removeItem('user_id');
+      localStorage.removeItem('user_id_post_id');
     }
     this.http.get<any>(this.globalRegisterURL + 'logout').subscribe(res => { });
   }
