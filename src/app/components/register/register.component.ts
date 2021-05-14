@@ -46,6 +46,7 @@ export class RegisterComponent implements OnInit {
   title = 'Register to Followear';
   private WindowSizeSubscription: Subscription;
   desktop: boolean;
+  ios: boolean = false;
 
 
   // TODO - FIXED TOUCHED INVALID CLASS
@@ -101,6 +102,7 @@ export class RegisterComponent implements OnInit {
     });
 
     this.onChanges();
+    this.ios = this.configService.iOS();
   }
 
   // convenience getter for easy access to form fields
