@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   showCloseButton: boolean = true;
   register: string = "register";
   loading = false;
+  ios: boolean = false;
   private WindowSizeSubscription: Subscription;
   facebookLoginEndpoint: string = environment.loginWithFbUrl;
   private baseApiUrl = environment.BASE_API_URL;
@@ -82,6 +83,7 @@ export class LoginComponent implements OnInit {
             this.desktop = false;
           }
         });
+    this.ios = this.configService.iOS();
   }
 
   ngOnInit() {
