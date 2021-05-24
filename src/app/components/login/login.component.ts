@@ -161,6 +161,7 @@ export class LoginComponent implements OnInit {
           }
           else if (this.configService.getGeneralSession('product_id')) {
             let productId = this.configService.getGeneralSession('product_id');
+            this.configService.removeItem('product_id');
             this.router.navigate(['product-page', productId]);
           }
           else {

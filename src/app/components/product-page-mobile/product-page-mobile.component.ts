@@ -190,7 +190,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       }
     }
     const dialogRef = this.dialog.open(LoginComponent, config);
-    dialogRef.disableClose = true;
+    dialogRef.disableClose = false;
   }
 
   hidePost(postId: number) {
