@@ -73,8 +73,6 @@ export class ConfigService {
     if (typeof Storage !== 'undefined') {
       //sessionStorage.setItem(key, val);
       localStorage.setItem(key, val);
-    } else {
-      alert('no session storgae');
     }
   }
 

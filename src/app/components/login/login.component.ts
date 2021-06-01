@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     private titleService: Title,
     private meta: Meta,
     private route: ActivatedRoute,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: any,
     @Optional() private dialogRef: MatDialogRef<LoginComponent>
 
   ) {
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
       this.modal = true;
       this.dialogRef
       dialogRef.addPanelClass("login-panel-class");
-      if (!this.data.showCloseButton) {
+      if (!this.dialogData.showCloseButton) {
         this.showCloseButton = false;
       }
     }
@@ -154,14 +154,13 @@ export class LoginComponent implements OnInit {
           if (this.dialogRef) {
             this.dialogRef.close();
           }
-          if (localStorage.getItem('profile')) {
-            let id = localStorage.getItem('profile');
-            localStorage.clear();
+          if (this.configSerivce.getGeneralSession('profile')) {
+            let id = this.configSerivce.getGeneralSession('profile');
+            this.configService.removeItem('profile');
             this.router.navigate(['profile', id]);
           }
-          else if (this.configService.getGeneralSession('product_id')) {
+          else if (this.configSerivce.getGeneralSession('product_id')) {
             let productId = this.configService.getGeneralSession('product_id');
-            this.configService.removeItem('product_id');
             this.router.navigate(['product-page', productId]);
           }
           else {

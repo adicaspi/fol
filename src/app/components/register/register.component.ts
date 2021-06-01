@@ -210,14 +210,13 @@ export class RegisterComponent implements OnInit {
           this.userService.username = data.username;
           this.userService.updateUser(data.userId);
           this.configSerivce.setSessionStorage(data.userId.toString());
-          if (localStorage.getItem('profile')) {
-            let id = localStorage.getItem('profile');
-            localStorage.removeItem('profile');
+          if (this.configSerivce.getGeneralSession('profile')) {
+            let id = this.configSerivce.getGeneralSession('profile');
+            this.configService.removeItem('profile');
             this.router.navigate(['profile', id]);
           }
           else if (this.configService.getGeneralSession('product_id')) {
             let productId = this.configService.getGeneralSession('product_id');
-            this.configService.removeItem('product_id');
             this.router.navigate(['product-page', productId]);
           }
           else {

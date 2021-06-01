@@ -67,6 +67,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     private meta: Meta
   ) {
     this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
+    this.postId = this.configService.getGeneralSession('product_id');
+    this.configService.removeItem('product_id');
 
   }
 
@@ -80,19 +82,24 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       this.userID = 7;
     }
     this.ios = this.configService.iOS();
-    this.route.paramMap
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe((params) => {
-        this.postId = +params.get('id');
-        if (!(this.postId > 0)) {
-          return;
-        }
-        this.imageUrls = [];
-        this.getPostInfo(this.userID);
-        if (this.registeredUser) {
-          this.getMoreFromUser();
-        }
-      });
+    // this.route.paramMap
+    //   .pipe(takeUntil(this.onDestroy))
+    //   .subscribe((params) => {
+    //     this.postId = +params.get('id');
+    //     if (!(this.postId > 0)) {
+    //       return;
+    //     }
+    //     this.imageUrls = [];
+    //     this.getPostInfo(this.userID);
+    //     if (this.registeredUser) {
+    //       this.getMoreFromUser();
+    //     }
+    //   });
+    this.imageUrls = [];
+    this.getPostInfo(this.userID);
+    if (this.registeredUser) {
+      this.getMoreFromUser();
+    }
     this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
     this.directingPage = this.dialogService.directingPage;
     if (this.registeredUser) {
@@ -182,6 +189,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
   registerPage(): void {
     //this.router.navigate(['/login']);
+    this.configService.setGeneralSession('product_id', this.postId);
     const config = {
       width: "100vh",
       height: 'unset',
@@ -273,7 +281,6 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.configService.removeItem('product_id');
     this.configService.removeItem('user_id_post_id');
     this.onDestroy.next();
     this.onDestroy.complete();

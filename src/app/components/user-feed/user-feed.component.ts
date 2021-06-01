@@ -175,7 +175,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   openLoginDialog() {
-    localStorage.setItem('profile', this.id.toString());
+    this.configService.setGeneralSession('profile', this.id.toString());
     var pageWidth = this.desktop ? "420px" : "92vw";
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
     const config = {
@@ -198,7 +198,7 @@ export class UserFeedComponent implements OnInit {
   }
 
   openRegisterDialog() {
-    localStorage.setItem('profile', this.id.toString());
+    this.configService.setGeneralSession('profile', this.id.toString());
     if (this.desktop) {
       var pageWidth = this.desktop ? "420px" : "92vw";
       const scrollStrategy = this.overlay.scrollStrategies.reposition();
@@ -236,6 +236,7 @@ export class UserFeedComponent implements OnInit {
       }
       else {
         this.dialog.closeAll();
+        this.configService.removeItem('profile');
         this.showPopup = true;
       }
     }
