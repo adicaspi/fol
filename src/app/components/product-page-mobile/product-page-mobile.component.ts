@@ -104,7 +104,9 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         this.getMoreFromUser();
       }
     }
-    this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
+    if (this.userPostUserId) {
+      this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
+    }
     this.directingPage = this.dialogService.directingPage;
     if (this.registeredUser) {
       this.didLike();
