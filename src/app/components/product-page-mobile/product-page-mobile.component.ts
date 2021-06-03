@@ -73,6 +73,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.titleService.setTitle('Product Page');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     if (this.userService.userId) {
@@ -82,23 +83,26 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       this.userID = 7;
     }
     this.ios = this.configService.iOS();
-    // this.route.paramMap
-    //   .pipe(takeUntil(this.onDestroy))
-    //   .subscribe((params) => {
-    //     this.postId = +params.get('id');
-    //     if (!(this.postId > 0)) {
-    //       return;
-    //     }
-    //     this.imageUrls = [];
-    //     this.getPostInfo(this.userID);
-    //     if (this.registeredUser) {
-    //       this.getMoreFromUser();
-    //     }
-    //   });
-    this.imageUrls = [];
-    this.getPostInfo(this.userID);
-    if (this.registeredUser) {
-      this.getMoreFromUser();
+    if (!this.postId) {
+      this.route.paramMap
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe((params) => {
+          this.postId = +params.get('id');
+          if (!(this.postId > 0)) {
+            return;
+          }
+          this.imageUrls = [];
+          this.getPostInfo(this.userID);
+          if (this.registeredUser) {
+            this.getMoreFromUser();
+          }
+        });
+    } else {
+      this.imageUrls = [];
+      this.getPostInfo(this.userID);
+      if (this.registeredUser) {
+        this.getMoreFromUser();
+      }
     }
     this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
     this.directingPage = this.dialogService.directingPage;
@@ -198,6 +202,12 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       }
     }
     const dialogRef = this.dialog.open(LoginComponent, config);
+    dialogRef.afterClosed().pipe(takeUntil(this.onDestroy)).subscribe(result => {
+      let id = this.configService.getGeneralSession('user_id');
+      if (id) {
+        this.registeredUser = true;
+      }
+    })
     dialogRef.disableClose = false;
   }
 
