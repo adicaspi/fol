@@ -60,7 +60,7 @@ export class ShoppingNavComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.includes("feed") || this.router.url == "www.followear.com") {
+    if (this.router.url.includes("feed") || this.router.url == "/") {
       this.componentName = ComponentName.Feed;
       this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("profile")) {

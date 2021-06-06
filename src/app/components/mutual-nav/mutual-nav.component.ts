@@ -53,9 +53,7 @@ export class MutualNavComponent implements OnInit {
     this.maxValue = 1800;
     this.priceRange.lower = 0;
     this.priceRange.upper = 1800;
-    console.log(this.router.url);
-    if (this.router.url.includes("feed") || this.router.url == "www.followear.com") {
-      console.log(this.router.url);
+    if (this.router.url.includes("feed") || this.router.url == "/") {
       this.componentName = ComponentName.Feed;
       this.filteringDTO.setFilteringDTO(this.feedService.feedFilteringDTO.getFilteringDTO());
     } if (this.router.url.includes("profile")) {
