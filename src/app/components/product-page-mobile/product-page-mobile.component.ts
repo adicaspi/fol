@@ -17,6 +17,7 @@ import { FeedService } from '../../services/feed.service';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { Meta, Title } from '../../../../node_modules/@angular/platform-browser';
+import * as jquery from 'jquery';
 
 
 @Component({
@@ -66,14 +67,14 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     private titleService: Title,
     private meta: Meta
   ) {
-    this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
-    this.postId = this.configService.getGeneralSession('product_id');
-    this.configService.removeItem('product_id');
+
 
   }
 
   ngOnInit() {
-
+    this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
+    this.postId = this.configService.getGeneralSession('product_id');
+    this.configService.removeItem('product_id');
     this.titleService.setTitle('Product Page');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     if (this.userService.userId) {
@@ -91,6 +92,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
           if (!(this.postId > 0)) {
             return;
           }
+
           this.imageUrls = [];
           this.getPostInfo(this.userID);
           if (this.registeredUser) {
@@ -100,17 +102,18 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     } else {
       this.imageUrls = [];
       this.getPostInfo(this.userID);
-      if (this.registeredUser) {
-        this.getMoreFromUser();
+      if (this.userPostUserId) {
+        this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
       }
     }
-    if (this.userPostUserId) {
-      this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
-    }
+
     this.directingPage = this.dialogService.directingPage;
     if (this.registeredUser) {
       this.didLike();
       this.didSave();
+      if (this.userPostUserId) {
+        this.getMoreFromUser();
+      }
     }
     this.incNumViews();
 
@@ -122,6 +125,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
+        this.userPostUserId = postInfo.userId;
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
         }
@@ -138,13 +142,16 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
             this.postInfo.selfThumbAddr
           );
         }
+        if (this.userPostUserId) {
+          this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
+          this.getMoreFromUser();
+        }
 
         this.userProfileSrc = this.postInfo.userProfileImageAddr;
         this.storeLogoSrc = this.postInfo.storeLogoAddr;
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numViews = this.postInfo.numViews;
-        this.numViews = 8;
-        this.getHoursDifference();
+        // this.getHoursDifference();
 
       });
   }
@@ -208,6 +215,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       let id = this.configService.getGeneralSession('user_id');
       if (id) {
         this.registeredUser = true;
+        jquery("a.login").css("display", "none");
       }
     })
     dialogRef.disableClose = false;
