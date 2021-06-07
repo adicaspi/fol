@@ -29,7 +29,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   userPost: UserPost;
   user: User;
   postId: number;
-  userPostUserId: number;
+  masterUserId: number;
   numFollowers$: Observable<number>;
   numViews: number;
   numLikes: number;
@@ -72,7 +72,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userPostUserId = this.configService.getGeneralSession('user_id_post_id');
+    this.masterUserId = this.configService.getGeneralSession('user_id_post_id');
     this.postId = this.configService.getGeneralSession('product_id');
     this.configService.removeItem('product_id');
     this.titleService.setTitle('Product Page');
@@ -92,40 +92,32 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
           if (!(this.postId > 0)) {
             return;
           }
-
-          this.imageUrls = [];
-          this.getPostInfo(this.userID);
-          if (this.registeredUser) {
-            this.getMoreFromUser();
+          else {
+            this.imageUrls = [];
+            this.getPostInfo(this.userID, this.postId);
           }
         });
     } else {
       this.imageUrls = [];
-      this.getPostInfo(this.userID);
-      if (this.userPostUserId) {
-        this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
-      }
+      this.getPostInfo(this.userID, this.postId);
     }
-
     this.directingPage = this.dialogService.directingPage;
     if (this.registeredUser) {
       this.didLike();
       this.didSave();
-      if (this.userPostUserId) {
-        this.getMoreFromUser();
-      }
+      this.getMoreFromUser(this.userID, this.masterUserId);
     }
     this.incNumViews();
 
   }
 
-  getPostInfo(userID: number) {
+  getPostInfo(userID: number, postID: number) {
     this.postService
-      .getMobilePostInfo(userID, this.postId)
+      .getMobilePostInfo(userID, postID)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
-        this.userPostUserId = postInfo.userId;
+        this.masterUserId = postInfo.userId;
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
         }
@@ -142,10 +134,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
             this.postInfo.selfThumbAddr
           );
         }
-        if (this.userPostUserId) {
-          this.numFollowers$ = this.userService.getNumberOfFollowers(this.userPostUserId).pipe(map(res => this.pipeTransform.transform(res)));
-          this.getMoreFromUser();
-        }
+
+        this.numFollowers$ = this.userService.getNumberOfFollowers(this.masterUserId).pipe(map(res => this.pipeTransform.transform(res)));
 
         this.userProfileSrc = this.postInfo.userProfileImageAddr;
         this.storeLogoSrc = this.postInfo.storeLogoAddr;
@@ -179,8 +169,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
 
 
-  getMoreFromUser() {
-    this.postsToShow$ = this.postService.getMorePostsFromUserMobile(this.userService.userId, this.postId, this.userPostUserId);
+  getMoreFromUser(userID, masterUserID) {
+    this.postsToShow$ = this.postService.getMorePostsFromUserMobile(userID, this.postId, masterUserID);
   }
 
   openMorePosts(post) {
