@@ -206,6 +206,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       if (id) {
         this.registeredUser = true;
         jquery("a.login").css("display", "none");
+        this.getMoreFromUser(id, this.masterUserId);
       }
     })
     dialogRef.disableClose = false;
