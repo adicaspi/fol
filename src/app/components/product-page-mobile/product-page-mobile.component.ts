@@ -84,7 +84,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       this.userID = 7;
     }
     this.ios = this.configService.iOS();
-    if (!this.postId || !this.masterUserId) {
+    if (!this.postId) {
       this.route.paramMap
         .pipe(takeUntil(this.onDestroy))
         .subscribe((params) => {
@@ -206,7 +206,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       if (id) {
         this.registeredUser = true;
         jquery("a.login").css("display", "none");
-        //this.getMoreFromUser(id, this.masterUserId);
+        this.getMoreFromUser(id, this.masterUserId);
       }
     })
     dialogRef.disableClose = false;
