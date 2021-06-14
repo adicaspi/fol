@@ -17,7 +17,8 @@ export class FilteringDTO {
     { id: 3, name: 'Dresses & Skirts', checked: false, servername: 'DressesOrSkirts' },
     { id: 4, name: 'Pants', checked: false, servername: 'Pants' },
     { id: 5, name: 'Shorts', checked: false, servername: 'Shorts' },
-    { id: 6, name: 'Lingerie', checked: false, servername: 'Lingerie' }
+    { id: 6, name: 'Lingerie', checked: false, servername: 'Lingerie' },
+    { id: 6, name: 'Swimwear', checked: false, servername: 'Swimwear' }
   ];
   designersObjects = [{ id: 1, name: 'Gucci', checked: false }, { id: 2, name: 'Prada', checked: false }, { id: 4, name: 'Isabel Marant', checked: false }, { id: 8, name: 'Givenchy', checked: false }, { id: 10, name: 'Miu Miu', checked: false }, { id: 5, name: 'Loewe', checked: false }, { id: 6, name: 'Saint Laurent', checked: false }, { id: 7, name: 'Celine', checked: false }, { id: 9, name: 'Fendi', checked: false }, { id: 11, name: 'Valentino', checked: false }, { id: 3, name: 'D&G', checked: false },];
   storesObjects = [{ id: 8, name: 'Zara', checked: false, show: true }, { id: 1, name: 'Asos', checked: false, show: true }, { id: 5, name: 'Shein', checked: false, show: true }, { id: 2, name: 'Net-A-Porter', checked: false, show: true }, { id: 3, name: 'Farfetch', checked: false, show: true }, { id: 6, name: 'Shopbop', checked: false, show: true }, { id: 7, name: 'TerminalX', checked: false, show: true }, { id: 9, name: 'Revolve', checked: false, show: true }, { id: 10, name: 'Factory54', checked: false, show: true }, { id: 13, name: 'The Outnet', checked: false, show: true }, { id: 14, name: 'Massimo Dutti', checked: false, show: true }, { id: 12, name: 'Mytheresa', checked: false, show: true }, { id: 20, name: 'Coconutlove', checked: false, show: true }
