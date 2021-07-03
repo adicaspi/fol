@@ -29,6 +29,7 @@ export class ExternalWebsiteComponent implements OnInit {
   logoSrc: string;
   onDestroy: Subject<void> = new Subject<void>();
   discoverPeopleArray = [];
+  iOSdevice: boolean = false;
   private WindowSizeSubscription: Subscription;
   firstSlot: Observable<PostInfo>;
   secondSlot: Observable<PostInfo>;
@@ -43,13 +44,14 @@ export class ExternalWebsiteComponent implements OnInit {
   ngOnInit() {
     let href = this.router.url;
     if (href.includes('/instagram')) {
-      if (this.configService.iOS) {
+      console.log("in ig");
+      if (this.getMobileOperatingSystem()) {
+        console.log("in if");
         window.location.href = "https://apps.apple.com/app/followear/id1476265803";
       }
-      // else {
-      //   this.router.navigate(['landing']);
-      // }
     }
+
+
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
       this.generateCarousel();
@@ -71,6 +73,15 @@ export class ExternalWebsiteComponent implements OnInit {
             this.logoSrc = "../../../assets/fw_logo_pink.ico"
           }
         });
+  }
+
+  getMobileOperatingSystem() {
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   initSlots() {
