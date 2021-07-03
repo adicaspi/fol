@@ -44,9 +44,7 @@ export class ExternalWebsiteComponent implements OnInit {
   ngOnInit() {
     let href = this.router.url;
     if (href.includes('/instagram')) {
-      console.log("in ig");
       if (this.getMobileOperatingSystem()) {
-        console.log("in if");
         window.location.href = "https://apps.apple.com/app/followear/id1476265803";
       }
     }
