@@ -45,9 +45,10 @@ export class ExternalWebsiteComponent implements OnInit {
     if (href.includes('/instagram')) {
       if (this.configService.iOS) {
         window.location.href = "https://apps.apple.com/app/followear/id1476265803";
-      } else {
-        this.router.navigate(['landing']);
       }
+      // else {
+      //   this.router.navigate(['landing']);
+      // }
     }
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
