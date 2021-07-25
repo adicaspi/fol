@@ -90,9 +90,9 @@ export class UserFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.userService.userId) {
-      this.registeredUser = true;
-    }
+    // if (this.userService.userId) {
+    //   this.registeredUser = true;
+    // }
     this.spinner.show();
     this.titleService.setTitle('User Profile Feed');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
