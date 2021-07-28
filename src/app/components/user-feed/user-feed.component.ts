@@ -93,10 +93,11 @@ export class UserFeedComponent implements OnInit {
     // if (this.userService.userId) {
     //   this.registeredUser = true;
     // }
-    this.spinner.show();
+
     this.titleService.setTitle('User Profile Feed');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
+    this.spinner.show();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: any) => {

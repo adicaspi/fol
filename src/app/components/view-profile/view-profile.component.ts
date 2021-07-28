@@ -39,28 +39,32 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const routeParams = this.activatedRoute.snapshot.params;
-    this.masterId = parseInt(routeParams.id);
+    //const routeParams = this.activatedRoute.snapshot.params;
+    //this.masterId = parseInt(routeParams.id);
     if (this.userService.userId) {
       this.registeredUser = true;
     }
+    this.activatedRoute.paramMap
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe((params) => {
+        this.masterId = +params.get('id');
+      });
+    this.checkWindowSize(this.masterId);
+  }
 
-    //this.updateUser(this.masterId);
+  checkWindowSize(id) {
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.onDestroy))
       .subscribe(
         value => {
           if (value.width > 600) {
             this.desktop = true;
-            this.router.navigate(['desktop-profile', this.masterId]);
+            this.router.navigate(['desktop-profile', id]);
           } else {
             this.desktop = false;
           }
         }
       );
-
-    //this.desktop = this.configService.windowSizeChanged;
-
   }
 
   updateUser(id) {
