@@ -73,7 +73,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.masterUserId = this.configService.getGeneralSession('user_id_post_id');
-    this.postId = this.configService.getGeneralSession('product_id');
+    //this.postId = this.configService.getGeneralSession('product_id');
     this.configService.removeItem('product_id');
     this.titleService.setTitle('Product Page');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
@@ -97,10 +97,11 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
             this.getPostInfo(this.userID, this.postId);
           }
         });
-    } else {
-      this.imageUrls = [];
-      this.getPostInfo(this.userID, this.postId);
     }
+    // else {
+    //   this.imageUrls = [];
+    //   this.getPostInfo(this.userID, this.postId);
+    // }
     this.directingPage = this.dialogService.directingPage;
     if (this.registeredUser) {
       this.didLike();
