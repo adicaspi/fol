@@ -61,38 +61,45 @@ export class UserProfileInfoMobileComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.userService.userId;
-    if (this.uid == null) {
-      const routeParams = this.activatedRoute.snapshot.params;
-      this.currMasterId = parseInt(routeParams.id);
-    } else {
-      this.currMasterId = this.uid;
-    }
+    //if (this.uid == null) {
+    //const routeParams = this.activatedRoute.snapshot.params;
+    //this.currMasterId = parseInt(routeParams.id);
+    this.activatedRoute.paramMap
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe((params) => {
+        this.currMasterId = +params.get('id');
+        this.updateUser(this.currMasterId);
+        this.getNumFollowers(this.currMasterId);
+        this.getNumFollowing(this.currMasterId);
+        this.getNumPosts(this.currMasterId);
+      });
+    //} else {
+    //this.currMasterId = this.uid;
+    //}
     if (this.userId == this.currMasterId) {
       this.userProfile = true;
     }
-    this.updateUser(this.currMasterId);
+
     if (this.userId) {
       this.userService.checkIsFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => {
         this.follows = res;
       })
     }
-    this.getNumFollowers();
-    this.getNumFollowing();
-    this.getNumPosts();
+
   }
 
-  getNumFollowing() {
-    this.userService.getNumberOfFollowing(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.following = res });
+  getNumFollowing(id) {
+    this.userService.getNumberOfFollowing(id).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.following = res });
   }
 
-  getNumFollowers() {
+  getNumFollowers(id) {
     //this.followers = this.userService.getNumberOfFollowers(this.currMasterId);
-    this.userService.getNumberOfFollowers(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.followers = res });
+    this.userService.getNumberOfFollowers(id).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.followers = res });
   }
 
-  getNumPosts() {
+  getNumPosts(id) {
     //this.numberOfPosts = this.userService.getNumberOfPosts(this.currMasterId);
-    this.userService.getNumberOfPosts(this.currMasterId).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.numberOfPosts = res });
+    this.userService.getNumberOfPosts(id).pipe(takeUntil(this.onDestroy)).subscribe(res => { this.numberOfPosts = res });
   }
 
   updateUser(id) {
