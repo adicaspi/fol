@@ -66,6 +66,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   get f() {
     return this.forgotPassForm.controls;
+
   }
 
   get r() {
@@ -107,12 +108,9 @@ export class ForgotPasswordComponent implements OnInit {
 
   onSubmitReset() {
     this.submittedreset = true;
-    console.log('in submited reset');
-
     if (this.resetPassForm.status == 'VALID') {
       let password = this.resetPassForm.value.password;
       let code = this.resetPassForm.value.code;
-      console.log('im code', code);
       let res = {
         email: this.userEmail,
         password: password,
