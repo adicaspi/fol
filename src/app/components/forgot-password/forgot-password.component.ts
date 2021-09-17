@@ -4,9 +4,10 @@ import { UserService } from '../../services/user.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorsService } from '../../services/errors.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { ConfigService } from '../../services/config.service';
 import { LocationService } from '../../services/location.service';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -24,6 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
   userEmail: string;
   wrongPassUser: boolean = false;
   desktop: boolean = true;
+  onDestroy: Subject<void> = new Subject<void>();
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -119,7 +121,7 @@ export class ForgotPasswordComponent implements OnInit {
 
       this.userService
         .setNewPassword(res)
-        .pipe(first())
+        .pipe(takeUntil(this.onDestroy))
         .subscribe(data => {
           this.router.navigate(['']);
         });
