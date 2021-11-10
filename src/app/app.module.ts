@@ -76,6 +76,7 @@ import { ViewMainProfileComponent } from './components/view-main-profile/view-ma
 import { ViewFollowListComponent } from './components/view-follow-list/view-follow-list.component';
 import { ExternalWebsiteComponent } from './components/external-website/external-website.component';
 import { AppBannerComponent } from './components/app-banner/app-banner.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 
 
@@ -130,7 +131,8 @@ import { AppBannerComponent } from './components/app-banner/app-banner.component
     ViewMainProfileComponent,
     ViewFollowListComponent,
     ExternalWebsiteComponent,
-    AppBannerComponent
+    AppBannerComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,

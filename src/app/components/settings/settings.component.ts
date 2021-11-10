@@ -45,6 +45,7 @@ export class SettingsComponent implements OnInit {
   timeout: any;
   termsLink: string = "https://www.followear.com/terms"
   cookiesLink: string = "https://www.followear.com/cookies-policy"
+  privacyLink: string = "https://www.followear.com/privacy-policy"
   onDestroy: Subject<void> = new Subject<void>();
   private WindowSizeSubscription: Subscription;
   postImage: any;

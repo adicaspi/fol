@@ -26,6 +26,7 @@ import { ExternalWebsiteComponent } from './components/external-website/external
 import {
   AuthGuardService as AuthGuard
 } from './services/auth-guard.service';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 
 
@@ -75,6 +76,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'cookies-policy', component: TermsCookiesComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
   {
     path: 'feed-discover-people', component: ViewDiscoverPeopleGeneralComponent
   },

@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit {
   containSpace: boolean = false;
   termsLink: string = "https://www.followear.com/terms"
   cookiesLink: string = "https://www.followear.com/cookies-policy"
+  privacyLink: string = "https://www.followear.com/privacy-policy"
   private baseApiUrl = environment.BASE_API_URL;
   facebookLoginEndpoint: string = environment.loginWithFbUrl;
   title = 'Register to Followear';
