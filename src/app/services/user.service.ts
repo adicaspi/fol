@@ -33,6 +33,7 @@ const httpFormDataImage = {
 export class UserService {
   userId: number;
   username: string;
+  region: string = "US";
   user: Observable<UserDetails>;
   private baseApiUrl = environment.BASE_API_URL;
   globalRegisterURL = this.baseApiUrl + '/registration/';
@@ -64,6 +65,14 @@ export class UserService {
 
   updateUser(id: number) {
     this.user = this.getUserDetails(id);
+  }
+
+  setRegion(region: string) {
+    this.region = region;
+  }
+
+  getRegion() {
+    return this.region;
   }
 
   uploadPost(fd: FormData, desc: string): Observable<any> {

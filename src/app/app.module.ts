@@ -194,7 +194,8 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
     ConfigService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (configService: ConfigService) => () => configService.getSessionStorgae(),
+      // useFactory: (configService: ConfigService) => () => configService.getSessionStorgae(),
+      useFactory: (configService: ConfigService) => () => configService.ngOnInit(),
       deps: [ConfigService, UserService],
       multi: true
     },

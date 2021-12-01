@@ -1,9 +1,11 @@
-import { Injectable, Injector, Inject } from '@angular/core';
+import { Injectable, Injector, Inject, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { PostService } from './post.service';
+import { FeedService } from './feed.service';
 
 export interface WindowSize {
   height: number,
@@ -14,13 +16,15 @@ export interface WindowSize {
   providedIn: 'root'
 })
 
-export class ConfigService {
+export class ConfigService implements OnInit {
 
 
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   constructor(
     private userService: UserService,
+    private feedService: FeedService,
+    private postService: PostService,
     private http: HttpClient,
     private injector: Injector,
 
@@ -43,9 +47,30 @@ export class ConfigService {
     height: this.window.innerHeight
   });
 
+  ngOnInit() {
+    this.getSessionStorgae();
+
+  }
+
   router(): Router {
     //this creates router property on your service.
     return this.injector.get(Router);
+  }
+
+  setUserRegionFromIP() {
+    this.getLocation().then(country => {
+      if (country == "US") {
+        this.setGeneralSession("region", "US");
+      } else if (country == "IL") {
+        this.setGeneralSession("region", "IL");
+      } else {
+        this.setGeneralSession("region", "US");
+      }
+    });
+  }
+
+  setUserRegionFromDTO(region) {
+    this.setGeneralSession("region", region);
   }
 
   setSessionStorage(userId) {
@@ -89,6 +114,13 @@ export class ConfigService {
     }
   }
 
+  getUserRegion(key) {
+    const res = localStorage.getItem(key);
+    if (res) {
+      return res;
+    }
+  }
+
   iOS() {
     return [
       'iPad Simulator',
@@ -101,5 +133,13 @@ export class ConfigService {
       // iPad on iOS 13 detection
       || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
   }
+
+  async getLocation(): Promise<string> {
+    var token = "f2525502aa8d72";
+    const request = await fetch("https://ipinfo.io/json?token=" + token);
+    const jsonResponse = await request.json();
+    return jsonResponse.country;
+  }
+
 }
 

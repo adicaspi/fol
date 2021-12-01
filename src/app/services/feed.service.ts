@@ -39,6 +39,7 @@ export class FeedService {
   constructor(private http: HttpClient) {
   }
 
+
   clearPostsSubject() {
     this.postsSubject.next();
   }
@@ -127,6 +128,7 @@ export class FeedService {
   }
 
   getGeneralExploreFeed(): Observable<any> {
+
     return this.http.post<any>(
       this.generalURL + '/explore-feed', this.exploreGeneralFilteringDTO.getFilteringDTO(), {
         headers: httpOptions.headers,
@@ -237,7 +239,14 @@ export class FeedService {
 
 
   discoverPeopleGeneral(): Observable<Array<DiscoverPeopleDTO>> {
-    return this.http.get<Array<DiscoverPeopleDTO>>(this.generalURL + '/discover-people').pipe().map(res => {
+    const httpOptions = {
+      'Content-Type': 'application/json'
+    };
+
+    const requestOptions = {
+      headers: new HttpHeaders(httpOptions),
+    };
+    return this.http.get<Array<DiscoverPeopleDTO>>(this.generalURL + '/discover-people', requestOptions).pipe().map(res => {
       let items: any = res;
       let discoverPeopleArray: Array<DiscoverPeopleDTO> =
         items.map((doc) => new DiscoverPeopleDTO(doc));

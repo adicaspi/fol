@@ -3,14 +3,10 @@ import { Title, Meta } from '@angular/platform-browser';
 import { Routes, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { RegisterComponent } from '../register/register.component';
-import { DialogService } from '../../services/dialog.service';
-import { LoginComponent } from '../login/login.component';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { Subscription, Observable } from 'rxjs';
-import { MatDialog } from '../../../../node_modules/@angular/material';
+import { FeedService } from '../../services/feed.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -26,11 +22,8 @@ export class LandingPageComponent implements OnInit {
   facebookLoginCode: string;
 
   constructor(
-    private dialog: MatDialog,
-    private router: Router,
-    private http: HttpClient,
     private userService: UserService,
-    private dialogService: DialogService,
+    private feedService: FeedService,
     private configService: ConfigService,
     private titleService: Title,
     private meta: Meta
@@ -62,6 +55,8 @@ export class LandingPageComponent implements OnInit {
     // }
 
   }
+
+
 
   ngOnDestroy(): void {
     this.WindowSizeSubscription.unsubscribe();

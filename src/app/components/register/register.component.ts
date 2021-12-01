@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   subscription: Subscription;
   error: any;
   registerForm: FormGroup;
+  region: string;
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -104,6 +105,8 @@ export class RegisterComponent implements OnInit {
 
     this.onChanges();
     this.ios = this.configService.iOS();
+    //console.log(this.getBrowserLocales());
+    this.region = this.configSerivce.getUserRegion("region");
   }
 
   // convenience getter for easy access to form fields
@@ -201,8 +204,10 @@ export class RegisterComponent implements OnInit {
       password: password,
       userName: username,
       birthDate: birthDate,
-      fullName: fullName
+      fullName: fullName,
+      region: this.region
     };
+
     this.userService
       .register(res)
       .subscribe(
@@ -214,6 +219,7 @@ export class RegisterComponent implements OnInit {
           if (this.configSerivce.getGeneralSession('profile')) {
             let id = this.configSerivce.getGeneralSession('profile');
             this.configService.removeItem('profile');
+            this.configSerivce.setUserRegionFromIP();
             this.router.navigate(['profile', id]);
           }
           else if (this.configService.getGeneralSession('product_id')) {
@@ -249,5 +255,36 @@ export class RegisterComponent implements OnInit {
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
+  }
+
+
+
+
+  getBrowserLocales(options = {}) {
+    const defaultOptions = {
+      languageCodeOnly: false,
+    };
+
+    const opt = {
+      ...defaultOptions,
+      ...options,
+    };
+
+    const browserLocales =
+      navigator.languages === undefined
+        ? [navigator.language]
+        : navigator.languages;
+
+    if (!browserLocales) {
+      return undefined;
+    }
+
+    return browserLocales.map(locale => {
+      const trimmedLocale = locale.trim();
+
+      return opt.languageCodeOnly
+        ? trimmedLocale.split(/-|_/)[0]
+        : trimmedLocale;
+    });
   }
 }

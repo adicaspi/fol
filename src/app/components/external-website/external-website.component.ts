@@ -39,9 +39,17 @@ export class ExternalWebsiteComponent implements OnInit {
   private bloggersPostsArray = environment.bloggersPosts;
   slots = [this.firstSlot, this.secondSlot, this.thirdSlot, this.fourthSlot, this.fifthSlot];
   constructor(private feedService: FeedService,
-    private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService) { }
+    private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService, private userService: UserService) { }
 
   ngOnInit() {
+
+    this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
+      this.discoverPeopleArray = res;
+      this.generateCarousel();
+    });
+
+    this.configService.setUserRegionFromIP();
+
     let href = this.router.url;
     if (href.includes('/instagram')) {
       if (this.getMobileOperatingSystem()) {
@@ -50,10 +58,7 @@ export class ExternalWebsiteComponent implements OnInit {
     }
 
 
-    this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
-      this.discoverPeopleArray = res;
-      this.generateCarousel();
-    });
+
 
     //set slots top position
     this.initSlots();
@@ -72,6 +77,8 @@ export class ExternalWebsiteComponent implements OnInit {
           }
         });
   }
+
+
 
   getMobileOperatingSystem() {
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);

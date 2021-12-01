@@ -104,5 +104,6 @@ export class ViewFeedComponent implements OnInit {
     this.userService.username = data.userName;
     this.userService.updateUser(data.userId);
     this.configService.setSessionStorage(data.userId.toString());
+    this.configService.setUserRegionFromDTO(data.region);
   }
 }
