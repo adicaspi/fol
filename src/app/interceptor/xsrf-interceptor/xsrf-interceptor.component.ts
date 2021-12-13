@@ -24,7 +24,6 @@ export class XsrfInterceptorComponent implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const headerName = 'X-XSRF-TOKEN';
     let region = this.configService.getUserRegion("region") as string;
-
     let token = this.tokenExtractor.getToken() as string;
 
 
@@ -34,8 +33,9 @@ export class XsrfInterceptorComponent implements HttpInterceptor {
 
 
     }
-
-    req = req.clone({ headers: req.headers.set('region', region) });
+    if (region) {
+      req = req.clone({ headers: req.headers.set('region', region) });
+    }
 
 
 

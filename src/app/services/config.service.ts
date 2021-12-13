@@ -57,6 +57,7 @@ export class ConfigService implements OnInit {
     return this.injector.get(Router);
   }
 
+
   setUserRegionFromIP() {
     this.getLocation().then(country => {
       if (country == "US") {

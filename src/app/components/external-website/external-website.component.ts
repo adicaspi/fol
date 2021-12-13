@@ -43,12 +43,14 @@ export class ExternalWebsiteComponent implements OnInit {
 
   ngOnInit() {
 
+    this.configService.setUserRegionFromIP();
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
       this.generateCarousel();
     });
 
-    this.configService.setUserRegionFromIP();
+
+
 
     let href = this.router.url;
     if (href.includes('/instagram')) {
