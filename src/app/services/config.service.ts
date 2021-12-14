@@ -70,6 +70,18 @@ export class ConfigService implements OnInit {
     });
   }
 
+  setUserRegionFromLocale() {
+    let language = navigator.language;
+    if ((language == "en") || (language == "en-US")) {
+      this.setGeneralSession("region", "US");
+    } else if ((language == "he-IL") || (language == "he")) {
+      this.setGeneralSession("region", "IL");
+    } else {
+      this.setGeneralSession("region", "US");
+    }
+
+  }
+
   setUserRegionFromDTO(region) {
     this.setGeneralSession("region", region);
   }

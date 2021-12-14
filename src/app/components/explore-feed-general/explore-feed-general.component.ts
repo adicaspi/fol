@@ -71,7 +71,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index, follow' });
     this.spinner.show();
-    this.configService.setUserRegionFromIP();
+    this.configService.setUserRegionFromLocale();
     this.updateFeed = this.feedService
       .getNewPosts().pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
         observablePosts.subscribe((observablePosts: any) => {

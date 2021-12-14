@@ -7,6 +7,7 @@ import { FeedService } from '../../services/feed.service';
 import { Router } from '@angular/router';
 import { MessageService } from '../../services/message.service';
 import { ShoppingNavService } from '../../services/shopping-nav.service';
+import { ConfigService } from '../../services/config.service';
 
 
 
@@ -46,7 +47,10 @@ export class MutualNavComponent implements OnInit {
   productsToShow = [];
   componentName: ComponentName;
 
-  constructor(private formBuilder: FormBuilder, private feedService: FeedService, private massageService: MessageService, private router: Router, private shoppingNavService: ShoppingNavService) { }
+  constructor(private formBuilder: FormBuilder, private feedService: FeedService, private massageService: MessageService, private router: Router, private shoppingNavService: ShoppingNavService, private configService: ConfigService) {
+    let region = this.configService.getUserRegion("region") as string;
+    this.filteringDTO.region = region;
+  }
 
   ngOnInit() {
     this.minValue = 0;

@@ -17,6 +17,7 @@ declare var setInputFilter: any;
 import '../../shared/input-filter.js'
 import { first } from '../../../../node_modules/rxjs-compat/operator/first';
 import { Router } from '../../../../node_modules/@angular/router';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-shopping-nav',
@@ -54,9 +55,12 @@ export class ShoppingNavComponent implements OnInit {
   constructor(
     private feedService: FeedService,
     private massageService: MessageService,
-    private router: Router
+    private router: Router,
+    private configService: ConfigService
 
   ) {
+    let region = this.configService.getUserRegion("region") as string;
+    this.filteringDTO.region = region;
   }
 
   ngOnInit() {

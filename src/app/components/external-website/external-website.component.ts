@@ -42,8 +42,7 @@ export class ExternalWebsiteComponent implements OnInit {
     private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService, private userService: UserService) { }
 
   ngOnInit() {
-
-    this.configService.setUserRegionFromIP();
+    this.configService.setUserRegionFromLocale();
     this.feedService.discoverPeopleGeneral().pipe(takeUntil(this.onDestroy)).subscribe(res => {
       this.discoverPeopleArray = res;
       this.generateCarousel();
