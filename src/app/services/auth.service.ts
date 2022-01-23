@@ -50,7 +50,7 @@ export class AuthService {
     var index = this.router.url.indexOf("code");
     if (index != -1) {
       var facebookLoginCode = this.router.url.substring(index + 5);
-      this.configService.setUserRegionFromIP();
+      //this.configService.setUserRegionFromIP();
       this.userService.loginWithFacebook(facebookLoginCode).pipe(map(res => {
         this.userService.userId = res.userId;
         this.userService.username = res.username;

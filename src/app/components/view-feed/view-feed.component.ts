@@ -82,7 +82,7 @@ export class ViewFeedComponent implements OnInit {
   }
 
   loginWithFacebook(code) {
-    this.configService.setUserRegionFromIP();
+    //this.configService.setUserRegionFromIP();
     this.userService.loginWithFacebook(code).pipe(takeUntil(this.onDestroy)).subscribe(data => {
       this.setUserDetails(data);
     })
