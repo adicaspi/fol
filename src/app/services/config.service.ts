@@ -132,6 +132,7 @@ export class ConfigService implements OnInit {
     if (res) {
       return res;
     }
+    return "US"; //defaults to US region
   }
 
   iOS() {
