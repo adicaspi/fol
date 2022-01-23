@@ -119,6 +119,11 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.valid;
   }
 
+  loginWithFaceBook() {
+    console.log("in login with facebook");
+    this.configSerivce.setUserRegionFromIP();
+  }
+
   onChanges(): void {
 
     this.registerForm.get('username').valueChanges.subscribe(val => {

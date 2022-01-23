@@ -47,13 +47,11 @@ export class AuthService {
 
 
   isAuthenticaedFacebook(): Observable<boolean> {
-    console.log("in facebook2");
     var index = this.router.url.indexOf("code");
     if (index != -1) {
-      console.log("in facebook3");
       var facebookLoginCode = this.router.url.substring(index + 5);
+      this.configService.setUserRegionFromIP();
       this.userService.loginWithFacebook(facebookLoginCode).pipe(map(res => {
-        console.log("in facebook4");
         this.userService.userId = res.userId;
         this.userService.username = res.username;
         this.userService.updateUser(res.userId);

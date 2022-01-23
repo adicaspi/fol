@@ -53,6 +53,7 @@ export class ViewFeedComponent implements OnInit {
         facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
       }
       this.loginWithFacebook(facebookLoginCode);
+
     }
     if (alreadyFoundOnFBError) {
       console.log("in facebook error");
@@ -81,6 +82,7 @@ export class ViewFeedComponent implements OnInit {
   }
 
   loginWithFacebook(code) {
+    this.configService.setUserRegionFromIP();
     this.userService.loginWithFacebook(code).pipe(takeUntil(this.onDestroy)).subscribe(data => {
       this.setUserDetails(data);
     })
