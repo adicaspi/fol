@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
 
     this.onChanges();
     this.ios = this.configService.iOS();
-    //console.log(this.getBrowserLocales());
+
 
 
   }
@@ -193,7 +193,6 @@ export class RegisterComponent implements OnInit {
     }
     this.configSerivce.setUserRegionFromIP();
     this.region = this.configSerivce.getUserRegion("region");
-
     this.loading = true;
     let email = this.registerForm.value.email;
     let username = this.registerForm.value.username;

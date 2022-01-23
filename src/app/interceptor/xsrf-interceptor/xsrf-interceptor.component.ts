@@ -26,8 +26,6 @@ export class XsrfInterceptorComponent implements HttpInterceptor {
     let region = this.configService.getUserRegion("region") as string;
     let token = this.tokenExtractor.getToken() as string;
 
-
-
     if (token !== null && req.method == 'POST') {
       req = req.clone({ headers: req.headers.set(headerName, token) });
 
