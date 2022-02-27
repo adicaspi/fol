@@ -118,6 +118,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
+        console.log(this.postInfo);
         this.masterUserId = postInfo.userId;
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
