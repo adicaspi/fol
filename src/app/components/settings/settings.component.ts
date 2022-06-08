@@ -167,6 +167,18 @@ export class SettingsComponent implements OnInit {
       await this.toBase64(this.selectedFile).then((value) => {
         console.log(value);
         // expected output: "Success!"
+
+        this.loading = true;
+        const fd = new FormData();
+        fd.append('image', this.selectedFile, this.selectedFile.name);
+        this.userService.updateProfileImage(fd).subscribe(res => {
+          this.showSuccessMsg = true;
+          this.loading = false;
+        }, error => {
+          this.loading = false;
+          console.log(error);
+        });
+
       });
     }
   }
@@ -299,18 +311,18 @@ export class SettingsComponent implements OnInit {
       });
     }
 
-    if (this.updateImageProfile) {
-      this.loading = true;
-      const fd = new FormData();
-      fd.append('image', this.selectedFile, this.selectedFile.name);
-      this.userService.updateProfileImage(fd).subscribe(res => {
-        this.showSuccessMsg = true;
-        this.loading = false;
-      }, error => {
-        this.loading = false;
-        console.log(error);
-      });
-    }
+    // if (this.updateImageProfile) {
+    //   this.loading = true;
+    //   const fd = new FormData();
+    //   fd.append('image', this.selectedFile, this.selectedFile.name);
+    //   this.userService.updateProfileImage(fd).subscribe(res => {
+    //     this.showSuccessMsg = true;
+    //     this.loading = false;
+    //   }, error => {
+    //     this.loading = false;
+    //     console.log(error);
+    //   });
+    // }
     this.hideMessage();
 
   }
