@@ -21,6 +21,7 @@ export class ConfigService implements OnInit {
 
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
+  private region;
   constructor(
     private userService: UserService,
     private feedService: FeedService,
@@ -58,8 +59,8 @@ export class ConfigService implements OnInit {
   }
 
 
-  setUserRegionFromIP() {
-    this.getLocation().then(country => {
+  async setUserRegionFromIP(): Promise<string> {
+    return this.getLocation().then(country => {
       if (country == "US") {
         this.setGeneralSession("region", "US");
       } else if (country == "IL") {
@@ -67,6 +68,7 @@ export class ConfigService implements OnInit {
       } else {
         this.setGeneralSession("region", "US");
       }
+      return country;
     });
   }
 
@@ -79,6 +81,7 @@ export class ConfigService implements OnInit {
     } else {
       this.setGeneralSession("region", "US");
     }
+
 
   }
 
@@ -129,6 +132,7 @@ export class ConfigService implements OnInit {
 
   getUserRegion(key) {
     const res = localStorage.getItem(key);
+    console.log("im res", res);
     if (res) {
       return res;
     }

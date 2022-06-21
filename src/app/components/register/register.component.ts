@@ -196,56 +196,58 @@ export class RegisterComponent implements OnInit {
 
       return;
     }
-    this.configSerivce.setUserRegionFromIP();
-    this.region = this.configSerivce.getUserRegion("region");
-    this.loading = true;
-    let email = this.registerForm.value.email;
-    let username = this.registerForm.value.username;
-    let password = this.registerForm.value.password;
-    let age = this.registerForm.value.birthDate;
-    let fullName = this.registerForm.value.fullName;
-    let birthDate = this.calculateBirthdate(age);
+    this.configSerivce.setUserRegionFromIP().then(region => {
+      this.region = region
+      this.loading = true;
+      let email = this.registerForm.value.email;
+      let username = this.registerForm.value.username;
+      let password = this.registerForm.value.password;
+      let age = this.registerForm.value.birthDate;
+      let fullName = this.registerForm.value.fullName;
+      let birthDate = this.calculateBirthdate(age);
 
-    let res = {
-      email: email,
-      password: password,
-      userName: username,
-      birthDate: birthDate,
-      fullName: fullName,
-      region: this.region
-    };
+      let res = {
+        email: email,
+        password: password,
+        userName: username,
+        birthDate: birthDate,
+        fullName: fullName,
+        region: this.region
+      };
 
-    this.userService
-      .register(res)
-      .subscribe(
-        data => {
-          this.userService.userId = data.userId;
-          this.userService.username = data.username;
-          this.userService.updateUser(data.userId);
-          this.configSerivce.setSessionStorage(data.userId.toString());
-          if (this.configSerivce.getGeneralSession('profile')) {
-            let id = this.configSerivce.getGeneralSession('profile');
-            this.configService.removeItem('profile');
-            this.router.navigate(['profile', id]);
+      this.userService
+        .register(res)
+        .subscribe(
+          data => {
+            this.userService.userId = data.userId;
+            this.userService.username = data.username;
+            this.userService.updateUser(data.userId);
+            this.configSerivce.setSessionStorage(data.userId.toString());
+            if (this.configSerivce.getGeneralSession('profile')) {
+              let id = this.configSerivce.getGeneralSession('profile');
+              this.configService.removeItem('profile');
+              this.router.navigate(['profile', id]);
+            }
+            else if (this.configService.getGeneralSession('product_id')) {
+              let productId = this.configService.getGeneralSession('product_id');
+              this.router.navigate(['product-page', productId]);
+            }
+            else {
+              this.router.navigate(['feed-discover-people']);
+            }
+            if (this.dialogRef) {
+              this.dialogRef.close();
+            }
+            this.ngOnDestroy();
+          },
+          error => {
+            this.loading = false;
+            if (this.error.error == 'User Collision') {
+              this.emailExists = true;
+            }
           }
-          else if (this.configService.getGeneralSession('product_id')) {
-            let productId = this.configService.getGeneralSession('product_id');
-            this.router.navigate(['product-page', productId]);
-          }
-          else {
-            this.router.navigate(['feed-discover-people']);
-          }
-
-          this.dialogRef.close();
-          this.ngOnDestroy();
-        },
-        error => {
-          this.loading = false;
-          if (this.error.error == 'User Collision') {
-            this.emailExists = true;
-          }
-        }
-      );
+        );
+    });
   }
 
   loginPage(): void {
