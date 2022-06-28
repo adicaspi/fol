@@ -19,6 +19,7 @@ import * as jquery from 'jquery';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { ScrollHelperService } from '../../services/scroll-helper.service';
 import { Title, Meta } from '@angular/platform-browser';
+import mixpanel from 'mixpanel-browser';
 
 @Component({
   selector: 'app-explore-feed',
@@ -62,6 +63,8 @@ export class ExploreFeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    mixpanel.time_event("Viewing Explore"); //Start measuring time spent of Feed
+    this.userService.updatePage("explore");
     this.titleService.setTitle('Explore User');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.spinner.show();
@@ -129,5 +132,6 @@ export class ExploreFeedComponent implements OnInit {
     this.onDestroy.next();
     this.feedSubsription.unsubscribe();
     this.WindowSizeSubscription.unsubscribe();
+    mixpanel.track("Viewing Explore"); //User moved from Explore
   }
 }

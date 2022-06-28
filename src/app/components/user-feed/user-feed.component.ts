@@ -24,6 +24,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import { LoginComponent } from '../login/login.component';
 import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
+import mixpanel from 'mixpanel-browser';
 
 
 
@@ -151,9 +152,13 @@ export class UserFeedComponent implements OnInit {
         this.id = +params['id'];
         if (this.userService.getCurrentUser() == this.id) {
           this.userProfile = true;
+          mixpanel.time_event("Viewing My Profile"); //Start measuring time spent on my profile
+          this.userService.updatePage("my profile");
         }
         else {
           this.user = this.userService.getUserProfileInfo(this.id);
+          mixpanel.time_event("Viewing User Profile"); //Start measuring time spent on user profile
+          this.userService.updatePage("user profile");
         }
         if (!this.desktop) {
           this.feedService.updateProfileFeed(this.id, this.offset);
@@ -300,5 +305,11 @@ export class UserFeedComponent implements OnInit {
     this.onDestroy.complete();
     this.feedSubscription.unsubscribe();
     this.updateFeed.unsubscribe();
+    if (this.userProfile) {
+      mixpanel.track("Viewing My Profile"); //User moved from his profile
+    }
+    else {
+      mixpanel.track("Viewing User Profile"); //User moved from user profile
+    }
   }
 }

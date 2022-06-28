@@ -18,6 +18,8 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { Meta, Title } from '../../../../node_modules/@angular/platform-browser';
 import * as jquery from 'jquery';
+import mixpanel from 'mixpanel-browser';
+
 
 
 @Component({
@@ -72,6 +74,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    mixpanel.time_event("Viewing Product"); //Start measuring time spent of Feed
+    this.userService.updatePage("product");
     this.masterUserId = this.configService.getGeneralSession('user_id_post_id');
     //this.postId = this.configService.getGeneralSession('product_id');
     this.configService.removeItem('product_id');
@@ -297,5 +301,6 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.configService.removeItem('user_id_post_id');
     this.onDestroy.next();
     this.onDestroy.complete();
+    mixpanel.track("Viewing Product"); //User moved from Explore
   }
 }

@@ -6,6 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { PostService } from './post.service';
 import { FeedService } from './feed.service';
+import mixpanel from 'mixpanel-browser';
+// or with require() syntax:
+// const mixpanel = require('mixpanel-browser');
+
+// Enabling the debug mode flag is useful during implementation,
+// but it's recommended you remove it for production
 
 export interface WindowSize {
   height: number,
@@ -50,7 +56,7 @@ export class ConfigService implements OnInit {
 
   ngOnInit() {
     this.getSessionStorgae();
-
+    mixpanel.init(environment.mixPanelToken, { debug: true });
   }
 
   router(): Router {
@@ -132,7 +138,6 @@ export class ConfigService implements OnInit {
 
   getUserRegion(key) {
     const res = localStorage.getItem(key);
-    console.log("im res", res);
     if (res) {
       return res;
     }

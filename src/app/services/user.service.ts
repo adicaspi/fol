@@ -35,11 +35,14 @@ export class UserService {
   username: string;
   region: string = "US";
   user: Observable<UserDetails>;
+  currPage: string;
+  prevPage: string;
   private baseApiUrl = environment.BASE_API_URL;
   globalRegisterURL = this.baseApiUrl + '/registration/';
   globaSoicalURL = this.baseApiUrl + '/social/';
   globalInfoURL = this.baseApiUrl + '/user-info/';
   globalSettingsURL = this.baseApiUrl + '/settings/';
+
 
   constructor(private http: HttpClient) { }
 
@@ -345,6 +348,20 @@ export class UserService {
       {
         params: params
       }).subscribe(res => { });
+  }
+
+  updatePage(page: string) {
+    if (this.currPage == null) {
+      this.currPage = page;
+      this.prevPage = page;
+    } else {
+      this.prevPage = this.currPage;
+      this.currPage = page;
+    }
+  }
+
+  getCurrPage() {
+    return this.currPage;
   }
 
 }

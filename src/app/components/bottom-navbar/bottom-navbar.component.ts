@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import * as jquery from 'jquery';
 import { User } from '../../models/User';
+import { MessageService } from '../../services/message.service';
 
 
 
@@ -49,6 +50,7 @@ export class BottomNavbarComponent implements OnInit {
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
+    private messageService: MessageService
   ) {
   }
 
@@ -136,6 +138,8 @@ export class BottomNavbarComponent implements OnInit {
     this.profile = true;
     this.feed = false;
     this.explore = false;
+    this.messageService.sendMessage("profile clicked");
+    this.messageService.clearMessage();
     this.router.navigate(['profile', this.userService.userId]);
   }
 

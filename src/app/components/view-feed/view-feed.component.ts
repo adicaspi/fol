@@ -5,10 +5,13 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 import { takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
+import mixpanel from 'mixpanel-browser';
+import { MessageService } from '../../services/message.service';
 @Component({
   selector: 'app-view-feed',
   templateUrl: './view-feed.component.html',
@@ -23,7 +26,7 @@ export class ViewFeedComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   searchedTouched: Observable<boolean>;
   error: any = {};
-  private subscription;
+  private subscription: Subscription;
   private autoLoginSubscription: Subscription;
   private anyErrors: boolean;
   private finished: boolean;
@@ -37,13 +40,16 @@ export class ViewFeedComponent implements OnInit {
     private http: HttpClient,
     private configService: ConfigService,
     private router: Router,
-    private errorsService: ErrorsService
+    private errorsService: ErrorsService,
+    private messageServie: MessageService
   ) {
 
   }
 
   ngOnInit() {
 
+    mixpanel.time_event("Viewing Feed"); //Start measuring time spent of Feed
+    this.userService.updatePage("feed");
     var index = this.router.url.indexOf("code");
     var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
     if (index != -1) {
@@ -107,5 +113,22 @@ export class ViewFeedComponent implements OnInit {
     this.userService.updateUser(data.userId);
     this.configService.setSessionStorage(data.userId.toString());
     this.configService.setUserRegionFromDTO(data.region);
+    this.mixPanelFunctions(data);
+
+
+
+  }
+
+  mixPanelFunctions(data) {
+    mixpanel.identify(data.userId);
+    mixpanel.track("Sign In", {
+      "userId": data.userId,
+      "username": data.username,
+    });
+    mixpanel.time_event("Log Out"); //Start measuring time until log out
+  }
+
+  ngOnDestroy() {
+    mixpanel.track("Viewing Feed"); //User moved from Feed
   }
 }

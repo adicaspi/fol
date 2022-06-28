@@ -22,6 +22,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
+import mixpanel from 'mixpanel-browser';
 
 
 @Component({
@@ -67,6 +68,8 @@ export class ExploreFeedGeneralComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    mixpanel.time_event("Viewing General Explore"); //Start measuring time spent of Feed
+    this.userService.updatePage("general explore");
     this.titleService.setTitle('Explore Followear General');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index, follow' });
@@ -192,6 +195,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
+    mixpanel.track("Viewing General Explore"); //User moved from General Explore
     this.onDestroy.next();
   }
 

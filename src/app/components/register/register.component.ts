@@ -15,6 +15,7 @@ import { LoginComponent } from '../login/login.component';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import * as jquery from 'jquery';
 import * as $ from 'jquery';
+import mixpanel from 'mixpanel-browser';
 
 @Component({
   selector: 'app-register',
@@ -221,6 +222,7 @@ export class RegisterComponent implements OnInit {
           data => {
             this.userService.userId = data.userId;
             this.userService.username = data.username;
+            this.mixPanelFunctions(data, username, email);
             this.userService.updateUser(data.userId);
             this.configSerivce.setSessionStorage(data.userId.toString());
             if (this.configSerivce.getGeneralSession('profile')) {
@@ -248,6 +250,20 @@ export class RegisterComponent implements OnInit {
           }
         );
     });
+  }
+
+  mixPanelFunctions(data, username, email) {
+    mixpanel.alias(data.userId);
+    mixpanel.track("Sign Up", {
+      "userId": data.userId,
+      "username": data.username,
+    });
+    mixpanel.people.set_once({ //set these properties for the user if not already set
+      '$name': username,
+      '$created': new Date(),
+      '$email': email
+    });
+    mixpanel.time_event("Log Out");
   }
 
   loginPage(): void {

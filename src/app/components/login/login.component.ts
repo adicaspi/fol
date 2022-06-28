@@ -16,6 +16,8 @@ import { RegisterComponent } from '../register/register.component';
 import { Title, Meta } from '@angular/platform-browser';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import { url } from 'inspector';
+import mixpanel from 'mixpanel-browser';
+
 
 @Component({
   selector: 'app-login',
@@ -151,6 +153,7 @@ export class LoginComponent implements OnInit {
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           this.userService.updateUser(data.userId);
+          this.mixPanelFunctions(data);
           this.configSerivce.setUserRegionFromDTO(data.region);
 
           this.configSerivce.setSessionStorage(data.userId.toString());
@@ -186,6 +189,16 @@ export class LoginComponent implements OnInit {
           }
         }
       );
+  }
+
+  mixPanelFunctions(data) {
+    mixpanel.identify(data.userId);
+    mixpanel.track("Signin", {
+      "userId": data.userId,
+      "username": data.username,
+    });
+    mixpanel.time_event("Log Out");
+
   }
 
   regsiterPage() {

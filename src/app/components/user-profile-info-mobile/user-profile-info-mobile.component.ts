@@ -11,6 +11,7 @@ import { User } from '../../models/User';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import mixpanel from 'mixpanel-browser';
 
 @Component({
   selector: 'app-user-profile-info-mobile',
@@ -172,6 +173,7 @@ export class UserProfileInfoMobileComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+    mixpanel.track("Log Out");
     this.router.navigate(['landing']);
   }
 
