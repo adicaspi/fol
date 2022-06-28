@@ -120,7 +120,11 @@ export class ViewFeedComponent implements OnInit {
   }
 
   mixPanelFunctions(data) {
-    mixpanel.identify(data.userId);
+    if (data.new) {
+      mixpanel.alias(data.userId);
+    } else {
+      mixpanel.identify(data.userId);
+    }
     mixpanel.track("Sign In", {
       "userId": data.userId,
       "username": data.username,
