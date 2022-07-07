@@ -9,6 +9,7 @@ import { User } from '../models/User';
 import { Observable } from 'rxjs';
 import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 import { UserDetails } from '../models/UserDetails';
+import { AnalyticsService } from './analytics.service';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
@@ -44,7 +45,8 @@ export class UserService {
   globalSettingsURL = this.baseApiUrl + '/settings/';
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private analyticsService: AnalyticsService) { }
 
   register(userForm: any): Observable<any> {
     return this.http.post<any>(this.globalRegisterURL + 'signup', userForm, {
@@ -227,11 +229,14 @@ export class UserService {
   }
 
   logout() {
+    this.analyticsService.reportLogout();
     this.userId = null;
     //const user_id = sessionStorage.getItem('user_id');
     const user_id = localStorage.getItem('user_id');
     const product_id = localStorage.getItem('product_id');
     const user_id_post_id = localStorage.getItem('user_id_post_id');
+    const region = localStorage.getItem('region');
+
 
     if (user_id) {
       //sessionStorage.removeItem('user_id');
@@ -244,6 +249,9 @@ export class UserService {
     if (user_id_post_id) {
       //sessionStorage.removeItem('user_id');
       localStorage.removeItem('user_id_post_id');
+    }
+    if (region) {
+      localStorage.removeItem('region');
     }
     this.http.get<any>(this.globalRegisterURL + 'logout').subscribe(res => { });
   }
@@ -362,6 +370,10 @@ export class UserService {
 
   getCurrPage() {
     return this.currPage;
+  }
+
+  getPrevPage() {
+    return this.prevPage;
   }
 
 }

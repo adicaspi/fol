@@ -17,6 +17,8 @@ import { Title, Meta } from '@angular/platform-browser';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import { url } from 'inspector';
 import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
+
 
 
 @Component({
@@ -45,7 +47,6 @@ export class LoginComponent implements OnInit {
   private WindowSizeSubscription: Subscription;
   facebookLoginEndpoint: string = environment.loginWithFbUrl;
   private baseApiUrl = environment.BASE_API_URL;
-  private autoLogin = this.baseApiUrl + '/registration/auto-login';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,6 +61,8 @@ export class LoginComponent implements OnInit {
     private titleService: Title,
     private meta: Meta,
     private route: ActivatedRoute,
+    private analyticsSerivce: AnalyticsService,
+
     @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: any,
     @Optional() private dialogRef: MatDialogRef<LoginComponent>
 
@@ -153,7 +156,7 @@ export class LoginComponent implements OnInit {
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           this.userService.updateUser(data.userId);
-          this.mixPanelFunctions(data);
+          this.analyticsSerivce.reportSignIn(data, false, false);
           this.configSerivce.setUserRegionFromDTO(data.region);
 
           this.configSerivce.setSessionStorage(data.userId.toString());
@@ -165,10 +168,10 @@ export class LoginComponent implements OnInit {
             this.configService.removeItem('profile');
             this.router.navigate(['profile', id]);
           }
-          else if (this.configSerivce.getGeneralSession('product_id')) {
-            let productId = this.configService.getGeneralSession('product_id');
-            this.router.navigate(['product-page', productId]);
-          }
+          // else if (this.configSerivce.getGeneralSession('product_id')) {
+          //   let productId = this.configService.getGeneralSession('product_id');
+          //   this.router.navigate(['product-page', productId]);
+          // }
           else {
             this.router.navigate(['/feed/' + data.userId]);
           }
@@ -191,15 +194,6 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  mixPanelFunctions(data) {
-    mixpanel.identify(data.userId);
-    mixpanel.track("Signin", {
-      "userId": data.userId,
-      "username": data.username,
-    });
-    mixpanel.time_event("Log Out");
-
-  }
 
   regsiterPage() {
     if (this.desktop) {

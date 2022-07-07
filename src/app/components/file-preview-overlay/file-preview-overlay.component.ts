@@ -21,6 +21,7 @@ import { LoginComponent } from '../login/login.component';
 import { Router } from '../../../../node_modules/@angular/router';
 import { RegisterComponent } from '../register/register.component';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-file-preview-overlay',
@@ -50,6 +51,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   onDestroy: Subject<void> = new Subject<void>();
   userID: number;
+  prevPage: string;
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
     private configService: ConfigService,
@@ -59,11 +61,14 @@ export class FilePreviewOverlayComponent implements OnInit {
     private feedService: FeedService,
     private router: Router,
     public dialog: MatDialog,
-    private overlay: Overlay
+    private overlay: Overlay,
+    private analyticsService: AnalyticsService
   ) {
   }
 
   ngOnInit() {
+    this.userService.updatePage("product");
+    this.prevPage = this.userService.getPrevPage();
     if (this.userService.userId) {
       this.registeredUser = true;
       this.userID = this.userService.userId;
@@ -132,6 +137,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     if (this.registeredUser) {
       this.postService.incrementPostRedirects(this.userID, this.postId);
     }
+    this.analyticsService.reportViewOnWebsite();
   }
 
   async didLike() {
@@ -289,6 +295,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   closeModal() {
+    this.userService.updatePage(this.prevPage);
     this.dialogRef.close();
   }
 

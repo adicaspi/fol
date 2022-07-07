@@ -18,7 +18,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { Meta, Title } from '../../../../node_modules/@angular/platform-browser';
 import * as jquery from 'jquery';
-import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -67,14 +67,14 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     private feedService: FeedService,
     private dialog: MatDialog,
     private titleService: Title,
-    private meta: Meta
+    private meta: Meta,
+    private analyticsService: AnalyticsService
   ) {
 
 
   }
 
   ngOnInit() {
-    mixpanel.time_event("Viewing Product"); //Start measuring time spent of Feed
     this.userService.updatePage("product");
     this.masterUserId = this.configService.getGeneralSession('user_id_post_id');
     //this.postId = this.configService.getGeneralSession('product_id');
@@ -114,6 +114,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     }
     this.incNumViews();
 
+
   }
 
   getPostInfo(userID: number, postID: number) {
@@ -122,7 +123,6 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
-        console.log(this.postInfo);
         this.masterUserId = postInfo.userId;
         if (this.postInfo.userId == this.userService.userId) {
           this.userProfile = true;
@@ -228,6 +228,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
   incPostRedirects() {
     this.postService.incrementPostRedirects(this.userID, this.postId);
+    this.analyticsService.reportViewOnWebsite();
+
   }
 
   async didLike() {
@@ -301,6 +303,5 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
     this.configService.removeItem('user_id_post_id');
     this.onDestroy.next();
     this.onDestroy.complete();
-    mixpanel.track("Viewing Product"); //User moved from Explore
   }
 }

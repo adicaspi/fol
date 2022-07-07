@@ -140,21 +140,36 @@ export class BottomNavbarComponent implements OnInit {
     this.explore = false;
     this.messageService.sendMessage("profile clicked");
     this.messageService.clearMessage();
-    this.router.navigate(['profile', this.userService.userId]);
+    if (this.router.url.includes("profile")) { //don't navigate to feed, user is already on feed
+      this.messageService.sendMessage("scroll up user page");
+      this.messageService.clearMessage();
+    } else {
+      this.router.navigate(['profile', this.userService.userId]);
+    }
   }
 
   feedPage() {
     this.feed = true;
     this.profile = false;
     this.explore = false;
-    this.router.navigate(['feed', this.userService.userId]);
+    if (this.router.url == "feed") { //don't navigate to feed, user is already on feed
+      this.messageService.sendMessage("scroll up feed page");
+      this.messageService.clearMessage();
+    } else {
+      this.router.navigate(['feed', this.userService.userId]);
+    }
   }
 
   explorePage() {
     this.explore = true;
     this.profile = false;
     this.feed = false;
-    this.router.navigate(['/explore', this.userService.userId]);
+    if (this.router.url.includes("explore")) { //don't navigate to feed, user is already on feed
+      this.messageService.sendMessage("scroll up explore page");
+      this.messageService.clearMessage();
+    } else {
+      this.router.navigate(['/explore', this.userService.userId]);
+    }
   }
 
 

@@ -6,6 +6,8 @@ import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/User';
+import mixpanel from 'mixpanel-browser';
+
 import * as jquery from 'jquery';
 
 

@@ -11,6 +11,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorsService } from '../../services/errors.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-http-error',
@@ -18,7 +19,7 @@ import { ErrorsService } from '../../services/errors.service';
   styleUrls: ['./http-error.component.css']
 })
 export class HttpErrorComponent implements HttpInterceptor {
-  constructor(private router: Router, private errorsService: ErrorsService) { }
+  constructor(private router: Router, private errorsService: ErrorsService, private analyticsService: AnalyticsService) { }
 
   intercept(
     request: HttpRequest<any>,
@@ -38,6 +39,7 @@ export class HttpErrorComponent implements HttpInterceptor {
             if (error.status == 401) {
               // TODO - add msg something went wrong
               //console.log('status 401 unauth');
+              this.analyticsService.reportLogout("401");
               this.router.navigate(['landing']);
             }
             if (error.error.error == 'User Collision') {

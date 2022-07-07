@@ -24,7 +24,8 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import { LoginComponent } from '../login/login.component';
 import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
-import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
+
 
 
 
@@ -49,7 +50,8 @@ export class UserFeedComponent implements OnInit {
   scrollPageToTop: boolean = false;
   user: Observable<User>;
   showPopup: boolean = true;
-  registeredUser: boolean = false;;
+  registeredUser: boolean = false;
+  productPageClicked: boolean = false;
   private baseApiUrl = environment.BASE_API_URL;
   private WindowSizeSubscription: Subscription
   private feedSubscription: Subscription
@@ -84,7 +86,8 @@ export class UserFeedComponent implements OnInit {
     private dialog: MatDialog,
     private overlay: Overlay,
     private titleService: Title,
-    private meta: Meta
+    private meta: Meta,
+    private analyticsService: AnalyticsService
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -94,7 +97,7 @@ export class UserFeedComponent implements OnInit {
     // if (this.userService.userId) {
     //   this.registeredUser = true;
     // }
-
+    this.productPageClicked = false;
     this.titleService.setTitle('User Profile Feed');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     jquery(".scroll-bar-container").css("margin", "-6px 0px -6px");
@@ -131,18 +134,22 @@ export class UserFeedComponent implements OnInit {
           //this.feedService.updateProfileFeed(this.id, this.offset);
           this.feedService.updateUserFeed(this.id, this.offset);
         }
+        if (msg.msg == "scroll up user page") {
+          window.scroll(0, 0);
+        }
       }
     });
-    this.WindowSizeSubscription = this.configService.windowSizeChanged.subscribe(
+    this.WindowSizeSubscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
-        if (value.width > 600) {
-          this.desktop = true;
-        }
         if (value.width <= 600) {
           this.desktop = false;
+        } else {
+          this.desktop = true;
         }
-      });
+      }, error => this.anyErrors = true,
+      () => this.finished = true);
     this.getActivatedRoute();
+
   }
 
   getActivatedRoute() {
@@ -152,13 +159,20 @@ export class UserFeedComponent implements OnInit {
         this.id = +params['id'];
         if (this.userService.getCurrentUser() == this.id) {
           this.userProfile = true;
-          mixpanel.time_event("Viewing My Profile"); //Start measuring time spent on my profile
+          this.analyticsService.reportMyProfileSessionStart();
           this.userService.updatePage("my profile");
-        }
-        else {
-          this.user = this.userService.getUserProfileInfo(this.id);
-          mixpanel.time_event("Viewing User Profile"); //Start measuring time spent on user profile
+          if (this.userService.getPrevPage() != "product") {
+            this.analyticsService.reportMyProfileView();
+          }
+        } else {
+          this.userProfile = false;
+          this.analyticsService.reportUserProfileSessionStart(this.id);
           this.userService.updatePage("user profile");
+          this.user = this.userService.getUserProfileInfo(this.id);
+          if (this.userService.getPrevPage() != "product") {
+            this.analyticsService.reportUserProfileView();
+          }
+
         }
         if (!this.desktop) {
           this.feedService.updateProfileFeed(this.id, this.offset);
@@ -288,6 +302,8 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
+    this.productPageClicked = true;
+    this.analyticsService.reportProductPageView("User-feed");
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     this.postService.userPost = post;
@@ -299,17 +315,20 @@ export class UserFeedComponent implements OnInit {
   }
 
 
-  public ngOnDestroy(): void {
+  ngOnDestroy() {
     this.WindowSizeSubscription.unsubscribe();
     this.onDestroy.next();
     this.onDestroy.complete();
     this.feedSubscription.unsubscribe();
     this.updateFeed.unsubscribe();
-    if (this.userProfile) {
-      mixpanel.track("Viewing My Profile"); //User moved from his profile
-    }
-    else {
-      mixpanel.track("Viewing User Profile"); //User moved from user profile
+    if (!this.productPageClicked) {
+      if (this.userProfile) {
+        this.analyticsService.reportMyProfileSessionEnd();
+      }
+      else {
+        this.analyticsService.reportUserProfileSessionEnd(this.id);
+      }
     }
   }
+
 }

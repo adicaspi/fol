@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 import { ConfigService } from './config.service';
 import { Router } from '../../../node_modules/@angular/router';
 import { takeUntil } from 'rxjs/operators';
+import { AnalyticsService } from './analytics.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,10 @@ export class AuthService {
   private baseApiUrl = environment.BASE_API_URL;
   private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private authenticated: boolean = false;
+  private facebookLogin = environment.loginWithFbUrl;
   onDestroy: Subject<void> = new Subject<void>();
   activated: Subscription;
-  constructor(private http: HttpClient, private userService: UserService, private configService: ConfigService, private router: Router) { }
+  constructor(private http: HttpClient, private userService: UserService, private configService: ConfigService, private router: Router, private analyticsService: AnalyticsService) { }
 
 
   isAuthenticated(): Observable<boolean> {
@@ -28,13 +30,15 @@ export class AuthService {
     }
   }
 
-
-
-
   loadConfigurationData(): Observable<boolean> {
     return this.http.get<any>(this.autoLogin).pipe(map(res => {
+      this.analyticsService.reportSignIn(res, true, false);
       this.setUserDetails(res);
       return true;
+    }, error => {
+      console.log(error);
+      this.router.navigate['landing'];
+      return false;
     }))
   }
 
@@ -43,22 +47,43 @@ export class AuthService {
     this.userService.username = data.userName;
     this.userService.updateUser(data.userId);
     this.configService.setSessionStorage(data.userId.toString());
+    this.configService.setUserRegionFromDTO(data.region);
   }
 
 
   isAuthenticaedFacebook(): Observable<boolean> {
+    if (this.userService.userId) {
+      return Observable.of(true);
+    }
     var index = this.router.url.indexOf("code");
+    var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
+    if (alreadyFoundOnFBError) {
+      console.log("in facebook error");
+      this.redirectToFacebook();
+    }
     if (index != -1) {
       var facebookLoginCode = this.router.url.substring(index + 5);
-      //this.configService.setUserRegionFromIP();
-      this.userService.loginWithFacebook(facebookLoginCode).pipe(map(res => {
-        this.userService.userId = res.userId;
-        this.userService.username = res.username;
-        this.userService.updateUser(res.userId);
-        this.configService.setSessionStorage(res.userId.toString());
-        return true;
-      }))
+      var hashTagIndex = this.router.url.indexOf("#");
+      if (hashTagIndex != -1) {
+        facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
+      }
+      this.loginWithFacebook(facebookLoginCode);
+      return Observable.of(true);
     }
-    return Observable.of(false);
+    else {
+      return this.loadConfigurationData();
+    }
   }
+
+  redirectToFacebook() {
+    window.location.href = this.facebookLogin;
+  }
+
+  loginWithFacebook(code) {
+    this.userService.loginWithFacebook(code).pipe(takeUntil(this.onDestroy)).subscribe(data => {
+      this.setUserDetails(data);
+      this.analyticsService.reprotFacebook(data);
+    })
+  }
+
 }

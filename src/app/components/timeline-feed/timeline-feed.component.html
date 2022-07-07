@@ -17,8 +17,8 @@
       <div class="card masonry-item" *ngFor="let post of posts">
 
         <div class="profile-image">
-          <img (click)="profilePage(post)" [attr.src]="post.profileImgSrc" />
-          <span (click)="profilePage(post)" class="card-text-profile">{{ post.post.userName }}</span>
+          <img (click)="profilePage(post,desktop)" [attr.src]="post.profileImgSrc" />
+          <span (click)="profilePage(post,desktop)" class="card-text-profile">{{ post.post.userName }}</span>
         </div>
 
 

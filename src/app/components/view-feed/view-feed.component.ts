@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { filter } from 'rxjs/operators';
 import mixpanel from 'mixpanel-browser';
 import { MessageService } from '../../services/message.service';
+import { AnalyticsService } from '../../services/analytics.service';
 @Component({
   selector: 'app-view-feed',
   templateUrl: './view-feed.component.html',
@@ -25,6 +26,7 @@ export class ViewFeedComponent implements OnInit {
   desktop: Boolean = true;
   filteredOptions: Observable<string[]>;
   searchedTouched: Observable<boolean>;
+  autologin: boolean = false;
   error: any = {};
   private subscription: Subscription;
   private autoLoginSubscription: Subscription;
@@ -41,37 +43,38 @@ export class ViewFeedComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private errorsService: ErrorsService,
-    private messageServie: MessageService
+    private messageServie: MessageService,
+    private analyticsSerivce: AnalyticsService
   ) {
 
   }
 
   ngOnInit() {
 
-    mixpanel.time_event("Viewing Feed"); //Start measuring time spent of Feed
-    this.userService.updatePage("feed");
-    var index = this.router.url.indexOf("code");
-    var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
-    if (index != -1) {
-      var facebookLoginCode = this.router.url.substring(index + 5);
-      var hashTagIndex = this.router.url.indexOf("#");
-      if (hashTagIndex != -1) {
-        facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
-      }
-      this.loginWithFacebook(facebookLoginCode);
+    // mixpanel.time_event("Viewing Feed"); //Start measuring time spent of Feed
+    // this.userService.updatePage("feed");
+    // var index = this.router.url.indexOf("code");
+    // var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
+    // if (index != -1) {
+    //   var facebookLoginCode = this.router.url.substring(index + 5);
+    //   var hashTagIndex = this.router.url.indexOf("#");
+    //   if (hashTagIndex != -1) {
+    //     facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
+    //   }
+    //   this.loginWithFacebook(facebookLoginCode);
 
-    }
-    if (alreadyFoundOnFBError) {
-      console.log("in facebook error");
-      this.redirectToFacebook();
-    }
+    // }
+    // if (alreadyFoundOnFBError) {
+    //   console.log("in facebook error");
+    //   this.redirectToFacebook();
+    // }
 
-    if (this.userService.userId) {
-      this.userId = true;
-    }
-    else {
-      this.loadConfigurationData();
-    }
+    // if (this.userService.userId) {
+    //   this.userId = true;
+    // }
+    // else {
+    //   this.loadConfigurationData();
+    // }
 
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
@@ -91,6 +94,7 @@ export class ViewFeedComponent implements OnInit {
     //this.configService.setUserRegionFromIP();
     this.userService.loginWithFacebook(code).pipe(takeUntil(this.onDestroy)).subscribe(data => {
       this.setUserDetails(data);
+      this.analyticsSerivce.reprotFacebook(data);
     })
   }
 
@@ -102,37 +106,24 @@ export class ViewFeedComponent implements OnInit {
     this.http
       .get<any>(this.autoLogin).pipe(takeUntil(this.onDestroy))
       .subscribe(data => {
-        this.setUserDetails(data);
+        this.setUserDetails(data, this.autologin);
+        this.analyticsSerivce.reportSignIn(data, true, false);
+      }, error => {
+        this.router.navigate['landing'];
+        console.log(error);
       })
   }
 
-  setUserDetails(data) {
+  setUserDetails(data, autologin?) {
     this.userId = true;
     this.userService.userId = data.userId;
     this.userService.username = data.userName;
     this.userService.updateUser(data.userId);
     this.configService.setSessionStorage(data.userId.toString());
     this.configService.setUserRegionFromDTO(data.region);
-    this.mixPanelFunctions(data);
-
-
-
-  }
-
-  mixPanelFunctions(data) {
-    if (data.new) {
-      mixpanel.alias(data.userId);
-    } else {
-      mixpanel.identify(data.userId);
-    }
-    mixpanel.track("Sign In", {
-      "userId": data.userId,
-      "username": data.username,
-    });
-    mixpanel.time_event("Log Out"); //Start measuring time until log out
   }
 
   ngOnDestroy() {
-    mixpanel.track("Viewing Feed"); //User moved from Feed
+    // mixpanel.track("Viewing Feed"); //User moved from Feed
   }
 }

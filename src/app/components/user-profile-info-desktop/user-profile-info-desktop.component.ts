@@ -14,6 +14,7 @@ import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.co
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-user-profile-info-desktop',
@@ -57,7 +58,8 @@ export class UserProfileInfoDesktopComponent implements OnInit {
     public router: Router,
     public configService: ConfigService,
     public location: LocationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+
   ) {
 
   }
@@ -177,7 +179,6 @@ export class UserProfileInfoDesktopComponent implements OnInit {
 
   logout() {
     this.userService.logout();
-    mixpanel.track("Log Out");
     this.router.navigate(['landing']);
   }
 

@@ -22,7 +22,7 @@ import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
-import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -41,6 +41,7 @@ export class ExploreFeedGeneralComponent implements OnInit {
   showNoPostsMessage: boolean = false;
   prevScrollPos = window.pageYOffset;
   showPopup: boolean = true;
+  productPageClicked: boolean = false;
   private feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -64,12 +65,19 @@ export class ExploreFeedGeneralComponent implements OnInit {
     private overlay: Overlay,
     private titleService: Title,
     private dialog: MatDialog,
-    private meta: Meta
-  ) { }
+    private meta: Meta,
+    private analyticsService: AnalyticsService
+  ) {
+
+  }
 
   ngOnInit() {
-    mixpanel.time_event("Viewing General Explore"); //Start measuring time spent of Feed
+    this.productPageClicked = false;
     this.userService.updatePage("general explore");
+    if (this.userService.getPrevPage() != "product") {
+      this.analyticsService.reportGeneralExploreView();
+    }
+
     this.titleService.setTitle('Explore Followear General');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index, follow' });
@@ -93,6 +101,8 @@ export class ExploreFeedGeneralComponent implements OnInit {
           this.spinner.show();
           this.posts = [];
           this.feedService.updateGeneralExploreFeed();
+        } if (msg.msg == "scroll up explore page") {
+          window.scroll(0, 0);
         }
       }
     });
@@ -181,6 +191,8 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   openDialog(post): void {
+    this.productPageClicked = true;
+    this.analyticsService.reportProductPageView("Explore-general-feed");
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {
@@ -195,7 +207,9 @@ export class ExploreFeedGeneralComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
-    mixpanel.track("Viewing General Explore"); //User moved from General Explore
+    if (!this.productPageClicked) {
+      this.analyticsService.reportGeneralExploreSessionEnd();
+    }
     this.onDestroy.next();
   }
 

@@ -12,7 +12,7 @@ import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 import { Title, Meta } from '../../../../node_modules/@angular/platform-browser';
-import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -38,16 +38,18 @@ export class DiscoverPeopleComponent implements OnInit {
     private dialog: MatDialog,
     private scrollHelperService: ScrollHelperService,
     private titleService: Title,
-    private meta: Meta) { }
+    private meta: Meta,
+    private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    mixpanel.time_event("Viewing Discover People"); //Start measuring time spent of Feed
+    this.analyticsService.reportDiscoverPeopleSessionStart();
     this.userService.updatePage("discover");
-    this.titleService.setTitle('Discover People');
-    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
     if (this.userService.userId) {
       this.registeredUser = true;
     }
+    this.titleService.setTitle('Discover People');
+    this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
+
     this.WindowSizeSubscription = this.configService.windowSizeChanged
       .subscribe(
         value => {
@@ -156,7 +158,8 @@ export class DiscoverPeopleComponent implements OnInit {
   ngOnDestroy(): void {
     this.onDestroy.next();
     this.WindowSizeSubscription.unsubscribe();
-    mixpanel.track("Viewing Discover People"); //User moved from Explore
+    this.analyticsService.reportDiscoverPeopleSessionStart();
+
   }
 
 }

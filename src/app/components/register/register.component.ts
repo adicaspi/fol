@@ -16,6 +16,7 @@ import { Overlay } from '../../../../node_modules/@angular/cdk/overlay';
 import * as jquery from 'jquery';
 import * as $ from 'jquery';
 import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-register',
@@ -63,6 +64,7 @@ export class RegisterComponent implements OnInit {
     private configService: ConfigService,
     private configSerivce: ConfigService,
     private titleService: Title,
+    private analyticsSerivce: AnalyticsService,
     private meta: Meta,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     @Optional() private dialogRef?: MatDialogRef<RegisterComponent>
@@ -222,7 +224,7 @@ export class RegisterComponent implements OnInit {
           data => {
             this.userService.userId = data.userId;
             this.userService.username = data.username;
-            this.mixPanelFunctions(data, username, email);
+            this.analyticsSerivce.reportSignUp(data, email, false);
             this.userService.updateUser(data.userId);
             this.configSerivce.setSessionStorage(data.userId.toString());
             if (this.configSerivce.getGeneralSession('profile')) {
@@ -230,10 +232,10 @@ export class RegisterComponent implements OnInit {
               this.configService.removeItem('profile');
               this.router.navigate(['profile', id]);
             }
-            else if (this.configService.getGeneralSession('product_id')) {
-              let productId = this.configService.getGeneralSession('product_id');
-              this.router.navigate(['product-page', productId]);
-            }
+            // else if (this.configService.getGeneralSession('product_id')) {
+            //   let productId = this.configService.getGeneralSession('product_id');
+            //   this.router.navigate(['product-page', productId]);
+            // }
             else {
               this.router.navigate(['feed-discover-people']);
             }
@@ -250,20 +252,6 @@ export class RegisterComponent implements OnInit {
           }
         );
     });
-  }
-
-  mixPanelFunctions(data, username, email) {
-    mixpanel.alias(data.userId);
-    mixpanel.track("Sign Up", {
-      "userId": data.userId,
-      "username": data.username,
-    });
-    mixpanel.people.set_once({ //set these properties for the user if not already set
-      '$name': username,
-      '$created': new Date(),
-      '$email': email
-    });
-    mixpanel.time_event("Log Out");
   }
 
   loginPage(): void {

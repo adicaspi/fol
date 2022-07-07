@@ -17,7 +17,6 @@ export class LandingPageComponent implements OnInit {
   routes: Routes = [{ path: 'register', component: RegisterComponent }];
   desktop: boolean;
   private baseApiUrl = environment.BASE_API_URL;
-  private autoLogin = this.baseApiUrl + '/registration/auto-login';
   private WindowSizeSubscription: Subscription;
   facebookLoginCode: string;
 

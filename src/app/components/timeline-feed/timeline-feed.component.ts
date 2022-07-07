@@ -25,6 +25,7 @@ import { MessageService } from '../../services/message.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import * as jquery from 'jquery';
 import { Title, Meta } from '@angular/platform-browser';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-timeline-feed',
@@ -51,6 +52,7 @@ export class TimelineFeedComponent implements OnInit {
   showNoPostsMessage: boolean = false;
   showDiscover: boolean = false;
   scrollPageToTop: boolean = false;
+  productPageClicked: boolean = false;
 
 
   private baseApiUrl = environment.BASE_API_URL;
@@ -68,12 +70,15 @@ export class TimelineFeedComponent implements OnInit {
     private massageService: MessageService,
     private spinner: NgxSpinnerService,
     private titleService: Title,
-    private meta: Meta
+    private meta: Meta,
+    private analyticsService: AnalyticsService
   ) {
+
 
   }
 
   ngOnInit() {
+    this.productPageClicked = false;
     this.spinner.show();
     this.titleService.setTitle('Followear Timeline Feed');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
@@ -113,6 +118,9 @@ export class TimelineFeedComponent implements OnInit {
           this.scrollPageToTop = true;
           this.feedService.updateTimelineFeed(this.id, this.offset);
         }
+        if (msg.msg == "scroll up feed page") {
+          window.scroll(0, 0);
+        }
       }
     });
 
@@ -120,6 +128,12 @@ export class TimelineFeedComponent implements OnInit {
       this.following = res;
       if (!this.following) {
         this.router.navigate(['feed-discover-people']);
+      } else {
+        this.analyticsService.reportTimelineFeedSessionStart()
+        this.userService.updatePage("feed");
+        if (this.userService.getPrevPage() != "product") {
+          this.analyticsService.reportTimelinefeedView();
+        }
       }
     });
     this.WindowSizeSubscription = this.configService.windowSizeChanged
@@ -146,6 +160,8 @@ export class TimelineFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
+    this.productPageClicked = true;
+    this.analyticsService.reportProductPageView("Timeline-feed");
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {
@@ -159,8 +175,12 @@ export class TimelineFeedComponent implements OnInit {
     return post.post.salePrice;
   }
 
-  profilePage(post) {
-    this.router.navigate(['profile', post['post']['userId']]);
+  profilePage(post, desktop) {
+    if (desktop) {
+      this.router.navigate(['desktop-profile', post['post']['userId']]);
+    } else {
+      this.router.navigate(['profile', post['post']['userId']]);
+    }
   }
 
   discoverPeople() {
@@ -172,6 +192,11 @@ export class TimelineFeedComponent implements OnInit {
     this.feedSubscription.unsubscribe();
     this.onDestroy.next();
     this.updateFeed.unsubscribe();
+    if (this.following) {
+      if (!this.productPageClicked) { //Session didn't end if user moved to product page
+        this.analyticsService.reportTimelineFeedSessionEnd(); //User moved from Feed
+      }
+    }
   }
 
 

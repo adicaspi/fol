@@ -189,7 +189,12 @@ export class NavbarComponent implements OnInit {
   }
 
   profilePage() {
-    this.router.navigate(['profile', this.userService.userId]);
+    if (this.desktop) {
+      this.router.navigate(['desktop-profile', this.userService.userId]);
+    } else {
+      this.router.navigate(['profile', this.userService.userId]);
+    }
+
   }
 
   settingsPage() {

@@ -173,7 +173,6 @@ export class UserProfileInfoMobileComponent implements OnInit {
 
   logout() {
     this.userService.logout();
-    mixpanel.track("Log Out");
     this.router.navigate(['landing']);
   }
 

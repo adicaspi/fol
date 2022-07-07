@@ -26,6 +26,7 @@ import { ExternalWebsiteComponent } from './components/external-website/external
 import {
   AuthGuardService as AuthGuard
 } from './services/auth-guard.service';
+import { AuthGuradFbService as AuthGuardFB } from './services/auth-gurad-fb.service';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 
@@ -34,7 +35,7 @@ const routes: Routes = [
   {
     path: '',
     component: ViewFeedComponent,
-    //canActivate: [AuthGuardFB]
+    canActivate: [AuthGuardFB]
   },
 
   {
@@ -48,7 +49,8 @@ const routes: Routes = [
   },
   {
     path: 'feed/:id', component: ViewFeedComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
+    canActivate: [AuthGuardFB]
 
   },
 

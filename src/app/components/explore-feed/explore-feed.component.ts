@@ -19,7 +19,7 @@ import * as jquery from 'jquery';
 import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
 import { ScrollHelperService } from '../../services/scroll-helper.service';
 import { Title, Meta } from '@angular/platform-browser';
-import mixpanel from 'mixpanel-browser';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-explore-feed',
@@ -37,6 +37,7 @@ export class ExploreFeedComponent implements OnInit {
   windowWidth: number;
   showNoPostsMessage: boolean = false;
   scrollPageToTop: boolean = false;
+  productPageClicked: boolean = false;
   feedSubsription: Subscription
   private baseApiUrl = environment.BASE_API_URL;
   private updateFeed: Subscription
@@ -59,12 +60,19 @@ export class ExploreFeedComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private scrollHelperService: ScrollHelperService,
     private titleService: Title,
-    private meta: Meta
-  ) { }
+    private meta: Meta,
+    private analyticsService: AnalyticsService
+  ) {
+
+  }
 
   ngOnInit() {
-    mixpanel.time_event("Viewing Explore"); //Start measuring time spent of Feed
+    this.productPageClicked = false;
+    this.analyticsService.reportExploreSessionStart();
     this.userService.updatePage("explore");
+    if (this.userService.getPrevPage() != "product") {
+      this.analyticsService.reportExploreView();
+    }
     this.titleService.setTitle('Explore User');
     this.meta.addTag({ name: 'description', content: "Explore Followear! click here to see fashion items from your favorite stores" });
     this.spinner.show();
@@ -93,6 +101,8 @@ export class ExploreFeedComponent implements OnInit {
           this.posts = [];
           this.scrollPageToTop = true;
           this.feedService.updateExploreFeed(this.id);
+        } if (msg.msg == "scroll up explore page") {
+          window.scroll(0, 0);
         }
       }
     });
@@ -115,6 +125,8 @@ export class ExploreFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
+    this.productPageClicked = true;
+    this.analyticsService.reportProductPageView("Explore-feed");
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {
@@ -132,6 +144,8 @@ export class ExploreFeedComponent implements OnInit {
     this.onDestroy.next();
     this.feedSubsription.unsubscribe();
     this.WindowSizeSubscription.unsubscribe();
-    mixpanel.track("Viewing Explore"); //User moved from Explore
+    if (!this.productPageClicked) {
+      this.analyticsService.reportExploreSessionEnd();
+    }
   }
 }
