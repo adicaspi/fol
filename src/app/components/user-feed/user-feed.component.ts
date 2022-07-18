@@ -157,20 +157,29 @@ export class UserFeedComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         this.id = +params['id'];
+        this.user = this.userService.getUserProfileInfo(this.id);
         if (this.userService.getCurrentUser() == this.id) {
           this.userProfile = true;
+
           this.analyticsService.reportMyProfileSessionStart();
+
           this.userService.updatePage("my profile");
           if (this.userService.getPrevPage() != "product") {
-            this.analyticsService.reportMyProfileView();
+            this.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
+              this.analyticsService.reportMyProfileView(user.id, user.id, user.username, user.fullName, user.description);
+            });
           }
         } else {
           this.userProfile = false;
-          this.analyticsService.reportUserProfileSessionStart(this.id);
+
           this.userService.updatePage("user profile");
-          this.user = this.userService.getUserProfileInfo(this.id);
+
           if (this.userService.getPrevPage() != "product") {
-            this.analyticsService.reportUserProfileView();
+            this.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
+              this.analyticsService.reportUserProfileView(user.id, this.userService.getCurrentUser(), user.username, user.fullName, user.description);
+            });
+            this.analyticsService.reportUserProfileSessionStart();
+
           }
 
         }
@@ -302,14 +311,13 @@ export class UserFeedComponent implements OnInit {
   }
 
   openDialog(post): void {
-    this.productPageClicked = true;
-    this.analyticsService.reportProductPageView("User-feed");
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     this.postService.userPost = post;
     if (this.desktop) {
       this.dialogService.openDialog();
     } else {
+      this.productPageClicked = true;
       this.router.navigate(['product-page', post.post.postId]);
     }
   }
@@ -323,10 +331,14 @@ export class UserFeedComponent implements OnInit {
     this.updateFeed.unsubscribe();
     if (!this.productPageClicked) {
       if (this.userProfile) {
-        this.analyticsService.reportMyProfileSessionEnd();
+        this.user.subscribe(user => {
+          this.analyticsService.reportMyProfileSessionEnd(user.id, user.id, user.username, user.fullName, user.description);
+        })
       }
       else {
-        this.analyticsService.reportUserProfileSessionEnd(this.id);
+        this.user.subscribe(user => {
+          this.analyticsService.reportUserProfileSessionEnd(user.id, this.userService.getCurrentUser(), user.username, user.fullName, user.description);
+        })
       }
     }
   }

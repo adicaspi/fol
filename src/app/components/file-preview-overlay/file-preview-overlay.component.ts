@@ -51,7 +51,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   pipeTransform: ThousandSuffixesPipe = new ThousandSuffixesPipe();
   onDestroy: Subject<void> = new Subject<void>();
   userID: number;
-  prevPage: string;
+  referrerPage: string;
   private baseApiUrl = environment.BASE_API_URL;
   constructor(
     private configService: ConfigService,
@@ -68,7 +68,7 @@ export class FilePreviewOverlayComponent implements OnInit {
 
   ngOnInit() {
     this.userService.updatePage("product");
-    this.prevPage = this.userService.getPrevPage();
+    this.referrerPage = this.userService.getPrevPage();
     if (this.userService.userId) {
       this.registeredUser = true;
       this.userID = this.userService.userId;
@@ -120,6 +120,7 @@ export class FilePreviewOverlayComponent implements OnInit {
         this.userProfileSrc = this.postInfo.userProfileImageAddr;
         this.postImageAddr = this.postInfo.postImageAddr;
         this.showSpinner = false;
+        this.analyticsService.reportProductPageView(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage);
       });
 
   }
@@ -137,7 +138,7 @@ export class FilePreviewOverlayComponent implements OnInit {
     if (this.registeredUser) {
       this.postService.incrementPostRedirects(this.userID, this.postId);
     }
-    this.analyticsService.reportViewOnWebsite();
+    this.analyticsService.reportViewOnWebsite(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage);
   }
 
   async didLike() {
@@ -184,7 +185,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   profilePage() {
     this.closeModal();
     // if (this.registeredUser) {
-    this.router.navigate(['profile', this.postInfo.userId]);
+    this.router.navigate(['desktop-profile', this.postInfo.userId]);
     // } else {
     //   this.registerPage();
     // }
@@ -295,7 +296,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   closeModal() {
-    this.userService.updatePage(this.prevPage);
+    this.userService.updatePage(this.referrerPage);
     this.dialogRef.close();
   }
 

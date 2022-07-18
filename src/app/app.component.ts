@@ -2,6 +2,10 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import mixpanel from 'mixpanel-browser';
 import { UserService } from './services/user.service';
 import { AnalyticsService } from './services/analytics.service';
+import { ActivatedRoute } from '../../node_modules/@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from '../../node_modules/rxjs';
+
 
 @Component({
   selector: 'app-root',
@@ -14,8 +18,9 @@ export class AppComponent implements OnInit {
   startTime = 0;
   endTime = 0;
   inActiveTime: any;
+  onDestroy: Subject<void> = new Subject<void>();
   constructor(private userService: UserService,
-    private analyticsService: AnalyticsService) {
+    private analyticsService: AnalyticsService, private activatedRoute: ActivatedRoute) {
 
   }
 
@@ -48,18 +53,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {
-    mixpanel.track("User Session"); //User moved from Feed
-  }
-
-  // @HostListener('window:unload', ['$event'])
-  // unloadHandler(event) {
-  //   console.log("in unload");
-  //   alert("unload");
-  //   mixpanel.track("User Session");
-  // }
-
-
   @HostListener('window:beforeunload', ['$event'])
   beforeUnloadHandler(event) {
     console.log("refresh", event);
@@ -84,10 +77,25 @@ export class AppComponent implements OnInit {
         this.analyticsService.reportTimelineFeedSessionEnd();
         break;
       case "user profile":
-        this.analyticsService.reportUserProfileSessionEnd();
+        this.activatedRoute.params
+          .pipe(takeUntil(this.onDestroy))
+          .subscribe(params => {
+            let id = +params['id'];
+            this.userService.getUserProfileInfo(id).subscribe(user => {
+              this.analyticsService.reportUserProfileSessionEnd(user.id, this.userService.getCurrentUser(), user.username, user.fullName, user.description);
+            });
+          })
         break;
       case "my profile":
-        this.analyticsService.reportMyProfileSessionEnd();
+        this.activatedRoute.params
+          .pipe(takeUntil(this.onDestroy))
+          .subscribe(params => {
+            let id = +params['id'];
+            this.userService.getUserProfileInfo(id).subscribe(user => {
+              this.analyticsService.reportMyProfileSessionEnd(user.id, user.id, user.username, user.fullName, user.description)
+            });
+          })
+
         break;
       case "explore":
         this.analyticsService.reportExploreSessionEnd();
@@ -103,4 +111,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    mixpanel.track("User Session");
+    this.onDestroy.next();
+    this.onDestroy.complete();
+
+  }
 }

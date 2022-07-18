@@ -11,7 +11,6 @@ import { User } from '../../models/User';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
-import mixpanel from 'mixpanel-browser';
 
 @Component({
   selector: 'app-user-profile-info-mobile',

@@ -126,7 +126,6 @@ export class ExploreFeedComponent implements OnInit {
 
   openDialog(post): void {
     this.productPageClicked = true;
-    this.analyticsService.reportProductPageView("Explore-feed");
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {

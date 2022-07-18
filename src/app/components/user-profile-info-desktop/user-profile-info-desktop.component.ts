@@ -13,7 +13,6 @@ import { User } from '../../models/User';
 import { ViewFollowListComponent } from '../view-follow-list/view-follow-list.component';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
-import mixpanel from 'mixpanel-browser';
 import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({

@@ -10,7 +10,6 @@ import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 import { takeUntil } from 'rxjs/operators';
 import { filter } from 'rxjs/operators';
-import mixpanel from 'mixpanel-browser';
 import { MessageService } from '../../services/message.service';
 import { AnalyticsService } from '../../services/analytics.service';
 @Component({
@@ -51,7 +50,6 @@ export class ViewFeedComponent implements OnInit {
 
   ngOnInit() {
 
-    // mixpanel.time_event("Viewing Feed"); //Start measuring time spent of Feed
     // this.userService.updatePage("feed");
     // var index = this.router.url.indexOf("code");
     // var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
@@ -124,6 +122,6 @@ export class ViewFeedComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    // mixpanel.track("Viewing Feed"); //User moved from Feed
+
   }
 }

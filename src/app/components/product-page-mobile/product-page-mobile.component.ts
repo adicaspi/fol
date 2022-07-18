@@ -51,6 +51,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   saveButtonClicked: boolean = false;
   registeredUser: boolean = false;
   showRegsterMsg: boolean = false;
+  referrerPage: string;
   userID: number;
   createDate: Date;
   hoursDiffrence = 0;
@@ -76,6 +77,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userService.updatePage("product");
+    this.referrerPage = this.userService.getPrevPage();
     this.masterUserId = this.configService.getGeneralSession('user_id_post_id');
     //this.postId = this.configService.getGeneralSession('product_id');
     this.configService.removeItem('product_id');
@@ -147,6 +149,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         this.storeLogoSrc = this.postInfo.storeLogoAddr;
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numViews = this.postInfo.numViews;
+        this.analyticsService.reportProductPageView(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage);
         // this.getHoursDifference();
 
       });
@@ -228,7 +231,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
 
   incPostRedirects() {
     this.postService.incrementPostRedirects(this.userID, this.postId);
-    this.analyticsService.reportViewOnWebsite();
+    this.analyticsService.reportViewOnWebsite(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage);
 
   }
 

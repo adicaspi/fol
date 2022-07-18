@@ -7,7 +7,7 @@ import { FeedService } from '../../services/feed.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/User';
 import * as jquery from 'jquery';
-import mixpanel from 'mixpanel-browser';
+
 
 
 
