@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
         this.inActiveTime = (this.endTime - this.startTime) / 1000; //inactive time in seconds
         if ((this.inActiveTime) / 60 >= 10) { //Tab was inactive for 10 mins
           console.log("session ended");
-          this.endSessionInLastVisitedComponent();
+          //this.endSessionInLastVisitedComponent();
           mixpanel.track("User Session"); //Session ended on the web
         }
       }
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
     } else {
       console.info("This page is not reloaded");
       localStorage.removeItem("user_id");
-      this.endSessionInLastVisitedComponent();
+      //this.endSessionInLastVisitedComponent();
       mixpanel.track("User Session");
     }
 
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.endSessionInLastVisitedComponent();
+    //this.endSessionInLastVisitedComponent();
     mixpanel.track("User Session");
     this.onDestroy.next();
     this.onDestroy.complete();
