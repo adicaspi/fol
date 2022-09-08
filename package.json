@@ -41,7 +41,7 @@
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
     "jquery-ui-touch-punch": "^0.2.3",
-    "jszip": "^3.2.2",
+    "jszip": "^3.7.0",
     "masonry-layout": "^4.2.2",
     "minireset.css": "~0.0.4",
     "ng-simple-slideshow": "^1.2.9",
