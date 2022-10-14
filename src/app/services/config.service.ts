@@ -1,7 +1,6 @@
 import { Injectable, Injector, Inject, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { PostService } from './post.service';
@@ -59,10 +58,10 @@ export class ConfigService implements OnInit {
     mixpanel.init(environment.mixPanelToken, { debug: true });
   }
 
-  router(): Router {
-    //this creates router property on your service.
-    return this.injector.get(Router);
-  }
+  // router(): Router {
+  //   //this creates router property on your service.
+  //   return this.injector.get(Router);
+  // }
 
 
   async setUserRegionFromIP(): Promise<string> {
@@ -107,9 +106,10 @@ export class ConfigService implements OnInit {
   getSessionStorgae() {
     // const user_id = sessionStorage.getItem('user_id');
     const user_id = localStorage.getItem('user_id');
+
     if (user_id) {
       var userId = parseInt(user_id);
-      this.userService.userId = userId;
+      this.userService.userId = parseInt(user_id);
       this.userService.updateUser(userId);
     } else {
       console.log('session storage not initiliazed yet');

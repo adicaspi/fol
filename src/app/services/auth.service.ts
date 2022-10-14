@@ -23,6 +23,7 @@ export class AuthService {
 
 
   isAuthenticated(): Observable<boolean> {
+    console.log("is authenitcated");
     if (this.userService.userId) {
       return Observable.of(true);
     } else {

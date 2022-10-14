@@ -50,7 +50,10 @@ const routes: Routes = [
   {
     path: 'feed/:id', component: ViewFeedComponent,
     //canActivate: [AuthGuard]
+<<<<<<< HEAD
     canActivate: [AuthGuardFB]
+=======
+>>>>>>> adi/facebok_login
 
   },
 
