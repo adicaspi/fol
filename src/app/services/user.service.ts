@@ -9,6 +9,7 @@ import { User } from '../models/User';
 import { Observable } from 'rxjs';
 import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 import { UserDetails } from '../models/UserDetails';
+import { Router } from '../../../node_modules/@angular/router';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };
@@ -57,6 +58,44 @@ export class UserService {
         params: params
       }
     );
+  }
+
+  facebookHandler(facebookLoginCode) {
+    console.log("in facebook handler");
+    this.loginWithFacebook(facebookLoginCode).subscribe(data => {
+      this.setUserDetails(data);
+    })
+  }
+
+
+
+  setUserDetails(data) {
+    console.log("in set user details data", data);
+    this.userId = data.userId;
+    this.username = data.userName;
+    this.updateUser(data.userId);
+    this.setSessionStorage(data.userId.toString());
+    this.setUserRegionFromDTO(data.region);
+  }
+
+  setUserRegionFromDTO(region) {
+    this.setGeneralSession("region", region);
+  }
+
+  setGeneralSession(key, val) {
+    if (typeof Storage !== 'undefined') {
+      //sessionStorage.setItem(key, val);
+      localStorage.setItem(key, val);
+    }
+  }
+
+  setSessionStorage(userId) {
+    if (typeof Storage !== 'undefined') {
+      //sessionStorage.setItem('user_id', userId);
+      localStorage.setItem('user_id', userId);
+    } else {
+      alert('no session storgae');
+    }
   }
 
   getCurrentUser(): any {

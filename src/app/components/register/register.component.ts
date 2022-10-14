@@ -47,6 +47,8 @@ export class RegisterComponent implements OnInit {
   facebookLoginEndpoint: string = environment.loginWithFbUrl;
   title = 'Register to Followear';
   private WindowSizeSubscription: Subscription;
+  private facebookLogin = environment.loginWithFbUrl;
+
   desktop: boolean;
   ios: boolean = false;
 
@@ -258,6 +260,32 @@ export class RegisterComponent implements OnInit {
 
   landingPage() {
     this.router.navigate(['landing']);
+  }
+
+  registerWithFacebook() {
+    console.log("in function facebook");
+    var index = this.router.url.indexOf("code");
+    console.log("in handling code: ", this.router.url);
+    var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
+    // if (index != -1) {
+    //   var facebookLoginCode = this.router.url.substring(index + 5);
+    //   var hashTagIndex = this.router.url.indexOf("#");
+    //   if (hashTagIndex != -1) {
+    //     facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
+    //   }
+    //   this.userService.facebookHandler(facebookLoginCode);
+    // }
+
+    // if (alreadyFoundOnFBError) {
+    //   console.log("in facebook error");
+    //   this.redirectToFacebook();
+    // }
+
+  }
+
+
+  redirectToFacebook() {
+    window.location.href = this.facebookLogin;
   }
 
   ngOnDestroy() {
