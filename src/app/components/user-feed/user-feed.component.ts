@@ -60,6 +60,7 @@ export class UserFeedComponent implements OnInit {
   private finished: boolean;
   savedTab: boolean = false;
   userFeedTab: boolean = true;
+  userObject: User
 
 
 
@@ -97,6 +98,7 @@ export class UserFeedComponent implements OnInit {
     // if (this.userService.userId) {
     //   this.registeredUser = true;
     // }
+
     this.productPageClicked = false;
     this.titleService.setTitle('User Profile Feed');
     this.meta.addTag({ name: 'robots', content: 'noimageindex, noarchive' });
@@ -152,36 +154,51 @@ export class UserFeedComponent implements OnInit {
 
   }
 
+  loadUser(id) {
+    this.userService.getUserProfileInfo(id).pipe(takeUntil(this.onDestroy)).subscribe(user => {
+      this.userObject = new User(user);
+    }, err => {
+      console.log(err);
+      //closeLoadingBar();
+    },
+      () => {
+        //do whatever you want
+        this.callMixPanel();
+      }
+
+    );
+  }
+
+  callMixPanel() {
+    if (this.userService.getCurrentUser() == this.id) {
+      this.analyticsService.reportMyProfileSessionStart();
+      this.userService.updatePage("my profile");
+      if (this.userService.getPrevPage() != "product") {
+        this.analyticsService.reportMyProfileView(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);
+
+      }
+    } else {
+      if (this.userService.getPrevPage() != "product") {
+        this.analyticsService.reportUserProfileView(this.userObject.id, this.userService.getCurrentUser(), this.userObject.username, this.userObject.fullName, this.userObject.description);
+        this.analyticsService.reportUserProfileSessionStart();
+      }
+
+    }
+
+  }
+
   getActivatedRoute() {
     this.activatedRoute.params
       .pipe(takeUntil(this.onDestroy))
       .subscribe(params => {
         this.id = +params['id'];
         this.user = this.userService.getUserProfileInfo(this.id);
+        this.loadUser(this.id);
         if (this.userService.getCurrentUser() == this.id) {
           this.userProfile = true;
-
-          this.analyticsService.reportMyProfileSessionStart();
-
-          this.userService.updatePage("my profile");
-          if (this.userService.getPrevPage() != "product") {
-            this.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
-              this.analyticsService.reportMyProfileView(user.id, user.id, user.username, user.fullName, user.description);
-            });
-          }
         } else {
           this.userProfile = false;
-
           this.userService.updatePage("user profile");
-
-          if (this.userService.getPrevPage() != "product") {
-            this.user.pipe(takeUntil(this.onDestroy)).subscribe(user => {
-              this.analyticsService.reportUserProfileView(user.id, this.userService.getCurrentUser(), user.username, user.fullName, user.description);
-            });
-            this.analyticsService.reportUserProfileSessionStart();
-
-          }
-
         }
         if (!this.desktop) {
           this.feedService.updateProfileFeed(this.id, this.offset);
@@ -332,12 +349,12 @@ export class UserFeedComponent implements OnInit {
     if (!this.productPageClicked) {
       if (this.userProfile) {
         this.user.subscribe(user => {
-          this.analyticsService.reportMyProfileSessionEnd(user.id, user.id, user.username, user.fullName, user.description);
+          this.analyticsService.reportMyProfileSessionEnd(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);
         })
       }
       else {
         this.user.subscribe(user => {
-          this.analyticsService.reportUserProfileSessionEnd(user.id, this.userService.getCurrentUser(), user.username, user.fullName, user.description);
+          this.analyticsService.reportUserProfileSessionEnd(this.userObject.id, this.userService.getCurrentUser(), this.userObject.username, this.userObject.fullName, this.userObject.description);
         })
       }
     }

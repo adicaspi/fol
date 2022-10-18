@@ -107,10 +107,9 @@ export class AnalyticsService {
     });
   }
 
-  reportMyProfileView(masterId, slaveId, username, fullName, description) {
+  reportMyProfileView(masterId, username, fullName, description) {
     mixpanel.track("My Profile Page Visit", {
       "Master Id": masterId,
-      "Slave Id": slaveId,
       "Username": username,
       "Full Name": fullName,
       "Description": description
@@ -158,15 +157,25 @@ export class AnalyticsService {
     mixpanel.time_event("My Profile Page Exit");
   }
 
-  reportMyProfileSessionEnd(masterId, SlaveId, username, fullName, description) {
+  // reportMyProfileSessionEnd(masterId, SlaveId, username, fullName, description) {
+  //   mixpanel.track("My Profile Page Exit", {
+  //     "Master Id": masterId,
+  //     "Slave Id": SlaveId,
+  //     "Username": username,
+  //     "Full Name": fullName,
+  //     "Description": description
+  //   });
+  // }
+
+  reportMyProfileSessionEnd(masterId, username, fullName, description) {
     mixpanel.track("My Profile Page Exit", {
       "Master Id": masterId,
-      "Slave Id": SlaveId,
       "Username": username,
       "Full Name": fullName,
       "Description": description
     });
   }
+
 
   reportExploreSessionStart() {
     mixpanel.time_event("Explore Page Exit");

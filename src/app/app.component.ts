@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
           .subscribe(params => {
             let id = +params['id'];
             this.userService.getUserProfileInfo(id).subscribe(user => {
-              this.analyticsService.reportMyProfileSessionEnd(user.id, user.id, user.username, user.fullName, user.description)
+              this.analyticsService.reportMyProfileSessionEnd(user.id, user.username, user.fullName, user.description)
             });
           })
 
