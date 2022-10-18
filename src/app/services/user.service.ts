@@ -9,11 +9,7 @@ import { User } from '../models/User';
 import { Observable } from 'rxjs';
 import { DiscoverPeopleDTO } from '../models/DiscoverPeopleDTO';
 import { UserDetails } from '../models/UserDetails';
-<<<<<<< HEAD
 import { AnalyticsService } from './analytics.service';
-=======
-import { Router } from '../../../node_modules/@angular/router';
->>>>>>> adi/facebok_login
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'observe': 'response' })
 };

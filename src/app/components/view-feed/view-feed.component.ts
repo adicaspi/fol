@@ -49,32 +49,6 @@ export class ViewFeedComponent implements OnInit {
   }
 
   ngOnInit() {
-
-<<<<<<< HEAD
-    // this.userService.updatePage("feed");
-    // var index = this.router.url.indexOf("code");
-    // var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
-    // if (index != -1) {
-    //   var facebookLoginCode = this.router.url.substring(index + 5);
-    //   var hashTagIndex = this.router.url.indexOf("#");
-    //   if (hashTagIndex != -1) {
-    //     facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
-    //   }
-    //   this.loginWithFacebook(facebookLoginCode);
-
-    // }
-    // if (alreadyFoundOnFBError) {
-    //   console.log("in facebook error");
-    //   this.redirectToFacebook();
-    // }
-
-    // if (this.userService.userId) {
-    //   this.userId = true;
-    // }
-    // else {
-    //   this.loadConfigurationData();
-    // }
-=======
     var index = this.router.url.indexOf("code");
     console.log("redeirected from fb", this.router.url);
     var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
@@ -98,7 +72,6 @@ export class ViewFeedComponent implements OnInit {
         this.loadConfigurationData();
       }
     }
->>>>>>> adi/facebok_login
 
     this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
       value => {
