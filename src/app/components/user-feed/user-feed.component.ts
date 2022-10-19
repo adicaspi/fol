@@ -178,6 +178,7 @@ export class UserFeedComponent implements OnInit {
 
       }
     } else {
+      this.userService.updatePage("user profile");
       if (this.userService.getPrevPage() != "product") {
         this.analyticsService.reportUserProfileView(this.userObject.id, this.userService.getCurrentUser(), this.userObject.username, this.userObject.fullName, this.userObject.description);
         this.analyticsService.reportUserProfileSessionStart();
@@ -198,7 +199,6 @@ export class UserFeedComponent implements OnInit {
           this.userProfile = true;
         } else {
           this.userProfile = false;
-          this.userService.updatePage("user profile");
         }
         if (!this.desktop) {
           this.feedService.updateProfileFeed(this.id, this.offset);

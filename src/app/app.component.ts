@@ -5,6 +5,7 @@ import { AnalyticsService } from './services/analytics.service';
 import { ActivatedRoute } from '../../node_modules/@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from '../../node_modules/rxjs';
+import { User } from './models/User';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   startTime = 0;
   endTime = 0;
   inActiveTime: any;
+  user: User;
   onDestroy: Subject<void> = new Subject<void>();
   constructor(private userService: UserService,
     private analyticsService: AnalyticsService, private activatedRoute: ActivatedRoute) {
@@ -43,6 +45,7 @@ export class AppComponent implements OnInit {
         this.endTime = performance.now();
         this.lastPageVisit = this.userService.getCurrPage(); // Get the last page visit before enterting in active state 
         console.log("tab switched, session still active");
+
         this.inActiveTime = (this.endTime - this.startTime) / 1000; //inactive time in seconds
         if ((this.inActiveTime) / 60 >= 10) { //Tab was inactive for 10 mins
           console.log("session ended");
@@ -64,7 +67,7 @@ export class AppComponent implements OnInit {
     } else {
       console.info("This page is not reloaded");
       localStorage.removeItem("user_id");
-      //this.endSessionInLastVisitedComponent();
+      this.endSessionInLastVisitedComponent();
       mixpanel.track("User Session");
     }
 
@@ -78,27 +81,17 @@ export class AppComponent implements OnInit {
         this.analyticsService.reportTimelineFeedSessionEnd();
         break;
       case "user profile":
-        this.activatedRoute.params
-          .pipe(takeUntil(this.onDestroy))
-          .subscribe(params => {
-            let id = +params['id'];
-            this.userService.getUserProfileInfo(id).subscribe(user => {
-              this.analyticsService.reportUserProfileSessionEnd(user.id, this.userService.getCurrentUser(), user.username, user.fullName, user.description);
-            });
-          })
+        this.user = Object.assign({}, this.userService.userObject);
+        this.analyticsService.reportUserProfileSessionEnd(this.user.id, this.userService.getCurrentUser(), this.user.username, this.user.fullName, this.user.description)
+
         break;
       case "my profile":
-        this.activatedRoute.params
-          .pipe(takeUntil(this.onDestroy))
-          .subscribe(params => {
-            let id = +params['id'];
-            this.userService.getUserProfileInfo(id).subscribe(user => {
-              this.analyticsService.reportMyProfileSessionEnd(user.id, user.username, user.fullName, user.description)
-            });
-          })
+        this.user = Object.assign({}, this.userService.userObject);
+        this.analyticsService.reportMyProfileSessionEnd(this.userService.userObject.id, this.userService.userObject.username, this.userService.userObject.fullName, this.userService.userObject.description)
 
         break;
       case "explore":
+        console.log("app comp explore case");
         this.analyticsService.reportExploreSessionEnd();
         break;
       case "general explore":

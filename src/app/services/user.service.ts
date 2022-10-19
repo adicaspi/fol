@@ -36,6 +36,7 @@ export class UserService {
   username: string;
   region: string = "US";
   user: Observable<UserDetails>;
+  userObject: User;
   currPage: string;
   prevPage: string;
   private baseApiUrl = environment.BASE_API_URL;
@@ -244,6 +245,8 @@ export class UserService {
     return this.http.get<User>(this.globalInfoURL + id + '/profile-info').pipe(
     )
       .map(res => {
+        let newUser = new User(res);
+        this.userObject = Object.assign({}, newUser);
         return new User(res);
       });
   }
