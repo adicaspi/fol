@@ -348,14 +348,13 @@ export class UserFeedComponent implements OnInit {
     this.updateFeed.unsubscribe();
     if (!this.productPageClicked) {
       if (this.userProfile) {
-        this.user.subscribe(user => {
-          this.analyticsService.reportMyProfileSessionEnd(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);
-        })
+
+        this.analyticsService.reportMyProfileSessionEnd(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);
+
       }
       else {
-        this.user.subscribe(user => {
-          this.analyticsService.reportUserProfileSessionEnd(this.userObject.id, this.userService.getCurrentUser(), this.userObject.username, this.userObject.fullName, this.userObject.description);
-        })
+        this.analyticsService.reportUserProfileSessionEnd(this.userObject.id, this.userService.getCurrentUser(), this.userObject.username, this.userObject.fullName, this.userObject.description);
+
       }
     }
   }
