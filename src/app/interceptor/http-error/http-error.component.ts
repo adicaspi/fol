@@ -39,7 +39,7 @@ export class HttpErrorComponent implements HttpInterceptor {
             if (error.status == 401) {
               // TODO - add msg something went wrong
               //console.log('status 401 unauth');
-              this.analyticsService.reportLogout("401");
+              this.analyticsService.reportUnauthorized();
               this.router.navigate(['landing']);
             }
             if (error.error.error == 'User Collision') {

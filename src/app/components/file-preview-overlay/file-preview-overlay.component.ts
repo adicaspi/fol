@@ -67,8 +67,8 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.updatePage("product");
-    this.referrerPage = this.userService.getPrevPage();
+    this.analyticsService.updatePage("Product");
+    this.referrerPage = this.analyticsService.getPrevPage();
     if (this.userService.userId) {
       this.registeredUser = true;
       this.userID = this.userService.userId;
@@ -120,7 +120,7 @@ export class FilePreviewOverlayComponent implements OnInit {
         this.userProfileSrc = this.postInfo.userProfileImageAddr;
         this.postImageAddr = this.postInfo.postImageAddr;
         this.showSpinner = false;
-        this.analyticsService.reportProductPageView(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage);
+        this.analyticsService.reportProductPageView(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage, this.postInfo.salePrice, this.postInfo.website, this.postInfo.numViews, this.postInfo.numLikes, this.postInfo.createDate);
       });
 
   }
@@ -296,7 +296,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   closeModal() {
-    this.userService.updatePage(this.referrerPage);
+    this.analyticsService.updatePage(this.referrerPage);
     this.dialogRef.close();
   }
 

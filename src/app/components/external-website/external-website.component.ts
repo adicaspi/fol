@@ -14,6 +14,7 @@ import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { PostInfo } from '../../models/PostInfo';
 import { environment } from '../../../environments/environment';
+import { AnalyticsService } from '../../services/analytics.service';
 (window as any).jQuery = $;
 
 
@@ -39,7 +40,7 @@ export class ExternalWebsiteComponent implements OnInit {
   private bloggersPostsArray = environment.bloggersPosts;
   slots = [this.firstSlot, this.secondSlot, this.thirdSlot, this.fourthSlot, this.fifthSlot];
   constructor(private feedService: FeedService,
-    private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService, private userService: UserService) { }
+    private configService: ConfigService, private router: Router, private dialogService: DialogService, private dialog: MatDialog, private postService: PostService, private userService: UserService, private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.configService.setUserRegionFromLocale();
@@ -48,7 +49,7 @@ export class ExternalWebsiteComponent implements OnInit {
       this.generateCarousel();
     });
 
-
+    this.analyticsService.updatePage("Landing Page");
 
 
     let href = this.router.url;

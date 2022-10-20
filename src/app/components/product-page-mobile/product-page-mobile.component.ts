@@ -76,8 +76,8 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userService.updatePage("product");
-    this.referrerPage = this.userService.getPrevPage();
+    this.analyticsService.updatePage("Product");
+    this.referrerPage = this.analyticsService.getPrevPage();
     this.masterUserId = this.configService.getGeneralSession('user_id_post_id');
     //this.postId = this.configService.getGeneralSession('product_id');
     this.configService.removeItem('product_id');
@@ -149,7 +149,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
         this.storeLogoSrc = this.postInfo.storeLogoAddr;
         this.postImageAddr = this.postInfo.postImageAddr;
         this.numViews = this.postInfo.numViews;
-        this.analyticsService.reportProductPageView(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage);
+        this.analyticsService.reportProductPageView(this.postInfo.postId, this.postInfo.userId, this.postInfo.userName, this.postInfo.price, this.postInfo.description, this.postInfo.storeName, this.postInfo.storeId, this.postInfo.link, this.userID, this.referrerPage, this.postInfo.salePrice, this.postInfo.website, this.postInfo.numViews, this.postInfo.numLikes, this.postInfo.createDate);
         // this.getHoursDifference();
 
       });

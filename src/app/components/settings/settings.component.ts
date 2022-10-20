@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { ConfigService } from '../../services/config.service';
 import { UserDetails } from '../../models/UserDetails';
+import { AnalyticsService } from '../../services/analytics.service';
 
 class fieldItem {
   label: string;
@@ -59,7 +60,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private analyticsSerivce: AnalyticsService
   ) { }
 
   ngOnInit() {
@@ -100,6 +102,7 @@ export class SettingsComponent implements OnInit {
             this.desktop = false;
           }
         });
+    this.analyticsSerivce.updatePage("settings page");
   }
 
   onChanges(): void {

@@ -97,6 +97,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
     this.titleService.setTitle('Register to Followear');
+    this.analyticsSerivce.updatePage("register page");
     this.meta.addTag({ name: 'description', content: "Join Followear! Sign up to see fashion items from your favorite stores" });
     this.meta.addTag({ name: 'robots', content: 'index' });
     this.registerForm = this.formBuilder.group({

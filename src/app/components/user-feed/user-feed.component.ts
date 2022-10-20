@@ -172,14 +172,14 @@ export class UserFeedComponent implements OnInit {
   callMixPanel() {
     if (this.userService.getCurrentUser() == this.id) {
       this.analyticsService.reportMyProfileSessionStart();
-      this.userService.updatePage("my profile");
-      if (this.userService.getPrevPage() != "product") {
+      this.analyticsService.updatePage("My Profile");
+      if (this.analyticsService.getPrevPage() != "Product") {
         this.analyticsService.reportMyProfileView(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);
 
       }
     } else {
-      this.userService.updatePage("user profile");
-      if (this.userService.getPrevPage() != "product") {
+      this.analyticsService.updatePage("User Profile");
+      if (this.analyticsService.getPrevPage() != "Product") {
         this.analyticsService.reportUserProfileView(this.userObject.id, this.userService.getCurrentUser(), this.userObject.username, this.userObject.fullName, this.userObject.description);
         this.analyticsService.reportUserProfileSessionStart();
       }

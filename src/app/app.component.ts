@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
       }
       else { // Web tab is not active
         this.endTime = performance.now();
-        this.lastPageVisit = this.userService.getCurrPage(); // Get the last page visit before enterting in active state 
+        this.lastPageVisit = this.analyticsService.getCurrPage(); // Get the last page visit before enterting in active state 
         console.log("tab switched, session still active");
 
         this.inActiveTime = (this.endTime - this.startTime) / 1000; //inactive time in seconds
@@ -75,29 +75,27 @@ export class AppComponent implements OnInit {
   }
 
   endSessionInLastVisitedComponent() {
-    this.lastPageVisit = this.userService.getCurrPage();
+    this.lastPageVisit = this.analyticsService.getCurrPage();
     switch (this.lastPageVisit) {
-      case "feed":
+      case "Feed":
         this.analyticsService.reportTimelineFeedSessionEnd();
         break;
-      case "user profile":
+      case "User Profile":
         this.user = Object.assign({}, this.userService.userObject);
         this.analyticsService.reportUserProfileSessionEnd(this.user.id, this.userService.getCurrentUser(), this.user.username, this.user.fullName, this.user.description)
-
         break;
-      case "my profile":
+      case "My Profile":
         this.user = Object.assign({}, this.userService.userObject);
         this.analyticsService.reportMyProfileSessionEnd(this.userService.userObject.id, this.userService.userObject.username, this.userService.userObject.fullName, this.userService.userObject.description)
 
         break;
-      case "explore":
-        console.log("app comp explore case");
+      case "Explore":
         this.analyticsService.reportExploreSessionEnd();
         break;
-      case "general explore":
+      case "General Explore":
         this.analyticsService.reportGeneralExploreSessionEnd();
         break;
-      case "discover":
+      case "Discover":
         this.analyticsService.reportDiscoverPeopleSessionEnd();
         break;
       default:

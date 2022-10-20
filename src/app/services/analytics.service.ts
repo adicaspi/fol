@@ -6,11 +6,40 @@ import { last } from '../../../node_modules/rxjs/operators';
   providedIn: 'root'
 })
 export class AnalyticsService {
-  lastEvent: String;
-  currPage: String;
-  prevPage: String;
+  currEvent: string;
+  lastEvent: string;
+  currPage: string;
+  prevPage: string;
 
   constructor() { }
+
+  updatePage(page: string) {
+    if (this.currPage == null) {
+      this.currPage = page;
+      this.prevPage = page;
+    } else {
+      this.prevPage = this.currPage;
+      this.currPage = page;
+    }
+  }
+
+  updateEvent(event) {
+    if (this.lastEvent == null) {
+      this.currEvent = event;
+      this.lastEvent = event;
+    } else {
+      this.lastEvent = this.currEvent;
+      this.currEvent = event;
+    }
+  }
+
+  getCurrPage() {
+    return this.currPage;
+  }
+
+  getPrevPage() {
+    return this.prevPage;
+  }
 
   reportSignUp(data, email?, isFacebook?) {
     mixpanel.identify(data.userId);
@@ -28,11 +57,14 @@ export class AnalyticsService {
       "Is Facebook": isFacebook
     })
     mixpanel.time_event("User Session");
+    this.updateEvent("Sign Up");
   }
 
   trackEvent(eventName, eventJson) {
     //add common properties
-    eventJson.addProperty("Last Event", this.lastEvent);
+    eventJson["Last Event"] = this.lastEvent;
+    eventJson["Current Page"] = this.currPage;
+    eventJson["Previous Page"] = this.prevPage;
     //etc
     mixpanel.track(eventName, eventJson);
   }
@@ -42,13 +74,14 @@ export class AnalyticsService {
     mixpanel.people.set_once({ //set these properties for the user if not already set
       '$name': data.userName,
     });
-    mixpanel.track("Sign In", {
+    this.updateEvent("Sign In");
+    this.trackEvent("Sign In", {
       "Username": data.username,
       "Is Auto Login": isAutoLogin,
       "Is Facebook": isFacebook
     });
-
     mixpanel.time_event("User Session"); //Start measuring time until log out
+
   }
 
   reprotFacebook(data) {
@@ -60,64 +93,75 @@ export class AnalyticsService {
   }
 
   reportLogout(param?) {
+    this.updateEvent("Log Out");
     if (param) {
-      mixpanel.track("Log Out", {
+      this.trackEvent("Log Out", {
         reason: param
       });
     } else {
-      mixpanel.track("Log Out");
+      this.trackEvent("Log Out", {});
     }
   }
 
-  reportProductPageView(productID, ownerID, ownerUserName, price, description, storeName, storeID, link, viewerID, referrerPage
-  ) {
-    mixpanel.track("Product Page Visit", {
+  reportUnauthorized() {
+    this.updateEvent("Unauthorized");
+    this.trackEvent("Unauthorized", {});
+  }
+
+  reportProductPageView(productID, ownerID, ownerUserName, price, description, storeName, storeID, link, viewerID, referrerPage, salePrice, website, numViews, numLikes, uploadDate) {
+    this.updateEvent("Product Page Visit");
+    this.trackEvent("Product Page Visit", {
+      "Description": description,
+      "Link": link,
+      "Price": price,
+      "Salerice": salePrice,
       "product ID": productID,
       "Owner ID": ownerID,
-      "Owner User Name": ownerUserName,
-      "Price": price,
-      "Description": description,
+      "Owner Username": ownerUserName,
+      "Store ID": storeID,
       "Store Name": storeName,
-      "store ID": storeID,
-      "Link": link,
-      "Viewer ID": viewerID,
+      "Website": website,
+      "Num Views": numViews,
+      "Num Likes": numLikes,
+      "Post Upload Date": uploadDate,
       "Referrer Page": referrerPage
     });
   }
 
   reportTimelinefeedView() {
-    mixpanel.track("Feed Page Visit");
+    this.updateEvent("Feed Page Visit");
+    this.trackEvent("Feed Page Visit", {});
   }
 
   reportGeneralExploreView() {
-    mixpanel.track("General Explore Page Visit");
+    this.updateEvent("General Explore Visit");
+    this.trackEvent("General Explore Page Visit", {});
   }
 
   reportExploreView() {
-    mixpanel.track("Explore Page Visit");
+    this.updateEvent("Explore Page Visit");
+    this.trackEvent("Explore Page Visit", {});
   }
 
   reportUserProfileView(masterId, slaveId, username, fullName, description) {
-    mixpanel.track("User Profile Page Visit", {
-      "Master Id": masterId,
-      "Slave Id": slaveId,
-      "Username": username,
-      "Full Name": fullName,
-      "Description": description
+    this.updateEvent("User Profile Page Visit");
+    this.trackEvent("User Profile Page Visit", {
+      "User ID": masterId,
+      "Username": username
     });
   }
 
   reportMyProfileView(masterId, username, fullName, description) {
-    mixpanel.track("My Profile Page Visit", {
-      "Master Id": masterId,
-      "Username": username,
-      "Full Name": fullName,
-      "Description": description
+    this.updateEvent("My Profile Page Visit");
+    this.trackEvent("My Profile Page Visit", {
+      "User ID": masterId,
+      "Username": username
     });
   }
 
   reportViewOnWebsite(productID, ownerID, ownerUserName, price, description, storeName, storeID, link, viewerID, referrerPage) {
-    mixpanel.track("View on Website", {
+    this.updateEvent("View On Website");
+    this.trackEvent("View on Website", {
       "Product ID": productID,
       "Owner ID": ownerID,
       "Owner User Name": ownerUserName,
@@ -136,20 +180,20 @@ export class AnalyticsService {
   }
 
   reportTimelineFeedSessionEnd() {
-    mixpanel.track("Feed Page Exit");
+    this.updateEvent("Feed Page Exit");
+    this.trackEvent("Feed Page Exit", {});
   }
 
   reportUserProfileSessionStart() {
     mixpanel.time_event("User Profile Page Exit");
+
   }
 
   reportUserProfileSessionEnd(masterId, slaveId, username, fullName, description) {
+    this.updateEvent("User Profile Page Exit");
     mixpanel.track("User Profile Page Exit", {
-      "Master Id": masterId,
-      "Slave Id": slaveId,
-      "Username": username,
-      "Full Name": fullName,
-      "Description": description
+      "User ID": masterId,
+      "Username": username
     });
   }
 
@@ -168,11 +212,10 @@ export class AnalyticsService {
   // }
 
   reportMyProfileSessionEnd(masterId, username, fullName, description) {
+    this.updateEvent("My Profile Page Exit");
     mixpanel.track("My Profile Page Exit", {
-      "Master Id": masterId,
-      "Username": username,
-      "Full Name": fullName,
-      "Description": description
+      "User ID": masterId,
+      "Username": username
     });
   }
 
@@ -182,6 +225,7 @@ export class AnalyticsService {
   }
 
   reportExploreSessionEnd() {
+    this.updateEvent("Explore Page Exit");
     mixpanel.track("Explore Page Exit");
   }
 
@@ -190,7 +234,8 @@ export class AnalyticsService {
   }
 
   reportGeneralExploreSessionEnd() {
-    mixpanel.track("General Explore Page Exit");
+    this.updateEvent("General Explore Page Exit");
+    this.trackEvent("General Explore Page Exit", {});
   }
 
   reportDiscoverPeopleSessionStart() {
@@ -198,6 +243,8 @@ export class AnalyticsService {
   }
 
   reportDiscoverPeopleSessionEnd() {
-    mixpanel.track("Discover Page Exit");
+    this.updateEvent("Discover Page Exit");
+    this.trackEvent("Discover Page Exit", {});
+
   }
 }

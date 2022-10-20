@@ -130,8 +130,8 @@ export class TimelineFeedComponent implements OnInit {
         this.router.navigate(['feed-discover-people']);
       } else {
         this.analyticsService.reportTimelineFeedSessionStart()
-        this.userService.updatePage("feed");
-        if (this.userService.getPrevPage() != "product") {
+        this.analyticsService.updatePage("Feed");
+        if (this.analyticsService.getPrevPage() != "Product") {
           this.analyticsService.reportTimelinefeedView();
         }
       }

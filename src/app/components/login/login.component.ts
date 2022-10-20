@@ -102,6 +102,7 @@ export class LoginComponent implements OnInit {
           }
         })
     }
+    this.analyticsSerivce.updatePage("login page");
     this.titleService.setTitle('Login to Followear');
     this.meta.addTag({ name: 'description', content: 'Welcome back to Followear. Create an account or log in to Followear - see the latest fashion items posted by your network' });
     this.meta.addTag({ name: 'robots', content: 'index' })

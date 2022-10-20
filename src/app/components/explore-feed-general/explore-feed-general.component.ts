@@ -73,8 +73,8 @@ export class ExploreFeedGeneralComponent implements OnInit {
 
   ngOnInit() {
     this.productPageClicked = false;
-    this.userService.updatePage("general explore");
-    if (this.userService.getPrevPage() != "product") {
+    this.analyticsService.updatePage("General Explore");
+    if (this.analyticsService.getPrevPage() != "Product") {
       this.analyticsService.reportGeneralExploreView();
     }
 
