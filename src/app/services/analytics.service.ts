@@ -103,11 +103,6 @@ export class AnalyticsService {
     }
   }
 
-  reportUnauthorized() {
-    this.updateEvent("Unauthorized");
-    this.trackEvent("Unauthorized", {});
-  }
-
   reportProductPageView(productID, ownerID, ownerUserName, price, description, storeName, storeID, link, viewerID, referrerPage, salePrice, website, numViews, numLikes, uploadDate) {
     this.updateEvent("Product Page Visit");
     this.trackEvent("Product Page Visit", {
