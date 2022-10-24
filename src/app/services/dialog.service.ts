@@ -18,6 +18,7 @@ import {
 import { FilePreviewOverlayRef } from '../components/file-preview-overlay/file-preview-overlay-ref';
 import { FollowingListMobileComponent } from '../components/following-list-mobile/following-list-mobile.component';
 import { MessageService } from './message.service';
+import { AnalyticsService } from './analytics.service';
 
 interface FilePreviewDialogConfig {
   panelClass?: string;
@@ -53,7 +54,8 @@ export class DialogService {
     private overlay: Overlay,
     private injector: Injector,
     private rendererFactory: RendererFactory2,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private analyticsService: AnalyticsService
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
@@ -77,6 +79,8 @@ export class DialogService {
     this.renderer.addClass(overlayRef.hostElement.parentElement, 'product-overlay-container');
     overlayRef.backdropClick().subscribe(_ => {
       this.renderer.removeClass(overlayRef.hostElement.parentElement, 'product-overlay-container');
+      var referrerPage = this.analyticsService.getPrevPage();
+      this.analyticsService.updatePage(referrerPage);
       dialogRef.close();
     });
     // const scrollStrategy = this.overlay.scrollStrategies.reposition();

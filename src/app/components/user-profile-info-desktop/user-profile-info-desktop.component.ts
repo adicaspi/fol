@@ -58,7 +58,7 @@ export class UserProfileInfoDesktopComponent implements OnInit {
     public configService: ConfigService,
     public location: LocationService,
     public dialog: MatDialog,
-
+    private analyticsService: AnalyticsService
   ) {
 
   }
@@ -177,6 +177,7 @@ export class UserProfileInfoDesktopComponent implements OnInit {
   }
 
   logout() {
+    this.analyticsService.reportMyProfileSessionEnd(this.userId, this.userService.userObject.username);
     this.userService.logout();
     this.router.navigate(['landing']);
   }

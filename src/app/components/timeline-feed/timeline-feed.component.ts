@@ -130,8 +130,8 @@ export class TimelineFeedComponent implements OnInit {
         this.router.navigate(['feed-discover-people']);
       } else {
         this.analyticsService.reportTimelineFeedSessionStart()
-        this.analyticsService.updatePage("Feed");
-        if (this.analyticsService.getPrevPage() != "Product") {
+        this.analyticsService.updatePage("Feed Page");
+        if (this.analyticsService.getPrevPage() != "Product Page") {
           this.analyticsService.reportTimelinefeedView();
         }
       }
@@ -164,7 +164,9 @@ export class TimelineFeedComponent implements OnInit {
     this.configService.setGeneralSession('product_id', post.post.postId);
     this.configService.setGeneralSession('user_id_post_id', post.post.userId);
     if (this.desktop) {
+
       this.dialogService.openDialog();
+
     } else {
       this.productPageClicked = true;
       this.router.navigate(['product-page', post.post.postId]);

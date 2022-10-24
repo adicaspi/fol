@@ -206,7 +206,7 @@ export class AnalyticsService {
   //   });
   // }
 
-  reportMyProfileSessionEnd(masterId, username, fullName, description) {
+  reportMyProfileSessionEnd(masterId, username, fullName?, description?) {
     this.updateEvent("My Profile Page Exit");
     mixpanel.track("My Profile Page Exit", {
       "User ID": masterId,

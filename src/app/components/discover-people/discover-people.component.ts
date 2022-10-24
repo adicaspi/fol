@@ -43,7 +43,7 @@ export class DiscoverPeopleComponent implements OnInit {
 
   ngOnInit() {
     this.analyticsService.reportDiscoverPeopleSessionStart();
-    this.analyticsService.updatePage("Discover");
+    this.analyticsService.updatePage("Discover Page");
     if (this.userService.userId) {
       this.registeredUser = true;
     }

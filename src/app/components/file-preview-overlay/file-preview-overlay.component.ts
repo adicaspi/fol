@@ -67,7 +67,7 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.analyticsService.updatePage("Product");
+    this.analyticsService.updatePage("Product Page");
     this.referrerPage = this.analyticsService.getPrevPage();
     if (this.userService.userId) {
       this.registeredUser = true;
@@ -212,13 +212,13 @@ export class FilePreviewOverlayComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(LoginComponent, config);
+
     dialogRef.disableClose = true;
     dialogRef.afterClosed().subscribe(res => {
       if (res == "register") {
         this.openRegisterDialog();
       }
-
-    })
+    });
   }
 
   openRegisterDialog() {

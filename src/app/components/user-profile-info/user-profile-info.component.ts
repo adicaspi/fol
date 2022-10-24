@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
 import { ConfigService } from '../../services/config.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-user-profile-info',

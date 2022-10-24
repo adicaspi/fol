@@ -172,14 +172,14 @@ export class UserFeedComponent implements OnInit {
   callMixPanel() {
     if (this.userService.getCurrentUser() == this.id) {
       this.analyticsService.reportMyProfileSessionStart();
-      this.analyticsService.updatePage("My Profile");
-      if (this.analyticsService.getPrevPage() != "Product") {
+      this.analyticsService.updatePage("My Profile Page");
+      if (this.analyticsService.getPrevPage() != "Product Page") {
         this.analyticsService.reportMyProfileView(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);
 
       }
     } else {
-      this.analyticsService.updatePage("User Profile");
-      if (this.analyticsService.getPrevPage() != "Product") {
+      this.analyticsService.updatePage("User Profile Page");
+      if (this.analyticsService.getPrevPage() != "Product Page") {
         this.analyticsService.reportUserProfileView(this.userObject.id, this.userService.getCurrentUser(), this.userObject.username, this.userObject.fullName, this.userObject.description);
         this.analyticsService.reportUserProfileSessionStart();
       }
@@ -346,7 +346,7 @@ export class UserFeedComponent implements OnInit {
     this.onDestroy.complete();
     this.feedSubscription.unsubscribe();
     this.updateFeed.unsubscribe();
-    if (!this.productPageClicked) {
+    if (!this.productPageClicked && (this.analyticsService.lastEvent != "My Profile Page Exit")) {
       if (this.userProfile) {
 
         this.analyticsService.reportMyProfileSessionEnd(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);

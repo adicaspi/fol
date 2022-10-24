@@ -11,6 +11,7 @@ import { User } from '../../models/User';
 import { MatDialog } from '../../../../node_modules/@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-user-profile-info-mobile',
@@ -54,7 +55,8 @@ export class UserProfileInfoMobileComponent implements OnInit {
     public router: Router,
     public configService: ConfigService,
     public location: LocationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private analyticsService: AnalyticsService
   ) {
 
   }
@@ -171,6 +173,7 @@ export class UserProfileInfoMobileComponent implements OnInit {
   }
 
   logout() {
+    this.analyticsService.reportMyProfileSessionEnd(this.userId, this.userService.userObject.username);
     this.userService.logout();
     this.router.navigate(['landing']);
   }

@@ -69,8 +69,8 @@ export class ExploreFeedComponent implements OnInit {
   ngOnInit() {
     this.productPageClicked = false;
     this.analyticsService.reportExploreSessionStart();
-    this.analyticsService.updatePage("Explore");
-    if (this.analyticsService.getPrevPage() != "Product") {
+    this.analyticsService.updatePage("Explore Page");
+    if (this.analyticsService.getPrevPage() != "Product Page") {
       this.analyticsService.reportExploreView();
     }
     this.titleService.setTitle('Explore User');

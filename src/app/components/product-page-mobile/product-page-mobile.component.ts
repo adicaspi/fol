@@ -76,7 +76,7 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.analyticsService.updatePage("Product");
+    this.analyticsService.updatePage("Product Page");
     this.referrerPage = this.analyticsService.getPrevPage();
     this.masterUserId = this.configService.getGeneralSession('user_id_post_id');
     //this.postId = this.configService.getGeneralSession('product_id');
