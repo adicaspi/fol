@@ -173,7 +173,6 @@ export class UserProfileInfoMobileComponent implements OnInit {
   }
 
   logout() {
-    this.analyticsService.reportMyProfileSessionEnd(this.userId, this.userService.userObject.username);
     this.userService.logout();
     this.router.navigate(['landing']);
   }

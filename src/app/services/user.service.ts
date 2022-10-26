@@ -56,6 +56,7 @@ export class UserService {
   }
 
   loginWithFacebook(code: string): Observable<any> {
+    console.log("in code login");
     let params = new HttpParams().set('code', code);
     return this.http.get<any>(
       this.globalRegisterURL + 'code-login',
@@ -270,7 +271,11 @@ export class UserService {
   }
 
   logout() {
-    this.analyticsService.reportLogout();
+    setTimeout(() => {
+      this.analyticsService.reportLogout();
+    },
+      50);
+
     this.userId = null;
     //const user_id = sessionStorage.getItem('user_id');
     const user_id = localStorage.getItem('user_id');

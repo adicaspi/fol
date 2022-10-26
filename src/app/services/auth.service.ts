@@ -57,6 +57,8 @@ export class AuthService {
       return Observable.of(true);
     }
     var index = this.router.url.indexOf("code");
+    console.log("router", this.router.url);
+    console.log("im index", index);
     var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
     if (alreadyFoundOnFBError) {
       console.log("in facebook error");
@@ -68,10 +70,12 @@ export class AuthService {
       if (hashTagIndex != -1) {
         facebookLoginCode = this.router.url.substring(index + 5, hashTagIndex);
       }
+      console.log("in facebook");
       this.loginWithFacebook(facebookLoginCode);
       return Observable.of(true);
     }
     else {
+      console.log("in load configuration");
       return this.loadConfigurationData();
     }
   }

@@ -7,7 +7,7 @@ export const environment = {
   { userId: 320, postId: 1840 },
   { userId: 323, postId: 1877 },
   { userId: 320, postId: 1839 }],
-  mixPanelToken: ''
+  mixPanelToken: '442296e55307d750415e94403301b54f'
 };
 
 

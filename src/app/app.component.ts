@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
 
     } else {
       console.info("This page is not reloaded");
-      localStorage.removeItem("user_id");
+      //localStorage.removeItem("user_id");
       this.endSessionInLastVisitedComponent();
       mixpanel.track("User Session");
     }
@@ -77,25 +77,25 @@ export class AppComponent implements OnInit {
   endSessionInLastVisitedComponent() {
     this.lastPageVisit = this.analyticsService.getCurrPage();
     switch (this.lastPageVisit) {
-      case "Feed":
+      case "Feed Page":
         this.analyticsService.reportTimelineFeedSessionEnd();
         break;
-      case "User Profile":
+      case "User Profile Page":
         this.user = Object.assign({}, this.userService.userObject);
         this.analyticsService.reportUserProfileSessionEnd(this.user.id, this.userService.getCurrentUser(), this.user.username, this.user.fullName, this.user.description)
         break;
-      case "My Profile":
+      case "My Profile Page":
         this.user = Object.assign({}, this.userService.userObject);
         this.analyticsService.reportMyProfileSessionEnd(this.userService.userObject.id, this.userService.userObject.username, this.userService.userObject.fullName, this.userService.userObject.description)
 
         break;
-      case "Explore":
+      case "Explore Page":
         this.analyticsService.reportExploreSessionEnd();
         break;
-      case "General Explore":
+      case "General Explore Page":
         this.analyticsService.reportGeneralExploreSessionEnd();
         break;
-      case "Discover":
+      case "Discover Page":
         this.analyticsService.reportDiscoverPeopleSessionEnd();
         break;
       default:

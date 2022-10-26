@@ -52,12 +52,13 @@ export class AnalyticsService {
     //   "username": data.userName,
     //   "isFacebook": isFacebook
     // });
+    this.updateEvent("Sign Up");
     this.trackEvent("Sign Up", {
       "Username": data.userName,
       "Is Facebook": isFacebook
     })
     mixpanel.time_event("User Session");
-    this.updateEvent("Sign Up");
+
   }
 
   trackEvent(eventName, eventJson) {
@@ -88,7 +89,7 @@ export class AnalyticsService {
     if (data.new) {
       this.reportSignUp(data, null, true);
     } else {
-      this.reportSignIn(data, null, true);
+      this.reportSignIn(data, false, true);
     }
   }
 
@@ -109,7 +110,7 @@ export class AnalyticsService {
       "Description": description,
       "Link": link,
       "Price": price,
-      "Salerice": salePrice,
+      "Sale Price": salePrice,
       "product ID": productID,
       "Owner ID": ownerID,
       "Owner Username": ownerUserName,
@@ -118,8 +119,7 @@ export class AnalyticsService {
       "Website": website,
       "Num Views": numViews,
       "Num Likes": numLikes,
-      "Post Upload Date": uploadDate,
-      "Referrer Page": referrerPage
+      "Post Upload Date": uploadDate
     });
   }
 
@@ -196,8 +196,6 @@ export class AnalyticsService {
   reportMyProfileSessionEnd(masterId, username, fullName?, description?) {
     this.updateEvent("My Profile Page Exit");
     this.trackEvent("My Profile Page Exit", {
-      "User ID": masterId,
-      "Username": username
     });
   }
 

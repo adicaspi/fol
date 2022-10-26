@@ -28,14 +28,22 @@ import {
 } from './services/auth-guard.service';
 import { AuthGuradFbService as AuthGuardFB } from './services/auth-gurad-fb.service';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { LoginMethodComponent } from './components/login-method/login-method.component';
 
 
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   component: ViewFeedComponent,
+  //   //canActivate: [AuthGuardFB],
+
+  // },
   {
     path: '',
-    component: ViewFeedComponent,
-    //canActivate: [AuthGuardFB]
+    component: LoginMethodComponent,
+    //canActivate: [AuthGuardFB],
+
   },
 
   {
@@ -43,6 +51,8 @@ const routes: Routes = [
     component: ExternalWebsiteComponent
   },
   { path: 'desktop-profile/:id', component: ViewMainProfileComponent },
+
+
   {
     path: 'profile/:id',
     component: ViewProfileComponent

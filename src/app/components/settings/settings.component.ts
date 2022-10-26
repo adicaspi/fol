@@ -102,7 +102,7 @@ export class SettingsComponent implements OnInit {
             this.desktop = false;
           }
         });
-    this.analyticsSerivce.updatePage("settings page");
+    this.analyticsSerivce.updatePage("Settings Page");
   }
 
   onChanges(): void {

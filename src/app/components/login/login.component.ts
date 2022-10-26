@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     private titleService: Title,
     private meta: Meta,
     private route: ActivatedRoute,
-    private analyticsSerivce: AnalyticsService,
+    private analyticsService: AnalyticsService,
 
     @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: any,
     @Optional() private dialogRef: MatDialogRef<LoginComponent>
@@ -92,6 +92,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.analyticsService.updatePage("Login Page");
     if (location.href.includes("product-page")) {
       this.route.paramMap
         .pipe(takeUntil(this.onDestroy))
@@ -102,7 +103,6 @@ export class LoginComponent implements OnInit {
           }
         })
     }
-    this.analyticsSerivce.updatePage("login page");
     this.titleService.setTitle('Login to Followear');
     this.meta.addTag({ name: 'description', content: 'Welcome back to Followear. Create an account or log in to Followear - see the latest fashion items posted by your network' });
     this.meta.addTag({ name: 'robots', content: 'index' })
@@ -157,7 +157,7 @@ export class LoginComponent implements OnInit {
           this.userService.userId = data.userId;
           this.userService.username = data.username;
           this.userService.updateUser(data.userId);
-          this.analyticsSerivce.reportSignIn(data, false, false);
+          this.analyticsService.reportSignIn(data, false, false);
           this.configSerivce.setUserRegionFromDTO(data.region);
 
           this.configSerivce.setSessionStorage(data.userId.toString());

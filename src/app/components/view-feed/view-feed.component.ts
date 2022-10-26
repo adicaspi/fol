@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user.service';
 import { HttpClient } from '@angular/common/http';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { ErrorsService } from '../../services/errors.service';
 import { takeUntil } from 'rxjs/operators';
@@ -43,15 +43,42 @@ export class ViewFeedComponent implements OnInit {
     private router: Router,
     private errorsService: ErrorsService,
     private messageServie: MessageService,
-    private analyticsSerivce: AnalyticsService
+    private analyticsSerivce: AnalyticsService,
+    private activatedRoute: ActivatedRoute
   ) {
 
   }
 
   ngOnInit() {
+
+    //this.loginMethod();
+    if (this.userService.userId) {
+      this.userId = true;
+    }
+    else {
+      console.log("in load configuration");
+      this.loadConfigurationData();
+    }
+    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
+      value => {
+        if (value.width <= 600) {
+          this.desktop = false;
+        }
+        else {
+          this.desktop = true;
+        }
+      }),
+      error => this.anyErrors = true,
+      () => this.finished = true
+
+  }
+
+  loginMethod() {
     var index = this.router.url.indexOf("code");
-    // console.log("redeirected from fb", this.router.url);
     var alreadyFoundOnFBError = this.router.url.includes("error_description=Already%20found%20an%20entry%20for%20username%20Facebook");
+    console.log("router", this.router.url);
+    console.log("im index", index);
+
     if (index != -1) {
       var facebookLoginCode = this.router.url.substring(index + 5);
       var hashTagIndex = this.router.url.indexOf("#");
@@ -73,26 +100,25 @@ export class ViewFeedComponent implements OnInit {
       }
     }
 
-    this.subscription = this.configService.windowSizeChanged.pipe(takeUntil(this.onDestroy)).subscribe(
-      value => {
-        if (value.width <= 600) {
-          this.desktop = false;
-        }
-        else {
-          this.desktop = true;
-        }
-      }),
-      error => this.anyErrors = true,
-      () => this.finished = true
-
   }
 
   loginWithFacebook(code) {
     //this.configService.setUserRegionFromIP();
     this.userService.loginWithFacebook(code).pipe(takeUntil(this.onDestroy)).subscribe(data => {
+      console.log("im data,", data);
       this.setUserDetails(data);
       this.analyticsSerivce.reprotFacebook(data);
+      this.router.navigate(
+        [], {
+          relativeTo: this.activatedRoute,
+          queryParams: data.userId,
+          queryParamsHandling: 'merge'
+        }
+      )
+      console.log("router navigat");
+      this.router.navigate(['feed', data.userId]);
     })
+
   }
 
   redirectToFacebook() {
