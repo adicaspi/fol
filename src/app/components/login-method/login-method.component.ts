@@ -51,10 +51,8 @@ export class LoginMethodComponent implements OnInit {
       console.log("in facebook error");
       this.redirectToFacebook();
     } else { //only try this if user didn't login with facebook
-      console.log("im userId,", this.userService.userId);
 
       if (this.userService.userId) {
-        console.log("login method checking userId");
         this.userId = true;
         var data = {
           username: this.userService.username
