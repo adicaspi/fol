@@ -56,6 +56,10 @@ export class LoginMethodComponent implements OnInit {
       if (this.userService.userId) {
         console.log("login method checking userId");
         this.userId = true;
+        var data = {
+          username: this.userService.username
+        }
+        this.analyticsService.reportSignIn(data, true, false);
         this.router.navigate(['feed', this.userService.userId]);
       }
       else {
