@@ -206,10 +206,10 @@ export class UserFeedComponent implements OnInit {
       })
   }
 
-  registerPage(): void {
-    this.showPopup = false;
-    this.openLoginDialog();
-  }
+  // registerPage(): void {
+  //   this.showPopup = false;
+  //   this.openLoginDialog();
+  // }
 
   openPostOrLogin(post) {
     // // if (this.registeredUser) {
@@ -271,22 +271,22 @@ export class UserFeedComponent implements OnInit {
   }
 
 
-  @HostListener('window:scroll', ['$event'])
-  scrollHandler(event) {
-    if (!this.userService.userId) {
-      let currScrollPos: number = window.pageYOffset;
-      if (currScrollPos > 2000) {
-        if (this.showPopup) {
-          this.registerPage();
-        }
-      }
-      else {
-        this.dialog.closeAll();
-        this.configService.removeItem('profile');
-        this.showPopup = true;
-      }
-    }
-  }
+  // @HostListener('window:scroll', ['$event'])
+  // scrollHandler(event) {
+  //   if (!this.userService.userId) {
+  //     let currScrollPos: number = window.pageYOffset;
+  //     if (currScrollPos > 2000) {
+  //       if (this.showPopup) {
+  //         this.registerPage();
+  //       }
+  //     }
+  //     else {
+  //       this.dialog.closeAll();
+  //       this.configService.removeItem('profile');
+  //       this.showPopup = true;
+  //     }
+  //   }
+  // }
 
   postSalePrice(post) {
     return post.post.salePrice;
