@@ -67,22 +67,25 @@
     </div>
 
 
-    <button type="button" class="shop-btn">
-      <a *ngIf="registeredUser || postInfo.storeName == 'Shein' ;else notRegistered" class="view-website" href="{{ postInfo.link }}" target="_blank" (click)="incPostRedirects()">
+    <!-- <button type="button" class="shop-btn">
+      <a *ngIf="registeredUser || postInfo.storeName == 'Shein' ;else notRegistered" class="view-website" href="{{ postInfo.link }}"
+        target="_blank" (click)="incPostRedirects()">
         View on Website
       </a>
       <ng-template #notRegistered>
         <a (click)=registerPage()>
+          View on Website
+        </a>
+      </ng-template>
+    </button> -->
+
+    <button type="button" class="shop-btn">
+      <a class="view-website" href="{{ postInfo.link }}" target="_blank" (click)="incPostRedirects()">
         View on Website
       </a>
-       </ng-template>
     </button>
 
-    <!-- <ng-template #redirectToLogin>
-      <button type="button" class="shop-btn">
-        View on Website
-      </button>
-    </ng-template> -->
+
   </div>
 
   <div class="buffer">
