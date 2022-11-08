@@ -55,7 +55,11 @@ export class GenerateFollowListComponent implements OnInit, OnDestroy {
   }
 
   userProfile(user) {
-    this.router.navigate(['profile', user['post']['id']]);
+    if (this.desktop) {
+      this.router.navigate(['desktop-profile', user['post']['id']]);
+    } else {
+      this.router.navigate(['profile', user['post']['id']]);
+    }
     if (this.matDialogRef) {
       this.matDialogRef.close();
     }

@@ -152,7 +152,7 @@ export class AnalyticsService {
   }
 
   reportViewOnWebsite(productID, ownerID, ownerUserName, price, description, storeName, storeID, link, viewerID, referrerPage) {
-    this.updateEvent("View On Website");
+    this.updateEvent("View on Website");
     this.trackEvent("View on Website", {
       "Product ID": productID,
       "Owner ID": ownerID,

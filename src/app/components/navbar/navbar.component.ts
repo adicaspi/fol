@@ -176,7 +176,12 @@ export class NavbarComponent implements OnInit {
   }
 
   searchUser(searchResult) {
-    this.router.navigate(['profile', searchResult.id]);
+    if (this.desktop) {
+      this.router.navigate(['desktop-profile', searchResult.id]);
+    } else {
+      this.router.navigate(['profile', searchResult.id]);
+    }
+
   }
 
   optionSelected($event) {

@@ -162,7 +162,11 @@ export class ExternalWebsiteComponent implements OnInit {
   }
 
   profilePage(slotNumber) {
-    this.router.navigate(['profile', slotNumber.userId]);
+    if (this.desktop) {
+      this.router.navigate(['desktop-profile', slotNumber.userId]);
+    } else {
+      this.router.navigate(['profile', slotNumber.userId]);
+    }
   }
 
   openProductPage(slotNumber): void {

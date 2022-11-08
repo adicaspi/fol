@@ -148,7 +148,7 @@ export class DiscoverPeopleComponent implements OnInit {
 
   profilePage(item) {
     if (this.desktop) {
-      this.router.navigate([]).then(result => { window.open('profile/' + item.userId, '_blank'); });
+      this.router.navigate([]).then(result => { window.open('desktop-profile/' + item.userId, '_blank'); });
     }
     else {
       this.router.navigate(['profile', item.userId]);
@@ -158,7 +158,7 @@ export class DiscoverPeopleComponent implements OnInit {
   ngOnDestroy(): void {
     this.onDestroy.next();
     this.WindowSizeSubscription.unsubscribe();
-    this.analyticsService.reportDiscoverPeopleSessionStart();
+    this.analyticsService.reportDiscoverPeopleSessionEnd();
 
   }
 
