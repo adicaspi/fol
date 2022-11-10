@@ -92,12 +92,13 @@ export class ExternalWebsiteComponent implements OnInit {
   }
 
   initSlots() {
-
-    this.firstSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[0].userId, this.bloggersPostsArray[0].postId);
-    this.secondSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[1].userId, this.bloggersPostsArray[1].postId);
-    this.thirdSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[2].userId, this.bloggersPostsArray[2].postId);
-    this.fourthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[3].userId, this.bloggersPostsArray[3].postId);
-    this.fifthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[4].userId, this.bloggersPostsArray[4].postId);
+    let prevPage = "";
+    let userID = 7;
+    this.firstSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[0].userId, this.bloggersPostsArray[0].postId, userID, prevPage);
+    this.secondSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[1].userId, this.bloggersPostsArray[1].postId, userID, prevPage);
+    this.thirdSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[2].userId, this.bloggersPostsArray[2].postId, userID, prevPage);
+    this.fourthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[3].userId, this.bloggersPostsArray[3].postId, userID, prevPage);
+    this.fifthSlot = this.postService.getMobilePostInfo(this.bloggersPostsArray[4].userId, this.bloggersPostsArray[4].postId, userID, prevPage);
   }
 
   generateCarousel() {

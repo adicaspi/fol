@@ -88,8 +88,14 @@ export class FilePreviewOverlayComponent implements OnInit {
   }
 
   getPostInfo(userID) {
+    let sourcePage = this.referrerPage;
+    sourcePage = sourcePage.replace("Page", "");
+    sourcePage = sourcePage.replace(/\s/g, "");
+    if (sourcePage == "Discover") {
+      sourcePage = "DiscoverPeople";
+    }
     this.postService
-      .getMobilePostInfo(userID, this.postId)
+      .getMobilePostInfo(userID, this.postId, this.userID, sourcePage)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;

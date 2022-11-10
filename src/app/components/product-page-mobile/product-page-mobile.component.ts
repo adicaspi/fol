@@ -120,8 +120,14 @@ export class ProductPageMobileComponent implements OnInit, OnDestroy {
   }
 
   getPostInfo(userID: number, postID: number) {
+    let sourcePage = this.referrerPage;
+    sourcePage = sourcePage.replace("Page", "");
+    sourcePage = sourcePage.replace(/\s/g, "");
+    if (sourcePage == "Discover") {
+      sourcePage = "DiscoverPeople";
+    }
     this.postService
-      .getMobilePostInfo(userID, postID)
+      .getMobilePostInfo(userID, postID, this.userID, sourcePage)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(postInfo => {
         this.postInfo = postInfo;
