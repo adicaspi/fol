@@ -58,7 +58,9 @@ export class PostService {
   getMobilePostInfo(userId, postId, viewingUserId, sourcePage): Observable<PostInfo> {
     let postInfoURL = this.socialUrl + '/' + userId + '/post-info';
     let params = new HttpParams();
-    params = params.append('viewingUserId', viewingUserId.toString());
+    if (viewingUserId != 7) {
+      params = params.append('viewingUserId', viewingUserId.toString());
+    }
     params = params.append('sourcePage', sourcePage.toString());
     params = params.append('postId', postId.toString());
     return this.http.get<PostInfo>(postInfoURL, {
