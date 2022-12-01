@@ -50,13 +50,13 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy))
       .subscribe((params) => {
         this.masterId = +params.get('id');
+        console.log(this.masterId);
         this.checkWindowSize(this.masterId);
       });
 
   }
 
   checkWindowSize(id) {
-    console.log("view profile");
     this.configService.windowSizeChanged
       .pipe(takeUntil(this.onDestroy))
       .subscribe(

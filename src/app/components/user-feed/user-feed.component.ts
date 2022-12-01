@@ -157,13 +157,15 @@ export class UserFeedComponent implements OnInit {
   loadUser(id) {
     this.userService.getUserProfileInfo(id).pipe(takeUntil(this.onDestroy)).subscribe(user => {
       this.userObject = new User(user);
+      this.callMixPanel();
+      console.log(this.userObject);
     }, err => {
       console.log(err);
       //closeLoadingBar();
     },
       () => {
         //do whatever you want
-        this.callMixPanel();
+        //this.callMixPanel();
       }
 
     );
@@ -346,7 +348,7 @@ export class UserFeedComponent implements OnInit {
     this.onDestroy.complete();
     this.feedSubscription.unsubscribe();
     this.updateFeed.unsubscribe();
-    if (!this.productPageClicked && (this.analyticsService.lastEvent != "My Profile Page Exit")) {
+    if (!this.productPageClicked && (this.analyticsService.lastEvent != "My Profile Page Exit") && (this.userObject)) {
       if (this.userProfile) {
 
         this.analyticsService.reportMyProfileSessionEnd(this.userObject.id, this.userObject.username, this.userObject.fullName, this.userObject.description);
