@@ -78,6 +78,7 @@ import { ExternalWebsiteComponent } from './components/external-website/external
 import { AppBannerComponent } from './components/app-banner/app-banner.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { LoginMethodComponent } from './components/login-method/login-method.component';
+import { CollectionsComponent } from './components/collections/collections.component';
 
 
 
@@ -134,7 +135,8 @@ import { LoginMethodComponent } from './components/login-method/login-method.com
     ExternalWebsiteComponent,
     AppBannerComponent,
     PrivacyPolicyComponent,
-    LoginMethodComponent
+    LoginMethodComponent,
+    CollectionsComponent
   ],
   imports: [
     BrowserModule,

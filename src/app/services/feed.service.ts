@@ -14,6 +14,7 @@ import { MessageService } from './message.service';
 import { catchError } from '../../../node_modules/rxjs/operators';
 import { post } from '../../../node_modules/@types/selenium-webdriver/http';
 import { FilteringDTO } from '../models/FilteringDTO';
+import { CollectionPost } from '../models/CollectionPostDTO';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -236,6 +237,20 @@ export class FeedService {
         }
       });
   }
+
+  getCollectionPosts(userId: number, collectionId: number): Observable<any> {
+    let params = new HttpParams().set('collectionId', collectionId.toString());
+    return this.http.get<Array<any>>(
+      this.globaSoicalURL + userId + '/collection-posts').pipe(
+      )
+      .map(res => {
+        let newPosts: Array<CollectionPost> = res.map((post) => new CollectionPost(post.postId, post.userId, post.postImageAddr, post.description, post.link, post.price, post.salePrice, post.website, post.thumbnail, post.selfThumb));
+        let feedReturnObject = new FeedReturnObject();
+        feedReturnObject.newPosts = newPosts;
+        return feedReturnObject;
+      });
+  }
+
 
 
   discoverPeopleGeneral(): Observable<Array<DiscoverPeopleDTO>> {

@@ -29,6 +29,7 @@ import {
 import { AuthGuradFbService as AuthGuardFB } from './services/auth-gurad-fb.service';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { LoginMethodComponent } from './components/login-method/login-method.component';
+import { CollectionsComponent } from './components/collections/collections.component';
 
 
 
@@ -98,7 +99,9 @@ const routes: Routes = [
     path: 'follow-list/:id', component: ViewFollowListComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'landing', component: ExternalWebsiteComponent }
+  { path: 'landing', component: ExternalWebsiteComponent },
+  { path: 'embed/:id', component: CollectionsComponent },
+
 
 ];
 
