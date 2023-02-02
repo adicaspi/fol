@@ -238,10 +238,10 @@ export class FeedService {
       });
   }
 
-  getCollectionPosts(userId: number, collectionId: number): Observable<any> {
+  getCollectionPosts(userId: number, collectionId: string): Observable<any> {
     let params = new HttpParams().set('collectionId', collectionId.toString());
     return this.http.get<Array<any>>(
-      this.globaSoicalURL + userId + '/collection-posts').pipe(
+      this.globaSoicalURL + userId + '/collection-posts', { params: params }).pipe(
       )
       .map(res => {
         let newPosts: Array<CollectionPost> = res.map((post) => new CollectionPost(post.postId, post.userId, post.postImageAddr, post.description, post.link, post.price, post.salePrice, post.website, post.thumbnail, post.selfThumb));

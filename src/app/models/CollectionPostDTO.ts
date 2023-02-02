@@ -1,11 +1,16 @@
 import { environment } from '../../environments/environment';
 
 export class CollectionPost {
-  profileImgSrc: string;
-  post: any;
-  postImgSrc: string;
-  thumbnail: string;
-  selfThumb: string
+  postId: any;
+  userId: any;
+  postImageAddr: string;
+  description: string;
+  link: string;
+  price: string;
+  salePrice: string;
+  website: string;
+  thumbnail?: string;
+  selfThumb?: string;
   private baseApiUrl = environment.BASE_API_URL;
 
   constructor(
@@ -21,8 +26,14 @@ export class CollectionPost {
     selfThumb?: string
 
   ) {
-
-    this.postImgSrc = this.baseApiUrl + '/image?s3key=' + postImageAddr;
+    this.postId = postId;
+    this.userId = userId;
+    this.postImageAddr = this.baseApiUrl + '/image?s3key=' + postImageAddr;
+    this.description = description;
+    this.link = link;
+    this.price = price;
+    this.salePrice = salePrice;
+    this.website = website;
     if (thumbnail) {
       this.thumbnail = this.baseApiUrl + '/image?s3key=' + thumbnail;
     }
@@ -36,7 +47,7 @@ export class CollectionPost {
   }
 
   get storeNameMobile() {
-    var website = this.post.website;
+    var website = this.website;
     if (website.includes(".com")) {
       var str = website.substring(0, website.length - 4); //remove .com from store name
     } else {
@@ -46,7 +57,7 @@ export class CollectionPost {
   }
 
   get storeWebsite() {
-    var websiteSuffix = this.post.website;
+    var websiteSuffix = this.website;
     var fullWebsite = 'https://www.' + websiteSuffix;
     return fullWebsite;
   }

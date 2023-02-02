@@ -100,7 +100,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'landing', component: ExternalWebsiteComponent },
-  { path: 'embed/:id', component: CollectionsComponent },
+  { path: 'embed/collection/:id', component: CollectionsComponent },
 
 
 ];

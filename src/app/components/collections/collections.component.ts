@@ -15,38 +15,24 @@ export class CollectionsComponent implements OnInit {
   onDestroy: Subject<void> = new Subject<void>();
   posts = [];
   userId = 0;
-  collectionId = 0;
+  collectionId: string;
   constructor(private feedService: FeedService, private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userId = this.userService.getCurrentUser();
-
+    this.collectionId = this.route.snapshot.paramMap.get('id');
+    this.getCollectionPosts();
   }
 
-  getCollectionId() {
-    this.route.queryParams
-      .subscribe(params => {
-        this.collectionId = params.id;
-        console.log(this.collectionId); // price
-      }, err => {
-        console.log(err);
-        //closeLoadingBar();
-      },
-        () => {
-          this.getCollectionPosts();
-        }
-      )
-
-  }
 
   getCollectionPosts() {
-    this.updateFeed = this.feedService
-      .getCollectionPosts(this.userId, this.collectionId).pipe(takeUntil(this.onDestroy)).subscribe(observablePosts => {
-        observablePosts.pipe(takeUntil(this.onDestroy)).subscribe((observablePosts: any) => {
-          this.posts = this.posts.concat(observablePosts.newPosts);
-        }, error => {
-          console.log(error);
-        })
+    this.feedService
+      .getCollectionPosts(this.userId, this.collectionId).pipe(takeUntil(this.onDestroy)).subscribe(result => {
+        this.posts = this.posts.concat(result.newPosts);
+        console.log(this.posts);
+      }, error => {
+        console.log(error);
       })
+
   }
 }
