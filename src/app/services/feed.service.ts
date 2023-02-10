@@ -240,6 +240,7 @@ export class FeedService {
 
   getCollectionPosts(userId: number, collectionId: string): Observable<any> {
     let params = new HttpParams().set('collectionId', collectionId.toString());
+    console.log(userId);
     return this.http.get<Array<any>>(
       this.globaSoicalURL + userId + '/collection-posts', { params: params }).pipe(
       )

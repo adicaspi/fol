@@ -14,12 +14,15 @@ export class CollectionsComponent implements OnInit {
   updateFeed: Subscription
   onDestroy: Subject<void> = new Subject<void>();
   posts = [];
-  userId = 0;
+  userId = 1;
   collectionId: string;
   constructor(private feedService: FeedService, private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userId = this.userService.getCurrentUser();
+    if(this.userId == undefined) {
+      this.userId = 1;
+    }
     this.collectionId = this.route.snapshot.paramMap.get('id');
     this.getCollectionPosts();
   }

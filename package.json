@@ -28,6 +28,7 @@
     "@trademe/ng-defer-load": "^3.1.0",
     "@types/angular": "^1.6.57",
     "@types/hammerjs": "^2.0.36",
+    "@types/mixpanel-browser": "^2.38.1",
     "angular-font-awesome": "^3.1.2",
     "angular-material": "^1.1.21",
     "bootstrap": "^4.5.0",
