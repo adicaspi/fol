@@ -252,7 +252,12 @@ export class FeedService {
       });
   }
 
-
+  getCollectionInfo(userId: number, collectionId: any): Observable<any> {
+    let params = new HttpParams().set('collectionId', collectionId.toString());
+    return this.http.get<any>(this.globaSoicalURL + userId + '/collection-info', {
+      params: params
+    });
+  }
 
   discoverPeopleGeneral(): Observable<Array<DiscoverPeopleDTO>> {
     const httpOptions = {

@@ -16,15 +16,17 @@ export class CollectionsComponent implements OnInit {
   posts = [];
   userId = 1;
   collectionId: string;
+  collectionName: Observable<string>;
   constructor(private feedService: FeedService, private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userId = this.userService.getCurrentUser();
-    if(this.userId == undefined) {
-      this.userId = 1;
+    if (this.userId == undefined) {
+      this.userId = 4;
     }
     this.collectionId = this.route.snapshot.paramMap.get('id');
     this.getCollectionPosts();
+    this.getCollectionInfo();
   }
 
 
@@ -36,6 +38,9 @@ export class CollectionsComponent implements OnInit {
       }, error => {
         console.log(error);
       })
+  }
 
+  getCollectionInfo() {
+    this.collectionName = this.feedService.getCollectionInfo(this.userId, this.collectionId);
   }
 }

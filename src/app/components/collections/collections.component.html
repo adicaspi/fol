@@ -1,7 +1,7 @@
 <div class="embed-container">
 
-  <div class="collection-title">
-    <div class="title-text">Summer Collection</div>
+  <div *ngIf="collectionName | async; let name" class="collection-title">
+    <div class="title-text">{{name.collectionName}}</div>
   </div>
 
   <div class="collection-images-container">
