@@ -1,10 +1,16 @@
-<div class="collection-title">
-  Summer Collection
-</div>
+<div class="embed-container">
 
-<div class="collection-images-container">
-  <div class="collection-item" *ngFor="let post of posts">
-    <div class="product-image" [ngStyle]="{ 'background-image': 'url(' + post.postImageAddr + ')'}"></div>
-    <div class="product-price">{{post.price}}</div>
+  <div class="collection-title">
+    <div class="title-text">Summer Collection</div>
+    <div class="see-all">See All <i class="fal fa-arrow-right"></i></div>
   </div>
+
+  <div class="collection-images-container">
+    <a class="collection-item" *ngFor="let post of posts" href="{{post.link}}" target="_parent">
+      <div class="product-image" [ngStyle]="{ 'background-image': 'url(' + post.postImageAddr + ')'}"></div>
+      <div class="product-site">{{post.website}}</div>
+      <div class="product-price">{{post.price}}</div>
+    </a>
+  </div>
+
 </div>

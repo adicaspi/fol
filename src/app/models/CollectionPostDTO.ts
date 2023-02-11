@@ -33,7 +33,7 @@ export class CollectionPost {
     this.link = link;
     this.price = price;
     this.salePrice = salePrice;
-    this.website = website;
+    this.website = website.split('.')[0];
     if (thumbnail) {
       this.thumbnail = this.baseApiUrl + '/image?s3key=' + thumbnail;
     }

@@ -1,12 +1,44 @@
+.embed-container {
+  background-color: white;
+  border-radius: 0.75rem;
+}
+
 .collection-title {
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
    font-weight: bold;
    font-size: 13px;
    width: 100%;
-   text-align: center;
+  //  text-align: center;
    height: 40px;
    line-height: 40px;
+   padding-left: 14px;
+   padding-right: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.collection-title .title-text {
+}
+
+.collection-title .see-all {
+  // background-color: black;
+  color: #333;
+
+  // border-radius: 16px;
+  // height: 26px;
+  // line-height: 26px;
+  // padding: 0 12px;
+  // margin-top: 4px;
+  // font-size: 12px;
+}
+
+.see-all i {
+  font-weight: 600;
+  font-size: 11px;
+  margin-left: 2px;
+  color: #333;
 }
 
 .collection-images-container {
@@ -18,18 +50,19 @@
   display: none;  /* Safari and Chrome */
 }
 
-.collection-item{
-  display: inline-block;
-  height: calc(100vh - 65px);
-  width: 48vh;
-  padding: 5px; 
-  
-}
-
 .collection-images-container{
+  display: block;
   overflow-x:scroll;
   white-space: nowrap;
   padding: 0 10px;
+  padding-bottom: 8px;
+}
+
+.collection-item{
+  display: inline-block;
+  height: calc(100vh - 85px);
+  width: 48vh;
+  padding: 5px; 
 }
 
 .product-image{
@@ -41,12 +74,21 @@
   background-position: center;
 }
 
+.product-site {
+  font-family: 'Helvetica Neue';
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  color: #888;
+  padding-top: 6px;
+}
+
 .product-price {
   font-family: 'Helvetica Neue';
-   font-size: 12px;
-   font-weight: 700;
-   text-align: center;
-   color: #333;
-   padding-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  color: #333;
+  padding-top: 6px;
 }
 
