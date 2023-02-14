@@ -14,7 +14,7 @@ import { MessageService } from './message.service';
 import { catchError } from '../../../node_modules/rxjs/operators';
 import { post } from '../../../node_modules/@types/selenium-webdriver/http';
 import { FilteringDTO } from '../models/FilteringDTO';
-import { CollectionPost } from '../models/CollectionPostDTO';
+import { CollectionPost, CollectionInfo } from '../models/CollectionPostDTO';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -256,6 +256,8 @@ export class FeedService {
     let params = new HttpParams().set('collectionId', collectionId.toString());
     return this.http.get<any>(this.globaSoicalURL + userId + '/collection-info', {
       params: params
+    }).pipe().map(res => {
+      return new CollectionInfo(res.collectionId, res.userId, res.collectionName, res.collectionImageAddr)
     });
   }
 

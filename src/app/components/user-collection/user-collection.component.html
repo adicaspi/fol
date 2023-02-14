@@ -1,0 +1,28 @@
+<div class="collection-container">
+  <div *ngIf="user | async; let user" class="user-section">
+    <div class="img-comp">
+      <img [attr.src]="user.profileImageAddr" />
+    </div>
+    <div class="username">
+      {{user.username}}
+    </div>
+  </div>
+
+  <div *ngIf="collectionInfo" class="collection-cover">
+    <img class="collection-img" [src]="collectionInfo.collectionImageAddr" />
+    <div class="title-text">{{collectionInfo.collectionName}}</div>
+  </div>
+
+  <div class="collection-images-container">
+    <div class="collection-item" *ngFor="let post of posts">
+      <img class="product-image" [src]="post.postImageAddr" />
+      <span class="product-description">{{post.description}}</span>
+      <div class="product-site-price">
+        <span class="product-price">{{post.price}}</span>
+        <span class="product-site">({{post.website}})</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

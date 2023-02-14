@@ -66,3 +66,25 @@ export class CollectionPost {
     return this.selfThumb;
   }
 }
+
+export class CollectionInfo {
+  collectionId: any;
+  userId: any;
+  collectionName: string;
+  collectionImageAddr: string
+
+  constructor(
+    collectionId: any,
+    userId: any,
+    collectionName: string,
+    collectionImageAddr: string,
+    private baseApiUrl = environment.BASE_API_URL
+
+  ) {
+    this.collectionId = collectionId;
+    this.userId = userId;
+    this.collectionName = collectionName;
+    this.collectionImageAddr = this.baseApiUrl + '/image?s3key=' + collectionImageAddr;
+  }
+}
+

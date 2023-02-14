@@ -79,6 +79,7 @@ import { AppBannerComponent } from './components/app-banner/app-banner.component
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { LoginMethodComponent } from './components/login-method/login-method.component';
 import { CollectionsComponent } from './components/collections/collections.component';
+import { UserCollectionComponent } from './components/user-collection/user-collection.component';
 
 
 
@@ -136,7 +137,8 @@ import { CollectionsComponent } from './components/collections/collections.compo
     AppBannerComponent,
     PrivacyPolicyComponent,
     LoginMethodComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    UserCollectionComponent
   ],
   imports: [
     BrowserModule,

@@ -30,6 +30,7 @@ import { AuthGuradFbService as AuthGuardFB } from './services/auth-gurad-fb.serv
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { LoginMethodComponent } from './components/login-method/login-method.component';
 import { CollectionsComponent } from './components/collections/collections.component';
+import { UserCollectionComponent } from './components/user-collection/user-collection.component';
 
 
 
@@ -101,6 +102,7 @@ const routes: Routes = [
   },
   { path: 'landing', component: ExternalWebsiteComponent },
   { path: 'embed/collection/:id', component: CollectionsComponent },
+  { path: 'user-collection/:id', component: UserCollectionComponent }
 
 
 ];
