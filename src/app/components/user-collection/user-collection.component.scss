@@ -12,29 +12,27 @@ img.collection-img{
 
 .user-section{
   display: flex;
-  justify-content: center;
-  margin-top:10px;
-  margin-bottom: 20px;
+  // justify-content: center;
+  margin-top:12px;
+  margin-bottom: 12px;
+  margin-left: 16px;
 }
 
 .img-comp img {
   border-radius: 50%;
-  min-width: 60px;
-  height: 70px;
+  min-width: 32px;
+  height: 32px;
   object-fit: cover;
+  border: 1px solid #d4d4d4;
 }
 
 .username{
   text-align: center;
+  color: #333;
+  font-size: 16px;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 10px;
-}
-
-.collection-cover{
-  position: relative;
-  text-align: center;
-  color: white;
 }
 
 .title-text{
@@ -42,12 +40,6 @@ img.collection-img{
   top: 8px;
   left: 16px; 
   font-size: 50px;
-}
-
-img.collection-img{
-  height: 250px;
-  width: 100%;
-  object-fit: cover;
 }
 
 .username{
@@ -189,11 +181,35 @@ span.strike-original-price{
 
   .search-results{
     height:100%;   
-}
+  }
   
   #main-body {
     padding-right: 0px;
     padding-left: 0px;
+  }
+
+  .collection-cover {
+    width: 900px;
+    border-radius: 12px;
+    margin: auto;
+  }
+
+  .user-section {
+    margin-top: 24px;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  img.collection-img{
+    border-radius: 12px;
+    height: 360px;
+    width: 800px;
+  }
+
+  .title-text{
+    left: 66px; 
+    font-weight: bold;
   }
 
   .center{
