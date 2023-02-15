@@ -3,10 +3,10 @@
 </div>
 <div class="collection-container">
   <div *ngIf="user | async; let user" class="user-section">
-    <div class="img-comp">
+    <div (click)="profilePage(user.id)" class="img-comp">
       <img [attr.src]="user.profileImageAddr" />
     </div>
-    <div class="username">
+    <div (click)="profilePage(user.id)" class="username">
       {{user.username}}
     </div>
   </div>

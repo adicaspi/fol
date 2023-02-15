@@ -101,4 +101,13 @@ export class UserCollectionComponent implements OnInit {
     }
   }
 
+  profilePage(id) {
+    if (this.desktop) {
+      this.router.navigate(['desktop-profile', id]);
+    } else {
+      this.router.navigate(['profile', id]);
+    }
+  }
+
+
 }
