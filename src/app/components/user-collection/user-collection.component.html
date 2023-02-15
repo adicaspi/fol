@@ -1,3 +1,6 @@
+<div class="top-navbar" *ngIf="desktop">
+  <app-navbar></app-navbar>
+</div>
 <div class="collection-container">
   <div *ngIf="user | async; let user" class="user-section">
     <div class="img-comp">
