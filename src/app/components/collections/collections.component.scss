@@ -38,6 +38,14 @@
   padding-bottom: 8px;
 }
 
+.collection-images-container.empty{
+  display: block;
+  overflow-x:scroll;
+  white-space: nowrap;
+  padding: 0 8px;
+  padding-bottom: 8px;
+}
+
 .collection-item{
   display: inline-block;
   height: calc(100vh - 85px);
