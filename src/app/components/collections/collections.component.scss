@@ -35,7 +35,7 @@
   overflow-x:scroll;
   white-space: nowrap;
   padding: 0 8px;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .collection-images-container.empty{
@@ -43,7 +43,7 @@
   overflow-x:scroll;
   white-space: nowrap;
   padding: 0 8px;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .collection-item{
@@ -82,8 +82,8 @@
 
 @media (min-width: 600px)  {
   .collection-images-container.empty{
-    display: flex;
-    justify-content: center;
-    overflow-x:unset;
+    margin-left:auto;
+    margin-right:auto;
+    width: fit-content;
   }
 }
