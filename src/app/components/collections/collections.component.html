@@ -1,14 +1,16 @@
 <div class="embed-container">
 
   <div *ngIf="collectionName | async; let name" class="collection-title">
-    <div class="title-text">{{name.collectionName}}</div>
+    <div *ngIf="paramsObject | async; let params" [ngStyle]="{'color': params.theme == 'dark' ? '#fefefa' : '#000000','background-color': params.theme == 'dark' ? '#1a1a1a' : 'white'}"
+      class="title-text">{{name.collectionName}}</div>
   </div>
 
-  <div class="collection-images-container">
+  <div *ngIf="paramsObject | async; let params" [ngStyle]="{'background-color': params.theme == 'dark' ? '#1a1a1a' : 'white'}"
+    class="collection-images-container">
     <a class="collection-item" *ngFor="let post of posts" href="{{post.link}}" target="_parent">
       <div class="product-image" [ngStyle]="{ 'background-image': 'url(' + post.postImageAddr + ')'}"></div>
-      <div class="product-site">{{post.website}}</div>
-      <div class="product-price">{{post.price}}</div>
+      <div [ngStyle]="{'color': params.theme == 'dark' ? '#d9d6cf' : '#888'}" class="product-site">{{post.website}}</div>
+      <div [ngStyle]="{'color': params.theme == 'dark' ? '#fefefa' : '#333'}" class="product-price">{{post.price}}</div>
     </a>
   </div>
 

@@ -3,7 +3,8 @@ import { FeedService } from '../../services/feed.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute, ParamMap, Params } from '../../../../node_modules/@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-collections',
@@ -17,6 +18,11 @@ export class CollectionsComponent implements OnInit {
   userId = 1;
   collectionId: string;
   collectionName: Observable<string>;
+  bgcol: string = 'black';
+  linkcol: string;
+  theme: string;
+  //paramsObject: Observable<Params>;
+  paramsObject: any;
   constructor(private feedService: FeedService, private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -24,6 +30,7 @@ export class CollectionsComponent implements OnInit {
     if (this.userId == undefined) {
       this.userId = 4;
     }
+    this.getRouteQueryParams();
     this.collectionId = this.route.snapshot.paramMap.get('id');
     this.getCollectionPosts();
     this.getCollectionInfo();
@@ -42,5 +49,20 @@ export class CollectionsComponent implements OnInit {
 
   getCollectionInfo() {
     this.collectionName = this.feedService.getCollectionInfo(this.userId, this.collectionId);
+  }
+
+  // getRouteQueryParams() {
+  //   this.route.queryParamMap
+  //     .subscribe((params => {
+  //       this.paramsObject = { ...params.keys, ...params };
+  //       console.log(this.paramsObject.params);
+  //       this.theme = this.paramsObject.params.theme;
+  //       console.log(this.theme);
+  //     }));
+  // }
+
+  getRouteQueryParams() {
+    this.paramsObject = this.route.queryParams;
+    console.log(this.paramsObject);
   }
 }
