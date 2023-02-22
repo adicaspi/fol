@@ -6,7 +6,7 @@
   </div>
 
   <div *ngIf="paramsObject | async; let params" [ngStyle]="{'background-color': params.theme == 'dark' ? '#1a1a1a' : 'white'}"
-    class="collection-images-container">
+    [ngClass]="posts.length < 5 ? 'collection-images-container empty': 'collection-images-container'">
     <a class="collection-item" *ngFor="let post of posts" href="{{post.link}}" target="_parent">
       <div class="product-image" [ngStyle]="{ 'background-image': 'url(' + post.postImageAddr + ')'}"></div>
       <div [ngStyle]="{'color': params.theme == 'dark' ? '#d9d6cf' : '#888'}" class="product-site">{{post.website}}</div>
