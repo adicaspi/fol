@@ -21,8 +21,7 @@ export class CollectionsComponent implements OnInit {
   bgcol: string = 'black';
   linkcol: string;
   theme: string;
-  //paramsObject: Observable<Params>;
-  paramsObject: any;
+  paramsObject: Observable<Params>;
   constructor(private feedService: FeedService, private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -41,7 +40,6 @@ export class CollectionsComponent implements OnInit {
     this.feedService
       .getCollectionPosts(this.userId, this.collectionId).pipe(takeUntil(this.onDestroy)).subscribe(result => {
         this.posts = this.posts.concat(result.newPosts);
-        console.log(this.posts);
       }, error => {
         console.log(error);
       })
@@ -63,6 +61,5 @@ export class CollectionsComponent implements OnInit {
 
   getRouteQueryParams() {
     this.paramsObject = this.route.queryParams;
-    console.log(this.paramsObject);
   }
 }
