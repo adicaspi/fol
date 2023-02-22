@@ -38,12 +38,6 @@
   padding-bottom: 8px;
 }
 
-.collection-images-container.empty{
-  display: flex;
-  justify-content: center;
-  overflow-x:unset;
-}
-
 .collection-item{
   display: inline-block;
   height: calc(100vh - 85px);
@@ -78,3 +72,10 @@
   padding-top: 6px;
 }
 
+@media (min-width: 600px)  {
+  .collection-images-container.empty{
+    display: flex;
+    justify-content: center;
+    overflow-x:unset;
+  }
+}
